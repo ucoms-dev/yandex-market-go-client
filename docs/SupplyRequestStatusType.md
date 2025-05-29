@@ -1,0 +1,43 @@
+# SupplyRequestStatusType
+
+## Enum
+
+
+* `CREATED` (value: `"CREATED"`)
+
+* `FINISHED` (value: `"FINISHED"`)
+
+* `CANCELLED` (value: `"CANCELLED"`)
+
+* `INVALID` (value: `"INVALID"`)
+
+* `VALIDATED` (value: `"VALIDATED"`)
+
+* `PUBLISHED` (value: `"PUBLISHED"`)
+
+* `ARRIVED_TO_SERVICE` (value: `"ARRIVED_TO_SERVICE"`)
+
+* `ARRIVED_TO_XDOC_SERVICE` (value: `"ARRIVED_TO_XDOC_SERVICE"`)
+
+* `SHIPPED_TO_SERVICE` (value: `"SHIPPED_TO_SERVICE"`)
+
+* `CANCELLATION_REQUESTED` (value: `"CANCELLATION_REQUESTED"`)
+
+* `CANCELLATION_REJECTED` (value: `"CANCELLATION_REJECTED"`)
+
+* `REGISTERED_IN_ELECTRONIC_QUEUE` (value: `"REGISTERED_IN_ELECTRONIC_QUEUE"`)
+
+* `READY_FOR_UTILIZATION` (value: `"READY_FOR_UTILIZATION"`)
+
+* `TRANSIT_MOVING` (value: `"TRANSIT_MOVING"`)
+
+* `WAREHOUSE_HANDLING` (value: `"WAREHOUSE_HANDLING"`)
+
+* `ACCEPTED_BY_WAREHOUSE_SYSTEM` (value: `"ACCEPTED_BY_WAREHOUSE_SYSTEM"`)
+
+* `READY_TO_WITHDRAW` (value: `"READY_TO_WITHDRAW"`)
+
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
