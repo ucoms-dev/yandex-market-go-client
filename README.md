@@ -34,7 +34,7 @@ go get golang.org/x/net/context
 Put the package under your project folder and add the following in import:
 
 ```go
-import openapi "github.com/pussikill/yandex-market-go-client"
+import openapi "github.com/ucoms-dev/yandex-market-go-client"
 ```
 
 To use a proxy, set the environment variable `HTTP_PROXY`:
