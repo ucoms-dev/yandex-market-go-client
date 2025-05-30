@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_ReportsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateBannersStatisticsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateBannersStatisticsReport(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateBoostConsolidatedReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateBoostConsolidatedReport(context.Background()).Execute()
 
@@ -48,7 +49,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateCompetitorsPositionReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateCompetitorsPositionReport(context.Background()).Execute()
 
@@ -60,7 +61,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateGoodsFeedbackReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateGoodsFeedbackReport(context.Background()).Execute()
 
@@ -72,7 +73,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateGoodsMovementReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateGoodsMovementReport(context.Background()).Execute()
 
@@ -84,7 +85,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateGoodsRealizationReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateGoodsRealizationReport(context.Background()).Execute()
 
@@ -96,7 +97,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateGoodsTurnoverReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateGoodsTurnoverReport(context.Background()).Execute()
 
@@ -108,7 +109,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateJewelryFiscalReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateJewelryFiscalReport(context.Background()).Execute()
 
@@ -120,7 +121,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateMassOrderLabelsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateMassOrderLabelsReport(context.Background()).Execute()
 
@@ -132,7 +133,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GeneratePricesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GeneratePricesReport(context.Background()).Execute()
 
@@ -144,7 +145,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateSalesGeographyReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateSalesGeographyReport(context.Background()).Execute()
 
@@ -156,7 +157,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateShelfsStatisticsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateShelfsStatisticsReport(context.Background()).Execute()
 
@@ -168,7 +169,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateShipmentListDocumentReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateShipmentListDocumentReport(context.Background()).Execute()
 
@@ -180,7 +181,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateShowsBoostReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateShowsBoostReport(context.Background()).Execute()
 
@@ -192,7 +193,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateShowsSalesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateShowsSalesReport(context.Background()).Execute()
 
@@ -204,7 +205,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateStocksOnWarehousesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateStocksOnWarehousesReport(context.Background()).Execute()
 
@@ -216,7 +217,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateUnitedMarketplaceServicesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateUnitedMarketplaceServicesReport(context.Background()).Execute()
 
@@ -228,7 +229,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateUnitedNettingReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateUnitedNettingReport(context.Background()).Execute()
 
@@ -240,7 +241,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateUnitedOrdersReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateUnitedOrdersReport(context.Background()).Execute()
 
@@ -252,7 +253,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GenerateUnitedReturnsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ReportsAPI.GenerateUnitedReturnsReport(context.Background()).Execute()
 
@@ -264,7 +265,7 @@ func Test_openapi_ReportsAPIService(t *testing.T) {
 
 	t.Run("Test ReportsAPIService GetReportInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var reportId string
 

@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_ExpressAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService AddHiddenOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -38,7 +39,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService AddOffersToArchive", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -52,7 +53,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService CalculateTariffs", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.CalculateTariffs(context.Background()).Execute()
 
@@ -64,7 +65,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService ConfirmBusinessPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -78,7 +79,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService ConfirmCampaignPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -92,7 +93,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService CreateChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -106,7 +107,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService DeleteCampaignOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -120,7 +121,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService DeleteGoodsFeedbackComment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -134,7 +135,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService DeleteHiddenOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -148,7 +149,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService DeleteOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -162,7 +163,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService DeleteOffersFromArchive", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -176,7 +177,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService DeletePromoOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -190,7 +191,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateBannersStatisticsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateBannersStatisticsReport(context.Background()).Execute()
 
@@ -202,7 +203,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateBoostConsolidatedReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateBoostConsolidatedReport(context.Background()).Execute()
 
@@ -214,7 +215,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateCompetitorsPositionReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateCompetitorsPositionReport(context.Background()).Execute()
 
@@ -226,7 +227,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateGoodsFeedbackReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateGoodsFeedbackReport(context.Background()).Execute()
 
@@ -238,7 +239,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateGoodsRealizationReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateGoodsRealizationReport(context.Background()).Execute()
 
@@ -250,7 +251,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateJewelryFiscalReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateJewelryFiscalReport(context.Background()).Execute()
 
@@ -262,7 +263,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateMassOrderLabelsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateMassOrderLabelsReport(context.Background()).Execute()
 
@@ -274,7 +275,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateOrderLabel", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -291,7 +292,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateOrderLabels", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -306,7 +307,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GeneratePricesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GeneratePricesReport(context.Background()).Execute()
 
@@ -318,7 +319,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateSalesGeographyReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateSalesGeographyReport(context.Background()).Execute()
 
@@ -330,7 +331,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateShelfsStatisticsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateShelfsStatisticsReport(context.Background()).Execute()
 
@@ -342,7 +343,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateShowsBoostReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateShowsBoostReport(context.Background()).Execute()
 
@@ -354,7 +355,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateShowsSalesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateShowsSalesReport(context.Background()).Execute()
 
@@ -366,7 +367,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateStocksOnWarehousesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateStocksOnWarehousesReport(context.Background()).Execute()
 
@@ -378,7 +379,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateUnitedMarketplaceServicesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateUnitedMarketplaceServicesReport(context.Background()).Execute()
 
@@ -390,7 +391,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateUnitedNettingReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateUnitedNettingReport(context.Background()).Execute()
 
@@ -402,7 +403,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateUnitedOrdersReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateUnitedOrdersReport(context.Background()).Execute()
 
@@ -414,7 +415,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GenerateUnitedReturnsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GenerateUnitedReturnsReport(context.Background()).Execute()
 
@@ -426,7 +427,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetAuthTokenInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GetAuthTokenInfo(context.Background()).Execute()
 
@@ -438,7 +439,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetBidsInfoForBusiness", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -452,7 +453,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetBidsRecommendations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -466,7 +467,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetBusinessQuarantineOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -480,7 +481,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetBusinessSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -494,7 +495,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCampaign", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -508,7 +509,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCampaignOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -522,7 +523,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCampaignQuarantineOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -536,7 +537,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCampaignRegion", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -550,7 +551,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCampaignSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -564,7 +565,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCampaigns", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GetCampaigns(context.Background()).Execute()
 
@@ -576,7 +577,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCategoriesMaxSaleQuantum", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GetCategoriesMaxSaleQuantum(context.Background()).Execute()
 
@@ -588,7 +589,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCategoriesTree", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GetCategoriesTree(context.Background()).Execute()
 
@@ -600,7 +601,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetCategoryContentParameters", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var categoryId int64
 
@@ -614,7 +615,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -628,7 +629,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetChatHistory", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -642,7 +643,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetChatMessage", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -656,7 +657,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetChats", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -670,7 +671,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetDeliveryServices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GetDeliveryServices(context.Background()).Execute()
 
@@ -682,7 +683,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetGoodsFeedbackComments", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -696,7 +697,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetGoodsFeedbacks", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -710,7 +711,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetGoodsStats", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -724,7 +725,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetHiddenOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -738,7 +739,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOfferCardsContentStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -752,7 +753,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOfferMappingEntries", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -766,7 +767,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOfferMappings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -780,7 +781,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOfferRecommendations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -794,7 +795,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOrder", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -809,7 +810,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOrderBusinessBuyerInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -824,7 +825,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOrderBusinessDocumentsInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -839,7 +840,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOrderIdentifiersStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -854,7 +855,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOrderLabelsData", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -869,7 +870,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOrders", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -883,7 +884,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetOrdersStats", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -897,7 +898,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetPagedWarehouses", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -911,7 +912,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -925,7 +926,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetPricesByOfferIds", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -939,7 +940,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetPromoOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -953,7 +954,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetPromos", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -967,7 +968,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetQualityRatingDetails", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -981,7 +982,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetQualityRatings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -995,7 +996,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetRegionsCodes", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.GetRegionsCodes(context.Background()).Execute()
 
@@ -1007,7 +1008,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetReportInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var reportId string
 
@@ -1021,7 +1022,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetReturn", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1037,7 +1038,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetReturnApplication", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1053,7 +1054,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetReturnPhoto", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1071,7 +1072,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetReturns", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1085,7 +1086,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetStocks", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1099,7 +1100,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetSuggestedOfferMappingEntries", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1113,7 +1114,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetSuggestedOfferMappings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1127,7 +1128,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetSuggestedPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1141,7 +1142,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService GetWarehouses", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1155,7 +1156,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService ProvideOrderItemIdentifiers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1170,7 +1171,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService PutBidsForBusiness", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1184,7 +1185,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService PutBidsForCampaign", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1198,7 +1199,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SearchRegionChildren", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var regionId int64
 
@@ -1212,7 +1213,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SearchRegionsById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var regionId int64
 
@@ -1226,7 +1227,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SearchRegionsByName", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.ExpressAPI.SearchRegionsByName(context.Background()).Execute()
 
@@ -1238,7 +1239,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SendFileToChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1252,7 +1253,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SendMessageToChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1266,7 +1267,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SetOrderBoxLayout", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1281,7 +1282,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SetOrderShipmentBoxes", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1297,7 +1298,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SkipGoodsFeedbacksReaction", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1311,7 +1312,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService SubmitReturnDecision", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1327,7 +1328,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateBusinessPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1341,7 +1342,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateCampaignOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1355,7 +1356,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateExternalOrderId", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1370,7 +1371,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateGoodsFeedbackComment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1384,7 +1385,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateOfferContent", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1398,7 +1399,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateOfferMappingEntries", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1412,7 +1413,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateOfferMappings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1426,7 +1427,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateOrderItems", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1440,7 +1441,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateOrderStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1455,7 +1456,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateOrderStatuses", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1469,7 +1470,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdatePrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1483,7 +1484,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdatePromoOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1497,7 +1498,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateStocks", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1511,7 +1512,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService UpdateWarehouseStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1525,7 +1526,7 @@ func Test_openapi_ExpressAPIService(t *testing.T) {
 
 	t.Run("Test ExpressAPIService VerifyOrderEac", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64

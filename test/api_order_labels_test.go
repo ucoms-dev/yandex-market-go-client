@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_OrderLabelsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_OrderLabelsAPIService(t *testing.T) {
 
 	t.Run("Test OrderLabelsAPIService GenerateOrderLabel", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -41,7 +42,7 @@ func Test_openapi_OrderLabelsAPIService(t *testing.T) {
 
 	t.Run("Test OrderLabelsAPIService GenerateOrderLabels", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -56,7 +57,7 @@ func Test_openapi_OrderLabelsAPIService(t *testing.T) {
 
 	t.Run("Test OrderLabelsAPIService GetOrderLabelsData", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64

@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_ChatsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_ChatsAPIService(t *testing.T) {
 
 	t.Run("Test ChatsAPIService CreateChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -38,7 +39,7 @@ func Test_openapi_ChatsAPIService(t *testing.T) {
 
 	t.Run("Test ChatsAPIService GetChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -52,7 +53,7 @@ func Test_openapi_ChatsAPIService(t *testing.T) {
 
 	t.Run("Test ChatsAPIService GetChatHistory", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -66,7 +67,7 @@ func Test_openapi_ChatsAPIService(t *testing.T) {
 
 	t.Run("Test ChatsAPIService GetChatMessage", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -80,7 +81,7 @@ func Test_openapi_ChatsAPIService(t *testing.T) {
 
 	t.Run("Test ChatsAPIService GetChats", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -94,7 +95,7 @@ func Test_openapi_ChatsAPIService(t *testing.T) {
 
 	t.Run("Test ChatsAPIService SendFileToChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -108,7 +109,7 @@ func Test_openapi_ChatsAPIService(t *testing.T) {
 
 	t.Run("Test ChatsAPIService SendMessageToChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 

@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_FbsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService AddHiddenOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -38,7 +39,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService AddOffersToArchive", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -52,7 +53,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService CalculateTariffs", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.CalculateTariffs(context.Background()).Execute()
 
@@ -64,7 +65,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService ConfirmBusinessPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -78,7 +79,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService ConfirmCampaignPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -92,7 +93,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService ConfirmShipment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -107,7 +108,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService CreateChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -121,7 +122,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DeleteCampaignOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -135,7 +136,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DeleteGoodsFeedbackComment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -149,7 +150,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DeleteHiddenOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -163,7 +164,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DeleteOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -177,7 +178,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DeleteOffersFromArchive", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -191,7 +192,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DeletePromoOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -205,7 +206,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DownloadShipmentAct", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -220,7 +221,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DownloadShipmentDiscrepancyAct", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -235,7 +236,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DownloadShipmentInboundAct", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -250,7 +251,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DownloadShipmentPalletLabels", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -265,7 +266,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DownloadShipmentReceptionTransferAct", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -279,7 +280,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService DownloadShipmentTransportationWaybill", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -294,7 +295,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateBannersStatisticsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateBannersStatisticsReport(context.Background()).Execute()
 
@@ -306,7 +307,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateBoostConsolidatedReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateBoostConsolidatedReport(context.Background()).Execute()
 
@@ -318,7 +319,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateCompetitorsPositionReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateCompetitorsPositionReport(context.Background()).Execute()
 
@@ -330,7 +331,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateGoodsFeedbackReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateGoodsFeedbackReport(context.Background()).Execute()
 
@@ -342,7 +343,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateGoodsRealizationReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateGoodsRealizationReport(context.Background()).Execute()
 
@@ -354,7 +355,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateJewelryFiscalReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateJewelryFiscalReport(context.Background()).Execute()
 
@@ -366,7 +367,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateMassOrderLabelsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateMassOrderLabelsReport(context.Background()).Execute()
 
@@ -378,7 +379,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateOrderLabel", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -395,7 +396,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateOrderLabels", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -410,7 +411,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GeneratePricesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GeneratePricesReport(context.Background()).Execute()
 
@@ -422,7 +423,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateSalesGeographyReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateSalesGeographyReport(context.Background()).Execute()
 
@@ -434,7 +435,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateShelfsStatisticsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateShelfsStatisticsReport(context.Background()).Execute()
 
@@ -446,7 +447,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateShipmentListDocumentReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateShipmentListDocumentReport(context.Background()).Execute()
 
@@ -458,7 +459,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateShowsBoostReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateShowsBoostReport(context.Background()).Execute()
 
@@ -470,7 +471,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateShowsSalesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateShowsSalesReport(context.Background()).Execute()
 
@@ -482,7 +483,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateStocksOnWarehousesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateStocksOnWarehousesReport(context.Background()).Execute()
 
@@ -494,7 +495,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateUnitedMarketplaceServicesReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateUnitedMarketplaceServicesReport(context.Background()).Execute()
 
@@ -506,7 +507,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateUnitedNettingReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateUnitedNettingReport(context.Background()).Execute()
 
@@ -518,7 +519,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateUnitedOrdersReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateUnitedOrdersReport(context.Background()).Execute()
 
@@ -530,7 +531,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GenerateUnitedReturnsReport", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GenerateUnitedReturnsReport(context.Background()).Execute()
 
@@ -542,7 +543,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetAuthTokenInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GetAuthTokenInfo(context.Background()).Execute()
 
@@ -554,7 +555,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetBidsInfoForBusiness", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -568,7 +569,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetBidsRecommendations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -582,7 +583,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetBusinessQuarantineOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -596,7 +597,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetBusinessSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -610,7 +611,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCampaign", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -624,7 +625,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCampaignOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -638,7 +639,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCampaignQuarantineOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -652,7 +653,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCampaignRegion", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -666,7 +667,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCampaignSettings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -680,7 +681,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCampaigns", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GetCampaigns(context.Background()).Execute()
 
@@ -692,7 +693,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCategoriesMaxSaleQuantum", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GetCategoriesMaxSaleQuantum(context.Background()).Execute()
 
@@ -704,7 +705,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCategoriesTree", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GetCategoriesTree(context.Background()).Execute()
 
@@ -716,7 +717,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetCategoryContentParameters", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var categoryId int64
 
@@ -730,7 +731,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -744,7 +745,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetChatHistory", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -758,7 +759,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetChatMessage", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -772,7 +773,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetChats", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -786,7 +787,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetDeliveryServices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GetDeliveryServices(context.Background()).Execute()
 
@@ -798,7 +799,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetGoodsFeedbackComments", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -812,7 +813,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetGoodsFeedbacks", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -826,7 +827,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetGoodsStats", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -840,7 +841,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetHiddenOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -854,7 +855,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOfferCardsContentStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -868,7 +869,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOfferMappingEntries", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -882,7 +883,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOfferMappings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -896,7 +897,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOfferRecommendations", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -910,7 +911,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOrder", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -925,7 +926,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOrderBusinessBuyerInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -940,7 +941,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOrderBusinessDocumentsInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -955,7 +956,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOrderIdentifiersStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -970,7 +971,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOrderLabelsData", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -985,7 +986,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOrders", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -999,7 +1000,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetOrdersStats", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1013,7 +1014,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetPagedWarehouses", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1027,7 +1028,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1041,7 +1042,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetPricesByOfferIds", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1055,7 +1056,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetPromoOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1069,7 +1070,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetPromos", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1083,7 +1084,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetQualityRatingDetails", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1097,7 +1098,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetQualityRatings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1111,7 +1112,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetRegionsCodes", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.GetRegionsCodes(context.Background()).Execute()
 
@@ -1123,7 +1124,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetReportInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var reportId string
 
@@ -1137,7 +1138,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetReturn", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1153,7 +1154,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetReturnApplication", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1169,7 +1170,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetReturnPhoto", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1187,7 +1188,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetReturns", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1201,7 +1202,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetShipment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -1216,7 +1217,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetShipmentOrdersInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -1231,7 +1232,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetStocks", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1245,7 +1246,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetSuggestedOfferMappingEntries", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1259,7 +1260,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetSuggestedOfferMappings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1273,7 +1274,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetSuggestedPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1287,7 +1288,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService GetWarehouses", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1301,7 +1302,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService ProvideOrderItemIdentifiers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1316,7 +1317,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService PutBidsForBusiness", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1330,7 +1331,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService PutBidsForCampaign", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1344,7 +1345,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SearchRegionChildren", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var regionId int64
 
@@ -1358,7 +1359,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SearchRegionsById", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var regionId int64
 
@@ -1372,7 +1373,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SearchRegionsByName", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.FbsAPI.SearchRegionsByName(context.Background()).Execute()
 
@@ -1384,7 +1385,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SearchShipments", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1398,7 +1399,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SendFileToChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1412,7 +1413,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SendMessageToChat", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1426,7 +1427,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SetOrderBoxLayout", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1441,7 +1442,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SetOrderShipmentBoxes", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1457,7 +1458,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SetShipmentPalletsCount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -1472,7 +1473,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SkipGoodsFeedbacksReaction", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1486,7 +1487,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService SubmitReturnDecision", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1502,7 +1503,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService TransferOrdersFromShipment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -1517,7 +1518,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateBusinessPrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1531,7 +1532,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateCampaignOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1545,7 +1546,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateExternalOrderId", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1560,7 +1561,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateGoodsFeedbackComment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1574,7 +1575,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateOfferContent", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1588,7 +1589,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateOfferMappingEntries", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1602,7 +1603,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateOfferMappings", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1616,7 +1617,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateOrderItems", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1630,7 +1631,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateOrderStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -1645,7 +1646,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateOrderStatuses", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1659,7 +1660,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdatePrices", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1673,7 +1674,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdatePromoOffers", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var businessId int64
 
@@ -1687,7 +1688,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateStocks", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -1701,7 +1702,7 @@ func Test_openapi_FbsAPIService(t *testing.T) {
 
 	t.Run("Test FbsAPIService UpdateWarehouseStatus", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 

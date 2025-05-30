@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_CategoriesAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_CategoriesAPIService(t *testing.T) {
 
 	t.Run("Test CategoriesAPIService GetCategoriesMaxSaleQuantum", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.CategoriesAPI.GetCategoriesMaxSaleQuantum(context.Background()).Execute()
 
@@ -36,7 +37,7 @@ func Test_openapi_CategoriesAPIService(t *testing.T) {
 
 	t.Run("Test CategoriesAPIService GetCategoriesTree", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.CategoriesAPI.GetCategoriesTree(context.Background()).Execute()
 

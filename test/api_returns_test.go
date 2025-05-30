@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_ReturnsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_ReturnsAPIService(t *testing.T) {
 
 	t.Run("Test ReturnsAPIService GetReturn", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -40,7 +41,7 @@ func Test_openapi_ReturnsAPIService(t *testing.T) {
 
 	t.Run("Test ReturnsAPIService GetReturnApplication", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -56,7 +57,7 @@ func Test_openapi_ReturnsAPIService(t *testing.T) {
 
 	t.Run("Test ReturnsAPIService GetReturnPhoto", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -74,7 +75,7 @@ func Test_openapi_ReturnsAPIService(t *testing.T) {
 
 	t.Run("Test ReturnsAPIService GetReturns", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -88,7 +89,7 @@ func Test_openapi_ReturnsAPIService(t *testing.T) {
 
 	t.Run("Test ReturnsAPIService SetReturnDecision", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64
@@ -104,7 +105,7 @@ func Test_openapi_ReturnsAPIService(t *testing.T) {
 
 	t.Run("Test ReturnsAPIService SubmitReturnDecision", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var orderId int64

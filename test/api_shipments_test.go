@@ -11,10 +11,11 @@ package openapi
 
 import (
 	"context"
+	"testing"
+
+	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_ShipmentsAPIService(t *testing.T) {
@@ -24,7 +25,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService ConfirmShipment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -39,7 +40,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService DownloadShipmentAct", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -54,7 +55,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService DownloadShipmentDiscrepancyAct", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -69,7 +70,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService DownloadShipmentInboundAct", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -84,7 +85,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService DownloadShipmentPalletLabels", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -99,7 +100,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService DownloadShipmentReceptionTransferAct", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -113,7 +114,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService DownloadShipmentTransportationWaybill", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -128,7 +129,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService GetShipment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -143,7 +144,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService GetShipmentOrdersInfo", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -158,7 +159,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService SearchShipments", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 
@@ -172,7 +173,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService SetShipmentPalletsCount", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
@@ -187,7 +188,7 @@ func Test_openapi_ShipmentsAPIService(t *testing.T) {
 
 	t.Run("Test ShipmentsAPIService TransferOrdersFromShipment", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var campaignId int64
 		var shipmentId int64
