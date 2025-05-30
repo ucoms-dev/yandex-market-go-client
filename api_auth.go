@@ -22,12 +22,12 @@ import (
 // AuthAPIService AuthAPI service
 type AuthAPIService service
 
-type ApiGetAuthTokenInfoRequest struct {
+type AuthApiGetAuthTokenInfoRequest struct {
 	ctx context.Context
 	ApiService *AuthAPIService
 }
 
-func (r ApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+func (r AuthApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
 	return r.ApiService.GetAuthTokenInfoExecute(r)
 }
 
@@ -49,10 +49,10 @@ GetAuthTokenInfo Получение информации об авторизац
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAuthTokenInfoRequest
+ @return AuthApiGetAuthTokenInfoRequest
 */
-func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInfoRequest {
-	return ApiGetAuthTokenInfoRequest{
+func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) AuthApiGetAuthTokenInfoRequest {
+	return AuthApiGetAuthTokenInfoRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -60,7 +60,7 @@ func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenIn
 
 // Execute executes the request
 //  @return GetTokenInfoResponse
-func (a *AuthAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+func (a *AuthAPIService) GetAuthTokenInfoExecute(r AuthApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}

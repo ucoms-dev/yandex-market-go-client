@@ -6478,12 +6478,12 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetAuthTokenInfoRequest struct {
+type ExpressApiGetAuthTokenInfoRequest struct {
 	ctx context.Context
 	ApiService *ExpressAPIService
 }
 
-func (r ApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+func (r ExpressApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
 	return r.ApiService.GetAuthTokenInfoExecute(r)
 }
 
@@ -6505,10 +6505,10 @@ GetAuthTokenInfo Получение информации об авторизац
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAuthTokenInfoRequest
+ @return ExpressApiGetAuthTokenInfoRequest
 */
-func (a *ExpressAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInfoRequest {
-	return ApiGetAuthTokenInfoRequest{
+func (a *ExpressAPIService) GetAuthTokenInfo(ctx context.Context) ExpressApiGetAuthTokenInfoRequest {
+	return ExpressApiGetAuthTokenInfoRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -6516,7 +6516,7 @@ func (a *ExpressAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthToke
 
 // Execute executes the request
 //  @return GetTokenInfoResponse
-func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ExpressApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
