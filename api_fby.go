@@ -1086,7 +1086,7 @@ func (a *FbyAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateChatRequest struct {
+type FbyApiCreateChatRequest struct {
 	ctx               context.Context
 	ApiService        *FbyAPIService
 	businessId        int64
@@ -1094,12 +1094,12 @@ type ApiCreateChatRequest struct {
 }
 
 // description
-func (r ApiCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) ApiCreateChatRequest {
+func (r FbyApiCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) FbyApiCreateChatRequest {
 	r.createChatRequest = &createChatRequest
 	return r
 }
 
-func (r ApiCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
+func (r FbyApiCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
 	return r.ApiService.CreateChatExecute(r)
 }
 
@@ -1115,10 +1115,10 @@ CreateChat Создание нового чата с покупателем
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiCreateChatRequest
+	@return FbyApiCreateChatRequest
 */
-func (a *FbyAPIService) CreateChat(ctx context.Context, businessId int64) ApiCreateChatRequest {
-	return ApiCreateChatRequest{
+func (a *FbyAPIService) CreateChat(ctx context.Context, businessId int64) FbyApiCreateChatRequest {
+	return FbyApiCreateChatRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -1128,7 +1128,7 @@ func (a *FbyAPIService) CreateChat(ctx context.Context, businessId int64) ApiCre
 // Execute executes the request
 //
 //	@return CreateChatResponse
-func (a *FbyAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
+func (a *FbyAPIService) CreateChatExecute(r FbyApiCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -9128,7 +9128,7 @@ func (a *FbyAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatRequest struct {
+type FbyApiGetChatRequest struct {
 	ctx        context.Context
 	ApiService *FbyAPIService
 	businessId int64
@@ -9136,12 +9136,12 @@ type ApiGetChatRequest struct {
 }
 
 // Идентификатор чата.
-func (r ApiGetChatRequest) ChatId(chatId int64) ApiGetChatRequest {
+func (r FbyApiGetChatRequest) ChatId(chatId int64) FbyApiGetChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
-func (r ApiGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
+func (r FbyApiGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
 	return r.ApiService.GetChatExecute(r)
 }
 
@@ -9165,10 +9165,10 @@ GetChat Получение чата по идентификатору
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetChatRequest
+	@return FbyApiGetChatRequest
 */
-func (a *FbyAPIService) GetChat(ctx context.Context, businessId int64) ApiGetChatRequest {
-	return ApiGetChatRequest{
+func (a *FbyAPIService) GetChat(ctx context.Context, businessId int64) FbyApiGetChatRequest {
+	return FbyApiGetChatRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -9178,7 +9178,7 @@ func (a *FbyAPIService) GetChat(ctx context.Context, businessId int64) ApiGetCha
 // Execute executes the request
 //
 //	@return GetChatResponse
-func (a *FbyAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *http.Response, error) {
+func (a *FbyAPIService) GetChatExecute(r FbyApiGetChatRequest) (*GetChatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -9341,7 +9341,7 @@ func (a *FbyAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatHistoryRequest struct {
+type FbyApiGetChatHistoryRequest struct {
 	ctx                   context.Context
 	ApiService            *FbyAPIService
 	businessId            int64
@@ -9352,30 +9352,30 @@ type ApiGetChatHistoryRequest struct {
 }
 
 // Идентификатор чата.
-func (r ApiGetChatHistoryRequest) ChatId(chatId int64) ApiGetChatHistoryRequest {
+func (r FbyApiGetChatHistoryRequest) ChatId(chatId int64) FbyApiGetChatHistoryRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r ApiGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) ApiGetChatHistoryRequest {
+func (r FbyApiGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) FbyApiGetChatHistoryRequest {
 	r.getChatHistoryRequest = &getChatHistoryRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetChatHistoryRequest) PageToken(pageToken string) ApiGetChatHistoryRequest {
+func (r FbyApiGetChatHistoryRequest) PageToken(pageToken string) FbyApiGetChatHistoryRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetChatHistoryRequest) Limit(limit int32) ApiGetChatHistoryRequest {
+func (r FbyApiGetChatHistoryRequest) Limit(limit int32) FbyApiGetChatHistoryRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
+func (r FbyApiGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
 	return r.ApiService.GetChatHistoryExecute(r)
 }
 
@@ -9391,10 +9391,10 @@ GetChatHistory Получение истории сообщений в чате
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetChatHistoryRequest
+	@return FbyApiGetChatHistoryRequest
 */
-func (a *FbyAPIService) GetChatHistory(ctx context.Context, businessId int64) ApiGetChatHistoryRequest {
-	return ApiGetChatHistoryRequest{
+func (a *FbyAPIService) GetChatHistory(ctx context.Context, businessId int64) FbyApiGetChatHistoryRequest {
+	return FbyApiGetChatHistoryRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -9404,7 +9404,7 @@ func (a *FbyAPIService) GetChatHistory(ctx context.Context, businessId int64) Ap
 // Execute executes the request
 //
 //	@return GetChatHistoryResponse
-func (a *FbyAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
+func (a *FbyAPIService) GetChatHistoryExecute(r FbyApiGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -9578,7 +9578,7 @@ func (a *FbyAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatMessageRequest struct {
+type FbyApiGetChatMessageRequest struct {
 	ctx        context.Context
 	ApiService *FbyAPIService
 	businessId int64
@@ -9587,18 +9587,18 @@ type ApiGetChatMessageRequest struct {
 }
 
 // Идентификатор чата.
-func (r ApiGetChatMessageRequest) ChatId(chatId int64) ApiGetChatMessageRequest {
+func (r FbyApiGetChatMessageRequest) ChatId(chatId int64) FbyApiGetChatMessageRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Идентификатор сообщения.
-func (r ApiGetChatMessageRequest) MessageId(messageId int64) ApiGetChatMessageRequest {
+func (r FbyApiGetChatMessageRequest) MessageId(messageId int64) FbyApiGetChatMessageRequest {
 	r.messageId = &messageId
 	return r
 }
 
-func (r ApiGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
+func (r FbyApiGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
 	return r.ApiService.GetChatMessageExecute(r)
 }
 
@@ -9622,10 +9622,10 @@ GetChatMessage Получение сообщения в чате
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetChatMessageRequest
+	@return FbyApiGetChatMessageRequest
 */
-func (a *FbyAPIService) GetChatMessage(ctx context.Context, businessId int64) ApiGetChatMessageRequest {
-	return ApiGetChatMessageRequest{
+func (a *FbyAPIService) GetChatMessage(ctx context.Context, businessId int64) FbyApiGetChatMessageRequest {
+	return FbyApiGetChatMessageRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -9635,7 +9635,7 @@ func (a *FbyAPIService) GetChatMessage(ctx context.Context, businessId int64) Ap
 // Execute executes the request
 //
 //	@return GetChatMessageResponse
-func (a *FbyAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
+func (a *FbyAPIService) GetChatMessageExecute(r FbyApiGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -9805,7 +9805,7 @@ func (a *FbyAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatsRequest struct {
+type FbyApiGetChatsRequest struct {
 	ctx             context.Context
 	ApiService      *FbyAPIService
 	businessId      int64
@@ -9815,24 +9815,24 @@ type ApiGetChatsRequest struct {
 }
 
 // description
-func (r ApiGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) ApiGetChatsRequest {
+func (r FbyApiGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) FbyApiGetChatsRequest {
 	r.getChatsRequest = &getChatsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetChatsRequest) PageToken(pageToken string) ApiGetChatsRequest {
+func (r FbyApiGetChatsRequest) PageToken(pageToken string) FbyApiGetChatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetChatsRequest) Limit(limit int32) ApiGetChatsRequest {
+func (r FbyApiGetChatsRequest) Limit(limit int32) FbyApiGetChatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
+func (r FbyApiGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
 	return r.ApiService.GetChatsExecute(r)
 }
 
@@ -9856,10 +9856,10 @@ GetChats Получение доступных чатов
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetChatsRequest
+	@return FbyApiGetChatsRequest
 */
-func (a *FbyAPIService) GetChats(ctx context.Context, businessId int64) ApiGetChatsRequest {
-	return ApiGetChatsRequest{
+func (a *FbyAPIService) GetChats(ctx context.Context, businessId int64) FbyApiGetChatsRequest {
+	return FbyApiGetChatsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -9869,7 +9869,7 @@ func (a *FbyAPIService) GetChats(ctx context.Context, businessId int64) ApiGetCh
 // Execute executes the request
 //
 //	@return GetChatsResponse
-func (a *FbyAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
+func (a *FbyAPIService) GetChatsExecute(r FbyApiGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -18323,7 +18323,7 @@ func (a *FbyAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSendFileToChatRequest struct {
+type FbyApiSendFileToChatRequest struct {
 	ctx        context.Context
 	ApiService *FbyAPIService
 	businessId int64
@@ -18332,18 +18332,18 @@ type ApiSendFileToChatRequest struct {
 }
 
 // Идентификатор чата.
-func (r ApiSendFileToChatRequest) ChatId(chatId int64) ApiSendFileToChatRequest {
+func (r FbyApiSendFileToChatRequest) ChatId(chatId int64) FbyApiSendFileToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Содержимое файла. Максимальный размер файла — 5 Мбайт.
-func (r ApiSendFileToChatRequest) File(file *os.File) ApiSendFileToChatRequest {
+func (r FbyApiSendFileToChatRequest) File(file *os.File) FbyApiSendFileToChatRequest {
 	r.file = file
 	return r
 }
 
-func (r ApiSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r FbyApiSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.SendFileToChatExecute(r)
 }
 
@@ -18359,10 +18359,10 @@ SendFileToChat Отправка файла в чат
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiSendFileToChatRequest
+	@return FbyApiSendFileToChatRequest
 */
-func (a *FbyAPIService) SendFileToChat(ctx context.Context, businessId int64) ApiSendFileToChatRequest {
-	return ApiSendFileToChatRequest{
+func (a *FbyAPIService) SendFileToChat(ctx context.Context, businessId int64) FbyApiSendFileToChatRequest {
+	return FbyApiSendFileToChatRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -18372,7 +18372,7 @@ func (a *FbyAPIService) SendFileToChat(ctx context.Context, businessId int64) Ap
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *FbyAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *FbyAPIService) SendFileToChatExecute(r FbyApiSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -18553,7 +18553,7 @@ func (a *FbyAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSendMessageToChatRequest struct {
+type FbyApiSendMessageToChatRequest struct {
 	ctx                      context.Context
 	ApiService               *FbyAPIService
 	businessId               int64
@@ -18562,18 +18562,18 @@ type ApiSendMessageToChatRequest struct {
 }
 
 // Идентификатор чата.
-func (r ApiSendMessageToChatRequest) ChatId(chatId int64) ApiSendMessageToChatRequest {
+func (r FbyApiSendMessageToChatRequest) ChatId(chatId int64) FbyApiSendMessageToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r ApiSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) ApiSendMessageToChatRequest {
+func (r FbyApiSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) FbyApiSendMessageToChatRequest {
 	r.sendMessageToChatRequest = &sendMessageToChatRequest
 	return r
 }
 
-func (r ApiSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r FbyApiSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.SendMessageToChatExecute(r)
 }
 
@@ -18589,10 +18589,10 @@ SendMessageToChat Отправка сообщения в чат
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiSendMessageToChatRequest
+	@return FbyApiSendMessageToChatRequest
 */
-func (a *FbyAPIService) SendMessageToChat(ctx context.Context, businessId int64) ApiSendMessageToChatRequest {
-	return ApiSendMessageToChatRequest{
+func (a *FbyAPIService) SendMessageToChat(ctx context.Context, businessId int64) FbyApiSendMessageToChatRequest {
+	return FbyApiSendMessageToChatRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -18602,7 +18602,7 @@ func (a *FbyAPIService) SendMessageToChat(ctx context.Context, businessId int64)
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *FbyAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *FbyAPIService) SendMessageToChatExecute(r FbyApiSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
