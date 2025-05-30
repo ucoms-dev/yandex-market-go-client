@@ -1,4 +1,4 @@
-module github.com/pussikill/yandex-market-go-client
+module github.com/ucoms-dev/yandex-market-go-client
 
 go 1.18
 
