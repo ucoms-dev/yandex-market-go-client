@@ -13,9 +13,9 @@ import (
 	"context"
 	"testing"
 
-	openapiclient "github.com/pussikill/yandex-market-go-client"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
 )
 
 func Test_openapi_GoodsStatsAPIService(t *testing.T) {
