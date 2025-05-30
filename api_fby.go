@@ -6264,12 +6264,12 @@ func (a *FbyAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetAuthTokenInfoRequest struct {
+type FbyApiGetAuthTokenInfoRequest struct {
 	ctx context.Context
 	ApiService *FbyAPIService
 }
 
-func (r ApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+func (r FbyApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
 	return r.ApiService.GetAuthTokenInfoExecute(r)
 }
 
@@ -6291,10 +6291,10 @@ GetAuthTokenInfo Получение информации об авторизац
 
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAuthTokenInfoRequest
+ @return FbyApiGetAuthTokenInfoRequest
 */
-func (a *FbyAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInfoRequest {
-	return ApiGetAuthTokenInfoRequest{
+func (a *FbyAPIService) GetAuthTokenInfo(ctx context.Context) FbyApiGetAuthTokenInfoRequest {
+	return FbyApiGetAuthTokenInfoRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -6302,7 +6302,7 @@ func (a *FbyAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInf
 
 // Execute executes the request
 //  @return GetTokenInfoResponse
-func (a *FbyAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+func (a *FbyAPIService) GetAuthTokenInfoExecute(r FbyApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
