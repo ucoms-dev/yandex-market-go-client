@@ -1113,12 +1113,12 @@ CreateChat Создание нового чата с покупателем
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-       @return ExpressApiCreateChatRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	       @return ExpressApiCreateChatRequest
 */
 func (a *ExpressAPIService) CreateChat(ctx context.Context, businessId int64) ExpressApiCreateChatRequest {
-        return ExpressApiCreateChatRequest{
+	return ExpressApiCreateChatRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
