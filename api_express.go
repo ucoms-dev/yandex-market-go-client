@@ -26,7 +26,7 @@ type ExpressAPIService service
 
 type ExpressAddHiddenOffersRequest struct {
 	ctx                    context.Context
-	ExpressService             *ExpressAPIService
+	ExpressService         *ExpressAPIService
 	campaignId             int64
 	addHiddenOffersRequest *AddHiddenOffersRequest
 }
@@ -64,8 +64,8 @@ AddHiddenOffers Скрытие товаров и настройки скрыти
 func (a *ExpressAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) ExpressAddHiddenOffersRequest {
 	return ExpressAddHiddenOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -235,7 +235,7 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ExpressAddHiddenOffersReque
 
 type ExpressAddOffersToArchiveRequest struct {
 	ctx                       context.Context
-	ExpressService                *ExpressAPIService
+	ExpressService            *ExpressAPIService
 	businessId                int64
 	addOffersToArchiveRequest *AddOffersToArchiveRequest
 }
@@ -272,8 +272,8 @@ AddOffersToArchive Добавление товаров в архив
 func (a *ExpressAPIService) AddOffersToArchive(ctx context.Context, businessId int64) ExpressAddOffersToArchiveRequest {
 	return ExpressAddOffersToArchiveRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -454,7 +454,7 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ExpressAddOffersToArchiv
 
 type ExpressCalculateTariffsRequest struct {
 	ctx                     context.Context
-	ExpressService              *ExpressAPIService
+	ExpressService          *ExpressAPIService
 	calculateTariffsRequest *CalculateTariffsRequest
 }
 
@@ -488,7 +488,7 @@ CalculateTariffs Калькулятор стоимости услуг
 func (a *ExpressAPIService) CalculateTariffs(ctx context.Context) ExpressCalculateTariffsRequest {
 	return ExpressCalculateTariffsRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -654,7 +654,7 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ExpressCalculateTariffsReq
 
 type ExpressConfirmBusinessPricesRequest struct {
 	ctx                  context.Context
-	ExpressService           *ExpressAPIService
+	ExpressService       *ExpressAPIService
 	businessId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
@@ -689,8 +689,8 @@ ConfirmBusinessPrices Удаление товара из карантина по
 func (a *ExpressAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) ExpressConfirmBusinessPricesRequest {
 	return ExpressConfirmBusinessPricesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -871,7 +871,7 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ExpressConfirmBusines
 
 type ExpressConfirmCampaignPricesRequest struct {
 	ctx                  context.Context
-	ExpressService           *ExpressAPIService
+	ExpressService       *ExpressAPIService
 	campaignId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
@@ -906,8 +906,8 @@ ConfirmCampaignPrices Удаление товара из карантина по
 func (a *ExpressAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) ExpressConfirmCampaignPricesRequest {
 	return ExpressConfirmCampaignPricesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -1088,7 +1088,7 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ExpressConfirmCampaig
 
 type ExpressExpressCreateChatRequest struct {
 	ctx               context.Context
-	ExpressService        *ExpressAPIService
+	ExpressService    *ExpressAPIService
 	businessId        int64
 	createChatRequest *CreateChatRequest
 }
@@ -1120,8 +1120,8 @@ CreateChat Создание нового чата с покупателем
 func (a *ExpressAPIService) CreateChat(ctx context.Context, businessId int64) ExpressExpressCreateChatRequest {
 	return ExpressExpressCreateChatRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -1291,7 +1291,7 @@ func (a *ExpressAPIService) CreateChatExecute(r ExpressExpressCreateChatRequest)
 
 type ExpressDeleteCampaignOffersRequest struct {
 	ctx                         context.Context
-	ExpressService                  *ExpressAPIService
+	ExpressService              *ExpressAPIService
 	campaignId                  int64
 	deleteCampaignOffersRequest *DeleteCampaignOffersRequest
 }
@@ -1330,8 +1330,8 @@ DeleteCampaignOffers Удаление товаров из ассортимент
 func (a *ExpressAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) ExpressDeleteCampaignOffersRequest {
 	return ExpressDeleteCampaignOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -1512,7 +1512,7 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ExpressDeleteCampaignO
 
 type ExpressDeleteGoodsFeedbackCommentRequest struct {
 	ctx                               context.Context
-	ExpressService                        *ExpressAPIService
+	ExpressService                    *ExpressAPIService
 	businessId                        int64
 	deleteGoodsFeedbackCommentRequest *DeleteGoodsFeedbackCommentRequest
 }
@@ -1543,8 +1543,8 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 func (a *ExpressAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) ExpressDeleteGoodsFeedbackCommentRequest {
 	return ExpressDeleteGoodsFeedbackCommentRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -1714,7 +1714,7 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ExpressDeleteGoo
 
 type ExpressDeleteHiddenOffersRequest struct {
 	ctx                       context.Context
-	ExpressService                *ExpressAPIService
+	ExpressService            *ExpressAPIService
 	campaignId                int64
 	deleteHiddenOffersRequest *DeleteHiddenOffersRequest
 }
@@ -1752,8 +1752,8 @@ DeleteHiddenOffers Возобновление показа товаров
 func (a *ExpressAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) ExpressDeleteHiddenOffersRequest {
 	return ExpressDeleteHiddenOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -1934,7 +1934,7 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ExpressDeleteHiddenOffer
 
 type ExpressDeleteOffersRequest struct {
 	ctx                 context.Context
-	ExpressService          *ExpressAPIService
+	ExpressService      *ExpressAPIService
 	businessId          int64
 	deleteOffersRequest *DeleteOffersRequest
 }
@@ -1965,8 +1965,8 @@ DeleteOffers Удаление товаров из каталога
 func (a *ExpressAPIService) DeleteOffers(ctx context.Context, businessId int64) ExpressDeleteOffersRequest {
 	return ExpressDeleteOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -2147,7 +2147,7 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ExpressDeleteOffersRequest) (*
 
 type ExpressDeleteOffersFromArchiveRequest struct {
 	ctx                            context.Context
-	ExpressService                     *ExpressAPIService
+	ExpressService                 *ExpressAPIService
 	businessId                     int64
 	deleteOffersFromArchiveRequest *DeleteOffersFromArchiveRequest
 }
@@ -2178,8 +2178,8 @@ DeleteOffersFromArchive Удаление товаров из архива
 func (a *ExpressAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) ExpressDeleteOffersFromArchiveRequest {
 	return ExpressDeleteOffersFromArchiveRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -2360,7 +2360,7 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ExpressDeleteOffers
 
 type ExpressDeletePromoOffersRequest struct {
 	ctx                      context.Context
-	ExpressService               *ExpressAPIService
+	ExpressService           *ExpressAPIService
 	businessId               int64
 	deletePromoOffersRequest *DeletePromoOffersRequest
 }
@@ -2393,8 +2393,8 @@ DeletePromoOffers Удаление товаров из акции
 func (a *ExpressAPIService) DeletePromoOffers(ctx context.Context, businessId int64) ExpressDeletePromoOffersRequest {
 	return ExpressDeletePromoOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -2564,7 +2564,7 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ExpressDeletePromoOffersR
 
 type ExpressGenerateBannersStatisticsReportRequest struct {
 	ctx                              context.Context
-	ExpressService                       *ExpressAPIService
+	ExpressService                   *ExpressAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
 	format                           *ReportFormatType
 }
@@ -2604,7 +2604,7 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 func (a *ExpressAPIService) GenerateBannersStatisticsReport(ctx context.Context) ExpressGenerateBannersStatisticsReportRequest {
 	return ExpressGenerateBannersStatisticsReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -2765,7 +2765,7 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ExpressGene
 
 type ExpressGenerateBoostConsolidatedReportRequest struct {
 	ctx                              context.Context
-	ExpressService                       *ExpressAPIService
+	ExpressService                   *ExpressAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
 	format                           *ReportFormatType
 }
@@ -2807,7 +2807,7 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 func (a *ExpressAPIService) GenerateBoostConsolidatedReport(ctx context.Context) ExpressGenerateBoostConsolidatedReportRequest {
 	return ExpressGenerateBoostConsolidatedReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -2968,7 +2968,7 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ExpressGene
 
 type ExpressGenerateCompetitorsPositionReportRequest struct {
 	ctx                                      context.Context
-	ExpressService                               *ExpressAPIService
+	ExpressService                           *ExpressAPIService
 	generateCompetitorsPositionReportRequest *GenerateCompetitorsPositionReportRequest
 	format                                   *ReportFormatType
 }
@@ -3014,7 +3014,7 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 func (a *ExpressAPIService) GenerateCompetitorsPositionReport(ctx context.Context) ExpressGenerateCompetitorsPositionReportRequest {
 	return ExpressGenerateCompetitorsPositionReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -3175,7 +3175,7 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ExpressGe
 
 type ExpressGenerateGoodsFeedbackReportRequest struct {
 	ctx                          context.Context
-	ExpressService                   *ExpressAPIService
+	ExpressService               *ExpressAPIService
 	generateGoodsFeedbackRequest *GenerateGoodsFeedbackRequest
 	format                       *ReportFormatType
 }
@@ -3215,7 +3215,7 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 func (a *ExpressAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ExpressGenerateGoodsFeedbackReportRequest {
 	return ExpressGenerateGoodsFeedbackReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -3376,7 +3376,7 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ExpressGenerate
 
 type ExpressGenerateGoodsRealizationReportRequest struct {
 	ctx                                   context.Context
-	ExpressService                            *ExpressAPIService
+	ExpressService                        *ExpressAPIService
 	generateGoodsRealizationReportRequest *GenerateGoodsRealizationReportRequest
 	format                                *ReportFormatType
 }
@@ -3426,7 +3426,7 @@ GenerateGoodsRealizationReport Отчет по реализации
 func (a *ExpressAPIService) GenerateGoodsRealizationReport(ctx context.Context) ExpressGenerateGoodsRealizationReportRequest {
 	return ExpressGenerateGoodsRealizationReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -3587,7 +3587,7 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ExpressGener
 
 type ExpressGenerateJewelryFiscalReportRequest struct {
 	ctx                                context.Context
-	ExpressService                         *ExpressAPIService
+	ExpressService                     *ExpressAPIService
 	generateJewelryFiscalReportRequest *GenerateJewelryFiscalReportRequest
 	format                             *ReportFormatType
 }
@@ -3627,7 +3627,7 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 func (a *ExpressAPIService) GenerateJewelryFiscalReport(ctx context.Context) ExpressGenerateJewelryFiscalReportRequest {
 	return ExpressGenerateJewelryFiscalReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -3788,7 +3788,7 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ExpressGenerate
 
 type ExpressGenerateMassOrderLabelsReportRequest struct {
 	ctx                            context.Context
-	ExpressService                     *ExpressAPIService
+	ExpressService                 *ExpressAPIService
 	generateMassOrderLabelsRequest *GenerateMassOrderLabelsRequest
 	format                         *PageFormatType
 }
@@ -3826,7 +3826,7 @@ GenerateMassOrderLabelsReport Готовые ярлыки‑наклейки н�
 func (a *ExpressAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ExpressGenerateMassOrderLabelsReportRequest {
 	return ExpressGenerateMassOrderLabelsReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -3983,13 +3983,13 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ExpressGenera
 }
 
 type ExpressGenerateOrderLabelRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
-	shipmentId int64
-	boxId      int64
-	format     *PageFormatType
+	campaignId     int64
+	orderId        int64
+	shipmentId     int64
+	boxId          int64
+	format         *PageFormatType
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
@@ -4022,11 +4022,11 @@ GenerateOrderLabel Готовый ярлык‑наклейка для коро�
 func (a *ExpressAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) ExpressGenerateOrderLabelRequest {
 	return ExpressGenerateOrderLabelRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
-		shipmentId: shipmentId,
-		boxId:      boxId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		shipmentId:     shipmentId,
+		boxId:          boxId,
 	}
 }
 
@@ -4196,11 +4196,11 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ExpressGenerateOrderLabe
 }
 
 type ExpressGenerateOrderLabelsRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
-	format     *PageFormatType
+	campaignId     int64
+	orderId        int64
+	format         *PageFormatType
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
@@ -4233,9 +4233,9 @@ GenerateOrderLabels Готовые ярлыки‑наклейки на все �
 func (a *ExpressAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) ExpressGenerateOrderLabelsRequest {
 	return ExpressGenerateOrderLabelsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -4404,7 +4404,7 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ExpressGenerateOrderLab
 
 type ExpressGeneratePricesReportRequest struct {
 	ctx                         context.Context
-	ExpressService                  *ExpressAPIService
+	ExpressService              *ExpressAPIService
 	generatePricesReportRequest *GeneratePricesReportRequest
 	format                      *ReportFormatType
 }
@@ -4452,7 +4452,7 @@ GeneratePricesReport Отчет «Цены на рынке»
 func (a *ExpressAPIService) GeneratePricesReport(ctx context.Context) ExpressGeneratePricesReportRequest {
 	return ExpressGeneratePricesReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -4613,7 +4613,7 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ExpressGeneratePricesR
 
 type ExpressGenerateSalesGeographyReportRequest struct {
 	ctx                           context.Context
-	ExpressService                    *ExpressAPIService
+	ExpressService                *ExpressAPIService
 	generateSalesGeographyRequest *GenerateSalesGeographyRequest
 	format                        *ReportFormatType
 }
@@ -4653,7 +4653,7 @@ GenerateSalesGeographyReport Отчет по географии продаж
 func (a *ExpressAPIService) GenerateSalesGeographyReport(ctx context.Context) ExpressGenerateSalesGeographyReportRequest {
 	return ExpressGenerateSalesGeographyReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -4814,7 +4814,7 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ExpressGenerat
 
 type ExpressGenerateShelfsStatisticsReportRequest struct {
 	ctx                             context.Context
-	ExpressService                      *ExpressAPIService
+	ExpressService                  *ExpressAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
 	format                          *ReportFormatType
 }
@@ -4854,7 +4854,7 @@ GenerateShelfsStatisticsReport Отчет по полкам
 func (a *ExpressAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ExpressGenerateShelfsStatisticsReportRequest {
 	return ExpressGenerateShelfsStatisticsReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -5015,7 +5015,7 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ExpressGener
 
 type ExpressGenerateShowsBoostReportRequest struct {
 	ctx                       context.Context
-	ExpressService                *ExpressAPIService
+	ExpressService            *ExpressAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
 	format                    *ReportFormatType
 }
@@ -5055,7 +5055,7 @@ GenerateShowsBoostReport Отчет по бусту показов
 func (a *ExpressAPIService) GenerateShowsBoostReport(ctx context.Context) ExpressGenerateShowsBoostReportRequest {
 	return ExpressGenerateShowsBoostReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -5216,7 +5216,7 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ExpressGenerateSho
 
 type ExpressGenerateShowsSalesReportRequest struct {
 	ctx                             context.Context
-	ExpressService                      *ExpressAPIService
+	ExpressService                  *ExpressAPIService
 	generateShowsSalesReportRequest *GenerateShowsSalesReportRequest
 	format                          *ReportFormatType
 }
@@ -5256,7 +5256,7 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 func (a *ExpressAPIService) GenerateShowsSalesReport(ctx context.Context) ExpressGenerateShowsSalesReportRequest {
 	return ExpressGenerateShowsSalesReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -5417,7 +5417,7 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ExpressGenerateSho
 
 type ExpressGenerateStocksOnWarehousesReportRequest struct {
 	ctx                                     context.Context
-	ExpressService                              *ExpressAPIService
+	ExpressService                          *ExpressAPIService
 	generateStocksOnWarehousesReportRequest *GenerateStocksOnWarehousesReportRequest
 	format                                  *ReportFormatType
 }
@@ -5462,7 +5462,7 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 func (a *ExpressAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) ExpressGenerateStocksOnWarehousesReportRequest {
 	return ExpressGenerateStocksOnWarehousesReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -5623,7 +5623,7 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ExpressGen
 
 type ExpressGenerateUnitedMarketplaceServicesReportRequest struct {
 	ctx                                            context.Context
-	ExpressService                                     *ExpressAPIService
+	ExpressService                                 *ExpressAPIService
 	generateUnitedMarketplaceServicesReportRequest *GenerateUnitedMarketplaceServicesReportRequest
 	format                                         *ReportFormatType
 	language                                       *ReportLanguageType
@@ -5679,7 +5679,7 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) ExpressGenerateUnitedMarketplaceServicesReportRequest {
 	return ExpressGenerateUnitedMarketplaceServicesReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -5843,7 +5843,7 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Exp
 
 type ExpressGenerateUnitedNettingReportRequest struct {
 	ctx                                context.Context
-	ExpressService                         *ExpressAPIService
+	ExpressService                     *ExpressAPIService
 	generateUnitedNettingReportRequest *GenerateUnitedNettingReportRequest
 	format                             *ReportFormatType
 	language                           *ReportLanguageType
@@ -5901,7 +5901,7 @@ GenerateUnitedNettingReport Отчет по платежам
 func (a *ExpressAPIService) GenerateUnitedNettingReport(ctx context.Context) ExpressGenerateUnitedNettingReportRequest {
 	return ExpressGenerateUnitedNettingReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -6065,7 +6065,7 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ExpressGenerate
 
 type ExpressGenerateUnitedOrdersReportRequest struct {
 	ctx                         context.Context
-	ExpressService                  *ExpressAPIService
+	ExpressService              *ExpressAPIService
 	generateUnitedOrdersRequest *GenerateUnitedOrdersRequest
 	format                      *ReportFormatType
 	language                    *ReportLanguageType
@@ -6112,7 +6112,7 @@ GenerateUnitedOrdersReport Отчет по заказам
 func (a *ExpressAPIService) GenerateUnitedOrdersReport(ctx context.Context) ExpressGenerateUnitedOrdersReportRequest {
 	return ExpressGenerateUnitedOrdersReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -6276,7 +6276,7 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ExpressGenerateU
 
 type ExpressGenerateUnitedReturnsReportRequest struct {
 	ctx                          context.Context
-	ExpressService                   *ExpressAPIService
+	ExpressService               *ExpressAPIService
 	generateUnitedReturnsRequest *GenerateUnitedReturnsRequest
 	format                       *ReportFormatType
 }
@@ -6318,7 +6318,7 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 func (a *ExpressAPIService) GenerateUnitedReturnsReport(ctx context.Context) ExpressGenerateUnitedReturnsReportRequest {
 	return ExpressGenerateUnitedReturnsReportRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -6478,7 +6478,7 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ExpressGenerate
 }
 
 type ExpressExpressGetAuthTokenInfoRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
 }
 
@@ -6506,7 +6506,7 @@ GetAuthTokenInfo Получение информации об авторизац
 func (a *ExpressAPIService) GetAuthTokenInfo(ctx context.Context) ExpressExpressGetAuthTokenInfoRequest {
 	return ExpressExpressGetAuthTokenInfoRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -6656,7 +6656,7 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ExpressExpressGetAuthToken
 
 type ExpressGetBidsInfoForBusinessRequest struct {
 	ctx                context.Context
-	ExpressService         *ExpressAPIService
+	ExpressService     *ExpressAPIService
 	businessId         int64
 	pageToken          *string
 	limit              *int32
@@ -6710,8 +6710,8 @@ GetBidsInfoForBusiness Информация об установленных ст
 func (a *ExpressAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) ExpressGetBidsInfoForBusinessRequest {
 	return ExpressGetBidsInfoForBusinessRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -6884,7 +6884,7 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ExpressGetBidsInfoFo
 
 type ExpressGetBidsRecommendationsRequest struct {
 	ctx                           context.Context
-	ExpressService                    *ExpressAPIService
+	ExpressService                *ExpressAPIService
 	businessId                    int64
 	getBidsRecommendationsRequest *GetBidsRecommendationsRequest
 }
@@ -6922,8 +6922,8 @@ GetBidsRecommendations Рекомендованные ставки для зад
 func (a *ExpressAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) ExpressGetBidsRecommendationsRequest {
 	return ExpressGetBidsRecommendationsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -7093,7 +7093,7 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ExpressGetBidsRecomm
 
 type ExpressGetBusinessQuarantineOffersRequest struct {
 	ctx                        context.Context
-	ExpressService                 *ExpressAPIService
+	ExpressService             *ExpressAPIService
 	businessId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
 	pageToken                  *string
@@ -7150,8 +7150,8 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 func (a *ExpressAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) ExpressGetBusinessQuarantineOffersRequest {
 	return ExpressGetBusinessQuarantineOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -7326,9 +7326,9 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ExpressGetBusin
 }
 
 type ExpressGetBusinessSettingsRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	businessId int64
+	businessId     int64
 }
 
 func (r ExpressGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
@@ -7351,8 +7351,8 @@ GetBusinessSettings Настройки кабинета
 func (a *ExpressAPIService) GetBusinessSettings(ctx context.Context, businessId int64) ExpressGetBusinessSettingsRequest {
 	return ExpressGetBusinessSettingsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -7516,9 +7516,9 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ExpressGetBusinessSetti
 }
 
 type ExpressGetCampaignRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
+	campaignId     int64
 }
 
 func (r ExpressGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
@@ -7541,8 +7541,8 @@ GetCampaign Информация о магазине
 func (a *ExpressAPIService) GetCampaign(ctx context.Context, campaignId int64) ExpressGetCampaignRequest {
 	return ExpressGetCampaignRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -7707,7 +7707,7 @@ func (a *ExpressAPIService) GetCampaignExecute(r ExpressGetCampaignRequest) (*Ge
 
 type ExpressGetCampaignOffersRequest struct {
 	ctx                      context.Context
-	ExpressService               *ExpressAPIService
+	ExpressService           *ExpressAPIService
 	campaignId               int64
 	getCampaignOffersRequest *GetCampaignOffersRequest
 	pageToken                *string
@@ -7752,8 +7752,8 @@ GetCampaignOffers Информация о товарах, которые раз�
 func (a *ExpressAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) ExpressGetCampaignOffersRequest {
 	return ExpressGetCampaignOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -7929,7 +7929,7 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ExpressGetCampaignOffersR
 
 type ExpressGetCampaignQuarantineOffersRequest struct {
 	ctx                        context.Context
-	ExpressService                 *ExpressAPIService
+	ExpressService             *ExpressAPIService
 	campaignId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
 	pageToken                  *string
@@ -7986,8 +7986,8 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 func (a *ExpressAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) ExpressGetCampaignQuarantineOffersRequest {
 	return ExpressGetCampaignQuarantineOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -8162,9 +8162,9 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ExpressGetCampa
 }
 
 type ExpressGetCampaignRegionRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
+	campaignId     int64
 }
 
 func (r ExpressGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
@@ -8195,8 +8195,8 @@ Deprecated
 func (a *ExpressAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) ExpressGetCampaignRegionRequest {
 	return ExpressGetCampaignRegionRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -8362,9 +8362,9 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ExpressGetCampaignRegionR
 }
 
 type ExpressGetCampaignSettingsRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
+	campaignId     int64
 }
 
 func (r ExpressGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
@@ -8387,8 +8387,8 @@ GetCampaignSettings Настройки магазина
 func (a *ExpressAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) ExpressGetCampaignSettingsRequest {
 	return ExpressGetCampaignSettingsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -8552,10 +8552,10 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ExpressGetCampaignSetti
 }
 
 type ExpressGetCampaignsRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	page       *int32
-	pageSize   *int32
+	page           *int32
+	pageSize       *int32
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
@@ -8592,7 +8592,7 @@ GetCampaigns Список магазинов пользователя
 func (a *ExpressAPIService) GetCampaigns(ctx context.Context) ExpressGetCampaignsRequest {
 	return ExpressGetCampaignsRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -8762,7 +8762,7 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ExpressGetCampaignsRequest) (*
 
 type ExpressGetCategoriesMaxSaleQuantumRequest struct {
 	ctx                                context.Context
-	ExpressService                         *ExpressAPIService
+	ExpressService                     *ExpressAPIService
 	getCategoriesMaxSaleQuantumRequest *GetCategoriesMaxSaleQuantumRequest
 }
 
@@ -8795,7 +8795,7 @@ GetCategoriesMaxSaleQuantum Лимит на установку кванта пр
 func (a *ExpressAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) ExpressGetCategoriesMaxSaleQuantumRequest {
 	return ExpressGetCategoriesMaxSaleQuantumRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -8961,7 +8961,7 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ExpressGetCateg
 
 type ExpressGetCategoriesTreeRequest struct {
 	ctx                  context.Context
-	ExpressService           *ExpressAPIService
+	ExpressService       *ExpressAPIService
 	getCategoriesRequest *GetCategoriesRequest
 }
 
@@ -8990,7 +8990,7 @@ GetCategoriesTree Дерево категорий
 func (a *ExpressAPIService) GetCategoriesTree(ctx context.Context) ExpressGetCategoriesTreeRequest {
 	return ExpressGetCategoriesTreeRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -9152,9 +9152,9 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ExpressGetCategoriesTreeR
 }
 
 type ExpressGetCategoryContentParametersRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	categoryId int64
+	categoryId     int64
 }
 
 func (r ExpressGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
@@ -9178,8 +9178,8 @@ GetCategoryContentParameters Списки характеристик товар�
 func (a *ExpressAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) ExpressGetCategoryContentParametersRequest {
 	return ExpressGetCategoryContentParametersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		categoryId: categoryId,
+		ctx:            ctx,
+		categoryId:     categoryId,
 	}
 }
 
@@ -9343,10 +9343,10 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ExpressGetCate
 }
 
 type ExpressExpressGetChatRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	businessId int64
-	chatId     *int64
+	businessId     int64
+	chatId         *int64
 }
 
 // Идентификатор чата.
@@ -9384,8 +9384,8 @@ GetChat Получение чата по идентификатору
 func (a *ExpressAPIService) GetChat(ctx context.Context, businessId int64) ExpressExpressGetChatRequest {
 	return ExpressExpressGetChatRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -9557,7 +9557,7 @@ func (a *ExpressAPIService) GetChatExecute(r ExpressExpressGetChatRequest) (*Get
 
 type ExpressExpressGetChatHistoryRequest struct {
 	ctx                   context.Context
-	ExpressService            *ExpressAPIService
+	ExpressService        *ExpressAPIService
 	businessId            int64
 	chatId                *int64
 	getChatHistoryRequest *GetChatHistoryRequest
@@ -9610,8 +9610,8 @@ GetChatHistory Получение истории сообщений в чате
 func (a *ExpressAPIService) GetChatHistory(ctx context.Context, businessId int64) ExpressExpressGetChatHistoryRequest {
 	return ExpressExpressGetChatHistoryRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -9793,11 +9793,11 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ExpressExpressGetChatHistory
 }
 
 type ExpressExpressGetChatMessageRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	businessId int64
-	chatId     *int64
-	messageId  *int64
+	businessId     int64
+	chatId         *int64
+	messageId      *int64
 }
 
 // Идентификатор чата.
@@ -9841,8 +9841,8 @@ GetChatMessage Получение сообщения в чате
 func (a *ExpressAPIService) GetChatMessage(ctx context.Context, businessId int64) ExpressExpressGetChatMessageRequest {
 	return ExpressExpressGetChatMessageRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -10021,7 +10021,7 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ExpressExpressGetChatMessage
 
 type ExpressExpressGetChatsRequest struct {
 	ctx             context.Context
-	ExpressService      *ExpressAPIService
+	ExpressService  *ExpressAPIService
 	businessId      int64
 	getChatsRequest *GetChatsRequest
 	pageToken       *string
@@ -10075,8 +10075,8 @@ GetChats Получение доступных чатов
 func (a *ExpressAPIService) GetChats(ctx context.Context, businessId int64) ExpressExpressGetChatsRequest {
 	return ExpressExpressGetChatsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -10251,7 +10251,7 @@ func (a *ExpressAPIService) GetChatsExecute(r ExpressExpressGetChatsRequest) (*G
 }
 
 type ExpressGetDeliveryServicesRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
 }
 
@@ -10274,7 +10274,7 @@ GetDeliveryServices Справочник служб доставки
 func (a *ExpressAPIService) GetDeliveryServices(ctx context.Context) ExpressGetDeliveryServicesRequest {
 	return ExpressGetDeliveryServicesRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -10435,7 +10435,7 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ExpressGetDeliveryServi
 
 type ExpressGetGoodsFeedbackCommentsRequest struct {
 	ctx                             context.Context
-	ExpressService                      *ExpressAPIService
+	ExpressService                  *ExpressAPIService
 	businessId                      int64
 	getGoodsFeedbackCommentsRequest *GetGoodsFeedbackCommentsRequest
 	pageToken                       *string
@@ -10495,8 +10495,8 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 func (a *ExpressAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) ExpressGetGoodsFeedbackCommentsRequest {
 	return ExpressGetGoodsFeedbackCommentsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -10672,7 +10672,7 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ExpressGetGoodsFee
 
 type ExpressGetGoodsFeedbacksRequest struct {
 	ctx                     context.Context
-	ExpressService              *ExpressAPIService
+	ExpressService          *ExpressAPIService
 	businessId              int64
 	pageToken               *string
 	limit                   *int32
@@ -10729,8 +10729,8 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 func (a *ExpressAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) ExpressGetGoodsFeedbacksRequest {
 	return ExpressGetGoodsFeedbacksRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -10903,7 +10903,7 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ExpressGetGoodsFeedbacksR
 
 type ExpressGetGoodsStatsRequest struct {
 	ctx                  context.Context
-	ExpressService           *ExpressAPIService
+	ExpressService       *ExpressAPIService
 	campaignId           int64
 	getGoodsStatsRequest *GetGoodsStatsRequest
 }
@@ -10934,8 +10934,8 @@ GetGoodsStats Отчет по товарам
 func (a *ExpressAPIService) GetGoodsStats(ctx context.Context, campaignId int64) ExpressGetGoodsStatsRequest {
 	return ExpressGetGoodsStatsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -11104,12 +11104,12 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ExpressGetGoodsStatsRequest) 
 }
 
 type ExpressGetHiddenOffersRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	offerId    *[]string
-	pageToken  *string
-	limit      *int32
+	campaignId     int64
+	offerId        *[]string
+	pageToken      *string
+	limit          *int32
 }
 
 // Идентификатор скрытого предложения.
@@ -11153,8 +11153,8 @@ GetHiddenOffers Информация о скрытых вами товарах
 func (a *ExpressAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) ExpressGetHiddenOffersRequest {
 	return ExpressGetHiddenOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -11317,7 +11317,7 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ExpressGetHiddenOffersReque
 
 type ExpressGetOfferCardsContentStatusRequest struct {
 	ctx                               context.Context
-	ExpressService                        *ExpressAPIService
+	ExpressService                    *ExpressAPIService
 	businessId                        int64
 	pageToken                         *string
 	limit                             *int32
@@ -11368,8 +11368,8 @@ GetOfferCardsContentStatus Получение информации о запол
 func (a *ExpressAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) ExpressGetOfferCardsContentStatusRequest {
 	return ExpressGetOfferCardsContentStatusRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -11541,18 +11541,18 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ExpressGetOfferC
 }
 
 type ExpressGetOfferMappingEntriesRequest struct {
-	ctx          context.Context
-	ExpressService   *ExpressAPIService
-	campaignId   int64
-	offerId      *[]string
-	shopSku      *[]string
-	mappingKind  *OfferMappingKindType
-	status       *[]OfferProcessingStatusType
-	availability *[]OfferAvailabilityStatusType
-	categoryId   *[]int32
-	vendor       *[]string
-	pageToken    *string
-	limit        *int32
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	offerId        *[]string
+	shopSku        *[]string
+	mappingKind    *OfferMappingKindType
+	status         *[]OfferProcessingStatusType
+	availability   *[]OfferAvailabilityStatusType
+	categoryId     *[]int32
+	vendor         *[]string
+	pageToken      *string
+	limit          *int32
 }
 
 // Идентификатор товара в каталоге.
@@ -11651,8 +11651,8 @@ Deprecated
 func (a *ExpressAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) ExpressGetOfferMappingEntriesRequest {
 	return ExpressGetOfferMappingEntriesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -11846,7 +11846,7 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ExpressGetOfferMappi
 
 type ExpressGetOfferMappingsRequest struct {
 	ctx                     context.Context
-	ExpressService              *ExpressAPIService
+	ExpressService          *ExpressAPIService
 	businessId              int64
 	pageToken               *string
 	limit                   *int32
@@ -11903,8 +11903,8 @@ GetOfferMappings Информация о товарах в каталоге
 func (a *ExpressAPIService) GetOfferMappings(ctx context.Context, businessId int64) ExpressGetOfferMappingsRequest {
 	return ExpressGetOfferMappingsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -12080,7 +12080,7 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ExpressGetOfferMappingsReq
 
 type ExpressGetOfferRecommendationsRequest struct {
 	ctx                            context.Context
-	ExpressService                     *ExpressAPIService
+	ExpressService                 *ExpressAPIService
 	businessId                     int64
 	getOfferRecommendationsRequest *GetOfferRecommendationsRequest
 	pageToken                      *string
@@ -12137,8 +12137,8 @@ GetOfferRecommendations Рекомендации Маркета, касающи�
 func (a *ExpressAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) ExpressGetOfferRecommendationsRequest {
 	return ExpressGetOfferRecommendationsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -12313,10 +12313,10 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ExpressGetOfferReco
 }
 
 type ExpressGetOrderRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
+	campaignId     int64
+	orderId        int64
 }
 
 func (r ExpressGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
@@ -12351,9 +12351,9 @@ GetOrder Информация об одном заказе
 func (a *ExpressAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderRequest {
 	return ExpressGetOrderRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -12518,10 +12518,10 @@ func (a *ExpressAPIService) GetOrderExecute(r ExpressGetOrderRequest) (*GetOrder
 }
 
 type ExpressGetOrderBusinessBuyerInfoRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
+	campaignId     int64
+	orderId        int64
 }
 
 func (r ExpressGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
@@ -12554,9 +12554,9 @@ GetOrderBusinessBuyerInfo Информация о покупателе — юр�
 func (a *ExpressAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderBusinessBuyerInfoRequest {
 	return ExpressGetOrderBusinessBuyerInfoRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -12721,10 +12721,10 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ExpressGetOrderBu
 }
 
 type ExpressGetOrderBusinessDocumentsInfoRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
+	campaignId     int64
+	orderId        int64
 }
 
 func (r ExpressGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
@@ -12751,9 +12751,9 @@ GetOrderBusinessDocumentsInfo Информация о документах
 func (a *ExpressAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderBusinessDocumentsInfoRequest {
 	return ExpressGetOrderBusinessDocumentsInfoRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -12918,10 +12918,10 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ExpressGetOrd
 }
 
 type ExpressGetOrderIdentifiersStatusRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
+	campaignId     int64
+	orderId        int64
 }
 
 func (r ExpressGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
@@ -12951,9 +12951,9 @@ GetOrderIdentifiersStatus Статусы проверки УИНов
 func (a *ExpressAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderIdentifiersStatusRequest {
 	return ExpressGetOrderIdentifiersStatusRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -13118,10 +13118,10 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ExpressGetOrderId
 }
 
 type ExpressGetOrderLabelsDataRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
+	campaignId     int64
+	orderId        int64
 }
 
 func (r ExpressGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
@@ -13146,9 +13146,9 @@ GetOrderLabelsData Данные для самостоятельного изго
 func (a *ExpressAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderLabelsDataRequest {
 	return ExpressGetOrderLabelsDataRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -13314,7 +13314,7 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ExpressGetOrderLabelsDat
 
 type ExpressGetOrdersRequest struct {
 	ctx                               context.Context
-	ExpressService                        *ExpressAPIService
+	ExpressService                    *ExpressAPIService
 	campaignId                        int64
 	orderIds                          *[]int64
 	status                            *[]OrderStatusType
@@ -13504,8 +13504,8 @@ GetOrders Информация о нескольких заказах
 func (a *ExpressAPIService) GetOrders(ctx context.Context, campaignId int64) ExpressGetOrdersRequest {
 	return ExpressGetOrdersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -13742,7 +13742,7 @@ func (a *ExpressAPIService) GetOrdersExecute(r ExpressGetOrdersRequest) (*GetOrd
 
 type ExpressGetOrdersStatsRequest struct {
 	ctx                   context.Context
-	ExpressService            *ExpressAPIService
+	ExpressService        *ExpressAPIService
 	campaignId            int64
 	pageToken             *string
 	limit                 *int32
@@ -13797,8 +13797,8 @@ GetOrdersStats Детальная информация по заказам
 func (a *ExpressAPIService) GetOrdersStats(ctx context.Context, campaignId int64) ExpressGetOrdersStatsRequest {
 	return ExpressGetOrdersStatsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -13971,7 +13971,7 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ExpressGetOrdersStatsRequest
 
 type ExpressGetPagedWarehousesRequest struct {
 	ctx                       context.Context
-	ExpressService                *ExpressAPIService
+	ExpressService            *ExpressAPIService
 	businessId                int64
 	pageToken                 *string
 	limit                     *int32
@@ -14022,8 +14022,8 @@ GetPagedWarehouses Список складов
 func (a *ExpressAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) ExpressGetPagedWarehousesRequest {
 	return ExpressGetPagedWarehousesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -14184,12 +14184,12 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ExpressGetPagedWarehouse
 }
 
 type ExpressGetPricesRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	pageToken  *string
-	limit      *int32
-	archived   *bool
+	campaignId     int64
+	pageToken      *string
+	limit          *int32
+	archived       *bool
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
@@ -14247,8 +14247,8 @@ Deprecated
 func (a *ExpressAPIService) GetPrices(ctx context.Context, campaignId int64) ExpressGetPricesRequest {
 	return ExpressGetPricesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -14427,7 +14427,7 @@ func (a *ExpressAPIService) GetPricesExecute(r ExpressGetPricesRequest) (*GetPri
 
 type ExpressGetPricesByOfferIdsRequest struct {
 	ctx                        context.Context
-	ExpressService                 *ExpressAPIService
+	ExpressService             *ExpressAPIService
 	campaignId                 int64
 	pageToken                  *string
 	limit                      *int32
@@ -14482,8 +14482,8 @@ GetPricesByOfferIds Просмотр цен на указанные товары
 func (a *ExpressAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) ExpressGetPricesByOfferIdsRequest {
 	return ExpressGetPricesByOfferIdsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -14656,7 +14656,7 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ExpressGetPricesByOffer
 
 type ExpressGetPromoOffersRequest struct {
 	ctx                   context.Context
-	ExpressService            *ExpressAPIService
+	ExpressService        *ExpressAPIService
 	businessId            int64
 	getPromoOffersRequest *GetPromoOffersRequest
 	pageToken             *string
@@ -14709,8 +14709,8 @@ GetPromoOffers Получение списка товаров, которые у
 func (a *ExpressAPIService) GetPromoOffers(ctx context.Context, businessId int64) ExpressGetPromoOffersRequest {
 	return ExpressGetPromoOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -14886,7 +14886,7 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ExpressGetPromoOffersRequest
 
 type ExpressGetPromosRequest struct {
 	ctx              context.Context
-	ExpressService       *ExpressAPIService
+	ExpressService   *ExpressAPIService
 	businessId       int64
 	getPromosRequest *GetPromosRequest
 }
@@ -14927,8 +14927,8 @@ GetPromos Получение списка акций
 func (a *ExpressAPIService) GetPromos(ctx context.Context, businessId int64) ExpressGetPromosRequest {
 	return ExpressGetPromosRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -15094,9 +15094,9 @@ func (a *ExpressAPIService) GetPromosExecute(r ExpressGetPromosRequest) (*GetPro
 }
 
 type ExpressGetQualityRatingDetailsRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
+	campaignId     int64
 }
 
 func (r ExpressGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
@@ -15120,8 +15120,8 @@ GetQualityRatingDetails Заказы, которые повлияли на ин�
 func (a *ExpressAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) ExpressGetQualityRatingDetailsRequest {
 	return ExpressGetQualityRatingDetailsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -15286,7 +15286,7 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ExpressGetQualityRa
 
 type ExpressGetQualityRatingsRequest struct {
 	ctx                     context.Context
-	ExpressService              *ExpressAPIService
+	ExpressService          *ExpressAPIService
 	businessId              int64
 	getQualityRatingRequest *GetQualityRatingRequest
 }
@@ -15319,8 +15319,8 @@ GetQualityRatings Индекс качества магазинов
 func (a *ExpressAPIService) GetQualityRatings(ctx context.Context, businessId int64) ExpressGetQualityRatingsRequest {
 	return ExpressGetQualityRatingsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -15489,7 +15489,7 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ExpressGetQualityRatingsR
 }
 
 type ExpressGetRegionsCodesRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
 }
 
@@ -15515,7 +15515,7 @@ GetRegionsCodes Список допустимых кодов стран
 func (a *ExpressAPIService) GetRegionsCodes(ctx context.Context) ExpressGetRegionsCodesRequest {
 	return ExpressGetRegionsCodesRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -15664,9 +15664,9 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ExpressGetRegionsCodesReque
 }
 
 type ExpressGetReportInfoRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	reportId   string
+	reportId       string
 }
 
 func (r ExpressGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
@@ -15692,8 +15692,8 @@ GetReportInfo Получение заданного отчета
 func (a *ExpressAPIService) GetReportInfo(ctx context.Context, reportId string) ExpressGetReportInfoRequest {
 	return ExpressGetReportInfoRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		reportId:   reportId,
+		ctx:            ctx,
+		reportId:       reportId,
 	}
 }
 
@@ -15860,11 +15860,11 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ExpressGetReportInfoRequest) 
 }
 
 type ExpressGetReturnRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
-	returnId   int64
+	campaignId     int64
+	orderId        int64
+	returnId       int64
 }
 
 func (r ExpressGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
@@ -15898,10 +15898,10 @@ GetReturn Информация о невыкупе или возврате
 func (a *ExpressAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) ExpressGetReturnRequest {
 	return ExpressGetReturnRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
-		returnId:   returnId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		returnId:       returnId,
 	}
 }
 
@@ -16067,11 +16067,11 @@ func (a *ExpressAPIService) GetReturnExecute(r ExpressGetReturnRequest) (*GetRet
 }
 
 type ExpressGetReturnApplicationRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
-	returnId   int64
+	campaignId     int64
+	orderId        int64
+	returnId       int64
 }
 
 func (r ExpressGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
@@ -16097,10 +16097,10 @@ GetReturnApplication Получение заявления на возврат
 func (a *ExpressAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) ExpressGetReturnApplicationRequest {
 	return ExpressGetReturnApplicationRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
-		returnId:   returnId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		returnId:       returnId,
 	}
 }
 
@@ -16266,13 +16266,13 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ExpressGetReturnApplic
 }
 
 type ExpressGetReturnPhotoRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
-	returnId   int64
-	itemId     int64
-	imageHash  string
+	campaignId     int64
+	orderId        int64
+	returnId       int64
+	itemId         int64
+	imageHash      string
 }
 
 func (r ExpressGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
@@ -16300,12 +16300,12 @@ GetReturnPhoto Получение фотографий товаров в воз�
 func (a *ExpressAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) ExpressGetReturnPhotoRequest {
 	return ExpressGetReturnPhotoRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
-		returnId:   returnId,
-		itemId:     itemId,
-		imageHash:  imageHash,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		returnId:       returnId,
+		itemId:         itemId,
+		imageHash:      imageHash,
 	}
 }
 
@@ -16473,18 +16473,18 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ExpressGetReturnPhotoRequest
 }
 
 type ExpressGetReturnsRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	pageToken  *string
-	limit      *int32
-	orderIds   *[]int64
-	statuses   *[]RefundStatusType
-	type_      *ReturnType
-	fromDate   *string
-	toDate     *string
-	fromDate2  *string
-	toDate2    *string
+	campaignId     int64
+	pageToken      *string
+	limit          *int32
+	orderIds       *[]int64
+	statuses       *[]RefundStatusType
+	type_          *ReturnType
+	fromDate       *string
+	toDate         *string
+	fromDate2      *string
+	toDate2        *string
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
@@ -16574,8 +16574,8 @@ GetReturns Список невыкупов и возвратов
 func (a *ExpressAPIService) GetReturns(ctx context.Context, campaignId int64) ExpressGetReturnsRequest {
 	return ExpressGetReturnsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -16767,7 +16767,7 @@ func (a *ExpressAPIService) GetReturnsExecute(r ExpressGetReturnsRequest) (*GetR
 
 type ExpressGetStocksRequest struct {
 	ctx                       context.Context
-	ExpressService                *ExpressAPIService
+	ExpressService            *ExpressAPIService
 	campaignId                int64
 	pageToken                 *string
 	limit                     *int32
@@ -16822,8 +16822,8 @@ GetStocks Информация об остатках и оборачиваемо
 func (a *ExpressAPIService) GetStocks(ctx context.Context, campaignId int64) ExpressGetStocksRequest {
 	return ExpressGetStocksRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -16985,7 +16985,7 @@ func (a *ExpressAPIService) GetStocksExecute(r ExpressGetStocksRequest) (*GetWar
 
 type ExpressGetSuggestedOfferMappingEntriesRequest struct {
 	ctx                                    context.Context
-	ExpressService                             *ExpressAPIService
+	ExpressService                         *ExpressAPIService
 	campaignId                             int64
 	getSuggestedOfferMappingEntriesRequest *GetSuggestedOfferMappingEntriesRequest
 }
@@ -17028,8 +17028,8 @@ Deprecated
 func (a *ExpressAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) ExpressGetSuggestedOfferMappingEntriesRequest {
 	return ExpressGetSuggestedOfferMappingEntriesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -17201,7 +17201,7 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ExpressGetS
 
 type ExpressGetSuggestedOfferMappingsRequest struct {
 	ctx                              context.Context
-	ExpressService                       *ExpressAPIService
+	ExpressService                   *ExpressAPIService
 	businessId                       int64
 	getSuggestedOfferMappingsRequest *GetSuggestedOfferMappingsRequest
 }
@@ -17251,8 +17251,8 @@ Deprecated
 func (a *ExpressAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) ExpressGetSuggestedOfferMappingsRequest {
 	return ExpressGetSuggestedOfferMappingsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -17421,7 +17421,7 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ExpressGetSuggest
 
 type ExpressGetSuggestedPricesRequest struct {
 	ctx                  context.Context
-	ExpressService           *ExpressAPIService
+	ExpressService       *ExpressAPIService
 	campaignId           int64
 	suggestPricesRequest *SuggestPricesRequest
 }
@@ -17474,8 +17474,8 @@ Deprecated
 func (a *ExpressAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) ExpressGetSuggestedPricesRequest {
 	return ExpressGetSuggestedPricesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -17646,9 +17646,9 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ExpressGetSuggestedPrice
 }
 
 type ExpressGetWarehousesRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	businessId int64
+	businessId     int64
 }
 
 func (r ExpressGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
@@ -17682,8 +17682,8 @@ Deprecated
 func (a *ExpressAPIService) GetWarehouses(ctx context.Context, businessId int64) ExpressGetWarehousesRequest {
 	return ExpressGetWarehousesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -17850,7 +17850,7 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ExpressGetWarehousesRequest) 
 
 type ExpressProvideOrderItemIdentifiersRequest struct {
 	ctx                                context.Context
-	ExpressService                         *ExpressAPIService
+	ExpressService                     *ExpressAPIService
 	campaignId                         int64
 	orderId                            int64
 	provideOrderItemIdentifiersRequest *ProvideOrderItemIdentifiersRequest
@@ -17905,9 +17905,9 @@ ProvideOrderItemIdentifiers Передача кодов маркировки е�
 func (a *ExpressAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) ExpressProvideOrderItemIdentifiersRequest {
 	return ExpressProvideOrderItemIdentifiersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -18078,7 +18078,7 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ExpressProvideO
 
 type ExpressPutBidsForBusinessRequest struct {
 	ctx               context.Context
-	ExpressService        *ExpressAPIService
+	ExpressService    *ExpressAPIService
 	businessId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
@@ -18142,8 +18142,8 @@ PutBidsForBusiness Включение буста продаж и установ�
 func (a *ExpressAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) ExpressPutBidsForBusinessRequest {
 	return ExpressPutBidsForBusinessRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -18313,7 +18313,7 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ExpressPutBidsForBusines
 
 type ExpressPutBidsForCampaignRequest struct {
 	ctx               context.Context
-	ExpressService        *ExpressAPIService
+	ExpressService    *ExpressAPIService
 	campaignId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
@@ -18371,8 +18371,8 @@ PutBidsForCampaign Включение буста продаж и установ�
 func (a *ExpressAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) ExpressPutBidsForCampaignRequest {
 	return ExpressPutBidsForCampaignRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -18541,11 +18541,11 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ExpressPutBidsForCampaig
 }
 
 type ExpressSearchRegionChildrenRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	regionId   int64
-	page       *int32
-	pageSize   *int32
+	regionId       int64
+	page           *int32
+	pageSize       *int32
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
@@ -18585,8 +18585,8 @@ SearchRegionChildren Информация о дочерних регионах
 func (a *ExpressAPIService) SearchRegionChildren(ctx context.Context, regionId int64) ExpressSearchRegionChildrenRequest {
 	return ExpressSearchRegionChildrenRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		regionId:   regionId,
+		ctx:            ctx,
+		regionId:       regionId,
 	}
 }
 
@@ -18756,9 +18756,9 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ExpressSearchRegionChi
 }
 
 type ExpressSearchRegionsByIdRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	regionId   int64
+	regionId       int64
 }
 
 func (r ExpressSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
@@ -18786,8 +18786,8 @@ SearchRegionsById Информация о регионе
 func (a *ExpressAPIService) SearchRegionsById(ctx context.Context, regionId int64) ExpressSearchRegionsByIdRequest {
 	return ExpressSearchRegionsByIdRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		regionId:   regionId,
+		ctx:            ctx,
+		regionId:       regionId,
 	}
 }
 
@@ -18937,11 +18937,11 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ExpressSearchRegionsByIdR
 }
 
 type ExpressSearchRegionsByNameRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	name       *string
-	pageToken  *string
-	limit      *int32
+	name           *string
+	pageToken      *string
+	limit          *int32
 }
 
 // Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;.
@@ -18988,7 +18988,7 @@ SearchRegionsByName Поиск регионов по их имени
 func (a *ExpressAPIService) SearchRegionsByName(ctx context.Context) ExpressSearchRegionsByNameRequest {
 	return ExpressSearchRegionsByNameRequest{
 		ExpressService: a,
-		ctx:        ctx,
+		ctx:            ctx,
 	}
 }
 
@@ -19136,11 +19136,11 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ExpressSearchRegionsByN
 }
 
 type ExpressExpressSendFileToChatRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	businessId int64
-	chatId     *int64
-	file       *os.File
+	businessId     int64
+	chatId         *int64
+	file           *os.File
 }
 
 // Идентификатор чата.
@@ -19176,8 +19176,8 @@ SendFileToChat Отправка файла в чат
 func (a *ExpressAPIService) SendFileToChat(ctx context.Context, businessId int64) ExpressExpressSendFileToChatRequest {
 	return ExpressExpressSendFileToChatRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -19367,7 +19367,7 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ExpressExpressSendFileToChat
 
 type ExpressExpressSendMessageToChatRequest struct {
 	ctx                      context.Context
-	ExpressService               *ExpressAPIService
+	ExpressService           *ExpressAPIService
 	businessId               int64
 	chatId                   *int64
 	sendMessageToChatRequest *SendMessageToChatRequest
@@ -19406,8 +19406,8 @@ SendMessageToChat Отправка сообщения в чат
 func (a *ExpressAPIService) SendMessageToChat(ctx context.Context, businessId int64) ExpressExpressSendMessageToChatRequest {
 	return ExpressExpressSendMessageToChatRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -19584,7 +19584,7 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ExpressExpressSendMessage
 
 type ExpressSetOrderBoxLayoutRequest struct {
 	ctx                      context.Context
-	ExpressService               *ExpressAPIService
+	ExpressService           *ExpressAPIService
 	campaignId               int64
 	orderId                  int64
 	setOrderBoxLayoutRequest *SetOrderBoxLayoutRequest
@@ -19861,9 +19861,9 @@ SetOrderBoxLayout Подготовка заказа
 func (a *ExpressAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) ExpressSetOrderBoxLayoutRequest {
 	return ExpressSetOrderBoxLayoutRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -20034,7 +20034,7 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ExpressSetOrderBoxLayoutR
 
 type ExpressSetOrderShipmentBoxesRequest struct {
 	ctx                          context.Context
-	ExpressService                   *ExpressAPIService
+	ExpressService               *ExpressAPIService
 	campaignId                   int64
 	orderId                      int64
 	shipmentId                   int64
@@ -20132,10 +20132,10 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 func (a *ExpressAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) ExpressSetOrderShipmentBoxesRequest {
 	return ExpressSetOrderShipmentBoxesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
-		shipmentId: shipmentId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		shipmentId:     shipmentId,
 	}
 }
 
@@ -20307,7 +20307,7 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ExpressSetOrderShipme
 
 type ExpressSkipGoodsFeedbacksReactionRequest struct {
 	ctx                              context.Context
-	ExpressService                       *ExpressAPIService
+	ExpressService                   *ExpressAPIService
 	businessId                       int64
 	skipGoodsFeedbackReactionRequest *SkipGoodsFeedbackReactionRequest
 }
@@ -20338,8 +20338,8 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 func (a *ExpressAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) ExpressSkipGoodsFeedbacksReactionRequest {
 	return ExpressSkipGoodsFeedbacksReactionRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -20508,12 +20508,12 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ExpressSkipGoods
 }
 
 type ExpressSubmitReturnDecisionRequest struct {
-	ctx        context.Context
+	ctx            context.Context
 	ExpressService *ExpressAPIService
-	campaignId int64
-	orderId    int64
-	returnId   int64
-	body       *map[string]interface{}
+	campaignId     int64
+	orderId        int64
+	returnId       int64
+	body           *map[string]interface{}
 }
 
 // description
@@ -20545,10 +20545,10 @@ SubmitReturnDecision Подтверждение решения по возвра
 func (a *ExpressAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) ExpressSubmitReturnDecisionRequest {
 	return ExpressSubmitReturnDecisionRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
-		returnId:   returnId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		returnId:       returnId,
 	}
 }
 
@@ -20717,7 +20717,7 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ExpressSubmitReturnDec
 
 type ExpressUpdateBusinessPricesRequest struct {
 	ctx                         context.Context
-	ExpressService                  *ExpressAPIService
+	ExpressService              *ExpressAPIService
 	businessId                  int64
 	updateBusinessPricesRequest *UpdateBusinessPricesRequest
 }
@@ -20756,8 +20756,8 @@ UpdateBusinessPrices Установка цен на товары для всех
 func (a *ExpressAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) ExpressUpdateBusinessPricesRequest {
 	return ExpressUpdateBusinessPricesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -20938,7 +20938,7 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ExpressUpdateBusinessP
 
 type ExpressUpdateCampaignOffersRequest struct {
 	ctx                         context.Context
-	ExpressService                  *ExpressAPIService
+	ExpressService              *ExpressAPIService
 	campaignId                  int64
 	updateCampaignOffersRequest *UpdateCampaignOffersRequest
 }
@@ -20969,8 +20969,8 @@ UpdateCampaignOffers Изменение условий продажи товар
 func (a *ExpressAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) ExpressUpdateCampaignOffersRequest {
 	return ExpressUpdateCampaignOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -21151,7 +21151,7 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ExpressUpdateCampaignO
 
 type ExpressUpdateExternalOrderIdRequest struct {
 	ctx                          context.Context
-	ExpressService                   *ExpressAPIService
+	ExpressService               *ExpressAPIService
 	campaignId                   int64
 	orderId                      int64
 	updateExternalOrderIdRequest *UpdateExternalOrderIdRequest
@@ -21186,9 +21186,9 @@ UpdateExternalOrderId Передача или изменение дополни�
 func (a *ExpressAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) ExpressUpdateExternalOrderIdRequest {
 	return ExpressUpdateExternalOrderIdRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -21359,7 +21359,7 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ExpressUpdateExternal
 
 type ExpressUpdateGoodsFeedbackCommentRequest struct {
 	ctx                               context.Context
-	ExpressService                        *ExpressAPIService
+	ExpressService                    *ExpressAPIService
 	businessId                        int64
 	updateGoodsFeedbackCommentRequest *UpdateGoodsFeedbackCommentRequest
 }
@@ -21404,8 +21404,8 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 func (a *ExpressAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) ExpressUpdateGoodsFeedbackCommentRequest {
 	return ExpressUpdateGoodsFeedbackCommentRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -21575,7 +21575,7 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ExpressUpdateGoo
 
 type ExpressUpdateOfferContentRequest struct {
 	ctx                       context.Context
-	ExpressService                *ExpressAPIService
+	ExpressService            *ExpressAPIService
 	businessId                int64
 	updateOfferContentRequest *UpdateOfferContentRequest
 }
@@ -21620,8 +21620,8 @@ UpdateOfferContent Редактирование категорийных хар�
 func (a *ExpressAPIService) UpdateOfferContent(ctx context.Context, businessId int64) ExpressUpdateOfferContentRequest {
 	return ExpressUpdateOfferContentRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -21802,7 +21802,7 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ExpressUpdateOfferConten
 
 type ExpressUpdateOfferMappingEntriesRequest struct {
 	ctx                            context.Context
-	ExpressService                     *ExpressAPIService
+	ExpressService                 *ExpressAPIService
 	campaignId                     int64
 	updateOfferMappingEntryRequest *UpdateOfferMappingEntryRequest
 }
@@ -21862,8 +21862,8 @@ Deprecated
 func (a *ExpressAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) ExpressUpdateOfferMappingEntriesRequest {
 	return ExpressUpdateOfferMappingEntriesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -22046,7 +22046,7 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ExpressUpdateOffe
 
 type ExpressUpdateOfferMappingsRequest struct {
 	ctx                        context.Context
-	ExpressService                 *ExpressAPIService
+	ExpressService             *ExpressAPIService
 	businessId                 int64
 	updateOfferMappingsRequest *UpdateOfferMappingsRequest
 	language                   *CatalogLanguageType
@@ -22148,8 +22148,8 @@ SKU товара можно изменить в кабинете продавц�
 func (a *ExpressAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) ExpressUpdateOfferMappingsRequest {
 	return ExpressUpdateOfferMappingsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -22333,7 +22333,7 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ExpressUpdateOfferMappi
 
 type ExpressUpdateOrderItemsRequest struct {
 	ctx                    context.Context
-	ExpressService             *ExpressAPIService
+	ExpressService         *ExpressAPIService
 	campaignId             int64
 	orderId                int64
 	updateOrderItemRequest *UpdateOrderItemRequest
@@ -22406,9 +22406,9 @@ UpdateOrderItems Удаление товара из заказа или умен
 func (a *ExpressAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) ExpressUpdateOrderItemsRequest {
 	return ExpressUpdateOrderItemsRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -22567,7 +22567,7 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ExpressUpdateOrderItemsReq
 
 type ExpressUpdateOrderStatusRequest struct {
 	ctx                      context.Context
-	ExpressService               *ExpressAPIService
+	ExpressService           *ExpressAPIService
 	campaignId               int64
 	orderId                  int64
 	updateOrderStatusRequest *UpdateOrderStatusRequest
@@ -22604,9 +22604,9 @@ UpdateOrderStatus Изменение статуса одного заказа
 func (a *ExpressAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) ExpressUpdateOrderStatusRequest {
 	return ExpressUpdateOrderStatusRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
@@ -22777,7 +22777,7 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ExpressUpdateOrderStatusR
 
 type ExpressUpdateOrderStatusesRequest struct {
 	ctx                        context.Context
-	ExpressService                 *ExpressAPIService
+	ExpressService             *ExpressAPIService
 	campaignId                 int64
 	updateOrderStatusesRequest *UpdateOrderStatusesRequest
 }
@@ -22814,8 +22814,8 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 func (a *ExpressAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) ExpressUpdateOrderStatusesRequest {
 	return ExpressUpdateOrderStatusesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -22985,7 +22985,7 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ExpressUpdateOrderStatu
 
 type ExpressUpdatePricesRequest struct {
 	ctx                 context.Context
-	ExpressService          *ExpressAPIService
+	ExpressService      *ExpressAPIService
 	campaignId          int64
 	updatePricesRequest *UpdatePricesRequest
 }
@@ -23030,8 +23030,8 @@ UpdatePrices Установка цен на товары в конкретном
 func (a *ExpressAPIService) UpdatePrices(ctx context.Context, campaignId int64) ExpressUpdatePricesRequest {
 	return ExpressUpdatePricesRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -23212,7 +23212,7 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ExpressUpdatePricesRequest) (*
 
 type ExpressUpdatePromoOffersRequest struct {
 	ctx                      context.Context
-	ExpressService               *ExpressAPIService
+	ExpressService           *ExpressAPIService
 	businessId               int64
 	updatePromoOffersRequest *UpdatePromoOffersRequest
 }
@@ -23245,8 +23245,8 @@ UpdatePromoOffers Добавление товаров в акцию или из�
 func (a *ExpressAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) ExpressUpdatePromoOffersRequest {
 	return ExpressUpdatePromoOffersRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		businessId: businessId,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
@@ -23416,7 +23416,7 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ExpressUpdatePromoOffersR
 
 type ExpressUpdateStocksRequest struct {
 	ctx                 context.Context
-	ExpressService          *ExpressAPIService
+	ExpressService      *ExpressAPIService
 	campaignId          int64
 	updateStocksRequest *UpdateStocksRequest
 }
@@ -23457,8 +23457,8 @@ UpdateStocks Передача информации об остатках
 func (a *ExpressAPIService) UpdateStocks(ctx context.Context, campaignId int64) ExpressUpdateStocksRequest {
 	return ExpressUpdateStocksRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -23628,7 +23628,7 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ExpressUpdateStocksRequest) (*
 
 type ExpressUpdateWarehouseStatusRequest struct {
 	ctx                          context.Context
-	ExpressService                   *ExpressAPIService
+	ExpressService               *ExpressAPIService
 	campaignId                   int64
 	updateWarehouseStatusRequest *UpdateWarehouseStatusRequest
 }
@@ -23661,8 +23661,8 @@ UpdateWarehouseStatus Изменение статуса склада
 func (a *ExpressAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) ExpressUpdateWarehouseStatusRequest {
 	return ExpressUpdateWarehouseStatusRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
@@ -23821,7 +23821,7 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ExpressUpdateWarehous
 
 type ExpressVerifyOrderEacRequest struct {
 	ctx                   context.Context
-	ExpressService            *ExpressAPIService
+	ExpressService        *ExpressAPIService
 	campaignId            int64
 	orderId               int64
 	verifyOrderEacRequest *VerifyOrderEacRequest
@@ -23865,9 +23865,9 @@ VerifyOrderEac Передача кода подтверждения
 func (a *ExpressAPIService) VerifyOrderEac(ctx context.Context, campaignId int64, orderId int64) ExpressVerifyOrderEacRequest {
 	return ExpressVerifyOrderEacRequest{
 		ExpressService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-		orderId:    orderId,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
