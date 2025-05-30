@@ -20,11 +20,11 @@ type OrderDeliveryType string
 
 // List of OrderDeliveryType
 const (
-	DELIVERY OrderDeliveryType = "DELIVERY"
-	PICKUP   OrderDeliveryType = "PICKUP"
-	POST     OrderDeliveryType = "POST"
-	DIGITAL  OrderDeliveryType = "DIGITAL"
-	UNKNOWN  OrderDeliveryType = "UNKNOWN"
+	OrderDeliveryType_DELIVERY OrderDeliveryType = "DELIVERY"
+	OrderDeliveryType_PICKUP   OrderDeliveryType = "PICKUP"
+	OrderDeliveryType_POST     OrderDeliveryType = "POST"
+	OrderDeliveryType_DIGITAL  OrderDeliveryType = "DIGITAL"
+	OrderDeliveryType_UNKNOWN  OrderDeliveryType = "UNKNOWN"
 )
 
 // All allowed values of OrderDeliveryType enum

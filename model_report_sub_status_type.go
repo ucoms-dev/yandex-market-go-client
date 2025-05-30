@@ -20,9 +20,9 @@ type ReportSubStatusType string
 
 // List of ReportSubStatusType
 const (
-	NO_DATA            ReportSubStatusType = "NO_DATA"
-	TOO_LARGE          ReportSubStatusType = "TOO_LARGE"
-	RESOURCE_NOT_FOUND ReportSubStatusType = "RESOURCE_NOT_FOUND"
+	ReportSubStatusType_NO_DATA            ReportSubStatusType = "NO_DATA"
+	ReportSubStatusType_TOO_LARGE          ReportSubStatusType = "TOO_LARGE"
+	ReportSubStatusType_RESOURCE_NOT_FOUND ReportSubStatusType = "RESOURCE_NOT_FOUND"
 )
 
 // All allowed values of ReportSubStatusType enum

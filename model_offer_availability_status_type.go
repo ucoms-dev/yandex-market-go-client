@@ -20,9 +20,9 @@ type OfferAvailabilityStatusType string
 
 // List of OfferAvailabilityStatusType
 const (
-	ACTIVE   OfferAvailabilityStatusType = "ACTIVE"
-	INACTIVE OfferAvailabilityStatusType = "INACTIVE"
-	DELISTED OfferAvailabilityStatusType = "DELISTED"
+	OfferAvailabilityStatusType_ACTIVE   OfferAvailabilityStatusType = "ACTIVE"
+	OfferAvailabilityStatusType_INACTIVE OfferAvailabilityStatusType = "INACTIVE"
+	OfferAvailabilityStatusType_DELISTED OfferAvailabilityStatusType = "DELISTED"
 )
 
 // All allowed values of OfferAvailabilityStatusType enum

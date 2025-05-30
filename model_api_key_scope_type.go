@@ -20,20 +20,20 @@ type ApiKeyScopeType string
 
 // List of ApiKeyScopeType
 const (
-	ALL_METHODS                              ApiKeyScopeType = "ALL_METHODS"
-	ALL_METHODS_READ_ONLY                    ApiKeyScopeType = "ALL_METHODS_READ_ONLY"
-	INVENTORY_AND_ORDER_PROCESSING           ApiKeyScopeType = "INVENTORY_AND_ORDER_PROCESSING"
-	INVENTORY_AND_ORDER_PROCESSING_READ_ONLY ApiKeyScopeType = "INVENTORY_AND_ORDER_PROCESSING_READ_ONLY"
-	PRICING                                  ApiKeyScopeType = "PRICING"
-	PRICING_READ_ONLY                        ApiKeyScopeType = "PRICING_READ_ONLY"
-	OFFERS_AND_CARDS_MANAGEMENT              ApiKeyScopeType = "OFFERS_AND_CARDS_MANAGEMENT"
-	OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY    ApiKeyScopeType = "OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY"
-	PROMOTION                                ApiKeyScopeType = "PROMOTION"
-	PROMOTION_READ_ONLY                      ApiKeyScopeType = "PROMOTION_READ_ONLY"
-	FINANCE_AND_ACCOUNTING                   ApiKeyScopeType = "FINANCE_AND_ACCOUNTING"
-	COMMUNICATION                            ApiKeyScopeType = "COMMUNICATION"
-	SETTINGS_MANAGEMENT                      ApiKeyScopeType = "SETTINGS_MANAGEMENT"
-	SUPPLIES_MANAGEMENT_READ_ONLY            ApiKeyScopeType = "SUPPLIES_MANAGEMENT_READ_ONLY"
+	ApiKeyScopeType_ALL_METHODS                              ApiKeyScopeType = "ALL_METHODS"
+	ApiKeyScopeType_ALL_METHODS_READ_ONLY                    ApiKeyScopeType = "ALL_METHODS_READ_ONLY"
+	ApiKeyScopeType_INVENTORY_AND_ORDER_PROCESSING           ApiKeyScopeType = "INVENTORY_AND_ORDER_PROCESSING"
+	ApiKeyScopeType_INVENTORY_AND_ORDER_PROCESSING_READ_ONLY ApiKeyScopeType = "INVENTORY_AND_ORDER_PROCESSING_READ_ONLY"
+	ApiKeyScopeType_PRICING                                  ApiKeyScopeType = "PRICING"
+	ApiKeyScopeType_PRICING_READ_ONLY                        ApiKeyScopeType = "PRICING_READ_ONLY"
+	ApiKeyScopeType_OFFERS_AND_CARDS_MANAGEMENT              ApiKeyScopeType = "OFFERS_AND_CARDS_MANAGEMENT"
+	ApiKeyScopeType_OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY    ApiKeyScopeType = "OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY"
+	ApiKeyScopeType_PROMOTION                                ApiKeyScopeType = "PROMOTION"
+	ApiKeyScopeType_PROMOTION_READ_ONLY                      ApiKeyScopeType = "PROMOTION_READ_ONLY"
+	ApiKeyScopeType_FINANCE_AND_ACCOUNTING                   ApiKeyScopeType = "FINANCE_AND_ACCOUNTING"
+	ApiKeyScopeType_COMMUNICATION                            ApiKeyScopeType = "COMMUNICATION"
+	ApiKeyScopeType_SETTINGS_MANAGEMENT                      ApiKeyScopeType = "SETTINGS_MANAGEMENT"
+	ApiKeyScopeType_SUPPLIES_MANAGEMENT_READ_ONLY            ApiKeyScopeType = "SUPPLIES_MANAGEMENT_READ_ONLY"
 )
 
 // All allowed values of ApiKeyScopeType enum

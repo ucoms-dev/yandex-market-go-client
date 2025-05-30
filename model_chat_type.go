@@ -20,8 +20,8 @@ type ChatType string
 
 // List of ChatType
 const (
-	CHAT      ChatType = "CHAT"
-	ARBITRAGE ChatType = "ARBITRAGE"
+	ChatType_CHAT      ChatType = "CHAT"
+	ChatType_ARBITRAGE ChatType = "ARBITRAGE"
 )
 
 // All allowed values of ChatType enum

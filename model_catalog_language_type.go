@@ -20,8 +20,8 @@ type CatalogLanguageType string
 
 // List of CatalogLanguageType
 const (
-	RU CatalogLanguageType = "RU"
-	UZ CatalogLanguageType = "UZ"
+	CatalogLanguageType_RU CatalogLanguageType = "RU"
+	CatalogLanguageType_UZ CatalogLanguageType = "UZ"
 )
 
 // All allowed values of CatalogLanguageType enum

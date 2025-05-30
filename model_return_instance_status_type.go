@@ -20,18 +20,18 @@ type ReturnInstanceStatusType string
 
 // List of ReturnInstanceStatusType
 const (
-	CREATED                  ReturnInstanceStatusType = "CREATED"
-	RECEIVED                 ReturnInstanceStatusType = "RECEIVED"
-	IN_TRANSIT               ReturnInstanceStatusType = "IN_TRANSIT"
-	READY_FOR_PICKUP         ReturnInstanceStatusType = "READY_FOR_PICKUP"
-	PICKED                   ReturnInstanceStatusType = "PICKED"
-	RECEIVED_ON_FULFILLMENT  ReturnInstanceStatusType = "RECEIVED_ON_FULFILLMENT"
-	CANCELLED                ReturnInstanceStatusType = "CANCELLED"
-	LOST                     ReturnInstanceStatusType = "LOST"
-	UTILIZED                 ReturnInstanceStatusType = "UTILIZED"
-	PREPARED_FOR_UTILIZATION ReturnInstanceStatusType = "PREPARED_FOR_UTILIZATION"
-	EXPROPRIATED             ReturnInstanceStatusType = "EXPROPRIATED"
-	NOT_IN_DEMAND            ReturnInstanceStatusType = "NOT_IN_DEMAND"
+	ReturnInstanceStatusType_CREATED                  ReturnInstanceStatusType = "CREATED"
+	ReturnInstanceStatusType_RECEIVED                 ReturnInstanceStatusType = "RECEIVED"
+	ReturnInstanceStatusType_IN_TRANSIT               ReturnInstanceStatusType = "IN_TRANSIT"
+	ReturnInstanceStatusType_READY_FOR_PICKUP         ReturnInstanceStatusType = "READY_FOR_PICKUP"
+	ReturnInstanceStatusType_PICKED                   ReturnInstanceStatusType = "PICKED"
+	ReturnInstanceStatusType_RECEIVED_ON_FULFILLMENT  ReturnInstanceStatusType = "RECEIVED_ON_FULFILLMENT"
+	ReturnInstanceStatusType_CANCELLED                ReturnInstanceStatusType = "CANCELLED"
+	ReturnInstanceStatusType_LOST                     ReturnInstanceStatusType = "LOST"
+	ReturnInstanceStatusType_UTILIZED                 ReturnInstanceStatusType = "UTILIZED"
+	ReturnInstanceStatusType_PREPARED_FOR_UTILIZATION ReturnInstanceStatusType = "PREPARED_FOR_UTILIZATION"
+	ReturnInstanceStatusType_EXPROPRIATED             ReturnInstanceStatusType = "EXPROPRIATED"
+	ReturnInstanceStatusType_NOT_IN_DEMAND            ReturnInstanceStatusType = "NOT_IN_DEMAND"
 )
 
 // All allowed values of ReturnInstanceStatusType enum

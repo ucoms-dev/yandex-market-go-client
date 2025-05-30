@@ -20,8 +20,8 @@ type WarehouseStatusType string
 
 // List of WarehouseStatusType
 const (
-	DISABLED_MANUALLY WarehouseStatusType = "DISABLED_MANUALLY"
-	OTHER             WarehouseStatusType = "OTHER"
+	WarehouseStatusType_DISABLED_MANUALLY WarehouseStatusType = "DISABLED_MANUALLY"
+	WarehouseStatusType_OTHER             WarehouseStatusType = "OTHER"
 )
 
 // All allowed values of WarehouseStatusType enum

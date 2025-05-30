@@ -20,8 +20,8 @@ type StatisticsAttributionType string
 
 // List of StatisticsAttributionType
 const (
-	CLICKS StatisticsAttributionType = "CLICKS"
-	SHOWS  StatisticsAttributionType = "SHOWS"
+	StatisticsAttributionType_CLICKS StatisticsAttributionType = "CLICKS"
+	StatisticsAttributionType_SHOWS  StatisticsAttributionType = "SHOWS"
 )
 
 // All allowed values of StatisticsAttributionType enum

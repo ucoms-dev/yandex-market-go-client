@@ -20,8 +20,8 @@ type LabelsSortingType string
 
 // List of LabelsSortingType
 const (
-	SORT_BY_GIVEN_ORDER      LabelsSortingType = "SORT_BY_GIVEN_ORDER"
-	SORT_BY_ORDER_CREATED_AT LabelsSortingType = "SORT_BY_ORDER_CREATED_AT"
+	LabelsSortingType_SORT_BY_GIVEN_ORDER      LabelsSortingType = "SORT_BY_GIVEN_ORDER"
+	LabelsSortingType_SORT_BY_ORDER_CREATED_AT LabelsSortingType = "SORT_BY_ORDER_CREATED_AT"
 )
 
 // All allowed values of LabelsSortingType enum

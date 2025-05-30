@@ -20,10 +20,10 @@ type OfferConditionQualityType string
 
 // List of OfferConditionQualityType
 const (
-	PERFECT       OfferConditionQualityType = "PERFECT"
-	EXCELLENT     OfferConditionQualityType = "EXCELLENT"
-	GOOD          OfferConditionQualityType = "GOOD"
-	NOT_SPECIFIED OfferConditionQualityType = "NOT_SPECIFIED"
+	OfferConditionQualityType_PERFECT       OfferConditionQualityType = "PERFECT"
+	OfferConditionQualityType_EXCELLENT     OfferConditionQualityType = "EXCELLENT"
+	OfferConditionQualityType_GOOD          OfferConditionQualityType = "GOOD"
+	OfferConditionQualityType_NOT_SPECIFIED OfferConditionQualityType = "NOT_SPECIFIED"
 )
 
 // All allowed values of OfferConditionQualityType enum

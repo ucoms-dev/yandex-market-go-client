@@ -20,10 +20,10 @@ type SellingProgramType string
 
 // List of SellingProgramType
 const (
-	FBY     SellingProgramType = "FBY"
-	FBS     SellingProgramType = "FBS"
-	DBS     SellingProgramType = "DBS"
-	EXPRESS SellingProgramType = "EXPRESS"
+	SellingProgramType_FBY     SellingProgramType = "FBY"
+	SellingProgramType_FBS     SellingProgramType = "FBS"
+	SellingProgramType_DBS     SellingProgramType = "DBS"
+	SellingProgramType_EXPRESS SellingProgramType = "EXPRESS"
 )
 
 // All allowed values of SellingProgramType enum

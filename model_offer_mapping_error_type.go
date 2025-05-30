@@ -20,18 +20,18 @@ type OfferMappingErrorType string
 
 // List of OfferMappingErrorType
 const (
-	UNKNOWN_CATEGORY            OfferMappingErrorType = "UNKNOWN_CATEGORY"
-	INVALID_CATEGORY            OfferMappingErrorType = "INVALID_CATEGORY"
-	EMPTY_MARKET_CATEGORY       OfferMappingErrorType = "EMPTY_MARKET_CATEGORY"
-	UNKNOWN_PARAMETER           OfferMappingErrorType = "UNKNOWN_PARAMETER"
-	UNEXPECTED_BOOLEAN_VALUE    OfferMappingErrorType = "UNEXPECTED_BOOLEAN_VALUE"
-	NUMBER_FORMAT               OfferMappingErrorType = "NUMBER_FORMAT"
-	INVALID_UNIT_ID             OfferMappingErrorType = "INVALID_UNIT_ID"
-	INVALID_GROUP_ID_LENGTH     OfferMappingErrorType = "INVALID_GROUP_ID_LENGTH"
-	INVALID_GROUP_ID_CHARACTERS OfferMappingErrorType = "INVALID_GROUP_ID_CHARACTERS"
-	INVALID_PICKER_URL          OfferMappingErrorType = "INVALID_PICKER_URL"
-	LOCKED_DIMENSIONS           OfferMappingErrorType = "LOCKED_DIMENSIONS"
-	INVALID_COMMODITY_CODE      OfferMappingErrorType = "INVALID_COMMODITY_CODE"
+	OfferMappingErrorType_UNKNOWN_CATEGORY            OfferMappingErrorType = "UNKNOWN_CATEGORY"
+	OfferMappingErrorType_INVALID_CATEGORY            OfferMappingErrorType = "INVALID_CATEGORY"
+	OfferMappingErrorType_EMPTY_MARKET_CATEGORY       OfferMappingErrorType = "EMPTY_MARKET_CATEGORY"
+	OfferMappingErrorType_UNKNOWN_PARAMETER           OfferMappingErrorType = "UNKNOWN_PARAMETER"
+	OfferMappingErrorType_UNEXPECTED_BOOLEAN_VALUE    OfferMappingErrorType = "UNEXPECTED_BOOLEAN_VALUE"
+	OfferMappingErrorType_NUMBER_FORMAT               OfferMappingErrorType = "NUMBER_FORMAT"
+	OfferMappingErrorType_INVALID_UNIT_ID             OfferMappingErrorType = "INVALID_UNIT_ID"
+	OfferMappingErrorType_INVALID_GROUP_ID_LENGTH     OfferMappingErrorType = "INVALID_GROUP_ID_LENGTH"
+	OfferMappingErrorType_INVALID_GROUP_ID_CHARACTERS OfferMappingErrorType = "INVALID_GROUP_ID_CHARACTERS"
+	OfferMappingErrorType_INVALID_PICKER_URL          OfferMappingErrorType = "INVALID_PICKER_URL"
+	OfferMappingErrorType_LOCKED_DIMENSIONS           OfferMappingErrorType = "LOCKED_DIMENSIONS"
+	OfferMappingErrorType_INVALID_COMMODITY_CODE      OfferMappingErrorType = "INVALID_COMMODITY_CODE"
 )
 
 // All allowed values of OfferMappingErrorType enum

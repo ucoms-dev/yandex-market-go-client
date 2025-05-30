@@ -20,8 +20,8 @@ type AddOffersToArchiveErrorType string
 
 // List of AddOffersToArchiveErrorType
 const (
-	OFFER_HAS_STOCKS AddOffersToArchiveErrorType = "OFFER_HAS_STOCKS"
-	UNKNOWN          AddOffersToArchiveErrorType = "UNKNOWN"
+	AddOffersToArchiveErrorType_OFFER_HAS_STOCKS AddOffersToArchiveErrorType = "OFFER_HAS_STOCKS"
+	AddOffersToArchiveErrorType_UNKNOWN          AddOffersToArchiveErrorType = "UNKNOWN"
 )
 
 // All allowed values of AddOffersToArchiveErrorType enum

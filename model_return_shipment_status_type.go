@@ -20,21 +20,21 @@ type ReturnShipmentStatusType string
 
 // List of ReturnShipmentStatusType
 const (
-	CREATED                    ReturnShipmentStatusType = "CREATED"
-	RECEIVED                   ReturnShipmentStatusType = "RECEIVED"
-	IN_TRANSIT                 ReturnShipmentStatusType = "IN_TRANSIT"
-	READY_FOR_PICKUP           ReturnShipmentStatusType = "READY_FOR_PICKUP"
-	PICKED                     ReturnShipmentStatusType = "PICKED"
-	LOST                       ReturnShipmentStatusType = "LOST"
-	EXPIRED                    ReturnShipmentStatusType = "EXPIRED"
-	CANCELLED                  ReturnShipmentStatusType = "CANCELLED"
-	FULFILMENT_RECEIVED        ReturnShipmentStatusType = "FULFILMENT_RECEIVED"
-	PREPARED_FOR_UTILIZATION   ReturnShipmentStatusType = "PREPARED_FOR_UTILIZATION"
-	NOT_IN_DEMAND              ReturnShipmentStatusType = "NOT_IN_DEMAND"
-	UTILIZED                   ReturnShipmentStatusType = "UTILIZED"
-	READY_FOR_EXPROPRIATION    ReturnShipmentStatusType = "READY_FOR_EXPROPRIATION"
-	RECEIVED_FOR_EXPROPRIATION ReturnShipmentStatusType = "RECEIVED_FOR_EXPROPRIATION"
-	UNKNOWN                    ReturnShipmentStatusType = "UNKNOWN"
+	ReturnShipmentStatusType_CREATED                    ReturnShipmentStatusType = "CREATED"
+	ReturnShipmentStatusType_RECEIVED                   ReturnShipmentStatusType = "RECEIVED"
+	ReturnShipmentStatusType_IN_TRANSIT                 ReturnShipmentStatusType = "IN_TRANSIT"
+	ReturnShipmentStatusType_READY_FOR_PICKUP           ReturnShipmentStatusType = "READY_FOR_PICKUP"
+	ReturnShipmentStatusType_PICKED                     ReturnShipmentStatusType = "PICKED"
+	ReturnShipmentStatusType_LOST                       ReturnShipmentStatusType = "LOST"
+	ReturnShipmentStatusType_EXPIRED                    ReturnShipmentStatusType = "EXPIRED"
+	ReturnShipmentStatusType_CANCELLED                  ReturnShipmentStatusType = "CANCELLED"
+	ReturnShipmentStatusType_FULFILMENT_RECEIVED        ReturnShipmentStatusType = "FULFILMENT_RECEIVED"
+	ReturnShipmentStatusType_PREPARED_FOR_UTILIZATION   ReturnShipmentStatusType = "PREPARED_FOR_UTILIZATION"
+	ReturnShipmentStatusType_NOT_IN_DEMAND              ReturnShipmentStatusType = "NOT_IN_DEMAND"
+	ReturnShipmentStatusType_UTILIZED                   ReturnShipmentStatusType = "UTILIZED"
+	ReturnShipmentStatusType_READY_FOR_EXPROPRIATION    ReturnShipmentStatusType = "READY_FOR_EXPROPRIATION"
+	ReturnShipmentStatusType_RECEIVED_FOR_EXPROPRIATION ReturnShipmentStatusType = "RECEIVED_FOR_EXPROPRIATION"
+	ReturnShipmentStatusType_UNKNOWN                    ReturnShipmentStatusType = "UNKNOWN"
 )
 
 // All allowed values of ReturnShipmentStatusType enum

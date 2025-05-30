@@ -20,13 +20,13 @@ type WarehouseStockType string
 
 // List of WarehouseStockType
 const (
-	FIT         WarehouseStockType = "FIT"
-	FREEZE      WarehouseStockType = "FREEZE"
-	AVAILABLE   WarehouseStockType = "AVAILABLE"
-	QUARANTINE  WarehouseStockType = "QUARANTINE"
-	UTILIZATION WarehouseStockType = "UTILIZATION"
-	DEFECT      WarehouseStockType = "DEFECT"
-	EXPIRED     WarehouseStockType = "EXPIRED"
+	WarehouseStockType_FIT         WarehouseStockType = "FIT"
+	WarehouseStockType_FREEZE      WarehouseStockType = "FREEZE"
+	WarehouseStockType_AVAILABLE   WarehouseStockType = "AVAILABLE"
+	WarehouseStockType_QUARANTINE  WarehouseStockType = "QUARANTINE"
+	WarehouseStockType_UTILIZATION WarehouseStockType = "UTILIZATION"
+	WarehouseStockType_DEFECT      WarehouseStockType = "DEFECT"
+	WarehouseStockType_EXPIRED     WarehouseStockType = "EXPIRED"
 )
 
 // All allowed values of WarehouseStockType enum

@@ -20,8 +20,8 @@ type FeedbackReactionStatusType string
 
 // List of FeedbackReactionStatusType
 const (
-	ALL           FeedbackReactionStatusType = "ALL"
-	NEED_REACTION FeedbackReactionStatusType = "NEED_REACTION"
+	FeedbackReactionStatusType_ALL           FeedbackReactionStatusType = "ALL"
+	FeedbackReactionStatusType_NEED_REACTION FeedbackReactionStatusType = "NEED_REACTION"
 )
 
 // All allowed values of FeedbackReactionStatusType enum

@@ -20,8 +20,8 @@ type ShowsSalesGroupingType string
 
 // List of ShowsSalesGroupingType
 const (
-	CATEGORIES ShowsSalesGroupingType = "CATEGORIES"
-	OFFERS     ShowsSalesGroupingType = "OFFERS"
+	ShowsSalesGroupingType_CATEGORIES ShowsSalesGroupingType = "CATEGORIES"
+	ShowsSalesGroupingType_OFFERS     ShowsSalesGroupingType = "OFFERS"
 )
 
 // All allowed values of ShowsSalesGroupingType enum

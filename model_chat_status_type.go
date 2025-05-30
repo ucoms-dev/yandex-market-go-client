@@ -20,12 +20,12 @@ type ChatStatusType string
 
 // List of ChatStatusType
 const (
-	NEW                  ChatStatusType = "NEW"
-	WAITING_FOR_CUSTOMER ChatStatusType = "WAITING_FOR_CUSTOMER"
-	WAITING_FOR_PARTNER  ChatStatusType = "WAITING_FOR_PARTNER"
-	WAITING_FOR_ARBITER  ChatStatusType = "WAITING_FOR_ARBITER"
-	WAITING_FOR_MARKET   ChatStatusType = "WAITING_FOR_MARKET"
-	FINISHED             ChatStatusType = "FINISHED"
+	ChatStatusType_NEW                  ChatStatusType = "NEW"
+	ChatStatusType_WAITING_FOR_CUSTOMER ChatStatusType = "WAITING_FOR_CUSTOMER"
+	ChatStatusType_WAITING_FOR_PARTNER  ChatStatusType = "WAITING_FOR_PARTNER"
+	ChatStatusType_WAITING_FOR_ARBITER  ChatStatusType = "WAITING_FOR_ARBITER"
+	ChatStatusType_WAITING_FOR_MARKET   ChatStatusType = "WAITING_FOR_MARKET"
+	ChatStatusType_FINISHED             ChatStatusType = "FINISHED"
 )
 
 // All allowed values of ChatStatusType enum

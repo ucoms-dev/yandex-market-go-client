@@ -20,8 +20,8 @@ type CategoryErrorType string
 
 // List of CategoryErrorType
 const (
-	UNKNOWN_CATEGORY     CategoryErrorType = "UNKNOWN_CATEGORY"
-	CATEGORY_IS_NOT_LEAF CategoryErrorType = "CATEGORY_IS_NOT_LEAF"
+	CategoryErrorType_UNKNOWN_CATEGORY     CategoryErrorType = "UNKNOWN_CATEGORY"
+	CategoryErrorType_CATEGORY_IS_NOT_LEAF CategoryErrorType = "CATEGORY_IS_NOT_LEAF"
 )
 
 // All allowed values of CategoryErrorType enum

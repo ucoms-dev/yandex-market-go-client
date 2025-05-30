@@ -20,9 +20,9 @@ type PlacementType string
 
 // List of PlacementType
 const (
-	FBS PlacementType = "FBS"
-	FBY PlacementType = "FBY"
-	DBS PlacementType = "DBS"
+	PlacementType_FBS PlacementType = "FBS"
+	PlacementType_FBY PlacementType = "FBY"
+	PlacementType_DBS PlacementType = "DBS"
 )
 
 // All allowed values of PlacementType enum

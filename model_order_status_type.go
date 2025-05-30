@@ -20,18 +20,18 @@ type OrderStatusType string
 
 // List of OrderStatusType
 const (
-	PLACING            OrderStatusType = "PLACING"
-	RESERVED           OrderStatusType = "RESERVED"
-	UNPAID             OrderStatusType = "UNPAID"
-	PROCESSING         OrderStatusType = "PROCESSING"
-	DELIVERY           OrderStatusType = "DELIVERY"
-	PICKUP             OrderStatusType = "PICKUP"
-	DELIVERED          OrderStatusType = "DELIVERED"
-	CANCELLED          OrderStatusType = "CANCELLED"
-	PENDING            OrderStatusType = "PENDING"
-	PARTIALLY_RETURNED OrderStatusType = "PARTIALLY_RETURNED"
-	RETURNED           OrderStatusType = "RETURNED"
-	UNKNOWN            OrderStatusType = "UNKNOWN"
+	OrderStatusType_PLACING            OrderStatusType = "PLACING"
+	OrderStatusType_RESERVED           OrderStatusType = "RESERVED"
+	OrderStatusType_UNPAID             OrderStatusType = "UNPAID"
+	OrderStatusType_PROCESSING         OrderStatusType = "PROCESSING"
+	OrderStatusType_DELIVERY           OrderStatusType = "DELIVERY"
+	OrderStatusType_PICKUP             OrderStatusType = "PICKUP"
+	OrderStatusType_DELIVERED          OrderStatusType = "DELIVERED"
+	OrderStatusType_CANCELLED          OrderStatusType = "CANCELLED"
+	OrderStatusType_PENDING            OrderStatusType = "PENDING"
+	OrderStatusType_PARTIALLY_RETURNED OrderStatusType = "PARTIALLY_RETURNED"
+	OrderStatusType_RETURNED           OrderStatusType = "RETURNED"
+	OrderStatusType_UNKNOWN            OrderStatusType = "UNKNOWN"
 )
 
 // All allowed values of OrderStatusType enum

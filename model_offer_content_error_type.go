@@ -20,15 +20,15 @@ type OfferContentErrorType string
 
 // List of OfferContentErrorType
 const (
-	OFFER_NOT_FOUND             OfferContentErrorType = "OFFER_NOT_FOUND"
-	UNKNOWN_CATEGORY            OfferContentErrorType = "UNKNOWN_CATEGORY"
-	INVALID_CATEGORY            OfferContentErrorType = "INVALID_CATEGORY"
-	UNKNOWN_PARAMETER           OfferContentErrorType = "UNKNOWN_PARAMETER"
-	UNEXPECTED_BOOLEAN_VALUE    OfferContentErrorType = "UNEXPECTED_BOOLEAN_VALUE"
-	NUMBER_FORMAT               OfferContentErrorType = "NUMBER_FORMAT"
-	INVALID_UNIT_ID             OfferContentErrorType = "INVALID_UNIT_ID"
-	INVALID_GROUP_ID_LENGTH     OfferContentErrorType = "INVALID_GROUP_ID_LENGTH"
-	INVALID_GROUP_ID_CHARACTERS OfferContentErrorType = "INVALID_GROUP_ID_CHARACTERS"
+	OfferContentErrorType_OFFER_NOT_FOUND             OfferContentErrorType = "OFFER_NOT_FOUND"
+	OfferContentErrorType_UNKNOWN_CATEGORY            OfferContentErrorType = "UNKNOWN_CATEGORY"
+	OfferContentErrorType_INVALID_CATEGORY            OfferContentErrorType = "INVALID_CATEGORY"
+	OfferContentErrorType_UNKNOWN_PARAMETER           OfferContentErrorType = "UNKNOWN_PARAMETER"
+	OfferContentErrorType_UNEXPECTED_BOOLEAN_VALUE    OfferContentErrorType = "UNEXPECTED_BOOLEAN_VALUE"
+	OfferContentErrorType_NUMBER_FORMAT               OfferContentErrorType = "NUMBER_FORMAT"
+	OfferContentErrorType_INVALID_UNIT_ID             OfferContentErrorType = "INVALID_UNIT_ID"
+	OfferContentErrorType_INVALID_GROUP_ID_LENGTH     OfferContentErrorType = "INVALID_GROUP_ID_LENGTH"
+	OfferContentErrorType_INVALID_GROUP_ID_CHARACTERS OfferContentErrorType = "INVALID_GROUP_ID_CHARACTERS"
 )
 
 // All allowed values of OfferContentErrorType enum

@@ -20,20 +20,20 @@ type RefundStatusType string
 
 // List of RefundStatusType
 const (
-	STARTED_BY_USER                RefundStatusType = "STARTED_BY_USER"
-	REFUND_IN_PROGRESS             RefundStatusType = "REFUND_IN_PROGRESS"
-	REFUNDED                       RefundStatusType = "REFUNDED"
-	FAILED                         RefundStatusType = "FAILED"
-	WAITING_FOR_DECISION           RefundStatusType = "WAITING_FOR_DECISION"
-	DECISION_MADE                  RefundStatusType = "DECISION_MADE"
-	REFUNDED_WITH_BONUSES          RefundStatusType = "REFUNDED_WITH_BONUSES"
-	REFUNDED_BY_SHOP               RefundStatusType = "REFUNDED_BY_SHOP"
-	CANCELLED                      RefundStatusType = "CANCELLED"
-	COMPLETE_WITHOUT_REFUND        RefundStatusType = "COMPLETE_WITHOUT_REFUND"
-	PREMODERATION_DISPUTE          RefundStatusType = "PREMODERATION_DISPUTE"
-	PREMODERATION_DECISION_WAITING RefundStatusType = "PREMODERATION_DECISION_WAITING"
-	PREMODERATION_DECISION_MADE    RefundStatusType = "PREMODERATION_DECISION_MADE"
-	UNKNOWN                        RefundStatusType = "UNKNOWN"
+	RefundStatusType_STARTED_BY_USER                RefundStatusType = "STARTED_BY_USER"
+	RefundStatusType_REFUND_IN_PROGRESS             RefundStatusType = "REFUND_IN_PROGRESS"
+	RefundStatusType_REFUNDED                       RefundStatusType = "REFUNDED"
+	RefundStatusType_FAILED                         RefundStatusType = "FAILED"
+	RefundStatusType_WAITING_FOR_DECISION           RefundStatusType = "WAITING_FOR_DECISION"
+	RefundStatusType_DECISION_MADE                  RefundStatusType = "DECISION_MADE"
+	RefundStatusType_REFUNDED_WITH_BONUSES          RefundStatusType = "REFUNDED_WITH_BONUSES"
+	RefundStatusType_REFUNDED_BY_SHOP               RefundStatusType = "REFUNDED_BY_SHOP"
+	RefundStatusType_CANCELLED                      RefundStatusType = "CANCELLED"
+	RefundStatusType_COMPLETE_WITHOUT_REFUND        RefundStatusType = "COMPLETE_WITHOUT_REFUND"
+	RefundStatusType_PREMODERATION_DISPUTE          RefundStatusType = "PREMODERATION_DISPUTE"
+	RefundStatusType_PREMODERATION_DECISION_WAITING RefundStatusType = "PREMODERATION_DECISION_WAITING"
+	RefundStatusType_PREMODERATION_DECISION_MADE    RefundStatusType = "PREMODERATION_DECISION_MADE"
+	RefundStatusType_UNKNOWN                        RefundStatusType = "UNKNOWN"
 )
 
 // All allowed values of RefundStatusType enum

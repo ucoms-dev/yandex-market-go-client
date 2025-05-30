@@ -20,8 +20,8 @@ type WarehouseComponentType string
 
 // List of WarehouseComponentType
 const (
-	ADDRESS WarehouseComponentType = "ADDRESS"
-	STATUS  WarehouseComponentType = "STATUS"
+	WarehouseComponentType_ADDRESS WarehouseComponentType = "ADDRESS"
+	WarehouseComponentType_STATUS  WarehouseComponentType = "STATUS"
 )
 
 // All allowed values of WarehouseComponentType enum

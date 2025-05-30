@@ -20,14 +20,14 @@ type ReturnDecisionType string
 
 // List of ReturnDecisionType
 const (
-	REFUND_MONEY                    ReturnDecisionType = "REFUND_MONEY"
-	REFUND_MONEY_INCLUDING_SHIPMENT ReturnDecisionType = "REFUND_MONEY_INCLUDING_SHIPMENT"
-	REPAIR                          ReturnDecisionType = "REPAIR"
-	REPLACE                         ReturnDecisionType = "REPLACE"
-	SEND_TO_EXAMINATION             ReturnDecisionType = "SEND_TO_EXAMINATION"
-	DECLINE_REFUND                  ReturnDecisionType = "DECLINE_REFUND"
-	OTHER_DECISION                  ReturnDecisionType = "OTHER_DECISION"
-	UNKNOWN                         ReturnDecisionType = "UNKNOWN"
+	ReturnDecisionType_REFUND_MONEY                    ReturnDecisionType = "REFUND_MONEY"
+	ReturnDecisionType_REFUND_MONEY_INCLUDING_SHIPMENT ReturnDecisionType = "REFUND_MONEY_INCLUDING_SHIPMENT"
+	ReturnDecisionType_REPAIR                          ReturnDecisionType = "REPAIR"
+	ReturnDecisionType_REPLACE                         ReturnDecisionType = "REPLACE"
+	ReturnDecisionType_SEND_TO_EXAMINATION             ReturnDecisionType = "SEND_TO_EXAMINATION"
+	ReturnDecisionType_DECLINE_REFUND                  ReturnDecisionType = "DECLINE_REFUND"
+	ReturnDecisionType_OTHER_DECISION                  ReturnDecisionType = "OTHER_DECISION"
+	ReturnDecisionType_UNKNOWN                         ReturnDecisionType = "UNKNOWN"
 )
 
 // All allowed values of ReturnDecisionType enum

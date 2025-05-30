@@ -20,9 +20,9 @@ type OrdersStatsStockType string
 
 // List of OrdersStatsStockType
 const (
-	FIT     OrdersStatsStockType = "FIT"
-	DEFECT  OrdersStatsStockType = "DEFECT"
-	EXPIRED OrdersStatsStockType = "EXPIRED"
+	OrdersStatsStockType_FIT     OrdersStatsStockType = "FIT"
+	OrdersStatsStockType_DEFECT  OrdersStatsStockType = "DEFECT"
+	OrdersStatsStockType_EXPIRED OrdersStatsStockType = "EXPIRED"
 )
 
 // All allowed values of OrdersStatsStockType enum

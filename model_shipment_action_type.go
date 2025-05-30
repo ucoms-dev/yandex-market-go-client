@@ -20,11 +20,11 @@ type ShipmentActionType string
 
 // List of ShipmentActionType
 const (
-	CONFIRM                  ShipmentActionType = "CONFIRM"
-	DOWNLOAD_ACT             ShipmentActionType = "DOWNLOAD_ACT"
-	DOWNLOAD_INBOUND_ACT     ShipmentActionType = "DOWNLOAD_INBOUND_ACT"
-	DOWNLOAD_DISCREPANCY_ACT ShipmentActionType = "DOWNLOAD_DISCREPANCY_ACT"
-	CHANGE_PALLETS_COUNT     ShipmentActionType = "CHANGE_PALLETS_COUNT"
+	ShipmentActionType_CONFIRM                  ShipmentActionType = "CONFIRM"
+	ShipmentActionType_DOWNLOAD_ACT             ShipmentActionType = "DOWNLOAD_ACT"
+	ShipmentActionType_DOWNLOAD_INBOUND_ACT     ShipmentActionType = "DOWNLOAD_INBOUND_ACT"
+	ShipmentActionType_DOWNLOAD_DISCREPANCY_ACT ShipmentActionType = "DOWNLOAD_DISCREPANCY_ACT"
+	ShipmentActionType_CHANGE_PALLETS_COUNT     ShipmentActionType = "CHANGE_PALLETS_COUNT"
 )
 
 // All allowed values of ShipmentActionType enum

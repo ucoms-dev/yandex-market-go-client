@@ -20,8 +20,8 @@ type OrdersStatsItemStatusType string
 
 // List of OrdersStatsItemStatusType
 const (
-	REJECTED OrdersStatsItemStatusType = "REJECTED"
-	RETURNED OrdersStatsItemStatusType = "RETURNED"
+	OrdersStatsItemStatusType_REJECTED OrdersStatsItemStatusType = "REJECTED"
+	OrdersStatsItemStatusType_RETURNED OrdersStatsItemStatusType = "RETURNED"
 )
 
 // All allowed values of OrdersStatsItemStatusType enum

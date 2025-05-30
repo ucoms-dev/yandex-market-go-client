@@ -20,18 +20,18 @@ type OfferProcessingStatusType string
 
 // List of OfferProcessingStatusType
 const (
-	UNKNOWN            OfferProcessingStatusType = "UNKNOWN"
-	READY              OfferProcessingStatusType = "READY"
-	IN_WORK            OfferProcessingStatusType = "IN_WORK"
-	NEED_INFO          OfferProcessingStatusType = "NEED_INFO"
-	NEED_MAPPING       OfferProcessingStatusType = "NEED_MAPPING"
-	NEED_CONTENT       OfferProcessingStatusType = "NEED_CONTENT"
-	CONTENT_PROCESSING OfferProcessingStatusType = "CONTENT_PROCESSING"
-	SUSPENDED          OfferProcessingStatusType = "SUSPENDED"
-	REJECTED           OfferProcessingStatusType = "REJECTED"
-	REVIEW             OfferProcessingStatusType = "REVIEW"
-	CREATE_ERROR       OfferProcessingStatusType = "CREATE_ERROR"
-	UPDATE_ERROR       OfferProcessingStatusType = "UPDATE_ERROR"
+	OfferProcessingStatusType_UNKNOWN            OfferProcessingStatusType = "UNKNOWN"
+	OfferProcessingStatusType_READY              OfferProcessingStatusType = "READY"
+	OfferProcessingStatusType_IN_WORK            OfferProcessingStatusType = "IN_WORK"
+	OfferProcessingStatusType_NEED_INFO          OfferProcessingStatusType = "NEED_INFO"
+	OfferProcessingStatusType_NEED_MAPPING       OfferProcessingStatusType = "NEED_MAPPING"
+	OfferProcessingStatusType_NEED_CONTENT       OfferProcessingStatusType = "NEED_CONTENT"
+	OfferProcessingStatusType_CONTENT_PROCESSING OfferProcessingStatusType = "CONTENT_PROCESSING"
+	OfferProcessingStatusType_SUSPENDED          OfferProcessingStatusType = "SUSPENDED"
+	OfferProcessingStatusType_REJECTED           OfferProcessingStatusType = "REJECTED"
+	OfferProcessingStatusType_REVIEW             OfferProcessingStatusType = "REVIEW"
+	OfferProcessingStatusType_CREATE_ERROR       OfferProcessingStatusType = "CREATE_ERROR"
+	OfferProcessingStatusType_UPDATE_ERROR       OfferProcessingStatusType = "UPDATE_ERROR"
 )
 
 // All allowed values of OfferProcessingStatusType enum

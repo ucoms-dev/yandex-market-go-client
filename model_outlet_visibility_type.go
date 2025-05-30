@@ -20,9 +20,9 @@ type OutletVisibilityType string
 
 // List of OutletVisibilityType
 const (
-	HIDDEN  OutletVisibilityType = "HIDDEN"
-	VISIBLE OutletVisibilityType = "VISIBLE"
-	UNKNOWN OutletVisibilityType = "UNKNOWN"
+	OutletVisibilityType_HIDDEN  OutletVisibilityType = "HIDDEN"
+	OutletVisibilityType_VISIBLE OutletVisibilityType = "VISIBLE"
+	OutletVisibilityType_UNKNOWN OutletVisibilityType = "UNKNOWN"
 )
 
 // All allowed values of OutletVisibilityType enum

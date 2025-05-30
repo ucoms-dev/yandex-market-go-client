@@ -20,8 +20,8 @@ type OrderDocumentStatusType string
 
 // List of OrderDocumentStatusType
 const (
-	READY     OrderDocumentStatusType = "READY"
-	NOT_READY OrderDocumentStatusType = "NOT_READY"
+	OrderDocumentStatusType_READY     OrderDocumentStatusType = "READY"
+	OrderDocumentStatusType_NOT_READY OrderDocumentStatusType = "NOT_READY"
 )
 
 // All allowed values of OrderDocumentStatusType enum

@@ -20,11 +20,11 @@ type OutletStatusType string
 
 // List of OutletStatusType
 const (
-	AT_MODERATION OutletStatusType = "AT_MODERATION"
-	FAILED        OutletStatusType = "FAILED"
-	MODERATED     OutletStatusType = "MODERATED"
-	NONMODERATED  OutletStatusType = "NONMODERATED"
-	UNKNOWN       OutletStatusType = "UNKNOWN"
+	OutletStatusType_AT_MODERATION OutletStatusType = "AT_MODERATION"
+	OutletStatusType_FAILED        OutletStatusType = "FAILED"
+	OutletStatusType_MODERATED     OutletStatusType = "MODERATED"
+	OutletStatusType_NONMODERATED  OutletStatusType = "NONMODERATED"
+	OutletStatusType_UNKNOWN       OutletStatusType = "UNKNOWN"
 )
 
 // All allowed values of OutletStatusType enum

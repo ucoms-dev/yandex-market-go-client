@@ -20,12 +20,12 @@ type OfferConditionType string
 
 // List of OfferConditionType
 const (
-	PREOWNED       OfferConditionType = "PREOWNED"
-	SHOWCASESAMPLE OfferConditionType = "SHOWCASESAMPLE"
-	REFURBISHED    OfferConditionType = "REFURBISHED"
-	REDUCTION      OfferConditionType = "REDUCTION"
-	RENOVATED      OfferConditionType = "RENOVATED"
-	NOT_SPECIFIED  OfferConditionType = "NOT_SPECIFIED"
+	OfferConditionType_PREOWNED       OfferConditionType = "PREOWNED"
+	OfferConditionType_SHOWCASESAMPLE OfferConditionType = "SHOWCASESAMPLE"
+	OfferConditionType_REFURBISHED    OfferConditionType = "REFURBISHED"
+	OfferConditionType_REDUCTION      OfferConditionType = "REDUCTION"
+	OfferConditionType_RENOVATED      OfferConditionType = "RENOVATED"
+	OfferConditionType_NOT_SPECIFIED  OfferConditionType = "NOT_SPECIFIED"
 )
 
 // All allowed values of OfferConditionType enum

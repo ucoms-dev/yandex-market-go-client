@@ -20,10 +20,10 @@ type GoodsFeedbackCommentStatusType string
 
 // List of GoodsFeedbackCommentStatusType
 const (
-	PUBLISHED   GoodsFeedbackCommentStatusType = "PUBLISHED"
-	UNMODERATED GoodsFeedbackCommentStatusType = "UNMODERATED"
-	BANNED      GoodsFeedbackCommentStatusType = "BANNED"
-	DELETED     GoodsFeedbackCommentStatusType = "DELETED"
+	GoodsFeedbackCommentStatusType_PUBLISHED   GoodsFeedbackCommentStatusType = "PUBLISHED"
+	GoodsFeedbackCommentStatusType_UNMODERATED GoodsFeedbackCommentStatusType = "UNMODERATED"
+	GoodsFeedbackCommentStatusType_BANNED      GoodsFeedbackCommentStatusType = "BANNED"
+	GoodsFeedbackCommentStatusType_DELETED     GoodsFeedbackCommentStatusType = "DELETED"
 )
 
 // All allowed values of GoodsFeedbackCommentStatusType enum
