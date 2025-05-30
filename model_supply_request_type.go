@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// SupplyRequestType Тип заявки:  * `SUPPLY` — поставка товаров. * `WITHDRAW` — вывоз товаров. * `UTILIZATION` — утилизация товаров. 
+// SupplyRequestType Тип заявки:  * `SUPPLY` — поставка товаров. * `WITHDRAW` — вывоз товаров. * `UTILIZATION` — утилизация товаров.
 type SupplyRequestType string
 
 // List of SupplyRequestType
 const (
-	SUPPLY SupplyRequestType = "SUPPLY"
-	WITHDRAW SupplyRequestType = "WITHDRAW"
-	UTILIZATION SupplyRequestType = "UTILIZATION"
+	SupplyRequestType_SUPPLY      SupplyRequestType = "SUPPLY"
+	SupplyRequestType_WITHDRAW    SupplyRequestType = "WITHDRAW"
+	SupplyRequestType_UTILIZATION SupplyRequestType = "UTILIZATION"
 )
 
 // All allowed values of SupplyRequestType enum
@@ -110,4 +110,3 @@ func (v *NullableSupplyRequestType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

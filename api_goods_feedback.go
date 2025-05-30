@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -19,14 +19,13 @@ import (
 	"strings"
 )
 
-
 // GoodsFeedbackAPIService GoodsFeedbackAPI service
 type GoodsFeedbackAPIService service
 
 type ApiDeleteGoodsFeedbackCommentRequest struct {
-	ctx context.Context
-	ApiService *GoodsFeedbackAPIService
-	businessId int64
+	ctx                               context.Context
+	ApiService                        *GoodsFeedbackAPIService
+	businessId                        int64
 	deleteGoodsFeedbackCommentRequest *DeleteGoodsFeedbackCommentRequest
 }
 
@@ -49,27 +48,27 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeleteGoodsFeedbackCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ApiDeleteGoodsFeedbackCommentRequest
 */
 func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) ApiDeleteGoodsFeedbackCommentRequest {
 	return ApiDeleteGoodsFeedbackCommentRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GoodsFeedbackAPIService.DeleteGoodsFeedbackComment")
@@ -152,8 +151,8 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -163,8 +162,8 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -174,8 +173,8 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -185,8 +184,8 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -196,8 +195,8 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -207,8 +206,8 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -226,12 +225,12 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteG
 }
 
 type ApiGetGoodsFeedbackCommentsRequest struct {
-	ctx context.Context
-	ApiService *GoodsFeedbackAPIService
-	businessId int64
+	ctx                             context.Context
+	ApiService                      *GoodsFeedbackAPIService
+	businessId                      int64
 	getGoodsFeedbackCommentsRequest *GetGoodsFeedbackCommentsRequest
-	pageToken *string
-	limit *int32
+	pageToken                       *string
+	limit                           *int32
 }
 
 func (r ApiGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) ApiGetGoodsFeedbackCommentsRequest {
@@ -239,13 +238,13 @@ func (r ApiGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getG
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
 func (r ApiGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) ApiGetGoodsFeedbackCommentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
+// Количество значений на одной странице.
 func (r ApiGetGoodsFeedbackCommentsRequest) Limit(limit int32) ApiGetGoodsFeedbackCommentsRequest {
 	r.limit = &limit
 	return r
@@ -262,8 +261,8 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 Возвращает комментарии к отзыву, кроме:
 
-  * тех, которые удалили пользователи или Маркет;
-  * комментариев к удаленным отзывам.
+  - тех, которые удалили пользователи или Маркет;
+  - комментариев к удаленным отзывам.
 
 {% note tip "Вы также можете настроить API-уведомления" %}
 
@@ -280,27 +279,27 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetGoodsFeedbackCommentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ApiGetGoodsFeedbackCommentsRequest
 */
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) ApiGetGoodsFeedbackCommentsRequest {
 	return ApiGetGoodsFeedbackCommentsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGoodsFeedbackCommentsResponse
+//
+//	@return GetGoodsFeedbackCommentsResponse
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGoodsFeedbackCommentsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsFeedbackCommentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GoodsFeedbackAPIService.GetGoodsFeedbackComments")
@@ -389,8 +388,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -400,8 +399,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -411,8 +410,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -422,8 +421,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -433,8 +432,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -444,8 +443,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -463,21 +462,21 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsF
 }
 
 type ApiGetGoodsFeedbacksRequest struct {
-	ctx context.Context
-	ApiService *GoodsFeedbackAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+	ctx                     context.Context
+	ApiService              *GoodsFeedbackAPIService
+	businessId              int64
+	pageToken               *string
+	limit                   *int32
 	getGoodsFeedbackRequest *GetGoodsFeedbackRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
 func (r ApiGetGoodsFeedbacksRequest) PageToken(pageToken string) ApiGetGoodsFeedbacksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
+// Количество значений на одной странице.
 func (r ApiGetGoodsFeedbacksRequest) Limit(limit int32) ApiGetGoodsFeedbacksRequest {
 	r.limit = &limit
 	return r
@@ -514,27 +513,27 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetGoodsFeedbacksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ApiGetGoodsFeedbacksRequest
 */
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) ApiGetGoodsFeedbacksRequest {
 	return ApiGetGoodsFeedbacksRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGoodsFeedbackResponse
+//
+//	@return GetGoodsFeedbackResponse
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGoodsFeedbackResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsFeedbackResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GoodsFeedbackAPIService.GetGoodsFeedbacks")
@@ -620,8 +619,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -631,8 +630,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -642,8 +641,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -653,8 +652,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -664,8 +663,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -675,8 +674,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -694,9 +693,9 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedback
 }
 
 type ApiSkipGoodsFeedbacksReactionRequest struct {
-	ctx context.Context
-	ApiService *GoodsFeedbackAPIService
-	businessId int64
+	ctx                              context.Context
+	ApiService                       *GoodsFeedbackAPIService
+	businessId                       int64
 	skipGoodsFeedbackReactionRequest *SkipGoodsFeedbackReactionRequest
 }
 
@@ -719,27 +718,27 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiSkipGoodsFeedbacksReactionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ApiSkipGoodsFeedbacksReactionRequest
 */
 func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) ApiSkipGoodsFeedbacksReactionRequest {
 	return ApiSkipGoodsFeedbacksReactionRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GoodsFeedbackAPIService.SkipGoodsFeedbacksReaction")
@@ -822,8 +821,8 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -833,8 +832,8 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -844,8 +843,8 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -855,8 +854,8 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -866,8 +865,8 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -877,8 +876,8 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -896,9 +895,9 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoo
 }
 
 type ApiUpdateGoodsFeedbackCommentRequest struct {
-	ctx context.Context
-	ApiService *GoodsFeedbackAPIService
-	businessId int64
+	ctx                               context.Context
+	ApiService                        *GoodsFeedbackAPIService
+	businessId                        int64
 	updateGoodsFeedbackCommentRequest *UpdateGoodsFeedbackCommentRequest
 }
 
@@ -935,27 +934,27 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateGoodsFeedbackCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ApiUpdateGoodsFeedbackCommentRequest
 */
 func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) ApiUpdateGoodsFeedbackCommentRequest {
 	return ApiUpdateGoodsFeedbackCommentRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateGoodsFeedbackCommentResponse
+//
+//	@return UpdateGoodsFeedbackCommentResponse
 func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateGoodsFeedbackCommentResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateGoodsFeedbackCommentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GoodsFeedbackAPIService.UpdateGoodsFeedbackComment")
@@ -1038,8 +1037,8 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1049,8 +1048,8 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1060,8 +1059,8 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1071,8 +1070,8 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1082,8 +1081,8 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1093,8 +1092,8 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

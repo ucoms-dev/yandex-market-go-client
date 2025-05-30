@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,18 +17,18 @@ import (
 // checks if the OrdersStatsItemDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrdersStatsItemDTO{}
 
-// OrdersStatsItemDTO Список товаров в заказе после возможных изменений.  В ходе обработки заказа Маркет может удалить из него единицы товаров — при проблемах на складе или по инициативе пользователя.  * Если из заказа удалены все единицы товара, его не будет в списке `items` — только в списке `initialItems`.  * Если в заказе осталась хотя бы одна единица товара, он будет и в списке `items` (с уменьшенным количеством единиц `count`), и в списке `initialItems` (с первоначальным количеством единиц `initialCount`). 
+// OrdersStatsItemDTO Список товаров в заказе после возможных изменений.  В ходе обработки заказа Маркет может удалить из него единицы товаров — при проблемах на складе или по инициативе пользователя.  * Если из заказа удалены все единицы товара, его не будет в списке `items` — только в списке `initialItems`.  * Если в заказе осталась хотя бы одна единица товара, он будет и в списке `items` (с уменьшенным количеством единиц `count`), и в списке `initialItems` (с первоначальным количеством единиц `initialCount`).
 type OrdersStatsItemDTO struct {
 	// Название товара.
 	OfferName *string `json:"offerName,omitempty"`
 	// SKU на Маркете.
 	MarketSku *int64 `json:"marketSku,omitempty"`
-	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields) 
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	ShopSku *string `json:"shopSku,omitempty" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
-	// Количество единиц товара с учетом удаленных единиц.  Если из заказа удалены все единицы товара, он попадет только в список `initialItems`. 
+	// Количество единиц товара с учетом удаленных единиц.  Если из заказа удалены все единицы товара, он попадет только в список `initialItems`.
 	Count *int32 `json:"count,omitempty"`
 	// Цена или скидки на товар.
-	Prices []OrdersStatsPriceDTO `json:"prices,omitempty"`
+	Prices    []OrdersStatsPriceDTO    `json:"prices,omitempty"`
 	Warehouse *OrdersStatsWarehouseDTO `json:"warehouse,omitempty"`
 	// Информация об удалении товара из заказа.
 	Details []OrdersStatsDetailsDTO `json:"details,omitempty"`
@@ -36,11 +36,11 @@ type OrdersStatsItemDTO struct {
 	CisList []string `json:"cisList,omitempty"`
 	// Первоначальное количество единиц товара.
 	InitialCount *int32 `json:"initialCount,omitempty"`
-	// Списанная ставка ближайшего конкурента.  Указывается в процентах от стоимости товара и умножается на 100. Например, ставка 5% обозначается как 500. 
+	// Списанная ставка ближайшего конкурента.  Указывается в процентах от стоимости товара и умножается на 100. Например, ставка 5% обозначается как 500.
 	BidFee *int32 `json:"bidFee,omitempty"`
-	// Порог для скидок с Маркетом на момент оформления заказа. [Что это такое?](https://yandex.ru/support/marketplace/marketing/smart-pricing.html#sponsored-discounts)  Точность — два знака после запятой. 
+	// Порог для скидок с Маркетом на момент оформления заказа. [Что это такое?](https://yandex.ru/support/marketplace/marketing/smart-pricing.html#sponsored-discounts)  Точность — два знака после запятой.
 	CofinanceThreshold *float32 `json:"cofinanceThreshold,omitempty"`
-	// Скидка с Маркетом. [Что это такое?](https://yandex.ru/support/marketplace/marketing/smart-pricing.html#sponsored-discounts)  Точность — два знака после запятой. 
+	// Скидка с Маркетом. [Что это такое?](https://yandex.ru/support/marketplace/marketing/smart-pricing.html#sponsored-discounts)  Точность — два знака после запятой.
 	CofinanceValue *float32 `json:"cofinanceValue,omitempty"`
 }
 
@@ -449,7 +449,7 @@ func (o *OrdersStatsItemDTO) SetCofinanceValue(v float32) {
 }
 
 func (o OrdersStatsItemDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -532,5 +532,3 @@ func (v *NullableOrdersStatsItemDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

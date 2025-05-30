@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,15 +21,15 @@ var _ MappedNullable = &SearchShipmentsRequest{}
 
 // SearchShipmentsRequest Запрос информации об отгрузках.
 type SearchShipmentsRequest struct {
-	// Начальная дата для фильтрации по дате отгрузки (включительно).  Формат даты: `ДД-ММ-ГГГГ`. 
+	// Начальная дата для фильтрации по дате отгрузки (включительно).  Формат даты: `ДД-ММ-ГГГГ`.
 	DateFrom string `json:"dateFrom"`
-	// Конечная дата для фильтрации по дате отгрузки (включительно).  Формат даты: `ДД-ММ-ГГГГ`. 
+	// Конечная дата для фильтрации по дате отгрузки (включительно).  Формат даты: `ДД-ММ-ГГГГ`.
 	DateTo string `json:"dateTo"`
 	// Список статусов отгрузок.
 	Statuses []ShipmentStatusType `json:"statuses,omitempty"`
 	// Список идентификаторов заказов из отгрузок.
 	OrderIds []int64 `json:"orderIds,omitempty"`
-	// Возвращать ли отмененные заказы.  Значение по умолчанию: `true`. Если возвращать отмененные заказы не нужно, передайте значение `false`. 
+	// Возвращать ли отмененные заказы.  Значение по умолчанию: `true`. Если возвращать отмененные заказы не нужно, передайте значение `false`.
 	CancelledOrders *bool `json:"cancelledOrders,omitempty"`
 }
 
@@ -205,7 +205,7 @@ func (o *SearchShipmentsRequest) SetCancelledOrders(v bool) {
 }
 
 func (o SearchShipmentsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -242,10 +242,10 @@ func (o *SearchShipmentsRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -301,5 +301,3 @@ func (v *NullableSearchShipmentsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

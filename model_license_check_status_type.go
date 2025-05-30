@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,17 +15,17 @@ import (
 	"fmt"
 )
 
-// LicenseCheckStatusType Статус проверки лицензии:  * `NEW` — лицензия проверяется. * `SUCCESS` — лицензия прошла проверку. * `FAIL` — лицензия не прошла проверку. * `REVOKE` — лицензия отозвана службой качества. * `DONT_WANT` — не проверяется. * `FAIL_MANUAL` — лицензия не прошла проверку службы качества. 
+// LicenseCheckStatusType Статус проверки лицензии:  * `NEW` — лицензия проверяется. * `SUCCESS` — лицензия прошла проверку. * `FAIL` — лицензия не прошла проверку. * `REVOKE` — лицензия отозвана службой качества. * `DONT_WANT` — не проверяется. * `FAIL_MANUAL` — лицензия не прошла проверку службы качества.
 type LicenseCheckStatusType string
 
 // List of LicenseCheckStatusType
 const (
-	NEW LicenseCheckStatusType = "NEW"
-	SUCCESS LicenseCheckStatusType = "SUCCESS"
-	FAIL LicenseCheckStatusType = "FAIL"
-	REVOKE LicenseCheckStatusType = "REVOKE"
-	DONT_WANT LicenseCheckStatusType = "DONT_WANT"
-	FAIL_MANUAL LicenseCheckStatusType = "FAIL_MANUAL"
+	LicenseCheckStatusType_NEW         LicenseCheckStatusType = "NEW"
+	LicenseCheckStatusType_SUCCESS     LicenseCheckStatusType = "SUCCESS"
+	LicenseCheckStatusType_FAIL        LicenseCheckStatusType = "FAIL"
+	LicenseCheckStatusType_REVOKE      LicenseCheckStatusType = "REVOKE"
+	LicenseCheckStatusType_DONT_WANT   LicenseCheckStatusType = "DONT_WANT"
+	LicenseCheckStatusType_FAIL_MANUAL LicenseCheckStatusType = "FAIL_MANUAL"
 )
 
 // All allowed values of LicenseCheckStatusType enum
@@ -116,4 +116,3 @@ func (v *NullableLicenseCheckStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OrderItemsModificationRequestReasonType Причина, почему обновился состав заказа:  * `PARTNER_REQUESTED_REMOVE` — магазин удалил товар. * `USER_REQUESTED_REMOVE` — покупатель попросил удалить товар. 
+// OrderItemsModificationRequestReasonType Причина, почему обновился состав заказа:  * `PARTNER_REQUESTED_REMOVE` — магазин удалил товар. * `USER_REQUESTED_REMOVE` — покупатель попросил удалить товар.
 type OrderItemsModificationRequestReasonType string
 
 // List of OrderItemsModificationRequestReasonType
 const (
-	PARTNER_REQUESTED_REMOVE OrderItemsModificationRequestReasonType = "PARTNER_REQUESTED_REMOVE"
-	USER_REQUESTED_REMOVE OrderItemsModificationRequestReasonType = "USER_REQUESTED_REMOVE"
+	OrderItemsModificationRequestReasonType_PARTNER_REQUESTED_REMOVE OrderItemsModificationRequestReasonType = "PARTNER_REQUESTED_REMOVE"
+	OrderItemsModificationRequestReasonType_USER_REQUESTED_REMOVE    OrderItemsModificationRequestReasonType = "USER_REQUESTED_REMOVE"
 )
 
 // All allowed values of OrderItemsModificationRequestReasonType enum
@@ -108,4 +108,3 @@ func (v *NullableOrderItemsModificationRequestReasonType) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

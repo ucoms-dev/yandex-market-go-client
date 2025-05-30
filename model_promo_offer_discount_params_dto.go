@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,11 +21,11 @@ var _ MappedNullable = &PromoOfferDiscountParamsDTO{}
 
 // PromoOfferDiscountParamsDTO Параметры товара в акции с типом `DIRECT_DISCOUNT` или `BLUE_FLASH`.
 type PromoOfferDiscountParamsDTO struct {
-	// Зачеркнутая цена — та, по которой товар продавался до акции.  Указывается в рублях.  Возвращается, только если товар участвует в акции. 
+	// Зачеркнутая цена — та, по которой товар продавался до акции.  Указывается в рублях.  Возвращается, только если товар участвует в акции.
 	Price *int64 `json:"price,omitempty"`
-	// Цена по акции — та, по которой вы хотите продавать товар.  Указывается в рублях.  Возвращается, только если товар участвует в акции. 
+	// Цена по акции — та, по которой вы хотите продавать товар.  Указывается в рублях.  Возвращается, только если товар участвует в акции.
 	PromoPrice *int64 `json:"promoPrice,omitempty"`
-	// Максимально возможная цена для участия в акции.  Указывается в рублях.  Возвращается для всех товаров. 
+	// Максимально возможная цена для участия в акции.  Указывается в рублях.  Возвращается для всех товаров.
 	MaxPromoPrice int64 `json:"maxPromoPrice"`
 }
 
@@ -138,7 +138,7 @@ func (o *PromoOfferDiscountParamsDTO) SetMaxPromoPrice(v int64) {
 }
 
 func (o PromoOfferDiscountParamsDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -170,10 +170,10 @@ func (o *PromoOfferDiscountParamsDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -229,5 +229,3 @@ func (v *NullablePromoOfferDiscountParamsDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

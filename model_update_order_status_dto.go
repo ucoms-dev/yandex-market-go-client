@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -20,11 +20,11 @@ var _ MappedNullable = &UpdateOrderStatusDTO{}
 // UpdateOrderStatusDTO Список заказов.
 type UpdateOrderStatusDTO struct {
 	// Идентификатор заказа.
-	Id *int64 `json:"id,omitempty"`
-	Status *OrderStatusType `json:"status,omitempty"`
-	Substatus *OrderSubstatusType `json:"substatus,omitempty"`
+	Id           *int64                 `json:"id,omitempty"`
+	Status       *OrderStatusType       `json:"status,omitempty"`
+	Substatus    *OrderSubstatusType    `json:"substatus,omitempty"`
 	UpdateStatus *OrderUpdateStatusType `json:"updateStatus,omitempty"`
-	// Ошибка при изменении статуса заказа. Содержит описание ошибки и идентификатор заказа.  Возвращается, если параметр `updateStatus` принимает значение `ERROR`. 
+	// Ошибка при изменении статуса заказа. Содержит описание ошибки и идентификатор заказа.  Возвращается, если параметр `updateStatus` принимает значение `ERROR`.
 	ErrorDetails *string `json:"errorDetails,omitempty"`
 }
 
@@ -206,7 +206,7 @@ func (o *UpdateOrderStatusDTO) SetErrorDetails(v string) {
 }
 
 func (o UpdateOrderStatusDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -268,5 +268,3 @@ func (v *NullableUpdateOrderStatusDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

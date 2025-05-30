@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// OrderDeliveryDispatchType Способ отгрузки:  * `BUYER` — доставка покупателю.  * `MARKET_BRANDED_OUTLET` — доставка в пункт выдачи заказов Маркета.  * `SHOP_OUTLET` — доставка в пункт выдачи заказов магазина.  * `UNKNOWN` — неизвестный тип. 
+// OrderDeliveryDispatchType Способ отгрузки:  * `BUYER` — доставка покупателю.  * `MARKET_BRANDED_OUTLET` — доставка в пункт выдачи заказов Маркета.  * `SHOP_OUTLET` — доставка в пункт выдачи заказов магазина.  * `UNKNOWN` — неизвестный тип.
 type OrderDeliveryDispatchType string
 
 // List of OrderDeliveryDispatchType
 const (
-	UNKNOWN OrderDeliveryDispatchType = "UNKNOWN"
-	BUYER OrderDeliveryDispatchType = "BUYER"
-	MARKET_BRANDED_OUTLET OrderDeliveryDispatchType = "MARKET_BRANDED_OUTLET"
-	SHOP_OUTLET OrderDeliveryDispatchType = "SHOP_OUTLET"
+	OrderDeliveryDispatchType_UNKNOWN               OrderDeliveryDispatchType = "UNKNOWN"
+	OrderDeliveryDispatchType_BUYER                 OrderDeliveryDispatchType = "BUYER"
+	OrderDeliveryDispatchType_MARKET_BRANDED_OUTLET OrderDeliveryDispatchType = "MARKET_BRANDED_OUTLET"
+	OrderDeliveryDispatchType_SHOP_OUTLET           OrderDeliveryDispatchType = "SHOP_OUTLET"
 )
 
 // All allowed values of OrderDeliveryDispatchType enum
@@ -112,4 +112,3 @@ func (v *NullableOrderDeliveryDispatchType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

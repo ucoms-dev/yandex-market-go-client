@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// ShipmentType Способ отгрузки заказов:  * `IMPORT` — вы самостоятельно привозите заказы в выбранный сортировочный центр или пункт приема заказов. * `WITHDRAW` — вы отгружаете заказы со своего склада курьерам Яндекс Маркета. 
+// ShipmentType Способ отгрузки заказов:  * `IMPORT` — вы самостоятельно привозите заказы в выбранный сортировочный центр или пункт приема заказов. * `WITHDRAW` — вы отгружаете заказы со своего склада курьерам Яндекс Маркета.
 type ShipmentType string
 
 // List of ShipmentType
 const (
-	IMPORT ShipmentType = "IMPORT"
-	WITHDRAW ShipmentType = "WITHDRAW"
+	ShipmentType_IMPORT   ShipmentType = "IMPORT"
+	ShipmentType_WITHDRAW ShipmentType = "WITHDRAW"
 )
 
 // All allowed values of ShipmentType enum
@@ -108,4 +108,3 @@ func (v *NullableShipmentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

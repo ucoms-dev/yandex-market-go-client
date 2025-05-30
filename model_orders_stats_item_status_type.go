@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OrdersStatsItemStatusType Статус товара:  * `REJECTED` — товар был добавлен в созданный заказ, но не был оплачен. * `RETURNED` — товар вернули. 
+// OrdersStatsItemStatusType Статус товара:  * `REJECTED` — товар был добавлен в созданный заказ, но не был оплачен. * `RETURNED` — товар вернули.
 type OrdersStatsItemStatusType string
 
 // List of OrdersStatsItemStatusType
 const (
-	REJECTED OrdersStatsItemStatusType = "REJECTED"
-	RETURNED OrdersStatsItemStatusType = "RETURNED"
+	OrdersStatsItemStatusType_REJECTED OrdersStatsItemStatusType = "REJECTED"
+	OrdersStatsItemStatusType_RETURNED OrdersStatsItemStatusType = "RETURNED"
 )
 
 // All allowed values of OrdersStatsItemStatusType enum
@@ -108,4 +108,3 @@ func (v *NullableOrdersStatsItemStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

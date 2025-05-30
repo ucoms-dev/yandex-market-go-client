@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -16,30 +16,29 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"os"
+	"strings"
 	"time"
 )
-
 
 // ExpressAPIService ExpressAPI service
 type ExpressAPIService service
 
-type ApiAddHiddenOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressAddHiddenOffersRequest struct {
+	ctx                    context.Context
+	ExpressService         *ExpressAPIService
+	campaignId             int64
 	addHiddenOffersRequest *AddHiddenOffersRequest
 }
 
 // Запрос на скрытие оферов.
-func (r ApiAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersRequest AddHiddenOffersRequest) ApiAddHiddenOffersRequest {
+func (r ExpressAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersRequest AddHiddenOffersRequest) ExpressAddHiddenOffersRequest {
 	r.addHiddenOffersRequest = &addHiddenOffersRequest
 	return r
 }
 
-func (r ApiAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.AddHiddenOffersExecute(r)
+func (r ExpressAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.AddHiddenOffersExecute(r)
 }
 
 /*
@@ -58,27 +57,27 @@ AddHiddenOffers Скрытие товаров и настройки скрыти
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiAddHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressAddHiddenOffersRequest
 */
-func (a *ExpressAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) ApiAddHiddenOffersRequest {
-	return ApiAddHiddenOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) ExpressAddHiddenOffersRequest {
+	return ExpressAddHiddenOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) AddHiddenOffersExecute(r ExpressAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.AddHiddenOffers")
@@ -121,14 +120,14 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -161,8 +160,8 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -172,8 +171,8 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -183,8 +182,8 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -194,8 +193,8 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -205,8 +204,8 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -216,8 +215,8 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -234,20 +233,20 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAddOffersToArchiveRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressAddOffersToArchiveRequest struct {
+	ctx                       context.Context
+	ExpressService            *ExpressAPIService
+	businessId                int64
 	addOffersToArchiveRequest *AddOffersToArchiveRequest
 }
 
-func (r ApiAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) ApiAddOffersToArchiveRequest {
+func (r ExpressAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) ExpressAddOffersToArchiveRequest {
 	r.addOffersToArchiveRequest = &addOffersToArchiveRequest
 	return r
 }
 
-func (r ApiAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
-	return r.ApiService.AddOffersToArchiveExecute(r)
+func (r ExpressAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
+	return r.ExpressService.AddOffersToArchiveExecute(r)
 }
 
 /*
@@ -266,27 +265,27 @@ AddOffersToArchive Добавление товаров в архив
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiAddOffersToArchiveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressAddOffersToArchiveRequest
 */
-func (a *ExpressAPIService) AddOffersToArchive(ctx context.Context, businessId int64) ApiAddOffersToArchiveRequest {
-	return ApiAddOffersToArchiveRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) AddOffersToArchive(ctx context.Context, businessId int64) ExpressAddOffersToArchiveRequest {
+	return ExpressAddOffersToArchiveRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return AddOffersToArchiveResponse
-func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
+//
+//	@return AddOffersToArchiveResponse
+func (a *ExpressAPIService) AddOffersToArchiveExecute(r ExpressAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AddOffersToArchiveResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AddOffersToArchiveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.AddOffersToArchive")
@@ -329,14 +328,14 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -369,8 +368,8 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -380,8 +379,8 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -391,8 +390,8 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -402,8 +401,8 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -413,8 +412,8 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -424,8 +423,8 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -435,8 +434,8 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -453,19 +452,19 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCalculateTariffsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressCalculateTariffsRequest struct {
+	ctx                     context.Context
+	ExpressService          *ExpressAPIService
 	calculateTariffsRequest *CalculateTariffsRequest
 }
 
-func (r ApiCalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) ApiCalculateTariffsRequest {
+func (r ExpressCalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) ExpressCalculateTariffsRequest {
 	r.calculateTariffsRequest = &calculateTariffsRequest
 	return r
 }
 
-func (r ApiCalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
-	return r.ApiService.CalculateTariffsExecute(r)
+func (r ExpressCalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
+	return r.ExpressService.CalculateTariffsExecute(r)
 }
 
 /*
@@ -483,25 +482,25 @@ CalculateTariffs Калькулятор стоимости услуг
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCalculateTariffsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressCalculateTariffsRequest
 */
-func (a *ExpressAPIService) CalculateTariffs(ctx context.Context) ApiCalculateTariffsRequest {
-	return ApiCalculateTariffsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) CalculateTariffs(ctx context.Context) ExpressCalculateTariffsRequest {
+	return ExpressCalculateTariffsRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CalculateTariffsResponse
-func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
+//
+//	@return CalculateTariffsResponse
+func (a *ExpressAPIService) CalculateTariffsExecute(r ExpressCalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CalculateTariffsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CalculateTariffsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.CalculateTariffs")
@@ -540,14 +539,14 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -580,8 +579,8 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -591,8 +590,8 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -602,8 +601,8 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -613,8 +612,8 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -624,8 +623,8 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -635,8 +634,8 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -653,20 +652,20 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfirmBusinessPricesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressConfirmBusinessPricesRequest struct {
+	ctx                  context.Context
+	ExpressService       *ExpressAPIService
+	businessId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r ApiConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ApiConfirmBusinessPricesRequest {
+func (r ExpressConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ExpressConfirmBusinessPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r ApiConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.ConfirmBusinessPricesExecute(r)
+func (r ExpressConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.ConfirmBusinessPricesExecute(r)
 }
 
 /*
@@ -683,27 +682,27 @@ ConfirmBusinessPrices Удаление товара из карантина по
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiConfirmBusinessPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressConfirmBusinessPricesRequest
 */
-func (a *ExpressAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) ApiConfirmBusinessPricesRequest {
-	return ApiConfirmBusinessPricesRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) ExpressConfirmBusinessPricesRequest {
+	return ExpressConfirmBusinessPricesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ExpressConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.ConfirmBusinessPrices")
@@ -746,14 +745,14 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -786,8 +785,8 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -797,8 +796,8 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -808,8 +807,8 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -819,8 +818,8 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -830,8 +829,8 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -841,8 +840,8 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -852,8 +851,8 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -870,20 +869,20 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPri
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfirmCampaignPricesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressConfirmCampaignPricesRequest struct {
+	ctx                  context.Context
+	ExpressService       *ExpressAPIService
+	campaignId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r ApiConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ApiConfirmCampaignPricesRequest {
+func (r ExpressConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ExpressConfirmCampaignPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r ApiConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.ConfirmCampaignPricesExecute(r)
+func (r ExpressConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.ConfirmCampaignPricesExecute(r)
 }
 
 /*
@@ -900,27 +899,27 @@ ConfirmCampaignPrices Удаление товара из карантина по
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiConfirmCampaignPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressConfirmCampaignPricesRequest
 */
-func (a *ExpressAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) ApiConfirmCampaignPricesRequest {
-	return ApiConfirmCampaignPricesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) ExpressConfirmCampaignPricesRequest {
+	return ExpressConfirmCampaignPricesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ExpressConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.ConfirmCampaignPrices")
@@ -963,14 +962,14 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -1003,8 +1002,8 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1014,8 +1013,8 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1025,8 +1024,8 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1036,8 +1035,8 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1047,8 +1046,8 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -1058,8 +1057,8 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1069,8 +1068,8 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1087,21 +1086,21 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPri
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateChatRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressExpressCreateChatRequest struct {
+	ctx               context.Context
+	ExpressService    *ExpressAPIService
+	businessId        int64
 	createChatRequest *CreateChatRequest
 }
 
 // description
-func (r ApiCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) ApiCreateChatRequest {
+func (r ExpressExpressCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) ExpressExpressCreateChatRequest {
 	r.createChatRequest = &createChatRequest
 	return r
 }
 
-func (r ApiCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
-	return r.ApiService.CreateChatExecute(r)
+func (r ExpressExpressCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
+	return r.ExpressService.CreateChatExecute(r)
 }
 
 /*
@@ -1114,27 +1113,27 @@ CreateChat Создание нового чата с покупателем
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiCreateChatRequest
+		@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+		@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	       @return ExpressExpressCreateChatRequest
 */
-func (a *ExpressAPIService) CreateChat(ctx context.Context, businessId int64) ApiCreateChatRequest {
-	return ApiCreateChatRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) CreateChat(ctx context.Context, businessId int64) ExpressExpressCreateChatRequest {
+	return ExpressExpressCreateChatRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateChatResponse
-func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
+//
+//	@return CreateChatResponse
+func (a *ExpressAPIService) CreateChatExecute(r ExpressExpressCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateChatResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateChatResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.CreateChat")
@@ -1177,14 +1176,14 @@ func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateCh
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -1217,8 +1216,8 @@ func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateCh
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1228,8 +1227,8 @@ func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateCh
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1239,8 +1238,8 @@ func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateCh
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1250,8 +1249,8 @@ func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateCh
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1261,8 +1260,8 @@ func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateCh
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1272,8 +1271,8 @@ func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateCh
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1290,20 +1289,20 @@ func (a *ExpressAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateCh
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteCampaignOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressDeleteCampaignOffersRequest struct {
+	ctx                         context.Context
+	ExpressService              *ExpressAPIService
+	campaignId                  int64
 	deleteCampaignOffersRequest *DeleteCampaignOffersRequest
 }
 
-func (r ApiDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) ApiDeleteCampaignOffersRequest {
+func (r ExpressDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) ExpressDeleteCampaignOffersRequest {
 	r.deleteCampaignOffersRequest = &deleteCampaignOffersRequest
 	return r
 }
 
-func (r ApiDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
-	return r.ApiService.DeleteCampaignOffersExecute(r)
+func (r ExpressDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
+	return r.ExpressService.DeleteCampaignOffersExecute(r)
 }
 
 /*
@@ -1324,27 +1323,27 @@ DeleteCampaignOffers Удаление товаров из ассортимент
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiDeleteCampaignOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressDeleteCampaignOffersRequest
 */
-func (a *ExpressAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) ApiDeleteCampaignOffersRequest {
-	return ApiDeleteCampaignOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) ExpressDeleteCampaignOffersRequest {
+	return ExpressDeleteCampaignOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteCampaignOffersResponse
-func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
+//
+//	@return DeleteCampaignOffersResponse
+func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ExpressDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteCampaignOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteCampaignOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.DeleteCampaignOffers")
@@ -1387,14 +1386,14 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -1427,8 +1426,8 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1438,8 +1437,8 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1449,8 +1448,8 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1460,8 +1459,8 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1471,8 +1470,8 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -1482,8 +1481,8 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1493,8 +1492,8 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1511,20 +1510,20 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffer
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteGoodsFeedbackCommentRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressDeleteGoodsFeedbackCommentRequest struct {
+	ctx                               context.Context
+	ExpressService                    *ExpressAPIService
+	businessId                        int64
 	deleteGoodsFeedbackCommentRequest *DeleteGoodsFeedbackCommentRequest
 }
 
-func (r ApiDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) ApiDeleteGoodsFeedbackCommentRequest {
+func (r ExpressDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) ExpressDeleteGoodsFeedbackCommentRequest {
 	r.deleteGoodsFeedbackCommentRequest = &deleteGoodsFeedbackCommentRequest
 	return r
 }
 
-func (r ApiDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.DeleteGoodsFeedbackCommentExecute(r)
+func (r ExpressDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.DeleteGoodsFeedbackCommentExecute(r)
 }
 
 /*
@@ -1537,27 +1536,27 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeleteGoodsFeedbackCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressDeleteGoodsFeedbackCommentRequest
 */
-func (a *ExpressAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) ApiDeleteGoodsFeedbackCommentRequest {
-	return ApiDeleteGoodsFeedbackCommentRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) ExpressDeleteGoodsFeedbackCommentRequest {
+	return ExpressDeleteGoodsFeedbackCommentRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ExpressDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.DeleteGoodsFeedbackComment")
@@ -1600,14 +1599,14 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -1640,8 +1639,8 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1651,8 +1650,8 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1662,8 +1661,8 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1673,8 +1672,8 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1684,8 +1683,8 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1695,8 +1694,8 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1713,21 +1712,21 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteHiddenOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressDeleteHiddenOffersRequest struct {
+	ctx                       context.Context
+	ExpressService            *ExpressAPIService
+	campaignId                int64
 	deleteHiddenOffersRequest *DeleteHiddenOffersRequest
 }
 
 // Запрос на возобновление показа оферов.
-func (r ApiDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHiddenOffersRequest DeleteHiddenOffersRequest) ApiDeleteHiddenOffersRequest {
+func (r ExpressDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHiddenOffersRequest DeleteHiddenOffersRequest) ExpressDeleteHiddenOffersRequest {
 	r.deleteHiddenOffersRequest = &deleteHiddenOffersRequest
 	return r
 }
 
-func (r ApiDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.DeleteHiddenOffersExecute(r)
+func (r ExpressDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.DeleteHiddenOffersExecute(r)
 }
 
 /*
@@ -1746,27 +1745,27 @@ DeleteHiddenOffers Возобновление показа товаров
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiDeleteHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressDeleteHiddenOffersRequest
 */
-func (a *ExpressAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) ApiDeleteHiddenOffersRequest {
-	return ApiDeleteHiddenOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) ExpressDeleteHiddenOffersRequest {
+	return ExpressDeleteHiddenOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ExpressDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.DeleteHiddenOffers")
@@ -1809,14 +1808,14 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -1849,8 +1848,8 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1860,8 +1859,8 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1871,8 +1870,8 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1882,8 +1881,8 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1893,8 +1892,8 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -1904,8 +1903,8 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1915,8 +1914,8 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1933,20 +1932,20 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressDeleteOffersRequest struct {
+	ctx                 context.Context
+	ExpressService      *ExpressAPIService
+	businessId          int64
 	deleteOffersRequest *DeleteOffersRequest
 }
 
-func (r ApiDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) ApiDeleteOffersRequest {
+func (r ExpressDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) ExpressDeleteOffersRequest {
 	r.deleteOffersRequest = &deleteOffersRequest
 	return r
 }
 
-func (r ApiDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
-	return r.ApiService.DeleteOffersExecute(r)
+func (r ExpressDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
+	return r.ExpressService.DeleteOffersExecute(r)
 }
 
 /*
@@ -1959,27 +1958,27 @@ DeleteOffers Удаление товаров из каталога
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeleteOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressDeleteOffersRequest
 */
-func (a *ExpressAPIService) DeleteOffers(ctx context.Context, businessId int64) ApiDeleteOffersRequest {
-	return ApiDeleteOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) DeleteOffers(ctx context.Context, businessId int64) ExpressDeleteOffersRequest {
+	return ExpressDeleteOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteOffersResponse
-func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
+//
+//	@return DeleteOffersResponse
+func (a *ExpressAPIService) DeleteOffersExecute(r ExpressDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.DeleteOffers")
@@ -2022,14 +2021,14 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -2062,8 +2061,8 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2073,8 +2072,8 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2084,8 +2083,8 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2095,8 +2094,8 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2106,8 +2105,8 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -2117,8 +2116,8 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2128,8 +2127,8 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2146,20 +2145,20 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*Dele
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOffersFromArchiveRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressDeleteOffersFromArchiveRequest struct {
+	ctx                            context.Context
+	ExpressService                 *ExpressAPIService
+	businessId                     int64
 	deleteOffersFromArchiveRequest *DeleteOffersFromArchiveRequest
 }
 
-func (r ApiDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) ApiDeleteOffersFromArchiveRequest {
+func (r ExpressDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) ExpressDeleteOffersFromArchiveRequest {
 	r.deleteOffersFromArchiveRequest = &deleteOffersFromArchiveRequest
 	return r
 }
 
-func (r ApiDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
-	return r.ApiService.DeleteOffersFromArchiveExecute(r)
+func (r ExpressDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+	return r.ExpressService.DeleteOffersFromArchiveExecute(r)
 }
 
 /*
@@ -2172,27 +2171,27 @@ DeleteOffersFromArchive Удаление товаров из архива
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeleteOffersFromArchiveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressDeleteOffersFromArchiveRequest
 */
-func (a *ExpressAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) ApiDeleteOffersFromArchiveRequest {
-	return ApiDeleteOffersFromArchiveRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) ExpressDeleteOffersFromArchiveRequest {
+	return ExpressDeleteOffersFromArchiveRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteOffersFromArchiveResponse
-func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+//
+//	@return DeleteOffersFromArchiveResponse
+func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ExpressDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteOffersFromArchiveResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteOffersFromArchiveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.DeleteOffersFromArchive")
@@ -2235,14 +2234,14 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -2275,8 +2274,8 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2286,8 +2285,8 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2297,8 +2296,8 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2308,8 +2307,8 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2319,8 +2318,8 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -2330,8 +2329,8 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2341,8 +2340,8 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2359,20 +2358,20 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFrom
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeletePromoOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressDeletePromoOffersRequest struct {
+	ctx                      context.Context
+	ExpressService           *ExpressAPIService
+	businessId               int64
 	deletePromoOffersRequest *DeletePromoOffersRequest
 }
 
-func (r ApiDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) ApiDeletePromoOffersRequest {
+func (r ExpressDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) ExpressDeletePromoOffersRequest {
 	r.deletePromoOffersRequest = &deletePromoOffersRequest
 	return r
 }
 
-func (r ApiDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
-	return r.ApiService.DeletePromoOffersExecute(r)
+func (r ExpressDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
+	return r.ExpressService.DeletePromoOffersExecute(r)
 }
 
 /*
@@ -2387,27 +2386,27 @@ DeletePromoOffers Удаление товаров из акции
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeletePromoOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressDeletePromoOffersRequest
 */
-func (a *ExpressAPIService) DeletePromoOffers(ctx context.Context, businessId int64) ApiDeletePromoOffersRequest {
-	return ApiDeletePromoOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) DeletePromoOffers(ctx context.Context, businessId int64) ExpressDeletePromoOffersRequest {
+	return ExpressDeletePromoOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return DeletePromoOffersResponse
-func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
+//
+//	@return DeletePromoOffersResponse
+func (a *ExpressAPIService) DeletePromoOffersExecute(r ExpressDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeletePromoOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeletePromoOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.DeletePromoOffers")
@@ -2450,14 +2449,14 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -2490,8 +2489,8 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2501,8 +2500,8 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2512,8 +2511,8 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2523,8 +2522,8 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2534,8 +2533,8 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2545,8 +2544,8 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2563,26 +2562,26 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateBannersStatisticsReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateBannersStatisticsReportRequest struct {
+	ctx                              context.Context
+	ExpressService                   *ExpressAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
-	format *ReportFormatType
+	format                           *ReportFormatType
 }
 
-func (r ApiGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) ApiGenerateBannersStatisticsReportRequest {
+func (r ExpressGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) ExpressGenerateBannersStatisticsReportRequest {
 	r.generateBannersStatisticsRequest = &generateBannersStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) ApiGenerateBannersStatisticsReportRequest {
+func (r ExpressGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) ExpressGenerateBannersStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateBannersStatisticsReportExecute(r)
+func (r ExpressGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateBannersStatisticsReportExecute(r)
 }
 
 /*
@@ -2599,25 +2598,25 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateBannersStatisticsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateBannersStatisticsReportRequest
 */
-func (a *ExpressAPIService) GenerateBannersStatisticsReport(ctx context.Context) ApiGenerateBannersStatisticsReportRequest {
-	return ApiGenerateBannersStatisticsReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateBannersStatisticsReport(ctx context.Context) ExpressGenerateBannersStatisticsReportRequest {
+	return ExpressGenerateBannersStatisticsReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ExpressGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateBannersStatisticsReport")
@@ -2662,14 +2661,14 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -2702,8 +2701,8 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2713,8 +2712,8 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2724,8 +2723,8 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2735,8 +2734,8 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2746,8 +2745,8 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2764,26 +2763,26 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateBoostConsolidatedReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateBoostConsolidatedReportRequest struct {
+	ctx                              context.Context
+	ExpressService                   *ExpressAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
-	format *ReportFormatType
+	format                           *ReportFormatType
 }
 
-func (r ApiGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) ApiGenerateBoostConsolidatedReportRequest {
+func (r ExpressGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) ExpressGenerateBoostConsolidatedReportRequest {
 	r.generateBoostConsolidatedRequest = &generateBoostConsolidatedRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) ApiGenerateBoostConsolidatedReportRequest {
+func (r ExpressGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) ExpressGenerateBoostConsolidatedReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateBoostConsolidatedReportExecute(r)
+func (r ExpressGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateBoostConsolidatedReportExecute(r)
 }
 
 /*
@@ -2802,25 +2801,25 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateBoostConsolidatedReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateBoostConsolidatedReportRequest
 */
-func (a *ExpressAPIService) GenerateBoostConsolidatedReport(ctx context.Context) ApiGenerateBoostConsolidatedReportRequest {
-	return ApiGenerateBoostConsolidatedReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateBoostConsolidatedReport(ctx context.Context) ExpressGenerateBoostConsolidatedReportRequest {
+	return ExpressGenerateBoostConsolidatedReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ExpressGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateBoostConsolidatedReport")
@@ -2865,14 +2864,14 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -2905,8 +2904,8 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2916,8 +2915,8 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2927,8 +2926,8 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2938,8 +2937,8 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2949,8 +2948,8 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2967,26 +2966,26 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateCompetitorsPositionReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateCompetitorsPositionReportRequest struct {
+	ctx                                      context.Context
+	ExpressService                           *ExpressAPIService
 	generateCompetitorsPositionReportRequest *GenerateCompetitorsPositionReportRequest
-	format *ReportFormatType
+	format                                   *ReportFormatType
 }
 
-func (r ApiGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) ApiGenerateCompetitorsPositionReportRequest {
+func (r ExpressGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) ExpressGenerateCompetitorsPositionReportRequest {
 	r.generateCompetitorsPositionReportRequest = &generateCompetitorsPositionReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) ApiGenerateCompetitorsPositionReportRequest {
+func (r ExpressGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) ExpressGenerateCompetitorsPositionReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateCompetitorsPositionReportExecute(r)
+func (r ExpressGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateCompetitorsPositionReportExecute(r)
 }
 
 /*
@@ -3009,25 +3008,25 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateCompetitorsPositionReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateCompetitorsPositionReportRequest
 */
-func (a *ExpressAPIService) GenerateCompetitorsPositionReport(ctx context.Context) ApiGenerateCompetitorsPositionReportRequest {
-	return ApiGenerateCompetitorsPositionReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateCompetitorsPositionReport(ctx context.Context) ExpressGenerateCompetitorsPositionReportRequest {
+	return ExpressGenerateCompetitorsPositionReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ExpressGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateCompetitorsPositionReport")
@@ -3072,14 +3071,14 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -3112,8 +3111,8 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3123,8 +3122,8 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3134,8 +3133,8 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3145,8 +3144,8 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3156,8 +3155,8 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3174,26 +3173,26 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsFeedbackReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateGoodsFeedbackReportRequest struct {
+	ctx                          context.Context
+	ExpressService               *ExpressAPIService
 	generateGoodsFeedbackRequest *GenerateGoodsFeedbackRequest
-	format *ReportFormatType
+	format                       *ReportFormatType
 }
 
-func (r ApiGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) ApiGenerateGoodsFeedbackReportRequest {
+func (r ExpressGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) ExpressGenerateGoodsFeedbackReportRequest {
 	r.generateGoodsFeedbackRequest = &generateGoodsFeedbackRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) ApiGenerateGoodsFeedbackReportRequest {
+func (r ExpressGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) ExpressGenerateGoodsFeedbackReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateGoodsFeedbackReportExecute(r)
+func (r ExpressGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateGoodsFeedbackReportExecute(r)
 }
 
 /*
@@ -3210,25 +3209,25 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateGoodsFeedbackReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateGoodsFeedbackReportRequest
 */
-func (a *ExpressAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ApiGenerateGoodsFeedbackReportRequest {
-	return ApiGenerateGoodsFeedbackReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ExpressGenerateGoodsFeedbackReportRequest {
+	return ExpressGenerateGoodsFeedbackReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ExpressGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateGoodsFeedbackReport")
@@ -3273,14 +3272,14 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -3313,8 +3312,8 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3324,8 +3323,8 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3335,8 +3334,8 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3346,8 +3345,8 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3357,8 +3356,8 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3375,26 +3374,26 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsRealizationReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateGoodsRealizationReportRequest struct {
+	ctx                                   context.Context
+	ExpressService                        *ExpressAPIService
 	generateGoodsRealizationReportRequest *GenerateGoodsRealizationReportRequest
-	format *ReportFormatType
+	format                                *ReportFormatType
 }
 
-func (r ApiGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) ApiGenerateGoodsRealizationReportRequest {
+func (r ExpressGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) ExpressGenerateGoodsRealizationReportRequest {
 	r.generateGoodsRealizationReportRequest = &generateGoodsRealizationReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) ApiGenerateGoodsRealizationReportRequest {
+func (r ExpressGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) ExpressGenerateGoodsRealizationReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateGoodsRealizationReportExecute(r)
+func (r ExpressGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateGoodsRealizationReportExecute(r)
 }
 
 /*
@@ -3410,36 +3409,36 @@ GenerateGoodsRealizationReport Отчет по реализации
 
 - FBY, FBS, Экспресс
 
-  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
+	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
 
 - DBS
 
-  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
+	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
 
 {% endlist %}
 
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateGoodsRealizationReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateGoodsRealizationReportRequest
 */
-func (a *ExpressAPIService) GenerateGoodsRealizationReport(ctx context.Context) ApiGenerateGoodsRealizationReportRequest {
-	return ApiGenerateGoodsRealizationReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateGoodsRealizationReport(ctx context.Context) ExpressGenerateGoodsRealizationReportRequest {
+	return ExpressGenerateGoodsRealizationReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ExpressGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateGoodsRealizationReport")
@@ -3484,14 +3483,14 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -3524,8 +3523,8 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3535,8 +3534,8 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3546,8 +3545,8 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3557,8 +3556,8 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3568,8 +3567,8 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3586,26 +3585,26 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateJewelryFiscalReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateJewelryFiscalReportRequest struct {
+	ctx                                context.Context
+	ExpressService                     *ExpressAPIService
 	generateJewelryFiscalReportRequest *GenerateJewelryFiscalReportRequest
-	format *ReportFormatType
+	format                             *ReportFormatType
 }
 
-func (r ApiGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) ApiGenerateJewelryFiscalReportRequest {
+func (r ExpressGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) ExpressGenerateJewelryFiscalReportRequest {
 	r.generateJewelryFiscalReportRequest = &generateJewelryFiscalReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) ApiGenerateJewelryFiscalReportRequest {
+func (r ExpressGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) ExpressGenerateJewelryFiscalReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateJewelryFiscalReportExecute(r)
+func (r ExpressGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateJewelryFiscalReportExecute(r)
 }
 
 /*
@@ -3622,25 +3621,25 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateJewelryFiscalReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateJewelryFiscalReportRequest
 */
-func (a *ExpressAPIService) GenerateJewelryFiscalReport(ctx context.Context) ApiGenerateJewelryFiscalReportRequest {
-	return ApiGenerateJewelryFiscalReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateJewelryFiscalReport(ctx context.Context) ExpressGenerateJewelryFiscalReportRequest {
+	return ExpressGenerateJewelryFiscalReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ExpressGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateJewelryFiscalReport")
@@ -3685,14 +3684,14 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -3725,8 +3724,8 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3736,8 +3735,8 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3747,8 +3746,8 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3758,8 +3757,8 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3769,8 +3768,8 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3787,26 +3786,26 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateMassOrderLabelsReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateMassOrderLabelsReportRequest struct {
+	ctx                            context.Context
+	ExpressService                 *ExpressAPIService
 	generateMassOrderLabelsRequest *GenerateMassOrderLabelsRequest
-	format *PageFormatType
+	format                         *PageFormatType
 }
 
-func (r ApiGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) ApiGenerateMassOrderLabelsReportRequest {
+func (r ExpressGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) ExpressGenerateMassOrderLabelsReportRequest {
 	r.generateMassOrderLabelsRequest = &generateMassOrderLabelsRequest
 	return r
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) ApiGenerateMassOrderLabelsReportRequest {
+func (r ExpressGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) ExpressGenerateMassOrderLabelsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateMassOrderLabelsReportExecute(r)
+func (r ExpressGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateMassOrderLabelsReportExecute(r)
 }
 
 /*
@@ -3821,25 +3820,25 @@ GenerateMassOrderLabelsReport Готовые ярлыки‑наклейки н�
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateMassOrderLabelsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateMassOrderLabelsReportRequest
 */
-func (a *ExpressAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ApiGenerateMassOrderLabelsReportRequest {
-	return ApiGenerateMassOrderLabelsReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ExpressGenerateMassOrderLabelsReportRequest {
+	return ExpressGenerateMassOrderLabelsReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ExpressGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateMassOrderLabelsReport")
@@ -3881,14 +3880,14 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -3921,8 +3920,8 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3932,8 +3931,8 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3943,8 +3942,8 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3954,8 +3953,8 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3965,8 +3964,8 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3983,24 +3982,24 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateOrderLabelRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
-	shipmentId int64
-	boxId int64
-	format *PageFormatType
+type ExpressGenerateOrderLabelRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
+	shipmentId     int64
+	boxId          int64
+	format         *PageFormatType
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateOrderLabelRequest) Format(format PageFormatType) ApiGenerateOrderLabelRequest {
+func (r ExpressGenerateOrderLabelRequest) Format(format PageFormatType) ExpressGenerateOrderLabelRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateOrderLabelRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GenerateOrderLabelExecute(r)
+func (r ExpressGenerateOrderLabelRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ExpressService.GenerateOrderLabelExecute(r)
 }
 
 /*
@@ -4013,33 +4012,33 @@ GenerateOrderLabel Готовый ярлык‑наклейка для коро�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param shipmentId Идентификатор грузоместа.
- @param boxId Идентификатор коробки.
- @return ApiGenerateOrderLabelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param shipmentId Идентификатор грузоместа.
+	@param boxId Идентификатор коробки.
+	@return ExpressGenerateOrderLabelRequest
 */
-func (a *ExpressAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) ApiGenerateOrderLabelRequest {
-	return ApiGenerateOrderLabelRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
-		shipmentId: shipmentId,
-		boxId: boxId,
+func (a *ExpressAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) ExpressGenerateOrderLabelRequest {
+	return ExpressGenerateOrderLabelRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		shipmentId:     shipmentId,
+		boxId:          boxId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *ExpressAPIService) GenerateOrderLabelExecute(r ExpressGenerateOrderLabelRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateOrderLabel")
@@ -4083,14 +4082,14 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -4123,8 +4122,8 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4134,8 +4133,8 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4145,8 +4144,8 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -4156,8 +4155,8 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4167,8 +4166,8 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4178,8 +4177,8 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4196,22 +4195,22 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateOrderLabelsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
-	format *PageFormatType
+type ExpressGenerateOrderLabelsRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
+	format         *PageFormatType
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateOrderLabelsRequest) Format(format PageFormatType) ApiGenerateOrderLabelsRequest {
+func (r ExpressGenerateOrderLabelsRequest) Format(format PageFormatType) ExpressGenerateOrderLabelsRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateOrderLabelsRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GenerateOrderLabelsExecute(r)
+func (r ExpressGenerateOrderLabelsRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ExpressService.GenerateOrderLabelsExecute(r)
 }
 
 /*
@@ -4226,29 +4225,29 @@ GenerateOrderLabels Готовые ярлыки‑наклейки на все �
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGenerateOrderLabelsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressGenerateOrderLabelsRequest
 */
-func (a *ExpressAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) ApiGenerateOrderLabelsRequest {
-	return ApiGenerateOrderLabelsRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) ExpressGenerateOrderLabelsRequest {
+	return ExpressGenerateOrderLabelsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ExpressGenerateOrderLabelsRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateOrderLabels")
@@ -4290,14 +4289,14 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -4330,8 +4329,8 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4341,8 +4340,8 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4352,8 +4351,8 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -4363,8 +4362,8 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4374,8 +4373,8 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4385,8 +4384,8 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4403,26 +4402,26 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratePricesReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGeneratePricesReportRequest struct {
+	ctx                         context.Context
+	ExpressService              *ExpressAPIService
 	generatePricesReportRequest *GeneratePricesReportRequest
-	format *ReportFormatType
+	format                      *ReportFormatType
 }
 
-func (r ApiGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) ApiGeneratePricesReportRequest {
+func (r ExpressGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) ExpressGeneratePricesReportRequest {
 	r.generatePricesReportRequest = &generatePricesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGeneratePricesReportRequest) Format(format ReportFormatType) ApiGeneratePricesReportRequest {
+func (r ExpressGeneratePricesReportRequest) Format(format ReportFormatType) ExpressGeneratePricesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GeneratePricesReportExecute(r)
+func (r ExpressGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GeneratePricesReportExecute(r)
 }
 
 /*
@@ -4447,25 +4446,25 @@ GeneratePricesReport Отчет «Цены на рынке»
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratePricesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGeneratePricesReportRequest
 */
-func (a *ExpressAPIService) GeneratePricesReport(ctx context.Context) ApiGeneratePricesReportRequest {
-	return ApiGeneratePricesReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GeneratePricesReport(ctx context.Context) ExpressGeneratePricesReportRequest {
+	return ExpressGeneratePricesReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GeneratePricesReportExecute(r ExpressGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GeneratePricesReport")
@@ -4510,14 +4509,14 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -4550,8 +4549,8 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4561,8 +4560,8 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4572,8 +4571,8 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4583,8 +4582,8 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4594,8 +4593,8 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4612,26 +4611,26 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateSalesGeographyReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateSalesGeographyReportRequest struct {
+	ctx                           context.Context
+	ExpressService                *ExpressAPIService
 	generateSalesGeographyRequest *GenerateSalesGeographyRequest
-	format *ReportFormatType
+	format                        *ReportFormatType
 }
 
-func (r ApiGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) ApiGenerateSalesGeographyReportRequest {
+func (r ExpressGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) ExpressGenerateSalesGeographyReportRequest {
 	r.generateSalesGeographyRequest = &generateSalesGeographyRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateSalesGeographyReportRequest) Format(format ReportFormatType) ApiGenerateSalesGeographyReportRequest {
+func (r ExpressGenerateSalesGeographyReportRequest) Format(format ReportFormatType) ExpressGenerateSalesGeographyReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateSalesGeographyReportExecute(r)
+func (r ExpressGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateSalesGeographyReportExecute(r)
 }
 
 /*
@@ -4648,25 +4647,25 @@ GenerateSalesGeographyReport Отчет по географии продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateSalesGeographyReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateSalesGeographyReportRequest
 */
-func (a *ExpressAPIService) GenerateSalesGeographyReport(ctx context.Context) ApiGenerateSalesGeographyReportRequest {
-	return ApiGenerateSalesGeographyReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateSalesGeographyReport(ctx context.Context) ExpressGenerateSalesGeographyReportRequest {
+	return ExpressGenerateSalesGeographyReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ExpressGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateSalesGeographyReport")
@@ -4711,14 +4710,14 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -4751,8 +4750,8 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4762,8 +4761,8 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4773,8 +4772,8 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4784,8 +4783,8 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4795,8 +4794,8 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4813,26 +4812,26 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShelfsStatisticsReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateShelfsStatisticsReportRequest struct {
+	ctx                             context.Context
+	ExpressService                  *ExpressAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
-	format *ReportFormatType
+	format                          *ReportFormatType
 }
 
-func (r ApiGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) ApiGenerateShelfsStatisticsReportRequest {
+func (r ExpressGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) ExpressGenerateShelfsStatisticsReportRequest {
 	r.generateShelfsStatisticsRequest = &generateShelfsStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) ApiGenerateShelfsStatisticsReportRequest {
+func (r ExpressGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) ExpressGenerateShelfsStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShelfsStatisticsReportExecute(r)
+func (r ExpressGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateShelfsStatisticsReportExecute(r)
 }
 
 /*
@@ -4849,25 +4848,25 @@ GenerateShelfsStatisticsReport Отчет по полкам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShelfsStatisticsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateShelfsStatisticsReportRequest
 */
-func (a *ExpressAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ApiGenerateShelfsStatisticsReportRequest {
-	return ApiGenerateShelfsStatisticsReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ExpressGenerateShelfsStatisticsReportRequest {
+	return ExpressGenerateShelfsStatisticsReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ExpressGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateShelfsStatisticsReport")
@@ -4912,14 +4911,14 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -4952,8 +4951,8 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4963,8 +4962,8 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4974,8 +4973,8 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4985,8 +4984,8 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4996,8 +4995,8 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5014,26 +5013,26 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShowsBoostReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateShowsBoostReportRequest struct {
+	ctx                       context.Context
+	ExpressService            *ExpressAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
-	format *ReportFormatType
+	format                    *ReportFormatType
 }
 
-func (r ApiGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) ApiGenerateShowsBoostReportRequest {
+func (r ExpressGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) ExpressGenerateShowsBoostReportRequest {
 	r.generateShowsBoostRequest = &generateShowsBoostRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShowsBoostReportRequest) Format(format ReportFormatType) ApiGenerateShowsBoostReportRequest {
+func (r ExpressGenerateShowsBoostReportRequest) Format(format ReportFormatType) ExpressGenerateShowsBoostReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShowsBoostReportExecute(r)
+func (r ExpressGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateShowsBoostReportExecute(r)
 }
 
 /*
@@ -5050,25 +5049,25 @@ GenerateShowsBoostReport Отчет по бусту показов
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShowsBoostReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateShowsBoostReportRequest
 */
-func (a *ExpressAPIService) GenerateShowsBoostReport(ctx context.Context) ApiGenerateShowsBoostReportRequest {
-	return ApiGenerateShowsBoostReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateShowsBoostReport(ctx context.Context) ExpressGenerateShowsBoostReportRequest {
+	return ExpressGenerateShowsBoostReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ExpressGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateShowsBoostReport")
@@ -5113,14 +5112,14 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -5153,8 +5152,8 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5164,8 +5163,8 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5175,8 +5174,8 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5186,8 +5185,8 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5197,8 +5196,8 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5215,26 +5214,26 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShowsSalesReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateShowsSalesReportRequest struct {
+	ctx                             context.Context
+	ExpressService                  *ExpressAPIService
 	generateShowsSalesReportRequest *GenerateShowsSalesReportRequest
-	format *ReportFormatType
+	format                          *ReportFormatType
 }
 
-func (r ApiGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) ApiGenerateShowsSalesReportRequest {
+func (r ExpressGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) ExpressGenerateShowsSalesReportRequest {
 	r.generateShowsSalesReportRequest = &generateShowsSalesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShowsSalesReportRequest) Format(format ReportFormatType) ApiGenerateShowsSalesReportRequest {
+func (r ExpressGenerateShowsSalesReportRequest) Format(format ReportFormatType) ExpressGenerateShowsSalesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShowsSalesReportExecute(r)
+func (r ExpressGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateShowsSalesReportExecute(r)
 }
 
 /*
@@ -5251,25 +5250,25 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShowsSalesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateShowsSalesReportRequest
 */
-func (a *ExpressAPIService) GenerateShowsSalesReport(ctx context.Context) ApiGenerateShowsSalesReportRequest {
-	return ApiGenerateShowsSalesReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateShowsSalesReport(ctx context.Context) ExpressGenerateShowsSalesReportRequest {
+	return ExpressGenerateShowsSalesReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ExpressGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateShowsSalesReport")
@@ -5314,14 +5313,14 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -5354,8 +5353,8 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5365,8 +5364,8 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5376,8 +5375,8 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5387,8 +5386,8 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5398,8 +5397,8 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5416,26 +5415,26 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateStocksOnWarehousesReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateStocksOnWarehousesReportRequest struct {
+	ctx                                     context.Context
+	ExpressService                          *ExpressAPIService
 	generateStocksOnWarehousesReportRequest *GenerateStocksOnWarehousesReportRequest
-	format *ReportFormatType
+	format                                  *ReportFormatType
 }
 
-func (r ApiGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) ApiGenerateStocksOnWarehousesReportRequest {
+func (r ExpressGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) ExpressGenerateStocksOnWarehousesReportRequest {
 	r.generateStocksOnWarehousesReportRequest = &generateStocksOnWarehousesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) ApiGenerateStocksOnWarehousesReportRequest {
+func (r ExpressGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) ExpressGenerateStocksOnWarehousesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateStocksOnWarehousesReportExecute(r)
+func (r ExpressGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateStocksOnWarehousesReportExecute(r)
 }
 
 /*
@@ -5457,25 +5456,25 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateStocksOnWarehousesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateStocksOnWarehousesReportRequest
 */
-func (a *ExpressAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) ApiGenerateStocksOnWarehousesReportRequest {
-	return ApiGenerateStocksOnWarehousesReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) ExpressGenerateStocksOnWarehousesReportRequest {
+	return ExpressGenerateStocksOnWarehousesReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ExpressGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateStocksOnWarehousesReport")
@@ -5520,14 +5519,14 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -5560,8 +5559,8 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5571,8 +5570,8 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5582,8 +5581,8 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5593,8 +5592,8 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5604,8 +5603,8 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5622,33 +5621,33 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedMarketplaceServicesReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateUnitedMarketplaceServicesReportRequest struct {
+	ctx                                            context.Context
+	ExpressService                                 *ExpressAPIService
 	generateUnitedMarketplaceServicesReportRequest *GenerateUnitedMarketplaceServicesReportRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                                         *ReportFormatType
+	language                                       *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r ExpressGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) ExpressGenerateUnitedMarketplaceServicesReportRequest {
 	r.generateUnitedMarketplaceServicesReportRequest = &generateUnitedMarketplaceServicesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r ExpressGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) ExpressGenerateUnitedMarketplaceServicesReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r ExpressGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) ExpressGenerateUnitedMarketplaceServicesReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedMarketplaceServicesReportExecute(r)
+func (r ExpressGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateUnitedMarketplaceServicesReportExecute(r)
 }
 
 /*
@@ -5674,25 +5673,25 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedMarketplaceServicesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateUnitedMarketplaceServicesReportRequest
 */
-func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) ApiGenerateUnitedMarketplaceServicesReportRequest {
-	return ApiGenerateUnitedMarketplaceServicesReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) ExpressGenerateUnitedMarketplaceServicesReportRequest {
+	return ExpressGenerateUnitedMarketplaceServicesReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ExpressGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateUnitedMarketplaceServicesReport")
@@ -5740,14 +5739,14 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -5780,8 +5779,8 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5791,8 +5790,8 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5802,8 +5801,8 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5813,8 +5812,8 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5824,8 +5823,8 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5842,33 +5841,33 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedNettingReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateUnitedNettingReportRequest struct {
+	ctx                                context.Context
+	ExpressService                     *ExpressAPIService
 	generateUnitedNettingReportRequest *GenerateUnitedNettingReportRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                             *ReportFormatType
+	language                           *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) ApiGenerateUnitedNettingReportRequest {
+func (r ExpressGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) ExpressGenerateUnitedNettingReportRequest {
 	r.generateUnitedNettingReportRequest = &generateUnitedNettingReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedNettingReportRequest) Format(format ReportFormatType) ApiGenerateUnitedNettingReportRequest {
+func (r ExpressGenerateUnitedNettingReportRequest) Format(format ReportFormatType) ExpressGenerateUnitedNettingReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedNettingReportRequest {
+func (r ExpressGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) ExpressGenerateUnitedNettingReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedNettingReportExecute(r)
+func (r ExpressGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateUnitedNettingReportExecute(r)
 }
 
 /*
@@ -5896,25 +5895,25 @@ GenerateUnitedNettingReport Отчет по платежам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedNettingReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateUnitedNettingReportRequest
 */
-func (a *ExpressAPIService) GenerateUnitedNettingReport(ctx context.Context) ApiGenerateUnitedNettingReportRequest {
-	return ApiGenerateUnitedNettingReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateUnitedNettingReport(ctx context.Context) ExpressGenerateUnitedNettingReportRequest {
+	return ExpressGenerateUnitedNettingReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ExpressGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateUnitedNettingReport")
@@ -5962,14 +5961,14 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -6002,8 +6001,8 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6013,8 +6012,8 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6024,8 +6023,8 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6035,8 +6034,8 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6046,8 +6045,8 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6064,33 +6063,33 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedOrdersReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateUnitedOrdersReportRequest struct {
+	ctx                         context.Context
+	ExpressService              *ExpressAPIService
 	generateUnitedOrdersRequest *GenerateUnitedOrdersRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                      *ReportFormatType
+	language                    *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) ApiGenerateUnitedOrdersReportRequest {
+func (r ExpressGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) ExpressGenerateUnitedOrdersReportRequest {
 	r.generateUnitedOrdersRequest = &generateUnitedOrdersRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) ApiGenerateUnitedOrdersReportRequest {
+func (r ExpressGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) ExpressGenerateUnitedOrdersReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedOrdersReportRequest {
+func (r ExpressGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) ExpressGenerateUnitedOrdersReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedOrdersReportExecute(r)
+func (r ExpressGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateUnitedOrdersReportExecute(r)
 }
 
 /*
@@ -6107,25 +6106,25 @@ GenerateUnitedOrdersReport Отчет по заказам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedOrdersReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateUnitedOrdersReportRequest
 */
-func (a *ExpressAPIService) GenerateUnitedOrdersReport(ctx context.Context) ApiGenerateUnitedOrdersReportRequest {
-	return ApiGenerateUnitedOrdersReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateUnitedOrdersReport(ctx context.Context) ExpressGenerateUnitedOrdersReportRequest {
+	return ExpressGenerateUnitedOrdersReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ExpressGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateUnitedOrdersReport")
@@ -6173,14 +6172,14 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -6213,8 +6212,8 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6224,8 +6223,8 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6235,8 +6234,8 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6246,8 +6245,8 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6257,8 +6256,8 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6275,26 +6274,26 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedReturnsReportRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGenerateUnitedReturnsReportRequest struct {
+	ctx                          context.Context
+	ExpressService               *ExpressAPIService
 	generateUnitedReturnsRequest *GenerateUnitedReturnsRequest
-	format *ReportFormatType
+	format                       *ReportFormatType
 }
 
-func (r ApiGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) ApiGenerateUnitedReturnsReportRequest {
+func (r ExpressGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) ExpressGenerateUnitedReturnsReportRequest {
 	r.generateUnitedReturnsRequest = &generateUnitedReturnsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) ApiGenerateUnitedReturnsReportRequest {
+func (r ExpressGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) ExpressGenerateUnitedReturnsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedReturnsReportExecute(r)
+func (r ExpressGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ExpressService.GenerateUnitedReturnsReportExecute(r)
 }
 
 /*
@@ -6313,25 +6312,25 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedReturnsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGenerateUnitedReturnsReportRequest
 */
-func (a *ExpressAPIService) GenerateUnitedReturnsReport(ctx context.Context) ApiGenerateUnitedReturnsReportRequest {
-	return ApiGenerateUnitedReturnsReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GenerateUnitedReturnsReport(ctx context.Context) ExpressGenerateUnitedReturnsReportRequest {
+	return ExpressGenerateUnitedReturnsReportRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ExpressGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GenerateUnitedReturnsReport")
@@ -6376,14 +6375,14 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -6416,8 +6415,8 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6427,8 +6426,8 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6438,8 +6437,8 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6449,8 +6448,8 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6460,8 +6459,8 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6478,13 +6477,13 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetAuthTokenInfoRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressExpressGetAuthTokenInfoRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
 }
 
-func (r ApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
-	return r.ApiService.GetAuthTokenInfoExecute(r)
+func (r ExpressExpressGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+	return r.ExpressService.GetAuthTokenInfoExecute(r)
 }
 
 /*
@@ -6492,9 +6491,7 @@ GetAuthTokenInfo Получение информации об авторизац
 
 {% include notitle [access](../../_auto/method_scopes/getAuthTokenInfo.md) %}
 
-{% note info "Метод доступен только для Api-Key-токена." %}
-
- 
+{% note info "Метод доступен только для Express-Key-токена." %}
 
 {% endnote %}
 
@@ -6503,25 +6500,25 @@ GetAuthTokenInfo Получение информации об авторизац
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAuthTokenInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressExpressGetAuthTokenInfoRequest
 */
-func (a *ExpressAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInfoRequest {
-	return ApiGetAuthTokenInfoRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GetAuthTokenInfo(ctx context.Context) ExpressExpressGetAuthTokenInfoRequest {
+	return ExpressExpressGetAuthTokenInfoRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetTokenInfoResponse
-func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+//
+//	@return GetTokenInfoResponse
+func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ExpressExpressGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetTokenInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetTokenInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetAuthTokenInfo")
@@ -6555,14 +6552,14 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -6595,8 +6592,8 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6606,8 +6603,8 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6617,8 +6614,8 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6628,8 +6625,8 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6639,8 +6636,8 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6657,35 +6654,35 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBidsInfoForBusinessRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+type ExpressGetBidsInfoForBusinessRequest struct {
+	ctx                context.Context
+	ExpressService     *ExpressAPIService
+	businessId         int64
+	pageToken          *string
+	limit              *int32
 	getBidsInfoRequest *GetBidsInfoRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetBidsInfoForBusinessRequest) PageToken(pageToken string) ApiGetBidsInfoForBusinessRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetBidsInfoForBusinessRequest) PageToken(pageToken string) ExpressGetBidsInfoForBusinessRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetBidsInfoForBusinessRequest) Limit(limit int32) ApiGetBidsInfoForBusinessRequest {
+// Количество значений на одной странице.
+func (r ExpressGetBidsInfoForBusinessRequest) Limit(limit int32) ExpressGetBidsInfoForBusinessRequest {
 	r.limit = &limit
 	return r
 }
 
 // description
-func (r ApiGetBidsInfoForBusinessRequest) GetBidsInfoRequest(getBidsInfoRequest GetBidsInfoRequest) ApiGetBidsInfoForBusinessRequest {
+func (r ExpressGetBidsInfoForBusinessRequest) GetBidsInfoRequest(getBidsInfoRequest GetBidsInfoRequest) ExpressGetBidsInfoForBusinessRequest {
 	r.getBidsInfoRequest = &getBidsInfoRequest
 	return r
 }
 
-func (r ApiGetBidsInfoForBusinessRequest) Execute() (*GetBidsInfoResponse, *http.Response, error) {
-	return r.ApiService.GetBidsInfoForBusinessExecute(r)
+func (r ExpressGetBidsInfoForBusinessRequest) Execute() (*GetBidsInfoResponse, *http.Response, error) {
+	return r.ExpressService.GetBidsInfoForBusinessExecute(r)
 }
 
 /*
@@ -6706,27 +6703,27 @@ GetBidsInfoForBusiness Информация об установленных ст
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetBidsInfoForBusinessRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetBidsInfoForBusinessRequest
 */
-func (a *ExpressAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) ApiGetBidsInfoForBusinessRequest {
-	return ApiGetBidsInfoForBusinessRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) ExpressGetBidsInfoForBusinessRequest {
+	return ExpressGetBidsInfoForBusinessRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBidsInfoResponse
-func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusinessRequest) (*GetBidsInfoResponse, *http.Response, error) {
+//
+//	@return GetBidsInfoResponse
+func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ExpressGetBidsInfoForBusinessRequest) (*GetBidsInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBidsInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBidsInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetBidsInfoForBusiness")
@@ -6772,14 +6769,14 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBus
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -6812,8 +6809,8 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBus
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6823,8 +6820,8 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBus
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6834,8 +6831,8 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBus
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -6845,8 +6842,8 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBus
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6856,8 +6853,8 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBus
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6867,8 +6864,8 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBus
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6885,21 +6882,21 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBus
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBidsRecommendationsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetBidsRecommendationsRequest struct {
+	ctx                           context.Context
+	ExpressService                *ExpressAPIService
+	businessId                    int64
 	getBidsRecommendationsRequest *GetBidsRecommendationsRequest
 }
 
 // description.
-func (r ApiGetBidsRecommendationsRequest) GetBidsRecommendationsRequest(getBidsRecommendationsRequest GetBidsRecommendationsRequest) ApiGetBidsRecommendationsRequest {
+func (r ExpressGetBidsRecommendationsRequest) GetBidsRecommendationsRequest(getBidsRecommendationsRequest GetBidsRecommendationsRequest) ExpressGetBidsRecommendationsRequest {
 	r.getBidsRecommendationsRequest = &getBidsRecommendationsRequest
 	return r
 }
 
-func (r ApiGetBidsRecommendationsRequest) Execute() (*GetBidsRecommendationsResponse, *http.Response, error) {
-	return r.ApiService.GetBidsRecommendationsExecute(r)
+func (r ExpressGetBidsRecommendationsRequest) Execute() (*GetBidsRecommendationsResponse, *http.Response, error) {
+	return r.ExpressService.GetBidsRecommendationsExecute(r)
 }
 
 /*
@@ -6918,27 +6915,27 @@ GetBidsRecommendations Рекомендованные ставки для зад
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetBidsRecommendationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetBidsRecommendationsRequest
 */
-func (a *ExpressAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) ApiGetBidsRecommendationsRequest {
-	return ApiGetBidsRecommendationsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) ExpressGetBidsRecommendationsRequest {
+	return ExpressGetBidsRecommendationsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBidsRecommendationsResponse
-func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendationsRequest) (*GetBidsRecommendationsResponse, *http.Response, error) {
+//
+//	@return GetBidsRecommendationsResponse
+func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ExpressGetBidsRecommendationsRequest) (*GetBidsRecommendationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBidsRecommendationsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBidsRecommendationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetBidsRecommendations")
@@ -6981,14 +6978,14 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommenda
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -7021,8 +7018,8 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommenda
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7032,8 +7029,8 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommenda
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7043,8 +7040,8 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommenda
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -7054,8 +7051,8 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommenda
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7065,8 +7062,8 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommenda
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7076,8 +7073,8 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommenda
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7094,34 +7091,34 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommenda
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBusinessQuarantineOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetBusinessQuarantineOffersRequest struct {
+	ctx                        context.Context
+	ExpressService             *ExpressAPIService
+	businessId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
-	pageToken *string
-	limit *int32
+	pageToken                  *string
+	limit                      *int32
 }
 
-func (r ApiGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ApiGetBusinessQuarantineOffersRequest {
+func (r ExpressGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ExpressGetBusinessQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetBusinessQuarantineOffersRequest) PageToken(pageToken string) ApiGetBusinessQuarantineOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetBusinessQuarantineOffersRequest) PageToken(pageToken string) ExpressGetBusinessQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetBusinessQuarantineOffersRequest) Limit(limit int32) ApiGetBusinessQuarantineOffersRequest {
+// Количество значений на одной странице.
+func (r ExpressGetBusinessQuarantineOffersRequest) Limit(limit int32) ExpressGetBusinessQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
-	return r.ApiService.GetBusinessQuarantineOffersExecute(r)
+func (r ExpressGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+	return r.ExpressService.GetBusinessQuarantineOffersExecute(r)
 }
 
 /*
@@ -7146,27 +7143,27 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetBusinessQuarantineOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetBusinessQuarantineOffersRequest
 */
-func (a *ExpressAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) ApiGetBusinessQuarantineOffersRequest {
-	return ApiGetBusinessQuarantineOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) ExpressGetBusinessQuarantineOffersRequest {
+	return ExpressGetBusinessQuarantineOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetQuarantineOffersResponse
-func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+//
+//	@return GetQuarantineOffersResponse
+func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ExpressGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetQuarantineOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetQuarantineOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetBusinessQuarantineOffers")
@@ -7215,14 +7212,14 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQ
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -7255,8 +7252,8 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7266,8 +7263,8 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7277,8 +7274,8 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -7288,8 +7285,8 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7299,8 +7296,8 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7310,8 +7307,8 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7328,14 +7325,14 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBusinessSettingsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetBusinessSettingsRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	businessId     int64
 }
 
-func (r ApiGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
-	return r.ApiService.GetBusinessSettingsExecute(r)
+func (r ExpressGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
+	return r.ExpressService.GetBusinessSettingsExecute(r)
 }
 
 /*
@@ -7347,27 +7344,27 @@ GetBusinessSettings Настройки кабинета
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetBusinessSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetBusinessSettingsRequest
 */
-func (a *ExpressAPIService) GetBusinessSettings(ctx context.Context, businessId int64) ApiGetBusinessSettingsRequest {
-	return ApiGetBusinessSettingsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetBusinessSettings(ctx context.Context, businessId int64) ExpressGetBusinessSettingsRequest {
+	return ExpressGetBusinessSettingsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBusinessSettingsResponse
-func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
+//
+//	@return GetBusinessSettingsResponse
+func (a *ExpressAPIService) GetBusinessSettingsExecute(r ExpressGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBusinessSettingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBusinessSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetBusinessSettings")
@@ -7405,14 +7402,14 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -7445,8 +7442,8 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7456,8 +7453,8 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7467,8 +7464,8 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -7478,8 +7475,8 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7489,8 +7486,8 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7500,8 +7497,8 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7518,14 +7515,14 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetCampaignRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
 }
 
-func (r ApiGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignExecute(r)
+func (r ExpressGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
+	return r.ExpressService.GetCampaignExecute(r)
 }
 
 /*
@@ -7537,27 +7534,27 @@ GetCampaign Информация о магазине
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetCampaignRequest
 */
-func (a *ExpressAPIService) GetCampaign(ctx context.Context, campaignId int64) ApiGetCampaignRequest {
-	return ApiGetCampaignRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetCampaign(ctx context.Context, campaignId int64) ExpressGetCampaignRequest {
+	return ExpressGetCampaignRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignResponse
-func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
+//
+//	@return GetCampaignResponse
+func (a *ExpressAPIService) GetCampaignExecute(r ExpressGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCampaign")
@@ -7595,14 +7592,14 @@ func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCam
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -7635,8 +7632,8 @@ func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7646,8 +7643,8 @@ func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7657,8 +7654,8 @@ func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -7668,8 +7665,8 @@ func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7679,8 +7676,8 @@ func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7690,8 +7687,8 @@ func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCam
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7708,34 +7705,34 @@ func (a *ExpressAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCam
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetCampaignOffersRequest struct {
+	ctx                      context.Context
+	ExpressService           *ExpressAPIService
+	campaignId               int64
 	getCampaignOffersRequest *GetCampaignOffersRequest
-	pageToken *string
-	limit *int32
+	pageToken                *string
+	limit                    *int32
 }
 
-func (r ApiGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) ApiGetCampaignOffersRequest {
+func (r ExpressGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) ExpressGetCampaignOffersRequest {
 	r.getCampaignOffersRequest = &getCampaignOffersRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetCampaignOffersRequest) PageToken(pageToken string) ApiGetCampaignOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetCampaignOffersRequest) PageToken(pageToken string) ExpressGetCampaignOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetCampaignOffersRequest) Limit(limit int32) ApiGetCampaignOffersRequest {
+// Количество значений на одной странице.
+func (r ExpressGetCampaignOffersRequest) Limit(limit int32) ExpressGetCampaignOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignOffersExecute(r)
+func (r ExpressGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
+	return r.ExpressService.GetCampaignOffersExecute(r)
 }
 
 /*
@@ -7748,27 +7745,27 @@ GetCampaignOffers Информация о товарах, которые раз�
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetCampaignOffersRequest
 */
-func (a *ExpressAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) ApiGetCampaignOffersRequest {
-	return ApiGetCampaignOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) ExpressGetCampaignOffersRequest {
+	return ExpressGetCampaignOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignOffersResponse
-func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
+//
+//	@return GetCampaignOffersResponse
+func (a *ExpressAPIService) GetCampaignOffersExecute(r ExpressGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCampaignOffers")
@@ -7817,14 +7814,14 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -7857,8 +7854,8 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7868,8 +7865,8 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7879,8 +7876,8 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -7890,8 +7887,8 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7901,8 +7898,8 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7912,8 +7909,8 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7930,34 +7927,34 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignQuarantineOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetCampaignQuarantineOffersRequest struct {
+	ctx                        context.Context
+	ExpressService             *ExpressAPIService
+	campaignId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
-	pageToken *string
-	limit *int32
+	pageToken                  *string
+	limit                      *int32
 }
 
-func (r ApiGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ApiGetCampaignQuarantineOffersRequest {
+func (r ExpressGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ExpressGetCampaignQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetCampaignQuarantineOffersRequest) PageToken(pageToken string) ApiGetCampaignQuarantineOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetCampaignQuarantineOffersRequest) PageToken(pageToken string) ExpressGetCampaignQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetCampaignQuarantineOffersRequest) Limit(limit int32) ApiGetCampaignQuarantineOffersRequest {
+// Количество значений на одной странице.
+func (r ExpressGetCampaignQuarantineOffersRequest) Limit(limit int32) ExpressGetCampaignQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignQuarantineOffersExecute(r)
+func (r ExpressGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+	return r.ExpressService.GetCampaignQuarantineOffersExecute(r)
 }
 
 /*
@@ -7982,27 +7979,27 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignQuarantineOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetCampaignQuarantineOffersRequest
 */
-func (a *ExpressAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) ApiGetCampaignQuarantineOffersRequest {
-	return ApiGetCampaignQuarantineOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) ExpressGetCampaignQuarantineOffersRequest {
+	return ExpressGetCampaignQuarantineOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetQuarantineOffersResponse
-func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+//
+//	@return GetQuarantineOffersResponse
+func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ExpressGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetQuarantineOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetQuarantineOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCampaignQuarantineOffers")
@@ -8051,14 +8048,14 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQ
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -8091,8 +8088,8 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8102,8 +8099,8 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8113,8 +8110,8 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -8124,8 +8121,8 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8135,8 +8132,8 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8146,8 +8143,8 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQ
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8164,14 +8161,14 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignRegionRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetCampaignRegionRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
 }
 
-func (r ApiGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignRegionExecute(r)
+func (r ExpressGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
+	return r.ExpressService.GetCampaignRegionExecute(r)
 }
 
 /*
@@ -8189,30 +8186,31 @@ GetCampaignRegion Регион магазина
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetCampaignRegionRequest
 
 Deprecated
 */
-func (a *ExpressAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) ApiGetCampaignRegionRequest {
-	return ApiGetCampaignRegionRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) ExpressGetCampaignRegionRequest {
+	return ExpressGetCampaignRegionRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignRegionResponse
+//
+//	@return GetCampaignRegionResponse
+//
 // Deprecated
-func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
+func (a *ExpressAPIService) GetCampaignRegionExecute(r ExpressGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignRegionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignRegionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCampaignRegion")
@@ -8250,14 +8248,14 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -8290,8 +8288,8 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8301,8 +8299,8 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8312,8 +8310,8 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -8323,8 +8321,8 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8334,8 +8332,8 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8345,8 +8343,8 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8363,14 +8361,14 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignSettingsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetCampaignSettingsRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
 }
 
-func (r ApiGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignSettingsExecute(r)
+func (r ExpressGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
+	return r.ExpressService.GetCampaignSettingsExecute(r)
 }
 
 /*
@@ -8382,27 +8380,27 @@ GetCampaignSettings Настройки магазина
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetCampaignSettingsRequest
 */
-func (a *ExpressAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) ApiGetCampaignSettingsRequest {
-	return ApiGetCampaignSettingsRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) ExpressGetCampaignSettingsRequest {
+	return ExpressGetCampaignSettingsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignSettingsResponse
-func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
+//
+//	@return GetCampaignSettingsResponse
+func (a *ExpressAPIService) GetCampaignSettingsExecute(r ExpressGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignSettingsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCampaignSettings")
@@ -8440,14 +8438,14 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -8480,8 +8478,8 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8491,8 +8489,8 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8502,8 +8500,8 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -8513,8 +8511,8 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8524,8 +8522,8 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8535,8 +8533,8 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8553,27 +8551,27 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	page *int32
-	pageSize *int32
+type ExpressGetCampaignsRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	page           *int32
+	pageSize       *int32
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiGetCampaignsRequest) Page(page int32) ApiGetCampaignsRequest {
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r ExpressGetCampaignsRequest) Page(page int32) ExpressGetCampaignsRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiGetCampaignsRequest) PageSize(pageSize int32) ApiGetCampaignsRequest {
+// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r ExpressGetCampaignsRequest) PageSize(pageSize int32) ExpressGetCampaignsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignsExecute(r)
+func (r ExpressGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
+	return r.ExpressService.GetCampaignsExecute(r)
 }
 
 /*
@@ -8581,32 +8579,32 @@ GetCampaigns Список магазинов пользователя
 
 {% include notitle [access](../../_auto/method_scopes/getCampaigns.md) %}
 
-**Для Api-Key-токена:** возвращает список магазинов в кабинете, для которого выдан токен. Нельзя получить список только подагентских магазинов.
+**Для Express-Key-токена:** возвращает список магазинов в кабинете, для которого выдан токен. Нельзя получить список только подагентских магазинов.
 
 **Для OAuth-токена:** возвращает список магазинов, к которым имеет доступ пользователь — владелец авторизационного токена, использованного в запросе. Для агентских пользователей список состоит из подагентских магазинов.
 
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCampaignsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGetCampaignsRequest
 */
-func (a *ExpressAPIService) GetCampaigns(ctx context.Context) ApiGetCampaignsRequest {
-	return ApiGetCampaignsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GetCampaigns(ctx context.Context) ExpressGetCampaignsRequest {
+	return ExpressGetCampaignsRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignsResponse
-func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
+//
+//	@return GetCampaignsResponse
+func (a *ExpressAPIService) GetCampaignsExecute(r ExpressGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCampaigns")
@@ -8649,14 +8647,14 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetC
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -8689,8 +8687,8 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8700,8 +8698,8 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8711,8 +8709,8 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -8722,8 +8720,8 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8733,8 +8731,8 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8744,8 +8742,8 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8762,19 +8760,19 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoriesMaxSaleQuantumRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGetCategoriesMaxSaleQuantumRequest struct {
+	ctx                                context.Context
+	ExpressService                     *ExpressAPIService
 	getCategoriesMaxSaleQuantumRequest *GetCategoriesMaxSaleQuantumRequest
 }
 
-func (r ApiGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) ApiGetCategoriesMaxSaleQuantumRequest {
+func (r ExpressGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) ExpressGetCategoriesMaxSaleQuantumRequest {
 	r.getCategoriesMaxSaleQuantumRequest = &getCategoriesMaxSaleQuantumRequest
 	return r
 }
 
-func (r ApiGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
-	return r.ApiService.GetCategoriesMaxSaleQuantumExecute(r)
+func (r ExpressGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+	return r.ExpressService.GetCategoriesMaxSaleQuantumExecute(r)
 }
 
 /*
@@ -8791,25 +8789,25 @@ GetCategoriesMaxSaleQuantum Лимит на установку кванта пр
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCategoriesMaxSaleQuantumRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGetCategoriesMaxSaleQuantumRequest
 */
-func (a *ExpressAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) ApiGetCategoriesMaxSaleQuantumRequest {
-	return ApiGetCategoriesMaxSaleQuantumRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) ExpressGetCategoriesMaxSaleQuantumRequest {
+	return ExpressGetCategoriesMaxSaleQuantumRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCategoriesMaxSaleQuantumResponse
-func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+//
+//	@return GetCategoriesMaxSaleQuantumResponse
+func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ExpressGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCategoriesMaxSaleQuantumResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCategoriesMaxSaleQuantumResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCategoriesMaxSaleQuantum")
@@ -8848,14 +8846,14 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategorie
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -8888,8 +8886,8 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategorie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8899,8 +8897,8 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategorie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8910,8 +8908,8 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategorie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -8921,8 +8919,8 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategorie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8932,8 +8930,8 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategorie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8943,8 +8941,8 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategorie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8961,19 +8959,19 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategorie
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoriesTreeRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGetCategoriesTreeRequest struct {
+	ctx                  context.Context
+	ExpressService       *ExpressAPIService
 	getCategoriesRequest *GetCategoriesRequest
 }
 
-func (r ApiGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) ApiGetCategoriesTreeRequest {
+func (r ExpressGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) ExpressGetCategoriesTreeRequest {
 	r.getCategoriesRequest = &getCategoriesRequest
 	return r
 }
 
-func (r ApiGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
-	return r.ApiService.GetCategoriesTreeExecute(r)
+func (r ExpressGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
+	return r.ExpressService.GetCategoriesTreeExecute(r)
 }
 
 /*
@@ -8986,25 +8984,25 @@ GetCategoriesTree Дерево категорий
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCategoriesTreeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGetCategoriesTreeRequest
 */
-func (a *ExpressAPIService) GetCategoriesTree(ctx context.Context) ApiGetCategoriesTreeRequest {
-	return ApiGetCategoriesTreeRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GetCategoriesTree(ctx context.Context) ExpressGetCategoriesTreeRequest {
+	return ExpressGetCategoriesTreeRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCategoriesResponse
-func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
+//
+//	@return GetCategoriesResponse
+func (a *ExpressAPIService) GetCategoriesTreeExecute(r ExpressGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCategoriesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCategoriesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCategoriesTree")
@@ -9040,14 +9038,14 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -9080,8 +9078,8 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9091,8 +9089,8 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9102,8 +9100,8 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9113,8 +9111,8 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9124,8 +9122,8 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -9135,8 +9133,8 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9153,14 +9151,14 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoryContentParametersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	categoryId int64
+type ExpressGetCategoryContentParametersRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	categoryId     int64
 }
 
-func (r ApiGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
-	return r.ApiService.GetCategoryContentParametersExecute(r)
+func (r ExpressGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
+	return r.ExpressService.GetCategoryContentParametersExecute(r)
 }
 
 /*
@@ -9173,27 +9171,27 @@ GetCategoryContentParameters Списки характеристик товар�
 |**⚙️ Лимит:** 100 категорий в минуту |
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md). 
- @return ApiGetCategoryContentParametersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
+	@return ExpressGetCategoryContentParametersRequest
 */
-func (a *ExpressAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) ApiGetCategoryContentParametersRequest {
-	return ApiGetCategoryContentParametersRequest{
-		ApiService: a,
-		ctx: ctx,
-		categoryId: categoryId,
+func (a *ExpressAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) ExpressGetCategoryContentParametersRequest {
+	return ExpressGetCategoryContentParametersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		categoryId:     categoryId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCategoryContentParametersResponse
-func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
+//
+//	@return GetCategoryContentParametersResponse
+func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ExpressGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCategoryContentParametersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCategoryContentParametersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetCategoryContentParameters")
@@ -9231,14 +9229,14 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -9271,8 +9269,8 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9282,8 +9280,8 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9293,8 +9291,8 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9304,8 +9302,8 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9315,8 +9313,8 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -9326,8 +9324,8 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9344,21 +9342,21 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	chatId *int64
+type ExpressExpressGetChatRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	businessId     int64
+	chatId         *int64
 }
 
 // Идентификатор чата.
-func (r ApiGetChatRequest) ChatId(chatId int64) ApiGetChatRequest {
+func (r ExpressExpressGetChatRequest) ChatId(chatId int64) ExpressExpressGetChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
-func (r ApiGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
-	return r.ApiService.GetChatExecute(r)
+func (r ExpressExpressGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
+	return r.ExpressService.GetChatExecute(r)
 }
 
 /*
@@ -9379,27 +9377,27 @@ GetChat Получение чата по идентификатору
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressExpressGetChatRequest
 */
-func (a *ExpressAPIService) GetChat(ctx context.Context, businessId int64) ApiGetChatRequest {
-	return ApiGetChatRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetChat(ctx context.Context, businessId int64) ExpressExpressGetChatRequest {
+	return ExpressExpressGetChatRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetChatResponse
-func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *http.Response, error) {
+//
+//	@return GetChatResponse
+func (a *ExpressAPIService) GetChatExecute(r ExpressExpressGetChatRequest) (*GetChatResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetChatResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetChatResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetChat")
@@ -9444,14 +9442,14 @@ func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatRespons
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -9484,8 +9482,8 @@ func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatRespons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9495,8 +9493,8 @@ func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatRespons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9506,8 +9504,8 @@ func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatRespons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9517,8 +9515,8 @@ func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatRespons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9528,8 +9526,8 @@ func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatRespons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -9539,8 +9537,8 @@ func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatRespons
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9557,42 +9555,42 @@ func (a *ExpressAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatRespons
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatHistoryRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	chatId *int64
+type ExpressExpressGetChatHistoryRequest struct {
+	ctx                   context.Context
+	ExpressService        *ExpressAPIService
+	businessId            int64
+	chatId                *int64
 	getChatHistoryRequest *GetChatHistoryRequest
-	pageToken *string
-	limit *int32
+	pageToken             *string
+	limit                 *int32
 }
 
 // Идентификатор чата.
-func (r ApiGetChatHistoryRequest) ChatId(chatId int64) ApiGetChatHistoryRequest {
+func (r ExpressExpressGetChatHistoryRequest) ChatId(chatId int64) ExpressExpressGetChatHistoryRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r ApiGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) ApiGetChatHistoryRequest {
+func (r ExpressExpressGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) ExpressExpressGetChatHistoryRequest {
 	r.getChatHistoryRequest = &getChatHistoryRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetChatHistoryRequest) PageToken(pageToken string) ApiGetChatHistoryRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressExpressGetChatHistoryRequest) PageToken(pageToken string) ExpressExpressGetChatHistoryRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetChatHistoryRequest) Limit(limit int32) ApiGetChatHistoryRequest {
+// Количество значений на одной странице.
+func (r ExpressExpressGetChatHistoryRequest) Limit(limit int32) ExpressExpressGetChatHistoryRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
-	return r.ApiService.GetChatHistoryExecute(r)
+func (r ExpressExpressGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
+	return r.ExpressService.GetChatHistoryExecute(r)
 }
 
 /*
@@ -9605,27 +9603,27 @@ GetChatHistory Получение истории сообщений в чате
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetChatHistoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressExpressGetChatHistoryRequest
 */
-func (a *ExpressAPIService) GetChatHistory(ctx context.Context, businessId int64) ApiGetChatHistoryRequest {
-	return ApiGetChatHistoryRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetChatHistory(ctx context.Context, businessId int64) ExpressExpressGetChatHistoryRequest {
+	return ExpressExpressGetChatHistoryRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetChatHistoryResponse
-func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
+//
+//	@return GetChatHistoryResponse
+func (a *ExpressAPIService) GetChatHistoryExecute(r ExpressExpressGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetChatHistoryResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetChatHistoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetChatHistory")
@@ -9681,14 +9679,14 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -9721,8 +9719,8 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9732,8 +9730,8 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9743,8 +9741,8 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9754,8 +9752,8 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9765,8 +9763,8 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -9776,8 +9774,8 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9794,28 +9792,28 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatMessageRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	chatId *int64
-	messageId *int64
+type ExpressExpressGetChatMessageRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	businessId     int64
+	chatId         *int64
+	messageId      *int64
 }
 
 // Идентификатор чата.
-func (r ApiGetChatMessageRequest) ChatId(chatId int64) ApiGetChatMessageRequest {
+func (r ExpressExpressGetChatMessageRequest) ChatId(chatId int64) ExpressExpressGetChatMessageRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Идентификатор сообщения.
-func (r ApiGetChatMessageRequest) MessageId(messageId int64) ApiGetChatMessageRequest {
+func (r ExpressExpressGetChatMessageRequest) MessageId(messageId int64) ExpressExpressGetChatMessageRequest {
 	r.messageId = &messageId
 	return r
 }
 
-func (r ApiGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
-	return r.ApiService.GetChatMessageExecute(r)
+func (r ExpressExpressGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
+	return r.ExpressService.GetChatMessageExecute(r)
 }
 
 /*
@@ -9836,27 +9834,27 @@ GetChatMessage Получение сообщения в чате
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetChatMessageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressExpressGetChatMessageRequest
 */
-func (a *ExpressAPIService) GetChatMessage(ctx context.Context, businessId int64) ApiGetChatMessageRequest {
-	return ApiGetChatMessageRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetChatMessage(ctx context.Context, businessId int64) ExpressExpressGetChatMessageRequest {
+	return ExpressExpressGetChatMessageRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetChatMessageResponse
-func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
+//
+//	@return GetChatMessageResponse
+func (a *ExpressAPIService) GetChatMessageExecute(r ExpressExpressGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetChatMessageResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetChatMessageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetChatMessage")
@@ -9908,14 +9906,14 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -9948,8 +9946,8 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9959,8 +9957,8 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9970,8 +9968,8 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9981,8 +9979,8 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9992,8 +9990,8 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10003,8 +10001,8 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10021,35 +10019,35 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressExpressGetChatsRequest struct {
+	ctx             context.Context
+	ExpressService  *ExpressAPIService
+	businessId      int64
 	getChatsRequest *GetChatsRequest
-	pageToken *string
-	limit *int32
+	pageToken       *string
+	limit           *int32
 }
 
 // description
-func (r ApiGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) ApiGetChatsRequest {
+func (r ExpressExpressGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) ExpressExpressGetChatsRequest {
 	r.getChatsRequest = &getChatsRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetChatsRequest) PageToken(pageToken string) ApiGetChatsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressExpressGetChatsRequest) PageToken(pageToken string) ExpressExpressGetChatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetChatsRequest) Limit(limit int32) ApiGetChatsRequest {
+// Количество значений на одной странице.
+func (r ExpressExpressGetChatsRequest) Limit(limit int32) ExpressExpressGetChatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
-	return r.ApiService.GetChatsExecute(r)
+func (r ExpressExpressGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
+	return r.ExpressService.GetChatsExecute(r)
 }
 
 /*
@@ -10070,27 +10068,27 @@ GetChats Получение доступных чатов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetChatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressExpressGetChatsRequest
 */
-func (a *ExpressAPIService) GetChats(ctx context.Context, businessId int64) ApiGetChatsRequest {
-	return ApiGetChatsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetChats(ctx context.Context, businessId int64) ExpressExpressGetChatsRequest {
+	return ExpressExpressGetChatsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetChatsResponse
-func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
+//
+//	@return GetChatsResponse
+func (a *ExpressAPIService) GetChatsExecute(r ExpressExpressGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetChatsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetChatsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetChats")
@@ -10139,14 +10137,14 @@ func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResp
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -10179,8 +10177,8 @@ func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10190,8 +10188,8 @@ func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10201,8 +10199,8 @@ func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10212,8 +10210,8 @@ func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10223,8 +10221,8 @@ func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10234,8 +10232,8 @@ func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10252,13 +10250,13 @@ func (a *ExpressAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetDeliveryServicesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGetDeliveryServicesRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
 }
 
-func (r ApiGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
-	return r.ApiService.GetDeliveryServicesExecute(r)
+func (r ExpressGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
+	return r.ExpressService.GetDeliveryServicesExecute(r)
 }
 
 /*
@@ -10270,25 +10268,25 @@ GetDeliveryServices Справочник служб доставки
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetDeliveryServicesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGetDeliveryServicesRequest
 */
-func (a *ExpressAPIService) GetDeliveryServices(ctx context.Context) ApiGetDeliveryServicesRequest {
-	return ApiGetDeliveryServicesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GetDeliveryServices(ctx context.Context) ExpressGetDeliveryServicesRequest {
+	return ExpressGetDeliveryServicesRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetDeliveryServicesResponse
-func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
+//
+//	@return GetDeliveryServicesResponse
+func (a *ExpressAPIService) GetDeliveryServicesExecute(r ExpressGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDeliveryServicesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDeliveryServicesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetDeliveryServices")
@@ -10322,14 +10320,14 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -10362,8 +10360,8 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10373,8 +10371,8 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10384,8 +10382,8 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10395,8 +10393,8 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10406,8 +10404,8 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10417,8 +10415,8 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10435,34 +10433,34 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsFeedbackCommentsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetGoodsFeedbackCommentsRequest struct {
+	ctx                             context.Context
+	ExpressService                  *ExpressAPIService
+	businessId                      int64
 	getGoodsFeedbackCommentsRequest *GetGoodsFeedbackCommentsRequest
-	pageToken *string
-	limit *int32
+	pageToken                       *string
+	limit                           *int32
 }
 
-func (r ApiGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) ApiGetGoodsFeedbackCommentsRequest {
+func (r ExpressGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) ExpressGetGoodsFeedbackCommentsRequest {
 	r.getGoodsFeedbackCommentsRequest = &getGoodsFeedbackCommentsRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) ApiGetGoodsFeedbackCommentsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) ExpressGetGoodsFeedbackCommentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetGoodsFeedbackCommentsRequest) Limit(limit int32) ApiGetGoodsFeedbackCommentsRequest {
+// Количество значений на одной странице.
+func (r ExpressGetGoodsFeedbackCommentsRequest) Limit(limit int32) ExpressGetGoodsFeedbackCommentsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsFeedbackCommentsExecute(r)
+func (r ExpressGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
+	return r.ExpressService.GetGoodsFeedbackCommentsExecute(r)
 }
 
 /*
@@ -10472,8 +10470,8 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 Возвращает комментарии к отзыву, кроме:
 
-  * тех, которые удалили пользователи или Маркет;
-  * комментариев к удаленным отзывам.
+  - тех, которые удалили пользователи или Маркет;
+  - комментариев к удаленным отзывам.
 
 {% note tip "Вы также можете настроить API-уведомления" %}
 
@@ -10490,27 +10488,27 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetGoodsFeedbackCommentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetGoodsFeedbackCommentsRequest
 */
-func (a *ExpressAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) ApiGetGoodsFeedbackCommentsRequest {
-	return ApiGetGoodsFeedbackCommentsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) ExpressGetGoodsFeedbackCommentsRequest {
+	return ExpressGetGoodsFeedbackCommentsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGoodsFeedbackCommentsResponse
-func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
+//
+//	@return GetGoodsFeedbackCommentsResponse
+func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ExpressGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGoodsFeedbackCommentsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsFeedbackCommentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetGoodsFeedbackComments")
@@ -10559,14 +10557,14 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbac
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -10599,8 +10597,8 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbac
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10610,8 +10608,8 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbac
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10621,8 +10619,8 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbac
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10632,8 +10630,8 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbac
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10643,8 +10641,8 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbac
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10654,8 +10652,8 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbac
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10672,34 +10670,34 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbac
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsFeedbacksRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+type ExpressGetGoodsFeedbacksRequest struct {
+	ctx                     context.Context
+	ExpressService          *ExpressAPIService
+	businessId              int64
+	pageToken               *string
+	limit                   *int32
 	getGoodsFeedbackRequest *GetGoodsFeedbackRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetGoodsFeedbacksRequest) PageToken(pageToken string) ApiGetGoodsFeedbacksRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetGoodsFeedbacksRequest) PageToken(pageToken string) ExpressGetGoodsFeedbacksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetGoodsFeedbacksRequest) Limit(limit int32) ApiGetGoodsFeedbacksRequest {
+// Количество значений на одной странице.
+func (r ExpressGetGoodsFeedbacksRequest) Limit(limit int32) ExpressGetGoodsFeedbacksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetGoodsFeedbacksRequest) GetGoodsFeedbackRequest(getGoodsFeedbackRequest GetGoodsFeedbackRequest) ApiGetGoodsFeedbacksRequest {
+func (r ExpressGetGoodsFeedbacksRequest) GetGoodsFeedbackRequest(getGoodsFeedbackRequest GetGoodsFeedbackRequest) ExpressGetGoodsFeedbacksRequest {
 	r.getGoodsFeedbackRequest = &getGoodsFeedbackRequest
 	return r
 }
 
-func (r ApiGetGoodsFeedbacksRequest) Execute() (*GetGoodsFeedbackResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsFeedbacksExecute(r)
+func (r ExpressGetGoodsFeedbacksRequest) Execute() (*GetGoodsFeedbackResponse, *http.Response, error) {
+	return r.ExpressService.GetGoodsFeedbacksExecute(r)
 }
 
 /*
@@ -10724,27 +10722,27 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetGoodsFeedbacksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetGoodsFeedbacksRequest
 */
-func (a *ExpressAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) ApiGetGoodsFeedbacksRequest {
-	return ApiGetGoodsFeedbacksRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) ExpressGetGoodsFeedbacksRequest {
+	return ExpressGetGoodsFeedbacksRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGoodsFeedbackResponse
-func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
+//
+//	@return GetGoodsFeedbackResponse
+func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ExpressGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGoodsFeedbackResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsFeedbackResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetGoodsFeedbacks")
@@ -10790,14 +10788,14 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -10830,8 +10828,8 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10841,8 +10839,8 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10852,8 +10850,8 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10863,8 +10861,8 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10874,8 +10872,8 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10885,8 +10883,8 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10903,20 +10901,20 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsStatsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetGoodsStatsRequest struct {
+	ctx                  context.Context
+	ExpressService       *ExpressAPIService
+	campaignId           int64
 	getGoodsStatsRequest *GetGoodsStatsRequest
 }
 
-func (r ApiGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) ApiGetGoodsStatsRequest {
+func (r ExpressGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) ExpressGetGoodsStatsRequest {
 	r.getGoodsStatsRequest = &getGoodsStatsRequest
 	return r
 }
 
-func (r ApiGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsStatsExecute(r)
+func (r ExpressGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
+	return r.ExpressService.GetGoodsStatsExecute(r)
 }
 
 /*
@@ -10929,27 +10927,27 @@ GetGoodsStats Отчет по товарам
 |**⚙️ Лимит:** 5 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetGoodsStatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetGoodsStatsRequest
 */
-func (a *ExpressAPIService) GetGoodsStats(ctx context.Context, campaignId int64) ApiGetGoodsStatsRequest {
-	return ApiGetGoodsStatsRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetGoodsStats(ctx context.Context, campaignId int64) ExpressGetGoodsStatsRequest {
+	return ExpressGetGoodsStatsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGoodsStatsResponse
-func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
+//
+//	@return GetGoodsStatsResponse
+func (a *ExpressAPIService) GetGoodsStatsExecute(r ExpressGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGoodsStatsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsStatsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetGoodsStats")
@@ -10992,14 +10990,14 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*Ge
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -11032,8 +11030,8 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -11043,8 +11041,8 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -11054,8 +11052,8 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -11065,8 +11063,8 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -11076,8 +11074,8 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11087,8 +11085,8 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11105,35 +11103,35 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetHiddenOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	offerId *[]string
-	pageToken *string
-	limit *int32
+type ExpressGetHiddenOffersRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	offerId        *[]string
+	pageToken      *string
+	limit          *int32
 }
 
-// Идентификатор скрытого предложения. 
-func (r ApiGetHiddenOffersRequest) OfferId(offerId []string) ApiGetHiddenOffersRequest {
+// Идентификатор скрытого предложения.
+func (r ExpressGetHiddenOffersRequest) OfferId(offerId []string) ExpressGetHiddenOffersRequest {
 	r.offerId = &offerId
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetHiddenOffersRequest) PageToken(pageToken string) ApiGetHiddenOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetHiddenOffersRequest) PageToken(pageToken string) ExpressGetHiddenOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetHiddenOffersRequest) Limit(limit int32) ApiGetHiddenOffersRequest {
+// Количество значений на одной странице.
+func (r ExpressGetHiddenOffersRequest) Limit(limit int32) ExpressGetHiddenOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetHiddenOffersRequest) Execute() (*GetHiddenOffersResponse, *http.Response, error) {
-	return r.ApiService.GetHiddenOffersExecute(r)
+func (r ExpressGetHiddenOffersRequest) Execute() (*GetHiddenOffersResponse, *http.Response, error) {
+	return r.ExpressService.GetHiddenOffersExecute(r)
 }
 
 /*
@@ -11148,27 +11146,27 @@ GetHiddenOffers Информация о скрытых вами товарах
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetHiddenOffersRequest
 */
-func (a *ExpressAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) ApiGetHiddenOffersRequest {
-	return ApiGetHiddenOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) ExpressGetHiddenOffersRequest {
+	return ExpressGetHiddenOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetHiddenOffersResponse
-func (a *ExpressAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
+//
+//	@return GetHiddenOffersResponse
+func (a *ExpressAPIService) GetHiddenOffersExecute(r ExpressGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetHiddenOffersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetHiddenOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetHiddenOffers")
@@ -11215,14 +11213,14 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -11255,8 +11253,8 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -11266,8 +11264,8 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -11277,8 +11275,8 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -11288,8 +11286,8 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11299,8 +11297,8 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11317,34 +11315,34 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferCardsContentStatusRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+type ExpressGetOfferCardsContentStatusRequest struct {
+	ctx                               context.Context
+	ExpressService                    *ExpressAPIService
+	businessId                        int64
+	pageToken                         *string
+	limit                             *int32
 	getOfferCardsContentStatusRequest *GetOfferCardsContentStatusRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOfferCardsContentStatusRequest) PageToken(pageToken string) ApiGetOfferCardsContentStatusRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetOfferCardsContentStatusRequest) PageToken(pageToken string) ExpressGetOfferCardsContentStatusRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOfferCardsContentStatusRequest) Limit(limit int32) ApiGetOfferCardsContentStatusRequest {
+// Количество значений на одной странице.
+func (r ExpressGetOfferCardsContentStatusRequest) Limit(limit int32) ExpressGetOfferCardsContentStatusRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) ApiGetOfferCardsContentStatusRequest {
+func (r ExpressGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) ExpressGetOfferCardsContentStatusRequest {
 	r.getOfferCardsContentStatusRequest = &getOfferCardsContentStatusRequest
 	return r
 }
 
-func (r ApiGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
-	return r.ApiService.GetOfferCardsContentStatusExecute(r)
+func (r ExpressGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+	return r.ExpressService.GetOfferCardsContentStatusExecute(r)
 }
 
 /*
@@ -11363,27 +11361,27 @@ GetOfferCardsContentStatus Получение информации о запол
 |**⚙️ Лимит:** 600 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetOfferCardsContentStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetOfferCardsContentStatusRequest
 */
-func (a *ExpressAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) ApiGetOfferCardsContentStatusRequest {
-	return ApiGetOfferCardsContentStatusRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) ExpressGetOfferCardsContentStatusRequest {
+	return ExpressGetOfferCardsContentStatusRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOfferCardsContentStatusResponse
-func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+//
+//	@return GetOfferCardsContentStatusResponse
+func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ExpressGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOfferCardsContentStatusResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOfferCardsContentStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOfferCardsContentStatus")
@@ -11429,14 +11427,14 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -11469,8 +11467,8 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -11480,8 +11478,8 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -11491,8 +11489,8 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -11502,8 +11500,8 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -11513,8 +11511,8 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11524,8 +11522,8 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11542,77 +11540,77 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferMappingEntriesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	offerId *[]string
-	shopSku *[]string
-	mappingKind *OfferMappingKindType
-	status *[]OfferProcessingStatusType
-	availability *[]OfferAvailabilityStatusType
-	categoryId *[]int32
-	vendor *[]string
-	pageToken *string
-	limit *int32
+type ExpressGetOfferMappingEntriesRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	offerId        *[]string
+	shopSku        *[]string
+	mappingKind    *OfferMappingKindType
+	status         *[]OfferProcessingStatusType
+	availability   *[]OfferAvailabilityStatusType
+	categoryId     *[]int32
+	vendor         *[]string
+	pageToken      *string
+	limit          *int32
 }
 
 // Идентификатор товара в каталоге.
-func (r ApiGetOfferMappingEntriesRequest) OfferId(offerId []string) ApiGetOfferMappingEntriesRequest {
+func (r ExpressGetOfferMappingEntriesRequest) OfferId(offerId []string) ExpressGetOfferMappingEntriesRequest {
 	r.offerId = &offerId
 	return r
 }
 
-// Ваш SKU товара.  Параметр может быть указан несколько раз, например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...shop_sku&#x3D;123&amp;shop_sku&#x3D;129&amp;shop_sku&#x3D;141... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) ShopSku(shopSku []string) ApiGetOfferMappingEntriesRequest {
+// Ваш SKU товара.  Параметр может быть указан несколько раз, например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...shop_sku&#x3D;123&amp;shop_sku&#x3D;129&amp;shop_sku&#x3D;141... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
+func (r ExpressGetOfferMappingEntriesRequest) ShopSku(shopSku []string) ExpressGetOfferMappingEntriesRequest {
 	r.shopSku = &shopSku
 	return r
 }
 
 // Тип маппинга.
-func (r ApiGetOfferMappingEntriesRequest) MappingKind(mappingKind OfferMappingKindType) ApiGetOfferMappingEntriesRequest {
+func (r ExpressGetOfferMappingEntriesRequest) MappingKind(mappingKind OfferMappingKindType) ExpressGetOfferMappingEntriesRequest {
 	r.mappingKind = &mappingKind
 	return r
 }
 
-// Фильтрация по статусу публикации товара:  * &#x60;READY&#x60; — товар прошел модерацию. * &#x60;IN_WORK&#x60; — товар проходит модерацию. * &#x60;NEED_CONTENT&#x60; — для товара без SKU на Маркете marketSku нужно найти карточку самостоятельно или создать ее. * &#x60;NEED_INFO&#x60; — товар не прошел модерацию из-за ошибок или недостающих сведений в описании товара. * &#x60;REJECTED&#x60; — товар не прошел модерацию, так как Маркет не планирует размещать подобные товары. * &#x60;SUSPENDED&#x60; — товар не прошел модерацию, так как Маркет пока не размещает подобные товары. * &#x60;OTHER&#x60; — товар не прошел модерацию по другой причине.  Можно указать несколько статусов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...status&#x3D;READY,IN_WORK... ...status&#x3D;READY&amp;status&#x3D;IN_WORK... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) Status(status []OfferProcessingStatusType) ApiGetOfferMappingEntriesRequest {
+// Фильтрация по статусу публикации товара:  * &#x60;READY&#x60; — товар прошел модерацию. * &#x60;IN_WORK&#x60; — товар проходит модерацию. * &#x60;NEED_CONTENT&#x60; — для товара без SKU на Маркете marketSku нужно найти карточку самостоятельно или создать ее. * &#x60;NEED_INFO&#x60; — товар не прошел модерацию из-за ошибок или недостающих сведений в описании товара. * &#x60;REJECTED&#x60; — товар не прошел модерацию, так как Маркет не планирует размещать подобные товары. * &#x60;SUSPENDED&#x60; — товар не прошел модерацию, так как Маркет пока не размещает подобные товары. * &#x60;OTHER&#x60; — товар не прошел модерацию по другой причине.  Можно указать несколько статусов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...status&#x3D;READY,IN_WORK... ...status&#x3D;READY&amp;status&#x3D;IN_WORK... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
+func (r ExpressGetOfferMappingEntriesRequest) Status(status []OfferProcessingStatusType) ExpressGetOfferMappingEntriesRequest {
 	r.status = &status
 	return r
 }
 
-// Фильтрация по планам поставок товара:  * &#x60;ACTIVE&#x60; — поставки будут. * &#x60;INACTIVE&#x60; — поставок не будет: товар есть на складе, но вы больше не планируете его поставлять. * &#x60;DELISTED&#x60; — архив: товар закончился на складе, и его поставок больше не будет.  Можно указать несколько значений в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...availability&#x3D;INACTIVE,DELISTED... ...availability&#x3D;INACTIVE&amp;availability&#x3D;DELISTED... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) Availability(availability []OfferAvailabilityStatusType) ApiGetOfferMappingEntriesRequest {
+// Фильтрация по планам поставок товара:  * &#x60;ACTIVE&#x60; — поставки будут. * &#x60;INACTIVE&#x60; — поставок не будет: товар есть на складе, но вы больше не планируете его поставлять. * &#x60;DELISTED&#x60; — архив: товар закончился на складе, и его поставок больше не будет.  Можно указать несколько значений в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...availability&#x3D;INACTIVE,DELISTED... ...availability&#x3D;INACTIVE&amp;availability&#x3D;DELISTED... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
+func (r ExpressGetOfferMappingEntriesRequest) Availability(availability []OfferAvailabilityStatusType) ExpressGetOfferMappingEntriesRequest {
 	r.availability = &availability
 	return r
 }
 
-// Фильтрация по идентификатору категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).  Можно указать несколько идентификаторов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...category_id&#x3D;14727164,14382343... ...category_id&#x3D;14727164&amp;category_id&#x3D;14382343... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) CategoryId(categoryId []int32) ApiGetOfferMappingEntriesRequest {
+// Фильтрация по идентификатору категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).  Можно указать несколько идентификаторов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...category_id&#x3D;14727164,14382343... ...category_id&#x3D;14727164&amp;category_id&#x3D;14382343... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
+func (r ExpressGetOfferMappingEntriesRequest) CategoryId(categoryId []int32) ExpressGetOfferMappingEntriesRequest {
 	r.categoryId = &categoryId
 	return r
 }
 
-// Фильтрация по бренду товара.  Можно указать несколько брендов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...vendor&#x3D;Aqua%20Minerale,Borjomi... ...vendor&#x3D;Aqua%20Minerale&amp;vendor&#x3D;Borjomi... &#x60;&#x60;&#x60;  Чтобы товар попал в результаты фильтрации, его бренд должен точно совпадать с одним из указанных в запросе. Например, если указан бренд Schwarzkopf, то в результатах не будет товаров Schwarzkopf Professional.  Если в названии бренда есть символы, которые не входят в таблицу ASCII (в том числе кириллические символы), используйте для них URL-кодирование. Например, пробел — %20, апостроф «&#39;» — %27 и т. д. Подробнее см. в разделе [Кодирование URL русскоязычной Википедии](https://ru.wikipedia.org/wiki/URL#Кодирование_URL).  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) Vendor(vendor []string) ApiGetOfferMappingEntriesRequest {
+// Фильтрация по бренду товара.  Можно указать несколько брендов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...vendor&#x3D;Aqua%20Minerale,Borjomi... ...vendor&#x3D;Aqua%20Minerale&amp;vendor&#x3D;Borjomi... &#x60;&#x60;&#x60;  Чтобы товар попал в результаты фильтрации, его бренд должен точно совпадать с одним из указанных в запросе. Например, если указан бренд Schwarzkopf, то в результатах не будет товаров Schwarzkopf Professional.  Если в названии бренда есть символы, которые не входят в таблицу ASCII (в том числе кириллические символы), используйте для них URL-кодирование. Например, пробел — %20, апостроф «&#39;» — %27 и т. д. Подробнее см. в разделе [Кодирование URL русскоязычной Википедии](https://ru.wikipedia.org/wiki/URL#Кодирование_URL).  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
+func (r ExpressGetOfferMappingEntriesRequest) Vendor(vendor []string) ExpressGetOfferMappingEntriesRequest {
 	r.vendor = &vendor
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOfferMappingEntriesRequest) PageToken(pageToken string) ApiGetOfferMappingEntriesRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetOfferMappingEntriesRequest) PageToken(pageToken string) ExpressGetOfferMappingEntriesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOfferMappingEntriesRequest) Limit(limit int32) ApiGetOfferMappingEntriesRequest {
+// Количество значений на одной странице.
+func (r ExpressGetOfferMappingEntriesRequest) Limit(limit int32) ExpressGetOfferMappingEntriesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferMappingEntriesRequest) Execute() (*GetOfferMappingEntriesResponse, *http.Response, error) {
-	return r.ApiService.GetOfferMappingEntriesExecute(r)
+func (r ExpressGetOfferMappingEntriesRequest) Execute() (*GetOfferMappingEntriesResponse, *http.Response, error) {
+	return r.ExpressService.GetOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -11644,30 +11642,31 @@ GetOfferMappingEntries Список товаров в каталоге
 
 [//]: <> (rule: суточный лимит товаров — количество товаров в каталоге магазина * 25)
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetOfferMappingEntriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *ExpressAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) ApiGetOfferMappingEntriesRequest {
-	return ApiGetOfferMappingEntriesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) ExpressGetOfferMappingEntriesRequest {
+	return ExpressGetOfferMappingEntriesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOfferMappingEntriesResponse
+//
+//	@return GetOfferMappingEntriesResponse
+//
 // Deprecated
-func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntriesRequest) (*GetOfferMappingEntriesResponse, *http.Response, error) {
+func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ExpressGetOfferMappingEntriesRequest) (*GetOfferMappingEntriesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOfferMappingEntriesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOfferMappingEntriesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOfferMappingEntries")
@@ -11732,14 +11731,14 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEn
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -11772,8 +11771,8 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -11783,8 +11782,8 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -11794,8 +11793,8 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -11805,8 +11804,8 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -11816,8 +11815,8 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11827,8 +11826,8 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEn
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11845,41 +11844,41 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEn
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferMappingsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
-	language *CatalogLanguageType
+type ExpressGetOfferMappingsRequest struct {
+	ctx                     context.Context
+	ExpressService          *ExpressAPIService
+	businessId              int64
+	pageToken               *string
+	limit                   *int32
+	language                *CatalogLanguageType
 	getOfferMappingsRequest *GetOfferMappingsRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOfferMappingsRequest) PageToken(pageToken string) ApiGetOfferMappingsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetOfferMappingsRequest) PageToken(pageToken string) ExpressGetOfferMappingsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOfferMappingsRequest) Limit(limit int32) ApiGetOfferMappingsRequest {
+// Количество значений на одной странице.
+func (r ExpressGetOfferMappingsRequest) Limit(limit int32) ExpressGetOfferMappingsRequest {
 	r.limit = &limit
 	return r
 }
 
-// Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;. 
-func (r ApiGetOfferMappingsRequest) Language(language CatalogLanguageType) ApiGetOfferMappingsRequest {
+// Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
+func (r ExpressGetOfferMappingsRequest) Language(language CatalogLanguageType) ExpressGetOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) ApiGetOfferMappingsRequest {
+func (r ExpressGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) ExpressGetOfferMappingsRequest {
 	r.getOfferMappingsRequest = &getOfferMappingsRequest
 	return r
 }
 
-func (r ApiGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.GetOfferMappingsExecute(r)
+func (r ExpressGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
+	return r.ExpressService.GetOfferMappingsExecute(r)
 }
 
 /*
@@ -11897,27 +11896,27 @@ GetOfferMappings Информация о товарах в каталоге
 |**⚙️ Лимит:** 600 запросов в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetOfferMappingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetOfferMappingsRequest
 */
-func (a *ExpressAPIService) GetOfferMappings(ctx context.Context, businessId int64) ApiGetOfferMappingsRequest {
-	return ApiGetOfferMappingsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetOfferMappings(ctx context.Context, businessId int64) ExpressGetOfferMappingsRequest {
+	return ExpressGetOfferMappingsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOfferMappingsResponse
-func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
+//
+//	@return GetOfferMappingsResponse
+func (a *ExpressAPIService) GetOfferMappingsExecute(r ExpressGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOfferMappingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOfferMappingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOfferMappings")
@@ -11966,14 +11965,14 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -12006,8 +12005,8 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12017,8 +12016,8 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12028,8 +12027,8 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12039,8 +12038,8 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12050,8 +12049,8 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12061,8 +12060,8 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12079,34 +12078,34 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferRecommendationsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetOfferRecommendationsRequest struct {
+	ctx                            context.Context
+	ExpressService                 *ExpressAPIService
+	businessId                     int64
 	getOfferRecommendationsRequest *GetOfferRecommendationsRequest
-	pageToken *string
-	limit *int32
+	pageToken                      *string
+	limit                          *int32
 }
 
-func (r ApiGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) ApiGetOfferRecommendationsRequest {
+func (r ExpressGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) ExpressGetOfferRecommendationsRequest {
 	r.getOfferRecommendationsRequest = &getOfferRecommendationsRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOfferRecommendationsRequest) PageToken(pageToken string) ApiGetOfferRecommendationsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetOfferRecommendationsRequest) PageToken(pageToken string) ExpressGetOfferRecommendationsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOfferRecommendationsRequest) Limit(limit int32) ApiGetOfferRecommendationsRequest {
+// Количество значений на одной странице.
+func (r ExpressGetOfferRecommendationsRequest) Limit(limit int32) ExpressGetOfferRecommendationsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
-	return r.ApiService.GetOfferRecommendationsExecute(r)
+func (r ExpressGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
+	return r.ExpressService.GetOfferRecommendationsExecute(r)
 }
 
 /*
@@ -12131,27 +12130,27 @@ GetOfferRecommendations Рекомендации Маркета, касающи�
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetOfferRecommendationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetOfferRecommendationsRequest
 */
-func (a *ExpressAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) ApiGetOfferRecommendationsRequest {
-	return ApiGetOfferRecommendationsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) ExpressGetOfferRecommendationsRequest {
+	return ExpressGetOfferRecommendationsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOfferRecommendationsResponse
-func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
+//
+//	@return GetOfferRecommendationsResponse
+func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ExpressGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOfferRecommendationsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOfferRecommendationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOfferRecommendations")
@@ -12200,14 +12199,14 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommen
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -12240,8 +12239,8 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12251,8 +12250,8 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12262,8 +12261,8 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12273,8 +12272,8 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12284,8 +12283,8 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12295,8 +12294,8 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12313,15 +12312,15 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressGetOrderRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
 }
 
-func (r ApiGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
-	return r.ApiService.GetOrderExecute(r)
+func (r ExpressGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
+	return r.ExpressService.GetOrderExecute(r)
 }
 
 /*
@@ -12344,29 +12343,29 @@ GetOrder Информация об одном заказе
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressGetOrderRequest
 */
-func (a *ExpressAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderRequest {
-	return ApiGetOrderRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderRequest {
+	return ExpressGetOrderRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrderResponse
-func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
+//
+//	@return GetOrderResponse
+func (a *ExpressAPIService) GetOrderExecute(r ExpressGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOrder")
@@ -12405,14 +12404,14 @@ func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResp
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -12445,8 +12444,8 @@ func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12456,8 +12455,8 @@ func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12467,8 +12466,8 @@ func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12478,8 +12477,8 @@ func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12489,8 +12488,8 @@ func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12500,8 +12499,8 @@ func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12518,15 +12517,15 @@ func (a *ExpressAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderBusinessBuyerInfoRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressGetOrderBusinessBuyerInfoRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
 }
 
-func (r ApiGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
-	return r.ApiService.GetOrderBusinessBuyerInfoExecute(r)
+func (r ExpressGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
+	return r.ExpressService.GetOrderBusinessBuyerInfoExecute(r)
 }
 
 /*
@@ -12547,29 +12546,29 @@ GetOrderBusinessBuyerInfo Информация о покупателе — юр�
 |**⚙️ Лимит:** 3 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderBusinessBuyerInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressGetOrderBusinessBuyerInfoRequest
 */
-func (a *ExpressAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBusinessBuyerInfoRequest {
-	return ApiGetOrderBusinessBuyerInfoRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderBusinessBuyerInfoRequest {
+	return ExpressGetOrderBusinessBuyerInfoRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBusinessBuyerInfoResponse
-func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
+//
+//	@return GetBusinessBuyerInfoResponse
+func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ExpressGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBusinessBuyerInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBusinessBuyerInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOrderBusinessBuyerInfo")
@@ -12608,14 +12607,14 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusine
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -12648,8 +12647,8 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12659,8 +12658,8 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12670,8 +12669,8 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12681,8 +12680,8 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12692,8 +12691,8 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12703,8 +12702,8 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12721,15 +12720,15 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusine
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderBusinessDocumentsInfoRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressGetOrderBusinessDocumentsInfoRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
 }
 
-func (r ApiGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
-	return r.ApiService.GetOrderBusinessDocumentsInfoExecute(r)
+func (r ExpressGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
+	return r.ExpressService.GetOrderBusinessDocumentsInfoExecute(r)
 }
 
 /*
@@ -12744,29 +12743,29 @@ GetOrderBusinessDocumentsInfo Информация о документах
 |**⚙️ Лимит:** 3 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderBusinessDocumentsInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressGetOrderBusinessDocumentsInfoRequest
 */
-func (a *ExpressAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBusinessDocumentsInfoRequest {
-	return ApiGetOrderBusinessDocumentsInfoRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderBusinessDocumentsInfoRequest {
+	return ExpressGetOrderBusinessDocumentsInfoRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBusinessDocumentsInfoResponse
-func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
+//
+//	@return GetBusinessDocumentsInfoResponse
+func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ExpressGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBusinessDocumentsInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBusinessDocumentsInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOrderBusinessDocumentsInfo")
@@ -12805,14 +12804,14 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBu
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -12845,8 +12844,8 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12856,8 +12855,8 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12867,8 +12866,8 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12878,8 +12877,8 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12889,8 +12888,8 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12900,8 +12899,8 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12918,15 +12917,15 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderIdentifiersStatusRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressGetOrderIdentifiersStatusRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
 }
 
-func (r ApiGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
-	return r.ApiService.GetOrderIdentifiersStatusExecute(r)
+func (r ExpressGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
+	return r.ExpressService.GetOrderIdentifiersStatusExecute(r)
 }
 
 /*
@@ -12944,29 +12943,29 @@ GetOrderIdentifiersStatus Статусы проверки УИНов
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderIdentifiersStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressGetOrderIdentifiersStatusRequest
 */
-func (a *ExpressAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderIdentifiersStatusRequest {
-	return ApiGetOrderIdentifiersStatusRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderIdentifiersStatusRequest {
+	return ExpressGetOrderIdentifiersStatusRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrderIdentifiersStatusResponse
-func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
+//
+//	@return GetOrderIdentifiersStatusResponse
+func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ExpressGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrderIdentifiersStatusResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrderIdentifiersStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOrderIdentifiersStatus")
@@ -13005,14 +13004,14 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdenti
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -13045,8 +13044,8 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdenti
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -13056,8 +13055,8 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdenti
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -13067,8 +13066,8 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdenti
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -13078,8 +13077,8 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdenti
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -13089,8 +13088,8 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdenti
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -13100,8 +13099,8 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdenti
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -13118,15 +13117,15 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdenti
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderLabelsDataRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressGetOrderLabelsDataRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
 }
 
-func (r ApiGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
-	return r.ApiService.GetOrderLabelsDataExecute(r)
+func (r ExpressGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
+	return r.ExpressService.GetOrderLabelsDataExecute(r)
 }
 
 /*
@@ -13139,29 +13138,29 @@ GetOrderLabelsData Данные для самостоятельного изго
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderLabelsDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressGetOrderLabelsDataRequest
 */
-func (a *ExpressAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderLabelsDataRequest {
-	return ApiGetOrderLabelsDataRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) ExpressGetOrderLabelsDataRequest {
+	return ExpressGetOrderLabelsDataRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrderLabelsDataResponse
-func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest) (*GetOrderLabelsDataResponse, *http.Response, error) {
+//
+//	@return GetOrderLabelsDataResponse
+func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ExpressGetOrderLabelsDataRequest) (*GetOrderLabelsDataResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrderLabelsDataResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrderLabelsDataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOrderLabelsData")
@@ -13200,14 +13199,14 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -13240,8 +13239,8 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -13251,8 +13250,8 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -13262,8 +13261,8 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -13273,8 +13272,8 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -13284,8 +13283,8 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -13295,8 +13294,8 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -13313,147 +13312,147 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrdersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderIds *[]int64
-	status *[]OrderStatusType
-	substatus *[]OrderSubstatusType
-	fromDate *string
-	toDate *string
-	supplierShipmentDateFrom *string
-	supplierShipmentDateTo *string
-	updatedAtFrom *time.Time
-	updatedAtTo *time.Time
-	dispatchType *OrderDeliveryDispatchType
-	fake *bool
-	hasCis *bool
+type ExpressGetOrdersRequest struct {
+	ctx                               context.Context
+	ExpressService                    *ExpressAPIService
+	campaignId                        int64
+	orderIds                          *[]int64
+	status                            *[]OrderStatusType
+	substatus                         *[]OrderSubstatusType
+	fromDate                          *string
+	toDate                            *string
+	supplierShipmentDateFrom          *string
+	supplierShipmentDateTo            *string
+	updatedAtFrom                     *time.Time
+	updatedAtTo                       *time.Time
+	dispatchType                      *OrderDeliveryDispatchType
+	fake                              *bool
+	hasCis                            *bool
 	onlyWaitingForCancellationApprove *bool
-	onlyEstimatedDelivery *bool
-	buyerType *OrderBuyerType
-	page *int32
-	pageSize *int32
-	pageToken *string
-	limit *int32
+	onlyEstimatedDelivery             *bool
+	buyerType                         *OrderBuyerType
+	page                              *int32
+	pageSize                          *int32
+	pageToken                         *string
+	limit                             *int32
 }
 
-// Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым. 
-func (r ApiGetOrdersRequest) OrderIds(orderIds []int64) ApiGetOrdersRequest {
+// Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
+func (r ExpressGetOrdersRequest) OrderIds(orderIds []int64) ExpressGetOrdersRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
-// Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется. 
-func (r ApiGetOrdersRequest) Status(status []OrderStatusType) ApiGetOrdersRequest {
+// Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется.
+func (r ExpressGetOrdersRequest) Status(status []OrderStatusType) ExpressGetOrdersRequest {
 	r.status = &status
 	return r
 }
 
-// Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется. 
-func (r ApiGetOrdersRequest) Substatus(substatus []OrderSubstatusType) ApiGetOrdersRequest {
+// Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется.
+func (r ExpressGetOrdersRequest) Substatus(substatus []OrderSubstatusType) ExpressGetOrdersRequest {
 	r.substatus = &substatus
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты. 
-func (r ApiGetOrdersRequest) FromDate(fromDate string) ApiGetOrdersRequest {
+// Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты.
+func (r ExpressGetOrdersRequest) FromDate(fromDate string) ExpressGetOrdersRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки. 
-func (r ApiGetOrdersRequest) ToDate(toDate string) ApiGetOrdersRequest {
+// Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки.
+func (r ExpressGetOrdersRequest) ToDate(toDate string) ExpressGetOrdersRequest {
 	r.toDate = &toDate
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации. 
-func (r ApiGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) ApiGetOrdersRequest {
+// Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
+func (r ExpressGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) ExpressGetOrdersRequest {
 	r.supplierShipmentDateFrom = &supplierShipmentDateFrom
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки. 
-func (r ApiGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) ApiGetOrdersRequest {
+// Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки.
+func (r ExpressGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) ExpressGetOrdersRequest {
 	r.supplierShipmentDateTo = &supplierShipmentDateTo
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации. 
-func (r ApiGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) ApiGetOrdersRequest {
+// Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
+func (r ExpressGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) ExpressGetOrdersRequest {
 	r.updatedAtFrom = &updatedAtFrom
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации. 
-func (r ApiGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) ApiGetOrdersRequest {
+// Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.
+func (r ExpressGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) ExpressGetOrdersRequest {
 	r.updatedAtTo = &updatedAtTo
 	return r
 }
 
 // Способ отгрузки
-func (r ApiGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) ApiGetOrdersRequest {
+func (r ExpressGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) ExpressGetOrdersRequest {
 	r.dispatchType = &dispatchType
 	return r
 }
 
-// Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета. 
-func (r ApiGetOrdersRequest) Fake(fake bool) ApiGetOrdersRequest {
+// Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета.
+func (r ExpressGetOrdersRequest) Fake(fake bool) ExpressGetOrdersRequest {
 	r.fake = &fake
 	return r
 }
 
-// Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям. 
-func (r ApiGetOrdersRequest) HasCis(hasCis bool) ApiGetOrdersRequest {
+// Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям.
+func (r ExpressGetOrdersRequest) HasCis(hasCis bool) ExpressGetOrdersRequest {
 	r.hasCis = &hasCis
 	return r
 }
 
-// **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation). 
-func (r ApiGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) ApiGetOrdersRequest {
+// **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).
+func (r ExpressGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) ExpressGetOrdersRequest {
 	r.onlyWaitingForCancellationApprove = &onlyWaitingForCancellationApprove
 	return r
 }
 
-// Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется. 
-func (r ApiGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) ApiGetOrdersRequest {
+// Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется.
+func (r ExpressGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) ExpressGetOrdersRequest {
 	r.onlyEstimatedDelivery = &onlyEstimatedDelivery
 	return r
 }
 
-// Фильтрация заказов по типу покупателя. 
-func (r ApiGetOrdersRequest) BuyerType(buyerType OrderBuyerType) ApiGetOrdersRequest {
+// Фильтрация заказов по типу покупателя.
+func (r ExpressGetOrdersRequest) BuyerType(buyerType OrderBuyerType) ExpressGetOrdersRequest {
 	r.buyerType = &buyerType
 	return r
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiGetOrdersRequest) Page(page int32) ApiGetOrdersRequest {
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r ExpressGetOrdersRequest) Page(page int32) ExpressGetOrdersRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiGetOrdersRequest) PageSize(pageSize int32) ApiGetOrdersRequest {
+// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r ExpressGetOrdersRequest) PageSize(pageSize int32) ExpressGetOrdersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOrdersRequest) PageToken(pageToken string) ApiGetOrdersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetOrdersRequest) PageToken(pageToken string) ExpressGetOrdersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOrdersRequest) Limit(limit int32) ApiGetOrdersRequest {
+// Количество значений на одной странице.
+func (r ExpressGetOrdersRequest) Limit(limit int32) ExpressGetOrdersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
-	return r.ApiService.GetOrdersExecute(r)
+func (r ExpressGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
+	return r.ExpressService.GetOrdersExecute(r)
 }
 
 /*
@@ -13498,27 +13497,27 @@ GetOrders Информация о нескольких заказах
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetOrdersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetOrdersRequest
 */
-func (a *ExpressAPIService) GetOrders(ctx context.Context, campaignId int64) ApiGetOrdersRequest {
-	return ApiGetOrdersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetOrders(ctx context.Context, campaignId int64) ExpressGetOrdersRequest {
+	return ExpressGetOrdersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrdersResponse
-func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
+//
+//	@return GetOrdersResponse
+func (a *ExpressAPIService) GetOrdersExecute(r ExpressGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrdersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrdersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOrders")
@@ -13628,14 +13627,14 @@ func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -13668,8 +13667,8 @@ func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -13679,8 +13678,8 @@ func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -13690,8 +13689,8 @@ func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -13701,8 +13700,8 @@ func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -13712,8 +13711,8 @@ func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -13723,8 +13722,8 @@ func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -13741,34 +13740,34 @@ func (a *ExpressAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrdersStatsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	pageToken *string
-	limit *int32
+type ExpressGetOrdersStatsRequest struct {
+	ctx                   context.Context
+	ExpressService        *ExpressAPIService
+	campaignId            int64
+	pageToken             *string
+	limit                 *int32
 	getOrdersStatsRequest *GetOrdersStatsRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOrdersStatsRequest) PageToken(pageToken string) ApiGetOrdersStatsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetOrdersStatsRequest) PageToken(pageToken string) ExpressGetOrdersStatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOrdersStatsRequest) Limit(limit int32) ApiGetOrdersStatsRequest {
+// Количество значений на одной странице.
+func (r ExpressGetOrdersStatsRequest) Limit(limit int32) ExpressGetOrdersStatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) ApiGetOrdersStatsRequest {
+func (r ExpressGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) ExpressGetOrdersStatsRequest {
 	r.getOrdersStatsRequest = &getOrdersStatsRequest
 	return r
 }
 
-func (r ApiGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
-	return r.ApiService.GetOrdersStatsExecute(r)
+func (r ExpressGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
+	return r.ExpressService.GetOrdersStatsExecute(r)
 }
 
 /*
@@ -13791,27 +13790,27 @@ GetOrdersStats Детальная информация по заказам
 |**⚙️ Лимит:** 1 000 000 заказов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetOrdersStatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetOrdersStatsRequest
 */
-func (a *ExpressAPIService) GetOrdersStats(ctx context.Context, campaignId int64) ApiGetOrdersStatsRequest {
-	return ApiGetOrdersStatsRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetOrdersStats(ctx context.Context, campaignId int64) ExpressGetOrdersStatsRequest {
+	return ExpressGetOrdersStatsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrdersStatsResponse
-func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
+//
+//	@return GetOrdersStatsResponse
+func (a *ExpressAPIService) GetOrdersStatsExecute(r ExpressGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrdersStatsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrdersStatsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetOrdersStats")
@@ -13857,14 +13856,14 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -13897,8 +13896,8 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -13908,8 +13907,8 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -13919,8 +13918,8 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -13930,8 +13929,8 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -13941,8 +13940,8 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -13952,8 +13951,8 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -13970,34 +13969,34 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPagedWarehousesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+type ExpressGetPagedWarehousesRequest struct {
+	ctx                       context.Context
+	ExpressService            *ExpressAPIService
+	businessId                int64
+	pageToken                 *string
+	limit                     *int32
 	getPagedWarehousesRequest *GetPagedWarehousesRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetPagedWarehousesRequest) PageToken(pageToken string) ApiGetPagedWarehousesRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetPagedWarehousesRequest) PageToken(pageToken string) ExpressGetPagedWarehousesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetPagedWarehousesRequest) Limit(limit int32) ApiGetPagedWarehousesRequest {
+// Количество значений на одной странице.
+func (r ExpressGetPagedWarehousesRequest) Limit(limit int32) ExpressGetPagedWarehousesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) ApiGetPagedWarehousesRequest {
+func (r ExpressGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) ExpressGetPagedWarehousesRequest {
 	r.getPagedWarehousesRequest = &getPagedWarehousesRequest
 	return r
 }
 
-func (r ApiGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
-	return r.ApiService.GetPagedWarehousesExecute(r)
+func (r ExpressGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
+	return r.ExpressService.GetPagedWarehousesExecute(r)
 }
 
 /*
@@ -14016,27 +14015,27 @@ GetPagedWarehouses Список складов
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetPagedWarehousesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetPagedWarehousesRequest
 */
-func (a *ExpressAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) ApiGetPagedWarehousesRequest {
-	return ApiGetPagedWarehousesRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) ExpressGetPagedWarehousesRequest {
+	return ExpressGetPagedWarehousesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPagedWarehousesResponse
-func (a *ExpressAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
+//
+//	@return GetPagedWarehousesResponse
+func (a *ExpressAPIService) GetPagedWarehousesExecute(r ExpressGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPagedWarehousesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPagedWarehousesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetPagedWarehouses")
@@ -14082,14 +14081,14 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -14122,8 +14121,8 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14133,8 +14132,8 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14144,8 +14143,8 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14155,8 +14154,8 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14166,8 +14165,8 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14184,35 +14183,35 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPricesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	pageToken *string
-	limit *int32
-	archived *bool
+type ExpressGetPricesRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	pageToken      *string
+	limit          *int32
+	archived       *bool
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetPricesRequest) PageToken(pageToken string) ApiGetPricesRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetPricesRequest) PageToken(pageToken string) ExpressGetPricesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetPricesRequest) Limit(limit int32) ApiGetPricesRequest {
+// Количество значений на одной странице.
+func (r ExpressGetPricesRequest) Limit(limit int32) ExpressGetPricesRequest {
 	r.limit = &limit
 	return r
 }
 
 // Фильтр по нахождению в архиве.
-func (r ApiGetPricesRequest) Archived(archived bool) ApiGetPricesRequest {
+func (r ExpressGetPricesRequest) Archived(archived bool) ExpressGetPricesRequest {
 	r.archived = &archived
 	return r
 }
 
-func (r ApiGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
-	return r.ApiService.GetPricesExecute(r)
+func (r ExpressGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
+	return r.ExpressService.GetPricesExecute(r)
 }
 
 /*
@@ -14239,30 +14238,31 @@ GetPrices Список цен
 |**⚙️ Лимит:** ```(количество товаров партнера на витрине) * 25``` товаров в сутки|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetPricesRequest
 
 Deprecated
 */
-func (a *ExpressAPIService) GetPrices(ctx context.Context, campaignId int64) ApiGetPricesRequest {
-	return ApiGetPricesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetPrices(ctx context.Context, campaignId int64) ExpressGetPricesRequest {
+	return ExpressGetPricesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPricesResponse
+//
+//	@return GetPricesResponse
+//
 // Deprecated
-func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
+func (a *ExpressAPIService) GetPricesExecute(r ExpressGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPricesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPricesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetPrices")
@@ -14312,14 +14312,14 @@ func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -14352,8 +14352,8 @@ func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14363,8 +14363,8 @@ func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14374,8 +14374,8 @@ func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -14385,8 +14385,8 @@ func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14396,8 +14396,8 @@ func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14407,8 +14407,8 @@ func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14425,34 +14425,34 @@ func (a *ExpressAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPricesByOfferIdsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	pageToken *string
-	limit *int32
+type ExpressGetPricesByOfferIdsRequest struct {
+	ctx                        context.Context
+	ExpressService             *ExpressAPIService
+	campaignId                 int64
+	pageToken                  *string
+	limit                      *int32
 	getPricesByOfferIdsRequest *GetPricesByOfferIdsRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetPricesByOfferIdsRequest) PageToken(pageToken string) ApiGetPricesByOfferIdsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetPricesByOfferIdsRequest) PageToken(pageToken string) ExpressGetPricesByOfferIdsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetPricesByOfferIdsRequest) Limit(limit int32) ApiGetPricesByOfferIdsRequest {
+// Количество значений на одной странице.
+func (r ExpressGetPricesByOfferIdsRequest) Limit(limit int32) ExpressGetPricesByOfferIdsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) ApiGetPricesByOfferIdsRequest {
+func (r ExpressGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) ExpressGetPricesByOfferIdsRequest {
 	r.getPricesByOfferIdsRequest = &getPricesByOfferIdsRequest
 	return r
 }
 
-func (r ApiGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
-	return r.ApiService.GetPricesByOfferIdsExecute(r)
+func (r ExpressGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
+	return r.ExpressService.GetPricesByOfferIdsExecute(r)
 }
 
 /*
@@ -14475,27 +14475,27 @@ GetPricesByOfferIds Просмотр цен на указанные товары
 
 [//]: <> (rule: суточный лимит товаров — количество товаров на витрине * 25)
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetPricesByOfferIdsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetPricesByOfferIdsRequest
 */
-func (a *ExpressAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) ApiGetPricesByOfferIdsRequest {
-	return ApiGetPricesByOfferIdsRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) ExpressGetPricesByOfferIdsRequest {
+	return ExpressGetPricesByOfferIdsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPricesByOfferIdsResponse
-func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
+//
+//	@return GetPricesByOfferIdsResponse
+func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ExpressGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPricesByOfferIdsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPricesByOfferIdsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetPricesByOfferIds")
@@ -14541,14 +14541,14 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -14581,8 +14581,8 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14592,8 +14592,8 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14603,8 +14603,8 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -14614,8 +14614,8 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14625,8 +14625,8 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14636,8 +14636,8 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14654,34 +14654,34 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPromoOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetPromoOffersRequest struct {
+	ctx                   context.Context
+	ExpressService        *ExpressAPIService
+	businessId            int64
 	getPromoOffersRequest *GetPromoOffersRequest
-	pageToken *string
-	limit *int32
+	pageToken             *string
+	limit                 *int32
 }
 
-func (r ApiGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) ApiGetPromoOffersRequest {
+func (r ExpressGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) ExpressGetPromoOffersRequest {
 	r.getPromoOffersRequest = &getPromoOffersRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetPromoOffersRequest) PageToken(pageToken string) ApiGetPromoOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetPromoOffersRequest) PageToken(pageToken string) ExpressGetPromoOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetPromoOffersRequest) Limit(limit int32) ApiGetPromoOffersRequest {
+// Количество значений на одной странице.
+func (r ExpressGetPromoOffersRequest) Limit(limit int32) ExpressGetPromoOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
-	return r.ApiService.GetPromoOffersExecute(r)
+func (r ExpressGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
+	return r.ExpressService.GetPromoOffersExecute(r)
 }
 
 /*
@@ -14702,27 +14702,27 @@ GetPromoOffers Получение списка товаров, которые у
 |**⚙️ Лимит:** 10 000 запросов в час, не более 500 товаров в запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetPromoOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetPromoOffersRequest
 */
-func (a *ExpressAPIService) GetPromoOffers(ctx context.Context, businessId int64) ApiGetPromoOffersRequest {
-	return ApiGetPromoOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetPromoOffers(ctx context.Context, businessId int64) ExpressGetPromoOffersRequest {
+	return ExpressGetPromoOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPromoOffersResponse
-func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
+//
+//	@return GetPromoOffersResponse
+func (a *ExpressAPIService) GetPromoOffersExecute(r ExpressGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPromoOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPromoOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetPromoOffers")
@@ -14771,14 +14771,14 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -14811,8 +14811,8 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14822,8 +14822,8 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14833,8 +14833,8 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -14844,8 +14844,8 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14855,8 +14855,8 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14866,8 +14866,8 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14884,20 +14884,20 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPromosRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetPromosRequest struct {
+	ctx              context.Context
+	ExpressService   *ExpressAPIService
+	businessId       int64
 	getPromosRequest *GetPromosRequest
 }
 
-func (r ApiGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) ApiGetPromosRequest {
+func (r ExpressGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) ExpressGetPromosRequest {
 	r.getPromosRequest = &getPromosRequest
 	return r
 }
 
-func (r ApiGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
-	return r.ApiService.GetPromosExecute(r)
+func (r ExpressGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
+	return r.ExpressService.GetPromosExecute(r)
 }
 
 /*
@@ -14920,27 +14920,27 @@ GetPromos Получение списка акций
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetPromosRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetPromosRequest
 */
-func (a *ExpressAPIService) GetPromos(ctx context.Context, businessId int64) ApiGetPromosRequest {
-	return ApiGetPromosRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetPromos(ctx context.Context, businessId int64) ExpressGetPromosRequest {
+	return ExpressGetPromosRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPromosResponse
-func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
+//
+//	@return GetPromosResponse
+func (a *ExpressAPIService) GetPromosExecute(r ExpressGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPromosResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPromosResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetPromos")
@@ -14980,14 +14980,14 @@ func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -15020,8 +15020,8 @@ func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -15031,8 +15031,8 @@ func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -15042,8 +15042,8 @@ func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -15053,8 +15053,8 @@ func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -15064,8 +15064,8 @@ func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -15075,8 +15075,8 @@ func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -15093,14 +15093,14 @@ func (a *ExpressAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetQualityRatingDetailsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetQualityRatingDetailsRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
 }
 
-func (r ApiGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
-	return r.ApiService.GetQualityRatingDetailsExecute(r)
+func (r ExpressGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
+	return r.ExpressService.GetQualityRatingDetailsExecute(r)
 }
 
 /*
@@ -15113,27 +15113,27 @@ GetQualityRatingDetails Заказы, которые повлияли на ин�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetQualityRatingDetailsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetQualityRatingDetailsRequest
 */
-func (a *ExpressAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) ApiGetQualityRatingDetailsRequest {
-	return ApiGetQualityRatingDetailsRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) ExpressGetQualityRatingDetailsRequest {
+	return ExpressGetQualityRatingDetailsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetQualityRatingDetailsResponse
-func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDetailsRequest) (*GetQualityRatingDetailsResponse, *http.Response, error) {
+//
+//	@return GetQualityRatingDetailsResponse
+func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ExpressGetQualityRatingDetailsRequest) (*GetQualityRatingDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetQualityRatingDetailsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetQualityRatingDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetQualityRatingDetails")
@@ -15171,14 +15171,14 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRating
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -15211,8 +15211,8 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRating
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -15222,8 +15222,8 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRating
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -15233,8 +15233,8 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRating
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -15244,8 +15244,8 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRating
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -15255,8 +15255,8 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRating
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -15266,8 +15266,8 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRating
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -15284,20 +15284,20 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRating
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetQualityRatingsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetQualityRatingsRequest struct {
+	ctx                     context.Context
+	ExpressService          *ExpressAPIService
+	businessId              int64
 	getQualityRatingRequest *GetQualityRatingRequest
 }
 
-func (r ApiGetQualityRatingsRequest) GetQualityRatingRequest(getQualityRatingRequest GetQualityRatingRequest) ApiGetQualityRatingsRequest {
+func (r ExpressGetQualityRatingsRequest) GetQualityRatingRequest(getQualityRatingRequest GetQualityRatingRequest) ExpressGetQualityRatingsRequest {
 	r.getQualityRatingRequest = &getQualityRatingRequest
 	return r
 }
 
-func (r ApiGetQualityRatingsRequest) Execute() (*GetQualityRatingResponse, *http.Response, error) {
-	return r.ApiService.GetQualityRatingsExecute(r)
+func (r ExpressGetQualityRatingsRequest) Execute() (*GetQualityRatingResponse, *http.Response, error) {
+	return r.ExpressService.GetQualityRatingsExecute(r)
 }
 
 /*
@@ -15312,27 +15312,27 @@ GetQualityRatings Индекс качества магазинов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetQualityRatingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetQualityRatingsRequest
 */
-func (a *ExpressAPIService) GetQualityRatings(ctx context.Context, businessId int64) ApiGetQualityRatingsRequest {
-	return ApiGetQualityRatingsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetQualityRatings(ctx context.Context, businessId int64) ExpressGetQualityRatingsRequest {
+	return ExpressGetQualityRatingsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetQualityRatingResponse
-func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) (*GetQualityRatingResponse, *http.Response, error) {
+//
+//	@return GetQualityRatingResponse
+func (a *ExpressAPIService) GetQualityRatingsExecute(r ExpressGetQualityRatingsRequest) (*GetQualityRatingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetQualityRatingResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetQualityRatingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetQualityRatings")
@@ -15375,14 +15375,14 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -15415,8 +15415,8 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -15426,8 +15426,8 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -15437,8 +15437,8 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -15448,8 +15448,8 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -15459,8 +15459,8 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -15470,8 +15470,8 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -15488,13 +15488,13 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetRegionsCodesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
+type ExpressGetRegionsCodesRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
 }
 
-func (r ApiGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
-	return r.ApiService.GetRegionsCodesExecute(r)
+func (r ExpressGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
+	return r.ExpressService.GetRegionsCodesExecute(r)
 }
 
 /*
@@ -15509,25 +15509,25 @@ GetRegionsCodes Список допустимых кодов стран
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRegionsCodesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressGetRegionsCodesRequest
 */
-func (a *ExpressAPIService) GetRegionsCodes(ctx context.Context) ApiGetRegionsCodesRequest {
-	return ApiGetRegionsCodesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) GetRegionsCodes(ctx context.Context) ExpressGetRegionsCodesRequest {
+	return ExpressGetRegionsCodesRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegionsCodesResponse
-func (a *ExpressAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
+//
+//	@return GetRegionsCodesResponse
+func (a *ExpressAPIService) GetRegionsCodesExecute(r ExpressGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegionsCodesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegionsCodesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetRegionsCodes")
@@ -15561,14 +15561,14 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -15601,8 +15601,8 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -15612,8 +15612,8 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -15623,8 +15623,8 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -15634,8 +15634,8 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -15645,8 +15645,8 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -15663,14 +15663,14 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReportInfoRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	reportId string
+type ExpressGetReportInfoRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	reportId       string
 }
 
-func (r ApiGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
-	return r.ApiService.GetReportInfoExecute(r)
+func (r ExpressGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
+	return r.ExpressService.GetReportInfoExecute(r)
 }
 
 /*
@@ -15685,27 +15685,27 @@ GetReportInfo Получение заданного отчета
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param reportId Идентификатор отчета, который вы получили после запуска генерации. 
- @return ApiGetReportInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Идентификатор отчета, который вы получили после запуска генерации.
+	@return ExpressGetReportInfoRequest
 */
-func (a *ExpressAPIService) GetReportInfo(ctx context.Context, reportId string) ApiGetReportInfoRequest {
-	return ApiGetReportInfoRequest{
-		ApiService: a,
-		ctx: ctx,
-		reportId: reportId,
+func (a *ExpressAPIService) GetReportInfo(ctx context.Context, reportId string) ExpressGetReportInfoRequest {
+	return ExpressGetReportInfoRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		reportId:       reportId,
 	}
 }
 
 // Execute executes the request
-//  @return GetReportInfoResponse
-func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
+//
+//	@return GetReportInfoResponse
+func (a *ExpressAPIService) GetReportInfoExecute(r ExpressGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetReportInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetReportInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetReportInfo")
@@ -15746,14 +15746,14 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -15786,8 +15786,8 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -15797,8 +15797,8 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -15808,8 +15808,8 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -15819,8 +15819,8 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -15830,8 +15830,8 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -15841,8 +15841,8 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -15859,16 +15859,16 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
-	returnId int64
+type ExpressGetReturnRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
+	returnId       int64
 }
 
-func (r ApiGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
-	return r.ApiService.GetReturnExecute(r)
+func (r ExpressGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
+	return r.ExpressService.GetReturnExecute(r)
 }
 
 /*
@@ -15889,31 +15889,31 @@ GetReturn Информация о невыкупе или возврате
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param returnId Идентификатор невыкупа или возврата.
- @return ApiGetReturnRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param returnId Идентификатор невыкупа или возврата.
+	@return ExpressGetReturnRequest
 */
-func (a *ExpressAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiGetReturnRequest {
-	return ApiGetReturnRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
-		returnId: returnId,
+func (a *ExpressAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) ExpressGetReturnRequest {
+	return ExpressGetReturnRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		returnId:       returnId,
 	}
 }
 
 // Execute executes the request
-//  @return GetReturnResponse
-func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnResponse, *http.Response, error) {
+//
+//	@return GetReturnResponse
+func (a *ExpressAPIService) GetReturnExecute(r ExpressGetReturnRequest) (*GetReturnResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetReturnResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetReturnResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetReturn")
@@ -15953,14 +15953,14 @@ func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -15993,8 +15993,8 @@ func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16004,8 +16004,8 @@ func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16015,8 +16015,8 @@ func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16026,8 +16026,8 @@ func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16037,8 +16037,8 @@ func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16048,8 +16048,8 @@ func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16066,16 +16066,16 @@ func (a *ExpressAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnApplicationRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
-	returnId int64
+type ExpressGetReturnApplicationRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
+	returnId       int64
 }
 
-func (r ApiGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GetReturnApplicationExecute(r)
+func (r ExpressGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ExpressService.GetReturnApplicationExecute(r)
 }
 
 /*
@@ -16088,31 +16088,31 @@ GetReturnApplication Получение заявления на возврат
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param returnId Идентификатор невыкупа или возврата.
- @return ApiGetReturnApplicationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param returnId Идентификатор невыкупа или возврата.
+	@return ExpressGetReturnApplicationRequest
 */
-func (a *ExpressAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiGetReturnApplicationRequest {
-	return ApiGetReturnApplicationRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
-		returnId: returnId,
+func (a *ExpressAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) ExpressGetReturnApplicationRequest {
+	return ExpressGetReturnApplicationRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		returnId:       returnId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *ExpressAPIService) GetReturnApplicationExecute(r ExpressGetReturnApplicationRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetReturnApplication")
@@ -16152,14 +16152,14 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicatio
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -16192,8 +16192,8 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicatio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16203,8 +16203,8 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicatio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16214,8 +16214,8 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicatio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16225,8 +16225,8 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicatio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16236,8 +16236,8 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicatio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16247,8 +16247,8 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicatio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16265,18 +16265,18 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicatio
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnPhotoRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
-	returnId int64
-	itemId int64
-	imageHash string
+type ExpressGetReturnPhotoRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
+	returnId       int64
+	itemId         int64
+	imageHash      string
 }
 
-func (r ApiGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GetReturnPhotoExecute(r)
+func (r ExpressGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ExpressService.GetReturnPhotoExecute(r)
 }
 
 /*
@@ -16289,35 +16289,35 @@ GetReturnPhoto Получение фотографий товаров в воз�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param returnId Идентификатор невыкупа или возврата.
- @param itemId Идентификатор товара в возврате.
- @param imageHash Хеш ссылки изображения для загрузки.
- @return ApiGetReturnPhotoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param returnId Идентификатор невыкупа или возврата.
+	@param itemId Идентификатор товара в возврате.
+	@param imageHash Хеш ссылки изображения для загрузки.
+	@return ExpressGetReturnPhotoRequest
 */
-func (a *ExpressAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) ApiGetReturnPhotoRequest {
-	return ApiGetReturnPhotoRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
-		returnId: returnId,
-		itemId: itemId,
-		imageHash: imageHash,
+func (a *ExpressAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) ExpressGetReturnPhotoRequest {
+	return ExpressGetReturnPhotoRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		returnId:       returnId,
+		itemId:         itemId,
+		imageHash:      imageHash,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *ExpressAPIService) GetReturnPhotoExecute(r ExpressGetReturnPhotoRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetReturnPhoto")
@@ -16359,14 +16359,14 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -16399,8 +16399,8 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16410,8 +16410,8 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16421,8 +16421,8 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16432,8 +16432,8 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16443,8 +16443,8 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16454,8 +16454,8 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16472,79 +16472,79 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	pageToken *string
-	limit *int32
-	orderIds *[]int64
-	statuses *[]RefundStatusType
-	type_ *ReturnType
-	fromDate *string
-	toDate *string
-	fromDate2 *string
-	toDate2 *string
+type ExpressGetReturnsRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	pageToken      *string
+	limit          *int32
+	orderIds       *[]int64
+	statuses       *[]RefundStatusType
+	type_          *ReturnType
+	fromDate       *string
+	toDate         *string
+	fromDate2      *string
+	toDate2        *string
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetReturnsRequest) PageToken(pageToken string) ApiGetReturnsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetReturnsRequest) PageToken(pageToken string) ExpressGetReturnsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetReturnsRequest) Limit(limit int32) ApiGetReturnsRequest {
+// Количество значений на одной странице.
+func (r ExpressGetReturnsRequest) Limit(limit int32) ExpressGetReturnsRequest {
 	r.limit = &limit
 	return r
 }
 
-// Идентификаторы заказов — для фильтрации результатов.  Несколько идентификаторов перечисляются через запятую без пробела. 
-func (r ApiGetReturnsRequest) OrderIds(orderIds []int64) ApiGetReturnsRequest {
+// Идентификаторы заказов — для фильтрации результатов.  Несколько идентификаторов перечисляются через запятую без пробела.
+func (r ExpressGetReturnsRequest) OrderIds(orderIds []int64) ExpressGetReturnsRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
-// Статусы невыкупов или возвратов — для фильтрации результатов.  Несколько статусов перечисляются через запятую. 
-func (r ApiGetReturnsRequest) Statuses(statuses []RefundStatusType) ApiGetReturnsRequest {
+// Статусы невыкупов или возвратов — для фильтрации результатов.  Несколько статусов перечисляются через запятую.
+func (r ExpressGetReturnsRequest) Statuses(statuses []RefundStatusType) ExpressGetReturnsRequest {
 	r.statuses = &statuses
 	return r
 }
 
-// Тип заказа для фильтрации:  * &#x60;UNREDEEMED&#x60; — невыкуп.  * &#x60;RETURN&#x60; — возврат.  Если не указать, в ответе будут и невыкупы, и возвраты. 
-func (r ApiGetReturnsRequest) Type_(type_ ReturnType) ApiGetReturnsRequest {
+// Тип заказа для фильтрации:  * &#x60;UNREDEEMED&#x60; — невыкуп.  * &#x60;RETURN&#x60; — возврат.  Если не указать, в ответе будут и невыкупы, и возвраты.
+func (r ExpressGetReturnsRequest) Type_(type_ ReturnType) ExpressGetReturnsRequest {
 	r.type_ = &type_
 	return r
 }
 
-// Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;. 
-func (r ApiGetReturnsRequest) FromDate(fromDate string) ApiGetReturnsRequest {
+// Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.
+func (r ExpressGetReturnsRequest) FromDate(fromDate string) ExpressGetReturnsRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
-// Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;. 
-func (r ApiGetReturnsRequest) ToDate(toDate string) ApiGetReturnsRequest {
+// Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.
+func (r ExpressGetReturnsRequest) ToDate(toDate string) ExpressGetReturnsRequest {
 	r.toDate = &toDate
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления. 
+// {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
-func (r ApiGetReturnsRequest) FromDate2(fromDate2 string) ApiGetReturnsRequest {
+func (r ExpressGetReturnsRequest) FromDate2(fromDate2 string) ExpressGetReturnsRequest {
 	r.fromDate2 = &fromDate2
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления. 
+// {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
-func (r ApiGetReturnsRequest) ToDate2(toDate2 string) ApiGetReturnsRequest {
+func (r ExpressGetReturnsRequest) ToDate2(toDate2 string) ExpressGetReturnsRequest {
 	r.toDate2 = &toDate2
 	return r
 }
 
-func (r ApiGetReturnsRequest) Execute() (*GetReturnsResponse, *http.Response, error) {
-	return r.ApiService.GetReturnsExecute(r)
+func (r ExpressGetReturnsRequest) Execute() (*GetReturnsResponse, *http.Response, error) {
+	return r.ExpressService.GetReturnsExecute(r)
 }
 
 /*
@@ -16567,27 +16567,27 @@ GetReturns Список невыкупов и возвратов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetReturnsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetReturnsRequest
 */
-func (a *ExpressAPIService) GetReturns(ctx context.Context, campaignId int64) ApiGetReturnsRequest {
-	return ApiGetReturnsRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetReturns(ctx context.Context, campaignId int64) ExpressGetReturnsRequest {
+	return ExpressGetReturnsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetReturnsResponse
-func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsResponse, *http.Response, error) {
+//
+//	@return GetReturnsResponse
+func (a *ExpressAPIService) GetReturnsExecute(r ExpressGetReturnsRequest) (*GetReturnsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetReturnsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetReturnsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetReturns")
@@ -16652,14 +16652,14 @@ func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetRetur
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -16692,8 +16692,8 @@ func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetRetur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16703,8 +16703,8 @@ func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetRetur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16714,8 +16714,8 @@ func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetRetur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16725,8 +16725,8 @@ func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetRetur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16736,8 +16736,8 @@ func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetRetur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16747,8 +16747,8 @@ func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetRetur
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16765,34 +16765,34 @@ func (a *ExpressAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetRetur
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetStocksRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	pageToken *string
-	limit *int32
+type ExpressGetStocksRequest struct {
+	ctx                       context.Context
+	ExpressService            *ExpressAPIService
+	campaignId                int64
+	pageToken                 *string
+	limit                     *int32
 	getWarehouseStocksRequest *GetWarehouseStocksRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetStocksRequest) PageToken(pageToken string) ApiGetStocksRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressGetStocksRequest) PageToken(pageToken string) ExpressGetStocksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetStocksRequest) Limit(limit int32) ApiGetStocksRequest {
+// Количество значений на одной странице.
+func (r ExpressGetStocksRequest) Limit(limit int32) ExpressGetStocksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) ApiGetStocksRequest {
+func (r ExpressGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) ExpressGetStocksRequest {
 	r.getWarehouseStocksRequest = &getWarehouseStocksRequest
 	return r
 }
 
-func (r ApiGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
-	return r.ApiService.GetStocksExecute(r)
+func (r ExpressGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
+	return r.ExpressService.GetStocksExecute(r)
 }
 
 /*
@@ -16815,27 +16815,27 @@ GetStocks Информация об остатках и оборачиваемо
 
 [//]: <> (turnover: Среднее количество дней, за которое товар продается. Подробно об оборачиваемости рассказано в Справке Маркета для продавцов https://yandex.ru/support/marketplace/analytics/turnover.html.)
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetStocksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetStocksRequest
 */
-func (a *ExpressAPIService) GetStocks(ctx context.Context, campaignId int64) ApiGetStocksRequest {
-	return ApiGetStocksRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetStocks(ctx context.Context, campaignId int64) ExpressGetStocksRequest {
+	return ExpressGetStocksRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetWarehouseStocksResponse
-func (a *ExpressAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
+//
+//	@return GetWarehouseStocksResponse
+func (a *ExpressAPIService) GetStocksExecute(r ExpressGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetWarehouseStocksResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetWarehouseStocksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetStocks")
@@ -16881,14 +16881,14 @@ func (a *ExpressAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehou
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -16921,8 +16921,8 @@ func (a *ExpressAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16932,8 +16932,8 @@ func (a *ExpressAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16943,8 +16943,8 @@ func (a *ExpressAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16954,8 +16954,8 @@ func (a *ExpressAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16965,8 +16965,8 @@ func (a *ExpressAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehou
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16983,20 +16983,20 @@ func (a *ExpressAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehou
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedOfferMappingEntriesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetSuggestedOfferMappingEntriesRequest struct {
+	ctx                                    context.Context
+	ExpressService                         *ExpressAPIService
+	campaignId                             int64
 	getSuggestedOfferMappingEntriesRequest *GetSuggestedOfferMappingEntriesRequest
 }
 
-func (r ApiGetSuggestedOfferMappingEntriesRequest) GetSuggestedOfferMappingEntriesRequest(getSuggestedOfferMappingEntriesRequest GetSuggestedOfferMappingEntriesRequest) ApiGetSuggestedOfferMappingEntriesRequest {
+func (r ExpressGetSuggestedOfferMappingEntriesRequest) GetSuggestedOfferMappingEntriesRequest(getSuggestedOfferMappingEntriesRequest GetSuggestedOfferMappingEntriesRequest) ExpressGetSuggestedOfferMappingEntriesRequest {
 	r.getSuggestedOfferMappingEntriesRequest = &getSuggestedOfferMappingEntriesRequest
 	return r
 }
 
-func (r ApiGetSuggestedOfferMappingEntriesRequest) Execute() (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedOfferMappingEntriesExecute(r)
+func (r ExpressGetSuggestedOfferMappingEntriesRequest) Execute() (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
+	return r.ExpressService.GetSuggestedOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -17019,30 +17019,31 @@ GetSuggestedOfferMappingEntries Рекомендованные карточки 
 |**⚙️ Лимит:** 100 000 рекомендаций в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetSuggestedOfferMappingEntriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetSuggestedOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *ExpressAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) ApiGetSuggestedOfferMappingEntriesRequest {
-	return ApiGetSuggestedOfferMappingEntriesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) ExpressGetSuggestedOfferMappingEntriesRequest {
+	return ExpressGetSuggestedOfferMappingEntriesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetSuggestedOfferMappingEntriesResponse
+//
+//	@return GetSuggestedOfferMappingEntriesResponse
+//
 // Deprecated
-func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggestedOfferMappingEntriesRequest) (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
+func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ExpressGetSuggestedOfferMappingEntriesRequest) (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSuggestedOfferMappingEntriesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSuggestedOfferMappingEntriesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetSuggestedOfferMappingEntries")
@@ -17085,14 +17086,14 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSugge
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -17125,8 +17126,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSugge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -17136,8 +17137,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSugge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17147,8 +17148,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSugge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17158,8 +17159,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSugge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17169,8 +17170,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSugge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17180,8 +17181,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSugge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17198,20 +17199,20 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSugge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedOfferMappingsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetSuggestedOfferMappingsRequest struct {
+	ctx                              context.Context
+	ExpressService                   *ExpressAPIService
+	businessId                       int64
 	getSuggestedOfferMappingsRequest *GetSuggestedOfferMappingsRequest
 }
 
-func (r ApiGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) ApiGetSuggestedOfferMappingsRequest {
+func (r ExpressGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) ExpressGetSuggestedOfferMappingsRequest {
 	r.getSuggestedOfferMappingsRequest = &getSuggestedOfferMappingsRequest
 	return r
 }
 
-func (r ApiGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedOfferMappingsExecute(r)
+func (r ExpressGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+	return r.ExpressService.GetSuggestedOfferMappingsExecute(r)
 }
 
 /*
@@ -17241,30 +17242,31 @@ GetSuggestedOfferMappings Просмотр карточек на Маркете,
 |**⚙️ Лимит:** 100 000 товаров в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetSuggestedOfferMappingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetSuggestedOfferMappingsRequest
 
 Deprecated
 */
-func (a *ExpressAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) ApiGetSuggestedOfferMappingsRequest {
-	return ApiGetSuggestedOfferMappingsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) ExpressGetSuggestedOfferMappingsRequest {
+	return ExpressGetSuggestedOfferMappingsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetSuggestedOfferMappingsResponse
+//
+//	@return GetSuggestedOfferMappingsResponse
+//
 // Deprecated
-func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ExpressGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSuggestedOfferMappingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSuggestedOfferMappingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetSuggestedOfferMappings")
@@ -17304,14 +17306,14 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOf
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -17344,8 +17346,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -17355,8 +17357,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17366,8 +17368,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17377,8 +17379,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17388,8 +17390,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17399,8 +17401,8 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17417,20 +17419,20 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOf
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedPricesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressGetSuggestedPricesRequest struct {
+	ctx                  context.Context
+	ExpressService       *ExpressAPIService
+	campaignId           int64
 	suggestPricesRequest *SuggestPricesRequest
 }
 
-func (r ApiGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) ApiGetSuggestedPricesRequest {
+func (r ExpressGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) ExpressGetSuggestedPricesRequest {
 	r.suggestPricesRequest = &suggestPricesRequest
 	return r
 }
 
-func (r ApiGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedPricesExecute(r)
+func (r ExpressGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
+	return r.ExpressService.GetSuggestedPricesExecute(r)
 }
 
 /*
@@ -17439,8 +17441,6 @@ GetSuggestedPrices Цены для продвижения товаров
 {% include notitle [access](../../_auto/method_scopes/getSuggestedPrices.md) %}
 
 {% note warning "Не используйте его, это может привести к ошибкам. Информацию о ценах вы можете получить в помощью [отчета «Цены на рынке»](../../reference/reports/generatePricesReport.md)." %}
-
- 
 
 {% endnote %}
 
@@ -17465,30 +17465,31 @@ GetSuggestedPrices Цены для продвижения товаров
 |**⚙️ Лимит:** 100 000 товаров в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetSuggestedPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressGetSuggestedPricesRequest
 
 Deprecated
 */
-func (a *ExpressAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) ApiGetSuggestedPricesRequest {
-	return ApiGetSuggestedPricesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) ExpressGetSuggestedPricesRequest {
+	return ExpressGetSuggestedPricesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return SuggestPricesResponse
+//
+//	@return SuggestPricesResponse
+//
 // Deprecated
-func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
+func (a *ExpressAPIService) GetSuggestedPricesExecute(r ExpressGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SuggestPricesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SuggestPricesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetSuggestedPrices")
@@ -17531,14 +17532,14 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -17571,8 +17572,8 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -17582,8 +17583,8 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17593,8 +17594,8 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17604,8 +17605,8 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17615,8 +17616,8 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17626,8 +17627,8 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17644,14 +17645,14 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetWarehousesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressGetWarehousesRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	businessId     int64
 }
 
-func (r ApiGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
-	return r.ApiService.GetWarehousesExecute(r)
+func (r ExpressGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
+	return r.ExpressService.GetWarehousesExecute(r)
 }
 
 /*
@@ -17672,30 +17673,31 @@ GetWarehouses Список складов и групп складов
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetWarehousesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressGetWarehousesRequest
 
 Deprecated
 */
-func (a *ExpressAPIService) GetWarehouses(ctx context.Context, businessId int64) ApiGetWarehousesRequest {
-	return ApiGetWarehousesRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) GetWarehouses(ctx context.Context, businessId int64) ExpressGetWarehousesRequest {
+	return ExpressGetWarehousesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetWarehousesResponse
+//
+//	@return GetWarehousesResponse
+//
 // Deprecated
-func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
+func (a *ExpressAPIService) GetWarehousesExecute(r ExpressGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetWarehousesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetWarehousesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.GetWarehouses")
@@ -17733,14 +17735,14 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*Ge
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -17773,8 +17775,8 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -17784,8 +17786,8 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17795,8 +17797,8 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17806,8 +17808,8 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17817,8 +17819,8 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17828,8 +17830,8 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17846,21 +17848,21 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProvideOrderItemIdentifiersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressProvideOrderItemIdentifiersRequest struct {
+	ctx                                context.Context
+	ExpressService                     *ExpressAPIService
+	campaignId                         int64
+	orderId                            int64
 	provideOrderItemIdentifiersRequest *ProvideOrderItemIdentifiersRequest
 }
 
-func (r ApiProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) ApiProvideOrderItemIdentifiersRequest {
+func (r ExpressProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) ExpressProvideOrderItemIdentifiersRequest {
 	r.provideOrderItemIdentifiersRequest = &provideOrderItemIdentifiersRequest
 	return r
 }
 
-func (r ApiProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
-	return r.ApiService.ProvideOrderItemIdentifiersExecute(r)
+func (r ExpressProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+	return r.ExpressService.ProvideOrderItemIdentifiersExecute(r)
 }
 
 /*
@@ -17895,29 +17897,29 @@ ProvideOrderItemIdentifiers Передача кодов маркировки е�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiProvideOrderItemIdentifiersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressProvideOrderItemIdentifiersRequest
 */
-func (a *ExpressAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) ApiProvideOrderItemIdentifiersRequest {
-	return ApiProvideOrderItemIdentifiersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) ExpressProvideOrderItemIdentifiersRequest {
+	return ExpressProvideOrderItemIdentifiersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return ProvideOrderItemIdentifiersResponse
-func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+//
+//	@return ProvideOrderItemIdentifiersResponse
+func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ExpressProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ProvideOrderItemIdentifiersResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ProvideOrderItemIdentifiersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.ProvideOrderItemIdentifiers")
@@ -17961,14 +17963,14 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrder
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -18001,8 +18003,8 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -18012,8 +18014,8 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18023,8 +18025,8 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18034,8 +18036,8 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18045,8 +18047,8 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18056,8 +18058,8 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18074,21 +18076,21 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrder
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPutBidsForBusinessRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressPutBidsForBusinessRequest struct {
+	ctx               context.Context
+	ExpressService    *ExpressAPIService
+	businessId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
 
 // description
-func (r ApiPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) ApiPutBidsForBusinessRequest {
+func (r ExpressPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) ExpressPutBidsForBusinessRequest {
 	r.putSkuBidsRequest = &putSkuBidsRequest
 	return r
 }
 
-func (r ApiPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.PutBidsForBusinessExecute(r)
+func (r ExpressPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.PutBidsForBusinessExecute(r)
 }
 
 /*
@@ -18133,27 +18135,27 @@ PutBidsForBusiness Включение буста продаж и установ�
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiPutBidsForBusinessRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressPutBidsForBusinessRequest
 */
-func (a *ExpressAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) ApiPutBidsForBusinessRequest {
-	return ApiPutBidsForBusinessRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) ExpressPutBidsForBusinessRequest {
+	return ExpressPutBidsForBusinessRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) PutBidsForBusinessExecute(r ExpressPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.PutBidsForBusiness")
@@ -18196,14 +18198,14 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -18236,8 +18238,8 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -18247,8 +18249,8 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18258,8 +18260,8 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18269,8 +18271,8 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18280,8 +18282,8 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18291,8 +18293,8 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18309,21 +18311,21 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPutBidsForCampaignRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressPutBidsForCampaignRequest struct {
+	ctx               context.Context
+	ExpressService    *ExpressAPIService
+	campaignId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
 
 // description
-func (r ApiPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) ApiPutBidsForCampaignRequest {
+func (r ExpressPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) ExpressPutBidsForCampaignRequest {
 	r.putSkuBidsRequest = &putSkuBidsRequest
 	return r
 }
 
-func (r ApiPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.PutBidsForCampaignExecute(r)
+func (r ExpressPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.PutBidsForCampaignExecute(r)
 }
 
 /*
@@ -18362,27 +18364,27 @@ PutBidsForCampaign Включение буста продаж и установ�
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiPutBidsForCampaignRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressPutBidsForCampaignRequest
 */
-func (a *ExpressAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) ApiPutBidsForCampaignRequest {
-	return ApiPutBidsForCampaignRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) ExpressPutBidsForCampaignRequest {
+	return ExpressPutBidsForCampaignRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) PutBidsForCampaignExecute(r ExpressPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.PutBidsForCampaign")
@@ -18425,14 +18427,14 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -18465,8 +18467,8 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -18476,8 +18478,8 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18487,8 +18489,8 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18498,8 +18500,8 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18509,8 +18511,8 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18520,8 +18522,8 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18538,28 +18540,28 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionChildrenRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	regionId int64
-	page *int32
-	pageSize *int32
+type ExpressSearchRegionChildrenRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	regionId       int64
+	page           *int32
+	pageSize       *int32
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiSearchRegionChildrenRequest) Page(page int32) ApiSearchRegionChildrenRequest {
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r ExpressSearchRegionChildrenRequest) Page(page int32) ExpressSearchRegionChildrenRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiSearchRegionChildrenRequest) PageSize(pageSize int32) ApiSearchRegionChildrenRequest {
+// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r ExpressSearchRegionChildrenRequest) PageSize(pageSize int32) ExpressSearchRegionChildrenRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiSearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionChildrenExecute(r)
+func (r ExpressSearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
+	return r.ExpressService.SearchRegionChildrenExecute(r)
 }
 
 /*
@@ -18576,27 +18578,27 @@ SearchRegionChildren Информация о дочерних регионах
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
- @return ApiSearchRegionChildrenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+	@return ExpressSearchRegionChildrenRequest
 */
-func (a *ExpressAPIService) SearchRegionChildren(ctx context.Context, regionId int64) ApiSearchRegionChildrenRequest {
-	return ApiSearchRegionChildrenRequest{
-		ApiService: a,
-		ctx: ctx,
-		regionId: regionId,
+func (a *ExpressAPIService) SearchRegionChildren(ctx context.Context, regionId int64) ExpressSearchRegionChildrenRequest {
+	return ExpressSearchRegionChildrenRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		regionId:       regionId,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegionWithChildrenResponse
-func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
+//
+//	@return GetRegionWithChildrenResponse
+func (a *ExpressAPIService) SearchRegionChildrenExecute(r ExpressSearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegionWithChildrenResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegionWithChildrenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SearchRegionChildren")
@@ -18640,14 +18642,14 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -18680,8 +18682,8 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -18691,8 +18693,8 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18702,8 +18704,8 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18713,8 +18715,8 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18724,8 +18726,8 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18735,8 +18737,8 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18753,14 +18755,14 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionsByIdRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	regionId int64
+type ExpressSearchRegionsByIdRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	regionId       int64
 }
 
-func (r ApiSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionsByIdExecute(r)
+func (r ExpressSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+	return r.ExpressService.SearchRegionsByIdExecute(r)
 }
 
 /*
@@ -18777,27 +18779,27 @@ SearchRegionsById Информация о регионе
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
- @return ApiSearchRegionsByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+	@return ExpressSearchRegionsByIdRequest
 */
-func (a *ExpressAPIService) SearchRegionsById(ctx context.Context, regionId int64) ApiSearchRegionsByIdRequest {
-	return ApiSearchRegionsByIdRequest{
-		ApiService: a,
-		ctx: ctx,
-		regionId: regionId,
+func (a *ExpressAPIService) SearchRegionsById(ctx context.Context, regionId int64) ExpressSearchRegionsByIdRequest {
+	return ExpressSearchRegionsByIdRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		regionId:       regionId,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegionsResponse
-func (a *ExpressAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
+//
+//	@return GetRegionsResponse
+func (a *ExpressAPIService) SearchRegionsByIdExecute(r ExpressSearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegionsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SearchRegionsById")
@@ -18832,14 +18834,14 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -18872,8 +18874,8 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18883,8 +18885,8 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18894,8 +18896,8 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18905,8 +18907,8 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18916,8 +18918,8 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18934,34 +18936,34 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionsByNameRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	name *string
-	pageToken *string
-	limit *int32
+type ExpressSearchRegionsByNameRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	name           *string
+	pageToken      *string
+	limit          *int32
 }
 
-// Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;. 
-func (r ApiSearchRegionsByNameRequest) Name(name string) ApiSearchRegionsByNameRequest {
+// Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;.
+func (r ExpressSearchRegionsByNameRequest) Name(name string) ExpressSearchRegionsByNameRequest {
 	r.name = &name
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiSearchRegionsByNameRequest) PageToken(pageToken string) ApiSearchRegionsByNameRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r ExpressSearchRegionsByNameRequest) PageToken(pageToken string) ExpressSearchRegionsByNameRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiSearchRegionsByNameRequest) Limit(limit int32) ApiSearchRegionsByNameRequest {
+// Количество значений на одной странице.
+func (r ExpressSearchRegionsByNameRequest) Limit(limit int32) ExpressSearchRegionsByNameRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionsByNameExecute(r)
+func (r ExpressSearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+	return r.ExpressService.SearchRegionsByNameExecute(r)
 }
 
 /*
@@ -18980,25 +18982,25 @@ SearchRegionsByName Поиск регионов по их имени
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSearchRegionsByNameRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ExpressSearchRegionsByNameRequest
 */
-func (a *ExpressAPIService) SearchRegionsByName(ctx context.Context) ApiSearchRegionsByNameRequest {
-	return ApiSearchRegionsByNameRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *ExpressAPIService) SearchRegionsByName(ctx context.Context) ExpressSearchRegionsByNameRequest {
+	return ExpressSearchRegionsByNameRequest{
+		ExpressService: a,
+		ctx:            ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegionsResponse
-func (a *ExpressAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
+//
+//	@return GetRegionsResponse
+func (a *ExpressAPIService) SearchRegionsByNameExecute(r ExpressSearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegionsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SearchRegionsByName")
@@ -19042,14 +19044,14 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -19082,8 +19084,8 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19093,8 +19095,8 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -19104,8 +19106,8 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -19115,8 +19117,8 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -19133,28 +19135,28 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSendFileToChatRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	chatId *int64
-	file *os.File
+type ExpressExpressSendFileToChatRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	businessId     int64
+	chatId         *int64
+	file           *os.File
 }
 
 // Идентификатор чата.
-func (r ApiSendFileToChatRequest) ChatId(chatId int64) ApiSendFileToChatRequest {
+func (r ExpressExpressSendFileToChatRequest) ChatId(chatId int64) ExpressExpressSendFileToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Содержимое файла. Максимальный размер файла — 5 Мбайт.
-func (r ApiSendFileToChatRequest) File(file *os.File) ApiSendFileToChatRequest {
+func (r ExpressExpressSendFileToChatRequest) File(file *os.File) ExpressExpressSendFileToChatRequest {
 	r.file = file
 	return r
 }
 
-func (r ApiSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SendFileToChatExecute(r)
+func (r ExpressExpressSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.SendFileToChatExecute(r)
 }
 
 /*
@@ -19167,27 +19169,27 @@ SendFileToChat Отправка файла в чат
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiSendFileToChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressExpressSendFileToChatRequest
 */
-func (a *ExpressAPIService) SendFileToChat(ctx context.Context, businessId int64) ApiSendFileToChatRequest {
-	return ApiSendFileToChatRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) SendFileToChat(ctx context.Context, businessId int64) ExpressExpressSendFileToChatRequest {
+	return ExpressExpressSendFileToChatRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) SendFileToChatExecute(r ExpressExpressSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SendFileToChat")
@@ -19233,8 +19235,8 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	var fileLocalVarFormFileName string
-	var fileLocalVarFileName     string
-	var fileLocalVarFileBytes    []byte
+	var fileLocalVarFileName string
+	var fileLocalVarFileBytes []byte
 
 	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
@@ -19250,14 +19252,14 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -19290,8 +19292,8 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -19301,8 +19303,8 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19312,8 +19314,8 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -19323,8 +19325,8 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -19334,8 +19336,8 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -19345,8 +19347,8 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -19363,28 +19365,28 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSendMessageToChatRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
-	chatId *int64
+type ExpressExpressSendMessageToChatRequest struct {
+	ctx                      context.Context
+	ExpressService           *ExpressAPIService
+	businessId               int64
+	chatId                   *int64
 	sendMessageToChatRequest *SendMessageToChatRequest
 }
 
 // Идентификатор чата.
-func (r ApiSendMessageToChatRequest) ChatId(chatId int64) ApiSendMessageToChatRequest {
+func (r ExpressExpressSendMessageToChatRequest) ChatId(chatId int64) ExpressExpressSendMessageToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r ApiSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) ApiSendMessageToChatRequest {
+func (r ExpressExpressSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) ExpressExpressSendMessageToChatRequest {
 	r.sendMessageToChatRequest = &sendMessageToChatRequest
 	return r
 }
 
-func (r ApiSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SendMessageToChatExecute(r)
+func (r ExpressExpressSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.SendMessageToChatExecute(r)
 }
 
 /*
@@ -19397,27 +19399,27 @@ SendMessageToChat Отправка сообщения в чат
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiSendMessageToChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressExpressSendMessageToChatRequest
 */
-func (a *ExpressAPIService) SendMessageToChat(ctx context.Context, businessId int64) ApiSendMessageToChatRequest {
-	return ApiSendMessageToChatRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) SendMessageToChat(ctx context.Context, businessId int64) ExpressExpressSendMessageToChatRequest {
+	return ExpressExpressSendMessageToChatRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) SendMessageToChatExecute(r ExpressExpressSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SendMessageToChat")
@@ -19467,14 +19469,14 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -19507,8 +19509,8 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -19518,8 +19520,8 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19529,8 +19531,8 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -19540,8 +19542,8 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -19551,8 +19553,8 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -19562,8 +19564,8 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -19580,21 +19582,21 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ApiSendMessageToChatReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderBoxLayoutRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressSetOrderBoxLayoutRequest struct {
+	ctx                      context.Context
+	ExpressService           *ExpressAPIService
+	campaignId               int64
+	orderId                  int64
 	setOrderBoxLayoutRequest *SetOrderBoxLayoutRequest
 }
 
-func (r ApiSetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) ApiSetOrderBoxLayoutRequest {
+func (r ExpressSetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) ExpressSetOrderBoxLayoutRequest {
 	r.setOrderBoxLayoutRequest = &setOrderBoxLayoutRequest
 	return r
 }
 
-func (r ApiSetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
-	return r.ApiService.SetOrderBoxLayoutExecute(r)
+func (r ExpressSetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
+	return r.ExpressService.SetOrderBoxLayoutExecute(r)
 }
 
 /*
@@ -19690,38 +19692,39 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если в одной коробке едут:
 
-  * три единицы одного товара, требующего маркировки;
-  * одна единица другого товара, не требущего маркировки.
+  - три единицы одного товара, требующего маркировки;
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "fullCount": 3,
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          },
-                          {
-                              "cis": "010304109478gftJ14545762!\u001dhGt264"
-                          },
-                          {
-                              "cis": "010304109478fRs28323ks23!\u001dhet201"
-                          }
-                      ]
-                  },
-                  {
-                      "id": 654321,
-                      "fullCount": 1
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+  - одна единица другого товара, не требущего маркировки.
+
+    ```json translate=no
+    {
+    "boxes": [
+    {
+    "items": [
+    {
+    "id": 123456,
+    "fullCount": 3,
+    "instances": [
+    {
+    "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+    },
+    {
+    "cis": "010304109478gftJ14545762!\u001dhGt264"
+    },
+    {
+    "cis": "010304109478fRs28323ks23!\u001dhet201"
+    }
+    ]
+    },
+    {
+    "id": 654321,
+    "fullCount": 1
+    }
+    ]
+    }
+    ]
+    }
+    ```
 
 {% endcut %}
 
@@ -19729,44 +19732,44 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если товар едет в двух коробках:
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+	```json translate=no
+	{
+	    "boxes": [
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        }
+	    ]
+	}
+	```
 
 {% endcut %}
 
@@ -19774,105 +19777,105 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если каждый из двух одинаковых товаров едет в двух коробках:
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+	```json translate=no
+	{
+	    "boxes": [
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        }
+	    ]
+	}
+	```
 
 {% endcut %}
 
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiSetOrderBoxLayoutRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressSetOrderBoxLayoutRequest
 */
-func (a *ExpressAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) ApiSetOrderBoxLayoutRequest {
-	return ApiSetOrderBoxLayoutRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) ExpressSetOrderBoxLayoutRequest {
+	return ExpressSetOrderBoxLayoutRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return SetOrderBoxLayoutResponse
-func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
+//
+//	@return SetOrderBoxLayoutResponse
+func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ExpressSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SetOrderBoxLayoutResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SetOrderBoxLayoutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SetOrderBoxLayout")
@@ -19916,14 +19919,14 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -19956,8 +19959,8 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -19967,8 +19970,8 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19978,8 +19981,8 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -19989,8 +19992,8 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20000,8 +20003,8 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20011,8 +20014,8 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20029,22 +20032,22 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderShipmentBoxesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
-	shipmentId int64
+type ExpressSetOrderShipmentBoxesRequest struct {
+	ctx                          context.Context
+	ExpressService               *ExpressAPIService
+	campaignId                   int64
+	orderId                      int64
+	shipmentId                   int64
 	setOrderShipmentBoxesRequest *SetOrderShipmentBoxesRequest
 }
 
-func (r ApiSetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) ApiSetOrderShipmentBoxesRequest {
+func (r ExpressSetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) ExpressSetOrderShipmentBoxesRequest {
 	r.setOrderShipmentBoxesRequest = &setOrderShipmentBoxesRequest
 	return r
 }
 
-func (r ApiSetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
-	return r.ApiService.SetOrderShipmentBoxesExecute(r)
+func (r ExpressSetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+	return r.ExpressService.SetOrderShipmentBoxesExecute(r)
 }
 
 /*
@@ -20071,27 +20074,29 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 Структура тела PUT-запроса:
 
 ```text translate=no
-{
-  "boxes":
-  [
-    {
-      "fulfilmentId": "{string}",
-      "weight": {int64},
-      "width": {int64},
-      "height": {int64},
-      "depth": {int64},
-      "items":
-      [
-        {
-          "id": {int64},
-          "count": {int32}
-        },
-        ...
-      ]
-    },
-    ...
-  ]
-}
+
+	{
+	  "boxes":
+	  [
+	    {
+	      "fulfilmentId": "{string}",
+	      "weight": {int64},
+	      "width": {int64},
+	      "height": {int64},
+	      "depth": {int64},
+	      "items":
+	      [
+	        {
+	          "id": {int64},
+	          "count": {int32}
+	        },
+	        ...
+	      ]
+	    },
+	    ...
+	  ]
+	}
+
 ```
 | **Параметр**  | **Тип**  | **Значение**  |
 | ----------- | ----------- | ----------- |
@@ -20118,31 +20123,31 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL. 
- @return ApiSetOrderShipmentBoxesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
+	@return ExpressSetOrderShipmentBoxesRequest
 */
-func (a *ExpressAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) ApiSetOrderShipmentBoxesRequest {
-	return ApiSetOrderShipmentBoxesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
-		shipmentId: shipmentId,
+func (a *ExpressAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) ExpressSetOrderShipmentBoxesRequest {
+	return ExpressSetOrderShipmentBoxesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		shipmentId:     shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return SetOrderShipmentBoxesResponse
-func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+//
+//	@return SetOrderShipmentBoxesResponse
+func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ExpressSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SetOrderShipmentBoxesResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SetOrderShipmentBoxesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SetOrderShipmentBoxes")
@@ -20187,14 +20192,14 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -20227,8 +20232,8 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -20238,8 +20243,8 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20249,8 +20254,8 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20260,8 +20265,8 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20271,8 +20276,8 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20282,8 +20287,8 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20300,20 +20305,20 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSkipGoodsFeedbacksReactionRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressSkipGoodsFeedbacksReactionRequest struct {
+	ctx                              context.Context
+	ExpressService                   *ExpressAPIService
+	businessId                       int64
 	skipGoodsFeedbackReactionRequest *SkipGoodsFeedbackReactionRequest
 }
 
-func (r ApiSkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) ApiSkipGoodsFeedbacksReactionRequest {
+func (r ExpressSkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) ExpressSkipGoodsFeedbacksReactionRequest {
 	r.skipGoodsFeedbackReactionRequest = &skipGoodsFeedbackReactionRequest
 	return r
 }
 
-func (r ApiSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SkipGoodsFeedbacksReactionExecute(r)
+func (r ExpressSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.SkipGoodsFeedbacksReactionExecute(r)
 }
 
 /*
@@ -20326,27 +20331,27 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiSkipGoodsFeedbacksReactionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressSkipGoodsFeedbacksReactionRequest
 */
-func (a *ExpressAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) ApiSkipGoodsFeedbacksReactionRequest {
-	return ApiSkipGoodsFeedbacksReactionRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) ExpressSkipGoodsFeedbacksReactionRequest {
+	return ExpressSkipGoodsFeedbacksReactionRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ExpressSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SkipGoodsFeedbacksReaction")
@@ -20389,14 +20394,14 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeed
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -20429,8 +20434,8 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeed
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -20440,8 +20445,8 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeed
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20451,8 +20456,8 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeed
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20462,8 +20467,8 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeed
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20473,8 +20478,8 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeed
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20484,8 +20489,8 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeed
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20502,23 +20507,23 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeed
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSubmitReturnDecisionRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
-	returnId int64
-	body *map[string]interface{}
+type ExpressSubmitReturnDecisionRequest struct {
+	ctx            context.Context
+	ExpressService *ExpressAPIService
+	campaignId     int64
+	orderId        int64
+	returnId       int64
+	body           *map[string]interface{}
 }
 
 // description
-func (r ApiSubmitReturnDecisionRequest) Body(body map[string]interface{}) ApiSubmitReturnDecisionRequest {
+func (r ExpressSubmitReturnDecisionRequest) Body(body map[string]interface{}) ExpressSubmitReturnDecisionRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiSubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SubmitReturnDecisionExecute(r)
+func (r ExpressSubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.SubmitReturnDecisionExecute(r)
 }
 
 /*
@@ -20531,31 +20536,31 @@ SubmitReturnDecision Подтверждение решения по возвра
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param returnId Идентификатор невыкупа или возврата.
- @return ApiSubmitReturnDecisionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param returnId Идентификатор невыкупа или возврата.
+	@return ExpressSubmitReturnDecisionRequest
 */
-func (a *ExpressAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiSubmitReturnDecisionRequest {
-	return ApiSubmitReturnDecisionRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
-		returnId: returnId,
+func (a *ExpressAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) ExpressSubmitReturnDecisionRequest {
+	return ExpressSubmitReturnDecisionRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
+		returnId:       returnId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ExpressSubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SubmitReturnDecision")
@@ -20597,14 +20602,14 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisio
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -20637,8 +20642,8 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -20648,8 +20653,8 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20659,8 +20664,8 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20670,8 +20675,8 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20681,8 +20686,8 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20692,8 +20697,8 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisio
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20710,20 +20715,20 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisio
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateBusinessPricesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressUpdateBusinessPricesRequest struct {
+	ctx                         context.Context
+	ExpressService              *ExpressAPIService
+	businessId                  int64
 	updateBusinessPricesRequest *UpdateBusinessPricesRequest
 }
 
-func (r ApiUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) ApiUpdateBusinessPricesRequest {
+func (r ExpressUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) ExpressUpdateBusinessPricesRequest {
 	r.updateBusinessPricesRequest = &updateBusinessPricesRequest
 	return r
 }
 
-func (r ApiUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateBusinessPricesExecute(r)
+func (r ExpressUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.UpdateBusinessPricesExecute(r)
 }
 
 /*
@@ -20744,27 +20749,27 @@ UpdateBusinessPrices Установка цен на товары для всех
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateBusinessPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressUpdateBusinessPricesRequest
 */
-func (a *ExpressAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) ApiUpdateBusinessPricesRequest {
-	return ApiUpdateBusinessPricesRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) ExpressUpdateBusinessPricesRequest {
+	return ExpressUpdateBusinessPricesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ExpressUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateBusinessPrices")
@@ -20807,14 +20812,14 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -20847,8 +20852,8 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -20858,8 +20863,8 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20869,8 +20874,8 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20880,8 +20885,8 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20891,8 +20896,8 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -20902,8 +20907,8 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20913,8 +20918,8 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20931,20 +20936,20 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrice
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateCampaignOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressUpdateCampaignOffersRequest struct {
+	ctx                         context.Context
+	ExpressService              *ExpressAPIService
+	campaignId                  int64
 	updateCampaignOffersRequest *UpdateCampaignOffersRequest
 }
 
-func (r ApiUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) ApiUpdateCampaignOffersRequest {
+func (r ExpressUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) ExpressUpdateCampaignOffersRequest {
 	r.updateCampaignOffersRequest = &updateCampaignOffersRequest
 	return r
 }
 
-func (r ApiUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateCampaignOffersExecute(r)
+func (r ExpressUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.UpdateCampaignOffersExecute(r)
 }
 
 /*
@@ -20957,27 +20962,27 @@ UpdateCampaignOffers Изменение условий продажи товар
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateCampaignOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressUpdateCampaignOffersRequest
 */
-func (a *ExpressAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) ApiUpdateCampaignOffersRequest {
-	return ApiUpdateCampaignOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) ExpressUpdateCampaignOffersRequest {
+	return ExpressUpdateCampaignOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ExpressUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateCampaignOffers")
@@ -21020,14 +21025,14 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -21060,8 +21065,8 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -21071,8 +21076,8 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21082,8 +21087,8 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -21093,8 +21098,8 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21104,8 +21109,8 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -21115,8 +21120,8 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21126,8 +21131,8 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21144,21 +21149,21 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffer
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateExternalOrderIdRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressUpdateExternalOrderIdRequest struct {
+	ctx                          context.Context
+	ExpressService               *ExpressAPIService
+	campaignId                   int64
+	orderId                      int64
 	updateExternalOrderIdRequest *UpdateExternalOrderIdRequest
 }
 
-func (r ApiUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) ApiUpdateExternalOrderIdRequest {
+func (r ExpressUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) ExpressUpdateExternalOrderIdRequest {
 	r.updateExternalOrderIdRequest = &updateExternalOrderIdRequest
 	return r
 }
 
-func (r ApiUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateExternalOrderIdExecute(r)
+func (r ExpressUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.UpdateExternalOrderIdExecute(r)
 }
 
 /*
@@ -21173,29 +21178,29 @@ UpdateExternalOrderId Передача или изменение дополни�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateExternalOrderIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressUpdateExternalOrderIdRequest
 */
-func (a *ExpressAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) ApiUpdateExternalOrderIdRequest {
-	return ApiUpdateExternalOrderIdRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) ExpressUpdateExternalOrderIdRequest {
+	return ExpressUpdateExternalOrderIdRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ExpressUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateExternalOrderId")
@@ -21239,14 +21244,14 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrde
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -21279,8 +21284,8 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -21290,8 +21295,8 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21301,8 +21306,8 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -21312,8 +21317,8 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21323,8 +21328,8 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21334,8 +21339,8 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrde
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21352,20 +21357,20 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrde
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateGoodsFeedbackCommentRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressUpdateGoodsFeedbackCommentRequest struct {
+	ctx                               context.Context
+	ExpressService                    *ExpressAPIService
+	businessId                        int64
 	updateGoodsFeedbackCommentRequest *UpdateGoodsFeedbackCommentRequest
 }
 
-func (r ApiUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) ApiUpdateGoodsFeedbackCommentRequest {
+func (r ExpressUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) ExpressUpdateGoodsFeedbackCommentRequest {
 	r.updateGoodsFeedbackCommentRequest = &updateGoodsFeedbackCommentRequest
 	return r
 }
 
-func (r ApiUpdateGoodsFeedbackCommentRequest) Execute() (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
-	return r.ApiService.UpdateGoodsFeedbackCommentExecute(r)
+func (r ExpressUpdateGoodsFeedbackCommentRequest) Execute() (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
+	return r.ExpressService.UpdateGoodsFeedbackCommentExecute(r)
 }
 
 /*
@@ -21392,27 +21397,27 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateGoodsFeedbackCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressUpdateGoodsFeedbackCommentRequest
 */
-func (a *ExpressAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) ApiUpdateGoodsFeedbackCommentRequest {
-	return ApiUpdateGoodsFeedbackCommentRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) ExpressUpdateGoodsFeedbackCommentRequest {
+	return ExpressUpdateGoodsFeedbackCommentRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateGoodsFeedbackCommentResponse
-func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
+//
+//	@return UpdateGoodsFeedbackCommentResponse
+func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ExpressUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateGoodsFeedbackCommentResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateGoodsFeedbackCommentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateGoodsFeedbackComment")
@@ -21455,14 +21460,14 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -21495,8 +21500,8 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -21506,8 +21511,8 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21517,8 +21522,8 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -21528,8 +21533,8 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21539,8 +21544,8 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21550,8 +21555,8 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21568,20 +21573,20 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferContentRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressUpdateOfferContentRequest struct {
+	ctx                       context.Context
+	ExpressService            *ExpressAPIService
+	businessId                int64
 	updateOfferContentRequest *UpdateOfferContentRequest
 }
 
-func (r ApiUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) ApiUpdateOfferContentRequest {
+func (r ExpressUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) ExpressUpdateOfferContentRequest {
 	r.updateOfferContentRequest = &updateOfferContentRequest
 	return r
 }
 
-func (r ApiUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferContentExecute(r)
+func (r ExpressUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
+	return r.ExpressService.UpdateOfferContentExecute(r)
 }
 
 /*
@@ -21608,27 +21613,27 @@ UpdateOfferContent Редактирование категорийных хар�
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateOfferContentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressUpdateOfferContentRequest
 */
-func (a *ExpressAPIService) UpdateOfferContent(ctx context.Context, businessId int64) ApiUpdateOfferContentRequest {
-	return ApiUpdateOfferContentRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) UpdateOfferContent(ctx context.Context, businessId int64) ExpressUpdateOfferContentRequest {
+	return ExpressUpdateOfferContentRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOfferContentResponse
-func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
+//
+//	@return UpdateOfferContentResponse
+func (a *ExpressAPIService) UpdateOfferContentExecute(r ExpressUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOfferContentResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOfferContentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateOfferContent")
@@ -21671,14 +21676,14 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -21711,8 +21716,8 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -21722,8 +21727,8 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21733,8 +21738,8 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -21744,8 +21749,8 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21755,8 +21760,8 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -21766,8 +21771,8 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21777,8 +21782,8 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21795,20 +21800,20 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferMappingEntriesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressUpdateOfferMappingEntriesRequest struct {
+	ctx                            context.Context
+	ExpressService                 *ExpressAPIService
+	campaignId                     int64
 	updateOfferMappingEntryRequest *UpdateOfferMappingEntryRequest
 }
 
-func (r ApiUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(updateOfferMappingEntryRequest UpdateOfferMappingEntryRequest) ApiUpdateOfferMappingEntriesRequest {
+func (r ExpressUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(updateOfferMappingEntryRequest UpdateOfferMappingEntryRequest) ExpressUpdateOfferMappingEntriesRequest {
 	r.updateOfferMappingEntryRequest = &updateOfferMappingEntryRequest
 	return r
 }
 
-func (r ApiUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferMappingEntriesExecute(r)
+func (r ExpressUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.UpdateOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -21848,30 +21853,31 @@ UpdateOfferMappingEntries Добавление и редактирование �
 |**⚙️ Лимит:** 5 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateOfferMappingEntriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressUpdateOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *ExpressAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) ApiUpdateOfferMappingEntriesRequest {
-	return ApiUpdateOfferMappingEntriesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) ExpressUpdateOfferMappingEntriesRequest {
+	return ExpressUpdateOfferMappingEntriesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
+//
 // Deprecated
-func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ExpressUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateOfferMappingEntries")
@@ -21914,14 +21920,14 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -21954,8 +21960,8 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -21965,8 +21971,8 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21976,8 +21982,8 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -21987,8 +21993,8 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21998,8 +22004,8 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -22009,8 +22015,8 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -22020,8 +22026,8 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -22038,27 +22044,27 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMap
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferMappingsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressUpdateOfferMappingsRequest struct {
+	ctx                        context.Context
+	ExpressService             *ExpressAPIService
+	businessId                 int64
 	updateOfferMappingsRequest *UpdateOfferMappingsRequest
-	language *CatalogLanguageType
+	language                   *CatalogLanguageType
 }
 
-func (r ApiUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) ApiUpdateOfferMappingsRequest {
+func (r ExpressUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) ExpressUpdateOfferMappingsRequest {
 	r.updateOfferMappingsRequest = &updateOfferMappingsRequest
 	return r
 }
 
-// Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;. 
-func (r ApiUpdateOfferMappingsRequest) Language(language CatalogLanguageType) ApiUpdateOfferMappingsRequest {
+// Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
+func (r ExpressUpdateOfferMappingsRequest) Language(language CatalogLanguageType) ExpressUpdateOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferMappingsExecute(r)
+func (r ExpressUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
+	return r.ExpressService.UpdateOfferMappingsExecute(r)
 }
 
 /*
@@ -22090,10 +22096,11 @@ UpdateOfferMappings Добавление товаров в каталог и и�
 
 Когда вы добавляете товары в каталог, указывайте значения параметров `name` и `description` на русском языке. Чтобы на витрине они отображались и на другом языке, еще раз выполните запрос `POST businesses/{businessId}/offer-mappings/update`, где укажите:
 
-  * язык в параметре `language`;
-  * значения параметров `name` и `description` на указанном языке.
+  - язык в параметре `language`;
 
-  Повторно передавать остальные характеристики товара не нужно.
+  - значения параметров `name` и `description` на указанном языке.
+
+    Повторно передавать остальные характеристики товара не нужно.
 
 {% endcut %}
 
@@ -22134,27 +22141,27 @@ SKU товара можно изменить в кабинете продавц�
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 100 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateOfferMappingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressUpdateOfferMappingsRequest
 */
-func (a *ExpressAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) ApiUpdateOfferMappingsRequest {
-	return ApiUpdateOfferMappingsRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) ExpressUpdateOfferMappingsRequest {
+	return ExpressUpdateOfferMappingsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOfferMappingsResponse
-func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
+//
+//	@return UpdateOfferMappingsResponse
+func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ExpressUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOfferMappingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOfferMappingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateOfferMappings")
@@ -22200,14 +22207,14 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -22240,8 +22247,8 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -22251,8 +22258,8 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -22262,8 +22269,8 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -22273,8 +22280,8 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -22284,8 +22291,8 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -22295,8 +22302,8 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -22306,8 +22313,8 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -22324,21 +22331,21 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderItemsRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressUpdateOrderItemsRequest struct {
+	ctx                    context.Context
+	ExpressService         *ExpressAPIService
+	campaignId             int64
+	orderId                int64
 	updateOrderItemRequest *UpdateOrderItemRequest
 }
 
-func (r ApiUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) ApiUpdateOrderItemsRequest {
+func (r ExpressUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) ExpressUpdateOrderItemsRequest {
 	r.updateOrderItemRequest = &updateOrderItemRequest
 	return r
 }
 
-func (r ApiUpdateOrderItemsRequest) Execute() (*http.Response, error) {
-	return r.ApiService.UpdateOrderItemsExecute(r)
+func (r ExpressUpdateOrderItemsRequest) Execute() (*http.Response, error) {
+	return r.ExpressService.UpdateOrderItemsExecute(r)
 }
 
 /*
@@ -22391,27 +22398,26 @@ UpdateOrderItems Удаление товара из заказа или умен
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateOrderItemsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressUpdateOrderItemsRequest
 */
-func (a *ExpressAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderItemsRequest {
-	return ApiUpdateOrderItemsRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) ExpressUpdateOrderItemsRequest {
+	return ExpressUpdateOrderItemsRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*http.Response, error) {
+func (a *ExpressAPIService) UpdateOrderItemsExecute(r ExpressUpdateOrderItemsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateOrderItems")
@@ -22455,14 +22461,14 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -22495,8 +22501,8 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -22506,8 +22512,8 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -22517,8 +22523,8 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -22528,8 +22534,8 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -22539,8 +22545,8 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -22550,8 +22556,8 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -22559,21 +22565,21 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStatusRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressUpdateOrderStatusRequest struct {
+	ctx                      context.Context
+	ExpressService           *ExpressAPIService
+	campaignId               int64
+	orderId                  int64
 	updateOrderStatusRequest *UpdateOrderStatusRequest
 }
 
-func (r ApiUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) ApiUpdateOrderStatusRequest {
+func (r ExpressUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) ExpressUpdateOrderStatusRequest {
 	r.updateOrderStatusRequest = &updateOrderStatusRequest
 	return r
 }
 
-func (r ApiUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
-	return r.ApiService.UpdateOrderStatusExecute(r)
+func (r ExpressUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
+	return r.ExpressService.UpdateOrderStatusExecute(r)
 }
 
 /*
@@ -22590,29 +22596,29 @@ UpdateOrderStatus Изменение статуса одного заказа
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateOrderStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressUpdateOrderStatusRequest
 */
-func (a *ExpressAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderStatusRequest {
-	return ApiUpdateOrderStatusRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) ExpressUpdateOrderStatusRequest {
+	return ExpressUpdateOrderStatusRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOrderStatusResponse
-func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
+//
+//	@return UpdateOrderStatusResponse
+func (a *ExpressAPIService) UpdateOrderStatusExecute(r ExpressUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOrderStatusResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOrderStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateOrderStatus")
@@ -22656,14 +22662,14 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -22696,8 +22702,8 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -22707,8 +22713,8 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -22718,8 +22724,8 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -22729,8 +22735,8 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -22740,8 +22746,8 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -22751,8 +22757,8 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -22769,20 +22775,20 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStatusesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressUpdateOrderStatusesRequest struct {
+	ctx                        context.Context
+	ExpressService             *ExpressAPIService
+	campaignId                 int64
 	updateOrderStatusesRequest *UpdateOrderStatusesRequest
 }
 
-func (r ApiUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) ApiUpdateOrderStatusesRequest {
+func (r ExpressUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) ExpressUpdateOrderStatusesRequest {
 	r.updateOrderStatusesRequest = &updateOrderStatusesRequest
 	return r
 }
 
-func (r ApiUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
-	return r.ApiService.UpdateOrderStatusesExecute(r)
+func (r ExpressUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
+	return r.ExpressService.UpdateOrderStatusesExecute(r)
 }
 
 /*
@@ -22801,27 +22807,27 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 |**⚙️ Лимит:** 100 000 заказов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateOrderStatusesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressUpdateOrderStatusesRequest
 */
-func (a *ExpressAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) ApiUpdateOrderStatusesRequest {
-	return ApiUpdateOrderStatusesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) ExpressUpdateOrderStatusesRequest {
+	return ExpressUpdateOrderStatusesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOrderStatusesResponse
-func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
+//
+//	@return UpdateOrderStatusesResponse
+func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ExpressUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOrderStatusesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOrderStatusesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateOrderStatuses")
@@ -22864,14 +22870,14 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -22904,8 +22910,8 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -22915,8 +22921,8 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -22926,8 +22932,8 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -22937,8 +22943,8 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -22948,8 +22954,8 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -22959,8 +22965,8 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -22977,20 +22983,20 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePricesRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressUpdatePricesRequest struct {
+	ctx                 context.Context
+	ExpressService      *ExpressAPIService
+	campaignId          int64
 	updatePricesRequest *UpdatePricesRequest
 }
 
-func (r ApiUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) ApiUpdatePricesRequest {
+func (r ExpressUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) ExpressUpdatePricesRequest {
 	r.updatePricesRequest = &updatePricesRequest
 	return r
 }
 
-func (r ApiUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdatePricesExecute(r)
+func (r ExpressUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.UpdatePricesExecute(r)
 }
 
 /*
@@ -23017,27 +23023,27 @@ UpdatePrices Установка цен на товары в конкретном
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdatePricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressUpdatePricesRequest
 */
-func (a *ExpressAPIService) UpdatePrices(ctx context.Context, campaignId int64) ApiUpdatePricesRequest {
-	return ApiUpdatePricesRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) UpdatePrices(ctx context.Context, campaignId int64) ExpressUpdatePricesRequest {
+	return ExpressUpdatePricesRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdatePricesExecute(r ExpressUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdatePrices")
@@ -23080,14 +23086,14 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -23120,8 +23126,8 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23131,8 +23137,8 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23142,8 +23148,8 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -23153,8 +23159,8 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -23164,8 +23170,8 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -23175,8 +23181,8 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23186,8 +23192,8 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23204,20 +23210,20 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*Empt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePromoOffersRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	businessId int64
+type ExpressUpdatePromoOffersRequest struct {
+	ctx                      context.Context
+	ExpressService           *ExpressAPIService
+	businessId               int64
 	updatePromoOffersRequest *UpdatePromoOffersRequest
 }
 
-func (r ApiUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) ApiUpdatePromoOffersRequest {
+func (r ExpressUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) ExpressUpdatePromoOffersRequest {
 	r.updatePromoOffersRequest = &updatePromoOffersRequest
 	return r
 }
 
-func (r ApiUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
-	return r.ApiService.UpdatePromoOffersExecute(r)
+func (r ExpressUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
+	return r.ExpressService.UpdatePromoOffersExecute(r)
 }
 
 /*
@@ -23232,27 +23238,27 @@ UpdatePromoOffers Добавление товаров в акцию или из�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdatePromoOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ExpressUpdatePromoOffersRequest
 */
-func (a *ExpressAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) ApiUpdatePromoOffersRequest {
-	return ApiUpdatePromoOffersRequest{
-		ApiService: a,
-		ctx: ctx,
-		businessId: businessId,
+func (a *ExpressAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) ExpressUpdatePromoOffersRequest {
+	return ExpressUpdatePromoOffersRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		businessId:     businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdatePromoOffersResponse
-func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
+//
+//	@return UpdatePromoOffersResponse
+func (a *ExpressAPIService) UpdatePromoOffersExecute(r ExpressUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdatePromoOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdatePromoOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdatePromoOffers")
@@ -23295,14 +23301,14 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -23335,8 +23341,8 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23346,8 +23352,8 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23357,8 +23363,8 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -23368,8 +23374,8 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -23379,8 +23385,8 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23390,8 +23396,8 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23408,20 +23414,20 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateStocksRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressUpdateStocksRequest struct {
+	ctx                 context.Context
+	ExpressService      *ExpressAPIService
+	campaignId          int64
 	updateStocksRequest *UpdateStocksRequest
 }
 
-func (r ApiUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) ApiUpdateStocksRequest {
+func (r ExpressUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) ExpressUpdateStocksRequest {
 	r.updateStocksRequest = &updateStocksRequest
 	return r
 }
 
-func (r ApiUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateStocksExecute(r)
+func (r ExpressUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ExpressService.UpdateStocksExecute(r)
 }
 
 /*
@@ -23444,27 +23450,27 @@ UpdateStocks Передача информации об остатках
 |**⚙️ Лимит:** 100 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateStocksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressUpdateStocksRequest
 */
-func (a *ExpressAPIService) UpdateStocks(ctx context.Context, campaignId int64) ApiUpdateStocksRequest {
-	return ApiUpdateStocksRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) UpdateStocks(ctx context.Context, campaignId int64) ExpressUpdateStocksRequest {
+	return ExpressUpdateStocksRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdateStocksExecute(r ExpressUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateStocks")
@@ -23507,14 +23513,14 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*Empt
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -23547,8 +23553,8 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23558,8 +23564,8 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23569,8 +23575,8 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -23580,8 +23586,8 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -23591,8 +23597,8 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23602,8 +23608,8 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23620,20 +23626,20 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*Empt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateWarehouseStatusRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
+type ExpressUpdateWarehouseStatusRequest struct {
+	ctx                          context.Context
+	ExpressService               *ExpressAPIService
+	campaignId                   int64
 	updateWarehouseStatusRequest *UpdateWarehouseStatusRequest
 }
 
-func (r ApiUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) ApiUpdateWarehouseStatusRequest {
+func (r ExpressUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) ExpressUpdateWarehouseStatusRequest {
 	r.updateWarehouseStatusRequest = &updateWarehouseStatusRequest
 	return r
 }
 
-func (r ApiUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
-	return r.ApiService.UpdateWarehouseStatusExecute(r)
+func (r ExpressUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
+	return r.ExpressService.UpdateWarehouseStatusExecute(r)
 }
 
 /*
@@ -23648,27 +23654,27 @@ UpdateWarehouseStatus Изменение статуса склада
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateWarehouseStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ExpressUpdateWarehouseStatusRequest
 */
-func (a *ExpressAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) ApiUpdateWarehouseStatusRequest {
-	return ApiUpdateWarehouseStatusRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
+func (a *ExpressAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) ExpressUpdateWarehouseStatusRequest {
+	return ExpressUpdateWarehouseStatusRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateWarehouseStatusResponse
-func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
+//
+//	@return UpdateWarehouseStatusResponse
+func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ExpressUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateWarehouseStatusResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateWarehouseStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateWarehouseStatus")
@@ -23711,14 +23717,14 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseSta
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -23751,8 +23757,8 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseSta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23762,8 +23768,8 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseSta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23773,8 +23779,8 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseSta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -23784,8 +23790,8 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseSta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23795,8 +23801,8 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseSta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23813,21 +23819,21 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseSta
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiVerifyOrderEacRequest struct {
-	ctx context.Context
-	ApiService *ExpressAPIService
-	campaignId int64
-	orderId int64
+type ExpressVerifyOrderEacRequest struct {
+	ctx                   context.Context
+	ExpressService        *ExpressAPIService
+	campaignId            int64
+	orderId               int64
 	verifyOrderEacRequest *VerifyOrderEacRequest
 }
 
-func (r ApiVerifyOrderEacRequest) VerifyOrderEacRequest(verifyOrderEacRequest VerifyOrderEacRequest) ApiVerifyOrderEacRequest {
+func (r ExpressVerifyOrderEacRequest) VerifyOrderEacRequest(verifyOrderEacRequest VerifyOrderEacRequest) ExpressVerifyOrderEacRequest {
 	r.verifyOrderEacRequest = &verifyOrderEacRequest
 	return r
 }
 
-func (r ApiVerifyOrderEacRequest) Execute() (*VerifyOrderEacResponse, *http.Response, error) {
-	return r.ApiService.VerifyOrderEacExecute(r)
+func (r ExpressVerifyOrderEacRequest) Execute() (*VerifyOrderEacResponse, *http.Response, error) {
+	return r.ExpressService.VerifyOrderEacExecute(r)
 }
 
 /*
@@ -23839,41 +23845,41 @@ VerifyOrderEac Передача кода подтверждения
 
 **Если у магазина настроена работа с кодами подтверждения:**
 
-  В запросах [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md), [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md), [PUT campaigns/{campaignId}/orders/{orderId}/status](../../reference/orders/updateOrderStatus.md) в параметре `delivery`, вложенном в `order`, возвращается параметр `eacType` с типом `Enum` — тип кода подтверждения для передачи заказа.
+	В запросах [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md), [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md), [PUT campaigns/{campaignId}/orders/{orderId}/status](../../reference/orders/updateOrderStatus.md) в параметре `delivery`, вложенном в `order`, возвращается параметр `eacType` с типом `Enum` — тип кода подтверждения для передачи заказа.
 
-  Возможные значения:
+	Возможные значения:
 
-  * `MERCHANT_TO_COURIER` (временно не возвращается) — продавец передает код курьеру для получения невыкупа;
-  * `COURIER_TO_MERCHANT` — курьер передает код продавцу для получения заказа.
+	* `MERCHANT_TO_COURIER` (временно не возвращается) — продавец передает код курьеру для получения невыкупа;
+	* `COURIER_TO_MERCHANT` — курьер передает код продавцу для получения заказа.
 
-  Параметр `eacType` возвращается при статусах заказа `COURIER_FOUND`, `COURIER_ARRIVED_TO_SENDER` и `DELIVERY_SERVICE_UNDELIVERED`. Если заказ в других статусах, параметр может отсутствовать.
+	Параметр `eacType` возвращается при статусах заказа `COURIER_FOUND`, `COURIER_ARRIVED_TO_SENDER` и `DELIVERY_SERVICE_UNDELIVERED`. Если заказ в других статусах, параметр может отсутствовать.
 
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiVerifyOrderEacRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ExpressVerifyOrderEacRequest
 */
-func (a *ExpressAPIService) VerifyOrderEac(ctx context.Context, campaignId int64, orderId int64) ApiVerifyOrderEacRequest {
-	return ApiVerifyOrderEacRequest{
-		ApiService: a,
-		ctx: ctx,
-		campaignId: campaignId,
-		orderId: orderId,
+func (a *ExpressAPIService) VerifyOrderEac(ctx context.Context, campaignId int64, orderId int64) ExpressVerifyOrderEacRequest {
+	return ExpressVerifyOrderEacRequest{
+		ExpressService: a,
+		ctx:            ctx,
+		campaignId:     campaignId,
+		orderId:        orderId,
 	}
 }
 
 // Execute executes the request
-//  @return VerifyOrderEacResponse
-func (a *ExpressAPIService) VerifyOrderEacExecute(r ApiVerifyOrderEacRequest) (*VerifyOrderEacResponse, *http.Response, error) {
+//
+//	@return VerifyOrderEacResponse
+func (a *ExpressAPIService) VerifyOrderEacExecute(r ExpressVerifyOrderEacRequest) (*VerifyOrderEacResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *VerifyOrderEacResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *VerifyOrderEacResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.VerifyOrderEac")
@@ -23917,14 +23923,14 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ApiVerifyOrderEacRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["ExpressKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Express-Key"] = key
 			}
 		}
 	}
@@ -23957,8 +23963,8 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ApiVerifyOrderEacRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23968,8 +23974,8 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ApiVerifyOrderEacRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23979,8 +23985,8 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ApiVerifyOrderEacRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -23990,8 +23996,8 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ApiVerifyOrderEacRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -24001,8 +24007,8 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ApiVerifyOrderEacRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -24012,8 +24018,8 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ApiVerifyOrderEacRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

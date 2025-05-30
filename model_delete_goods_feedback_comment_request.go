@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,17 +11,17 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the DeleteGoodsFeedbackCommentRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeleteGoodsFeedbackCommentRequest{}
 
-// DeleteGoodsFeedbackCommentRequest Фильтр запроса отзывов по бизнесу. 
+// DeleteGoodsFeedbackCommentRequest Фильтр запроса отзывов по бизнесу.
 type DeleteGoodsFeedbackCommentRequest struct {
-	// Идентификатор комментария к отзыву. 
+	// Идентификатор комментария к отзыву.
 	Id int64 `json:"id"`
 }
 
@@ -70,7 +70,7 @@ func (o *DeleteGoodsFeedbackCommentRequest) SetId(v int64) {
 }
 
 func (o DeleteGoodsFeedbackCommentRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -96,10 +96,10 @@ func (o *DeleteGoodsFeedbackCommentRequest) UnmarshalJSON(data []byte) (err erro
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -155,5 +155,3 @@ func (v *NullableDeleteGoodsFeedbackCommentRequest) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

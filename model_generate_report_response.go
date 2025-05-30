@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -20,7 +20,7 @@ var _ MappedNullable = &GenerateReportResponse{}
 // GenerateReportResponse Ответ на запрос генерации отчета.
 type GenerateReportResponse struct {
 	Status *ApiResponseStatusType `json:"status,omitempty"`
-	Result *GenerateReportDTO `json:"result,omitempty"`
+	Result *GenerateReportDTO     `json:"result,omitempty"`
 }
 
 // NewGenerateReportResponse instantiates a new GenerateReportResponse object
@@ -105,7 +105,7 @@ func (o *GenerateReportResponse) SetResult(v GenerateReportDTO) {
 }
 
 func (o GenerateReportResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableGenerateReportResponse) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

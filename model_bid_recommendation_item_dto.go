@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -23,9 +23,9 @@ var _ MappedNullable = &BidRecommendationItemDTO{}
 type BidRecommendationItemDTO struct {
 	// Значение ставки.
 	Bid int32 `json:"bid"`
-	// Доля показов. 
+	// Доля показов.
 	ShowPercent int64 `json:"showPercent"`
-	// Список доступных субсидий.  Чтобы получить необходимый инструмент продвижения, установите ставку, которая будет рекомендована для этого инструмента или выше. 
+	// Список доступных субсидий.  Чтобы получить необходимый инструмент продвижения, установите ставку, которая будет рекомендована для этого инструмента или выше.
 	Benefits []BenefitType `json:"benefits,omitempty"`
 }
 
@@ -132,7 +132,7 @@ func (o *BidRecommendationItemDTO) SetBenefits(v []BenefitType) {
 }
 
 func (o BidRecommendationItemDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -163,10 +163,10 @@ func (o *BidRecommendationItemDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -222,5 +222,3 @@ func (v *NullableBidRecommendationItemDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

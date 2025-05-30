@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,10 +11,10 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the OrdersStatsOrderDTO type satisfies the MappedNullable interface at compile time
@@ -24,28 +24,28 @@ var _ MappedNullable = &OrdersStatsOrderDTO{}
 type OrdersStatsOrderDTO struct {
 	// Идентификатор заказа.
 	Id *int64 `json:"id,omitempty"`
-	// Дата создания заказа.  Формат даты: `ГГГГ-ММ-ДД`. 
+	// Дата создания заказа.  Формат даты: `ГГГГ-ММ-ДД`.
 	CreationDate *string `json:"creationDate,omitempty"`
-	// Дата и время, когда статус заказа был изменен в последний раз.  Формат даты и времени: ISO 8601. Например, `2017-11-21T00:00:00`. Часовой пояс — UTC+03:00 (Москва). 
-	StatusUpdateDate *time.Time `json:"statusUpdateDate,omitempty"`
-	Status *OrderStatsStatusType `json:"status,omitempty"`
+	// Дата и время, когда статус заказа был изменен в последний раз.  Формат даты и времени: ISO 8601. Например, `2017-11-21T00:00:00`. Часовой пояс — UTC+03:00 (Москва).
+	StatusUpdateDate *time.Time            `json:"statusUpdateDate,omitempty"`
+	Status           *OrderStatsStatusType `json:"status,omitempty"`
 	// Идентификатор заказа в информационной системе магазина.
-	PartnerOrderId *string `json:"partnerOrderId,omitempty"`
-	PaymentType *OrdersStatsOrderPaymentType `json:"paymentType,omitempty"`
-	// Тип заказа:  * `false` — настоящий заказ покупателя.  * `true` — [тестовый](../../concepts/sandbox.md) заказ Маркета. 
-	Fake *bool `json:"fake,omitempty"`
+	PartnerOrderId *string                      `json:"partnerOrderId,omitempty"`
+	PaymentType    *OrdersStatsOrderPaymentType `json:"paymentType,omitempty"`
+	// Тип заказа:  * `false` — настоящий заказ покупателя.  * `true` — [тестовый](../../concepts/sandbox.md) заказ Маркета.
+	Fake           *bool                         `json:"fake,omitempty"`
 	DeliveryRegion *OrdersStatsDeliveryRegionDTO `json:"deliveryRegion,omitempty"`
-	// Список товаров в заказе после возможных изменений.  Информация о доставке заказа добавляется отдельным элементом в массиве `items`— параметр `offerName` со значением `Доставка`. 
+	// Список товаров в заказе после возможных изменений.  Информация о доставке заказа добавляется отдельным элементом в массиве `items`— параметр `offerName` со значением `Доставка`.
 	Items []OrdersStatsItemDTO `json:"items"`
 	// Список товаров в заказе до изменений.
 	InitialItems []OrdersStatsItemDTO `json:"initialItems,omitempty"`
-	// Информация о денежных переводах по заказу.  Может вернуться пустым, если нет данных о переводах. Например, заказ отменен или выбрана оплата при получении (для модели DBS). 
+	// Информация о денежных переводах по заказу.  Может вернуться пустым, если нет данных о переводах. Например, заказ отменен или выбрана оплата при получении (для модели DBS).
 	Payments []OrdersStatsPaymentDTO `json:"payments"`
 	// Информация о стоимости услуг.
 	Commissions []OrdersStatsCommissionDTO `json:"commissions"`
 	// Начисление баллов, которые используются для уменьшения стоимости размещения, и их списание в случае невыкупа или возврата.
 	Subsidies []OrdersStatsSubsidyDTO `json:"subsidies,omitempty"`
-	Currency CurrencyType `json:"currency"`
+	Currency  CurrencyType            `json:"currency"`
 }
 
 type _OrdersStatsOrderDTO OrdersStatsOrderDTO
@@ -490,7 +490,7 @@ func (o *OrdersStatsOrderDTO) SetCurrency(v CurrencyType) {
 }
 
 func (o OrdersStatsOrderDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -552,10 +552,10 @@ func (o *OrdersStatsOrderDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -611,5 +611,3 @@ func (v *NullableOrdersStatsOrderDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

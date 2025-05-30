@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,23 +15,23 @@ import (
 	"fmt"
 )
 
-// OrderStatusType Статус заказа:  * `PLACING` — оформляется, подготовка к резервированию.  * `RESERVED` — зарезервирован, но недооформлен.  * `UNPAID` — оформлен, но еще не оплачен (если выбрана оплата при оформлении).  * `PROCESSING` — находится в обработке.  * `DELIVERY` — передан в службу доставки.  * `PICKUP` — доставлен в пункт самовывоза.  * `DELIVERED` — получен покупателем.  * `CANCELLED` — отменен.  * `PENDING` — ожидает обработки со стороны продавца.  * `PARTIALLY_RETURNED` — возвращен частично.  * `RETURNED` — возвращен полностью.  * `UNKNOWN` — неизвестный статус.  Также могут возвращаться другие значения. Обрабатывать их не требуется. 
+// OrderStatusType Статус заказа:  * `PLACING` — оформляется, подготовка к резервированию.  * `RESERVED` — зарезервирован, но недооформлен.  * `UNPAID` — оформлен, но еще не оплачен (если выбрана оплата при оформлении).  * `PROCESSING` — находится в обработке.  * `DELIVERY` — передан в службу доставки.  * `PICKUP` — доставлен в пункт самовывоза.  * `DELIVERED` — получен покупателем.  * `CANCELLED` — отменен.  * `PENDING` — ожидает обработки со стороны продавца.  * `PARTIALLY_RETURNED` — возвращен частично.  * `RETURNED` — возвращен полностью.  * `UNKNOWN` — неизвестный статус.  Также могут возвращаться другие значения. Обрабатывать их не требуется.
 type OrderStatusType string
 
 // List of OrderStatusType
 const (
-	PLACING OrderStatusType = "PLACING"
-	RESERVED OrderStatusType = "RESERVED"
-	UNPAID OrderStatusType = "UNPAID"
-	PROCESSING OrderStatusType = "PROCESSING"
-	DELIVERY OrderStatusType = "DELIVERY"
-	PICKUP OrderStatusType = "PICKUP"
-	DELIVERED OrderStatusType = "DELIVERED"
-	CANCELLED OrderStatusType = "CANCELLED"
-	PENDING OrderStatusType = "PENDING"
-	PARTIALLY_RETURNED OrderStatusType = "PARTIALLY_RETURNED"
-	RETURNED OrderStatusType = "RETURNED"
-	UNKNOWN OrderStatusType = "UNKNOWN"
+	OrderStatusType_PLACING            OrderStatusType = "PLACING"
+	OrderStatusType_RESERVED           OrderStatusType = "RESERVED"
+	OrderStatusType_UNPAID             OrderStatusType = "UNPAID"
+	OrderStatusType_PROCESSING         OrderStatusType = "PROCESSING"
+	OrderStatusType_DELIVERY           OrderStatusType = "DELIVERY"
+	OrderStatusType_PICKUP             OrderStatusType = "PICKUP"
+	OrderStatusType_DELIVERED          OrderStatusType = "DELIVERED"
+	OrderStatusType_CANCELLED          OrderStatusType = "CANCELLED"
+	OrderStatusType_PENDING            OrderStatusType = "PENDING"
+	OrderStatusType_PARTIALLY_RETURNED OrderStatusType = "PARTIALLY_RETURNED"
+	OrderStatusType_RETURNED           OrderStatusType = "RETURNED"
+	OrderStatusType_UNKNOWN            OrderStatusType = "UNKNOWN"
 )
 
 // All allowed values of OrderStatusType enum
@@ -128,4 +128,3 @@ func (v *NullableOrderStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

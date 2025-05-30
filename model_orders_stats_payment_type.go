@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OrdersStatsPaymentType Тип денежного перевода: - `PAYMENT` — оплата. - `REFUND` — возврат. 
+// OrdersStatsPaymentType Тип денежного перевода: - `PAYMENT` — оплата. - `REFUND` — возврат.
 type OrdersStatsPaymentType string
 
 // List of OrdersStatsPaymentType
 const (
-	PAYMENT OrdersStatsPaymentType = "PAYMENT"
-	REFUND OrdersStatsPaymentType = "REFUND"
+	OrdersStatsPaymentType_PAYMENT OrdersStatsPaymentType = "PAYMENT"
+	OrdersStatsPaymentType_REFUND  OrdersStatsPaymentType = "REFUND"
 )
 
 // All allowed values of OrdersStatsPaymentType enum
@@ -108,4 +108,3 @@ func (v *NullableOrdersStatsPaymentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

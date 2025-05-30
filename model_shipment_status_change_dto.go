@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -23,7 +23,7 @@ type ShipmentStatusChangeDTO struct {
 	Status *ShipmentStatusType `json:"status,omitempty"`
 	// Описание статуса отгрузки.
 	Description *string `json:"description,omitempty"`
-	// Время последнего изменения статуса отгрузки.  Формат даты: ISO 8601 со смещением относительно UTC. 
+	// Время последнего изменения статуса отгрузки.  Формат даты: ISO 8601 со смещением относительно UTC.
 	UpdateTime *time.Time `json:"updateTime,omitempty"`
 }
 
@@ -141,7 +141,7 @@ func (o *ShipmentStatusChangeDTO) SetUpdateTime(v time.Time) {
 }
 
 func (o ShipmentStatusChangeDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -197,5 +197,3 @@ func (v *NullableShipmentStatusChangeDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

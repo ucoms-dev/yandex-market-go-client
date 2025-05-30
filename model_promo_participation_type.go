@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// PromoParticipationType Какие акции вернутся:  * `PARTICIPATING_NOW` — текущие и будущие акции продавца.  * `PARTICIPATED` — завершенные акции продавца за последний год. Если за год их было меньше 15, в ответе придут 15 последних акций за все время. 
+// PromoParticipationType Какие акции вернутся:  * `PARTICIPATING_NOW` — текущие и будущие акции продавца.  * `PARTICIPATED` — завершенные акции продавца за последний год. Если за год их было меньше 15, в ответе придут 15 последних акций за все время.
 type PromoParticipationType string
 
 // List of PromoParticipationType
 const (
-	PARTICIPATING_NOW PromoParticipationType = "PARTICIPATING_NOW"
-	PARTICIPATED PromoParticipationType = "PARTICIPATED"
+	PromoParticipationType_PARTICIPATING_NOW PromoParticipationType = "PARTICIPATING_NOW"
+	PromoParticipationType_PARTICIPATED      PromoParticipationType = "PARTICIPATED"
 )
 
 // All allowed values of PromoParticipationType enum
@@ -108,4 +108,3 @@ func (v *NullablePromoParticipationType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

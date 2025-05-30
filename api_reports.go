@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // ReportsAPIService ReportsAPI service
 type ReportsAPIService service
 
 type ApiGenerateBannersStatisticsReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                              context.Context
+	ApiService                       *ReportsAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
-	format *ReportFormatType
+	format                           *ReportFormatType
 }
 
 func (r ApiGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) ApiGenerateBannersStatisticsReportRequest {
@@ -59,25 +58,25 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateBannersStatisticsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateBannersStatisticsReportRequest
 */
 func (a *ReportsAPIService) GenerateBannersStatisticsReport(ctx context.Context) ApiGenerateBannersStatisticsReportRequest {
 	return ApiGenerateBannersStatisticsReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateBannersStatisticsReport")
@@ -162,8 +161,8 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -173,8 +172,8 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -184,8 +183,8 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -195,8 +194,8 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -206,8 +205,8 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -225,10 +224,10 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 }
 
 type ApiGenerateBoostConsolidatedReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                              context.Context
+	ApiService                       *ReportsAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
-	format *ReportFormatType
+	format                           *ReportFormatType
 }
 
 func (r ApiGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) ApiGenerateBoostConsolidatedReportRequest {
@@ -262,25 +261,25 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateBoostConsolidatedReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateBoostConsolidatedReportRequest
 */
 func (a *ReportsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) ApiGenerateBoostConsolidatedReportRequest {
 	return ApiGenerateBoostConsolidatedReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateBoostConsolidatedReport")
@@ -365,8 +364,8 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -376,8 +375,8 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -387,8 +386,8 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -398,8 +397,8 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -409,8 +408,8 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -428,10 +427,10 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 }
 
 type ApiGenerateCompetitorsPositionReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                                      context.Context
+	ApiService                               *ReportsAPIService
 	generateCompetitorsPositionReportRequest *GenerateCompetitorsPositionReportRequest
-	format *ReportFormatType
+	format                                   *ReportFormatType
 }
 
 func (r ApiGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) ApiGenerateCompetitorsPositionReportRequest {
@@ -469,25 +468,25 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateCompetitorsPositionReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateCompetitorsPositionReportRequest
 */
 func (a *ReportsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) ApiGenerateCompetitorsPositionReportRequest {
 	return ApiGenerateCompetitorsPositionReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateCompetitorsPositionReport")
@@ -572,8 +571,8 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -583,8 +582,8 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -594,8 +593,8 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -605,8 +604,8 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -616,8 +615,8 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -635,10 +634,10 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 }
 
 type ApiGenerateGoodsFeedbackReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                          context.Context
+	ApiService                   *ReportsAPIService
 	generateGoodsFeedbackRequest *GenerateGoodsFeedbackRequest
-	format *ReportFormatType
+	format                       *ReportFormatType
 }
 
 func (r ApiGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) ApiGenerateGoodsFeedbackReportRequest {
@@ -670,25 +669,25 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateGoodsFeedbackReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateGoodsFeedbackReportRequest
 */
 func (a *ReportsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ApiGenerateGoodsFeedbackReportRequest {
 	return ApiGenerateGoodsFeedbackReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateGoodsFeedbackReport")
@@ -773,8 +772,8 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -784,8 +783,8 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -795,8 +794,8 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -806,8 +805,8 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -817,8 +816,8 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -836,10 +835,10 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 }
 
 type ApiGenerateGoodsMovementReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                                context.Context
+	ApiService                         *ReportsAPIService
 	generateGoodsMovementReportRequest *GenerateGoodsMovementReportRequest
-	format *ReportFormatType
+	format                             *ReportFormatType
 }
 
 func (r ApiGenerateGoodsMovementReportRequest) GenerateGoodsMovementReportRequest(generateGoodsMovementReportRequest GenerateGoodsMovementReportRequest) ApiGenerateGoodsMovementReportRequest {
@@ -871,25 +870,25 @@ GenerateGoodsMovementReport Отчет по движению товаров
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateGoodsMovementReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateGoodsMovementReportRequest
 */
 func (a *ReportsAPIService) GenerateGoodsMovementReport(ctx context.Context) ApiGenerateGoodsMovementReportRequest {
 	return ApiGenerateGoodsMovementReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGoodsMovementReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateGoodsMovementReport")
@@ -974,8 +973,8 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -985,8 +984,8 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -996,8 +995,8 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1007,8 +1006,8 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1018,8 +1017,8 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1037,10 +1036,10 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGood
 }
 
 type ApiGenerateGoodsRealizationReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                                   context.Context
+	ApiService                            *ReportsAPIService
 	generateGoodsRealizationReportRequest *GenerateGoodsRealizationReportRequest
-	format *ReportFormatType
+	format                                *ReportFormatType
 }
 
 func (r ApiGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) ApiGenerateGoodsRealizationReportRequest {
@@ -1071,36 +1070,36 @@ GenerateGoodsRealizationReport Отчет по реализации
 
 - FBY, FBS, Экспресс
 
-  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
+	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
 
 - DBS
 
-  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
+	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
 
 {% endlist %}
 
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateGoodsRealizationReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateGoodsRealizationReportRequest
 */
 func (a *ReportsAPIService) GenerateGoodsRealizationReport(ctx context.Context) ApiGenerateGoodsRealizationReportRequest {
 	return ApiGenerateGoodsRealizationReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateGoodsRealizationReport")
@@ -1185,8 +1184,8 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1196,8 +1195,8 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1207,8 +1206,8 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1218,8 +1217,8 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1229,8 +1228,8 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1248,10 +1247,10 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 }
 
 type ApiGenerateGoodsTurnoverReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                          context.Context
+	ApiService                   *ReportsAPIService
 	generateGoodsTurnoverRequest *GenerateGoodsTurnoverRequest
-	format *ReportFormatType
+	format                       *ReportFormatType
 }
 
 func (r ApiGenerateGoodsTurnoverReportRequest) GenerateGoodsTurnoverRequest(generateGoodsTurnoverRequest GenerateGoodsTurnoverRequest) ApiGenerateGoodsTurnoverReportRequest {
@@ -1283,25 +1282,25 @@ GenerateGoodsTurnoverReport Отчет по оборачиваемости
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateGoodsTurnoverReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateGoodsTurnoverReportRequest
 */
 func (a *ReportsAPIService) GenerateGoodsTurnoverReport(ctx context.Context) ApiGenerateGoodsTurnoverReportRequest {
 	return ApiGenerateGoodsTurnoverReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGoodsTurnoverReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateGoodsTurnoverReport")
@@ -1386,8 +1385,8 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1397,8 +1396,8 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1408,8 +1407,8 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1419,8 +1418,8 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1430,8 +1429,8 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGood
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1449,10 +1448,10 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGood
 }
 
 type ApiGenerateJewelryFiscalReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                                context.Context
+	ApiService                         *ReportsAPIService
 	generateJewelryFiscalReportRequest *GenerateJewelryFiscalReportRequest
-	format *ReportFormatType
+	format                             *ReportFormatType
 }
 
 func (r ApiGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) ApiGenerateJewelryFiscalReportRequest {
@@ -1484,25 +1483,25 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateJewelryFiscalReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateJewelryFiscalReportRequest
 */
 func (a *ReportsAPIService) GenerateJewelryFiscalReport(ctx context.Context) ApiGenerateJewelryFiscalReportRequest {
 	return ApiGenerateJewelryFiscalReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateJewelryFiscalReport")
@@ -1587,8 +1586,8 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1598,8 +1597,8 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1609,8 +1608,8 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1620,8 +1619,8 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1631,8 +1630,8 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1650,10 +1649,10 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 }
 
 type ApiGenerateMassOrderLabelsReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                            context.Context
+	ApiService                     *ReportsAPIService
 	generateMassOrderLabelsRequest *GenerateMassOrderLabelsRequest
-	format *PageFormatType
+	format                         *PageFormatType
 }
 
 func (r ApiGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) ApiGenerateMassOrderLabelsReportRequest {
@@ -1683,25 +1682,25 @@ GenerateMassOrderLabelsReport Готовые ярлыки‑наклейки н�
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateMassOrderLabelsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateMassOrderLabelsReportRequest
 */
 func (a *ReportsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ApiGenerateMassOrderLabelsReportRequest {
 	return ApiGenerateMassOrderLabelsReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateMassOrderLabelsReport")
@@ -1783,8 +1782,8 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1794,8 +1793,8 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1805,8 +1804,8 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1816,8 +1815,8 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1827,8 +1826,8 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1846,10 +1845,10 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 }
 
 type ApiGeneratePricesReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                         context.Context
+	ApiService                  *ReportsAPIService
 	generatePricesReportRequest *GeneratePricesReportRequest
-	format *ReportFormatType
+	format                      *ReportFormatType
 }
 
 func (r ApiGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) ApiGeneratePricesReportRequest {
@@ -1889,25 +1888,25 @@ GeneratePricesReport Отчет «Цены на рынке»
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratePricesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGeneratePricesReportRequest
 */
 func (a *ReportsAPIService) GeneratePricesReport(ctx context.Context) ApiGeneratePricesReportRequest {
 	return ApiGeneratePricesReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GeneratePricesReport")
@@ -1992,8 +1991,8 @@ func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2003,8 +2002,8 @@ func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2014,8 +2013,8 @@ func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2025,8 +2024,8 @@ func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2036,8 +2035,8 @@ func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2055,10 +2054,10 @@ func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 }
 
 type ApiGenerateSalesGeographyReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                           context.Context
+	ApiService                    *ReportsAPIService
 	generateSalesGeographyRequest *GenerateSalesGeographyRequest
-	format *ReportFormatType
+	format                        *ReportFormatType
 }
 
 func (r ApiGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) ApiGenerateSalesGeographyReportRequest {
@@ -2090,25 +2089,25 @@ GenerateSalesGeographyReport Отчет по географии продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateSalesGeographyReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateSalesGeographyReportRequest
 */
 func (a *ReportsAPIService) GenerateSalesGeographyReport(ctx context.Context) ApiGenerateSalesGeographyReportRequest {
 	return ApiGenerateSalesGeographyReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateSalesGeographyReport")
@@ -2193,8 +2192,8 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2204,8 +2203,8 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2215,8 +2214,8 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2226,8 +2225,8 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2237,8 +2236,8 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2256,10 +2255,10 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 }
 
 type ApiGenerateShelfsStatisticsReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                             context.Context
+	ApiService                      *ReportsAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
-	format *ReportFormatType
+	format                          *ReportFormatType
 }
 
 func (r ApiGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) ApiGenerateShelfsStatisticsReportRequest {
@@ -2291,25 +2290,25 @@ GenerateShelfsStatisticsReport Отчет по полкам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShelfsStatisticsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateShelfsStatisticsReportRequest
 */
 func (a *ReportsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ApiGenerateShelfsStatisticsReportRequest {
 	return ApiGenerateShelfsStatisticsReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateShelfsStatisticsReport")
@@ -2394,8 +2393,8 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2405,8 +2404,8 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2416,8 +2415,8 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2427,8 +2426,8 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2438,8 +2437,8 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2457,8 +2456,8 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 }
 
 type ApiGenerateShipmentListDocumentReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                                       context.Context
+	ApiService                                *ReportsAPIService
 	generateShipmentListDocumentReportRequest *GenerateShipmentListDocumentReportRequest
 }
 
@@ -2483,25 +2482,25 @@ GenerateShipmentListDocumentReport Получение листа сборки
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShipmentListDocumentReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateShipmentListDocumentReportRequest
 */
 func (a *ReportsAPIService) GenerateShipmentListDocumentReport(ctx context.Context) ApiGenerateShipmentListDocumentReportRequest {
 	return ApiGenerateShipmentListDocumentReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateShipmentListDocumentReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateShipmentListDocumentReport")
@@ -2580,8 +2579,8 @@ func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGener
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2591,8 +2590,8 @@ func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGener
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2602,8 +2601,8 @@ func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGener
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2613,8 +2612,8 @@ func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGener
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2624,8 +2623,8 @@ func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGener
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2643,10 +2642,10 @@ func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGener
 }
 
 type ApiGenerateShowsBoostReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                       context.Context
+	ApiService                *ReportsAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
-	format *ReportFormatType
+	format                    *ReportFormatType
 }
 
 func (r ApiGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) ApiGenerateShowsBoostReportRequest {
@@ -2678,25 +2677,25 @@ GenerateShowsBoostReport Отчет по бусту показов
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShowsBoostReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateShowsBoostReportRequest
 */
 func (a *ReportsAPIService) GenerateShowsBoostReport(ctx context.Context) ApiGenerateShowsBoostReportRequest {
 	return ApiGenerateShowsBoostReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateShowsBoostReport")
@@ -2781,8 +2780,8 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2792,8 +2791,8 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2803,8 +2802,8 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2814,8 +2813,8 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2825,8 +2824,8 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2844,10 +2843,10 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 }
 
 type ApiGenerateShowsSalesReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                             context.Context
+	ApiService                      *ReportsAPIService
 	generateShowsSalesReportRequest *GenerateShowsSalesReportRequest
-	format *ReportFormatType
+	format                          *ReportFormatType
 }
 
 func (r ApiGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) ApiGenerateShowsSalesReportRequest {
@@ -2879,25 +2878,25 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShowsSalesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateShowsSalesReportRequest
 */
 func (a *ReportsAPIService) GenerateShowsSalesReport(ctx context.Context) ApiGenerateShowsSalesReportRequest {
 	return ApiGenerateShowsSalesReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateShowsSalesReport")
@@ -2982,8 +2981,8 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2993,8 +2992,8 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3004,8 +3003,8 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3015,8 +3014,8 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3026,8 +3025,8 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3045,10 +3044,10 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 }
 
 type ApiGenerateStocksOnWarehousesReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                                     context.Context
+	ApiService                              *ReportsAPIService
 	generateStocksOnWarehousesReportRequest *GenerateStocksOnWarehousesReportRequest
-	format *ReportFormatType
+	format                                  *ReportFormatType
 }
 
 func (r ApiGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) ApiGenerateStocksOnWarehousesReportRequest {
@@ -3085,25 +3084,25 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateStocksOnWarehousesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateStocksOnWarehousesReportRequest
 */
 func (a *ReportsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) ApiGenerateStocksOnWarehousesReportRequest {
 	return ApiGenerateStocksOnWarehousesReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateStocksOnWarehousesReport")
@@ -3188,8 +3187,8 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3199,8 +3198,8 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3210,8 +3209,8 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3221,8 +3220,8 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3232,8 +3231,8 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3251,11 +3250,11 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 }
 
 type ApiGenerateUnitedMarketplaceServicesReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                                            context.Context
+	ApiService                                     *ReportsAPIService
 	generateUnitedMarketplaceServicesReportRequest *GenerateUnitedMarketplaceServicesReportRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                                         *ReportFormatType
+	language                                       *ReportLanguageType
 }
 
 func (r ApiGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) ApiGenerateUnitedMarketplaceServicesReportRequest {
@@ -3302,25 +3301,25 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedMarketplaceServicesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateUnitedMarketplaceServicesReportRequest
 */
 func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) ApiGenerateUnitedMarketplaceServicesReportRequest {
 	return ApiGenerateUnitedMarketplaceServicesReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateUnitedMarketplaceServicesReport")
@@ -3408,8 +3407,8 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3419,8 +3418,8 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3430,8 +3429,8 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3441,8 +3440,8 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3452,8 +3451,8 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3471,11 +3470,11 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 }
 
 type ApiGenerateUnitedNettingReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                                context.Context
+	ApiService                         *ReportsAPIService
 	generateUnitedNettingReportRequest *GenerateUnitedNettingReportRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                             *ReportFormatType
+	language                           *ReportLanguageType
 }
 
 func (r ApiGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) ApiGenerateUnitedNettingReportRequest {
@@ -3524,25 +3523,25 @@ GenerateUnitedNettingReport Отчет по платежам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedNettingReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateUnitedNettingReportRequest
 */
 func (a *ReportsAPIService) GenerateUnitedNettingReport(ctx context.Context) ApiGenerateUnitedNettingReportRequest {
 	return ApiGenerateUnitedNettingReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateUnitedNettingReport")
@@ -3630,8 +3629,8 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3641,8 +3640,8 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3652,8 +3651,8 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3663,8 +3662,8 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3674,8 +3673,8 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3693,11 +3692,11 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 }
 
 type ApiGenerateUnitedOrdersReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                         context.Context
+	ApiService                  *ReportsAPIService
 	generateUnitedOrdersRequest *GenerateUnitedOrdersRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                      *ReportFormatType
+	language                    *ReportLanguageType
 }
 
 func (r ApiGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) ApiGenerateUnitedOrdersReportRequest {
@@ -3735,25 +3734,25 @@ GenerateUnitedOrdersReport Отчет по заказам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedOrdersReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateUnitedOrdersReportRequest
 */
 func (a *ReportsAPIService) GenerateUnitedOrdersReport(ctx context.Context) ApiGenerateUnitedOrdersReportRequest {
 	return ApiGenerateUnitedOrdersReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateUnitedOrdersReport")
@@ -3841,8 +3840,8 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3852,8 +3851,8 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3863,8 +3862,8 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3874,8 +3873,8 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3885,8 +3884,8 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3904,10 +3903,10 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 }
 
 type ApiGenerateUnitedReturnsReportRequest struct {
-	ctx context.Context
-	ApiService *ReportsAPIService
+	ctx                          context.Context
+	ApiService                   *ReportsAPIService
 	generateUnitedReturnsRequest *GenerateUnitedReturnsRequest
-	format *ReportFormatType
+	format                       *ReportFormatType
 }
 
 func (r ApiGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) ApiGenerateUnitedReturnsReportRequest {
@@ -3941,25 +3940,25 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedReturnsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGenerateUnitedReturnsReportRequest
 */
 func (a *ReportsAPIService) GenerateUnitedReturnsReport(ctx context.Context) ApiGenerateUnitedReturnsReportRequest {
 	return ApiGenerateUnitedReturnsReportRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
+//
+//	@return GenerateReportResponse
 func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateUnitedReturnsReport")
@@ -4044,8 +4043,8 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4055,8 +4054,8 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4066,8 +4065,8 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4077,8 +4076,8 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4088,8 +4087,8 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4107,9 +4106,9 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 }
 
 type ApiGetReportInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ReportsAPIService
-	reportId string
+	reportId   string
 }
 
 func (r ApiGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
@@ -4128,27 +4127,27 @@ GetReportInfo Получение заданного отчета
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param reportId Идентификатор отчета, который вы получили после запуска генерации. 
- @return ApiGetReportInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Идентификатор отчета, который вы получили после запуска генерации.
+	@return ApiGetReportInfoRequest
 */
 func (a *ReportsAPIService) GetReportInfo(ctx context.Context, reportId string) ApiGetReportInfoRequest {
 	return ApiGetReportInfoRequest{
 		ApiService: a,
-		ctx: ctx,
-		reportId: reportId,
+		ctx:        ctx,
+		reportId:   reportId,
 	}
 }
 
 // Execute executes the request
-//  @return GetReportInfoResponse
+//
+//	@return GetReportInfoResponse
 func (a *ReportsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetReportInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetReportInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GetReportInfo")
@@ -4229,8 +4228,8 @@ func (a *ReportsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4240,8 +4239,8 @@ func (a *ReportsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4251,8 +4250,8 @@ func (a *ReportsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -4262,8 +4261,8 @@ func (a *ReportsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4273,8 +4272,8 @@ func (a *ReportsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4284,8 +4283,8 @@ func (a *ReportsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

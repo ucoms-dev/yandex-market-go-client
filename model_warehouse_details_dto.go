@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -25,13 +25,13 @@ type WarehouseDetailsDTO struct {
 	Id int64 `json:"id"`
 	// Название склада.
 	Name string `json:"name"`
-	// Идентификатор кампании того магазина, который связан со складом.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
+	// Идентификатор кампании того магазина, который связан со складом.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	CampaignId int64 `json:"campaignId"`
 	// Возможна ли доставка для модели Экспресс.
-	Express bool `json:"express"`
+	Express   bool                   `json:"express"`
 	GroupInfo *WarehouseGroupInfoDTO `json:"groupInfo,omitempty"`
-	Address *WarehouseAddressDTO `json:"address,omitempty"`
-	Status *WarehouseStatusDTO `json:"status,omitempty"`
+	Address   *WarehouseAddressDTO   `json:"address,omitempty"`
+	Status    *WarehouseStatusDTO    `json:"status,omitempty"`
 }
 
 type _WarehouseDetailsDTO WarehouseDetailsDTO
@@ -250,7 +250,7 @@ func (o *WarehouseDetailsDTO) SetStatus(v WarehouseStatusDTO) {
 }
 
 func (o WarehouseDetailsDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -291,10 +291,10 @@ func (o *WarehouseDetailsDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -350,5 +350,3 @@ func (v *NullableWarehouseDetailsDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

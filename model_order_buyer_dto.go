@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,15 +11,15 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the OrderBuyerDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderBuyerDTO{}
 
-// OrderBuyerDTO Информация о покупателе.  Параметры `id`, `lastName`, `firstName` и `middleName` возвращаются, только если вы работаете по модели DBS. 
+// OrderBuyerDTO Информация о покупателе.  Параметры `id`, `lastName`, `firstName` и `middleName` возвращаются, только если вы работаете по модели DBS.
 type OrderBuyerDTO struct {
 	// Идентификатор покупателя.
 	Id *string `json:"id,omitempty"`
@@ -28,8 +28,8 @@ type OrderBuyerDTO struct {
 	// Имя покупателя.
 	FirstName *string `json:"firstName,omitempty"`
 	// Отчество покупателя.
-	MiddleName *string `json:"middleName,omitempty"`
-	Type OrderBuyerType `json:"type"`
+	MiddleName *string        `json:"middleName,omitempty"`
+	Type       OrderBuyerType `json:"type"`
 }
 
 type _OrderBuyerDTO OrderBuyerDTO
@@ -205,7 +205,7 @@ func (o *OrderBuyerDTO) SetType(v OrderBuyerType) {
 }
 
 func (o OrderBuyerDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -243,10 +243,10 @@ func (o *OrderBuyerDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -302,5 +302,3 @@ func (v *NullableOrderBuyerDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

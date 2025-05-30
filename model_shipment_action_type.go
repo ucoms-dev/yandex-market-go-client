@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,16 +15,16 @@ import (
 	"fmt"
 )
 
-// ShipmentActionType Действия с отгрузкой:  * `CONFIRM` — подтвердить отгрузку. * `DOWNLOAD_ACT` — скачать акт приема-передачи отгрузки. * `DOWNLOAD_INBOUND_ACT` — скачать список принятых заказов. * `DOWNLOAD_DISCREPANCY_ACT` — скачать акт расхождений. * `CHANGE_PALLETS_COUNT` — указать количество палет. 
+// ShipmentActionType Действия с отгрузкой:  * `CONFIRM` — подтвердить отгрузку. * `DOWNLOAD_ACT` — скачать акт приема-передачи отгрузки. * `DOWNLOAD_INBOUND_ACT` — скачать список принятых заказов. * `DOWNLOAD_DISCREPANCY_ACT` — скачать акт расхождений. * `CHANGE_PALLETS_COUNT` — указать количество палет.
 type ShipmentActionType string
 
 // List of ShipmentActionType
 const (
-	CONFIRM ShipmentActionType = "CONFIRM"
-	DOWNLOAD_ACT ShipmentActionType = "DOWNLOAD_ACT"
-	DOWNLOAD_INBOUND_ACT ShipmentActionType = "DOWNLOAD_INBOUND_ACT"
-	DOWNLOAD_DISCREPANCY_ACT ShipmentActionType = "DOWNLOAD_DISCREPANCY_ACT"
-	CHANGE_PALLETS_COUNT ShipmentActionType = "CHANGE_PALLETS_COUNT"
+	ShipmentActionType_CONFIRM                  ShipmentActionType = "CONFIRM"
+	ShipmentActionType_DOWNLOAD_ACT             ShipmentActionType = "DOWNLOAD_ACT"
+	ShipmentActionType_DOWNLOAD_INBOUND_ACT     ShipmentActionType = "DOWNLOAD_INBOUND_ACT"
+	ShipmentActionType_DOWNLOAD_DISCREPANCY_ACT ShipmentActionType = "DOWNLOAD_DISCREPANCY_ACT"
+	ShipmentActionType_CHANGE_PALLETS_COUNT     ShipmentActionType = "CHANGE_PALLETS_COUNT"
 )
 
 // All allowed values of ShipmentActionType enum
@@ -114,4 +114,3 @@ func (v *NullableShipmentActionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

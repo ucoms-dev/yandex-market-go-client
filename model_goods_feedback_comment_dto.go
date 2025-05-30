@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,17 +21,17 @@ var _ MappedNullable = &GoodsFeedbackCommentDTO{}
 
 // GoodsFeedbackCommentDTO Комментарий к отзыву.
 type GoodsFeedbackCommentDTO struct {
-	// Идентификатор комментария к отзыву. 
+	// Идентификатор комментария к отзыву.
 	Id int64 `json:"id"`
 	// Текст комментария.
 	Text string `json:"text"`
 	// Может ли продавец изменять комментарий или удалять его.
 	CanModify *bool `json:"canModify,omitempty"`
-	// Идентификатор комментария к отзыву. 
-	ParentId *int64 `json:"parentId,omitempty"`
-	Author GoodsFeedbackCommentAuthorDTO `json:"author"`
-	Status GoodsFeedbackCommentStatusType `json:"status"`
-	// Идентификатор отзыва. 
+	// Идентификатор комментария к отзыву.
+	ParentId *int64                         `json:"parentId,omitempty"`
+	Author   GoodsFeedbackCommentAuthorDTO  `json:"author"`
+	Status   GoodsFeedbackCommentStatusType `json:"status"`
+	// Идентификатор отзыва.
 	FeedbackId int64 `json:"feedbackId"`
 }
 
@@ -244,7 +244,7 @@ func (o *GoodsFeedbackCommentDTO) SetFeedbackId(v int64) {
 }
 
 func (o GoodsFeedbackCommentDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -284,10 +284,10 @@ func (o *GoodsFeedbackCommentDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -343,5 +343,3 @@ func (v *NullableGoodsFeedbackCommentDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

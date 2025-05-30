@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,12 +17,12 @@ import (
 // checks if the UpdateOfferMappingEntryDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdateOfferMappingEntryDTO{}
 
-// UpdateOfferMappingEntryDTO Список товаров.  В теле запроса можно передать от одного до 500 товаров.  Обязательный параметр. 
+// UpdateOfferMappingEntryDTO Список товаров.  В теле запроса можно передать от одного до 500 товаров.  Обязательный параметр.
 type UpdateOfferMappingEntryDTO struct {
-	Mapping *OfferMappingDTO `json:"mapping,omitempty"`
-	AwaitingModerationMapping *OfferMappingDTO `json:"awaitingModerationMapping,omitempty"`
-	RejectedMapping *OfferMappingDTO `json:"rejectedMapping,omitempty"`
-	Offer *UpdateMappingsOfferDTO `json:"offer,omitempty"`
+	Mapping                   *OfferMappingDTO        `json:"mapping,omitempty"`
+	AwaitingModerationMapping *OfferMappingDTO        `json:"awaitingModerationMapping,omitempty"`
+	RejectedMapping           *OfferMappingDTO        `json:"rejectedMapping,omitempty"`
+	Offer                     *UpdateMappingsOfferDTO `json:"offer,omitempty"`
 }
 
 // NewUpdateOfferMappingEntryDTO instantiates a new UpdateOfferMappingEntryDTO object
@@ -171,7 +171,7 @@ func (o *UpdateOfferMappingEntryDTO) SetOffer(v UpdateMappingsOfferDTO) {
 }
 
 func (o UpdateOfferMappingEntryDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -230,5 +230,3 @@ func (v *NullableUpdateOfferMappingEntryDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

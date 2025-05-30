@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,7 +17,7 @@ import (
 // checks if the GetCategoriesRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetCategoriesRequest{}
 
-// GetCategoriesRequest Параметры запроса категорий. 
+// GetCategoriesRequest Параметры запроса категорий.
 type GetCategoriesRequest struct {
 	Language *LanguageType `json:"language,omitempty"`
 }
@@ -72,7 +72,7 @@ func (o *GetCategoriesRequest) SetLanguage(v LanguageType) {
 }
 
 func (o GetCategoriesRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -122,5 +122,3 @@ func (v *NullableGetCategoriesRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -22,9 +22,9 @@ var _ MappedNullable = &SetReturnDecisionRequest{}
 // SetReturnDecisionRequest Решения по товару в возврате.
 type SetReturnDecisionRequest struct {
 	// Идентификатор товара в возврате.
-	ReturnItemId int64 `json:"returnItemId"`
+	ReturnItemId int64                     `json:"returnItemId"`
 	DecisionType ReturnRequestDecisionType `json:"decisionType"`
-	// Комментарий к решению. Укажите:  * для `REFUND_MONEY_INCLUDING_SHIPMENT`— стоимость обратной пересылки.  * для `REPAIR` — когда вы устраните недостатки товара.  * для `DECLINE_REFUND` — причину отказа.  * для `OTHER_DECISION` — какое решение вы предлагаете. 
+	// Комментарий к решению. Укажите:  * для `REFUND_MONEY_INCLUDING_SHIPMENT`— стоимость обратной пересылки.  * для `REPAIR` — когда вы устраните недостатки товара.  * для `DECLINE_REFUND` — причину отказа.  * для `OTHER_DECISION` — какое решение вы предлагаете.
 	Comment *string `json:"comment,omitempty"`
 }
 
@@ -130,7 +130,7 @@ func (o *SetReturnDecisionRequest) SetComment(v string) {
 }
 
 func (o SetReturnDecisionRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -161,10 +161,10 @@ func (o *SetReturnDecisionRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -220,5 +220,3 @@ func (v *NullableSetReturnDecisionRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

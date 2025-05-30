@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,12 +17,12 @@ import (
 // checks if the OfferMediaFileDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OfferMediaFileDTO{}
 
-// OfferMediaFileDTO Информация о медиафайле товара. 
+// OfferMediaFileDTO Информация о медиафайле товара.
 type OfferMediaFileDTO struct {
-	// Ссылка на медиафайл. 
+	// Ссылка на медиафайл.
 	Url *string `json:"url,omitempty"`
-	// Название медиафайла. 
-	Title *string `json:"title,omitempty"`
+	// Название медиафайла.
+	Title       *string                   `json:"title,omitempty"`
 	UploadState *MediaFileUploadStateType `json:"uploadState,omitempty"`
 }
 
@@ -140,7 +140,7 @@ func (o *OfferMediaFileDTO) SetUploadState(v MediaFileUploadStateType) {
 }
 
 func (o OfferMediaFileDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,5 +196,3 @@ func (v *NullableOfferMediaFileDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

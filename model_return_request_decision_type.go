@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,18 +15,18 @@ import (
 	"fmt"
 )
 
-// ReturnRequestDecisionType Решение по товару в возврате:  * `REFUND_MONEY` — вернуть деньги за товар. * `REFUND_MONEY_INCLUDING_SHIPMENT` — вернуть деньги за товар и обратную пересылку. * `REPAIR` — магазин устранит недостатки товара. * `REPLACE` — магазин заменит товар. * `SEND_TO_EXAMINATION` — магазин отправит товар на экспертизу. * `DECLINE_REFUND` — не возвращать деньги. * `OTHER_DECISION` — другое решение. 
+// ReturnRequestDecisionType Решение по товару в возврате:  * `REFUND_MONEY` — вернуть деньги за товар. * `REFUND_MONEY_INCLUDING_SHIPMENT` — вернуть деньги за товар и обратную пересылку. * `REPAIR` — магазин устранит недостатки товара. * `REPLACE` — магазин заменит товар. * `SEND_TO_EXAMINATION` — магазин отправит товар на экспертизу. * `DECLINE_REFUND` — не возвращать деньги. * `OTHER_DECISION` — другое решение.
 type ReturnRequestDecisionType string
 
 // List of ReturnRequestDecisionType
 const (
-	REFUND_MONEY ReturnRequestDecisionType = "REFUND_MONEY"
-	REFUND_MONEY_INCLUDING_SHIPMENT ReturnRequestDecisionType = "REFUND_MONEY_INCLUDING_SHIPMENT"
-	REPAIR ReturnRequestDecisionType = "REPAIR"
-	REPLACE ReturnRequestDecisionType = "REPLACE"
-	SEND_TO_EXAMINATION ReturnRequestDecisionType = "SEND_TO_EXAMINATION"
-	DECLINE_REFUND ReturnRequestDecisionType = "DECLINE_REFUND"
-	OTHER_DECISION ReturnRequestDecisionType = "OTHER_DECISION"
+	ReturnRequestDecisionType_REFUND_MONEY                    ReturnRequestDecisionType = "REFUND_MONEY"
+	ReturnRequestDecisionType_REFUND_MONEY_INCLUDING_SHIPMENT ReturnRequestDecisionType = "REFUND_MONEY_INCLUDING_SHIPMENT"
+	ReturnRequestDecisionType_REPAIR                          ReturnRequestDecisionType = "REPAIR"
+	ReturnRequestDecisionType_REPLACE                         ReturnRequestDecisionType = "REPLACE"
+	ReturnRequestDecisionType_SEND_TO_EXAMINATION             ReturnRequestDecisionType = "SEND_TO_EXAMINATION"
+	ReturnRequestDecisionType_DECLINE_REFUND                  ReturnRequestDecisionType = "DECLINE_REFUND"
+	ReturnRequestDecisionType_OTHER_DECISION                  ReturnRequestDecisionType = "OTHER_DECISION"
 )
 
 // All allowed values of ReturnRequestDecisionType enum
@@ -118,4 +118,3 @@ func (v *NullableReturnRequestDecisionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

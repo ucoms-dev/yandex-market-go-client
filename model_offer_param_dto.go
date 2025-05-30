@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,19 +11,19 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the OfferParamDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OfferParamDTO{}
 
-// OfferParamDTO Параметры товара.  Если у товара несколько значений одного параметра, передайте их с одним и тем же `name`, но разными `value`.  {% cut \"Пример\" %}  ```json translate=no \"params\": [   {     \"name\": \"Цвет для фильтра\",     \"value\": \"Зеленый\"   },   {     \"name\": \"Цвет для фильтра\",     \"value\": \"Желтый\"   } ] ```  {% endcut %} 
+// OfferParamDTO Параметры товара.  Если у товара несколько значений одного параметра, передайте их с одним и тем же `name`, но разными `value`.  {% cut \"Пример\" %}  ```json translate=no \"params\": [   {     \"name\": \"Цвет для фильтра\",     \"value\": \"Зеленый\"   },   {     \"name\": \"Цвет для фильтра\",     \"value\": \"Желтый\"   } ] ```  {% endcut %}
 type OfferParamDTO struct {
-	// Название характеристики.  Должно совпадать с названием характеристики на Маркете. Узнать его можно из Excel-шаблона категории или через запрос [POST category/{categoryId}/parameters](../../reference/content/getCategoryContentParameters.md). 
+	// Название характеристики.  Должно совпадать с названием характеристики на Маркете. Узнать его можно из Excel-шаблона категории или через запрос [POST category/{categoryId}/parameters](../../reference/content/getCategoryContentParameters.md).
 	Name string `json:"name"`
-	// Значение. 
+	// Значение.
 	Value string `json:"value"`
 }
 
@@ -97,7 +97,7 @@ func (o *OfferParamDTO) SetValue(v string) {
 }
 
 func (o OfferParamDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -125,10 +125,10 @@ func (o *OfferParamDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -184,5 +184,3 @@ func (v *NullableOfferParamDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

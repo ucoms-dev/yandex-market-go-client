@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -24,17 +24,17 @@ type ReturnDecisionDTO struct {
 	// Количество единиц товара.
 	Count *int32 `json:"count,omitempty"`
 	// Комментарий.
-	Comment *string `json:"comment,omitempty"`
-	ReasonType *ReturnDecisionReasonType `json:"reasonType,omitempty"`
+	Comment       *string                      `json:"comment,omitempty"`
+	ReasonType    *ReturnDecisionReasonType    `json:"reasonType,omitempty"`
 	SubreasonType *ReturnDecisionSubreasonType `json:"subreasonType,omitempty"`
-	DecisionType *ReturnDecisionType `json:"decisionType,omitempty"`
-	// {% note warning \"Вместо него используйте `amount`.\" %}     {% endnote %}  Сумма возврата в копейках. 
+	DecisionType  *ReturnDecisionType          `json:"decisionType,omitempty"`
+	// {% note warning \"Вместо него используйте `amount`.\" %}     {% endnote %}  Сумма возврата в копейках.
 	// Deprecated
-	RefundAmount *int64 `json:"refundAmount,omitempty"`
-	Amount *CurrencyValueDTO `json:"amount,omitempty"`
-	// {% note warning \"Вместо него используйте `partnerCompensationAmount`.\" %}     {% endnote %}  Компенсация за обратную доставку в копейках. 
+	RefundAmount *int64            `json:"refundAmount,omitempty"`
+	Amount       *CurrencyValueDTO `json:"amount,omitempty"`
+	// {% note warning \"Вместо него используйте `partnerCompensationAmount`.\" %}     {% endnote %}  Компенсация за обратную доставку в копейках.
 	// Deprecated
-	PartnerCompensation *int64 `json:"partnerCompensation,omitempty"`
+	PartnerCompensation       *int64            `json:"partnerCompensation,omitempty"`
 	PartnerCompensationAmount *CurrencyValueDTO `json:"partnerCompensationAmount,omitempty"`
 	// Список хеш-кодов фотографий товара от покупателя.
 	Images []string `json:"images,omitempty"`
@@ -417,7 +417,7 @@ func (o *ReturnDecisionDTO) SetImages(v []string) {
 }
 
 func (o ReturnDecisionDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -497,5 +497,3 @@ func (v *NullableReturnDecisionDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

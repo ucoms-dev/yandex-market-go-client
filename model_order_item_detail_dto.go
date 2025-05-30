@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -22,9 +22,9 @@ var _ MappedNullable = &OrderItemDetailDTO{}
 // OrderItemDetailDTO Детали по товару в заказе.
 type OrderItemDetailDTO struct {
 	// Количество единиц товара.
-	ItemCount int64 `json:"itemCount"`
+	ItemCount  int64               `json:"itemCount"`
 	ItemStatus OrderItemStatusType `json:"itemStatus"`
-	// Формат даты: `ДД-ММ-ГГГГ`. 
+	// Формат даты: `ДД-ММ-ГГГГ`.
 	UpdateDate string `json:"updateDate"`
 }
 
@@ -123,7 +123,7 @@ func (o *OrderItemDetailDTO) SetUpdateDate(v string) {
 }
 
 func (o OrderItemDetailDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -153,10 +153,10 @@ func (o *OrderItemDetailDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -212,5 +212,3 @@ func (v *NullableOrderItemDetailDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

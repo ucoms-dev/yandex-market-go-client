@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OfferCardContentStatusType Статус вычисления рейтинга карточки товара и рекомендаций:  * `UPDATING` — рейтинг обновляется. * `ACTUAL` — рейтинг актуальный. 
+// OfferCardContentStatusType Статус вычисления рейтинга карточки товара и рекомендаций:  * `UPDATING` — рейтинг обновляется. * `ACTUAL` — рейтинг актуальный.
 type OfferCardContentStatusType string
 
 // List of OfferCardContentStatusType
 const (
-	UPDATING OfferCardContentStatusType = "UPDATING"
-	ACTUAL OfferCardContentStatusType = "ACTUAL"
+	OfferCardContentStatusType_UPDATING OfferCardContentStatusType = "UPDATING"
+	OfferCardContentStatusType_ACTUAL   OfferCardContentStatusType = "ACTUAL"
 )
 
 // All allowed values of OfferCardContentStatusType enum
@@ -108,4 +108,3 @@ func (v *NullableOfferCardContentStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

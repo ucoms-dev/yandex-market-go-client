@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// LicenseType Тип лицензии:  * `ALCOHOL` — лицензия на розничную продажу алкогольной продукции. * `UNKNOWN` — неизвестный тип лицензии. 
+// LicenseType Тип лицензии:  * `ALCOHOL` — лицензия на розничную продажу алкогольной продукции. * `UNKNOWN` — неизвестный тип лицензии.
 type LicenseType string
 
 // List of LicenseType
 const (
-	ALCOHOL LicenseType = "ALCOHOL"
-	UNKNOWN LicenseType = "UNKNOWN"
+	LicenseType_ALCOHOL LicenseType = "ALCOHOL"
+	LicenseType_UNKNOWN LicenseType = "UNKNOWN"
 )
 
 // All allowed values of LicenseType enum
@@ -108,4 +108,3 @@ func (v *NullableLicenseType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

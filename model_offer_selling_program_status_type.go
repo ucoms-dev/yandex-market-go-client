@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OfferSellingProgramStatusType Информация о доступности или недоступности.  * `FINE` — доступно. * `REJECT` — недоступно. 
+// OfferSellingProgramStatusType Информация о доступности или недоступности.  * `FINE` — доступно. * `REJECT` — недоступно.
 type OfferSellingProgramStatusType string
 
 // List of OfferSellingProgramStatusType
 const (
-	FINE OfferSellingProgramStatusType = "FINE"
-	REJECT OfferSellingProgramStatusType = "REJECT"
+	OfferSellingProgramStatusType_FINE   OfferSellingProgramStatusType = "FINE"
+	OfferSellingProgramStatusType_REJECT OfferSellingProgramStatusType = "REJECT"
 )
 
 // All allowed values of OfferSellingProgramStatusType enum
@@ -108,4 +108,3 @@ func (v *NullableOfferSellingProgramStatusType) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

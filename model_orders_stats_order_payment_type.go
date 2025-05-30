@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// OrdersStatsOrderPaymentType Тип оплаты заказа: - `POSTPAID` — заказ оплачен после того, как был получен. - `PREPAID` — заказ оплачен до того, как был получен. - `UNKNOWN` — неизвестный тип оплаты. Скорее всего покупатель отменил или вернул заказ или не было его оплаты. 
+// OrdersStatsOrderPaymentType Тип оплаты заказа: - `POSTPAID` — заказ оплачен после того, как был получен. - `PREPAID` — заказ оплачен до того, как был получен. - `UNKNOWN` — неизвестный тип оплаты. Скорее всего покупатель отменил или вернул заказ или не было его оплаты.
 type OrdersStatsOrderPaymentType string
 
 // List of OrdersStatsOrderPaymentType
 const (
-	POSTPAID OrdersStatsOrderPaymentType = "POSTPAID"
-	PREPAID OrdersStatsOrderPaymentType = "PREPAID"
-	UNKNOWN OrdersStatsOrderPaymentType = "UNKNOWN"
+	OrdersStatsOrderPaymentType_POSTPAID OrdersStatsOrderPaymentType = "POSTPAID"
+	OrdersStatsOrderPaymentType_PREPAID  OrdersStatsOrderPaymentType = "PREPAID"
+	OrdersStatsOrderPaymentType_UNKNOWN  OrdersStatsOrderPaymentType = "UNKNOWN"
 )
 
 // All allowed values of OrdersStatsOrderPaymentType enum
@@ -110,4 +110,3 @@ func (v *NullableOrdersStatsOrderPaymentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

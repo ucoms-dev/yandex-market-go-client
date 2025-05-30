@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// LabelsSortingType Тип сортировки ярлыков:  * `SORT_BY_GIVEN_ORDER` — ярлыки заказов будут расположены в том же порядке, в каком были переданы идентификаторы заказов в запросе. * `SORT_BY_ORDER_CREATED_AT` — ярлыки будут расположены в соответствии с датой создания заказа с группировкой по магазинам.  Если параметр не указан, ярлыки сортируются по дате создания. 
+// LabelsSortingType Тип сортировки ярлыков:  * `SORT_BY_GIVEN_ORDER` — ярлыки заказов будут расположены в том же порядке, в каком были переданы идентификаторы заказов в запросе. * `SORT_BY_ORDER_CREATED_AT` — ярлыки будут расположены в соответствии с датой создания заказа с группировкой по магазинам.  Если параметр не указан, ярлыки сортируются по дате создания.
 type LabelsSortingType string
 
 // List of LabelsSortingType
 const (
-	SORT_BY_GIVEN_ORDER LabelsSortingType = "SORT_BY_GIVEN_ORDER"
-	SORT_BY_ORDER_CREATED_AT LabelsSortingType = "SORT_BY_ORDER_CREATED_AT"
+	LabelsSortingType_SORT_BY_GIVEN_ORDER      LabelsSortingType = "SORT_BY_GIVEN_ORDER"
+	LabelsSortingType_SORT_BY_ORDER_CREATED_AT LabelsSortingType = "SORT_BY_ORDER_CREATED_AT"
 )
 
 // All allowed values of LabelsSortingType enum
@@ -108,4 +108,3 @@ func (v *NullableLabelsSortingType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

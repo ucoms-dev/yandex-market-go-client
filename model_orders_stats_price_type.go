@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// OrdersStatsPriceType Тип скидки или цена на товар: - `BUYER` — цена на товар с учетом скидок, в том числе купонов. - `CASHBACK` — баллы Плюса. - `MARKETPLACE` — купоны. 
+// OrdersStatsPriceType Тип скидки или цена на товар: - `BUYER` — цена на товар с учетом скидок, в том числе купонов. - `CASHBACK` — баллы Плюса. - `MARKETPLACE` — купоны.
 type OrdersStatsPriceType string
 
 // List of OrdersStatsPriceType
 const (
-	BUYER OrdersStatsPriceType = "BUYER"
-	CASHBACK OrdersStatsPriceType = "CASHBACK"
-	MARKETPLACE OrdersStatsPriceType = "MARKETPLACE"
+	OrdersStatsPriceType_BUYER       OrdersStatsPriceType = "BUYER"
+	OrdersStatsPriceType_CASHBACK    OrdersStatsPriceType = "CASHBACK"
+	OrdersStatsPriceType_MARKETPLACE OrdersStatsPriceType = "MARKETPLACE"
 )
 
 // All allowed values of OrdersStatsPriceType enum
@@ -110,4 +110,3 @@ func (v *NullableOrdersStatsPriceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

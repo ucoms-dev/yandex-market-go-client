@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,17 +15,17 @@ import (
 	"fmt"
 )
 
-// OrderLiftType Тип подъема заказа на этаж:  * `NOT_NEEDED` — не требуется.  * `MANUAL` — ручной.  * `ELEVATOR` — лифт.  * `CARGO_ELEVATOR` — грузовой лифт.  * `FREE` — любой из перечисленных выше, если включена опция бесплатного подъема.  * `UNKNOWN` — неизвестный тип. 
+// OrderLiftType Тип подъема заказа на этаж:  * `NOT_NEEDED` — не требуется.  * `MANUAL` — ручной.  * `ELEVATOR` — лифт.  * `CARGO_ELEVATOR` — грузовой лифт.  * `FREE` — любой из перечисленных выше, если включена опция бесплатного подъема.  * `UNKNOWN` — неизвестный тип.
 type OrderLiftType string
 
 // List of OrderLiftType
 const (
-	NOT_NEEDED OrderLiftType = "NOT_NEEDED"
-	MANUAL OrderLiftType = "MANUAL"
-	ELEVATOR OrderLiftType = "ELEVATOR"
-	CARGO_ELEVATOR OrderLiftType = "CARGO_ELEVATOR"
-	FREE OrderLiftType = "FREE"
-	UNKNOWN OrderLiftType = "UNKNOWN"
+	OrderLiftType_NOT_NEEDED     OrderLiftType = "NOT_NEEDED"
+	OrderLiftType_MANUAL         OrderLiftType = "MANUAL"
+	OrderLiftType_ELEVATOR       OrderLiftType = "ELEVATOR"
+	OrderLiftType_CARGO_ELEVATOR OrderLiftType = "CARGO_ELEVATOR"
+	OrderLiftType_FREE           OrderLiftType = "FREE"
+	OrderLiftType_UNKNOWN        OrderLiftType = "UNKNOWN"
 )
 
 // All allowed values of OrderLiftType enum
@@ -116,4 +116,3 @@ func (v *NullableOrderLiftType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

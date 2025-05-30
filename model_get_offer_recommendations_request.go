@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -20,8 +20,8 @@ var _ MappedNullable = &GetOfferRecommendationsRequest{}
 // GetOfferRecommendationsRequest struct for GetOfferRecommendationsRequest
 type GetOfferRecommendationsRequest struct {
 	// Идентификаторы товаров, информация о которых нужна. ⚠️ Не используйте это поле одновременно с остальными фильтрами. Если вы хотите воспользоваться фильтрами, оставьте поле пустым.
-	OfferIds []string `json:"offerIds,omitempty"`
-	CofinancePriceFilter *FieldStateType `json:"cofinancePriceFilter,omitempty"`
+	OfferIds              []string                  `json:"offerIds,omitempty"`
+	CofinancePriceFilter  *FieldStateType           `json:"cofinancePriceFilter,omitempty"`
 	CompetitivenessFilter *PriceCompetitivenessType `json:"competitivenessFilter,omitempty"`
 }
 
@@ -140,7 +140,7 @@ func (o *GetOfferRecommendationsRequest) SetCompetitivenessFilter(v PriceCompeti
 }
 
 func (o GetOfferRecommendationsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,5 +196,3 @@ func (v *NullableGetOfferRecommendationsRequest) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

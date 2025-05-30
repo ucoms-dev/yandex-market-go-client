@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,17 +15,17 @@ import (
 	"fmt"
 )
 
-// ChatStatusType Статус чата:  * `NEW` — новый чат. * `WAITING_FOR_CUSTOMER` — нужен ответ покупателя. * `WAITING_FOR_PARTNER` — нужен ответ магазина. * `WAITING_FOR_ARBITER` — нужен ответ арбитра. * `WAITING_FOR_MARKET` — нужен ответ Маркета. * `FINISHED` — чат завершен. 
+// ChatStatusType Статус чата:  * `NEW` — новый чат. * `WAITING_FOR_CUSTOMER` — нужен ответ покупателя. * `WAITING_FOR_PARTNER` — нужен ответ магазина. * `WAITING_FOR_ARBITER` — нужен ответ арбитра. * `WAITING_FOR_MARKET` — нужен ответ Маркета. * `FINISHED` — чат завершен.
 type ChatStatusType string
 
 // List of ChatStatusType
 const (
-	NEW ChatStatusType = "NEW"
-	WAITING_FOR_CUSTOMER ChatStatusType = "WAITING_FOR_CUSTOMER"
-	WAITING_FOR_PARTNER ChatStatusType = "WAITING_FOR_PARTNER"
-	WAITING_FOR_ARBITER ChatStatusType = "WAITING_FOR_ARBITER"
-	WAITING_FOR_MARKET ChatStatusType = "WAITING_FOR_MARKET"
-	FINISHED ChatStatusType = "FINISHED"
+	ChatStatusType_NEW                  ChatStatusType = "NEW"
+	ChatStatusType_WAITING_FOR_CUSTOMER ChatStatusType = "WAITING_FOR_CUSTOMER"
+	ChatStatusType_WAITING_FOR_PARTNER  ChatStatusType = "WAITING_FOR_PARTNER"
+	ChatStatusType_WAITING_FOR_ARBITER  ChatStatusType = "WAITING_FOR_ARBITER"
+	ChatStatusType_WAITING_FOR_MARKET   ChatStatusType = "WAITING_FOR_MARKET"
+	ChatStatusType_FINISHED             ChatStatusType = "FINISHED"
 )
 
 // All allowed values of ChatStatusType enum
@@ -116,4 +116,3 @@ func (v *NullableChatStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OfferMappingKindType Вид маппинга: * `ALL` — все товары. * `ACTIVE` — готовые к продаже товары. 
+// OfferMappingKindType Вид маппинга: * `ALL` — все товары. * `ACTIVE` — готовые к продаже товары.
 type OfferMappingKindType string
 
 // List of OfferMappingKindType
 const (
-	ACTIVE OfferMappingKindType = "ACTIVE"
-	ALL OfferMappingKindType = "ALL"
+	OfferMappingKindType_ACTIVE OfferMappingKindType = "ACTIVE"
+	OfferMappingKindType_ALL    OfferMappingKindType = "ALL"
 )
 
 // All allowed values of OfferMappingKindType enum
@@ -108,4 +108,3 @@ func (v *NullableOfferMappingKindType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -22,11 +22,11 @@ type LogisticPickupPointDTO struct {
 	// Идентификатор пункта вывоза.
 	Id *int64 `json:"id,omitempty"`
 	// Название пункта вывоза.
-	Name *string `json:"name,omitempty"`
+	Name    *string           `json:"name,omitempty"`
 	Address *PickupAddressDTO `json:"address,omitempty"`
 	// Дополнительные инструкции к вывозу.
-	Instruction *string `json:"instruction,omitempty"`
-	Type *LogisticPointType `json:"type,omitempty"`
+	Instruction *string            `json:"instruction,omitempty"`
+	Type        *LogisticPointType `json:"type,omitempty"`
 	// Идентификатор логистического партнера, к которому относится логистическая точка.
 	LogisticPartnerId *int64 `json:"logisticPartnerId,omitempty"`
 }
@@ -241,7 +241,7 @@ func (o *LogisticPickupPointDTO) SetLogisticPartnerId(v int64) {
 }
 
 func (o LogisticPickupPointDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -306,5 +306,3 @@ func (v *NullableLogisticPickupPointDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

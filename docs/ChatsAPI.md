@@ -31,7 +31,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/pussikill/yandex-market-go-client"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
 )
 
 func main() {
@@ -103,7 +103,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/pussikill/yandex-market-go-client"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
 )
 
 func main() {
@@ -175,7 +175,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/pussikill/yandex-market-go-client"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
 )
 
 func main() {
@@ -253,7 +253,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/pussikill/yandex-market-go-client"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
 )
 
 func main() {
@@ -327,7 +327,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/pussikill/yandex-market-go-client"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
 )
 
 func main() {
@@ -403,7 +403,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/pussikill/yandex-market-go-client"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
 )
 
 func main() {
@@ -477,7 +477,7 @@ import (
 	"context"
 	"fmt"
 	"os"
-	openapiclient "github.com/pussikill/yandex-market-go-client"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
 )
 
 func main() {

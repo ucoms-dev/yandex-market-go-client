@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// ChatMessageSenderType Кто отправил сообщение:  * `PARTNER` — магазин. * `CUSTOMER` — покупатель. * `MARKET` — Маркет. * `SUPPORT` — сотрудник службы поддержки Маркета. 
+// ChatMessageSenderType Кто отправил сообщение:  * `PARTNER` — магазин. * `CUSTOMER` — покупатель. * `MARKET` — Маркет. * `SUPPORT` — сотрудник службы поддержки Маркета.
 type ChatMessageSenderType string
 
 // List of ChatMessageSenderType
 const (
-	PARTNER ChatMessageSenderType = "PARTNER"
-	CUSTOMER ChatMessageSenderType = "CUSTOMER"
-	MARKET ChatMessageSenderType = "MARKET"
-	SUPPORT ChatMessageSenderType = "SUPPORT"
+	ChatMessageSenderType_PARTNER  ChatMessageSenderType = "PARTNER"
+	ChatMessageSenderType_CUSTOMER ChatMessageSenderType = "CUSTOMER"
+	ChatMessageSenderType_MARKET   ChatMessageSenderType = "MARKET"
+	ChatMessageSenderType_SUPPORT  ChatMessageSenderType = "SUPPORT"
 )
 
 // All allowed values of ChatMessageSenderType enum
@@ -112,4 +112,3 @@ func (v *NullableChatMessageSenderType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

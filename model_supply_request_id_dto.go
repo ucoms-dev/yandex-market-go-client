@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,11 +21,11 @@ var _ MappedNullable = &SupplyRequestIdDTO{}
 
 // SupplyRequestIdDTO Идентификатор и номера заявки.
 type SupplyRequestIdDTO struct {
-	// Идентификатор заявки.  {% note warning \"Используется только в API\" %}  По нему не получится найти заявки в кабинете продавца на Маркете. Для этого используйте `marketplaceRequestId` или `warehouseRequestId`.  {% endnote %} 
+	// Идентификатор заявки.  {% note warning \"Используется только в API\" %}  По нему не получится найти заявки в кабинете продавца на Маркете. Для этого используйте `marketplaceRequestId` или `warehouseRequestId`.  {% endnote %}
 	Id int64 `json:"id"`
-	// Номер заявки на маркетплейсе.  Также указывается в кабинете продавца на Маркете. 
+	// Номер заявки на маркетплейсе.  Также указывается в кабинете продавца на Маркете.
 	MarketplaceRequestId *string `json:"marketplaceRequestId,omitempty"`
-	// Номер заявки на складе.  Также указывается в кабинете продавца на Маркете. 
+	// Номер заявки на складе.  Также указывается в кабинете продавца на Маркете.
 	WarehouseRequestId *string `json:"warehouseRequestId,omitempty"`
 }
 
@@ -138,7 +138,7 @@ func (o *SupplyRequestIdDTO) SetWarehouseRequestId(v string) {
 }
 
 func (o SupplyRequestIdDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -170,10 +170,10 @@ func (o *SupplyRequestIdDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -229,5 +229,3 @@ func (v *NullableSupplyRequestIdDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

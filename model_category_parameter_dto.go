@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -24,8 +24,8 @@ type CategoryParameterDTO struct {
 	// Идентификатор характеристики.
 	Id int64 `json:"id"`
 	// Название характеристики.
-	Name *string `json:"name,omitempty"`
-	Type ParameterType `json:"type"`
+	Name *string                   `json:"name,omitempty"`
+	Type ParameterType             `json:"type"`
 	Unit *CategoryParameterUnitDTO `json:"unit,omitempty"`
 	// Описание характеристики.
 	Description *string `json:"description,omitempty"`
@@ -42,7 +42,7 @@ type CategoryParameterDTO struct {
 	// Можно ли передавать собственное значение, которого нет в списке вариантов Маркета. Только для характеристик типа `ENUM`.
 	AllowCustomValues bool `json:"allowCustomValues"`
 	// Список допустимых значений параметра. Только для характеристик типа `ENUM`.
-	Values []ParameterValueOptionDTO `json:"values,omitempty"`
+	Values      []ParameterValueOptionDTO     `json:"values,omitempty"`
 	Constraints *ParameterValueConstraintsDTO `json:"constraints,omitempty"`
 	// Ограничения на значения, накладываемые другими характеристиками. Только для характеристик типа `ENUM`.
 	ValueRestrictions []ValueRestrictionDTO `json:"valueRestrictions,omitempty"`
@@ -470,7 +470,7 @@ func (o *CategoryParameterDTO) SetValueRestrictions(v []ValueRestrictionDTO) {
 }
 
 func (o CategoryParameterDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -529,10 +529,10 @@ func (o *CategoryParameterDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -588,5 +588,3 @@ func (v *NullableCategoryParameterDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

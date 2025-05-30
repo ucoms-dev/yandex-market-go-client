@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// EacVerificationStatusType Статус проверки кода подтверждения:  * `ACCEPTED` — код верный. * `REJECTED` — код неверный. * `NEED_UPDATE` — Маркет отправит новый код. Значение возвращается, если превышено количество попыток отправки кода. 
+// EacVerificationStatusType Статус проверки кода подтверждения:  * `ACCEPTED` — код верный. * `REJECTED` — код неверный. * `NEED_UPDATE` — Маркет отправит новый код. Значение возвращается, если превышено количество попыток отправки кода.
 type EacVerificationStatusType string
 
 // List of EacVerificationStatusType
 const (
-	ACCEPTED EacVerificationStatusType = "ACCEPTED"
-	REJECTED EacVerificationStatusType = "REJECTED"
-	NEED_UPDATE EacVerificationStatusType = "NEED_UPDATE"
+	EacVerificationStatusType_ACCEPTED    EacVerificationStatusType = "ACCEPTED"
+	EacVerificationStatusType_REJECTED    EacVerificationStatusType = "REJECTED"
+	EacVerificationStatusType_NEED_UPDATE EacVerificationStatusType = "NEED_UPDATE"
 )
 
 // All allowed values of EacVerificationStatusType enum
@@ -110,4 +110,3 @@ func (v *NullableEacVerificationStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// ShipmentPalletLabelPageFormatType Формат страницы: * `A4` — формат страницы A4. * `A8` — формат страницы A8. 
+// ShipmentPalletLabelPageFormatType Формат страницы: * `A4` — формат страницы A4. * `A8` — формат страницы A8.
 type ShipmentPalletLabelPageFormatType string
 
 // List of ShipmentPalletLabelPageFormatType
 const (
-	A4 ShipmentPalletLabelPageFormatType = "A4"
-	A8 ShipmentPalletLabelPageFormatType = "A8"
+	ShipmentPalletLabelPageFormatType_A4 ShipmentPalletLabelPageFormatType = "A4"
+	ShipmentPalletLabelPageFormatType_A8 ShipmentPalletLabelPageFormatType = "A8"
 )
 
 // All allowed values of ShipmentPalletLabelPageFormatType enum
@@ -108,4 +108,3 @@ func (v *NullableShipmentPalletLabelPageFormatType) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

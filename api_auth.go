@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -18,16 +18,15 @@ import (
 	"net/url"
 )
 
-
 // AuthAPIService AuthAPI service
 type AuthAPIService service
 
-type ApiGetAuthTokenInfoRequest struct {
-	ctx context.Context
+type AuthApiGetAuthTokenInfoRequest struct {
+	ctx        context.Context
 	ApiService *AuthAPIService
 }
 
-func (r ApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+func (r AuthApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
 	return r.ApiService.GetAuthTokenInfoExecute(r)
 }
 
@@ -38,8 +37,6 @@ GetAuthTokenInfo Получение информации об авторизац
 
 {% note info "Метод доступен только для Api-Key-токена." %}
 
- 
-
 {% endnote %}
 
 Возвращает информацию о переданном авторизационном токене.
@@ -47,25 +44,25 @@ GetAuthTokenInfo Получение информации об авторизац
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAuthTokenInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return AuthApiGetAuthTokenInfoRequest
 */
-func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInfoRequest {
-	return ApiGetAuthTokenInfoRequest{
+func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) AuthApiGetAuthTokenInfoRequest {
+	return AuthApiGetAuthTokenInfoRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetTokenInfoResponse
-func (a *AuthAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+//
+//	@return GetTokenInfoResponse
+func (a *AuthAPIService) GetAuthTokenInfoExecute(r AuthApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetTokenInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetTokenInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "AuthAPIService.GetAuthTokenInfo")
@@ -139,8 +136,8 @@ func (a *AuthAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -150,8 +147,8 @@ func (a *AuthAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -161,8 +158,8 @@ func (a *AuthAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -172,8 +169,8 @@ func (a *AuthAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -183,8 +180,8 @@ func (a *AuthAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

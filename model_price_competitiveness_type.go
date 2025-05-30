@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// PriceCompetitivenessType Привлекательность цены:  * `OPTIMAL` — привлекательная. * `AVERAGE` — умеренная. * `LOW` — непривлекательная. 
+// PriceCompetitivenessType Привлекательность цены:  * `OPTIMAL` — привлекательная. * `AVERAGE` — умеренная. * `LOW` — непривлекательная.
 type PriceCompetitivenessType string
 
 // List of PriceCompetitivenessType
 const (
-	OPTIMAL PriceCompetitivenessType = "OPTIMAL"
-	AVERAGE PriceCompetitivenessType = "AVERAGE"
-	LOW PriceCompetitivenessType = "LOW"
+	PriceCompetitivenessType_OPTIMAL PriceCompetitivenessType = "OPTIMAL"
+	PriceCompetitivenessType_AVERAGE PriceCompetitivenessType = "AVERAGE"
+	PriceCompetitivenessType_LOW     PriceCompetitivenessType = "LOW"
 )
 
 // All allowed values of PriceCompetitivenessType enum
@@ -110,4 +110,3 @@ func (v *NullablePriceCompetitivenessType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

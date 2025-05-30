@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &EnrichedOrderBoxLayoutDTO{}
 
 // EnrichedOrderBoxLayoutDTO Информация о коробке.
 type EnrichedOrderBoxLayoutDTO struct {
-	// Список товаров в коробке.  Если в коробке едет часть большого товара, в списке может быть только один пункт. 
+	// Список товаров в коробке.  Если в коробке едет часть большого товара, в списке может быть только один пункт.
 	Items []OrderBoxLayoutItemDTO `json:"items"`
 	// Идентификатор коробки.
 	BoxId *int64 `json:"boxId,omitempty"`
@@ -104,7 +104,7 @@ func (o *EnrichedOrderBoxLayoutDTO) SetBoxId(v int64) {
 }
 
 func (o EnrichedOrderBoxLayoutDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,10 +133,10 @@ func (o *EnrichedOrderBoxLayoutDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -192,5 +192,3 @@ func (v *NullableEnrichedOrderBoxLayoutDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

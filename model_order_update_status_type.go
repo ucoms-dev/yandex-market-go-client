@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OrderUpdateStatusType Изменился ли статус заказа:  * `OK` — статус изменен.  * `ERROR` — статус не изменен. В этом случае появится сообщение об ошибке в параметре `errorDetails`. 
+// OrderUpdateStatusType Изменился ли статус заказа:  * `OK` — статус изменен.  * `ERROR` — статус не изменен. В этом случае появится сообщение об ошибке в параметре `errorDetails`.
 type OrderUpdateStatusType string
 
 // List of OrderUpdateStatusType
 const (
-	OK OrderUpdateStatusType = "OK"
-	ERROR OrderUpdateStatusType = "ERROR"
+	OrderUpdateStatusType_OK    OrderUpdateStatusType = "OK"
+	OrderUpdateStatusType_ERROR OrderUpdateStatusType = "ERROR"
 )
 
 // All allowed values of OrderUpdateStatusType enum
@@ -108,4 +108,3 @@ func (v *NullableOrderUpdateStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

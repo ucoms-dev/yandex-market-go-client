@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -19,15 +19,14 @@ import (
 	"strings"
 )
 
-
 // OrderBusinessInformationAPIService OrderBusinessInformationAPI service
 type OrderBusinessInformationAPIService service
 
 type ApiGetOrderBusinessBuyerInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *OrderBusinessInformationAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
 func (r ApiGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
@@ -52,29 +51,29 @@ GetOrderBusinessBuyerInfo Информация о покупателе — юр�
 |**⚙️ Лимит:** 3 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderBusinessBuyerInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiGetOrderBusinessBuyerInfoRequest
 */
 func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBusinessBuyerInfoRequest {
 	return ApiGetOrderBusinessBuyerInfoRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBusinessBuyerInfoResponse
+//
+//	@return GetBusinessBuyerInfoResponse
 func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBusinessBuyerInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBusinessBuyerInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrderBusinessInformationAPIService.GetOrderBusinessBuyerInfo")
@@ -153,8 +152,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfoExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -164,8 +163,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfoExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -175,8 +174,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfoExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -186,8 +185,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfoExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -197,8 +196,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfoExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -208,8 +207,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfoExecute(r 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -227,10 +226,10 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessBuyerInfoExecute(r 
 }
 
 type ApiGetOrderBusinessDocumentsInfoRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *OrderBusinessInformationAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
 func (r ApiGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
@@ -249,29 +248,29 @@ GetOrderBusinessDocumentsInfo Информация о документах
 |**⚙️ Лимит:** 3 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderBusinessDocumentsInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiGetOrderBusinessDocumentsInfoRequest
 */
 func (a *OrderBusinessInformationAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBusinessDocumentsInfoRequest {
 	return ApiGetOrderBusinessDocumentsInfoRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBusinessDocumentsInfoResponse
+//
+//	@return GetBusinessDocumentsInfoResponse
 func (a *OrderBusinessInformationAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBusinessDocumentsInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBusinessDocumentsInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrderBusinessInformationAPIService.GetOrderBusinessDocumentsInfo")
@@ -350,8 +349,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessDocumentsInfoExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -361,8 +360,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessDocumentsInfoExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -372,8 +371,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessDocumentsInfoExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -383,8 +382,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessDocumentsInfoExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -394,8 +393,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessDocumentsInfoExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -405,8 +404,8 @@ func (a *OrderBusinessInformationAPIService) GetOrderBusinessDocumentsInfoExecut
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

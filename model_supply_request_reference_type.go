@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// SupplyRequestReferenceType Тип связи между двумя заявками:  * `VIRTUAL_DISTRIBUTION` — [мультипоставка](*multisupply).  * `WITHDRAW` — вывоз непринятых товаров.      Подтипы заявки: `DEFAULT`, `XDOC`, `VIRTUAL_DISTRIBUTION_CENTER_CHILD` и `ANOMALY_WITHDRAW`.  * `UTILIZATION` — утилизация непринятых товаров.      Подтипы заявки: `DEFAULT`, `XDOC`, `VIRTUAL_DISTRIBUTION_CENTER_CHILD` и `FORCE_PLAN_ANOMALY_PER_SUPPLY`.  * `ADDITIONAL_SUPPLY` — дополнительная поставка.      Подтипы заявки: `DEFAULT`, `XDOC`, `VIRTUAL_DISTRIBUTION_CENTER_CHILD` и `ADDITIONAL_SUPPLY`. 
+// SupplyRequestReferenceType Тип связи между двумя заявками:  * `VIRTUAL_DISTRIBUTION` — [мультипоставка](*multisupply).  * `WITHDRAW` — вывоз непринятых товаров.      Подтипы заявки: `DEFAULT`, `XDOC`, `VIRTUAL_DISTRIBUTION_CENTER_CHILD` и `ANOMALY_WITHDRAW`.  * `UTILIZATION` — утилизация непринятых товаров.      Подтипы заявки: `DEFAULT`, `XDOC`, `VIRTUAL_DISTRIBUTION_CENTER_CHILD` и `FORCE_PLAN_ANOMALY_PER_SUPPLY`.  * `ADDITIONAL_SUPPLY` — дополнительная поставка.      Подтипы заявки: `DEFAULT`, `XDOC`, `VIRTUAL_DISTRIBUTION_CENTER_CHILD` и `ADDITIONAL_SUPPLY`.
 type SupplyRequestReferenceType string
 
 // List of SupplyRequestReferenceType
 const (
-	VIRTUAL_DISTRIBUTION SupplyRequestReferenceType = "VIRTUAL_DISTRIBUTION"
-	WITHDRAW SupplyRequestReferenceType = "WITHDRAW"
-	UTILIZATION SupplyRequestReferenceType = "UTILIZATION"
-	ADDITIONAL_SUPPLY SupplyRequestReferenceType = "ADDITIONAL_SUPPLY"
+	SupplyRequestReferenceType_VIRTUAL_DISTRIBUTION SupplyRequestReferenceType = "VIRTUAL_DISTRIBUTION"
+	SupplyRequestReferenceType_WITHDRAW             SupplyRequestReferenceType = "WITHDRAW"
+	SupplyRequestReferenceType_UTILIZATION          SupplyRequestReferenceType = "UTILIZATION"
+	SupplyRequestReferenceType_ADDITIONAL_SUPPLY    SupplyRequestReferenceType = "ADDITIONAL_SUPPLY"
 )
 
 // All allowed values of SupplyRequestReferenceType enum
@@ -112,4 +112,3 @@ func (v *NullableSupplyRequestReferenceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

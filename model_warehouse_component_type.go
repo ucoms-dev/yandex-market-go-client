@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// WarehouseComponentType Свойства складов, которые необходимо вернуть:  * `ADDRESS` — адрес склада. * `STATUS` — статус склада. 
+// WarehouseComponentType Свойства складов, которые необходимо вернуть:  * `ADDRESS` — адрес склада. * `STATUS` — статус склада.
 type WarehouseComponentType string
 
 // List of WarehouseComponentType
 const (
-	ADDRESS WarehouseComponentType = "ADDRESS"
-	STATUS WarehouseComponentType = "STATUS"
+	WarehouseComponentType_ADDRESS WarehouseComponentType = "ADDRESS"
+	WarehouseComponentType_STATUS  WarehouseComponentType = "STATUS"
 )
 
 // All allowed values of WarehouseComponentType enum
@@ -108,4 +108,3 @@ func (v *NullableWarehouseComponentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

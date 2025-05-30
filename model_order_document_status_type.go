@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OrderDocumentStatusType Статус документа:  * `READY` — готов. * `NOT_READY` — не готов. 
+// OrderDocumentStatusType Статус документа:  * `READY` — готов. * `NOT_READY` — не готов.
 type OrderDocumentStatusType string
 
 // List of OrderDocumentStatusType
 const (
-	READY OrderDocumentStatusType = "READY"
-	NOT_READY OrderDocumentStatusType = "NOT_READY"
+	OrderDocumentStatusType_READY     OrderDocumentStatusType = "READY"
+	OrderDocumentStatusType_NOT_READY OrderDocumentStatusType = "NOT_READY"
 )
 
 // All allowed values of OrderDocumentStatusType enum
@@ -108,4 +108,3 @@ func (v *NullableOrderDocumentStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

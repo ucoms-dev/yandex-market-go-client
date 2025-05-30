@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,28 +15,28 @@ import (
 	"fmt"
 )
 
-// SupplyRequestStatusType Статус заявки на поставку:  * `CREATED` — создан черновик заявки. * `FINISHED` — заявка завершена, товары:   * приняты на складе;   * переданы на другой склад при перемещении;   * переданы продавцу при вывозе;   * утилизированы. * `CANCELLED` — заявка отменена. * `INVALID` — ошибка обработки. * `VALIDATED` — заявка в обработке. * `PUBLISHED` — создана заявка. * `ARRIVED_TO_SERVICE` — поставка прибыла на склад хранения. * `ARRIVED_TO_XDOC_SERVICE` — поставка прибыла на транзитный склад. * `SHIPPED_TO_SERVICE` — поставка отправлена с транзитного склада на склад хранения. * `CANCELLATION_REQUESTED` — запрошена отмена заявки. * `CANCELLATION_REJECTED` — заявка не будет отменена. * `REGISTERED_IN_ELECTRONIC_QUEUE` — поставка зарегистрирована в электронной очереди. * `READY_FOR_UTILIZATION` — товары готовы к утилизации. * `TRANSIT_MOVING` — перемещение товаров на склад вывоза. * `WAREHOUSE_HANDLING` — вторичная приемка товаров или их сборка для вывоза или утилизации. * `ACCEPTED_BY_WAREHOUSE_SYSTEM` — информация о заявке направлена на склад. * `READY_TO_WITHDRAW` — товары готовы к выдаче. 
+// SupplyRequestStatusType Статус заявки на поставку:  * `CREATED` — создан черновик заявки. * `FINISHED` — заявка завершена, товары:   * приняты на складе;   * переданы на другой склад при перемещении;   * переданы продавцу при вывозе;   * утилизированы. * `CANCELLED` — заявка отменена. * `INVALID` — ошибка обработки. * `VALIDATED` — заявка в обработке. * `PUBLISHED` — создана заявка. * `ARRIVED_TO_SERVICE` — поставка прибыла на склад хранения. * `ARRIVED_TO_XDOC_SERVICE` — поставка прибыла на транзитный склад. * `SHIPPED_TO_SERVICE` — поставка отправлена с транзитного склада на склад хранения. * `CANCELLATION_REQUESTED` — запрошена отмена заявки. * `CANCELLATION_REJECTED` — заявка не будет отменена. * `REGISTERED_IN_ELECTRONIC_QUEUE` — поставка зарегистрирована в электронной очереди. * `READY_FOR_UTILIZATION` — товары готовы к утилизации. * `TRANSIT_MOVING` — перемещение товаров на склад вывоза. * `WAREHOUSE_HANDLING` — вторичная приемка товаров или их сборка для вывоза или утилизации. * `ACCEPTED_BY_WAREHOUSE_SYSTEM` — информация о заявке направлена на склад. * `READY_TO_WITHDRAW` — товары готовы к выдаче.
 type SupplyRequestStatusType string
 
 // List of SupplyRequestStatusType
 const (
-	CREATED SupplyRequestStatusType = "CREATED"
-	FINISHED SupplyRequestStatusType = "FINISHED"
-	CANCELLED SupplyRequestStatusType = "CANCELLED"
-	INVALID SupplyRequestStatusType = "INVALID"
-	VALIDATED SupplyRequestStatusType = "VALIDATED"
-	PUBLISHED SupplyRequestStatusType = "PUBLISHED"
-	ARRIVED_TO_SERVICE SupplyRequestStatusType = "ARRIVED_TO_SERVICE"
-	ARRIVED_TO_XDOC_SERVICE SupplyRequestStatusType = "ARRIVED_TO_XDOC_SERVICE"
-	SHIPPED_TO_SERVICE SupplyRequestStatusType = "SHIPPED_TO_SERVICE"
-	CANCELLATION_REQUESTED SupplyRequestStatusType = "CANCELLATION_REQUESTED"
-	CANCELLATION_REJECTED SupplyRequestStatusType = "CANCELLATION_REJECTED"
-	REGISTERED_IN_ELECTRONIC_QUEUE SupplyRequestStatusType = "REGISTERED_IN_ELECTRONIC_QUEUE"
-	READY_FOR_UTILIZATION SupplyRequestStatusType = "READY_FOR_UTILIZATION"
-	TRANSIT_MOVING SupplyRequestStatusType = "TRANSIT_MOVING"
-	WAREHOUSE_HANDLING SupplyRequestStatusType = "WAREHOUSE_HANDLING"
-	ACCEPTED_BY_WAREHOUSE_SYSTEM SupplyRequestStatusType = "ACCEPTED_BY_WAREHOUSE_SYSTEM"
-	READY_TO_WITHDRAW SupplyRequestStatusType = "READY_TO_WITHDRAW"
+	SupplyRequestStatusType_CREATED                        SupplyRequestStatusType = "CREATED"
+	SupplyRequestStatusType_FINISHED                       SupplyRequestStatusType = "FINISHED"
+	SupplyRequestStatusType_CANCELLED                      SupplyRequestStatusType = "CANCELLED"
+	SupplyRequestStatusType_INVALID                        SupplyRequestStatusType = "INVALID"
+	SupplyRequestStatusType_VALIDATED                      SupplyRequestStatusType = "VALIDATED"
+	SupplyRequestStatusType_PUBLISHED                      SupplyRequestStatusType = "PUBLISHED"
+	SupplyRequestStatusType_ARRIVED_TO_SERVICE             SupplyRequestStatusType = "ARRIVED_TO_SERVICE"
+	SupplyRequestStatusType_ARRIVED_TO_XDOC_SERVICE        SupplyRequestStatusType = "ARRIVED_TO_XDOC_SERVICE"
+	SupplyRequestStatusType_SHIPPED_TO_SERVICE             SupplyRequestStatusType = "SHIPPED_TO_SERVICE"
+	SupplyRequestStatusType_CANCELLATION_REQUESTED         SupplyRequestStatusType = "CANCELLATION_REQUESTED"
+	SupplyRequestStatusType_CANCELLATION_REJECTED          SupplyRequestStatusType = "CANCELLATION_REJECTED"
+	SupplyRequestStatusType_REGISTERED_IN_ELECTRONIC_QUEUE SupplyRequestStatusType = "REGISTERED_IN_ELECTRONIC_QUEUE"
+	SupplyRequestStatusType_READY_FOR_UTILIZATION          SupplyRequestStatusType = "READY_FOR_UTILIZATION"
+	SupplyRequestStatusType_TRANSIT_MOVING                 SupplyRequestStatusType = "TRANSIT_MOVING"
+	SupplyRequestStatusType_WAREHOUSE_HANDLING             SupplyRequestStatusType = "WAREHOUSE_HANDLING"
+	SupplyRequestStatusType_ACCEPTED_BY_WAREHOUSE_SYSTEM   SupplyRequestStatusType = "ACCEPTED_BY_WAREHOUSE_SYSTEM"
+	SupplyRequestStatusType_READY_TO_WITHDRAW              SupplyRequestStatusType = "READY_TO_WITHDRAW"
 )
 
 // All allowed values of SupplyRequestStatusType enum
@@ -138,4 +138,3 @@ func (v *NullableSupplyRequestStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,9 +17,9 @@ import (
 // checks if the OfferRecommendationDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OfferRecommendationDTO{}
 
-// OfferRecommendationDTO Информация о состоянии цен и рекомендации. 
+// OfferRecommendationDTO Информация о состоянии цен и рекомендации.
 type OfferRecommendationDTO struct {
-	Offer *OfferForRecommendationDTO `json:"offer,omitempty"`
+	Offer          *OfferForRecommendationDTO  `json:"offer,omitempty"`
 	Recommendation *OfferRecommendationInfoDTO `json:"recommendation,omitempty"`
 }
 
@@ -105,7 +105,7 @@ func (o *OfferRecommendationDTO) SetRecommendation(v OfferRecommendationInfoDTO)
 }
 
 func (o OfferRecommendationDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableOfferRecommendationDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

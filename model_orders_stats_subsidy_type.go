@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// OrdersStatsSubsidyType Источник баллов, которые используются для уменьшения стоимости размещения:  * `YANDEX_CASHBACK` — скидка по подписке Яндекс Плюс.  * `SUBSIDY` — скидка Маркета (по акциям, промокодам, купонам и т. д.)  * `DELIVERY` — скидка за доставку (DBS). 
+// OrdersStatsSubsidyType Источник баллов, которые используются для уменьшения стоимости размещения:  * `YANDEX_CASHBACK` — скидка по подписке Яндекс Плюс.  * `SUBSIDY` — скидка Маркета (по акциям, промокодам, купонам и т. д.)  * `DELIVERY` — скидка за доставку (DBS).
 type OrdersStatsSubsidyType string
 
 // List of OrdersStatsSubsidyType
 const (
-	YANDEX_CASHBACK OrdersStatsSubsidyType = "YANDEX_CASHBACK"
-	SUBSIDY OrdersStatsSubsidyType = "SUBSIDY"
-	DELIVERY OrdersStatsSubsidyType = "DELIVERY"
+	OrdersStatsSubsidyType_YANDEX_CASHBACK OrdersStatsSubsidyType = "YANDEX_CASHBACK"
+	OrdersStatsSubsidyType_SUBSIDY         OrdersStatsSubsidyType = "SUBSIDY"
+	OrdersStatsSubsidyType_DELIVERY        OrdersStatsSubsidyType = "DELIVERY"
 )
 
 // All allowed values of OrdersStatsSubsidyType enum
@@ -110,4 +110,3 @@ func (v *NullableOrdersStatsSubsidyType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

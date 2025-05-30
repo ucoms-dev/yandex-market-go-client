@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,28 +11,28 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the OfferCardDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OfferCardDTO{}
 
-// OfferCardDTO Информация о состоянии карточки товара.  Если поле `mapping` отсутствует в ответе, Маркет еще не успел обработать информацию о товаре. Чтобы определить категорию такого товара, повторите запрос через несколько минут. 
+// OfferCardDTO Информация о состоянии карточки товара.  Если поле `mapping` отсутствует в ответе, Маркет еще не успел обработать информацию о товаре. Чтобы определить категорию такого товара, повторите запрос через несколько минут.
 type OfferCardDTO struct {
-	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields) 
-	OfferId string `json:"offerId" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
+	OfferId string         `json:"offerId" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
 	Mapping *GetMappingDTO `json:"mapping,omitempty"`
-	// Список характеристик с их значениями. 
-	ParameterValues []ParameterValueDTO `json:"parameterValues,omitempty"`
-	CardStatus *OfferCardStatusType `json:"cardStatus,omitempty"`
+	// Список характеристик с их значениями.
+	ParameterValues []ParameterValueDTO  `json:"parameterValues,omitempty"`
+	CardStatus      *OfferCardStatusType `json:"cardStatus,omitempty"`
 	// Рейтинг карточки.
 	ContentRating *int32 `json:"contentRating,omitempty"`
 	// Средний рейтинг карточки у товаров той категории, которая указана в `marketCategoryId`.
-	AverageContentRating *int32 `json:"averageContentRating,omitempty"`
-	ContentRatingStatus *OfferCardContentStatusType `json:"contentRatingStatus,omitempty"`
-	// Список рекомендаций к заполнению карточки.  Рекомендации Маркета помогают заполнять карточку так, чтобы покупателям было проще найти ваш товар и решиться на покупку. 
+	AverageContentRating *int32                      `json:"averageContentRating,omitempty"`
+	ContentRatingStatus  *OfferCardContentStatusType `json:"contentRatingStatus,omitempty"`
+	// Список рекомендаций к заполнению карточки.  Рекомендации Маркета помогают заполнять карточку так, чтобы покупателям было проще найти ваш товар и решиться на покупку.
 	Recommendations []OfferCardRecommendationDTO `json:"recommendations,omitempty"`
 	// Ошибки в контенте, препятствующие размещению товара на витрине.
 	Errors []OfferErrorDTO `json:"errors,omitempty"`
@@ -377,7 +377,7 @@ func (o *OfferCardDTO) SetWarnings(v []OfferErrorDTO) {
 }
 
 func (o OfferCardDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -430,10 +430,10 @@ func (o *OfferCardDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -489,5 +489,3 @@ func (v *NullableOfferCardDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,19 +15,19 @@ import (
 	"fmt"
 )
 
-// ShipmentStatusType Статус отгрузки:  * `OUTBOUND_CREATED` — формируется. * `OUTBOUND_READY_FOR_CONFIRMATION` — можно обрабатывать. * `OUTBOUND_CONFIRMED` — подтверждена и готова к отправке. * `OUTBOUND_SIGNED` — по ней подписан электронный акт приема-передачи. * `ACCEPTED` — принята в сортировочном центре или пункте приема. * `ACCEPTED_WITH_DISCREPANCIES` — принята с расхождениями. * `FINISHED` — завершена. * `ERROR` — отменена из-за ошибки. 
+// ShipmentStatusType Статус отгрузки:  * `OUTBOUND_CREATED` — формируется. * `OUTBOUND_READY_FOR_CONFIRMATION` — можно обрабатывать. * `OUTBOUND_CONFIRMED` — подтверждена и готова к отправке. * `OUTBOUND_SIGNED` — по ней подписан электронный акт приема-передачи. * `ACCEPTED` — принята в сортировочном центре или пункте приема. * `ACCEPTED_WITH_DISCREPANCIES` — принята с расхождениями. * `FINISHED` — завершена. * `ERROR` — отменена из-за ошибки.
 type ShipmentStatusType string
 
 // List of ShipmentStatusType
 const (
-	OUTBOUND_CREATED ShipmentStatusType = "OUTBOUND_CREATED"
-	OUTBOUND_READY_FOR_CONFIRMATION ShipmentStatusType = "OUTBOUND_READY_FOR_CONFIRMATION"
-	OUTBOUND_CONFIRMED ShipmentStatusType = "OUTBOUND_CONFIRMED"
-	OUTBOUND_SIGNED ShipmentStatusType = "OUTBOUND_SIGNED"
-	FINISHED ShipmentStatusType = "FINISHED"
-	ACCEPTED ShipmentStatusType = "ACCEPTED"
-	ACCEPTED_WITH_DISCREPANCIES ShipmentStatusType = "ACCEPTED_WITH_DISCREPANCIES"
-	ERROR ShipmentStatusType = "ERROR"
+	ShipmentStatusType_OUTBOUND_CREATED                ShipmentStatusType = "OUTBOUND_CREATED"
+	ShipmentStatusType_OUTBOUND_READY_FOR_CONFIRMATION ShipmentStatusType = "OUTBOUND_READY_FOR_CONFIRMATION"
+	ShipmentStatusType_OUTBOUND_CONFIRMED              ShipmentStatusType = "OUTBOUND_CONFIRMED"
+	ShipmentStatusType_OUTBOUND_SIGNED                 ShipmentStatusType = "OUTBOUND_SIGNED"
+	ShipmentStatusType_FINISHED                        ShipmentStatusType = "FINISHED"
+	ShipmentStatusType_ACCEPTED                        ShipmentStatusType = "ACCEPTED"
+	ShipmentStatusType_ACCEPTED_WITH_DISCREPANCIES     ShipmentStatusType = "ACCEPTED_WITH_DISCREPANCIES"
+	ShipmentStatusType_ERROR                           ShipmentStatusType = "ERROR"
 )
 
 // All allowed values of ShipmentStatusType enum
@@ -120,4 +120,3 @@ func (v *NullableShipmentStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

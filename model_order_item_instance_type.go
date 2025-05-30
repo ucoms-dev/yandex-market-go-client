@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,16 +15,16 @@ import (
 	"fmt"
 )
 
-// OrderItemInstanceType Вид маркировки товара:  * `CIS` — КИЗ, идентификатор единицы товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go). Обязателен для заполнения.  * `CIS_OPTIONAL` — КИЗ, идентификатор единицы товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/). Необязателен для заполнения, но в ближайшее время потребуется его передача.  * `UIN` — УИН, уникальный идентификационный номер.  * `RNPT` — РНПТ, регистрационный номер партии товара.  * `GTD` — номер ГТД, грузовой таможенной декларации. 
+// OrderItemInstanceType Вид маркировки товара:  * `CIS` — КИЗ, идентификатор единицы товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go). Обязателен для заполнения.  * `CIS_OPTIONAL` — КИЗ, идентификатор единицы товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/). Необязателен для заполнения, но в ближайшее время потребуется его передача.  * `UIN` — УИН, уникальный идентификационный номер.  * `RNPT` — РНПТ, регистрационный номер партии товара.  * `GTD` — номер ГТД, грузовой таможенной декларации.
 type OrderItemInstanceType string
 
 // List of OrderItemInstanceType
 const (
-	CIS OrderItemInstanceType = "CIS"
-	CIS_OPTIONAL OrderItemInstanceType = "CIS_OPTIONAL"
-	UIN OrderItemInstanceType = "UIN"
-	RNPT OrderItemInstanceType = "RNPT"
-	GTD OrderItemInstanceType = "GTD"
+	OrderItemInstanceType_CIS          OrderItemInstanceType = "CIS"
+	OrderItemInstanceType_CIS_OPTIONAL OrderItemInstanceType = "CIS_OPTIONAL"
+	OrderItemInstanceType_UIN          OrderItemInstanceType = "UIN"
+	OrderItemInstanceType_RNPT         OrderItemInstanceType = "RNPT"
+	OrderItemInstanceType_GTD          OrderItemInstanceType = "GTD"
 )
 
 // All allowed values of OrderItemInstanceType enum
@@ -114,4 +114,3 @@ func (v *NullableOrderItemInstanceType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

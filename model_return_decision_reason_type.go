@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,19 +15,19 @@ import (
 	"fmt"
 )
 
-// ReturnDecisionReasonType Причины возврата:  * `BAD_QUALITY` — бракованный товар (есть недостатки).  * `DOES_NOT_FIT` — товар не подошел.  * `WRONG_ITEM` — привезли не тот товар.  * `DAMAGE_DELIVERY` — товар поврежден при доставке.  * `LOYALTY_FAIL` — невозможно установить виновного в браке/пересорте.  * `CONTENT_FAIL` — ошибочное описание товара по вине Маркета.  * `DELIVERY_FAIL` — товар не привезли.  * `UNKNOWN` — причина не известна. 
+// ReturnDecisionReasonType Причины возврата:  * `BAD_QUALITY` — бракованный товар (есть недостатки).  * `DOES_NOT_FIT` — товар не подошел.  * `WRONG_ITEM` — привезли не тот товар.  * `DAMAGE_DELIVERY` — товар поврежден при доставке.  * `LOYALTY_FAIL` — невозможно установить виновного в браке/пересорте.  * `CONTENT_FAIL` — ошибочное описание товара по вине Маркета.  * `DELIVERY_FAIL` — товар не привезли.  * `UNKNOWN` — причина не известна.
 type ReturnDecisionReasonType string
 
 // List of ReturnDecisionReasonType
 const (
-	BAD_QUALITY ReturnDecisionReasonType = "BAD_QUALITY"
-	DOES_NOT_FIT ReturnDecisionReasonType = "DOES_NOT_FIT"
-	WRONG_ITEM ReturnDecisionReasonType = "WRONG_ITEM"
-	DAMAGE_DELIVERY ReturnDecisionReasonType = "DAMAGE_DELIVERY"
-	LOYALTY_FAIL ReturnDecisionReasonType = "LOYALTY_FAIL"
-	CONTENT_FAIL ReturnDecisionReasonType = "CONTENT_FAIL"
-	DELIVERY_FAIL ReturnDecisionReasonType = "DELIVERY_FAIL"
-	UNKNOWN ReturnDecisionReasonType = "UNKNOWN"
+	ReturnDecisionReasonType_BAD_QUALITY     ReturnDecisionReasonType = "BAD_QUALITY"
+	ReturnDecisionReasonType_DOES_NOT_FIT    ReturnDecisionReasonType = "DOES_NOT_FIT"
+	ReturnDecisionReasonType_WRONG_ITEM      ReturnDecisionReasonType = "WRONG_ITEM"
+	ReturnDecisionReasonType_DAMAGE_DELIVERY ReturnDecisionReasonType = "DAMAGE_DELIVERY"
+	ReturnDecisionReasonType_LOYALTY_FAIL    ReturnDecisionReasonType = "LOYALTY_FAIL"
+	ReturnDecisionReasonType_CONTENT_FAIL    ReturnDecisionReasonType = "CONTENT_FAIL"
+	ReturnDecisionReasonType_DELIVERY_FAIL   ReturnDecisionReasonType = "DELIVERY_FAIL"
+	ReturnDecisionReasonType_UNKNOWN         ReturnDecisionReasonType = "UNKNOWN"
 )
 
 // All allowed values of ReturnDecisionReasonType enum
@@ -120,4 +120,3 @@ func (v *NullableReturnDecisionReasonType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

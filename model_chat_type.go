@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// ChatType Тип чата:  * `CHAT` — чат с покупателем. * `ARBITRAGE` — спор. 
+// ChatType Тип чата:  * `CHAT` — чат с покупателем. * `ARBITRAGE` — спор.
 type ChatType string
 
 // List of ChatType
 const (
-	CHAT ChatType = "CHAT"
-	ARBITRAGE ChatType = "ARBITRAGE"
+	ChatType_CHAT      ChatType = "CHAT"
+	ChatType_ARBITRAGE ChatType = "ARBITRAGE"
 )
 
 // All allowed values of ChatType enum
@@ -108,4 +108,3 @@ func (v *NullableChatType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

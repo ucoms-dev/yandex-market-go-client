@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -20,15 +20,14 @@ import (
 	"time"
 )
 
-
 // OrdersAPIService OrdersAPI service
 type OrdersAPIService service
 
 type ApiAcceptOrderCancellationRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderId int64
+	ctx                            context.Context
+	ApiService                     *OrdersAPIService
+	campaignId                     int64
+	orderId                        int64
 	acceptOrderCancellationRequest *AcceptOrderCancellationRequest
 }
 
@@ -52,43 +51,43 @@ AcceptOrderCancellation Отмена заказа покупателем
 
 Если заказ уже передан службе доставки (статус `DELIVERY` или `PICKUP`) и пользователь отменил его, вы можете предупредить службу об отмене в течение 48 часов.
 
-  * Служба доставки узнала об отмене до передачи заказа покупателю — подтвердите отмену с помощью запроса [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation.md).
-  * Заказ уже доставлен — отклоните отмену с помощью этого же запроса. Тогда у покупателя останется заказ, и деньги за него возвращаться не будут.
+  - Служба доставки узнала об отмене до передачи заказа покупателю — подтвердите отмену с помощью запроса [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation.md).
+  - Заказ уже доставлен — отклоните отмену с помощью этого же запроса. Тогда у покупателя останется заказ, и деньги за него возвращаться не будут.
 
 **Как узнать об отмененных заказах:**
 
-  * Отправьте запрос [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md). В его URL добавьте входной параметр `onlyWaitingForCancellationApprove=true`.
-  * В кабинете или через почту — на нее придет уведомление об отмене.
-  * Подключите API-уведомления. Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новая заявка на отмену заказа. [{#T}](../../push-notifications/index.md)
+  - Отправьте запрос [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md). В его URL добавьте входной параметр `onlyWaitingForCancellationApprove=true`.
+  - В кабинете или через почту — на нее придет уведомление об отмене.
+  - Подключите API-уведомления. Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новая заявка на отмену заказа. [{#T}](../../push-notifications/index.md)
 
 Если в течение 48 часов вы не подтвердите или отклоните отмену, заказ будет отменен автоматически.
 
 |**⚙️ Лимит:** 500 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiAcceptOrderCancellationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiAcceptOrderCancellationRequest
 */
 func (a *OrdersAPIService) AcceptOrderCancellation(ctx context.Context, campaignId int64, orderId int64) ApiAcceptOrderCancellationRequest {
 	return ApiAcceptOrderCancellationRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancellationRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.AcceptOrderCancellation")
@@ -172,8 +171,8 @@ func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancel
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -183,8 +182,8 @@ func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancel
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -194,8 +193,8 @@ func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancel
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -205,8 +204,8 @@ func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancel
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -216,8 +215,8 @@ func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancel
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -227,8 +226,8 @@ func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancel
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -246,10 +245,10 @@ func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancel
 }
 
 type ApiGetOrderRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *OrdersAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
 func (r ApiGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
@@ -276,29 +275,29 @@ GetOrder Информация об одном заказе
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiGetOrderRequest
 */
 func (a *OrdersAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderRequest {
 	return ApiGetOrderRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrderResponse
+//
+//	@return GetOrderResponse
 func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.GetOrder")
@@ -377,8 +376,8 @@ func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -388,8 +387,8 @@ func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -399,8 +398,8 @@ func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -410,8 +409,8 @@ func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -421,8 +420,8 @@ func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -432,8 +431,8 @@ func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -451,10 +450,10 @@ func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderRespo
 }
 
 type ApiGetOrderIdentifiersStatusRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *OrdersAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
 func (r ApiGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
@@ -476,29 +475,29 @@ GetOrderIdentifiersStatus Статусы проверки УИНов
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderIdentifiersStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiGetOrderIdentifiersStatusRequest
 */
 func (a *OrdersAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderIdentifiersStatusRequest {
 	return ApiGetOrderIdentifiersStatusRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrderIdentifiersStatusResponse
+//
+//	@return GetOrderIdentifiersStatusResponse
 func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrderIdentifiersStatusResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrderIdentifiersStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.GetOrderIdentifiersStatus")
@@ -577,8 +576,8 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentif
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -588,8 +587,8 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentif
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -599,8 +598,8 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentif
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -610,8 +609,8 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentif
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -621,8 +620,8 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentif
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -632,8 +631,8 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentif
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -651,79 +650,79 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentif
 }
 
 type ApiGetOrdersRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderIds *[]int64
-	status *[]OrderStatusType
-	substatus *[]OrderSubstatusType
-	fromDate *string
-	toDate *string
-	supplierShipmentDateFrom *string
-	supplierShipmentDateTo *string
-	updatedAtFrom *time.Time
-	updatedAtTo *time.Time
-	dispatchType *OrderDeliveryDispatchType
-	fake *bool
-	hasCis *bool
+	ctx                               context.Context
+	ApiService                        *OrdersAPIService
+	campaignId                        int64
+	orderIds                          *[]int64
+	status                            *[]OrderStatusType
+	substatus                         *[]OrderSubstatusType
+	fromDate                          *string
+	toDate                            *string
+	supplierShipmentDateFrom          *string
+	supplierShipmentDateTo            *string
+	updatedAtFrom                     *time.Time
+	updatedAtTo                       *time.Time
+	dispatchType                      *OrderDeliveryDispatchType
+	fake                              *bool
+	hasCis                            *bool
 	onlyWaitingForCancellationApprove *bool
-	onlyEstimatedDelivery *bool
-	buyerType *OrderBuyerType
-	page *int32
-	pageSize *int32
-	pageToken *string
-	limit *int32
+	onlyEstimatedDelivery             *bool
+	buyerType                         *OrderBuyerType
+	page                              *int32
+	pageSize                          *int32
+	pageToken                         *string
+	limit                             *int32
 }
 
-// Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым. 
+// Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
 func (r ApiGetOrdersRequest) OrderIds(orderIds []int64) ApiGetOrdersRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
-// Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется. 
+// Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется.
 func (r ApiGetOrdersRequest) Status(status []OrderStatusType) ApiGetOrdersRequest {
 	r.status = &status
 	return r
 }
 
-// Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется. 
+// Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется.
 func (r ApiGetOrdersRequest) Substatus(substatus []OrderSubstatusType) ApiGetOrdersRequest {
 	r.substatus = &substatus
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты. 
+// Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты.
 func (r ApiGetOrdersRequest) FromDate(fromDate string) ApiGetOrdersRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки. 
+// Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки.
 func (r ApiGetOrdersRequest) ToDate(toDate string) ApiGetOrdersRequest {
 	r.toDate = &toDate
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации. 
+// Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
 func (r ApiGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) ApiGetOrdersRequest {
 	r.supplierShipmentDateFrom = &supplierShipmentDateFrom
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки. 
+// Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки.
 func (r ApiGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) ApiGetOrdersRequest {
 	r.supplierShipmentDateTo = &supplierShipmentDateTo
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации. 
+// Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
 func (r ApiGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) ApiGetOrdersRequest {
 	r.updatedAtFrom = &updatedAtFrom
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации. 
+// Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.
 func (r ApiGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) ApiGetOrdersRequest {
 	r.updatedAtTo = &updatedAtTo
 	return r
@@ -735,55 +734,55 @@ func (r ApiGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType
 	return r
 }
 
-// Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета. 
+// Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета.
 func (r ApiGetOrdersRequest) Fake(fake bool) ApiGetOrdersRequest {
 	r.fake = &fake
 	return r
 }
 
-// Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям. 
+// Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям.
 func (r ApiGetOrdersRequest) HasCis(hasCis bool) ApiGetOrdersRequest {
 	r.hasCis = &hasCis
 	return r
 }
 
-// **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation). 
+// **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).
 func (r ApiGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) ApiGetOrdersRequest {
 	r.onlyWaitingForCancellationApprove = &onlyWaitingForCancellationApprove
 	return r
 }
 
-// Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется. 
+// Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется.
 func (r ApiGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) ApiGetOrdersRequest {
 	r.onlyEstimatedDelivery = &onlyEstimatedDelivery
 	return r
 }
 
-// Фильтрация заказов по типу покупателя. 
+// Фильтрация заказов по типу покупателя.
 func (r ApiGetOrdersRequest) BuyerType(buyerType OrderBuyerType) ApiGetOrdersRequest {
 	r.buyerType = &buyerType
 	return r
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
 func (r ApiGetOrdersRequest) Page(page int32) ApiGetOrdersRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
+// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
 func (r ApiGetOrdersRequest) PageSize(pageSize int32) ApiGetOrdersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
 func (r ApiGetOrdersRequest) PageToken(pageToken string) ApiGetOrdersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
+// Количество значений на одной странице.
 func (r ApiGetOrdersRequest) Limit(limit int32) ApiGetOrdersRequest {
 	r.limit = &limit
 	return r
@@ -835,27 +834,27 @@ GetOrders Информация о нескольких заказах
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetOrdersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ApiGetOrdersRequest
 */
 func (a *OrdersAPIService) GetOrders(ctx context.Context, campaignId int64) ApiGetOrdersRequest {
 	return ApiGetOrdersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrdersResponse
+//
+//	@return GetOrdersResponse
 func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrdersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrdersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.GetOrders")
@@ -1005,8 +1004,8 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1016,8 +1015,8 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1027,8 +1026,8 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1038,8 +1037,8 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1049,8 +1048,8 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1060,8 +1059,8 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1079,10 +1078,10 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 }
 
 type ApiProvideOrderDigitalCodesRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderId int64
+	ctx                             context.Context
+	ApiService                      *OrdersAPIService
+	campaignId                      int64
+	orderId                         int64
 	provideOrderDigitalCodesRequest *ProvideOrderDigitalCodesRequest
 }
 
@@ -1119,29 +1118,29 @@ ProvideOrderDigitalCodes Передача ключей цифровых това
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiProvideOrderDigitalCodesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiProvideOrderDigitalCodesRequest
 */
 func (a *OrdersAPIService) ProvideOrderDigitalCodes(ctx context.Context, campaignId int64, orderId int64) ApiProvideOrderDigitalCodesRequest {
 	return ApiProvideOrderDigitalCodesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigitalCodesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.ProvideOrderDigitalCodes")
@@ -1225,8 +1224,8 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1236,8 +1235,8 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1247,8 +1246,8 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1258,8 +1257,8 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1269,8 +1268,8 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1280,8 +1279,8 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1299,10 +1298,10 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigi
 }
 
 type ApiProvideOrderItemIdentifiersRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderId int64
+	ctx                                context.Context
+	ApiService                         *OrdersAPIService
+	campaignId                         int64
+	orderId                            int64
 	provideOrderItemIdentifiersRequest *ProvideOrderItemIdentifiersRequest
 }
 
@@ -1347,29 +1346,29 @@ ProvideOrderItemIdentifiers Передача кодов маркировки е�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiProvideOrderItemIdentifiersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiProvideOrderItemIdentifiersRequest
 */
 func (a *OrdersAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) ApiProvideOrderItemIdentifiersRequest {
 	return ApiProvideOrderItemIdentifiersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return ProvideOrderItemIdentifiersResponse
+//
+//	@return ProvideOrderItemIdentifiersResponse
 func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ProvideOrderItemIdentifiersResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ProvideOrderItemIdentifiersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.ProvideOrderItemIdentifiers")
@@ -1453,8 +1452,8 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1464,8 +1463,8 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1475,8 +1474,8 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1486,8 +1485,8 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1497,8 +1496,8 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1508,8 +1507,8 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1527,10 +1526,10 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderI
 }
 
 type ApiSetOrderBoxLayoutRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderId int64
+	ctx                      context.Context
+	ApiService               *OrdersAPIService
+	campaignId               int64
+	orderId                  int64
 	setOrderBoxLayoutRequest *SetOrderBoxLayoutRequest
 }
 
@@ -1636,38 +1635,39 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если в одной коробке едут:
 
-  * три единицы одного товара, требующего маркировки;
-  * одна единица другого товара, не требущего маркировки.
+  - три единицы одного товара, требующего маркировки;
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "fullCount": 3,
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          },
-                          {
-                              "cis": "010304109478gftJ14545762!\u001dhGt264"
-                          },
-                          {
-                              "cis": "010304109478fRs28323ks23!\u001dhet201"
-                          }
-                      ]
-                  },
-                  {
-                      "id": 654321,
-                      "fullCount": 1
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+  - одна единица другого товара, не требущего маркировки.
+
+    ```json translate=no
+    {
+    "boxes": [
+    {
+    "items": [
+    {
+    "id": 123456,
+    "fullCount": 3,
+    "instances": [
+    {
+    "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+    },
+    {
+    "cis": "010304109478gftJ14545762!\u001dhGt264"
+    },
+    {
+    "cis": "010304109478fRs28323ks23!\u001dhet201"
+    }
+    ]
+    },
+    {
+    "id": 654321,
+    "fullCount": 1
+    }
+    ]
+    }
+    ]
+    }
+    ```
 
 {% endcut %}
 
@@ -1675,44 +1675,44 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если товар едет в двух коробках:
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+	```json translate=no
+	{
+	    "boxes": [
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        }
+	    ]
+	}
+	```
 
 {% endcut %}
 
@@ -1720,105 +1720,105 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если каждый из двух одинаковых товаров едет в двух коробках:
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+	```json translate=no
+	{
+	    "boxes": [
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        }
+	    ]
+	}
+	```
 
 {% endcut %}
 
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiSetOrderBoxLayoutRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiSetOrderBoxLayoutRequest
 */
 func (a *OrdersAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) ApiSetOrderBoxLayoutRequest {
 	return ApiSetOrderBoxLayoutRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return SetOrderBoxLayoutResponse
+//
+//	@return SetOrderBoxLayoutResponse
 func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SetOrderBoxLayoutResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SetOrderBoxLayoutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.SetOrderBoxLayout")
@@ -1902,8 +1902,8 @@ func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1913,8 +1913,8 @@ func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1924,8 +1924,8 @@ func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1935,8 +1935,8 @@ func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1946,8 +1946,8 @@ func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1957,8 +1957,8 @@ func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1976,11 +1976,11 @@ func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReques
 }
 
 type ApiSetOrderShipmentBoxesRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderId int64
-	shipmentId int64
+	ctx                          context.Context
+	ApiService                   *OrdersAPIService
+	campaignId                   int64
+	orderId                      int64
+	shipmentId                   int64
 	setOrderShipmentBoxesRequest *SetOrderShipmentBoxesRequest
 }
 
@@ -2017,27 +2017,29 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 Структура тела PUT-запроса:
 
 ```text translate=no
-{
-  "boxes":
-  [
-    {
-      "fulfilmentId": "{string}",
-      "weight": {int64},
-      "width": {int64},
-      "height": {int64},
-      "depth": {int64},
-      "items":
-      [
-        {
-          "id": {int64},
-          "count": {int32}
-        },
-        ...
-      ]
-    },
-    ...
-  ]
-}
+
+	{
+	  "boxes":
+	  [
+	    {
+	      "fulfilmentId": "{string}",
+	      "weight": {int64},
+	      "width": {int64},
+	      "height": {int64},
+	      "depth": {int64},
+	      "items":
+	      [
+	        {
+	          "id": {int64},
+	          "count": {int32}
+	        },
+	        ...
+	      ]
+	    },
+	    ...
+	  ]
+	}
+
 ```
 | **Параметр**  | **Тип**  | **Значение**  |
 | ----------- | ----------- | ----------- |
@@ -2064,31 +2066,31 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL. 
- @return ApiSetOrderShipmentBoxesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
+	@return ApiSetOrderShipmentBoxesRequest
 */
 func (a *OrdersAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) ApiSetOrderShipmentBoxesRequest {
 	return ApiSetOrderShipmentBoxesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return SetOrderShipmentBoxesResponse
+//
+//	@return SetOrderShipmentBoxesResponse
 func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SetOrderShipmentBoxesResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SetOrderShipmentBoxesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.SetOrderShipmentBoxes")
@@ -2173,8 +2175,8 @@ func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBox
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2184,8 +2186,8 @@ func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBox
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2195,8 +2197,8 @@ func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBox
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2206,8 +2208,8 @@ func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBox
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2217,8 +2219,8 @@ func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBox
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2228,8 +2230,8 @@ func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBox
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2247,10 +2249,10 @@ func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBox
 }
 
 type ApiUpdateExternalOrderIdRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderId int64
+	ctx                          context.Context
+	ApiService                   *OrdersAPIService
+	campaignId                   int64
+	orderId                      int64
 	updateExternalOrderIdRequest *UpdateExternalOrderIdRequest
 }
 
@@ -2275,29 +2277,29 @@ UpdateExternalOrderId Передача или изменение дополни�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateExternalOrderIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiUpdateExternalOrderIdRequest
 */
 func (a *OrdersAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) ApiUpdateExternalOrderIdRequest {
 	return ApiUpdateExternalOrderIdRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.UpdateExternalOrderId")
@@ -2381,8 +2383,8 @@ func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2392,8 +2394,8 @@ func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2403,8 +2405,8 @@ func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2414,8 +2416,8 @@ func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2425,8 +2427,8 @@ func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2436,8 +2438,8 @@ func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrder
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2455,10 +2457,10 @@ func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrder
 }
 
 type ApiUpdateOrderItemsRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderId int64
+	ctx                    context.Context
+	ApiService             *OrdersAPIService
+	campaignId             int64
+	orderId                int64
 	updateOrderItemRequest *UpdateOrderItemRequest
 }
 
@@ -2521,27 +2523,26 @@ UpdateOrderItems Удаление товара из заказа или умен
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateOrderItemsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiUpdateOrderItemsRequest
 */
 func (a *OrdersAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderItemsRequest {
 	return ApiUpdateOrderItemsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
 func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.UpdateOrderItems")
@@ -2625,8 +2626,8 @@ func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest)
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2636,8 +2637,8 @@ func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest)
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2647,8 +2648,8 @@ func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest)
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2658,8 +2659,8 @@ func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest)
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2669,8 +2670,8 @@ func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest)
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2680,8 +2681,8 @@ func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest)
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -2690,10 +2691,10 @@ func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest)
 }
 
 type ApiUpdateOrderStatusRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
-	orderId int64
+	ctx                      context.Context
+	ApiService               *OrdersAPIService
+	campaignId               int64
+	orderId                  int64
 	updateOrderStatusRequest *UpdateOrderStatusRequest
 }
 
@@ -2720,29 +2721,29 @@ UpdateOrderStatus Изменение статуса одного заказа
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateOrderStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return ApiUpdateOrderStatusRequest
 */
 func (a *OrdersAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderStatusRequest {
 	return ApiUpdateOrderStatusRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOrderStatusResponse
+//
+//	@return UpdateOrderStatusResponse
 func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOrderStatusResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOrderStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.UpdateOrderStatus")
@@ -2826,8 +2827,8 @@ func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2837,8 +2838,8 @@ func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2848,8 +2849,8 @@ func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2859,8 +2860,8 @@ func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2870,8 +2871,8 @@ func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2881,8 +2882,8 @@ func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReques
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2900,9 +2901,9 @@ func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReques
 }
 
 type ApiUpdateOrderStatusesRequest struct {
-	ctx context.Context
-	ApiService *OrdersAPIService
-	campaignId int64
+	ctx                        context.Context
+	ApiService                 *OrdersAPIService
+	campaignId                 int64
 	updateOrderStatusesRequest *UpdateOrderStatusesRequest
 }
 
@@ -2931,27 +2932,27 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 |**⚙️ Лимит:** 100 000 заказов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateOrderStatusesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return ApiUpdateOrderStatusesRequest
 */
 func (a *OrdersAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) ApiUpdateOrderStatusesRequest {
 	return ApiUpdateOrderStatusesRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOrderStatusesResponse
+//
+//	@return UpdateOrderStatusesResponse
 func (a *OrdersAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOrderStatusesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOrderStatusesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "OrdersAPIService.UpdateOrderStatuses")
@@ -3034,8 +3035,8 @@ func (a *OrdersAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3045,8 +3046,8 @@ func (a *OrdersAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3056,8 +3057,8 @@ func (a *OrdersAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -3067,8 +3068,8 @@ func (a *OrdersAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3078,8 +3079,8 @@ func (a *OrdersAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3089,8 +3090,8 @@ func (a *OrdersAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

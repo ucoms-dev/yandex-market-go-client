@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,16 +11,16 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the GenerateUnitedMarketplaceServicesReportRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenerateUnitedMarketplaceServicesReportRequest{}
 
-// GenerateUnitedMarketplaceServicesReportRequest Данные, необходимые для генерации отчета: идентификатор кампании, период, за который нужен отчет, а также фильтры. 
+// GenerateUnitedMarketplaceServicesReportRequest Данные, необходимые для генерации отчета: идентификатор кампании, период, за который нужен отчет, а также фильтры.
 type GenerateUnitedMarketplaceServicesReportRequest struct {
 	// Идентификатор кабинета.
 	BusinessId int64 `json:"businessId"`
@@ -42,11 +42,11 @@ type GenerateUnitedMarketplaceServicesReportRequest struct {
 	YearTo *int32 `json:"yearTo,omitempty"`
 	// Номер месяца.
 	MonthTo *int32 `json:"monthTo,omitempty"`
-	// Список моделей, которые нужны в отчете. 
+	// Список моделей, которые нужны в отчете.
 	PlacementPrograms []PlacementType `json:"placementPrograms,omitempty"`
 	// Список ИНН, которые нужны в отчете.
 	Inns []string `json:"inns,omitempty"`
-	// Список идентификаторов кампании тех магазинов, которые нужны в отчете.  Их можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не используйте вместо них идентификаторы магазинов, которые указаны в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
+	// Список идентификаторов кампании тех магазинов, которые нужны в отчете.  Их можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не используйте вместо них идентификаторы магазинов, которые указаны в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	CampaignIds []int64 `json:"campaignIds,omitempty"`
 }
 
@@ -456,7 +456,7 @@ func (o *GenerateUnitedMarketplaceServicesReportRequest) SetCampaignIds(v []int6
 }
 
 func (o GenerateUnitedMarketplaceServicesReportRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -515,10 +515,10 @@ func (o *GenerateUnitedMarketplaceServicesReportRequest) UnmarshalJSON(data []by
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -574,5 +574,3 @@ func (v *NullableGenerateUnitedMarketplaceServicesReportRequest) UnmarshalJSON(s
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// OutletType Тип точки продаж.  Возможные значения:  * `DEPOT` — пункт выдачи заказов. * `MIXED` — смешанный тип точки продаж (торговый зал и пункт выдачи заказов). * `RETAIL` — розничная точка продаж (торговый зал). * `NOT_DEFINED` — неизвестный тип точки продажи. При определении типа произошла ошибка. 
+// OutletType Тип точки продаж.  Возможные значения:  * `DEPOT` — пункт выдачи заказов. * `MIXED` — смешанный тип точки продаж (торговый зал и пункт выдачи заказов). * `RETAIL` — розничная точка продаж (торговый зал). * `NOT_DEFINED` — неизвестный тип точки продажи. При определении типа произошла ошибка.
 type OutletType string
 
 // List of OutletType
 const (
-	DEPOT OutletType = "DEPOT"
-	MIXED OutletType = "MIXED"
-	RETAIL OutletType = "RETAIL"
-	NOT_DEFINED OutletType = "NOT_DEFINED"
+	OutletType_DEPOT       OutletType = "DEPOT"
+	OutletType_MIXED       OutletType = "MIXED"
+	OutletType_RETAIL      OutletType = "RETAIL"
+	OutletType_NOT_DEFINED OutletType = "NOT_DEFINED"
 )
 
 // All allowed values of OutletType enum
@@ -112,4 +112,3 @@ func (v *NullableOutletType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

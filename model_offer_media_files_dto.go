@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,15 +17,15 @@ import (
 // checks if the OfferMediaFilesDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OfferMediaFilesDTO{}
 
-// OfferMediaFilesDTO Информация о медиафайлах товара. 
+// OfferMediaFilesDTO Информация о медиафайлах товара.
 type OfferMediaFilesDTO struct {
-	// Использовать первое видео в карточке как видеообложку.  Передайте `true`, чтобы первое видео использовалось как видеообложка, или `false`, чтобы видеообложка не отображалась в карточке товара. 
+	// Использовать первое видео в карточке как видеообложку.  Передайте `true`, чтобы первое видео использовалось как видеообложка, или `false`, чтобы видеообложка не отображалась в карточке товара.
 	FirstVideoAsCover *bool `json:"firstVideoAsCover,omitempty"`
-	// Видеофайлы товара. 
+	// Видеофайлы товара.
 	Videos []OfferMediaFileDTO `json:"videos,omitempty"`
-	// Изображения товара. 
+	// Изображения товара.
 	Pictures []OfferMediaFileDTO `json:"pictures,omitempty"`
-	// Руководства по использованию товара. 
+	// Руководства по использованию товара.
 	Manuals []OfferMediaFileDTO `json:"manuals,omitempty"`
 }
 
@@ -178,7 +178,7 @@ func (o *OfferMediaFilesDTO) SetManuals(v []OfferMediaFileDTO) {
 }
 
 func (o OfferMediaFilesDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -237,5 +237,3 @@ func (v *NullableOfferMediaFilesDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

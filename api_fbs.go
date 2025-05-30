@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -16,30 +16,29 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"strings"
 	"os"
+	"strings"
 	"time"
 )
-
 
 // FbsAPIService FbsAPI service
 type FbsAPIService service
 
-type ApiAddHiddenOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsAddHiddenOffersRequest struct {
+	ctx                    context.Context
+	FbsService             *FbsAPIService
+	campaignId             int64
 	addHiddenOffersRequest *AddHiddenOffersRequest
 }
 
 // Запрос на скрытие оферов.
-func (r ApiAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersRequest AddHiddenOffersRequest) ApiAddHiddenOffersRequest {
+func (r FbsAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersRequest AddHiddenOffersRequest) FbsAddHiddenOffersRequest {
 	r.addHiddenOffersRequest = &addHiddenOffersRequest
 	return r
 }
 
-func (r ApiAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.AddHiddenOffersExecute(r)
+func (r FbsAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.AddHiddenOffersExecute(r)
 }
 
 /*
@@ -58,27 +57,27 @@ AddHiddenOffers Скрытие товаров и настройки скрыти
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiAddHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsAddHiddenOffersRequest
 */
-func (a *FbsAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) ApiAddHiddenOffersRequest {
-	return ApiAddHiddenOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) FbsAddHiddenOffersRequest {
+	return FbsAddHiddenOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) AddHiddenOffersExecute(r FbsAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.AddHiddenOffers")
@@ -121,14 +120,14 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -161,8 +160,8 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -172,8 +171,8 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -183,8 +182,8 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -194,8 +193,8 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -205,8 +204,8 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -216,8 +215,8 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -234,20 +233,20 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAddOffersToArchiveRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsAddOffersToArchiveRequest struct {
+	ctx                       context.Context
+	FbsService                *FbsAPIService
+	businessId                int64
 	addOffersToArchiveRequest *AddOffersToArchiveRequest
 }
 
-func (r ApiAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) ApiAddOffersToArchiveRequest {
+func (r FbsAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) FbsAddOffersToArchiveRequest {
 	r.addOffersToArchiveRequest = &addOffersToArchiveRequest
 	return r
 }
 
-func (r ApiAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
-	return r.ApiService.AddOffersToArchiveExecute(r)
+func (r FbsAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
+	return r.FbsService.AddOffersToArchiveExecute(r)
 }
 
 /*
@@ -266,27 +265,27 @@ AddOffersToArchive Добавление товаров в архив
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiAddOffersToArchiveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsAddOffersToArchiveRequest
 */
-func (a *FbsAPIService) AddOffersToArchive(ctx context.Context, businessId int64) ApiAddOffersToArchiveRequest {
-	return ApiAddOffersToArchiveRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) AddOffersToArchive(ctx context.Context, businessId int64) FbsAddOffersToArchiveRequest {
+	return FbsAddOffersToArchiveRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return AddOffersToArchiveResponse
-func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
+//
+//	@return AddOffersToArchiveResponse
+func (a *FbsAPIService) AddOffersToArchiveExecute(r FbsAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *AddOffersToArchiveResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *AddOffersToArchiveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.AddOffersToArchive")
@@ -329,14 +328,14 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -369,8 +368,8 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -380,8 +379,8 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -391,8 +390,8 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -402,8 +401,8 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -413,8 +412,8 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -424,8 +423,8 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -435,8 +434,8 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -453,19 +452,19 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCalculateTariffsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsCalculateTariffsRequest struct {
+	ctx                     context.Context
+	FbsService              *FbsAPIService
 	calculateTariffsRequest *CalculateTariffsRequest
 }
 
-func (r ApiCalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) ApiCalculateTariffsRequest {
+func (r FbsCalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) FbsCalculateTariffsRequest {
 	r.calculateTariffsRequest = &calculateTariffsRequest
 	return r
 }
 
-func (r ApiCalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
-	return r.ApiService.CalculateTariffsExecute(r)
+func (r FbsCalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
+	return r.FbsService.CalculateTariffsExecute(r)
 }
 
 /*
@@ -483,25 +482,25 @@ CalculateTariffs Калькулятор стоимости услуг
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiCalculateTariffsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsCalculateTariffsRequest
 */
-func (a *FbsAPIService) CalculateTariffs(ctx context.Context) ApiCalculateTariffsRequest {
-	return ApiCalculateTariffsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) CalculateTariffs(ctx context.Context) FbsCalculateTariffsRequest {
+	return FbsCalculateTariffsRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return CalculateTariffsResponse
-func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
+//
+//	@return CalculateTariffsResponse
+func (a *FbsAPIService) CalculateTariffsExecute(r FbsCalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CalculateTariffsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CalculateTariffsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.CalculateTariffs")
@@ -540,14 +539,14 @@ func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -580,8 +579,8 @@ func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -591,8 +590,8 @@ func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -602,8 +601,8 @@ func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -613,8 +612,8 @@ func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -624,8 +623,8 @@ func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -635,8 +634,8 @@ func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -653,20 +652,20 @@ func (a *FbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfirmBusinessPricesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsConfirmBusinessPricesRequest struct {
+	ctx                  context.Context
+	FbsService           *FbsAPIService
+	businessId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r ApiConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ApiConfirmBusinessPricesRequest {
+func (r FbsConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) FbsConfirmBusinessPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r ApiConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.ConfirmBusinessPricesExecute(r)
+func (r FbsConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.ConfirmBusinessPricesExecute(r)
 }
 
 /*
@@ -683,27 +682,27 @@ ConfirmBusinessPrices Удаление товара из карантина по
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiConfirmBusinessPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsConfirmBusinessPricesRequest
 */
-func (a *FbsAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) ApiConfirmBusinessPricesRequest {
-	return ApiConfirmBusinessPricesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) FbsConfirmBusinessPricesRequest {
+	return FbsConfirmBusinessPricesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) ConfirmBusinessPricesExecute(r FbsConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.ConfirmBusinessPrices")
@@ -746,14 +745,14 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -786,8 +785,8 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -797,8 +796,8 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -808,8 +807,8 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -819,8 +818,8 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -830,8 +829,8 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -841,8 +840,8 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -852,8 +851,8 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -870,20 +869,20 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfirmCampaignPricesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsConfirmCampaignPricesRequest struct {
+	ctx                  context.Context
+	FbsService           *FbsAPIService
+	campaignId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r ApiConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ApiConfirmCampaignPricesRequest {
+func (r FbsConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) FbsConfirmCampaignPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r ApiConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.ConfirmCampaignPricesExecute(r)
+func (r FbsConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.ConfirmCampaignPricesExecute(r)
 }
 
 /*
@@ -900,27 +899,27 @@ ConfirmCampaignPrices Удаление товара из карантина по
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiConfirmCampaignPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsConfirmCampaignPricesRequest
 */
-func (a *FbsAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) ApiConfirmCampaignPricesRequest {
-	return ApiConfirmCampaignPricesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) FbsConfirmCampaignPricesRequest {
+	return FbsConfirmCampaignPricesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) ConfirmCampaignPricesExecute(r FbsConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.ConfirmCampaignPrices")
@@ -963,14 +962,14 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -1003,8 +1002,8 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1014,8 +1013,8 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1025,8 +1024,8 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1036,8 +1035,8 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1047,8 +1046,8 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -1058,8 +1057,8 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1069,8 +1068,8 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1087,21 +1086,21 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfirmShipmentRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	shipmentId int64
+type FbsConfirmShipmentRequest struct {
+	ctx                    context.Context
+	FbsService             *FbsAPIService
+	campaignId             int64
+	shipmentId             int64
 	confirmShipmentRequest *ConfirmShipmentRequest
 }
 
-func (r ApiConfirmShipmentRequest) ConfirmShipmentRequest(confirmShipmentRequest ConfirmShipmentRequest) ApiConfirmShipmentRequest {
+func (r FbsConfirmShipmentRequest) ConfirmShipmentRequest(confirmShipmentRequest ConfirmShipmentRequest) FbsConfirmShipmentRequest {
 	r.confirmShipmentRequest = &confirmShipmentRequest
 	return r
 }
 
-func (r ApiConfirmShipmentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.ConfirmShipmentExecute(r)
+func (r FbsConfirmShipmentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.ConfirmShipmentExecute(r)
 }
 
 /*
@@ -1113,29 +1112,29 @@ ConfirmShipment Подтверждение отгрузки
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiConfirmShipmentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsConfirmShipmentRequest
 */
-func (a *FbsAPIService) ConfirmShipment(ctx context.Context, campaignId int64, shipmentId int64) ApiConfirmShipmentRequest {
-	return ApiConfirmShipmentRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) ConfirmShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsConfirmShipmentRequest {
+	return FbsConfirmShipmentRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) ConfirmShipmentExecute(r FbsConfirmShipmentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.ConfirmShipment")
@@ -1179,14 +1178,14 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*Em
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -1219,8 +1218,8 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1230,8 +1229,8 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1241,8 +1240,8 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1252,8 +1251,8 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1263,8 +1262,8 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1274,8 +1273,8 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*Em
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1292,21 +1291,21 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r ApiConfirmShipmentRequest) (*Em
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateChatRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsCreateChatRequest struct {
+	ctx               context.Context
+	FbsService        *FbsAPIService
+	businessId        int64
 	createChatRequest *CreateChatRequest
 }
 
 // description
-func (r ApiCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) ApiCreateChatRequest {
+func (r FbsCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) FbsCreateChatRequest {
 	r.createChatRequest = &createChatRequest
 	return r
 }
 
-func (r ApiCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
-	return r.ApiService.CreateChatExecute(r)
+func (r FbsCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
+	return r.FbsService.CreateChatExecute(r)
 }
 
 /*
@@ -1319,27 +1318,27 @@ CreateChat Создание нового чата с покупателем
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiCreateChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsCreateChatRequest
 */
-func (a *FbsAPIService) CreateChat(ctx context.Context, businessId int64) ApiCreateChatRequest {
-	return ApiCreateChatRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) CreateChat(ctx context.Context, businessId int64) FbsCreateChatRequest {
+	return FbsCreateChatRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return CreateChatResponse
-func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
+//
+//	@return CreateChatResponse
+func (a *FbsAPIService) CreateChatExecute(r FbsCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *CreateChatResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateChatResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.CreateChat")
@@ -1382,14 +1381,14 @@ func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -1422,8 +1421,8 @@ func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1433,8 +1432,8 @@ func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1444,8 +1443,8 @@ func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1455,8 +1454,8 @@ func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1466,8 +1465,8 @@ func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1477,8 +1476,8 @@ func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1495,20 +1494,20 @@ func (a *FbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteCampaignOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsDeleteCampaignOffersRequest struct {
+	ctx                         context.Context
+	FbsService                  *FbsAPIService
+	campaignId                  int64
 	deleteCampaignOffersRequest *DeleteCampaignOffersRequest
 }
 
-func (r ApiDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) ApiDeleteCampaignOffersRequest {
+func (r FbsDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) FbsDeleteCampaignOffersRequest {
 	r.deleteCampaignOffersRequest = &deleteCampaignOffersRequest
 	return r
 }
 
-func (r ApiDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
-	return r.ApiService.DeleteCampaignOffersExecute(r)
+func (r FbsDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
+	return r.FbsService.DeleteCampaignOffersExecute(r)
 }
 
 /*
@@ -1529,27 +1528,27 @@ DeleteCampaignOffers Удаление товаров из ассортимент
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiDeleteCampaignOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsDeleteCampaignOffersRequest
 */
-func (a *FbsAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) ApiDeleteCampaignOffersRequest {
-	return ApiDeleteCampaignOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) FbsDeleteCampaignOffersRequest {
+	return FbsDeleteCampaignOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteCampaignOffersResponse
-func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
+//
+//	@return DeleteCampaignOffersResponse
+func (a *FbsAPIService) DeleteCampaignOffersExecute(r FbsDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteCampaignOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteCampaignOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DeleteCampaignOffers")
@@ -1592,14 +1591,14 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -1632,8 +1631,8 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1643,8 +1642,8 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1654,8 +1653,8 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1665,8 +1664,8 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1676,8 +1675,8 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -1687,8 +1686,8 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1698,8 +1697,8 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1716,20 +1715,20 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteGoodsFeedbackCommentRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsDeleteGoodsFeedbackCommentRequest struct {
+	ctx                               context.Context
+	FbsService                        *FbsAPIService
+	businessId                        int64
 	deleteGoodsFeedbackCommentRequest *DeleteGoodsFeedbackCommentRequest
 }
 
-func (r ApiDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) ApiDeleteGoodsFeedbackCommentRequest {
+func (r FbsDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) FbsDeleteGoodsFeedbackCommentRequest {
 	r.deleteGoodsFeedbackCommentRequest = &deleteGoodsFeedbackCommentRequest
 	return r
 }
 
-func (r ApiDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.DeleteGoodsFeedbackCommentExecute(r)
+func (r FbsDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.DeleteGoodsFeedbackCommentExecute(r)
 }
 
 /*
@@ -1742,27 +1741,27 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeleteGoodsFeedbackCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsDeleteGoodsFeedbackCommentRequest
 */
-func (a *FbsAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) ApiDeleteGoodsFeedbackCommentRequest {
-	return ApiDeleteGoodsFeedbackCommentRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) FbsDeleteGoodsFeedbackCommentRequest {
+	return FbsDeleteGoodsFeedbackCommentRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r FbsDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DeleteGoodsFeedbackComment")
@@ -1805,14 +1804,14 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -1845,8 +1844,8 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1856,8 +1855,8 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1867,8 +1866,8 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1878,8 +1877,8 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1889,8 +1888,8 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1900,8 +1899,8 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1918,21 +1917,21 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteHiddenOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsDeleteHiddenOffersRequest struct {
+	ctx                       context.Context
+	FbsService                *FbsAPIService
+	campaignId                int64
 	deleteHiddenOffersRequest *DeleteHiddenOffersRequest
 }
 
 // Запрос на возобновление показа оферов.
-func (r ApiDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHiddenOffersRequest DeleteHiddenOffersRequest) ApiDeleteHiddenOffersRequest {
+func (r FbsDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHiddenOffersRequest DeleteHiddenOffersRequest) FbsDeleteHiddenOffersRequest {
 	r.deleteHiddenOffersRequest = &deleteHiddenOffersRequest
 	return r
 }
 
-func (r ApiDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.DeleteHiddenOffersExecute(r)
+func (r FbsDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.DeleteHiddenOffersExecute(r)
 }
 
 /*
@@ -1951,27 +1950,27 @@ DeleteHiddenOffers Возобновление показа товаров
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiDeleteHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsDeleteHiddenOffersRequest
 */
-func (a *FbsAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) ApiDeleteHiddenOffersRequest {
-	return ApiDeleteHiddenOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) FbsDeleteHiddenOffersRequest {
+	return FbsDeleteHiddenOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) DeleteHiddenOffersExecute(r FbsDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DeleteHiddenOffers")
@@ -2014,14 +2013,14 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -2054,8 +2053,8 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2065,8 +2064,8 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2076,8 +2075,8 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2087,8 +2086,8 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2098,8 +2097,8 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -2109,8 +2108,8 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2120,8 +2119,8 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2138,20 +2137,20 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsDeleteOffersRequest struct {
+	ctx                 context.Context
+	FbsService          *FbsAPIService
+	businessId          int64
 	deleteOffersRequest *DeleteOffersRequest
 }
 
-func (r ApiDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) ApiDeleteOffersRequest {
+func (r FbsDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) FbsDeleteOffersRequest {
 	r.deleteOffersRequest = &deleteOffersRequest
 	return r
 }
 
-func (r ApiDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
-	return r.ApiService.DeleteOffersExecute(r)
+func (r FbsDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
+	return r.FbsService.DeleteOffersExecute(r)
 }
 
 /*
@@ -2164,27 +2163,27 @@ DeleteOffers Удаление товаров из каталога
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeleteOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsDeleteOffersRequest
 */
-func (a *FbsAPIService) DeleteOffers(ctx context.Context, businessId int64) ApiDeleteOffersRequest {
-	return ApiDeleteOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DeleteOffers(ctx context.Context, businessId int64) FbsDeleteOffersRequest {
+	return FbsDeleteOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteOffersResponse
-func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
+//
+//	@return DeleteOffersResponse
+func (a *FbsAPIService) DeleteOffersExecute(r FbsDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DeleteOffers")
@@ -2227,14 +2226,14 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -2267,8 +2266,8 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2278,8 +2277,8 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2289,8 +2288,8 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2300,8 +2299,8 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2311,8 +2310,8 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -2322,8 +2321,8 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2333,8 +2332,8 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2351,20 +2350,20 @@ func (a *FbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOffersFromArchiveRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsDeleteOffersFromArchiveRequest struct {
+	ctx                            context.Context
+	FbsService                     *FbsAPIService
+	businessId                     int64
 	deleteOffersFromArchiveRequest *DeleteOffersFromArchiveRequest
 }
 
-func (r ApiDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) ApiDeleteOffersFromArchiveRequest {
+func (r FbsDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) FbsDeleteOffersFromArchiveRequest {
 	r.deleteOffersFromArchiveRequest = &deleteOffersFromArchiveRequest
 	return r
 }
 
-func (r ApiDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
-	return r.ApiService.DeleteOffersFromArchiveExecute(r)
+func (r FbsDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+	return r.FbsService.DeleteOffersFromArchiveExecute(r)
 }
 
 /*
@@ -2377,27 +2376,27 @@ DeleteOffersFromArchive Удаление товаров из архива
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeleteOffersFromArchiveRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsDeleteOffersFromArchiveRequest
 */
-func (a *FbsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) ApiDeleteOffersFromArchiveRequest {
-	return ApiDeleteOffersFromArchiveRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) FbsDeleteOffersFromArchiveRequest {
+	return FbsDeleteOffersFromArchiveRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return DeleteOffersFromArchiveResponse
-func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+//
+//	@return DeleteOffersFromArchiveResponse
+func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r FbsDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeleteOffersFromArchiveResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeleteOffersFromArchiveResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DeleteOffersFromArchive")
@@ -2440,14 +2439,14 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -2480,8 +2479,8 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2491,8 +2490,8 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2502,8 +2501,8 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2513,8 +2512,8 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2524,8 +2523,8 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -2535,8 +2534,8 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2546,8 +2545,8 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2564,20 +2563,20 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeletePromoOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsDeletePromoOffersRequest struct {
+	ctx                      context.Context
+	FbsService               *FbsAPIService
+	businessId               int64
 	deletePromoOffersRequest *DeletePromoOffersRequest
 }
 
-func (r ApiDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) ApiDeletePromoOffersRequest {
+func (r FbsDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) FbsDeletePromoOffersRequest {
 	r.deletePromoOffersRequest = &deletePromoOffersRequest
 	return r
 }
 
-func (r ApiDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
-	return r.ApiService.DeletePromoOffersExecute(r)
+func (r FbsDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
+	return r.FbsService.DeletePromoOffersExecute(r)
 }
 
 /*
@@ -2592,27 +2591,27 @@ DeletePromoOffers Удаление товаров из акции
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiDeletePromoOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsDeletePromoOffersRequest
 */
-func (a *FbsAPIService) DeletePromoOffers(ctx context.Context, businessId int64) ApiDeletePromoOffersRequest {
-	return ApiDeletePromoOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DeletePromoOffers(ctx context.Context, businessId int64) FbsDeletePromoOffersRequest {
+	return FbsDeletePromoOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return DeletePromoOffersResponse
-func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
+//
+//	@return DeletePromoOffersResponse
+func (a *FbsAPIService) DeletePromoOffersExecute(r FbsDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *DeletePromoOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *DeletePromoOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DeletePromoOffers")
@@ -2655,14 +2654,14 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -2695,8 +2694,8 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2706,8 +2705,8 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2717,8 +2716,8 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2728,8 +2727,8 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2739,8 +2738,8 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2750,8 +2749,8 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2768,15 +2767,15 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDownloadShipmentActRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsDownloadShipmentActRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r ApiDownloadShipmentActRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.DownloadShipmentActExecute(r)
+func (r FbsDownloadShipmentActRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.DownloadShipmentActExecute(r)
 }
 
 /*
@@ -2802,13 +2801,15 @@ DownloadShipmentAct Получение акта приема-передачи
 || Отправитель                                               | Название вашего юридического лица, указанное в кабинете продавца на Маркете.                                                                                                                                                                                         ||
 || Исполнитель                                               | Название юридического лица сортировочного центра или службы доставки.                                                                                                                                                                                                ||
 || № отправления в системе заказчика                         |
-  {% note warning "Поле больше не используется" %}
 
-   
+	{% note warning "Поле больше не используется" %}
 
-  {% endnote %}
 
-  Ваш идентификатор заказа, который вы указали в ответе на запрос `POST order/accept` от Маркета.                                                                                                                                                                      ||
+
+	{% endnote %}
+
+	Ваш идентификатор заказа, который вы указали в ответе на запрос `POST order/accept` от Маркета.                                                                                                                                                                      ||
+
 || № отправления в системе исполнителя (субподрядчика)       | Идентификатор заказа на Маркете, как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md).                                                                                                                             ||
 || Объявленная ценность                                      | Общая сумма заказа без учета стоимости доставки, как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md) или [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md).                       ||
 || Вес                                                       | Масса брутто грузового места (суммарная масса упаковки и содержимого), как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md) или [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md). ||
@@ -2821,29 +2822,29 @@ DownloadShipmentAct Получение акта приема-передачи
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiDownloadShipmentActRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsDownloadShipmentActRequest
 */
-func (a *FbsAPIService) DownloadShipmentAct(ctx context.Context, campaignId int64, shipmentId int64) ApiDownloadShipmentActRequest {
-	return ApiDownloadShipmentActRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DownloadShipmentAct(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentActRequest {
+	return FbsDownloadShipmentActRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) DownloadShipmentActExecute(r FbsDownloadShipmentActRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DownloadShipmentAct")
@@ -2885,14 +2886,14 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -2925,8 +2926,8 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -2936,8 +2937,8 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -2947,8 +2948,8 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -2958,8 +2959,8 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -2969,8 +2970,8 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -2980,8 +2981,8 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -2998,15 +2999,15 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r ApiDownloadShipmentActReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDownloadShipmentDiscrepancyActRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsDownloadShipmentDiscrepancyActRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r ApiDownloadShipmentDiscrepancyActRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.DownloadShipmentDiscrepancyActExecute(r)
+func (r FbsDownloadShipmentDiscrepancyActRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.DownloadShipmentDiscrepancyActExecute(r)
 }
 
 /*
@@ -3018,29 +3019,29 @@ DownloadShipmentDiscrepancyAct Получение акта расхождени�
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiDownloadShipmentDiscrepancyActRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsDownloadShipmentDiscrepancyActRequest
 */
-func (a *FbsAPIService) DownloadShipmentDiscrepancyAct(ctx context.Context, campaignId int64, shipmentId int64) ApiDownloadShipmentDiscrepancyActRequest {
-	return ApiDownloadShipmentDiscrepancyActRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DownloadShipmentDiscrepancyAct(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentDiscrepancyActRequest {
+	return FbsDownloadShipmentDiscrepancyActRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipmentDiscrepancyActRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r FbsDownloadShipmentDiscrepancyActRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DownloadShipmentDiscrepancyAct")
@@ -3082,14 +3083,14 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipm
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -3122,8 +3123,8 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipm
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3133,8 +3134,8 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipm
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3144,8 +3145,8 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipm
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -3155,8 +3156,8 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipm
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3166,8 +3167,8 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipm
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3177,8 +3178,8 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipm
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3195,15 +3196,15 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r ApiDownloadShipm
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDownloadShipmentInboundActRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsDownloadShipmentInboundActRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r ApiDownloadShipmentInboundActRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.DownloadShipmentInboundActExecute(r)
+func (r FbsDownloadShipmentInboundActRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.DownloadShipmentInboundActExecute(r)
 }
 
 /*
@@ -3218,29 +3219,29 @@ DownloadShipmentInboundAct Получение фактического акта 
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiDownloadShipmentInboundActRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsDownloadShipmentInboundActRequest
 */
-func (a *FbsAPIService) DownloadShipmentInboundAct(ctx context.Context, campaignId int64, shipmentId int64) ApiDownloadShipmentInboundActRequest {
-	return ApiDownloadShipmentInboundActRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DownloadShipmentInboundAct(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentInboundActRequest {
+	return FbsDownloadShipmentInboundActRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentInboundActRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) DownloadShipmentInboundActExecute(r FbsDownloadShipmentInboundActRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DownloadShipmentInboundAct")
@@ -3282,14 +3283,14 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentI
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -3322,8 +3323,8 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3333,8 +3334,8 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3344,8 +3345,8 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -3355,8 +3356,8 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3366,8 +3367,8 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3377,8 +3378,8 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentI
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3395,22 +3396,22 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r ApiDownloadShipmentI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDownloadShipmentPalletLabelsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsDownloadShipmentPalletLabelsRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 	shipmentId int64
-	format *ShipmentPalletLabelPageFormatType
+	format     *ShipmentPalletLabelPageFormatType
 }
 
-// Формат страниц PDF-файла с ярлыками:  * &#x60;A4&#x60; — по 16 ярлыков на странице. * &#x60;A8&#x60; — по одному ярлыку на странице. 
-func (r ApiDownloadShipmentPalletLabelsRequest) Format(format ShipmentPalletLabelPageFormatType) ApiDownloadShipmentPalletLabelsRequest {
+// Формат страниц PDF-файла с ярлыками:  * &#x60;A4&#x60; — по 16 ярлыков на странице. * &#x60;A8&#x60; — по одному ярлыку на странице.
+func (r FbsDownloadShipmentPalletLabelsRequest) Format(format ShipmentPalletLabelPageFormatType) FbsDownloadShipmentPalletLabelsRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiDownloadShipmentPalletLabelsRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.DownloadShipmentPalletLabelsExecute(r)
+func (r FbsDownloadShipmentPalletLabelsRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.DownloadShipmentPalletLabelsExecute(r)
 }
 
 /*
@@ -3426,29 +3427,29 @@ PDF-файл с ярлыками на каждый короб или палет�
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiDownloadShipmentPalletLabelsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsDownloadShipmentPalletLabelsRequest
 */
-func (a *FbsAPIService) DownloadShipmentPalletLabels(ctx context.Context, campaignId int64, shipmentId int64) ApiDownloadShipmentPalletLabelsRequest {
-	return ApiDownloadShipmentPalletLabelsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DownloadShipmentPalletLabels(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentPalletLabelsRequest {
+	return FbsDownloadShipmentPalletLabelsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmentPalletLabelsRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r FbsDownloadShipmentPalletLabelsRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DownloadShipmentPalletLabels")
@@ -3496,14 +3497,14 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmen
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -3536,8 +3537,8 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3547,8 +3548,8 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3558,8 +3559,8 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -3569,8 +3570,8 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3580,8 +3581,8 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3591,8 +3592,8 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3609,28 +3610,28 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r ApiDownloadShipmen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDownloadShipmentReceptionTransferActRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsDownloadShipmentReceptionTransferActRequest struct {
+	ctx         context.Context
+	FbsService  *FbsAPIService
+	campaignId  int64
 	warehouseId *int32
-	signatory *string
+	signatory   *string
 }
 
 // Идентификатор склада.
-func (r ApiDownloadShipmentReceptionTransferActRequest) WarehouseId(warehouseId int32) ApiDownloadShipmentReceptionTransferActRequest {
+func (r FbsDownloadShipmentReceptionTransferActRequest) WarehouseId(warehouseId int32) FbsDownloadShipmentReceptionTransferActRequest {
 	r.warehouseId = &warehouseId
 	return r
 }
 
-// Логин пользователя в Яндекс ID, от имени которого будет подписываться электронный акт приема-передачи.  Указывается без &#x60;@yandex.ru&#x60;.  Где его найти:  * на странице [Яндекс ID](https://id.yandex.ru); * в [кабинете продавца на Маркете](https://partner.market.yandex.ru/):    * слева снизу под иконкой пользователя;   * на странице **Настройки** → **Сотрудники и доступы**. 
-func (r ApiDownloadShipmentReceptionTransferActRequest) Signatory(signatory string) ApiDownloadShipmentReceptionTransferActRequest {
+// Логин пользователя в Яндекс ID, от имени которого будет подписываться электронный акт приема-передачи.  Указывается без &#x60;@yandex.ru&#x60;.  Где его найти:  * на странице [Яндекс ID](https://id.yandex.ru); * в [кабинете продавца на Маркете](https://partner.market.yandex.ru/):    * слева снизу под иконкой пользователя;   * на странице **Настройки** → **Сотрудники и доступы**.
+func (r FbsDownloadShipmentReceptionTransferActRequest) Signatory(signatory string) FbsDownloadShipmentReceptionTransferActRequest {
 	r.signatory = &signatory
 	return r
 }
 
-func (r ApiDownloadShipmentReceptionTransferActRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.DownloadShipmentReceptionTransferActExecute(r)
+func (r FbsDownloadShipmentReceptionTransferActRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.DownloadShipmentReceptionTransferActExecute(r)
 }
 
 /*
@@ -3657,13 +3658,15 @@ DownloadShipmentReceptionTransferAct Подтверждение ближайше
 || Отправитель	                                       | Название вашего юридического лица, указанное в кабинете продавца на Маркете.                                                                                                                                                                                         ||
 || Исполнитель                                         | Название юридического лица сортировочного центра или службы доставки.                                                                                                                                                                                                ||
 || № отправления в системе заказчика                   |
-  {% note warning "Поле больше не используется" %}
 
-   
+	{% note warning "Поле больше не используется" %}
 
-  {% endnote %}
 
-  Ваш идентификатор заказа, который вы указали в ответе на запрос `POST order/accept` от Маркета.                                                                                                                                                                      ||
+
+	{% endnote %}
+
+	Ваш идентификатор заказа, который вы указали в ответе на запрос `POST order/accept` от Маркета.                                                                                                                                                                      ||
+
 || № отправления в системе исполнителя (субподрядчика) | Идентификатор заказа на Маркете, как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md).                                                                                                                             ||
 || Объявленная ценность                                | Общая сумма заказа без учета стоимости доставки, как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md) или [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md).                       ||
 || Стоимость всех товаров в заказе                     | Стоимость всех заказанных товаров.                                                                                                                                                                                                                                   ||
@@ -3677,27 +3680,27 @@ DownloadShipmentReceptionTransferAct Подтверждение ближайше
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiDownloadShipmentReceptionTransferActRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsDownloadShipmentReceptionTransferActRequest
 */
-func (a *FbsAPIService) DownloadShipmentReceptionTransferAct(ctx context.Context, campaignId int64) ApiDownloadShipmentReceptionTransferActRequest {
-	return ApiDownloadShipmentReceptionTransferActRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DownloadShipmentReceptionTransferAct(ctx context.Context, campaignId int64) FbsDownloadShipmentReceptionTransferActRequest {
+	return FbsDownloadShipmentReceptionTransferActRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloadShipmentReceptionTransferActRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r FbsDownloadShipmentReceptionTransferActRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DownloadShipmentReceptionTransferAct")
@@ -3741,14 +3744,14 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloa
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -3781,8 +3784,8 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3792,8 +3795,8 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -3803,8 +3806,8 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -3814,8 +3817,8 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -3825,8 +3828,8 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -3836,8 +3839,8 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -3854,15 +3857,15 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r ApiDownloa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDownloadShipmentTransportationWaybillRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsDownloadShipmentTransportationWaybillRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r ApiDownloadShipmentTransportationWaybillRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.DownloadShipmentTransportationWaybillExecute(r)
+func (r FbsDownloadShipmentTransportationWaybillRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.DownloadShipmentTransportationWaybillExecute(r)
 }
 
 /*
@@ -3877,29 +3880,29 @@ DownloadShipmentTransportationWaybill Получение транспортно�
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiDownloadShipmentTransportationWaybillRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsDownloadShipmentTransportationWaybillRequest
 */
-func (a *FbsAPIService) DownloadShipmentTransportationWaybill(ctx context.Context, campaignId int64, shipmentId int64) ApiDownloadShipmentTransportationWaybillRequest {
-	return ApiDownloadShipmentTransportationWaybillRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) DownloadShipmentTransportationWaybill(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentTransportationWaybillRequest {
+	return FbsDownloadShipmentTransportationWaybillRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownloadShipmentTransportationWaybillRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r FbsDownloadShipmentTransportationWaybillRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.DownloadShipmentTransportationWaybill")
@@ -3941,14 +3944,14 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownlo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -3981,8 +3984,8 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownlo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -3992,8 +3995,8 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownlo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4003,8 +4006,8 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownlo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -4014,8 +4017,8 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownlo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4025,8 +4028,8 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownlo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4036,8 +4039,8 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownlo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4054,26 +4057,26 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r ApiDownlo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateBannersStatisticsReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateBannersStatisticsReportRequest struct {
+	ctx                              context.Context
+	FbsService                       *FbsAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
-	format *ReportFormatType
+	format                           *ReportFormatType
 }
 
-func (r ApiGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) ApiGenerateBannersStatisticsReportRequest {
+func (r FbsGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) FbsGenerateBannersStatisticsReportRequest {
 	r.generateBannersStatisticsRequest = &generateBannersStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) ApiGenerateBannersStatisticsReportRequest {
+func (r FbsGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) FbsGenerateBannersStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateBannersStatisticsReportExecute(r)
+func (r FbsGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateBannersStatisticsReportExecute(r)
 }
 
 /*
@@ -4090,25 +4093,25 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateBannersStatisticsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateBannersStatisticsReportRequest
 */
-func (a *FbsAPIService) GenerateBannersStatisticsReport(ctx context.Context) ApiGenerateBannersStatisticsReportRequest {
-	return ApiGenerateBannersStatisticsReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateBannersStatisticsReport(ctx context.Context) FbsGenerateBannersStatisticsReportRequest {
+	return FbsGenerateBannersStatisticsReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r FbsGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateBannersStatisticsReport")
@@ -4153,14 +4156,14 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBann
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -4193,8 +4196,8 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBann
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4204,8 +4207,8 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBann
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4215,8 +4218,8 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBann
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4226,8 +4229,8 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBann
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4237,8 +4240,8 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBann
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4255,26 +4258,26 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBann
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateBoostConsolidatedReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateBoostConsolidatedReportRequest struct {
+	ctx                              context.Context
+	FbsService                       *FbsAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
-	format *ReportFormatType
+	format                           *ReportFormatType
 }
 
-func (r ApiGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) ApiGenerateBoostConsolidatedReportRequest {
+func (r FbsGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) FbsGenerateBoostConsolidatedReportRequest {
 	r.generateBoostConsolidatedRequest = &generateBoostConsolidatedRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) ApiGenerateBoostConsolidatedReportRequest {
+func (r FbsGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) FbsGenerateBoostConsolidatedReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateBoostConsolidatedReportExecute(r)
+func (r FbsGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateBoostConsolidatedReportExecute(r)
 }
 
 /*
@@ -4293,25 +4296,25 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateBoostConsolidatedReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateBoostConsolidatedReportRequest
 */
-func (a *FbsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) ApiGenerateBoostConsolidatedReportRequest {
-	return ApiGenerateBoostConsolidatedReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) FbsGenerateBoostConsolidatedReportRequest {
+	return FbsGenerateBoostConsolidatedReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r FbsGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateBoostConsolidatedReport")
@@ -4356,14 +4359,14 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoos
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -4396,8 +4399,8 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoos
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4407,8 +4410,8 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoos
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4418,8 +4421,8 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoos
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4429,8 +4432,8 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoos
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4440,8 +4443,8 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoos
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4458,26 +4461,26 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoos
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateCompetitorsPositionReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateCompetitorsPositionReportRequest struct {
+	ctx                                      context.Context
+	FbsService                               *FbsAPIService
 	generateCompetitorsPositionReportRequest *GenerateCompetitorsPositionReportRequest
-	format *ReportFormatType
+	format                                   *ReportFormatType
 }
 
-func (r ApiGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) ApiGenerateCompetitorsPositionReportRequest {
+func (r FbsGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) FbsGenerateCompetitorsPositionReportRequest {
 	r.generateCompetitorsPositionReportRequest = &generateCompetitorsPositionReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) ApiGenerateCompetitorsPositionReportRequest {
+func (r FbsGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) FbsGenerateCompetitorsPositionReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateCompetitorsPositionReportExecute(r)
+func (r FbsGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateCompetitorsPositionReportExecute(r)
 }
 
 /*
@@ -4500,25 +4503,25 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateCompetitorsPositionReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateCompetitorsPositionReportRequest
 */
-func (a *FbsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) ApiGenerateCompetitorsPositionReportRequest {
-	return ApiGenerateCompetitorsPositionReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) FbsGenerateCompetitorsPositionReportRequest {
+	return FbsGenerateCompetitorsPositionReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r FbsGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateCompetitorsPositionReport")
@@ -4563,14 +4566,14 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -4603,8 +4606,8 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4614,8 +4617,8 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4625,8 +4628,8 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4636,8 +4639,8 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4647,8 +4650,8 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4665,26 +4668,26 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsFeedbackReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateGoodsFeedbackReportRequest struct {
+	ctx                          context.Context
+	FbsService                   *FbsAPIService
 	generateGoodsFeedbackRequest *GenerateGoodsFeedbackRequest
-	format *ReportFormatType
+	format                       *ReportFormatType
 }
 
-func (r ApiGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) ApiGenerateGoodsFeedbackReportRequest {
+func (r FbsGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) FbsGenerateGoodsFeedbackReportRequest {
 	r.generateGoodsFeedbackRequest = &generateGoodsFeedbackRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) ApiGenerateGoodsFeedbackReportRequest {
+func (r FbsGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) FbsGenerateGoodsFeedbackReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateGoodsFeedbackReportExecute(r)
+func (r FbsGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateGoodsFeedbackReportExecute(r)
 }
 
 /*
@@ -4701,25 +4704,25 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateGoodsFeedbackReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateGoodsFeedbackReportRequest
 */
-func (a *FbsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ApiGenerateGoodsFeedbackReportRequest {
-	return ApiGenerateGoodsFeedbackReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) FbsGenerateGoodsFeedbackReportRequest {
+	return FbsGenerateGoodsFeedbackReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r FbsGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateGoodsFeedbackReport")
@@ -4764,14 +4767,14 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFee
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -4804,8 +4807,8 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFee
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -4815,8 +4818,8 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFee
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -4826,8 +4829,8 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFee
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -4837,8 +4840,8 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFee
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -4848,8 +4851,8 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFee
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -4866,26 +4869,26 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFee
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsRealizationReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateGoodsRealizationReportRequest struct {
+	ctx                                   context.Context
+	FbsService                            *FbsAPIService
 	generateGoodsRealizationReportRequest *GenerateGoodsRealizationReportRequest
-	format *ReportFormatType
+	format                                *ReportFormatType
 }
 
-func (r ApiGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) ApiGenerateGoodsRealizationReportRequest {
+func (r FbsGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) FbsGenerateGoodsRealizationReportRequest {
 	r.generateGoodsRealizationReportRequest = &generateGoodsRealizationReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) ApiGenerateGoodsRealizationReportRequest {
+func (r FbsGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) FbsGenerateGoodsRealizationReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateGoodsRealizationReportExecute(r)
+func (r FbsGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateGoodsRealizationReportExecute(r)
 }
 
 /*
@@ -4901,36 +4904,36 @@ GenerateGoodsRealizationReport Отчет по реализации
 
 - FBY, FBS, Экспресс
 
-  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
+	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
 
 - DBS
 
-  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
+	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
 
 {% endlist %}
 
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateGoodsRealizationReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateGoodsRealizationReportRequest
 */
-func (a *FbsAPIService) GenerateGoodsRealizationReport(ctx context.Context) ApiGenerateGoodsRealizationReportRequest {
-	return ApiGenerateGoodsRealizationReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateGoodsRealizationReport(ctx context.Context) FbsGenerateGoodsRealizationReportRequest {
+	return FbsGenerateGoodsRealizationReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r FbsGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateGoodsRealizationReport")
@@ -4975,14 +4978,14 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoods
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -5015,8 +5018,8 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoods
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5026,8 +5029,8 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoods
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5037,8 +5040,8 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoods
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5048,8 +5051,8 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoods
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5059,8 +5062,8 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoods
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5077,26 +5080,26 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoods
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateJewelryFiscalReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateJewelryFiscalReportRequest struct {
+	ctx                                context.Context
+	FbsService                         *FbsAPIService
 	generateJewelryFiscalReportRequest *GenerateJewelryFiscalReportRequest
-	format *ReportFormatType
+	format                             *ReportFormatType
 }
 
-func (r ApiGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) ApiGenerateJewelryFiscalReportRequest {
+func (r FbsGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) FbsGenerateJewelryFiscalReportRequest {
 	r.generateJewelryFiscalReportRequest = &generateJewelryFiscalReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) ApiGenerateJewelryFiscalReportRequest {
+func (r FbsGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) FbsGenerateJewelryFiscalReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateJewelryFiscalReportExecute(r)
+func (r FbsGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateJewelryFiscalReportExecute(r)
 }
 
 /*
@@ -5113,25 +5116,25 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateJewelryFiscalReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateJewelryFiscalReportRequest
 */
-func (a *FbsAPIService) GenerateJewelryFiscalReport(ctx context.Context) ApiGenerateJewelryFiscalReportRequest {
-	return ApiGenerateJewelryFiscalReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateJewelryFiscalReport(ctx context.Context) FbsGenerateJewelryFiscalReportRequest {
+	return FbsGenerateJewelryFiscalReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r FbsGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateJewelryFiscalReport")
@@ -5176,14 +5179,14 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryF
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -5216,8 +5219,8 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5227,8 +5230,8 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5238,8 +5241,8 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5249,8 +5252,8 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5260,8 +5263,8 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryF
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5278,26 +5281,26 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryF
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateMassOrderLabelsReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateMassOrderLabelsReportRequest struct {
+	ctx                            context.Context
+	FbsService                     *FbsAPIService
 	generateMassOrderLabelsRequest *GenerateMassOrderLabelsRequest
-	format *PageFormatType
+	format                         *PageFormatType
 }
 
-func (r ApiGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) ApiGenerateMassOrderLabelsReportRequest {
+func (r FbsGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) FbsGenerateMassOrderLabelsReportRequest {
 	r.generateMassOrderLabelsRequest = &generateMassOrderLabelsRequest
 	return r
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) ApiGenerateMassOrderLabelsReportRequest {
+func (r FbsGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) FbsGenerateMassOrderLabelsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateMassOrderLabelsReportExecute(r)
+func (r FbsGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateMassOrderLabelsReportExecute(r)
 }
 
 /*
@@ -5312,25 +5315,25 @@ GenerateMassOrderLabelsReport Готовые ярлыки‑наклейки н�
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateMassOrderLabelsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateMassOrderLabelsReportRequest
 */
-func (a *FbsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ApiGenerateMassOrderLabelsReportRequest {
-	return ApiGenerateMassOrderLabelsReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) FbsGenerateMassOrderLabelsReportRequest {
+	return FbsGenerateMassOrderLabelsReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r FbsGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateMassOrderLabelsReport")
@@ -5372,14 +5375,14 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOr
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -5412,8 +5415,8 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5423,8 +5426,8 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5434,8 +5437,8 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5445,8 +5448,8 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5456,8 +5459,8 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOr
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5474,24 +5477,24 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateOrderLabelRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateOrderLabelRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 	shipmentId int64
-	boxId int64
-	format *PageFormatType
+	boxId      int64
+	format     *PageFormatType
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateOrderLabelRequest) Format(format PageFormatType) ApiGenerateOrderLabelRequest {
+func (r FbsGenerateOrderLabelRequest) Format(format PageFormatType) FbsGenerateOrderLabelRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateOrderLabelRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GenerateOrderLabelExecute(r)
+func (r FbsGenerateOrderLabelRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.GenerateOrderLabelExecute(r)
 }
 
 /*
@@ -5504,33 +5507,33 @@ GenerateOrderLabel Готовый ярлык‑наклейка для коро�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param shipmentId Идентификатор грузоместа.
- @param boxId Идентификатор коробки.
- @return ApiGenerateOrderLabelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param shipmentId Идентификатор грузоместа.
+	@param boxId Идентификатор коробки.
+	@return FbsGenerateOrderLabelRequest
 */
-func (a *FbsAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) ApiGenerateOrderLabelRequest {
-	return ApiGenerateOrderLabelRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) FbsGenerateOrderLabelRequest {
+	return FbsGenerateOrderLabelRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 		shipmentId: shipmentId,
-		boxId: boxId,
+		boxId:      boxId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) GenerateOrderLabelExecute(r FbsGenerateOrderLabelRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateOrderLabel")
@@ -5574,14 +5577,14 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -5614,8 +5617,8 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5625,8 +5628,8 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5636,8 +5639,8 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -5647,8 +5650,8 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5658,8 +5661,8 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5669,8 +5672,8 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5687,22 +5690,22 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateOrderLabelsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateOrderLabelsRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
-	format *PageFormatType
+	orderId    int64
+	format     *PageFormatType
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateOrderLabelsRequest) Format(format PageFormatType) ApiGenerateOrderLabelsRequest {
+func (r FbsGenerateOrderLabelsRequest) Format(format PageFormatType) FbsGenerateOrderLabelsRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateOrderLabelsRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GenerateOrderLabelsExecute(r)
+func (r FbsGenerateOrderLabelsRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.GenerateOrderLabelsExecute(r)
 }
 
 /*
@@ -5717,29 +5720,29 @@ GenerateOrderLabels Готовые ярлыки‑наклейки на все �
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGenerateOrderLabelsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsGenerateOrderLabelsRequest
 */
-func (a *FbsAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) ApiGenerateOrderLabelsRequest {
-	return ApiGenerateOrderLabelsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) FbsGenerateOrderLabelsRequest {
+	return FbsGenerateOrderLabelsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) GenerateOrderLabelsExecute(r FbsGenerateOrderLabelsRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateOrderLabels")
@@ -5781,14 +5784,14 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -5821,8 +5824,8 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -5832,8 +5835,8 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -5843,8 +5846,8 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -5854,8 +5857,8 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -5865,8 +5868,8 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -5876,8 +5879,8 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -5894,26 +5897,26 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratePricesReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGeneratePricesReportRequest struct {
+	ctx                         context.Context
+	FbsService                  *FbsAPIService
 	generatePricesReportRequest *GeneratePricesReportRequest
-	format *ReportFormatType
+	format                      *ReportFormatType
 }
 
-func (r ApiGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) ApiGeneratePricesReportRequest {
+func (r FbsGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) FbsGeneratePricesReportRequest {
 	r.generatePricesReportRequest = &generatePricesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGeneratePricesReportRequest) Format(format ReportFormatType) ApiGeneratePricesReportRequest {
+func (r FbsGeneratePricesReportRequest) Format(format ReportFormatType) FbsGeneratePricesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GeneratePricesReportExecute(r)
+func (r FbsGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GeneratePricesReportExecute(r)
 }
 
 /*
@@ -5938,25 +5941,25 @@ GeneratePricesReport Отчет «Цены на рынке»
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGeneratePricesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGeneratePricesReportRequest
 */
-func (a *FbsAPIService) GeneratePricesReport(ctx context.Context) ApiGeneratePricesReportRequest {
-	return ApiGeneratePricesReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GeneratePricesReport(ctx context.Context) FbsGeneratePricesReportRequest {
+	return FbsGeneratePricesReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GeneratePricesReportExecute(r FbsGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GeneratePricesReport")
@@ -6001,14 +6004,14 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -6041,8 +6044,8 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6052,8 +6055,8 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6063,8 +6066,8 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6074,8 +6077,8 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6085,8 +6088,8 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6103,26 +6106,26 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateSalesGeographyReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateSalesGeographyReportRequest struct {
+	ctx                           context.Context
+	FbsService                    *FbsAPIService
 	generateSalesGeographyRequest *GenerateSalesGeographyRequest
-	format *ReportFormatType
+	format                        *ReportFormatType
 }
 
-func (r ApiGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) ApiGenerateSalesGeographyReportRequest {
+func (r FbsGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) FbsGenerateSalesGeographyReportRequest {
 	r.generateSalesGeographyRequest = &generateSalesGeographyRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateSalesGeographyReportRequest) Format(format ReportFormatType) ApiGenerateSalesGeographyReportRequest {
+func (r FbsGenerateSalesGeographyReportRequest) Format(format ReportFormatType) FbsGenerateSalesGeographyReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateSalesGeographyReportExecute(r)
+func (r FbsGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateSalesGeographyReportExecute(r)
 }
 
 /*
@@ -6139,25 +6142,25 @@ GenerateSalesGeographyReport Отчет по географии продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateSalesGeographyReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateSalesGeographyReportRequest
 */
-func (a *FbsAPIService) GenerateSalesGeographyReport(ctx context.Context) ApiGenerateSalesGeographyReportRequest {
-	return ApiGenerateSalesGeographyReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateSalesGeographyReport(ctx context.Context) FbsGenerateSalesGeographyReportRequest {
+	return FbsGenerateSalesGeographyReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r FbsGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateSalesGeographyReport")
@@ -6202,14 +6205,14 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -6242,8 +6245,8 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6253,8 +6256,8 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6264,8 +6267,8 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6275,8 +6278,8 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6286,8 +6289,8 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6304,26 +6307,26 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShelfsStatisticsReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateShelfsStatisticsReportRequest struct {
+	ctx                             context.Context
+	FbsService                      *FbsAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
-	format *ReportFormatType
+	format                          *ReportFormatType
 }
 
-func (r ApiGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) ApiGenerateShelfsStatisticsReportRequest {
+func (r FbsGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) FbsGenerateShelfsStatisticsReportRequest {
 	r.generateShelfsStatisticsRequest = &generateShelfsStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) ApiGenerateShelfsStatisticsReportRequest {
+func (r FbsGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) FbsGenerateShelfsStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShelfsStatisticsReportExecute(r)
+func (r FbsGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateShelfsStatisticsReportExecute(r)
 }
 
 /*
@@ -6340,25 +6343,25 @@ GenerateShelfsStatisticsReport Отчет по полкам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShelfsStatisticsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateShelfsStatisticsReportRequest
 */
-func (a *FbsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ApiGenerateShelfsStatisticsReportRequest {
-	return ApiGenerateShelfsStatisticsReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) FbsGenerateShelfsStatisticsReportRequest {
+	return FbsGenerateShelfsStatisticsReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r FbsGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateShelfsStatisticsReport")
@@ -6403,14 +6406,14 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelf
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -6443,8 +6446,8 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6454,8 +6457,8 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6465,8 +6468,8 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6476,8 +6479,8 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6487,8 +6490,8 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelf
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6505,19 +6508,19 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelf
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShipmentListDocumentReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateShipmentListDocumentReportRequest struct {
+	ctx                                       context.Context
+	FbsService                                *FbsAPIService
 	generateShipmentListDocumentReportRequest *GenerateShipmentListDocumentReportRequest
 }
 
-func (r ApiGenerateShipmentListDocumentReportRequest) GenerateShipmentListDocumentReportRequest(generateShipmentListDocumentReportRequest GenerateShipmentListDocumentReportRequest) ApiGenerateShipmentListDocumentReportRequest {
+func (r FbsGenerateShipmentListDocumentReportRequest) GenerateShipmentListDocumentReportRequest(generateShipmentListDocumentReportRequest GenerateShipmentListDocumentReportRequest) FbsGenerateShipmentListDocumentReportRequest {
 	r.generateShipmentListDocumentReportRequest = &generateShipmentListDocumentReportRequest
 	return r
 }
 
-func (r ApiGenerateShipmentListDocumentReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShipmentListDocumentReportExecute(r)
+func (r FbsGenerateShipmentListDocumentReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateShipmentListDocumentReportExecute(r)
 }
 
 /*
@@ -6532,25 +6535,25 @@ GenerateShipmentListDocumentReport Получение листа сборки
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShipmentListDocumentReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateShipmentListDocumentReportRequest
 */
-func (a *FbsAPIService) GenerateShipmentListDocumentReport(ctx context.Context) ApiGenerateShipmentListDocumentReportRequest {
-	return ApiGenerateShipmentListDocumentReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateShipmentListDocumentReport(ctx context.Context) FbsGenerateShipmentListDocumentReportRequest {
+	return FbsGenerateShipmentListDocumentReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateShipmentListDocumentReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r FbsGenerateShipmentListDocumentReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateShipmentListDocumentReport")
@@ -6589,14 +6592,14 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateS
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -6629,8 +6632,8 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6640,8 +6643,8 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6651,8 +6654,8 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6662,8 +6665,8 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6673,8 +6676,8 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateS
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6691,26 +6694,26 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShowsBoostReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateShowsBoostReportRequest struct {
+	ctx                       context.Context
+	FbsService                *FbsAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
-	format *ReportFormatType
+	format                    *ReportFormatType
 }
 
-func (r ApiGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) ApiGenerateShowsBoostReportRequest {
+func (r FbsGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) FbsGenerateShowsBoostReportRequest {
 	r.generateShowsBoostRequest = &generateShowsBoostRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShowsBoostReportRequest) Format(format ReportFormatType) ApiGenerateShowsBoostReportRequest {
+func (r FbsGenerateShowsBoostReportRequest) Format(format ReportFormatType) FbsGenerateShowsBoostReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShowsBoostReportExecute(r)
+func (r FbsGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateShowsBoostReportExecute(r)
 }
 
 /*
@@ -6727,25 +6730,25 @@ GenerateShowsBoostReport Отчет по бусту показов
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShowsBoostReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateShowsBoostReportRequest
 */
-func (a *FbsAPIService) GenerateShowsBoostReport(ctx context.Context) ApiGenerateShowsBoostReportRequest {
-	return ApiGenerateShowsBoostReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateShowsBoostReport(ctx context.Context) FbsGenerateShowsBoostReportRequest {
+	return FbsGenerateShowsBoostReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateShowsBoostReportExecute(r FbsGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateShowsBoostReport")
@@ -6790,14 +6793,14 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -6830,8 +6833,8 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -6841,8 +6844,8 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -6852,8 +6855,8 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -6863,8 +6866,8 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -6874,8 +6877,8 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -6892,26 +6895,26 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShowsSalesReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateShowsSalesReportRequest struct {
+	ctx                             context.Context
+	FbsService                      *FbsAPIService
 	generateShowsSalesReportRequest *GenerateShowsSalesReportRequest
-	format *ReportFormatType
+	format                          *ReportFormatType
 }
 
-func (r ApiGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) ApiGenerateShowsSalesReportRequest {
+func (r FbsGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) FbsGenerateShowsSalesReportRequest {
 	r.generateShowsSalesReportRequest = &generateShowsSalesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShowsSalesReportRequest) Format(format ReportFormatType) ApiGenerateShowsSalesReportRequest {
+func (r FbsGenerateShowsSalesReportRequest) Format(format ReportFormatType) FbsGenerateShowsSalesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShowsSalesReportExecute(r)
+func (r FbsGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateShowsSalesReportExecute(r)
 }
 
 /*
@@ -6928,25 +6931,25 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateShowsSalesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateShowsSalesReportRequest
 */
-func (a *FbsAPIService) GenerateShowsSalesReport(ctx context.Context) ApiGenerateShowsSalesReportRequest {
-	return ApiGenerateShowsSalesReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateShowsSalesReport(ctx context.Context) FbsGenerateShowsSalesReportRequest {
+	return FbsGenerateShowsSalesReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateShowsSalesReportExecute(r FbsGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateShowsSalesReport")
@@ -6991,14 +6994,14 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -7031,8 +7034,8 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7042,8 +7045,8 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7053,8 +7056,8 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7064,8 +7067,8 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7075,8 +7078,8 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7093,26 +7096,26 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateStocksOnWarehousesReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateStocksOnWarehousesReportRequest struct {
+	ctx                                     context.Context
+	FbsService                              *FbsAPIService
 	generateStocksOnWarehousesReportRequest *GenerateStocksOnWarehousesReportRequest
-	format *ReportFormatType
+	format                                  *ReportFormatType
 }
 
-func (r ApiGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) ApiGenerateStocksOnWarehousesReportRequest {
+func (r FbsGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) FbsGenerateStocksOnWarehousesReportRequest {
 	r.generateStocksOnWarehousesReportRequest = &generateStocksOnWarehousesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) ApiGenerateStocksOnWarehousesReportRequest {
+func (r FbsGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) FbsGenerateStocksOnWarehousesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateStocksOnWarehousesReportExecute(r)
+func (r FbsGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateStocksOnWarehousesReportExecute(r)
 }
 
 /*
@@ -7134,25 +7137,25 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateStocksOnWarehousesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateStocksOnWarehousesReportRequest
 */
-func (a *FbsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) ApiGenerateStocksOnWarehousesReportRequest {
-	return ApiGenerateStocksOnWarehousesReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) FbsGenerateStocksOnWarehousesReportRequest {
+	return FbsGenerateStocksOnWarehousesReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r FbsGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateStocksOnWarehousesReport")
@@ -7197,14 +7200,14 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateSto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -7237,8 +7240,8 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateSto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7248,8 +7251,8 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateSto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7259,8 +7262,8 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateSto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7270,8 +7273,8 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateSto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7281,8 +7284,8 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateSto
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7299,33 +7302,33 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateSto
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedMarketplaceServicesReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateUnitedMarketplaceServicesReportRequest struct {
+	ctx                                            context.Context
+	FbsService                                     *FbsAPIService
 	generateUnitedMarketplaceServicesReportRequest *GenerateUnitedMarketplaceServicesReportRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                                         *ReportFormatType
+	language                                       *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r FbsGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) FbsGenerateUnitedMarketplaceServicesReportRequest {
 	r.generateUnitedMarketplaceServicesReportRequest = &generateUnitedMarketplaceServicesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r FbsGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) FbsGenerateUnitedMarketplaceServicesReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r FbsGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) FbsGenerateUnitedMarketplaceServicesReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedMarketplaceServicesReportExecute(r)
+func (r FbsGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateUnitedMarketplaceServicesReportExecute(r)
 }
 
 /*
@@ -7351,25 +7354,25 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedMarketplaceServicesReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateUnitedMarketplaceServicesReportRequest
 */
-func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) ApiGenerateUnitedMarketplaceServicesReportRequest {
-	return ApiGenerateUnitedMarketplaceServicesReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) FbsGenerateUnitedMarketplaceServicesReportRequest {
+	return FbsGenerateUnitedMarketplaceServicesReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbsGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateUnitedMarketplaceServicesReport")
@@ -7417,14 +7420,14 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGene
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -7457,8 +7460,8 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGene
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7468,8 +7471,8 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGene
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7479,8 +7482,8 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGene
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7490,8 +7493,8 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGene
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7501,8 +7504,8 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGene
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7519,33 +7522,33 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGene
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedNettingReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateUnitedNettingReportRequest struct {
+	ctx                                context.Context
+	FbsService                         *FbsAPIService
 	generateUnitedNettingReportRequest *GenerateUnitedNettingReportRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                             *ReportFormatType
+	language                           *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) ApiGenerateUnitedNettingReportRequest {
+func (r FbsGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) FbsGenerateUnitedNettingReportRequest {
 	r.generateUnitedNettingReportRequest = &generateUnitedNettingReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedNettingReportRequest) Format(format ReportFormatType) ApiGenerateUnitedNettingReportRequest {
+func (r FbsGenerateUnitedNettingReportRequest) Format(format ReportFormatType) FbsGenerateUnitedNettingReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedNettingReportRequest {
+func (r FbsGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) FbsGenerateUnitedNettingReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedNettingReportExecute(r)
+func (r FbsGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateUnitedNettingReportExecute(r)
 }
 
 /*
@@ -7573,25 +7576,25 @@ GenerateUnitedNettingReport Отчет по платежам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedNettingReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateUnitedNettingReportRequest
 */
-func (a *FbsAPIService) GenerateUnitedNettingReport(ctx context.Context) ApiGenerateUnitedNettingReportRequest {
-	return ApiGenerateUnitedNettingReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateUnitedNettingReport(ctx context.Context) FbsGenerateUnitedNettingReportRequest {
+	return FbsGenerateUnitedNettingReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r FbsGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateUnitedNettingReport")
@@ -7639,14 +7642,14 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -7679,8 +7682,8 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7690,8 +7693,8 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7701,8 +7704,8 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7712,8 +7715,8 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7723,8 +7726,8 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7741,33 +7744,33 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedOrdersReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateUnitedOrdersReportRequest struct {
+	ctx                         context.Context
+	FbsService                  *FbsAPIService
 	generateUnitedOrdersRequest *GenerateUnitedOrdersRequest
-	format *ReportFormatType
-	language *ReportLanguageType
+	format                      *ReportFormatType
+	language                    *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) ApiGenerateUnitedOrdersReportRequest {
+func (r FbsGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) FbsGenerateUnitedOrdersReportRequest {
 	r.generateUnitedOrdersRequest = &generateUnitedOrdersRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) ApiGenerateUnitedOrdersReportRequest {
+func (r FbsGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) FbsGenerateUnitedOrdersReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedOrdersReportRequest {
+func (r FbsGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) FbsGenerateUnitedOrdersReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedOrdersReportExecute(r)
+func (r FbsGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateUnitedOrdersReportExecute(r)
 }
 
 /*
@@ -7784,25 +7787,25 @@ GenerateUnitedOrdersReport Отчет по заказам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedOrdersReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateUnitedOrdersReportRequest
 */
-func (a *FbsAPIService) GenerateUnitedOrdersReport(ctx context.Context) ApiGenerateUnitedOrdersReportRequest {
-	return ApiGenerateUnitedOrdersReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateUnitedOrdersReport(ctx context.Context) FbsGenerateUnitedOrdersReportRequest {
+	return FbsGenerateUnitedOrdersReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r FbsGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateUnitedOrdersReport")
@@ -7850,14 +7853,14 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrd
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -7890,8 +7893,8 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrd
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -7901,8 +7904,8 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrd
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -7912,8 +7915,8 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrd
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -7923,8 +7926,8 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrd
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -7934,8 +7937,8 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrd
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -7952,26 +7955,26 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrd
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedReturnsReportRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGenerateUnitedReturnsReportRequest struct {
+	ctx                          context.Context
+	FbsService                   *FbsAPIService
 	generateUnitedReturnsRequest *GenerateUnitedReturnsRequest
-	format *ReportFormatType
+	format                       *ReportFormatType
 }
 
-func (r ApiGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) ApiGenerateUnitedReturnsReportRequest {
+func (r FbsGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) FbsGenerateUnitedReturnsReportRequest {
 	r.generateUnitedReturnsRequest = &generateUnitedReturnsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) ApiGenerateUnitedReturnsReportRequest {
+func (r FbsGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) FbsGenerateUnitedReturnsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedReturnsReportExecute(r)
+func (r FbsGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.FbsService.GenerateUnitedReturnsReportExecute(r)
 }
 
 /*
@@ -7990,25 +7993,25 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGenerateUnitedReturnsReportRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGenerateUnitedReturnsReportRequest
 */
-func (a *FbsAPIService) GenerateUnitedReturnsReport(ctx context.Context) ApiGenerateUnitedReturnsReportRequest {
-	return ApiGenerateUnitedReturnsReportRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GenerateUnitedReturnsReport(ctx context.Context) FbsGenerateUnitedReturnsReportRequest {
+	return FbsGenerateUnitedReturnsReportRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GenerateReportResponse
-func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//
+//	@return GenerateReportResponse
+func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r FbsGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GenerateReportResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GenerateUnitedReturnsReport")
@@ -8053,14 +8056,14 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -8093,8 +8096,8 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8104,8 +8107,8 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8115,8 +8118,8 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8126,8 +8129,8 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8137,8 +8140,8 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8155,13 +8158,13 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetAuthTokenInfoRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetAuthTokenInfoRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 }
 
-func (r ApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
-	return r.ApiService.GetAuthTokenInfoExecute(r)
+func (r FbsGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+	return r.FbsService.GetAuthTokenInfoExecute(r)
 }
 
 /*
@@ -8169,9 +8172,7 @@ GetAuthTokenInfo Получение информации об авторизац
 
 {% include notitle [access](../../_auto/method_scopes/getAuthTokenInfo.md) %}
 
-{% note info "Метод доступен только для Api-Key-токена." %}
-
- 
+{% note info "Метод доступен только для Fbs-Key-токена." %}
 
 {% endnote %}
 
@@ -8180,25 +8181,25 @@ GetAuthTokenInfo Получение информации об авторизац
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetAuthTokenInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGetAuthTokenInfoRequest
 */
-func (a *FbsAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInfoRequest {
-	return ApiGetAuthTokenInfoRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetAuthTokenInfo(ctx context.Context) FbsGetAuthTokenInfoRequest {
+	return FbsGetAuthTokenInfoRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetTokenInfoResponse
-func (a *FbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+//
+//	@return GetTokenInfoResponse
+func (a *FbsAPIService) GetAuthTokenInfoExecute(r FbsGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetTokenInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetTokenInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetAuthTokenInfo")
@@ -8232,14 +8233,14 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -8272,8 +8273,8 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8283,8 +8284,8 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8294,8 +8295,8 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8305,8 +8306,8 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8316,8 +8317,8 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8334,35 +8335,35 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBidsInfoForBusinessRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+type FbsGetBidsInfoForBusinessRequest struct {
+	ctx                context.Context
+	FbsService         *FbsAPIService
+	businessId         int64
+	pageToken          *string
+	limit              *int32
 	getBidsInfoRequest *GetBidsInfoRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetBidsInfoForBusinessRequest) PageToken(pageToken string) ApiGetBidsInfoForBusinessRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetBidsInfoForBusinessRequest) PageToken(pageToken string) FbsGetBidsInfoForBusinessRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetBidsInfoForBusinessRequest) Limit(limit int32) ApiGetBidsInfoForBusinessRequest {
+// Количество значений на одной странице.
+func (r FbsGetBidsInfoForBusinessRequest) Limit(limit int32) FbsGetBidsInfoForBusinessRequest {
 	r.limit = &limit
 	return r
 }
 
 // description
-func (r ApiGetBidsInfoForBusinessRequest) GetBidsInfoRequest(getBidsInfoRequest GetBidsInfoRequest) ApiGetBidsInfoForBusinessRequest {
+func (r FbsGetBidsInfoForBusinessRequest) GetBidsInfoRequest(getBidsInfoRequest GetBidsInfoRequest) FbsGetBidsInfoForBusinessRequest {
 	r.getBidsInfoRequest = &getBidsInfoRequest
 	return r
 }
 
-func (r ApiGetBidsInfoForBusinessRequest) Execute() (*GetBidsInfoResponse, *http.Response, error) {
-	return r.ApiService.GetBidsInfoForBusinessExecute(r)
+func (r FbsGetBidsInfoForBusinessRequest) Execute() (*GetBidsInfoResponse, *http.Response, error) {
+	return r.FbsService.GetBidsInfoForBusinessExecute(r)
 }
 
 /*
@@ -8383,27 +8384,27 @@ GetBidsInfoForBusiness Информация об установленных ст
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetBidsInfoForBusinessRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetBidsInfoForBusinessRequest
 */
-func (a *FbsAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) ApiGetBidsInfoForBusinessRequest {
-	return ApiGetBidsInfoForBusinessRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) FbsGetBidsInfoForBusinessRequest {
+	return FbsGetBidsInfoForBusinessRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBidsInfoResponse
-func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusinessRequest) (*GetBidsInfoResponse, *http.Response, error) {
+//
+//	@return GetBidsInfoResponse
+func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r FbsGetBidsInfoForBusinessRequest) (*GetBidsInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBidsInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBidsInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetBidsInfoForBusiness")
@@ -8449,14 +8450,14 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -8489,8 +8490,8 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8500,8 +8501,8 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8511,8 +8512,8 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -8522,8 +8523,8 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8533,8 +8534,8 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8544,8 +8545,8 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8562,21 +8563,21 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBidsRecommendationsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetBidsRecommendationsRequest struct {
+	ctx                           context.Context
+	FbsService                    *FbsAPIService
+	businessId                    int64
 	getBidsRecommendationsRequest *GetBidsRecommendationsRequest
 }
 
 // description.
-func (r ApiGetBidsRecommendationsRequest) GetBidsRecommendationsRequest(getBidsRecommendationsRequest GetBidsRecommendationsRequest) ApiGetBidsRecommendationsRequest {
+func (r FbsGetBidsRecommendationsRequest) GetBidsRecommendationsRequest(getBidsRecommendationsRequest GetBidsRecommendationsRequest) FbsGetBidsRecommendationsRequest {
 	r.getBidsRecommendationsRequest = &getBidsRecommendationsRequest
 	return r
 }
 
-func (r ApiGetBidsRecommendationsRequest) Execute() (*GetBidsRecommendationsResponse, *http.Response, error) {
-	return r.ApiService.GetBidsRecommendationsExecute(r)
+func (r FbsGetBidsRecommendationsRequest) Execute() (*GetBidsRecommendationsResponse, *http.Response, error) {
+	return r.FbsService.GetBidsRecommendationsExecute(r)
 }
 
 /*
@@ -8595,27 +8596,27 @@ GetBidsRecommendations Рекомендованные ставки для зад
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetBidsRecommendationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetBidsRecommendationsRequest
 */
-func (a *FbsAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) ApiGetBidsRecommendationsRequest {
-	return ApiGetBidsRecommendationsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) FbsGetBidsRecommendationsRequest {
+	return FbsGetBidsRecommendationsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBidsRecommendationsResponse
-func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendationsRequest) (*GetBidsRecommendationsResponse, *http.Response, error) {
+//
+//	@return GetBidsRecommendationsResponse
+func (a *FbsAPIService) GetBidsRecommendationsExecute(r FbsGetBidsRecommendationsRequest) (*GetBidsRecommendationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBidsRecommendationsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBidsRecommendationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetBidsRecommendations")
@@ -8658,14 +8659,14 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -8698,8 +8699,8 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8709,8 +8710,8 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8720,8 +8721,8 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -8731,8 +8732,8 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8742,8 +8743,8 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8753,8 +8754,8 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -8771,34 +8772,34 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBusinessQuarantineOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetBusinessQuarantineOffersRequest struct {
+	ctx                        context.Context
+	FbsService                 *FbsAPIService
+	businessId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
-	pageToken *string
-	limit *int32
+	pageToken                  *string
+	limit                      *int32
 }
 
-func (r ApiGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ApiGetBusinessQuarantineOffersRequest {
+func (r FbsGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) FbsGetBusinessQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetBusinessQuarantineOffersRequest) PageToken(pageToken string) ApiGetBusinessQuarantineOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetBusinessQuarantineOffersRequest) PageToken(pageToken string) FbsGetBusinessQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetBusinessQuarantineOffersRequest) Limit(limit int32) ApiGetBusinessQuarantineOffersRequest {
+// Количество значений на одной странице.
+func (r FbsGetBusinessQuarantineOffersRequest) Limit(limit int32) FbsGetBusinessQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
-	return r.ApiService.GetBusinessQuarantineOffersExecute(r)
+func (r FbsGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+	return r.FbsService.GetBusinessQuarantineOffersExecute(r)
 }
 
 /*
@@ -8823,27 +8824,27 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetBusinessQuarantineOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetBusinessQuarantineOffersRequest
 */
-func (a *FbsAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) ApiGetBusinessQuarantineOffersRequest {
-	return ApiGetBusinessQuarantineOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) FbsGetBusinessQuarantineOffersRequest {
+	return FbsGetBusinessQuarantineOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetQuarantineOffersResponse
-func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+//
+//	@return GetQuarantineOffersResponse
+func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r FbsGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetQuarantineOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetQuarantineOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetBusinessQuarantineOffers")
@@ -8892,14 +8893,14 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -8932,8 +8933,8 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -8943,8 +8944,8 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -8954,8 +8955,8 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -8965,8 +8966,8 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -8976,8 +8977,8 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -8987,8 +8988,8 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9005,14 +9006,14 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBusinessSettingsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetBusinessSettingsRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	businessId int64
 }
 
-func (r ApiGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
-	return r.ApiService.GetBusinessSettingsExecute(r)
+func (r FbsGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
+	return r.FbsService.GetBusinessSettingsExecute(r)
 }
 
 /*
@@ -9024,27 +9025,27 @@ GetBusinessSettings Настройки кабинета
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetBusinessSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetBusinessSettingsRequest
 */
-func (a *FbsAPIService) GetBusinessSettings(ctx context.Context, businessId int64) ApiGetBusinessSettingsRequest {
-	return ApiGetBusinessSettingsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetBusinessSettings(ctx context.Context, businessId int64) FbsGetBusinessSettingsRequest {
+	return FbsGetBusinessSettingsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBusinessSettingsResponse
-func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
+//
+//	@return GetBusinessSettingsResponse
+func (a *FbsAPIService) GetBusinessSettingsExecute(r FbsGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBusinessSettingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBusinessSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetBusinessSettings")
@@ -9082,14 +9083,14 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -9122,8 +9123,8 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9133,8 +9134,8 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9144,8 +9145,8 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9155,8 +9156,8 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9166,8 +9167,8 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -9177,8 +9178,8 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9195,14 +9196,14 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetCampaignRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignExecute(r)
+func (r FbsGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
+	return r.FbsService.GetCampaignExecute(r)
 }
 
 /*
@@ -9214,27 +9215,27 @@ GetCampaign Информация о магазине
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetCampaignRequest
 */
-func (a *FbsAPIService) GetCampaign(ctx context.Context, campaignId int64) ApiGetCampaignRequest {
-	return ApiGetCampaignRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCampaign(ctx context.Context, campaignId int64) FbsGetCampaignRequest {
+	return FbsGetCampaignRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignResponse
-func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
+//
+//	@return GetCampaignResponse
+func (a *FbsAPIService) GetCampaignExecute(r FbsGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCampaign")
@@ -9272,14 +9273,14 @@ func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -9312,8 +9313,8 @@ func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9323,8 +9324,8 @@ func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9334,8 +9335,8 @@ func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9345,8 +9346,8 @@ func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9356,8 +9357,8 @@ func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -9367,8 +9368,8 @@ func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9385,34 +9386,34 @@ func (a *FbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsGetCampaignOffersRequest struct {
+	ctx                      context.Context
+	FbsService               *FbsAPIService
+	campaignId               int64
 	getCampaignOffersRequest *GetCampaignOffersRequest
-	pageToken *string
-	limit *int32
+	pageToken                *string
+	limit                    *int32
 }
 
-func (r ApiGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) ApiGetCampaignOffersRequest {
+func (r FbsGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) FbsGetCampaignOffersRequest {
 	r.getCampaignOffersRequest = &getCampaignOffersRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetCampaignOffersRequest) PageToken(pageToken string) ApiGetCampaignOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetCampaignOffersRequest) PageToken(pageToken string) FbsGetCampaignOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetCampaignOffersRequest) Limit(limit int32) ApiGetCampaignOffersRequest {
+// Количество значений на одной странице.
+func (r FbsGetCampaignOffersRequest) Limit(limit int32) FbsGetCampaignOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignOffersExecute(r)
+func (r FbsGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
+	return r.FbsService.GetCampaignOffersExecute(r)
 }
 
 /*
@@ -9425,27 +9426,27 @@ GetCampaignOffers Информация о товарах, которые раз�
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetCampaignOffersRequest
 */
-func (a *FbsAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) ApiGetCampaignOffersRequest {
-	return ApiGetCampaignOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) FbsGetCampaignOffersRequest {
+	return FbsGetCampaignOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignOffersResponse
-func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
+//
+//	@return GetCampaignOffersResponse
+func (a *FbsAPIService) GetCampaignOffersExecute(r FbsGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCampaignOffers")
@@ -9494,14 +9495,14 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -9534,8 +9535,8 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9545,8 +9546,8 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9556,8 +9557,8 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9567,8 +9568,8 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9578,8 +9579,8 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -9589,8 +9590,8 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9607,34 +9608,34 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignQuarantineOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsGetCampaignQuarantineOffersRequest struct {
+	ctx                        context.Context
+	FbsService                 *FbsAPIService
+	campaignId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
-	pageToken *string
-	limit *int32
+	pageToken                  *string
+	limit                      *int32
 }
 
-func (r ApiGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ApiGetCampaignQuarantineOffersRequest {
+func (r FbsGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) FbsGetCampaignQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetCampaignQuarantineOffersRequest) PageToken(pageToken string) ApiGetCampaignQuarantineOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetCampaignQuarantineOffersRequest) PageToken(pageToken string) FbsGetCampaignQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetCampaignQuarantineOffersRequest) Limit(limit int32) ApiGetCampaignQuarantineOffersRequest {
+// Количество значений на одной странице.
+func (r FbsGetCampaignQuarantineOffersRequest) Limit(limit int32) FbsGetCampaignQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignQuarantineOffersExecute(r)
+func (r FbsGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+	return r.FbsService.GetCampaignQuarantineOffersExecute(r)
 }
 
 /*
@@ -9659,27 +9660,27 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignQuarantineOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetCampaignQuarantineOffersRequest
 */
-func (a *FbsAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) ApiGetCampaignQuarantineOffersRequest {
-	return ApiGetCampaignQuarantineOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) FbsGetCampaignQuarantineOffersRequest {
+	return FbsGetCampaignQuarantineOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetQuarantineOffersResponse
-func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+//
+//	@return GetQuarantineOffersResponse
+func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r FbsGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetQuarantineOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetQuarantineOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCampaignQuarantineOffers")
@@ -9728,14 +9729,14 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -9768,8 +9769,8 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9779,8 +9780,8 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9790,8 +9791,8 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -9801,8 +9802,8 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -9812,8 +9813,8 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -9823,8 +9824,8 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -9841,14 +9842,14 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignRegionRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetCampaignRegionRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignRegionExecute(r)
+func (r FbsGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
+	return r.FbsService.GetCampaignRegionExecute(r)
 }
 
 /*
@@ -9866,30 +9867,31 @@ GetCampaignRegion Регион магазина
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignRegionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetCampaignRegionRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) ApiGetCampaignRegionRequest {
-	return ApiGetCampaignRegionRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) FbsGetCampaignRegionRequest {
+	return FbsGetCampaignRegionRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignRegionResponse
+//
+//	@return GetCampaignRegionResponse
+//
 // Deprecated
-func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
+func (a *FbsAPIService) GetCampaignRegionExecute(r FbsGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignRegionResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignRegionResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCampaignRegion")
@@ -9927,14 +9929,14 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -9967,8 +9969,8 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -9978,8 +9980,8 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -9989,8 +9991,8 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10000,8 +10002,8 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10011,8 +10013,8 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10022,8 +10024,8 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10040,14 +10042,14 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignSettingsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetCampaignSettingsRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignSettingsExecute(r)
+func (r FbsGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
+	return r.FbsService.GetCampaignSettingsExecute(r)
 }
 
 /*
@@ -10059,27 +10061,27 @@ GetCampaignSettings Настройки магазина
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetCampaignSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetCampaignSettingsRequest
 */
-func (a *FbsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) ApiGetCampaignSettingsRequest {
-	return ApiGetCampaignSettingsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) FbsGetCampaignSettingsRequest {
+	return FbsGetCampaignSettingsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignSettingsResponse
-func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
+//
+//	@return GetCampaignSettingsResponse
+func (a *FbsAPIService) GetCampaignSettingsExecute(r FbsGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignSettingsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignSettingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCampaignSettings")
@@ -10117,14 +10119,14 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -10157,8 +10159,8 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10168,8 +10170,8 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10179,8 +10181,8 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10190,8 +10192,8 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10201,8 +10203,8 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10212,8 +10214,8 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10230,27 +10232,27 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	page *int32
-	pageSize *int32
+type FbsGetCampaignsRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
+	page       *int32
+	pageSize   *int32
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiGetCampaignsRequest) Page(page int32) ApiGetCampaignsRequest {
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r FbsGetCampaignsRequest) Page(page int32) FbsGetCampaignsRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiGetCampaignsRequest) PageSize(pageSize int32) ApiGetCampaignsRequest {
+// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r FbsGetCampaignsRequest) PageSize(pageSize int32) FbsGetCampaignsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignsExecute(r)
+func (r FbsGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
+	return r.FbsService.GetCampaignsExecute(r)
 }
 
 /*
@@ -10258,32 +10260,32 @@ GetCampaigns Список магазинов пользователя
 
 {% include notitle [access](../../_auto/method_scopes/getCampaigns.md) %}
 
-**Для Api-Key-токена:** возвращает список магазинов в кабинете, для которого выдан токен. Нельзя получить список только подагентских магазинов.
+**Для Fbs-Key-токена:** возвращает список магазинов в кабинете, для которого выдан токен. Нельзя получить список только подагентских магазинов.
 
 **Для OAuth-токена:** возвращает список магазинов, к которым имеет доступ пользователь — владелец авторизационного токена, использованного в запросе. Для агентских пользователей список состоит из подагентских магазинов.
 
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCampaignsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGetCampaignsRequest
 */
-func (a *FbsAPIService) GetCampaigns(ctx context.Context) ApiGetCampaignsRequest {
-	return ApiGetCampaignsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCampaigns(ctx context.Context) FbsGetCampaignsRequest {
+	return FbsGetCampaignsRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCampaignsResponse
-func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
+//
+//	@return GetCampaignsResponse
+func (a *FbsAPIService) GetCampaignsExecute(r FbsGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCampaignsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCampaignsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCampaigns")
@@ -10326,14 +10328,14 @@ func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -10366,8 +10368,8 @@ func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10377,8 +10379,8 @@ func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10388,8 +10390,8 @@ func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10399,8 +10401,8 @@ func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10410,8 +10412,8 @@ func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10421,8 +10423,8 @@ func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10439,19 +10441,19 @@ func (a *FbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoriesMaxSaleQuantumRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetCategoriesMaxSaleQuantumRequest struct {
+	ctx                                context.Context
+	FbsService                         *FbsAPIService
 	getCategoriesMaxSaleQuantumRequest *GetCategoriesMaxSaleQuantumRequest
 }
 
-func (r ApiGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) ApiGetCategoriesMaxSaleQuantumRequest {
+func (r FbsGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) FbsGetCategoriesMaxSaleQuantumRequest {
 	r.getCategoriesMaxSaleQuantumRequest = &getCategoriesMaxSaleQuantumRequest
 	return r
 }
 
-func (r ApiGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
-	return r.ApiService.GetCategoriesMaxSaleQuantumExecute(r)
+func (r FbsGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+	return r.FbsService.GetCategoriesMaxSaleQuantumExecute(r)
 }
 
 /*
@@ -10468,25 +10470,25 @@ GetCategoriesMaxSaleQuantum Лимит на установку кванта пр
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCategoriesMaxSaleQuantumRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGetCategoriesMaxSaleQuantumRequest
 */
-func (a *FbsAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) ApiGetCategoriesMaxSaleQuantumRequest {
-	return ApiGetCategoriesMaxSaleQuantumRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) FbsGetCategoriesMaxSaleQuantumRequest {
+	return FbsGetCategoriesMaxSaleQuantumRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCategoriesMaxSaleQuantumResponse
-func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+//
+//	@return GetCategoriesMaxSaleQuantumResponse
+func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r FbsGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCategoriesMaxSaleQuantumResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCategoriesMaxSaleQuantumResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCategoriesMaxSaleQuantum")
@@ -10525,14 +10527,14 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -10565,8 +10567,8 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10576,8 +10578,8 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10587,8 +10589,8 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10598,8 +10600,8 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10609,8 +10611,8 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10620,8 +10622,8 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10638,19 +10640,19 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoriesTreeRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetCategoriesTreeRequest struct {
+	ctx                  context.Context
+	FbsService           *FbsAPIService
 	getCategoriesRequest *GetCategoriesRequest
 }
 
-func (r ApiGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) ApiGetCategoriesTreeRequest {
+func (r FbsGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) FbsGetCategoriesTreeRequest {
 	r.getCategoriesRequest = &getCategoriesRequest
 	return r
 }
 
-func (r ApiGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
-	return r.ApiService.GetCategoriesTreeExecute(r)
+func (r FbsGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
+	return r.FbsService.GetCategoriesTreeExecute(r)
 }
 
 /*
@@ -10663,25 +10665,25 @@ GetCategoriesTree Дерево категорий
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetCategoriesTreeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGetCategoriesTreeRequest
 */
-func (a *FbsAPIService) GetCategoriesTree(ctx context.Context) ApiGetCategoriesTreeRequest {
-	return ApiGetCategoriesTreeRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCategoriesTree(ctx context.Context) FbsGetCategoriesTreeRequest {
+	return FbsGetCategoriesTreeRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetCategoriesResponse
-func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
+//
+//	@return GetCategoriesResponse
+func (a *FbsAPIService) GetCategoriesTreeExecute(r FbsGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCategoriesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCategoriesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCategoriesTree")
@@ -10717,14 +10719,14 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -10757,8 +10759,8 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10768,8 +10770,8 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10779,8 +10781,8 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10790,8 +10792,8 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10801,8 +10803,8 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -10812,8 +10814,8 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -10830,14 +10832,14 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoryContentParametersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetCategoryContentParametersRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	categoryId int64
 }
 
-func (r ApiGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
-	return r.ApiService.GetCategoryContentParametersExecute(r)
+func (r FbsGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
+	return r.FbsService.GetCategoryContentParametersExecute(r)
 }
 
 /*
@@ -10850,27 +10852,27 @@ GetCategoryContentParameters Списки характеристик товар�
 |**⚙️ Лимит:** 100 категорий в минуту |
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md). 
- @return ApiGetCategoryContentParametersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
+	@return FbsGetCategoryContentParametersRequest
 */
-func (a *FbsAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) ApiGetCategoryContentParametersRequest {
-	return ApiGetCategoryContentParametersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) FbsGetCategoryContentParametersRequest {
+	return FbsGetCategoryContentParametersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		categoryId: categoryId,
 	}
 }
 
 // Execute executes the request
-//  @return GetCategoryContentParametersResponse
-func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
+//
+//	@return GetCategoryContentParametersResponse
+func (a *FbsAPIService) GetCategoryContentParametersExecute(r FbsGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetCategoryContentParametersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetCategoryContentParametersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetCategoryContentParameters")
@@ -10908,14 +10910,14 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -10948,8 +10950,8 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -10959,8 +10961,8 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -10970,8 +10972,8 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -10981,8 +10983,8 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -10992,8 +10994,8 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11003,8 +11005,8 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11021,21 +11023,21 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetChatRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	businessId int64
-	chatId *int64
+	chatId     *int64
 }
 
 // Идентификатор чата.
-func (r ApiGetChatRequest) ChatId(chatId int64) ApiGetChatRequest {
+func (r FbsGetChatRequest) ChatId(chatId int64) FbsGetChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
-func (r ApiGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
-	return r.ApiService.GetChatExecute(r)
+func (r FbsGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
+	return r.FbsService.GetChatExecute(r)
 }
 
 /*
@@ -11056,27 +11058,27 @@ GetChat Получение чата по идентификатору
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetChatRequest
 */
-func (a *FbsAPIService) GetChat(ctx context.Context, businessId int64) ApiGetChatRequest {
-	return ApiGetChatRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetChat(ctx context.Context, businessId int64) FbsGetChatRequest {
+	return FbsGetChatRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetChatResponse
-func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *http.Response, error) {
+//
+//	@return GetChatResponse
+func (a *FbsAPIService) GetChatExecute(r FbsGetChatRequest) (*GetChatResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetChatResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetChatResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetChat")
@@ -11121,14 +11123,14 @@ func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -11161,8 +11163,8 @@ func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -11172,8 +11174,8 @@ func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -11183,8 +11185,8 @@ func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -11194,8 +11196,8 @@ func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -11205,8 +11207,8 @@ func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11216,8 +11218,8 @@ func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11234,42 +11236,42 @@ func (a *FbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatHistoryRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
-	chatId *int64
+type FbsGetChatHistoryRequest struct {
+	ctx                   context.Context
+	FbsService            *FbsAPIService
+	businessId            int64
+	chatId                *int64
 	getChatHistoryRequest *GetChatHistoryRequest
-	pageToken *string
-	limit *int32
+	pageToken             *string
+	limit                 *int32
 }
 
 // Идентификатор чата.
-func (r ApiGetChatHistoryRequest) ChatId(chatId int64) ApiGetChatHistoryRequest {
+func (r FbsGetChatHistoryRequest) ChatId(chatId int64) FbsGetChatHistoryRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r ApiGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) ApiGetChatHistoryRequest {
+func (r FbsGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) FbsGetChatHistoryRequest {
 	r.getChatHistoryRequest = &getChatHistoryRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetChatHistoryRequest) PageToken(pageToken string) ApiGetChatHistoryRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetChatHistoryRequest) PageToken(pageToken string) FbsGetChatHistoryRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetChatHistoryRequest) Limit(limit int32) ApiGetChatHistoryRequest {
+// Количество значений на одной странице.
+func (r FbsGetChatHistoryRequest) Limit(limit int32) FbsGetChatHistoryRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
-	return r.ApiService.GetChatHistoryExecute(r)
+func (r FbsGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
+	return r.FbsService.GetChatHistoryExecute(r)
 }
 
 /*
@@ -11282,27 +11284,27 @@ GetChatHistory Получение истории сообщений в чате
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetChatHistoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetChatHistoryRequest
 */
-func (a *FbsAPIService) GetChatHistory(ctx context.Context, businessId int64) ApiGetChatHistoryRequest {
-	return ApiGetChatHistoryRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetChatHistory(ctx context.Context, businessId int64) FbsGetChatHistoryRequest {
+	return FbsGetChatHistoryRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetChatHistoryResponse
-func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
+//
+//	@return GetChatHistoryResponse
+func (a *FbsAPIService) GetChatHistoryExecute(r FbsGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetChatHistoryResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetChatHistoryResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetChatHistory")
@@ -11358,14 +11360,14 @@ func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -11398,8 +11400,8 @@ func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -11409,8 +11411,8 @@ func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -11420,8 +11422,8 @@ func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -11431,8 +11433,8 @@ func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -11442,8 +11444,8 @@ func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11453,8 +11455,8 @@ func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11471,28 +11473,28 @@ func (a *FbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatMessageRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetChatMessageRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	businessId int64
-	chatId *int64
-	messageId *int64
+	chatId     *int64
+	messageId  *int64
 }
 
 // Идентификатор чата.
-func (r ApiGetChatMessageRequest) ChatId(chatId int64) ApiGetChatMessageRequest {
+func (r FbsGetChatMessageRequest) ChatId(chatId int64) FbsGetChatMessageRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Идентификатор сообщения.
-func (r ApiGetChatMessageRequest) MessageId(messageId int64) ApiGetChatMessageRequest {
+func (r FbsGetChatMessageRequest) MessageId(messageId int64) FbsGetChatMessageRequest {
 	r.messageId = &messageId
 	return r
 }
 
-func (r ApiGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
-	return r.ApiService.GetChatMessageExecute(r)
+func (r FbsGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
+	return r.FbsService.GetChatMessageExecute(r)
 }
 
 /*
@@ -11513,27 +11515,27 @@ GetChatMessage Получение сообщения в чате
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetChatMessageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetChatMessageRequest
 */
-func (a *FbsAPIService) GetChatMessage(ctx context.Context, businessId int64) ApiGetChatMessageRequest {
-	return ApiGetChatMessageRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetChatMessage(ctx context.Context, businessId int64) FbsGetChatMessageRequest {
+	return FbsGetChatMessageRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetChatMessageResponse
-func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
+//
+//	@return GetChatMessageResponse
+func (a *FbsAPIService) GetChatMessageExecute(r FbsGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetChatMessageResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetChatMessageResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetChatMessage")
@@ -11585,14 +11587,14 @@ func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -11625,8 +11627,8 @@ func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -11636,8 +11638,8 @@ func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -11647,8 +11649,8 @@ func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -11658,8 +11660,8 @@ func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -11669,8 +11671,8 @@ func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11680,8 +11682,8 @@ func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11698,35 +11700,35 @@ func (a *FbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetChatsRequest struct {
+	ctx             context.Context
+	FbsService      *FbsAPIService
+	businessId      int64
 	getChatsRequest *GetChatsRequest
-	pageToken *string
-	limit *int32
+	pageToken       *string
+	limit           *int32
 }
 
 // description
-func (r ApiGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) ApiGetChatsRequest {
+func (r FbsGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) FbsGetChatsRequest {
 	r.getChatsRequest = &getChatsRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetChatsRequest) PageToken(pageToken string) ApiGetChatsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetChatsRequest) PageToken(pageToken string) FbsGetChatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetChatsRequest) Limit(limit int32) ApiGetChatsRequest {
+// Количество значений на одной странице.
+func (r FbsGetChatsRequest) Limit(limit int32) FbsGetChatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
-	return r.ApiService.GetChatsExecute(r)
+func (r FbsGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
+	return r.FbsService.GetChatsExecute(r)
 }
 
 /*
@@ -11747,27 +11749,27 @@ GetChats Получение доступных чатов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetChatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetChatsRequest
 */
-func (a *FbsAPIService) GetChats(ctx context.Context, businessId int64) ApiGetChatsRequest {
-	return ApiGetChatsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetChats(ctx context.Context, businessId int64) FbsGetChatsRequest {
+	return FbsGetChatsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetChatsResponse
-func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
+//
+//	@return GetChatsResponse
+func (a *FbsAPIService) GetChatsExecute(r FbsGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetChatsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetChatsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetChats")
@@ -11816,14 +11818,14 @@ func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -11856,8 +11858,8 @@ func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -11867,8 +11869,8 @@ func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -11878,8 +11880,8 @@ func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -11889,8 +11891,8 @@ func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -11900,8 +11902,8 @@ func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -11911,8 +11913,8 @@ func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -11929,13 +11931,13 @@ func (a *FbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetDeliveryServicesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetDeliveryServicesRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 }
 
-func (r ApiGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
-	return r.ApiService.GetDeliveryServicesExecute(r)
+func (r FbsGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
+	return r.FbsService.GetDeliveryServicesExecute(r)
 }
 
 /*
@@ -11947,25 +11949,25 @@ GetDeliveryServices Справочник служб доставки
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetDeliveryServicesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGetDeliveryServicesRequest
 */
-func (a *FbsAPIService) GetDeliveryServices(ctx context.Context) ApiGetDeliveryServicesRequest {
-	return ApiGetDeliveryServicesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetDeliveryServices(ctx context.Context) FbsGetDeliveryServicesRequest {
+	return FbsGetDeliveryServicesRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetDeliveryServicesResponse
-func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
+//
+//	@return GetDeliveryServicesResponse
+func (a *FbsAPIService) GetDeliveryServicesExecute(r FbsGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetDeliveryServicesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDeliveryServicesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetDeliveryServices")
@@ -11999,14 +12001,14 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -12039,8 +12041,8 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12050,8 +12052,8 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12061,8 +12063,8 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12072,8 +12074,8 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12083,8 +12085,8 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12094,8 +12096,8 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12112,34 +12114,34 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsFeedbackCommentsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetGoodsFeedbackCommentsRequest struct {
+	ctx                             context.Context
+	FbsService                      *FbsAPIService
+	businessId                      int64
 	getGoodsFeedbackCommentsRequest *GetGoodsFeedbackCommentsRequest
-	pageToken *string
-	limit *int32
+	pageToken                       *string
+	limit                           *int32
 }
 
-func (r ApiGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) ApiGetGoodsFeedbackCommentsRequest {
+func (r FbsGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) FbsGetGoodsFeedbackCommentsRequest {
 	r.getGoodsFeedbackCommentsRequest = &getGoodsFeedbackCommentsRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) ApiGetGoodsFeedbackCommentsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) FbsGetGoodsFeedbackCommentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetGoodsFeedbackCommentsRequest) Limit(limit int32) ApiGetGoodsFeedbackCommentsRequest {
+// Количество значений на одной странице.
+func (r FbsGetGoodsFeedbackCommentsRequest) Limit(limit int32) FbsGetGoodsFeedbackCommentsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsFeedbackCommentsExecute(r)
+func (r FbsGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
+	return r.FbsService.GetGoodsFeedbackCommentsExecute(r)
 }
 
 /*
@@ -12149,8 +12151,8 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 Возвращает комментарии к отзыву, кроме:
 
-  * тех, которые удалили пользователи или Маркет;
-  * комментариев к удаленным отзывам.
+  - тех, которые удалили пользователи или Маркет;
+  - комментариев к удаленным отзывам.
 
 {% note tip "Вы также можете настроить API-уведомления" %}
 
@@ -12167,27 +12169,27 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetGoodsFeedbackCommentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetGoodsFeedbackCommentsRequest
 */
-func (a *FbsAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) ApiGetGoodsFeedbackCommentsRequest {
-	return ApiGetGoodsFeedbackCommentsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) FbsGetGoodsFeedbackCommentsRequest {
+	return FbsGetGoodsFeedbackCommentsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGoodsFeedbackCommentsResponse
-func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
+//
+//	@return GetGoodsFeedbackCommentsResponse
+func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r FbsGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGoodsFeedbackCommentsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsFeedbackCommentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetGoodsFeedbackComments")
@@ -12236,14 +12238,14 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -12276,8 +12278,8 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12287,8 +12289,8 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12298,8 +12300,8 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12309,8 +12311,8 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12320,8 +12322,8 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12331,8 +12333,8 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12349,34 +12351,34 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsFeedbacksRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+type FbsGetGoodsFeedbacksRequest struct {
+	ctx                     context.Context
+	FbsService              *FbsAPIService
+	businessId              int64
+	pageToken               *string
+	limit                   *int32
 	getGoodsFeedbackRequest *GetGoodsFeedbackRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetGoodsFeedbacksRequest) PageToken(pageToken string) ApiGetGoodsFeedbacksRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetGoodsFeedbacksRequest) PageToken(pageToken string) FbsGetGoodsFeedbacksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetGoodsFeedbacksRequest) Limit(limit int32) ApiGetGoodsFeedbacksRequest {
+// Количество значений на одной странице.
+func (r FbsGetGoodsFeedbacksRequest) Limit(limit int32) FbsGetGoodsFeedbacksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetGoodsFeedbacksRequest) GetGoodsFeedbackRequest(getGoodsFeedbackRequest GetGoodsFeedbackRequest) ApiGetGoodsFeedbacksRequest {
+func (r FbsGetGoodsFeedbacksRequest) GetGoodsFeedbackRequest(getGoodsFeedbackRequest GetGoodsFeedbackRequest) FbsGetGoodsFeedbacksRequest {
 	r.getGoodsFeedbackRequest = &getGoodsFeedbackRequest
 	return r
 }
 
-func (r ApiGetGoodsFeedbacksRequest) Execute() (*GetGoodsFeedbackResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsFeedbacksExecute(r)
+func (r FbsGetGoodsFeedbacksRequest) Execute() (*GetGoodsFeedbackResponse, *http.Response, error) {
+	return r.FbsService.GetGoodsFeedbacksExecute(r)
 }
 
 /*
@@ -12401,27 +12403,27 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetGoodsFeedbacksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetGoodsFeedbacksRequest
 */
-func (a *FbsAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) ApiGetGoodsFeedbacksRequest {
-	return ApiGetGoodsFeedbacksRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) FbsGetGoodsFeedbacksRequest {
+	return FbsGetGoodsFeedbacksRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGoodsFeedbackResponse
-func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
+//
+//	@return GetGoodsFeedbackResponse
+func (a *FbsAPIService) GetGoodsFeedbacksExecute(r FbsGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGoodsFeedbackResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsFeedbackResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetGoodsFeedbacks")
@@ -12467,14 +12469,14 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -12507,8 +12509,8 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12518,8 +12520,8 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12529,8 +12531,8 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12540,8 +12542,8 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12551,8 +12553,8 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12562,8 +12564,8 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12580,20 +12582,20 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsStatsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsGetGoodsStatsRequest struct {
+	ctx                  context.Context
+	FbsService           *FbsAPIService
+	campaignId           int64
 	getGoodsStatsRequest *GetGoodsStatsRequest
 }
 
-func (r ApiGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) ApiGetGoodsStatsRequest {
+func (r FbsGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) FbsGetGoodsStatsRequest {
 	r.getGoodsStatsRequest = &getGoodsStatsRequest
 	return r
 }
 
-func (r ApiGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsStatsExecute(r)
+func (r FbsGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
+	return r.FbsService.GetGoodsStatsExecute(r)
 }
 
 /*
@@ -12606,27 +12608,27 @@ GetGoodsStats Отчет по товарам
 |**⚙️ Лимит:** 5 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetGoodsStatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetGoodsStatsRequest
 */
-func (a *FbsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) ApiGetGoodsStatsRequest {
-	return ApiGetGoodsStatsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) FbsGetGoodsStatsRequest {
+	return FbsGetGoodsStatsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetGoodsStatsResponse
-func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
+//
+//	@return GetGoodsStatsResponse
+func (a *FbsAPIService) GetGoodsStatsExecute(r FbsGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetGoodsStatsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsStatsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetGoodsStats")
@@ -12669,14 +12671,14 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -12709,8 +12711,8 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12720,8 +12722,8 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12731,8 +12733,8 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -12742,8 +12744,8 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12753,8 +12755,8 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12764,8 +12766,8 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12782,35 +12784,35 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetHiddenOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetHiddenOffersRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	offerId *[]string
-	pageToken *string
-	limit *int32
+	offerId    *[]string
+	pageToken  *string
+	limit      *int32
 }
 
-// Идентификатор скрытого предложения. 
-func (r ApiGetHiddenOffersRequest) OfferId(offerId []string) ApiGetHiddenOffersRequest {
+// Идентификатор скрытого предложения.
+func (r FbsGetHiddenOffersRequest) OfferId(offerId []string) FbsGetHiddenOffersRequest {
 	r.offerId = &offerId
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetHiddenOffersRequest) PageToken(pageToken string) ApiGetHiddenOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetHiddenOffersRequest) PageToken(pageToken string) FbsGetHiddenOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetHiddenOffersRequest) Limit(limit int32) ApiGetHiddenOffersRequest {
+// Количество значений на одной странице.
+func (r FbsGetHiddenOffersRequest) Limit(limit int32) FbsGetHiddenOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetHiddenOffersRequest) Execute() (*GetHiddenOffersResponse, *http.Response, error) {
-	return r.ApiService.GetHiddenOffersExecute(r)
+func (r FbsGetHiddenOffersRequest) Execute() (*GetHiddenOffersResponse, *http.Response, error) {
+	return r.FbsService.GetHiddenOffersExecute(r)
 }
 
 /*
@@ -12825,27 +12827,27 @@ GetHiddenOffers Информация о скрытых вами товарах
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetHiddenOffersRequest
 */
-func (a *FbsAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) ApiGetHiddenOffersRequest {
-	return ApiGetHiddenOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) FbsGetHiddenOffersRequest {
+	return FbsGetHiddenOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetHiddenOffersResponse
-func (a *FbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
+//
+//	@return GetHiddenOffersResponse
+func (a *FbsAPIService) GetHiddenOffersExecute(r FbsGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetHiddenOffersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetHiddenOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetHiddenOffers")
@@ -12892,14 +12894,14 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*Ge
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -12932,8 +12934,8 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -12943,8 +12945,8 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -12954,8 +12956,8 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -12965,8 +12967,8 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -12976,8 +12978,8 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -12994,34 +12996,34 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferCardsContentStatusRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+type FbsGetOfferCardsContentStatusRequest struct {
+	ctx                               context.Context
+	FbsService                        *FbsAPIService
+	businessId                        int64
+	pageToken                         *string
+	limit                             *int32
 	getOfferCardsContentStatusRequest *GetOfferCardsContentStatusRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOfferCardsContentStatusRequest) PageToken(pageToken string) ApiGetOfferCardsContentStatusRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetOfferCardsContentStatusRequest) PageToken(pageToken string) FbsGetOfferCardsContentStatusRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOfferCardsContentStatusRequest) Limit(limit int32) ApiGetOfferCardsContentStatusRequest {
+// Количество значений на одной странице.
+func (r FbsGetOfferCardsContentStatusRequest) Limit(limit int32) FbsGetOfferCardsContentStatusRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) ApiGetOfferCardsContentStatusRequest {
+func (r FbsGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) FbsGetOfferCardsContentStatusRequest {
 	r.getOfferCardsContentStatusRequest = &getOfferCardsContentStatusRequest
 	return r
 }
 
-func (r ApiGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
-	return r.ApiService.GetOfferCardsContentStatusExecute(r)
+func (r FbsGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+	return r.FbsService.GetOfferCardsContentStatusExecute(r)
 }
 
 /*
@@ -13040,27 +13042,27 @@ GetOfferCardsContentStatus Получение информации о запол
 |**⚙️ Лимит:** 600 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetOfferCardsContentStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetOfferCardsContentStatusRequest
 */
-func (a *FbsAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) ApiGetOfferCardsContentStatusRequest {
-	return ApiGetOfferCardsContentStatusRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) FbsGetOfferCardsContentStatusRequest {
+	return FbsGetOfferCardsContentStatusRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOfferCardsContentStatusResponse
-func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+//
+//	@return GetOfferCardsContentStatusResponse
+func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r FbsGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOfferCardsContentStatusResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOfferCardsContentStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOfferCardsContentStatus")
@@ -13106,14 +13108,14 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -13146,8 +13148,8 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -13157,8 +13159,8 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -13168,8 +13170,8 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -13179,8 +13181,8 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -13190,8 +13192,8 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -13201,8 +13203,8 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -13219,77 +13221,77 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferMappingEntriesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	offerId *[]string
-	shopSku *[]string
-	mappingKind *OfferMappingKindType
-	status *[]OfferProcessingStatusType
+type FbsGetOfferMappingEntriesRequest struct {
+	ctx          context.Context
+	FbsService   *FbsAPIService
+	campaignId   int64
+	offerId      *[]string
+	shopSku      *[]string
+	mappingKind  *OfferMappingKindType
+	status       *[]OfferProcessingStatusType
 	availability *[]OfferAvailabilityStatusType
-	categoryId *[]int32
-	vendor *[]string
-	pageToken *string
-	limit *int32
+	categoryId   *[]int32
+	vendor       *[]string
+	pageToken    *string
+	limit        *int32
 }
 
 // Идентификатор товара в каталоге.
-func (r ApiGetOfferMappingEntriesRequest) OfferId(offerId []string) ApiGetOfferMappingEntriesRequest {
+func (r FbsGetOfferMappingEntriesRequest) OfferId(offerId []string) FbsGetOfferMappingEntriesRequest {
 	r.offerId = &offerId
 	return r
 }
 
-// Ваш SKU товара.  Параметр может быть указан несколько раз, например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...shop_sku&#x3D;123&amp;shop_sku&#x3D;129&amp;shop_sku&#x3D;141... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) ShopSku(shopSku []string) ApiGetOfferMappingEntriesRequest {
+// Ваш SKU товара.  Параметр может быть указан несколько раз, например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...shop_sku&#x3D;123&amp;shop_sku&#x3D;129&amp;shop_sku&#x3D;141... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
+func (r FbsGetOfferMappingEntriesRequest) ShopSku(shopSku []string) FbsGetOfferMappingEntriesRequest {
 	r.shopSku = &shopSku
 	return r
 }
 
 // Тип маппинга.
-func (r ApiGetOfferMappingEntriesRequest) MappingKind(mappingKind OfferMappingKindType) ApiGetOfferMappingEntriesRequest {
+func (r FbsGetOfferMappingEntriesRequest) MappingKind(mappingKind OfferMappingKindType) FbsGetOfferMappingEntriesRequest {
 	r.mappingKind = &mappingKind
 	return r
 }
 
-// Фильтрация по статусу публикации товара:  * &#x60;READY&#x60; — товар прошел модерацию. * &#x60;IN_WORK&#x60; — товар проходит модерацию. * &#x60;NEED_CONTENT&#x60; — для товара без SKU на Маркете marketSku нужно найти карточку самостоятельно или создать ее. * &#x60;NEED_INFO&#x60; — товар не прошел модерацию из-за ошибок или недостающих сведений в описании товара. * &#x60;REJECTED&#x60; — товар не прошел модерацию, так как Маркет не планирует размещать подобные товары. * &#x60;SUSPENDED&#x60; — товар не прошел модерацию, так как Маркет пока не размещает подобные товары. * &#x60;OTHER&#x60; — товар не прошел модерацию по другой причине.  Можно указать несколько статусов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...status&#x3D;READY,IN_WORK... ...status&#x3D;READY&amp;status&#x3D;IN_WORK... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) Status(status []OfferProcessingStatusType) ApiGetOfferMappingEntriesRequest {
+// Фильтрация по статусу публикации товара:  * &#x60;READY&#x60; — товар прошел модерацию. * &#x60;IN_WORK&#x60; — товар проходит модерацию. * &#x60;NEED_CONTENT&#x60; — для товара без SKU на Маркете marketSku нужно найти карточку самостоятельно или создать ее. * &#x60;NEED_INFO&#x60; — товар не прошел модерацию из-за ошибок или недостающих сведений в описании товара. * &#x60;REJECTED&#x60; — товар не прошел модерацию, так как Маркет не планирует размещать подобные товары. * &#x60;SUSPENDED&#x60; — товар не прошел модерацию, так как Маркет пока не размещает подобные товары. * &#x60;OTHER&#x60; — товар не прошел модерацию по другой причине.  Можно указать несколько статусов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...status&#x3D;READY,IN_WORK... ...status&#x3D;READY&amp;status&#x3D;IN_WORK... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
+func (r FbsGetOfferMappingEntriesRequest) Status(status []OfferProcessingStatusType) FbsGetOfferMappingEntriesRequest {
 	r.status = &status
 	return r
 }
 
-// Фильтрация по планам поставок товара:  * &#x60;ACTIVE&#x60; — поставки будут. * &#x60;INACTIVE&#x60; — поставок не будет: товар есть на складе, но вы больше не планируете его поставлять. * &#x60;DELISTED&#x60; — архив: товар закончился на складе, и его поставок больше не будет.  Можно указать несколько значений в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...availability&#x3D;INACTIVE,DELISTED... ...availability&#x3D;INACTIVE&amp;availability&#x3D;DELISTED... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) Availability(availability []OfferAvailabilityStatusType) ApiGetOfferMappingEntriesRequest {
+// Фильтрация по планам поставок товара:  * &#x60;ACTIVE&#x60; — поставки будут. * &#x60;INACTIVE&#x60; — поставок не будет: товар есть на складе, но вы больше не планируете его поставлять. * &#x60;DELISTED&#x60; — архив: товар закончился на складе, и его поставок больше не будет.  Можно указать несколько значений в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...availability&#x3D;INACTIVE,DELISTED... ...availability&#x3D;INACTIVE&amp;availability&#x3D;DELISTED... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
+func (r FbsGetOfferMappingEntriesRequest) Availability(availability []OfferAvailabilityStatusType) FbsGetOfferMappingEntriesRequest {
 	r.availability = &availability
 	return r
 }
 
-// Фильтрация по идентификатору категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).  Можно указать несколько идентификаторов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...category_id&#x3D;14727164,14382343... ...category_id&#x3D;14727164&amp;category_id&#x3D;14382343... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) CategoryId(categoryId []int32) ApiGetOfferMappingEntriesRequest {
+// Фильтрация по идентификатору категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).  Можно указать несколько идентификаторов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...category_id&#x3D;14727164,14382343... ...category_id&#x3D;14727164&amp;category_id&#x3D;14382343... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
+func (r FbsGetOfferMappingEntriesRequest) CategoryId(categoryId []int32) FbsGetOfferMappingEntriesRequest {
 	r.categoryId = &categoryId
 	return r
 }
 
-// Фильтрация по бренду товара.  Можно указать несколько брендов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...vendor&#x3D;Aqua%20Minerale,Borjomi... ...vendor&#x3D;Aqua%20Minerale&amp;vendor&#x3D;Borjomi... &#x60;&#x60;&#x60;  Чтобы товар попал в результаты фильтрации, его бренд должен точно совпадать с одним из указанных в запросе. Например, если указан бренд Schwarzkopf, то в результатах не будет товаров Schwarzkopf Professional.  Если в названии бренда есть символы, которые не входят в таблицу ASCII (в том числе кириллические символы), используйте для них URL-кодирование. Например, пробел — %20, апостроф «&#39;» — %27 и т. д. Подробнее см. в разделе [Кодирование URL русскоязычной Википедии](https://ru.wikipedia.org/wiki/URL#Кодирование_URL).  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке. 
-func (r ApiGetOfferMappingEntriesRequest) Vendor(vendor []string) ApiGetOfferMappingEntriesRequest {
+// Фильтрация по бренду товара.  Можно указать несколько брендов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...vendor&#x3D;Aqua%20Minerale,Borjomi... ...vendor&#x3D;Aqua%20Minerale&amp;vendor&#x3D;Borjomi... &#x60;&#x60;&#x60;  Чтобы товар попал в результаты фильтрации, его бренд должен точно совпадать с одним из указанных в запросе. Например, если указан бренд Schwarzkopf, то в результатах не будет товаров Schwarzkopf Professional.  Если в названии бренда есть символы, которые не входят в таблицу ASCII (в том числе кириллические символы), используйте для них URL-кодирование. Например, пробел — %20, апостроф «&#39;» — %27 и т. д. Подробнее см. в разделе [Кодирование URL русскоязычной Википедии](https://ru.wikipedia.org/wiki/URL#Кодирование_URL).  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
+func (r FbsGetOfferMappingEntriesRequest) Vendor(vendor []string) FbsGetOfferMappingEntriesRequest {
 	r.vendor = &vendor
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOfferMappingEntriesRequest) PageToken(pageToken string) ApiGetOfferMappingEntriesRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetOfferMappingEntriesRequest) PageToken(pageToken string) FbsGetOfferMappingEntriesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOfferMappingEntriesRequest) Limit(limit int32) ApiGetOfferMappingEntriesRequest {
+// Количество значений на одной странице.
+func (r FbsGetOfferMappingEntriesRequest) Limit(limit int32) FbsGetOfferMappingEntriesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferMappingEntriesRequest) Execute() (*GetOfferMappingEntriesResponse, *http.Response, error) {
-	return r.ApiService.GetOfferMappingEntriesExecute(r)
+func (r FbsGetOfferMappingEntriesRequest) Execute() (*GetOfferMappingEntriesResponse, *http.Response, error) {
+	return r.FbsService.GetOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -13321,30 +13323,31 @@ GetOfferMappingEntries Список товаров в каталоге
 
 [//]: <> (rule: суточный лимит товаров — количество товаров в каталоге магазина * 25)
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetOfferMappingEntriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) ApiGetOfferMappingEntriesRequest {
-	return ApiGetOfferMappingEntriesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) FbsGetOfferMappingEntriesRequest {
+	return FbsGetOfferMappingEntriesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOfferMappingEntriesResponse
+//
+//	@return GetOfferMappingEntriesResponse
+//
 // Deprecated
-func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntriesRequest) (*GetOfferMappingEntriesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetOfferMappingEntriesExecute(r FbsGetOfferMappingEntriesRequest) (*GetOfferMappingEntriesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOfferMappingEntriesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOfferMappingEntriesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOfferMappingEntries")
@@ -13409,14 +13412,14 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -13449,8 +13452,8 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -13460,8 +13463,8 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -13471,8 +13474,8 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -13482,8 +13485,8 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -13493,8 +13496,8 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -13504,8 +13507,8 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -13522,41 +13525,41 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferMappingsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
-	language *CatalogLanguageType
+type FbsGetOfferMappingsRequest struct {
+	ctx                     context.Context
+	FbsService              *FbsAPIService
+	businessId              int64
+	pageToken               *string
+	limit                   *int32
+	language                *CatalogLanguageType
 	getOfferMappingsRequest *GetOfferMappingsRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOfferMappingsRequest) PageToken(pageToken string) ApiGetOfferMappingsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetOfferMappingsRequest) PageToken(pageToken string) FbsGetOfferMappingsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOfferMappingsRequest) Limit(limit int32) ApiGetOfferMappingsRequest {
+// Количество значений на одной странице.
+func (r FbsGetOfferMappingsRequest) Limit(limit int32) FbsGetOfferMappingsRequest {
 	r.limit = &limit
 	return r
 }
 
-// Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;. 
-func (r ApiGetOfferMappingsRequest) Language(language CatalogLanguageType) ApiGetOfferMappingsRequest {
+// Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
+func (r FbsGetOfferMappingsRequest) Language(language CatalogLanguageType) FbsGetOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) ApiGetOfferMappingsRequest {
+func (r FbsGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) FbsGetOfferMappingsRequest {
 	r.getOfferMappingsRequest = &getOfferMappingsRequest
 	return r
 }
 
-func (r ApiGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.GetOfferMappingsExecute(r)
+func (r FbsGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
+	return r.FbsService.GetOfferMappingsExecute(r)
 }
 
 /*
@@ -13574,27 +13577,27 @@ GetOfferMappings Информация о товарах в каталоге
 |**⚙️ Лимит:** 600 запросов в минуту, не более 200 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetOfferMappingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetOfferMappingsRequest
 */
-func (a *FbsAPIService) GetOfferMappings(ctx context.Context, businessId int64) ApiGetOfferMappingsRequest {
-	return ApiGetOfferMappingsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOfferMappings(ctx context.Context, businessId int64) FbsGetOfferMappingsRequest {
+	return FbsGetOfferMappingsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOfferMappingsResponse
-func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
+//
+//	@return GetOfferMappingsResponse
+func (a *FbsAPIService) GetOfferMappingsExecute(r FbsGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOfferMappingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOfferMappingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOfferMappings")
@@ -13643,14 +13646,14 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -13683,8 +13686,8 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -13694,8 +13697,8 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -13705,8 +13708,8 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -13716,8 +13719,8 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -13727,8 +13730,8 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -13738,8 +13741,8 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -13756,34 +13759,34 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferRecommendationsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetOfferRecommendationsRequest struct {
+	ctx                            context.Context
+	FbsService                     *FbsAPIService
+	businessId                     int64
 	getOfferRecommendationsRequest *GetOfferRecommendationsRequest
-	pageToken *string
-	limit *int32
+	pageToken                      *string
+	limit                          *int32
 }
 
-func (r ApiGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) ApiGetOfferRecommendationsRequest {
+func (r FbsGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) FbsGetOfferRecommendationsRequest {
 	r.getOfferRecommendationsRequest = &getOfferRecommendationsRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOfferRecommendationsRequest) PageToken(pageToken string) ApiGetOfferRecommendationsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetOfferRecommendationsRequest) PageToken(pageToken string) FbsGetOfferRecommendationsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOfferRecommendationsRequest) Limit(limit int32) ApiGetOfferRecommendationsRequest {
+// Количество значений на одной странице.
+func (r FbsGetOfferRecommendationsRequest) Limit(limit int32) FbsGetOfferRecommendationsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
-	return r.ApiService.GetOfferRecommendationsExecute(r)
+func (r FbsGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
+	return r.FbsService.GetOfferRecommendationsExecute(r)
 }
 
 /*
@@ -13808,27 +13811,27 @@ GetOfferRecommendations Рекомендации Маркета, касающи�
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetOfferRecommendationsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetOfferRecommendationsRequest
 */
-func (a *FbsAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) ApiGetOfferRecommendationsRequest {
-	return ApiGetOfferRecommendationsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) FbsGetOfferRecommendationsRequest {
+	return FbsGetOfferRecommendationsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOfferRecommendationsResponse
-func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
+//
+//	@return GetOfferRecommendationsResponse
+func (a *FbsAPIService) GetOfferRecommendationsExecute(r FbsGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOfferRecommendationsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOfferRecommendationsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOfferRecommendations")
@@ -13877,14 +13880,14 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -13917,8 +13920,8 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -13928,8 +13931,8 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -13939,8 +13942,8 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -13950,8 +13953,8 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -13961,8 +13964,8 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -13972,8 +13975,8 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -13990,15 +13993,15 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetOrderRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
-func (r ApiGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
-	return r.ApiService.GetOrderExecute(r)
+func (r FbsGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
+	return r.FbsService.GetOrderExecute(r)
 }
 
 /*
@@ -14021,29 +14024,29 @@ GetOrder Информация об одном заказе
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsGetOrderRequest
 */
-func (a *FbsAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderRequest {
-	return ApiGetOrderRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderRequest {
+	return FbsGetOrderRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrderResponse
-func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
+//
+//	@return GetOrderResponse
+func (a *FbsAPIService) GetOrderExecute(r FbsGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrderResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrderResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOrder")
@@ -14082,14 +14085,14 @@ func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -14122,8 +14125,8 @@ func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14133,8 +14136,8 @@ func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14144,8 +14147,8 @@ func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -14155,8 +14158,8 @@ func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14166,8 +14169,8 @@ func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14177,8 +14180,8 @@ func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14195,15 +14198,15 @@ func (a *FbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderBusinessBuyerInfoRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetOrderBusinessBuyerInfoRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
-func (r ApiGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
-	return r.ApiService.GetOrderBusinessBuyerInfoExecute(r)
+func (r FbsGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
+	return r.FbsService.GetOrderBusinessBuyerInfoExecute(r)
 }
 
 /*
@@ -14224,29 +14227,29 @@ GetOrderBusinessBuyerInfo Информация о покупателе — юр�
 |**⚙️ Лимит:** 3 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderBusinessBuyerInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsGetOrderBusinessBuyerInfoRequest
 */
-func (a *FbsAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBusinessBuyerInfoRequest {
-	return ApiGetOrderBusinessBuyerInfoRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderBusinessBuyerInfoRequest {
+	return FbsGetOrderBusinessBuyerInfoRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBusinessBuyerInfoResponse
-func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
+//
+//	@return GetBusinessBuyerInfoResponse
+func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r FbsGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBusinessBuyerInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBusinessBuyerInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOrderBusinessBuyerInfo")
@@ -14285,14 +14288,14 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -14325,8 +14328,8 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14336,8 +14339,8 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14347,8 +14350,8 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -14358,8 +14361,8 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14369,8 +14372,8 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14380,8 +14383,8 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14398,15 +14401,15 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderBusinessDocumentsInfoRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetOrderBusinessDocumentsInfoRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
-func (r ApiGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
-	return r.ApiService.GetOrderBusinessDocumentsInfoExecute(r)
+func (r FbsGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
+	return r.FbsService.GetOrderBusinessDocumentsInfoExecute(r)
 }
 
 /*
@@ -14421,29 +14424,29 @@ GetOrderBusinessDocumentsInfo Информация о документах
 |**⚙️ Лимит:** 3 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderBusinessDocumentsInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsGetOrderBusinessDocumentsInfoRequest
 */
-func (a *FbsAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBusinessDocumentsInfoRequest {
-	return ApiGetOrderBusinessDocumentsInfoRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderBusinessDocumentsInfoRequest {
+	return FbsGetOrderBusinessDocumentsInfoRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetBusinessDocumentsInfoResponse
-func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
+//
+//	@return GetBusinessDocumentsInfoResponse
+func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r FbsGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetBusinessDocumentsInfoResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetBusinessDocumentsInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOrderBusinessDocumentsInfo")
@@ -14482,14 +14485,14 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -14522,8 +14525,8 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14533,8 +14536,8 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14544,8 +14547,8 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -14555,8 +14558,8 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14566,8 +14569,8 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14577,8 +14580,8 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14595,15 +14598,15 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderIdentifiersStatusRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetOrderIdentifiersStatusRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
-func (r ApiGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
-	return r.ApiService.GetOrderIdentifiersStatusExecute(r)
+func (r FbsGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
+	return r.FbsService.GetOrderIdentifiersStatusExecute(r)
 }
 
 /*
@@ -14621,29 +14624,29 @@ GetOrderIdentifiersStatus Статусы проверки УИНов
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderIdentifiersStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsGetOrderIdentifiersStatusRequest
 */
-func (a *FbsAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderIdentifiersStatusRequest {
-	return ApiGetOrderIdentifiersStatusRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderIdentifiersStatusRequest {
+	return FbsGetOrderIdentifiersStatusRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrderIdentifiersStatusResponse
-func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
+//
+//	@return GetOrderIdentifiersStatusResponse
+func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r FbsGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrderIdentifiersStatusResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrderIdentifiersStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOrderIdentifiersStatus")
@@ -14682,14 +14685,14 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifier
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -14722,8 +14725,8 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifier
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14733,8 +14736,8 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifier
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14744,8 +14747,8 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifier
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -14755,8 +14758,8 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifier
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14766,8 +14769,8 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifier
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14777,8 +14780,8 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifier
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14795,15 +14798,15 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifier
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderLabelsDataRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetOrderLabelsDataRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
+	orderId    int64
 }
 
-func (r ApiGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
-	return r.ApiService.GetOrderLabelsDataExecute(r)
+func (r FbsGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
+	return r.FbsService.GetOrderLabelsDataExecute(r)
 }
 
 /*
@@ -14816,29 +14819,29 @@ GetOrderLabelsData Данные для самостоятельного изго
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiGetOrderLabelsDataRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsGetOrderLabelsDataRequest
 */
-func (a *FbsAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderLabelsDataRequest {
-	return ApiGetOrderLabelsDataRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderLabelsDataRequest {
+	return FbsGetOrderLabelsDataRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrderLabelsDataResponse
-func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest) (*GetOrderLabelsDataResponse, *http.Response, error) {
+//
+//	@return GetOrderLabelsDataResponse
+func (a *FbsAPIService) GetOrderLabelsDataExecute(r FbsGetOrderLabelsDataRequest) (*GetOrderLabelsDataResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrderLabelsDataResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrderLabelsDataResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOrderLabelsData")
@@ -14877,14 +14880,14 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -14917,8 +14920,8 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -14928,8 +14931,8 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -14939,8 +14942,8 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -14950,8 +14953,8 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -14961,8 +14964,8 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -14972,8 +14975,8 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -14990,147 +14993,147 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrdersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	orderIds *[]int64
-	status *[]OrderStatusType
-	substatus *[]OrderSubstatusType
-	fromDate *string
-	toDate *string
-	supplierShipmentDateFrom *string
-	supplierShipmentDateTo *string
-	updatedAtFrom *time.Time
-	updatedAtTo *time.Time
-	dispatchType *OrderDeliveryDispatchType
-	fake *bool
-	hasCis *bool
+type FbsGetOrdersRequest struct {
+	ctx                               context.Context
+	FbsService                        *FbsAPIService
+	campaignId                        int64
+	orderIds                          *[]int64
+	status                            *[]OrderStatusType
+	substatus                         *[]OrderSubstatusType
+	fromDate                          *string
+	toDate                            *string
+	supplierShipmentDateFrom          *string
+	supplierShipmentDateTo            *string
+	updatedAtFrom                     *time.Time
+	updatedAtTo                       *time.Time
+	dispatchType                      *OrderDeliveryDispatchType
+	fake                              *bool
+	hasCis                            *bool
 	onlyWaitingForCancellationApprove *bool
-	onlyEstimatedDelivery *bool
-	buyerType *OrderBuyerType
-	page *int32
-	pageSize *int32
-	pageToken *string
-	limit *int32
+	onlyEstimatedDelivery             *bool
+	buyerType                         *OrderBuyerType
+	page                              *int32
+	pageSize                          *int32
+	pageToken                         *string
+	limit                             *int32
 }
 
-// Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым. 
-func (r ApiGetOrdersRequest) OrderIds(orderIds []int64) ApiGetOrdersRequest {
+// Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
+func (r FbsGetOrdersRequest) OrderIds(orderIds []int64) FbsGetOrdersRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
-// Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется. 
-func (r ApiGetOrdersRequest) Status(status []OrderStatusType) ApiGetOrdersRequest {
+// Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется.
+func (r FbsGetOrdersRequest) Status(status []OrderStatusType) FbsGetOrdersRequest {
 	r.status = &status
 	return r
 }
 
-// Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется. 
-func (r ApiGetOrdersRequest) Substatus(substatus []OrderSubstatusType) ApiGetOrdersRequest {
+// Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется.
+func (r FbsGetOrdersRequest) Substatus(substatus []OrderSubstatusType) FbsGetOrdersRequest {
 	r.substatus = &substatus
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты. 
-func (r ApiGetOrdersRequest) FromDate(fromDate string) ApiGetOrdersRequest {
+// Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты.
+func (r FbsGetOrdersRequest) FromDate(fromDate string) FbsGetOrdersRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки. 
-func (r ApiGetOrdersRequest) ToDate(toDate string) ApiGetOrdersRequest {
+// Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки.
+func (r FbsGetOrdersRequest) ToDate(toDate string) FbsGetOrdersRequest {
 	r.toDate = &toDate
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации. 
-func (r ApiGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) ApiGetOrdersRequest {
+// Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
+func (r FbsGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) FbsGetOrdersRequest {
 	r.supplierShipmentDateFrom = &supplierShipmentDateFrom
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки. 
-func (r ApiGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) ApiGetOrdersRequest {
+// Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки.
+func (r FbsGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) FbsGetOrdersRequest {
 	r.supplierShipmentDateTo = &supplierShipmentDateTo
 	return r
 }
 
-// Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации. 
-func (r ApiGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) ApiGetOrdersRequest {
+// Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
+func (r FbsGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) FbsGetOrdersRequest {
 	r.updatedAtFrom = &updatedAtFrom
 	return r
 }
 
-// Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации. 
-func (r ApiGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) ApiGetOrdersRequest {
+// Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.
+func (r FbsGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) FbsGetOrdersRequest {
 	r.updatedAtTo = &updatedAtTo
 	return r
 }
 
 // Способ отгрузки
-func (r ApiGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) ApiGetOrdersRequest {
+func (r FbsGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) FbsGetOrdersRequest {
 	r.dispatchType = &dispatchType
 	return r
 }
 
-// Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета. 
-func (r ApiGetOrdersRequest) Fake(fake bool) ApiGetOrdersRequest {
+// Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета.
+func (r FbsGetOrdersRequest) Fake(fake bool) FbsGetOrdersRequest {
 	r.fake = &fake
 	return r
 }
 
-// Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям. 
-func (r ApiGetOrdersRequest) HasCis(hasCis bool) ApiGetOrdersRequest {
+// Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям.
+func (r FbsGetOrdersRequest) HasCis(hasCis bool) FbsGetOrdersRequest {
 	r.hasCis = &hasCis
 	return r
 }
 
-// **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation). 
-func (r ApiGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) ApiGetOrdersRequest {
+// **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).
+func (r FbsGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) FbsGetOrdersRequest {
 	r.onlyWaitingForCancellationApprove = &onlyWaitingForCancellationApprove
 	return r
 }
 
-// Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется. 
-func (r ApiGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) ApiGetOrdersRequest {
+// Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется.
+func (r FbsGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) FbsGetOrdersRequest {
 	r.onlyEstimatedDelivery = &onlyEstimatedDelivery
 	return r
 }
 
-// Фильтрация заказов по типу покупателя. 
-func (r ApiGetOrdersRequest) BuyerType(buyerType OrderBuyerType) ApiGetOrdersRequest {
+// Фильтрация заказов по типу покупателя.
+func (r FbsGetOrdersRequest) BuyerType(buyerType OrderBuyerType) FbsGetOrdersRequest {
 	r.buyerType = &buyerType
 	return r
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiGetOrdersRequest) Page(page int32) ApiGetOrdersRequest {
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r FbsGetOrdersRequest) Page(page int32) FbsGetOrdersRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiGetOrdersRequest) PageSize(pageSize int32) ApiGetOrdersRequest {
+// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r FbsGetOrdersRequest) PageSize(pageSize int32) FbsGetOrdersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOrdersRequest) PageToken(pageToken string) ApiGetOrdersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetOrdersRequest) PageToken(pageToken string) FbsGetOrdersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOrdersRequest) Limit(limit int32) ApiGetOrdersRequest {
+// Количество значений на одной странице.
+func (r FbsGetOrdersRequest) Limit(limit int32) FbsGetOrdersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
-	return r.ApiService.GetOrdersExecute(r)
+func (r FbsGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
+	return r.FbsService.GetOrdersExecute(r)
 }
 
 /*
@@ -15175,27 +15178,27 @@ GetOrders Информация о нескольких заказах
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetOrdersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetOrdersRequest
 */
-func (a *FbsAPIService) GetOrders(ctx context.Context, campaignId int64) ApiGetOrdersRequest {
-	return ApiGetOrdersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOrders(ctx context.Context, campaignId int64) FbsGetOrdersRequest {
+	return FbsGetOrdersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrdersResponse
-func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
+//
+//	@return GetOrdersResponse
+func (a *FbsAPIService) GetOrdersExecute(r FbsGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrdersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrdersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOrders")
@@ -15305,14 +15308,14 @@ func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -15345,8 +15348,8 @@ func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -15356,8 +15359,8 @@ func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -15367,8 +15370,8 @@ func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -15378,8 +15381,8 @@ func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -15389,8 +15392,8 @@ func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -15400,8 +15403,8 @@ func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -15418,34 +15421,34 @@ func (a *FbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrdersStatsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	pageToken *string
-	limit *int32
+type FbsGetOrdersStatsRequest struct {
+	ctx                   context.Context
+	FbsService            *FbsAPIService
+	campaignId            int64
+	pageToken             *string
+	limit                 *int32
 	getOrdersStatsRequest *GetOrdersStatsRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetOrdersStatsRequest) PageToken(pageToken string) ApiGetOrdersStatsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetOrdersStatsRequest) PageToken(pageToken string) FbsGetOrdersStatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetOrdersStatsRequest) Limit(limit int32) ApiGetOrdersStatsRequest {
+// Количество значений на одной странице.
+func (r FbsGetOrdersStatsRequest) Limit(limit int32) FbsGetOrdersStatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) ApiGetOrdersStatsRequest {
+func (r FbsGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) FbsGetOrdersStatsRequest {
 	r.getOrdersStatsRequest = &getOrdersStatsRequest
 	return r
 }
 
-func (r ApiGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
-	return r.ApiService.GetOrdersStatsExecute(r)
+func (r FbsGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
+	return r.FbsService.GetOrdersStatsExecute(r)
 }
 
 /*
@@ -15468,27 +15471,27 @@ GetOrdersStats Детальная информация по заказам
 |**⚙️ Лимит:** 1 000 000 заказов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetOrdersStatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetOrdersStatsRequest
 */
-func (a *FbsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) ApiGetOrdersStatsRequest {
-	return ApiGetOrdersStatsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) FbsGetOrdersStatsRequest {
+	return FbsGetOrdersStatsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetOrdersStatsResponse
-func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
+//
+//	@return GetOrdersStatsResponse
+func (a *FbsAPIService) GetOrdersStatsExecute(r FbsGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetOrdersStatsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetOrdersStatsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetOrdersStats")
@@ -15534,14 +15537,14 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -15574,8 +15577,8 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -15585,8 +15588,8 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -15596,8 +15599,8 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -15607,8 +15610,8 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -15618,8 +15621,8 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -15629,8 +15632,8 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -15647,34 +15650,34 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPagedWarehousesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
-	pageToken *string
-	limit *int32
+type FbsGetPagedWarehousesRequest struct {
+	ctx                       context.Context
+	FbsService                *FbsAPIService
+	businessId                int64
+	pageToken                 *string
+	limit                     *int32
 	getPagedWarehousesRequest *GetPagedWarehousesRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetPagedWarehousesRequest) PageToken(pageToken string) ApiGetPagedWarehousesRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetPagedWarehousesRequest) PageToken(pageToken string) FbsGetPagedWarehousesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetPagedWarehousesRequest) Limit(limit int32) ApiGetPagedWarehousesRequest {
+// Количество значений на одной странице.
+func (r FbsGetPagedWarehousesRequest) Limit(limit int32) FbsGetPagedWarehousesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) ApiGetPagedWarehousesRequest {
+func (r FbsGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) FbsGetPagedWarehousesRequest {
 	r.getPagedWarehousesRequest = &getPagedWarehousesRequest
 	return r
 }
 
-func (r ApiGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
-	return r.ApiService.GetPagedWarehousesExecute(r)
+func (r FbsGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
+	return r.FbsService.GetPagedWarehousesExecute(r)
 }
 
 /*
@@ -15693,27 +15696,27 @@ GetPagedWarehouses Список складов
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetPagedWarehousesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetPagedWarehousesRequest
 */
-func (a *FbsAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) ApiGetPagedWarehousesRequest {
-	return ApiGetPagedWarehousesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) FbsGetPagedWarehousesRequest {
+	return FbsGetPagedWarehousesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPagedWarehousesResponse
-func (a *FbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
+//
+//	@return GetPagedWarehousesResponse
+func (a *FbsAPIService) GetPagedWarehousesExecute(r FbsGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPagedWarehousesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPagedWarehousesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetPagedWarehouses")
@@ -15759,14 +15762,14 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -15799,8 +15802,8 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -15810,8 +15813,8 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -15821,8 +15824,8 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -15832,8 +15835,8 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -15843,8 +15846,8 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -15861,35 +15864,35 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPricesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetPricesRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	pageToken *string
-	limit *int32
-	archived *bool
+	pageToken  *string
+	limit      *int32
+	archived   *bool
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetPricesRequest) PageToken(pageToken string) ApiGetPricesRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetPricesRequest) PageToken(pageToken string) FbsGetPricesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetPricesRequest) Limit(limit int32) ApiGetPricesRequest {
+// Количество значений на одной странице.
+func (r FbsGetPricesRequest) Limit(limit int32) FbsGetPricesRequest {
 	r.limit = &limit
 	return r
 }
 
 // Фильтр по нахождению в архиве.
-func (r ApiGetPricesRequest) Archived(archived bool) ApiGetPricesRequest {
+func (r FbsGetPricesRequest) Archived(archived bool) FbsGetPricesRequest {
 	r.archived = &archived
 	return r
 }
 
-func (r ApiGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
-	return r.ApiService.GetPricesExecute(r)
+func (r FbsGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
+	return r.FbsService.GetPricesExecute(r)
 }
 
 /*
@@ -15916,30 +15919,31 @@ GetPrices Список цен
 |**⚙️ Лимит:** ```(количество товаров партнера на витрине) * 25``` товаров в сутки|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetPricesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetPrices(ctx context.Context, campaignId int64) ApiGetPricesRequest {
-	return ApiGetPricesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetPrices(ctx context.Context, campaignId int64) FbsGetPricesRequest {
+	return FbsGetPricesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPricesResponse
+//
+//	@return GetPricesResponse
+//
 // Deprecated
-func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetPricesExecute(r FbsGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPricesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPricesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetPrices")
@@ -15989,14 +15993,14 @@ func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -16029,8 +16033,8 @@ func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16040,8 +16044,8 @@ func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16051,8 +16055,8 @@ func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16062,8 +16066,8 @@ func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16073,8 +16077,8 @@ func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16084,8 +16088,8 @@ func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16102,34 +16106,34 @@ func (a *FbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPricesByOfferIdsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	pageToken *string
-	limit *int32
+type FbsGetPricesByOfferIdsRequest struct {
+	ctx                        context.Context
+	FbsService                 *FbsAPIService
+	campaignId                 int64
+	pageToken                  *string
+	limit                      *int32
 	getPricesByOfferIdsRequest *GetPricesByOfferIdsRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetPricesByOfferIdsRequest) PageToken(pageToken string) ApiGetPricesByOfferIdsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetPricesByOfferIdsRequest) PageToken(pageToken string) FbsGetPricesByOfferIdsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetPricesByOfferIdsRequest) Limit(limit int32) ApiGetPricesByOfferIdsRequest {
+// Количество значений на одной странице.
+func (r FbsGetPricesByOfferIdsRequest) Limit(limit int32) FbsGetPricesByOfferIdsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) ApiGetPricesByOfferIdsRequest {
+func (r FbsGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) FbsGetPricesByOfferIdsRequest {
 	r.getPricesByOfferIdsRequest = &getPricesByOfferIdsRequest
 	return r
 }
 
-func (r ApiGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
-	return r.ApiService.GetPricesByOfferIdsExecute(r)
+func (r FbsGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
+	return r.FbsService.GetPricesByOfferIdsExecute(r)
 }
 
 /*
@@ -16152,27 +16156,27 @@ GetPricesByOfferIds Просмотр цен на указанные товары
 
 [//]: <> (rule: суточный лимит товаров — количество товаров на витрине * 25)
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetPricesByOfferIdsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetPricesByOfferIdsRequest
 */
-func (a *FbsAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) ApiGetPricesByOfferIdsRequest {
-	return ApiGetPricesByOfferIdsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) FbsGetPricesByOfferIdsRequest {
+	return FbsGetPricesByOfferIdsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPricesByOfferIdsResponse
-func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
+//
+//	@return GetPricesByOfferIdsResponse
+func (a *FbsAPIService) GetPricesByOfferIdsExecute(r FbsGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPricesByOfferIdsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPricesByOfferIdsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetPricesByOfferIds")
@@ -16218,14 +16222,14 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -16258,8 +16262,8 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16269,8 +16273,8 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16280,8 +16284,8 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16291,8 +16295,8 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16302,8 +16306,8 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16313,8 +16317,8 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16331,34 +16335,34 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPromoOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetPromoOffersRequest struct {
+	ctx                   context.Context
+	FbsService            *FbsAPIService
+	businessId            int64
 	getPromoOffersRequest *GetPromoOffersRequest
-	pageToken *string
-	limit *int32
+	pageToken             *string
+	limit                 *int32
 }
 
-func (r ApiGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) ApiGetPromoOffersRequest {
+func (r FbsGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) FbsGetPromoOffersRequest {
 	r.getPromoOffersRequest = &getPromoOffersRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetPromoOffersRequest) PageToken(pageToken string) ApiGetPromoOffersRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetPromoOffersRequest) PageToken(pageToken string) FbsGetPromoOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetPromoOffersRequest) Limit(limit int32) ApiGetPromoOffersRequest {
+// Количество значений на одной странице.
+func (r FbsGetPromoOffersRequest) Limit(limit int32) FbsGetPromoOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
-	return r.ApiService.GetPromoOffersExecute(r)
+func (r FbsGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
+	return r.FbsService.GetPromoOffersExecute(r)
 }
 
 /*
@@ -16379,27 +16383,27 @@ GetPromoOffers Получение списка товаров, которые у
 |**⚙️ Лимит:** 10 000 запросов в час, не более 500 товаров в запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetPromoOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetPromoOffersRequest
 */
-func (a *FbsAPIService) GetPromoOffers(ctx context.Context, businessId int64) ApiGetPromoOffersRequest {
-	return ApiGetPromoOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetPromoOffers(ctx context.Context, businessId int64) FbsGetPromoOffersRequest {
+	return FbsGetPromoOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPromoOffersResponse
-func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
+//
+//	@return GetPromoOffersResponse
+func (a *FbsAPIService) GetPromoOffersExecute(r FbsGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPromoOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPromoOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetPromoOffers")
@@ -16448,14 +16452,14 @@ func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -16488,8 +16492,8 @@ func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16499,8 +16503,8 @@ func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16510,8 +16514,8 @@ func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16521,8 +16525,8 @@ func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16532,8 +16536,8 @@ func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16543,8 +16547,8 @@ func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16561,20 +16565,20 @@ func (a *FbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPromosRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetPromosRequest struct {
+	ctx              context.Context
+	FbsService       *FbsAPIService
+	businessId       int64
 	getPromosRequest *GetPromosRequest
 }
 
-func (r ApiGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) ApiGetPromosRequest {
+func (r FbsGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) FbsGetPromosRequest {
 	r.getPromosRequest = &getPromosRequest
 	return r
 }
 
-func (r ApiGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
-	return r.ApiService.GetPromosExecute(r)
+func (r FbsGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
+	return r.FbsService.GetPromosExecute(r)
 }
 
 /*
@@ -16597,27 +16601,27 @@ GetPromos Получение списка акций
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetPromosRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetPromosRequest
 */
-func (a *FbsAPIService) GetPromos(ctx context.Context, businessId int64) ApiGetPromosRequest {
-	return ApiGetPromosRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetPromos(ctx context.Context, businessId int64) FbsGetPromosRequest {
+	return FbsGetPromosRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetPromosResponse
-func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
+//
+//	@return GetPromosResponse
+func (a *FbsAPIService) GetPromosExecute(r FbsGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetPromosResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPromosResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetPromos")
@@ -16657,14 +16661,14 @@ func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -16697,8 +16701,8 @@ func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16708,8 +16712,8 @@ func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16719,8 +16723,8 @@ func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16730,8 +16734,8 @@ func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16741,8 +16745,8 @@ func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16752,8 +16756,8 @@ func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16770,14 +16774,14 @@ func (a *FbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetQualityRatingDetailsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetQualityRatingDetailsRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 }
 
-func (r ApiGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
-	return r.ApiService.GetQualityRatingDetailsExecute(r)
+func (r FbsGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
+	return r.FbsService.GetQualityRatingDetailsExecute(r)
 }
 
 /*
@@ -16790,27 +16794,27 @@ GetQualityRatingDetails Заказы, которые повлияли на ин�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetQualityRatingDetailsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetQualityRatingDetailsRequest
 */
-func (a *FbsAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) ApiGetQualityRatingDetailsRequest {
-	return ApiGetQualityRatingDetailsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) FbsGetQualityRatingDetailsRequest {
+	return FbsGetQualityRatingDetailsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetQualityRatingDetailsResponse
-func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDetailsRequest) (*GetQualityRatingDetailsResponse, *http.Response, error) {
+//
+//	@return GetQualityRatingDetailsResponse
+func (a *FbsAPIService) GetQualityRatingDetailsExecute(r FbsGetQualityRatingDetailsRequest) (*GetQualityRatingDetailsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetQualityRatingDetailsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetQualityRatingDetailsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetQualityRatingDetails")
@@ -16848,14 +16852,14 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -16888,8 +16892,8 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -16899,8 +16903,8 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -16910,8 +16914,8 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -16921,8 +16925,8 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -16932,8 +16936,8 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -16943,8 +16947,8 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -16961,20 +16965,20 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetQualityRatingsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetQualityRatingsRequest struct {
+	ctx                     context.Context
+	FbsService              *FbsAPIService
+	businessId              int64
 	getQualityRatingRequest *GetQualityRatingRequest
 }
 
-func (r ApiGetQualityRatingsRequest) GetQualityRatingRequest(getQualityRatingRequest GetQualityRatingRequest) ApiGetQualityRatingsRequest {
+func (r FbsGetQualityRatingsRequest) GetQualityRatingRequest(getQualityRatingRequest GetQualityRatingRequest) FbsGetQualityRatingsRequest {
 	r.getQualityRatingRequest = &getQualityRatingRequest
 	return r
 }
 
-func (r ApiGetQualityRatingsRequest) Execute() (*GetQualityRatingResponse, *http.Response, error) {
-	return r.ApiService.GetQualityRatingsExecute(r)
+func (r FbsGetQualityRatingsRequest) Execute() (*GetQualityRatingResponse, *http.Response, error) {
+	return r.FbsService.GetQualityRatingsExecute(r)
 }
 
 /*
@@ -16989,27 +16993,27 @@ GetQualityRatings Индекс качества магазинов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetQualityRatingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetQualityRatingsRequest
 */
-func (a *FbsAPIService) GetQualityRatings(ctx context.Context, businessId int64) ApiGetQualityRatingsRequest {
-	return ApiGetQualityRatingsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetQualityRatings(ctx context.Context, businessId int64) FbsGetQualityRatingsRequest {
+	return FbsGetQualityRatingsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetQualityRatingResponse
-func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) (*GetQualityRatingResponse, *http.Response, error) {
+//
+//	@return GetQualityRatingResponse
+func (a *FbsAPIService) GetQualityRatingsExecute(r FbsGetQualityRatingsRequest) (*GetQualityRatingResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetQualityRatingResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetQualityRatingResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetQualityRatings")
@@ -17052,14 +17056,14 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -17092,8 +17096,8 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -17103,8 +17107,8 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17114,8 +17118,8 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17125,8 +17129,8 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17136,8 +17140,8 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17147,8 +17151,8 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17165,13 +17169,13 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetRegionsCodesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetRegionsCodesRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 }
 
-func (r ApiGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
-	return r.ApiService.GetRegionsCodesExecute(r)
+func (r FbsGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
+	return r.FbsService.GetRegionsCodesExecute(r)
 }
 
 /*
@@ -17186,25 +17190,25 @@ GetRegionsCodes Список допустимых кодов стран
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetRegionsCodesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsGetRegionsCodesRequest
 */
-func (a *FbsAPIService) GetRegionsCodes(ctx context.Context) ApiGetRegionsCodesRequest {
-	return ApiGetRegionsCodesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetRegionsCodes(ctx context.Context) FbsGetRegionsCodesRequest {
+	return FbsGetRegionsCodesRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegionsCodesResponse
-func (a *FbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
+//
+//	@return GetRegionsCodesResponse
+func (a *FbsAPIService) GetRegionsCodesExecute(r FbsGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegionsCodesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegionsCodesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetRegionsCodes")
@@ -17238,14 +17242,14 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*Ge
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -17278,8 +17282,8 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17289,8 +17293,8 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17300,8 +17304,8 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17311,8 +17315,8 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17322,8 +17326,8 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*Ge
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17340,14 +17344,14 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReportInfoRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	reportId string
+type FbsGetReportInfoRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
+	reportId   string
 }
 
-func (r ApiGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
-	return r.ApiService.GetReportInfoExecute(r)
+func (r FbsGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
+	return r.FbsService.GetReportInfoExecute(r)
 }
 
 /*
@@ -17362,27 +17366,27 @@ GetReportInfo Получение заданного отчета
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param reportId Идентификатор отчета, который вы получили после запуска генерации. 
- @return ApiGetReportInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param reportId Идентификатор отчета, который вы получили после запуска генерации.
+	@return FbsGetReportInfoRequest
 */
-func (a *FbsAPIService) GetReportInfo(ctx context.Context, reportId string) ApiGetReportInfoRequest {
-	return ApiGetReportInfoRequest{
-		ApiService: a,
-		ctx: ctx,
-		reportId: reportId,
+func (a *FbsAPIService) GetReportInfo(ctx context.Context, reportId string) FbsGetReportInfoRequest {
+	return FbsGetReportInfoRequest{
+		FbsService: a,
+		ctx:        ctx,
+		reportId:   reportId,
 	}
 }
 
 // Execute executes the request
-//  @return GetReportInfoResponse
-func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
+//
+//	@return GetReportInfoResponse
+func (a *FbsAPIService) GetReportInfoExecute(r FbsGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetReportInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetReportInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetReportInfo")
@@ -17423,14 +17427,14 @@ func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -17463,8 +17467,8 @@ func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -17474,8 +17478,8 @@ func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17485,8 +17489,8 @@ func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17496,8 +17500,8 @@ func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17507,8 +17511,8 @@ func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17518,8 +17522,8 @@ func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17536,16 +17540,16 @@ func (a *FbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetReturnRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
-	returnId int64
+	orderId    int64
+	returnId   int64
 }
 
-func (r ApiGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
-	return r.ApiService.GetReturnExecute(r)
+func (r FbsGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
+	return r.FbsService.GetReturnExecute(r)
 }
 
 /*
@@ -17566,31 +17570,31 @@ GetReturn Информация о невыкупе или возврате
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param returnId Идентификатор невыкупа или возврата.
- @return ApiGetReturnRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param returnId Идентификатор невыкупа или возврата.
+	@return FbsGetReturnRequest
 */
-func (a *FbsAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiGetReturnRequest {
-	return ApiGetReturnRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsGetReturnRequest {
+	return FbsGetReturnRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
-		returnId: returnId,
+		orderId:    orderId,
+		returnId:   returnId,
 	}
 }
 
 // Execute executes the request
-//  @return GetReturnResponse
-func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnResponse, *http.Response, error) {
+//
+//	@return GetReturnResponse
+func (a *FbsAPIService) GetReturnExecute(r FbsGetReturnRequest) (*GetReturnResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetReturnResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetReturnResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetReturn")
@@ -17630,14 +17634,14 @@ func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -17670,8 +17674,8 @@ func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -17681,8 +17685,8 @@ func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17692,8 +17696,8 @@ func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17703,8 +17707,8 @@ func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17714,8 +17718,8 @@ func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17725,8 +17729,8 @@ func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17743,16 +17747,16 @@ func (a *FbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnApplicationRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetReturnApplicationRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
-	returnId int64
+	orderId    int64
+	returnId   int64
 }
 
-func (r ApiGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GetReturnApplicationExecute(r)
+func (r FbsGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.GetReturnApplicationExecute(r)
 }
 
 /*
@@ -17765,31 +17769,31 @@ GetReturnApplication Получение заявления на возврат
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param returnId Идентификатор невыкупа или возврата.
- @return ApiGetReturnApplicationRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param returnId Идентификатор невыкупа или возврата.
+	@return FbsGetReturnApplicationRequest
 */
-func (a *FbsAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiGetReturnApplicationRequest {
-	return ApiGetReturnApplicationRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsGetReturnApplicationRequest {
+	return FbsGetReturnApplicationRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
-		returnId: returnId,
+		orderId:    orderId,
+		returnId:   returnId,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) GetReturnApplicationExecute(r FbsGetReturnApplicationRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetReturnApplication")
@@ -17829,14 +17833,14 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -17869,8 +17873,8 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -17880,8 +17884,8 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -17891,8 +17895,8 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -17902,8 +17906,8 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -17913,8 +17917,8 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -17924,8 +17928,8 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -17942,18 +17946,18 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnPhotoRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetReturnPhotoRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
-	returnId int64
-	itemId int64
-	imageHash string
+	orderId    int64
+	returnId   int64
+	itemId     int64
+	imageHash  string
 }
 
-func (r ApiGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GetReturnPhotoExecute(r)
+func (r FbsGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
+	return r.FbsService.GetReturnPhotoExecute(r)
 }
 
 /*
@@ -17966,35 +17970,35 @@ GetReturnPhoto Получение фотографий товаров в воз�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param returnId Идентификатор невыкупа или возврата.
- @param itemId Идентификатор товара в возврате.
- @param imageHash Хеш ссылки изображения для загрузки.
- @return ApiGetReturnPhotoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param returnId Идентификатор невыкупа или возврата.
+	@param itemId Идентификатор товара в возврате.
+	@param imageHash Хеш ссылки изображения для загрузки.
+	@return FbsGetReturnPhotoRequest
 */
-func (a *FbsAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) ApiGetReturnPhotoRequest {
-	return ApiGetReturnPhotoRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) FbsGetReturnPhotoRequest {
+	return FbsGetReturnPhotoRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
-		returnId: returnId,
-		itemId: itemId,
-		imageHash: imageHash,
+		orderId:    orderId,
+		returnId:   returnId,
+		itemId:     itemId,
+		imageHash:  imageHash,
 	}
 }
 
 // Execute executes the request
-//  @return *os.File
-func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.File, *http.Response, error) {
+//
+//	@return *os.File
+func (a *FbsAPIService) GetReturnPhotoExecute(r FbsGetReturnPhotoRequest) (*os.File, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *os.File
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *os.File
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetReturnPhoto")
@@ -18036,14 +18040,14 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -18076,8 +18080,8 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -18087,8 +18091,8 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18098,8 +18102,8 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18109,8 +18113,8 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18120,8 +18124,8 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18131,8 +18135,8 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18149,79 +18153,79 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetReturnsRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	pageToken *string
-	limit *int32
-	orderIds *[]int64
-	statuses *[]RefundStatusType
-	type_ *ReturnType
-	fromDate *string
-	toDate *string
-	fromDate2 *string
-	toDate2 *string
+	pageToken  *string
+	limit      *int32
+	orderIds   *[]int64
+	statuses   *[]RefundStatusType
+	type_      *ReturnType
+	fromDate   *string
+	toDate     *string
+	fromDate2  *string
+	toDate2    *string
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetReturnsRequest) PageToken(pageToken string) ApiGetReturnsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetReturnsRequest) PageToken(pageToken string) FbsGetReturnsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetReturnsRequest) Limit(limit int32) ApiGetReturnsRequest {
+// Количество значений на одной странице.
+func (r FbsGetReturnsRequest) Limit(limit int32) FbsGetReturnsRequest {
 	r.limit = &limit
 	return r
 }
 
-// Идентификаторы заказов — для фильтрации результатов.  Несколько идентификаторов перечисляются через запятую без пробела. 
-func (r ApiGetReturnsRequest) OrderIds(orderIds []int64) ApiGetReturnsRequest {
+// Идентификаторы заказов — для фильтрации результатов.  Несколько идентификаторов перечисляются через запятую без пробела.
+func (r FbsGetReturnsRequest) OrderIds(orderIds []int64) FbsGetReturnsRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
-// Статусы невыкупов или возвратов — для фильтрации результатов.  Несколько статусов перечисляются через запятую. 
-func (r ApiGetReturnsRequest) Statuses(statuses []RefundStatusType) ApiGetReturnsRequest {
+// Статусы невыкупов или возвратов — для фильтрации результатов.  Несколько статусов перечисляются через запятую.
+func (r FbsGetReturnsRequest) Statuses(statuses []RefundStatusType) FbsGetReturnsRequest {
 	r.statuses = &statuses
 	return r
 }
 
-// Тип заказа для фильтрации:  * &#x60;UNREDEEMED&#x60; — невыкуп.  * &#x60;RETURN&#x60; — возврат.  Если не указать, в ответе будут и невыкупы, и возвраты. 
-func (r ApiGetReturnsRequest) Type_(type_ ReturnType) ApiGetReturnsRequest {
+// Тип заказа для фильтрации:  * &#x60;UNREDEEMED&#x60; — невыкуп.  * &#x60;RETURN&#x60; — возврат.  Если не указать, в ответе будут и невыкупы, и возвраты.
+func (r FbsGetReturnsRequest) Type_(type_ ReturnType) FbsGetReturnsRequest {
 	r.type_ = &type_
 	return r
 }
 
-// Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;. 
-func (r ApiGetReturnsRequest) FromDate(fromDate string) ApiGetReturnsRequest {
+// Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.
+func (r FbsGetReturnsRequest) FromDate(fromDate string) FbsGetReturnsRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
-// Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;. 
-func (r ApiGetReturnsRequest) ToDate(toDate string) ApiGetReturnsRequest {
+// Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.
+func (r FbsGetReturnsRequest) ToDate(toDate string) FbsGetReturnsRequest {
 	r.toDate = &toDate
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления. 
+// {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
-func (r ApiGetReturnsRequest) FromDate2(fromDate2 string) ApiGetReturnsRequest {
+func (r FbsGetReturnsRequest) FromDate2(fromDate2 string) FbsGetReturnsRequest {
 	r.fromDate2 = &fromDate2
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления. 
+// {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
-func (r ApiGetReturnsRequest) ToDate2(toDate2 string) ApiGetReturnsRequest {
+func (r FbsGetReturnsRequest) ToDate2(toDate2 string) FbsGetReturnsRequest {
 	r.toDate2 = &toDate2
 	return r
 }
 
-func (r ApiGetReturnsRequest) Execute() (*GetReturnsResponse, *http.Response, error) {
-	return r.ApiService.GetReturnsExecute(r)
+func (r FbsGetReturnsRequest) Execute() (*GetReturnsResponse, *http.Response, error) {
+	return r.FbsService.GetReturnsExecute(r)
 }
 
 /*
@@ -18244,27 +18248,27 @@ GetReturns Список невыкупов и возвратов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetReturnsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetReturnsRequest
 */
-func (a *FbsAPIService) GetReturns(ctx context.Context, campaignId int64) ApiGetReturnsRequest {
-	return ApiGetReturnsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetReturns(ctx context.Context, campaignId int64) FbsGetReturnsRequest {
+	return FbsGetReturnsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetReturnsResponse
-func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsResponse, *http.Response, error) {
+//
+//	@return GetReturnsResponse
+func (a *FbsAPIService) GetReturnsExecute(r FbsGetReturnsRequest) (*GetReturnsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetReturnsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetReturnsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetReturns")
@@ -18329,14 +18333,14 @@ func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -18369,8 +18373,8 @@ func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -18380,8 +18384,8 @@ func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18391,8 +18395,8 @@ func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18402,8 +18406,8 @@ func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18413,8 +18417,8 @@ func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18424,8 +18428,8 @@ func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18442,22 +18446,22 @@ func (a *FbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetShipmentRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	shipmentId int64
+type FbsGetShipmentRequest struct {
+	ctx             context.Context
+	FbsService      *FbsAPIService
+	campaignId      int64
+	shipmentId      int64
 	cancelledOrders *bool
 }
 
-// Возвращать ли отмененные заказы.  Значение по умолчанию: &#x60;true&#x60;. Если возвращать отмененные заказы не нужно, передайте значение &#x60;false&#x60;. 
-func (r ApiGetShipmentRequest) CancelledOrders(cancelledOrders bool) ApiGetShipmentRequest {
+// Возвращать ли отмененные заказы.  Значение по умолчанию: &#x60;true&#x60;. Если возвращать отмененные заказы не нужно, передайте значение &#x60;false&#x60;.
+func (r FbsGetShipmentRequest) CancelledOrders(cancelledOrders bool) FbsGetShipmentRequest {
 	r.cancelledOrders = &cancelledOrders
 	return r
 }
 
-func (r ApiGetShipmentRequest) Execute() (*GetShipmentResponse, *http.Response, error) {
-	return r.ApiService.GetShipmentExecute(r)
+func (r FbsGetShipmentRequest) Execute() (*GetShipmentResponse, *http.Response, error) {
+	return r.FbsService.GetShipmentExecute(r)
 }
 
 /*
@@ -18469,29 +18473,29 @@ GetShipment Получение информации об одной отгруз
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiGetShipmentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsGetShipmentRequest
 */
-func (a *FbsAPIService) GetShipment(ctx context.Context, campaignId int64, shipmentId int64) ApiGetShipmentRequest {
-	return ApiGetShipmentRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsGetShipmentRequest {
+	return FbsGetShipmentRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return GetShipmentResponse
-func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmentResponse, *http.Response, error) {
+//
+//	@return GetShipmentResponse
+func (a *FbsAPIService) GetShipmentExecute(r FbsGetShipmentRequest) (*GetShipmentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetShipmentResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetShipmentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetShipment")
@@ -18539,14 +18543,14 @@ func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmen
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -18579,8 +18583,8 @@ func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -18590,8 +18594,8 @@ func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18601,8 +18605,8 @@ func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18612,8 +18616,8 @@ func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18623,8 +18627,8 @@ func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18634,8 +18638,8 @@ func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmen
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18652,15 +18656,15 @@ func (a *FbsAPIService) GetShipmentExecute(r ApiGetShipmentRequest) (*GetShipmen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetShipmentOrdersInfoRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetShipmentOrdersInfoRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r ApiGetShipmentOrdersInfoRequest) Execute() (*GetShipmentOrdersInfoResponse, *http.Response, error) {
-	return r.ApiService.GetShipmentOrdersInfoExecute(r)
+func (r FbsGetShipmentOrdersInfoRequest) Execute() (*GetShipmentOrdersInfoResponse, *http.Response, error) {
+	return r.FbsService.GetShipmentOrdersInfoExecute(r)
 }
 
 /*
@@ -18672,29 +18676,29 @@ GetShipmentOrdersInfo Получение информации о возможн�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiGetShipmentOrdersInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsGetShipmentOrdersInfoRequest
 */
-func (a *FbsAPIService) GetShipmentOrdersInfo(ctx context.Context, campaignId int64, shipmentId int64) ApiGetShipmentOrdersInfoRequest {
-	return ApiGetShipmentOrdersInfoRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetShipmentOrdersInfo(ctx context.Context, campaignId int64, shipmentId int64) FbsGetShipmentOrdersInfoRequest {
+	return FbsGetShipmentOrdersInfoRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return GetShipmentOrdersInfoResponse
-func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoRequest) (*GetShipmentOrdersInfoResponse, *http.Response, error) {
+//
+//	@return GetShipmentOrdersInfoResponse
+func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r FbsGetShipmentOrdersInfoRequest) (*GetShipmentOrdersInfoResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetShipmentOrdersInfoResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetShipmentOrdersInfoResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetShipmentOrdersInfo")
@@ -18736,14 +18740,14 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -18776,8 +18780,8 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -18787,8 +18791,8 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -18798,8 +18802,8 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -18809,8 +18813,8 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -18820,8 +18824,8 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -18831,8 +18835,8 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -18849,34 +18853,34 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r ApiGetShipmentOrdersInfoR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetStocksRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	pageToken *string
-	limit *int32
+type FbsGetStocksRequest struct {
+	ctx                       context.Context
+	FbsService                *FbsAPIService
+	campaignId                int64
+	pageToken                 *string
+	limit                     *int32
 	getWarehouseStocksRequest *GetWarehouseStocksRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiGetStocksRequest) PageToken(pageToken string) ApiGetStocksRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsGetStocksRequest) PageToken(pageToken string) FbsGetStocksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiGetStocksRequest) Limit(limit int32) ApiGetStocksRequest {
+// Количество значений на одной странице.
+func (r FbsGetStocksRequest) Limit(limit int32) FbsGetStocksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) ApiGetStocksRequest {
+func (r FbsGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) FbsGetStocksRequest {
 	r.getWarehouseStocksRequest = &getWarehouseStocksRequest
 	return r
 }
 
-func (r ApiGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
-	return r.ApiService.GetStocksExecute(r)
+func (r FbsGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
+	return r.FbsService.GetStocksExecute(r)
 }
 
 /*
@@ -18899,27 +18903,27 @@ GetStocks Информация об остатках и оборачиваемо
 
 [//]: <> (turnover: Среднее количество дней, за которое товар продается. Подробно об оборачиваемости рассказано в Справке Маркета для продавцов https://yandex.ru/support/marketplace/analytics/turnover.html.)
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetStocksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetStocksRequest
 */
-func (a *FbsAPIService) GetStocks(ctx context.Context, campaignId int64) ApiGetStocksRequest {
-	return ApiGetStocksRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetStocks(ctx context.Context, campaignId int64) FbsGetStocksRequest {
+	return FbsGetStocksRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetWarehouseStocksResponse
-func (a *FbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
+//
+//	@return GetWarehouseStocksResponse
+func (a *FbsAPIService) GetStocksExecute(r FbsGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetWarehouseStocksResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetWarehouseStocksResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetStocks")
@@ -18965,14 +18969,14 @@ func (a *FbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseSt
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -19005,8 +19009,8 @@ func (a *FbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseSt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -19016,8 +19020,8 @@ func (a *FbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseSt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19027,8 +19031,8 @@ func (a *FbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseSt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -19038,8 +19042,8 @@ func (a *FbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseSt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -19049,8 +19053,8 @@ func (a *FbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseSt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -19067,20 +19071,20 @@ func (a *FbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseSt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedOfferMappingEntriesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsGetSuggestedOfferMappingEntriesRequest struct {
+	ctx                                    context.Context
+	FbsService                             *FbsAPIService
+	campaignId                             int64
 	getSuggestedOfferMappingEntriesRequest *GetSuggestedOfferMappingEntriesRequest
 }
 
-func (r ApiGetSuggestedOfferMappingEntriesRequest) GetSuggestedOfferMappingEntriesRequest(getSuggestedOfferMappingEntriesRequest GetSuggestedOfferMappingEntriesRequest) ApiGetSuggestedOfferMappingEntriesRequest {
+func (r FbsGetSuggestedOfferMappingEntriesRequest) GetSuggestedOfferMappingEntriesRequest(getSuggestedOfferMappingEntriesRequest GetSuggestedOfferMappingEntriesRequest) FbsGetSuggestedOfferMappingEntriesRequest {
 	r.getSuggestedOfferMappingEntriesRequest = &getSuggestedOfferMappingEntriesRequest
 	return r
 }
 
-func (r ApiGetSuggestedOfferMappingEntriesRequest) Execute() (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedOfferMappingEntriesExecute(r)
+func (r FbsGetSuggestedOfferMappingEntriesRequest) Execute() (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
+	return r.FbsService.GetSuggestedOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -19103,30 +19107,31 @@ GetSuggestedOfferMappingEntries Рекомендованные карточки 
 |**⚙️ Лимит:** 100 000 рекомендаций в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetSuggestedOfferMappingEntriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetSuggestedOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) ApiGetSuggestedOfferMappingEntriesRequest {
-	return ApiGetSuggestedOfferMappingEntriesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) FbsGetSuggestedOfferMappingEntriesRequest {
+	return FbsGetSuggestedOfferMappingEntriesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return GetSuggestedOfferMappingEntriesResponse
+//
+//	@return GetSuggestedOfferMappingEntriesResponse
+//
 // Deprecated
-func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggestedOfferMappingEntriesRequest) (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r FbsGetSuggestedOfferMappingEntriesRequest) (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSuggestedOfferMappingEntriesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSuggestedOfferMappingEntriesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetSuggestedOfferMappingEntries")
@@ -19169,14 +19174,14 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -19209,8 +19214,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -19220,8 +19225,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19231,8 +19236,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -19242,8 +19247,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -19253,8 +19258,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -19264,8 +19269,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -19282,20 +19287,20 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedOfferMappingsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsGetSuggestedOfferMappingsRequest struct {
+	ctx                              context.Context
+	FbsService                       *FbsAPIService
+	businessId                       int64
 	getSuggestedOfferMappingsRequest *GetSuggestedOfferMappingsRequest
 }
 
-func (r ApiGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) ApiGetSuggestedOfferMappingsRequest {
+func (r FbsGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) FbsGetSuggestedOfferMappingsRequest {
 	r.getSuggestedOfferMappingsRequest = &getSuggestedOfferMappingsRequest
 	return r
 }
 
-func (r ApiGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedOfferMappingsExecute(r)
+func (r FbsGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+	return r.FbsService.GetSuggestedOfferMappingsExecute(r)
 }
 
 /*
@@ -19325,30 +19330,31 @@ GetSuggestedOfferMappings Просмотр карточек на Маркете,
 |**⚙️ Лимит:** 100 000 товаров в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetSuggestedOfferMappingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetSuggestedOfferMappingsRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) ApiGetSuggestedOfferMappingsRequest {
-	return ApiGetSuggestedOfferMappingsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) FbsGetSuggestedOfferMappingsRequest {
+	return FbsGetSuggestedOfferMappingsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetSuggestedOfferMappingsResponse
+//
+//	@return GetSuggestedOfferMappingsResponse
+//
 // Deprecated
-func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r FbsGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetSuggestedOfferMappingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSuggestedOfferMappingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetSuggestedOfferMappings")
@@ -19388,14 +19394,14 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -19428,8 +19434,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -19439,8 +19445,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19450,8 +19456,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -19461,8 +19467,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -19472,8 +19478,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -19483,8 +19489,8 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -19501,20 +19507,20 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedPricesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsGetSuggestedPricesRequest struct {
+	ctx                  context.Context
+	FbsService           *FbsAPIService
+	campaignId           int64
 	suggestPricesRequest *SuggestPricesRequest
 }
 
-func (r ApiGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) ApiGetSuggestedPricesRequest {
+func (r FbsGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) FbsGetSuggestedPricesRequest {
 	r.suggestPricesRequest = &suggestPricesRequest
 	return r
 }
 
-func (r ApiGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedPricesExecute(r)
+func (r FbsGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
+	return r.FbsService.GetSuggestedPricesExecute(r)
 }
 
 /*
@@ -19523,8 +19529,6 @@ GetSuggestedPrices Цены для продвижения товаров
 {% include notitle [access](../../_auto/method_scopes/getSuggestedPrices.md) %}
 
 {% note warning "Не используйте его, это может привести к ошибкам. Информацию о ценах вы можете получить в помощью [отчета «Цены на рынке»](../../reference/reports/generatePricesReport.md)." %}
-
- 
 
 {% endnote %}
 
@@ -19549,30 +19553,31 @@ GetSuggestedPrices Цены для продвижения товаров
 |**⚙️ Лимит:** 100 000 товаров в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiGetSuggestedPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsGetSuggestedPricesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) ApiGetSuggestedPricesRequest {
-	return ApiGetSuggestedPricesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) FbsGetSuggestedPricesRequest {
+	return FbsGetSuggestedPricesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return SuggestPricesResponse
+//
+//	@return SuggestPricesResponse
+//
 // Deprecated
-func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetSuggestedPricesExecute(r FbsGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SuggestPricesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SuggestPricesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetSuggestedPrices")
@@ -19615,14 +19620,14 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -19655,8 +19660,8 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -19666,8 +19671,8 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19677,8 +19682,8 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -19688,8 +19693,8 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -19699,8 +19704,8 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -19710,8 +19715,8 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -19728,14 +19733,14 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetWarehousesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsGetWarehousesRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	businessId int64
 }
 
-func (r ApiGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
-	return r.ApiService.GetWarehousesExecute(r)
+func (r FbsGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
+	return r.FbsService.GetWarehousesExecute(r)
 }
 
 /*
@@ -19756,30 +19761,31 @@ GetWarehouses Список складов и групп складов
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiGetWarehousesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsGetWarehousesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetWarehouses(ctx context.Context, businessId int64) ApiGetWarehousesRequest {
-	return ApiGetWarehousesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) GetWarehouses(ctx context.Context, businessId int64) FbsGetWarehousesRequest {
+	return FbsGetWarehousesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return GetWarehousesResponse
+//
+//	@return GetWarehousesResponse
+//
 // Deprecated
-func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetWarehousesExecute(r FbsGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetWarehousesResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetWarehousesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.GetWarehouses")
@@ -19817,14 +19823,14 @@ func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -19857,8 +19863,8 @@ func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -19868,8 +19874,8 @@ func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -19879,8 +19885,8 @@ func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -19890,8 +19896,8 @@ func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -19901,8 +19907,8 @@ func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -19912,8 +19918,8 @@ func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -19930,21 +19936,21 @@ func (a *FbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProvideOrderItemIdentifiersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	orderId int64
+type FbsProvideOrderItemIdentifiersRequest struct {
+	ctx                                context.Context
+	FbsService                         *FbsAPIService
+	campaignId                         int64
+	orderId                            int64
 	provideOrderItemIdentifiersRequest *ProvideOrderItemIdentifiersRequest
 }
 
-func (r ApiProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) ApiProvideOrderItemIdentifiersRequest {
+func (r FbsProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) FbsProvideOrderItemIdentifiersRequest {
 	r.provideOrderItemIdentifiersRequest = &provideOrderItemIdentifiersRequest
 	return r
 }
 
-func (r ApiProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
-	return r.ApiService.ProvideOrderItemIdentifiersExecute(r)
+func (r FbsProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+	return r.FbsService.ProvideOrderItemIdentifiersExecute(r)
 }
 
 /*
@@ -19979,29 +19985,29 @@ ProvideOrderItemIdentifiers Передача кодов маркировки е�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiProvideOrderItemIdentifiersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsProvideOrderItemIdentifiersRequest
 */
-func (a *FbsAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) ApiProvideOrderItemIdentifiersRequest {
-	return ApiProvideOrderItemIdentifiersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) FbsProvideOrderItemIdentifiersRequest {
+	return FbsProvideOrderItemIdentifiersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return ProvideOrderItemIdentifiersResponse
-func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+//
+//	@return ProvideOrderItemIdentifiersResponse
+func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r FbsProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *ProvideOrderItemIdentifiersResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *ProvideOrderItemIdentifiersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.ProvideOrderItemIdentifiers")
@@ -20045,14 +20051,14 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -20085,8 +20091,8 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -20096,8 +20102,8 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20107,8 +20113,8 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20118,8 +20124,8 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20129,8 +20135,8 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20140,8 +20146,8 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20158,21 +20164,21 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPutBidsForBusinessRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsPutBidsForBusinessRequest struct {
+	ctx               context.Context
+	FbsService        *FbsAPIService
+	businessId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
 
 // description
-func (r ApiPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) ApiPutBidsForBusinessRequest {
+func (r FbsPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) FbsPutBidsForBusinessRequest {
 	r.putSkuBidsRequest = &putSkuBidsRequest
 	return r
 }
 
-func (r ApiPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.PutBidsForBusinessExecute(r)
+func (r FbsPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.PutBidsForBusinessExecute(r)
 }
 
 /*
@@ -20217,27 +20223,27 @@ PutBidsForBusiness Включение буста продаж и установ�
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiPutBidsForBusinessRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsPutBidsForBusinessRequest
 */
-func (a *FbsAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) ApiPutBidsForBusinessRequest {
-	return ApiPutBidsForBusinessRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) FbsPutBidsForBusinessRequest {
+	return FbsPutBidsForBusinessRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) PutBidsForBusinessExecute(r FbsPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.PutBidsForBusiness")
@@ -20280,14 +20286,14 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -20320,8 +20326,8 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -20331,8 +20337,8 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20342,8 +20348,8 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20353,8 +20359,8 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20364,8 +20370,8 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20375,8 +20381,8 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20393,21 +20399,21 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPutBidsForCampaignRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsPutBidsForCampaignRequest struct {
+	ctx               context.Context
+	FbsService        *FbsAPIService
+	campaignId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
 
 // description
-func (r ApiPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) ApiPutBidsForCampaignRequest {
+func (r FbsPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) FbsPutBidsForCampaignRequest {
 	r.putSkuBidsRequest = &putSkuBidsRequest
 	return r
 }
 
-func (r ApiPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.PutBidsForCampaignExecute(r)
+func (r FbsPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.PutBidsForCampaignExecute(r)
 }
 
 /*
@@ -20446,27 +20452,27 @@ PutBidsForCampaign Включение буста продаж и установ�
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiPutBidsForCampaignRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsPutBidsForCampaignRequest
 */
-func (a *FbsAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) ApiPutBidsForCampaignRequest {
-	return ApiPutBidsForCampaignRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) FbsPutBidsForCampaignRequest {
+	return FbsPutBidsForCampaignRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) PutBidsForCampaignExecute(r FbsPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.PutBidsForCampaign")
@@ -20509,14 +20515,14 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -20549,8 +20555,8 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -20560,8 +20566,8 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20571,8 +20577,8 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20582,8 +20588,8 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20593,8 +20599,8 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20604,8 +20610,8 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20622,28 +20628,28 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionChildrenRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	regionId int64
-	page *int32
-	pageSize *int32
+type FbsSearchRegionChildrenRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
+	regionId   int64
+	page       *int32
+	pageSize   *int32
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiSearchRegionChildrenRequest) Page(page int32) ApiSearchRegionChildrenRequest {
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r FbsSearchRegionChildrenRequest) Page(page int32) FbsSearchRegionChildrenRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
-func (r ApiSearchRegionChildrenRequest) PageSize(pageSize int32) ApiSearchRegionChildrenRequest {
+// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+func (r FbsSearchRegionChildrenRequest) PageSize(pageSize int32) FbsSearchRegionChildrenRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiSearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionChildrenExecute(r)
+func (r FbsSearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
+	return r.FbsService.SearchRegionChildrenExecute(r)
 }
 
 /*
@@ -20660,27 +20666,27 @@ SearchRegionChildren Информация о дочерних регионах
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
- @return ApiSearchRegionChildrenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+	@return FbsSearchRegionChildrenRequest
 */
-func (a *FbsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) ApiSearchRegionChildrenRequest {
-	return ApiSearchRegionChildrenRequest{
-		ApiService: a,
-		ctx: ctx,
-		regionId: regionId,
+func (a *FbsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) FbsSearchRegionChildrenRequest {
+	return FbsSearchRegionChildrenRequest{
+		FbsService: a,
+		ctx:        ctx,
+		regionId:   regionId,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegionWithChildrenResponse
-func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
+//
+//	@return GetRegionWithChildrenResponse
+func (a *FbsAPIService) SearchRegionChildrenExecute(r FbsSearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegionWithChildrenResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegionWithChildrenResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SearchRegionChildren")
@@ -20724,14 +20730,14 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -20764,8 +20770,8 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -20775,8 +20781,8 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20786,8 +20792,8 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20797,8 +20803,8 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20808,8 +20814,8 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -20819,8 +20825,8 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -20837,14 +20843,14 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionsByIdRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	regionId int64
+type FbsSearchRegionsByIdRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
+	regionId   int64
 }
 
-func (r ApiSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionsByIdExecute(r)
+func (r FbsSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+	return r.FbsService.SearchRegionsByIdExecute(r)
 }
 
 /*
@@ -20861,27 +20867,27 @@ SearchRegionsById Информация о регионе
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
- @return ApiSearchRegionsByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+	@return FbsSearchRegionsByIdRequest
 */
-func (a *FbsAPIService) SearchRegionsById(ctx context.Context, regionId int64) ApiSearchRegionsByIdRequest {
-	return ApiSearchRegionsByIdRequest{
-		ApiService: a,
-		ctx: ctx,
-		regionId: regionId,
+func (a *FbsAPIService) SearchRegionsById(ctx context.Context, regionId int64) FbsSearchRegionsByIdRequest {
+	return FbsSearchRegionsByIdRequest{
+		FbsService: a,
+		ctx:        ctx,
+		regionId:   regionId,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegionsResponse
-func (a *FbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
+//
+//	@return GetRegionsResponse
+func (a *FbsAPIService) SearchRegionsByIdExecute(r FbsSearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegionsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SearchRegionsById")
@@ -20916,14 +20922,14 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -20956,8 +20962,8 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -20967,8 +20973,8 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -20978,8 +20984,8 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -20989,8 +20995,8 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21000,8 +21006,8 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21018,34 +21024,34 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionsByNameRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	name *string
-	pageToken *string
-	limit *int32
+type FbsSearchRegionsByNameRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
+	name       *string
+	pageToken  *string
+	limit      *int32
 }
 
-// Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;. 
-func (r ApiSearchRegionsByNameRequest) Name(name string) ApiSearchRegionsByNameRequest {
+// Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;.
+func (r FbsSearchRegionsByNameRequest) Name(name string) FbsSearchRegionsByNameRequest {
 	r.name = &name
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiSearchRegionsByNameRequest) PageToken(pageToken string) ApiSearchRegionsByNameRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsSearchRegionsByNameRequest) PageToken(pageToken string) FbsSearchRegionsByNameRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiSearchRegionsByNameRequest) Limit(limit int32) ApiSearchRegionsByNameRequest {
+// Количество значений на одной странице.
+func (r FbsSearchRegionsByNameRequest) Limit(limit int32) FbsSearchRegionsByNameRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionsByNameExecute(r)
+func (r FbsSearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+	return r.FbsService.SearchRegionsByNameExecute(r)
 }
 
 /*
@@ -21064,25 +21070,25 @@ SearchRegionsByName Поиск регионов по их имени
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSearchRegionsByNameRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return FbsSearchRegionsByNameRequest
 */
-func (a *FbsAPIService) SearchRegionsByName(ctx context.Context) ApiSearchRegionsByNameRequest {
-	return ApiSearchRegionsByNameRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SearchRegionsByName(ctx context.Context) FbsSearchRegionsByNameRequest {
+	return FbsSearchRegionsByNameRequest{
+		FbsService: a,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetRegionsResponse
-func (a *FbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
+//
+//	@return GetRegionsResponse
+func (a *FbsAPIService) SearchRegionsByNameExecute(r FbsSearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetRegionsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetRegionsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SearchRegionsByName")
@@ -21126,14 +21132,14 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -21166,8 +21172,8 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21177,8 +21183,8 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21188,8 +21194,8 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21199,8 +21205,8 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21217,34 +21223,34 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchShipmentsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsSearchShipmentsRequest struct {
+	ctx                    context.Context
+	FbsService             *FbsAPIService
+	campaignId             int64
 	searchShipmentsRequest *SearchShipmentsRequest
-	pageToken *string
-	limit *int32
+	pageToken              *string
+	limit                  *int32
 }
 
-func (r ApiSearchShipmentsRequest) SearchShipmentsRequest(searchShipmentsRequest SearchShipmentsRequest) ApiSearchShipmentsRequest {
+func (r FbsSearchShipmentsRequest) SearchShipmentsRequest(searchShipmentsRequest SearchShipmentsRequest) FbsSearchShipmentsRequest {
 	r.searchShipmentsRequest = &searchShipmentsRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются. 
-func (r ApiSearchShipmentsRequest) PageToken(pageToken string) ApiSearchShipmentsRequest {
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+func (r FbsSearchShipmentsRequest) PageToken(pageToken string) FbsSearchShipmentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице. 
-func (r ApiSearchShipmentsRequest) Limit(limit int32) ApiSearchShipmentsRequest {
+// Количество значений на одной странице.
+func (r FbsSearchShipmentsRequest) Limit(limit int32) FbsSearchShipmentsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchShipmentsRequest) Execute() (*SearchShipmentsResponse, *http.Response, error) {
-	return r.ApiService.SearchShipmentsExecute(r)
+func (r FbsSearchShipmentsRequest) Execute() (*SearchShipmentsResponse, *http.Response, error) {
+	return r.FbsService.SearchShipmentsExecute(r)
 }
 
 /*
@@ -21262,27 +21268,27 @@ SearchShipments Получение информации о нескольких 
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiSearchShipmentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsSearchShipmentsRequest
 */
-func (a *FbsAPIService) SearchShipments(ctx context.Context, campaignId int64) ApiSearchShipmentsRequest {
-	return ApiSearchShipmentsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SearchShipments(ctx context.Context, campaignId int64) FbsSearchShipmentsRequest {
+	return FbsSearchShipmentsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return SearchShipmentsResponse
-func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*SearchShipmentsResponse, *http.Response, error) {
+//
+//	@return SearchShipmentsResponse
+func (a *FbsAPIService) SearchShipmentsExecute(r FbsSearchShipmentsRequest) (*SearchShipmentsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SearchShipmentsResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SearchShipmentsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SearchShipments")
@@ -21331,14 +21337,14 @@ func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*Se
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -21371,8 +21377,8 @@ func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*Se
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -21382,8 +21388,8 @@ func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*Se
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21393,8 +21399,8 @@ func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*Se
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -21404,8 +21410,8 @@ func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*Se
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21415,8 +21421,8 @@ func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*Se
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21426,8 +21432,8 @@ func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*Se
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21444,28 +21450,28 @@ func (a *FbsAPIService) SearchShipmentsExecute(r ApiSearchShipmentsRequest) (*Se
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSendFileToChatRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsSendFileToChatRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	businessId int64
-	chatId *int64
-	file *os.File
+	chatId     *int64
+	file       *os.File
 }
 
 // Идентификатор чата.
-func (r ApiSendFileToChatRequest) ChatId(chatId int64) ApiSendFileToChatRequest {
+func (r FbsSendFileToChatRequest) ChatId(chatId int64) FbsSendFileToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Содержимое файла. Максимальный размер файла — 5 Мбайт.
-func (r ApiSendFileToChatRequest) File(file *os.File) ApiSendFileToChatRequest {
+func (r FbsSendFileToChatRequest) File(file *os.File) FbsSendFileToChatRequest {
 	r.file = file
 	return r
 }
 
-func (r ApiSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SendFileToChatExecute(r)
+func (r FbsSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.SendFileToChatExecute(r)
 }
 
 /*
@@ -21478,27 +21484,27 @@ SendFileToChat Отправка файла в чат
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiSendFileToChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsSendFileToChatRequest
 */
-func (a *FbsAPIService) SendFileToChat(ctx context.Context, businessId int64) ApiSendFileToChatRequest {
-	return ApiSendFileToChatRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SendFileToChat(ctx context.Context, businessId int64) FbsSendFileToChatRequest {
+	return FbsSendFileToChatRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) SendFileToChatExecute(r FbsSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SendFileToChat")
@@ -21544,8 +21550,8 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	var fileLocalVarFormFileName string
-	var fileLocalVarFileName     string
-	var fileLocalVarFileBytes    []byte
+	var fileLocalVarFileName string
+	var fileLocalVarFileBytes []byte
 
 	fileLocalVarFormFileName = "file"
 	fileLocalVarFile := r.file
@@ -21561,14 +21567,14 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -21601,8 +21607,8 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -21612,8 +21618,8 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21623,8 +21629,8 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -21634,8 +21640,8 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21645,8 +21651,8 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21656,8 +21662,8 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21674,28 +21680,28 @@ func (a *FbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSendMessageToChatRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
-	chatId *int64
+type FbsSendMessageToChatRequest struct {
+	ctx                      context.Context
+	FbsService               *FbsAPIService
+	businessId               int64
+	chatId                   *int64
 	sendMessageToChatRequest *SendMessageToChatRequest
 }
 
 // Идентификатор чата.
-func (r ApiSendMessageToChatRequest) ChatId(chatId int64) ApiSendMessageToChatRequest {
+func (r FbsSendMessageToChatRequest) ChatId(chatId int64) FbsSendMessageToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r ApiSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) ApiSendMessageToChatRequest {
+func (r FbsSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) FbsSendMessageToChatRequest {
 	r.sendMessageToChatRequest = &sendMessageToChatRequest
 	return r
 }
 
-func (r ApiSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SendMessageToChatExecute(r)
+func (r FbsSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.SendMessageToChatExecute(r)
 }
 
 /*
@@ -21708,27 +21714,27 @@ SendMessageToChat Отправка сообщения в чат
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiSendMessageToChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsSendMessageToChatRequest
 */
-func (a *FbsAPIService) SendMessageToChat(ctx context.Context, businessId int64) ApiSendMessageToChatRequest {
-	return ApiSendMessageToChatRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SendMessageToChat(ctx context.Context, businessId int64) FbsSendMessageToChatRequest {
+	return FbsSendMessageToChatRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) SendMessageToChatExecute(r FbsSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SendMessageToChat")
@@ -21778,14 +21784,14 @@ func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -21818,8 +21824,8 @@ func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -21829,8 +21835,8 @@ func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -21840,8 +21846,8 @@ func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -21851,8 +21857,8 @@ func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -21862,8 +21868,8 @@ func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -21873,8 +21879,8 @@ func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -21891,21 +21897,21 @@ func (a *FbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderBoxLayoutRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	orderId int64
+type FbsSetOrderBoxLayoutRequest struct {
+	ctx                      context.Context
+	FbsService               *FbsAPIService
+	campaignId               int64
+	orderId                  int64
 	setOrderBoxLayoutRequest *SetOrderBoxLayoutRequest
 }
 
-func (r ApiSetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) ApiSetOrderBoxLayoutRequest {
+func (r FbsSetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) FbsSetOrderBoxLayoutRequest {
 	r.setOrderBoxLayoutRequest = &setOrderBoxLayoutRequest
 	return r
 }
 
-func (r ApiSetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
-	return r.ApiService.SetOrderBoxLayoutExecute(r)
+func (r FbsSetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
+	return r.FbsService.SetOrderBoxLayoutExecute(r)
 }
 
 /*
@@ -22001,38 +22007,39 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если в одной коробке едут:
 
-  * три единицы одного товара, требующего маркировки;
-  * одна единица другого товара, не требущего маркировки.
+  - три единицы одного товара, требующего маркировки;
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "fullCount": 3,
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          },
-                          {
-                              "cis": "010304109478gftJ14545762!\u001dhGt264"
-                          },
-                          {
-                              "cis": "010304109478fRs28323ks23!\u001dhet201"
-                          }
-                      ]
-                  },
-                  {
-                      "id": 654321,
-                      "fullCount": 1
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+  - одна единица другого товара, не требущего маркировки.
+
+    ```json translate=no
+    {
+    "boxes": [
+    {
+    "items": [
+    {
+    "id": 123456,
+    "fullCount": 3,
+    "instances": [
+    {
+    "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+    },
+    {
+    "cis": "010304109478gftJ14545762!\u001dhGt264"
+    },
+    {
+    "cis": "010304109478fRs28323ks23!\u001dhet201"
+    }
+    ]
+    },
+    {
+    "id": 654321,
+    "fullCount": 1
+    }
+    ]
+    }
+    ]
+    }
+    ```
 
 {% endcut %}
 
@@ -22040,44 +22047,44 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если товар едет в двух коробках:
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+	```json translate=no
+	{
+	    "boxes": [
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        }
+	    ]
+	}
+	```
 
 {% endcut %}
 
@@ -22085,105 +22092,105 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если каждый из двух одинаковых товаров едет в двух коробках:
 
-  ```json translate=no
-  {
-      "boxes": [
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 1,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          },
-          {
-              "items": [
-                  {
-                      "id": 123456,
-                      "partialCount": {
-                          "current": 2,
-                          "total": 2
-                      },
-                      "instances": [
-                          {
-                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-                          }
-                      ]
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+	```json translate=no
+	{
+	    "boxes": [
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 1,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        },
+	        {
+	            "items": [
+	                {
+	                    "id": 123456,
+	                    "partialCount": {
+	                        "current": 2,
+	                        "total": 2
+	                    },
+	                    "instances": [
+	                        {
+	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+	                        }
+	                    ]
+	                }
+	            ]
+	        }
+	    ]
+	}
+	```
 
 {% endcut %}
 
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiSetOrderBoxLayoutRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsSetOrderBoxLayoutRequest
 */
-func (a *FbsAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) ApiSetOrderBoxLayoutRequest {
-	return ApiSetOrderBoxLayoutRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) FbsSetOrderBoxLayoutRequest {
+	return FbsSetOrderBoxLayoutRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return SetOrderBoxLayoutResponse
-func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
+//
+//	@return SetOrderBoxLayoutResponse
+func (a *FbsAPIService) SetOrderBoxLayoutExecute(r FbsSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SetOrderBoxLayoutResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SetOrderBoxLayoutResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SetOrderBoxLayout")
@@ -22227,14 +22234,14 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -22267,8 +22274,8 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -22278,8 +22285,8 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -22289,8 +22296,8 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -22300,8 +22307,8 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -22311,8 +22318,8 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -22322,8 +22329,8 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -22340,22 +22347,22 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderShipmentBoxesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	orderId int64
-	shipmentId int64
+type FbsSetOrderShipmentBoxesRequest struct {
+	ctx                          context.Context
+	FbsService                   *FbsAPIService
+	campaignId                   int64
+	orderId                      int64
+	shipmentId                   int64
 	setOrderShipmentBoxesRequest *SetOrderShipmentBoxesRequest
 }
 
-func (r ApiSetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) ApiSetOrderShipmentBoxesRequest {
+func (r FbsSetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) FbsSetOrderShipmentBoxesRequest {
 	r.setOrderShipmentBoxesRequest = &setOrderShipmentBoxesRequest
 	return r
 }
 
-func (r ApiSetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
-	return r.ApiService.SetOrderShipmentBoxesExecute(r)
+func (r FbsSetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+	return r.FbsService.SetOrderShipmentBoxesExecute(r)
 }
 
 /*
@@ -22382,27 +22389,29 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 Структура тела PUT-запроса:
 
 ```text translate=no
-{
-  "boxes":
-  [
-    {
-      "fulfilmentId": "{string}",
-      "weight": {int64},
-      "width": {int64},
-      "height": {int64},
-      "depth": {int64},
-      "items":
-      [
-        {
-          "id": {int64},
-          "count": {int32}
-        },
-        ...
-      ]
-    },
-    ...
-  ]
-}
+
+	{
+	  "boxes":
+	  [
+	    {
+	      "fulfilmentId": "{string}",
+	      "weight": {int64},
+	      "width": {int64},
+	      "height": {int64},
+	      "depth": {int64},
+	      "items":
+	      [
+	        {
+	          "id": {int64},
+	          "count": {int32}
+	        },
+	        ...
+	      ]
+	    },
+	    ...
+	  ]
+	}
+
 ```
 | **Параметр**  | **Тип**  | **Значение**  |
 | ----------- | ----------- | ----------- |
@@ -22429,31 +22438,31 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL. 
- @return ApiSetOrderShipmentBoxesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
+	@return FbsSetOrderShipmentBoxesRequest
 */
-func (a *FbsAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) ApiSetOrderShipmentBoxesRequest {
-	return ApiSetOrderShipmentBoxesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) FbsSetOrderShipmentBoxesRequest {
+	return FbsSetOrderShipmentBoxesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return SetOrderShipmentBoxesResponse
-func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+//
+//	@return SetOrderShipmentBoxesResponse
+func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r FbsSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SetOrderShipmentBoxesResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SetOrderShipmentBoxesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SetOrderShipmentBoxes")
@@ -22498,14 +22507,14 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -22538,8 +22547,8 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -22549,8 +22558,8 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -22560,8 +22569,8 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -22571,8 +22580,8 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -22582,8 +22591,8 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -22593,8 +22602,8 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -22611,21 +22620,21 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetShipmentPalletsCountRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	shipmentId int64
+type FbsSetShipmentPalletsCountRequest struct {
+	ctx                            context.Context
+	FbsService                     *FbsAPIService
+	campaignId                     int64
+	shipmentId                     int64
 	setShipmentPalletsCountRequest *SetShipmentPalletsCountRequest
 }
 
-func (r ApiSetShipmentPalletsCountRequest) SetShipmentPalletsCountRequest(setShipmentPalletsCountRequest SetShipmentPalletsCountRequest) ApiSetShipmentPalletsCountRequest {
+func (r FbsSetShipmentPalletsCountRequest) SetShipmentPalletsCountRequest(setShipmentPalletsCountRequest SetShipmentPalletsCountRequest) FbsSetShipmentPalletsCountRequest {
 	r.setShipmentPalletsCountRequest = &setShipmentPalletsCountRequest
 	return r
 }
 
-func (r ApiSetShipmentPalletsCountRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SetShipmentPalletsCountExecute(r)
+func (r FbsSetShipmentPalletsCountRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.SetShipmentPalletsCountExecute(r)
 }
 
 /*
@@ -22639,29 +22648,29 @@ SetShipmentPalletsCount Передача количества упаковок �
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiSetShipmentPalletsCountRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsSetShipmentPalletsCountRequest
 */
-func (a *FbsAPIService) SetShipmentPalletsCount(ctx context.Context, campaignId int64, shipmentId int64) ApiSetShipmentPalletsCountRequest {
-	return ApiSetShipmentPalletsCountRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SetShipmentPalletsCount(ctx context.Context, campaignId int64, shipmentId int64) FbsSetShipmentPalletsCountRequest {
+	return FbsSetShipmentPalletsCountRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCountRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) SetShipmentPalletsCountExecute(r FbsSetShipmentPalletsCountRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SetShipmentPalletsCount")
@@ -22708,14 +22717,14 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -22748,8 +22757,8 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -22759,8 +22768,8 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -22770,8 +22779,8 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -22781,8 +22790,8 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -22792,8 +22801,8 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -22803,8 +22812,8 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCo
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -22821,20 +22830,20 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r ApiSetShipmentPalletsCo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSkipGoodsFeedbacksReactionRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsSkipGoodsFeedbacksReactionRequest struct {
+	ctx                              context.Context
+	FbsService                       *FbsAPIService
+	businessId                       int64
 	skipGoodsFeedbackReactionRequest *SkipGoodsFeedbackReactionRequest
 }
 
-func (r ApiSkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) ApiSkipGoodsFeedbacksReactionRequest {
+func (r FbsSkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) FbsSkipGoodsFeedbacksReactionRequest {
 	r.skipGoodsFeedbackReactionRequest = &skipGoodsFeedbackReactionRequest
 	return r
 }
 
-func (r ApiSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SkipGoodsFeedbacksReactionExecute(r)
+func (r FbsSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.SkipGoodsFeedbacksReactionExecute(r)
 }
 
 /*
@@ -22847,27 +22856,27 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiSkipGoodsFeedbacksReactionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsSkipGoodsFeedbacksReactionRequest
 */
-func (a *FbsAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) ApiSkipGoodsFeedbacksReactionRequest {
-	return ApiSkipGoodsFeedbacksReactionRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) FbsSkipGoodsFeedbacksReactionRequest {
+	return FbsSkipGoodsFeedbacksReactionRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r FbsSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SkipGoodsFeedbacksReaction")
@@ -22910,14 +22919,14 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -22950,8 +22959,8 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -22961,8 +22970,8 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -22972,8 +22981,8 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -22983,8 +22992,8 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -22994,8 +23003,8 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23005,8 +23014,8 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23023,23 +23032,23 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSubmitReturnDecisionRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
+type FbsSubmitReturnDecisionRequest struct {
+	ctx        context.Context
+	FbsService *FbsAPIService
 	campaignId int64
-	orderId int64
-	returnId int64
-	body *map[string]interface{}
+	orderId    int64
+	returnId   int64
+	body       *map[string]interface{}
 }
 
 // description
-func (r ApiSubmitReturnDecisionRequest) Body(body map[string]interface{}) ApiSubmitReturnDecisionRequest {
+func (r FbsSubmitReturnDecisionRequest) Body(body map[string]interface{}) FbsSubmitReturnDecisionRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiSubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SubmitReturnDecisionExecute(r)
+func (r FbsSubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.SubmitReturnDecisionExecute(r)
 }
 
 /*
@@ -23052,31 +23061,31 @@ SubmitReturnDecision Подтверждение решения по возвра
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @param returnId Идентификатор невыкупа или возврата.
- @return ApiSubmitReturnDecisionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@param returnId Идентификатор невыкупа или возврата.
+	@return FbsSubmitReturnDecisionRequest
 */
-func (a *FbsAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiSubmitReturnDecisionRequest {
-	return ApiSubmitReturnDecisionRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsSubmitReturnDecisionRequest {
+	return FbsSubmitReturnDecisionRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
-		returnId: returnId,
+		orderId:    orderId,
+		returnId:   returnId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) SubmitReturnDecisionExecute(r FbsSubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.SubmitReturnDecision")
@@ -23118,14 +23127,14 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -23158,8 +23167,8 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23169,8 +23178,8 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23180,8 +23189,8 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -23191,8 +23200,8 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -23202,8 +23211,8 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23213,8 +23222,8 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23231,21 +23240,21 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiTransferOrdersFromShipmentRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	shipmentId int64
+type FbsTransferOrdersFromShipmentRequest struct {
+	ctx                               context.Context
+	FbsService                        *FbsAPIService
+	campaignId                        int64
+	shipmentId                        int64
 	transferOrdersFromShipmentRequest *TransferOrdersFromShipmentRequest
 }
 
-func (r ApiTransferOrdersFromShipmentRequest) TransferOrdersFromShipmentRequest(transferOrdersFromShipmentRequest TransferOrdersFromShipmentRequest) ApiTransferOrdersFromShipmentRequest {
+func (r FbsTransferOrdersFromShipmentRequest) TransferOrdersFromShipmentRequest(transferOrdersFromShipmentRequest TransferOrdersFromShipmentRequest) FbsTransferOrdersFromShipmentRequest {
 	r.transferOrdersFromShipmentRequest = &transferOrdersFromShipmentRequest
 	return r
 }
 
-func (r ApiTransferOrdersFromShipmentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.TransferOrdersFromShipmentExecute(r)
+func (r FbsTransferOrdersFromShipmentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.TransferOrdersFromShipmentExecute(r)
 }
 
 /*
@@ -23270,29 +23279,29 @@ TransferOrdersFromShipment Перенос заказов в следующую �
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param shipmentId Идентификатор отгрузки.
- @return ApiTransferOrdersFromShipmentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param shipmentId Идентификатор отгрузки.
+	@return FbsTransferOrdersFromShipmentRequest
 */
-func (a *FbsAPIService) TransferOrdersFromShipment(ctx context.Context, campaignId int64, shipmentId int64) ApiTransferOrdersFromShipmentRequest {
-	return ApiTransferOrdersFromShipmentRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) TransferOrdersFromShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsTransferOrdersFromShipmentRequest {
+	return FbsTransferOrdersFromShipmentRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFromShipmentRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r FbsTransferOrdersFromShipmentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.TransferOrdersFromShipment")
@@ -23339,14 +23348,14 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFro
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -23379,8 +23388,8 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23390,8 +23399,8 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23401,8 +23410,8 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -23412,8 +23421,8 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -23423,8 +23432,8 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23434,8 +23443,8 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFro
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23452,20 +23461,20 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r ApiTransferOrdersFro
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateBusinessPricesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsUpdateBusinessPricesRequest struct {
+	ctx                         context.Context
+	FbsService                  *FbsAPIService
+	businessId                  int64
 	updateBusinessPricesRequest *UpdateBusinessPricesRequest
 }
 
-func (r ApiUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) ApiUpdateBusinessPricesRequest {
+func (r FbsUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) FbsUpdateBusinessPricesRequest {
 	r.updateBusinessPricesRequest = &updateBusinessPricesRequest
 	return r
 }
 
-func (r ApiUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateBusinessPricesExecute(r)
+func (r FbsUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.UpdateBusinessPricesExecute(r)
 }
 
 /*
@@ -23486,27 +23495,27 @@ UpdateBusinessPrices Установка цен на товары для всех
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateBusinessPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsUpdateBusinessPricesRequest
 */
-func (a *FbsAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) ApiUpdateBusinessPricesRequest {
-	return ApiUpdateBusinessPricesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) FbsUpdateBusinessPricesRequest {
+	return FbsUpdateBusinessPricesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) UpdateBusinessPricesExecute(r FbsUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateBusinessPrices")
@@ -23549,14 +23558,14 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -23589,8 +23598,8 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23600,8 +23609,8 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23611,8 +23620,8 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -23622,8 +23631,8 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -23633,8 +23642,8 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -23644,8 +23653,8 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23655,8 +23664,8 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23673,20 +23682,20 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateCampaignOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsUpdateCampaignOffersRequest struct {
+	ctx                         context.Context
+	FbsService                  *FbsAPIService
+	campaignId                  int64
 	updateCampaignOffersRequest *UpdateCampaignOffersRequest
 }
 
-func (r ApiUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) ApiUpdateCampaignOffersRequest {
+func (r FbsUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) FbsUpdateCampaignOffersRequest {
 	r.updateCampaignOffersRequest = &updateCampaignOffersRequest
 	return r
 }
 
-func (r ApiUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateCampaignOffersExecute(r)
+func (r FbsUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.UpdateCampaignOffersExecute(r)
 }
 
 /*
@@ -23699,27 +23708,27 @@ UpdateCampaignOffers Изменение условий продажи товар
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateCampaignOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsUpdateCampaignOffersRequest
 */
-func (a *FbsAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) ApiUpdateCampaignOffersRequest {
-	return ApiUpdateCampaignOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) FbsUpdateCampaignOffersRequest {
+	return FbsUpdateCampaignOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) UpdateCampaignOffersExecute(r FbsUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateCampaignOffers")
@@ -23762,14 +23771,14 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -23802,8 +23811,8 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -23813,8 +23822,8 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -23824,8 +23833,8 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -23835,8 +23844,8 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -23846,8 +23855,8 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -23857,8 +23866,8 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -23868,8 +23877,8 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -23886,21 +23895,21 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateExternalOrderIdRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	orderId int64
+type FbsUpdateExternalOrderIdRequest struct {
+	ctx                          context.Context
+	FbsService                   *FbsAPIService
+	campaignId                   int64
+	orderId                      int64
 	updateExternalOrderIdRequest *UpdateExternalOrderIdRequest
 }
 
-func (r ApiUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) ApiUpdateExternalOrderIdRequest {
+func (r FbsUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) FbsUpdateExternalOrderIdRequest {
 	r.updateExternalOrderIdRequest = &updateExternalOrderIdRequest
 	return r
 }
 
-func (r ApiUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateExternalOrderIdExecute(r)
+func (r FbsUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.UpdateExternalOrderIdExecute(r)
 }
 
 /*
@@ -23915,29 +23924,29 @@ UpdateExternalOrderId Передача или изменение дополни�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateExternalOrderIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsUpdateExternalOrderIdRequest
 */
-func (a *FbsAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) ApiUpdateExternalOrderIdRequest {
-	return ApiUpdateExternalOrderIdRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) FbsUpdateExternalOrderIdRequest {
+	return FbsUpdateExternalOrderIdRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) UpdateExternalOrderIdExecute(r FbsUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateExternalOrderId")
@@ -23981,14 +23990,14 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -24021,8 +24030,8 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -24032,8 +24041,8 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -24043,8 +24052,8 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -24054,8 +24063,8 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -24065,8 +24074,8 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -24076,8 +24085,8 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -24094,20 +24103,20 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateGoodsFeedbackCommentRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsUpdateGoodsFeedbackCommentRequest struct {
+	ctx                               context.Context
+	FbsService                        *FbsAPIService
+	businessId                        int64
 	updateGoodsFeedbackCommentRequest *UpdateGoodsFeedbackCommentRequest
 }
 
-func (r ApiUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) ApiUpdateGoodsFeedbackCommentRequest {
+func (r FbsUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) FbsUpdateGoodsFeedbackCommentRequest {
 	r.updateGoodsFeedbackCommentRequest = &updateGoodsFeedbackCommentRequest
 	return r
 }
 
-func (r ApiUpdateGoodsFeedbackCommentRequest) Execute() (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
-	return r.ApiService.UpdateGoodsFeedbackCommentExecute(r)
+func (r FbsUpdateGoodsFeedbackCommentRequest) Execute() (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
+	return r.FbsService.UpdateGoodsFeedbackCommentExecute(r)
 }
 
 /*
@@ -24134,27 +24143,27 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateGoodsFeedbackCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsUpdateGoodsFeedbackCommentRequest
 */
-func (a *FbsAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) ApiUpdateGoodsFeedbackCommentRequest {
-	return ApiUpdateGoodsFeedbackCommentRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) FbsUpdateGoodsFeedbackCommentRequest {
+	return FbsUpdateGoodsFeedbackCommentRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateGoodsFeedbackCommentResponse
-func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
+//
+//	@return UpdateGoodsFeedbackCommentResponse
+func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r FbsUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateGoodsFeedbackCommentResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateGoodsFeedbackCommentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateGoodsFeedbackComment")
@@ -24197,14 +24206,14 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -24237,8 +24246,8 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -24248,8 +24257,8 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -24259,8 +24268,8 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -24270,8 +24279,8 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -24281,8 +24290,8 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -24292,8 +24301,8 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -24310,20 +24319,20 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferContentRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsUpdateOfferContentRequest struct {
+	ctx                       context.Context
+	FbsService                *FbsAPIService
+	businessId                int64
 	updateOfferContentRequest *UpdateOfferContentRequest
 }
 
-func (r ApiUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) ApiUpdateOfferContentRequest {
+func (r FbsUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) FbsUpdateOfferContentRequest {
 	r.updateOfferContentRequest = &updateOfferContentRequest
 	return r
 }
 
-func (r ApiUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferContentExecute(r)
+func (r FbsUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
+	return r.FbsService.UpdateOfferContentExecute(r)
 }
 
 /*
@@ -24350,27 +24359,27 @@ UpdateOfferContent Редактирование категорийных хар�
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateOfferContentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsUpdateOfferContentRequest
 */
-func (a *FbsAPIService) UpdateOfferContent(ctx context.Context, businessId int64) ApiUpdateOfferContentRequest {
-	return ApiUpdateOfferContentRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateOfferContent(ctx context.Context, businessId int64) FbsUpdateOfferContentRequest {
+	return FbsUpdateOfferContentRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOfferContentResponse
-func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
+//
+//	@return UpdateOfferContentResponse
+func (a *FbsAPIService) UpdateOfferContentExecute(r FbsUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOfferContentResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOfferContentResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateOfferContent")
@@ -24413,14 +24422,14 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -24453,8 +24462,8 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -24464,8 +24473,8 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -24475,8 +24484,8 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -24486,8 +24495,8 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -24497,8 +24506,8 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -24508,8 +24517,8 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -24519,8 +24528,8 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -24537,20 +24546,20 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferMappingEntriesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsUpdateOfferMappingEntriesRequest struct {
+	ctx                            context.Context
+	FbsService                     *FbsAPIService
+	campaignId                     int64
 	updateOfferMappingEntryRequest *UpdateOfferMappingEntryRequest
 }
 
-func (r ApiUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(updateOfferMappingEntryRequest UpdateOfferMappingEntryRequest) ApiUpdateOfferMappingEntriesRequest {
+func (r FbsUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(updateOfferMappingEntryRequest UpdateOfferMappingEntryRequest) FbsUpdateOfferMappingEntriesRequest {
 	r.updateOfferMappingEntryRequest = &updateOfferMappingEntryRequest
 	return r
 }
 
-func (r ApiUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferMappingEntriesExecute(r)
+func (r FbsUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.UpdateOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -24590,30 +24599,31 @@ UpdateOfferMappingEntries Добавление и редактирование �
 |**⚙️ Лимит:** 5 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateOfferMappingEntriesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsUpdateOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) ApiUpdateOfferMappingEntriesRequest {
-	return ApiUpdateOfferMappingEntriesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) FbsUpdateOfferMappingEntriesRequest {
+	return FbsUpdateOfferMappingEntriesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
+//
 // Deprecated
-func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r FbsUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateOfferMappingEntries")
@@ -24656,14 +24666,14 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -24696,8 +24706,8 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -24707,8 +24717,8 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -24718,8 +24728,8 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -24729,8 +24739,8 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -24740,8 +24750,8 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -24751,8 +24761,8 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -24762,8 +24772,8 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -24780,27 +24790,27 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferMappingsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsUpdateOfferMappingsRequest struct {
+	ctx                        context.Context
+	FbsService                 *FbsAPIService
+	businessId                 int64
 	updateOfferMappingsRequest *UpdateOfferMappingsRequest
-	language *CatalogLanguageType
+	language                   *CatalogLanguageType
 }
 
-func (r ApiUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) ApiUpdateOfferMappingsRequest {
+func (r FbsUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) FbsUpdateOfferMappingsRequest {
 	r.updateOfferMappingsRequest = &updateOfferMappingsRequest
 	return r
 }
 
-// Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;. 
-func (r ApiUpdateOfferMappingsRequest) Language(language CatalogLanguageType) ApiUpdateOfferMappingsRequest {
+// Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
+func (r FbsUpdateOfferMappingsRequest) Language(language CatalogLanguageType) FbsUpdateOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferMappingsExecute(r)
+func (r FbsUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
+	return r.FbsService.UpdateOfferMappingsExecute(r)
 }
 
 /*
@@ -24832,10 +24842,11 @@ UpdateOfferMappings Добавление товаров в каталог и и�
 
 Когда вы добавляете товары в каталог, указывайте значения параметров `name` и `description` на русском языке. Чтобы на витрине они отображались и на другом языке, еще раз выполните запрос `POST businesses/{businessId}/offer-mappings/update`, где укажите:
 
-  * язык в параметре `language`;
-  * значения параметров `name` и `description` на указанном языке.
+  - язык в параметре `language`;
 
-  Повторно передавать остальные характеристики товара не нужно.
+  - значения параметров `name` и `description` на указанном языке.
+
+    Повторно передавать остальные характеристики товара не нужно.
 
 {% endcut %}
 
@@ -24876,27 +24887,27 @@ SKU товара можно изменить в кабинете продавц�
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 100 товаров в одном запросе|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdateOfferMappingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsUpdateOfferMappingsRequest
 */
-func (a *FbsAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) ApiUpdateOfferMappingsRequest {
-	return ApiUpdateOfferMappingsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) FbsUpdateOfferMappingsRequest {
+	return FbsUpdateOfferMappingsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOfferMappingsResponse
-func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
+//
+//	@return UpdateOfferMappingsResponse
+func (a *FbsAPIService) UpdateOfferMappingsExecute(r FbsUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOfferMappingsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOfferMappingsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateOfferMappings")
@@ -24942,14 +24953,14 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -24982,8 +24993,8 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -24993,8 +25004,8 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -25004,8 +25015,8 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -25015,8 +25026,8 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -25026,8 +25037,8 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -25037,8 +25048,8 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -25048,8 +25059,8 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -25066,21 +25077,21 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderItemsRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	orderId int64
+type FbsUpdateOrderItemsRequest struct {
+	ctx                    context.Context
+	FbsService             *FbsAPIService
+	campaignId             int64
+	orderId                int64
 	updateOrderItemRequest *UpdateOrderItemRequest
 }
 
-func (r ApiUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) ApiUpdateOrderItemsRequest {
+func (r FbsUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) FbsUpdateOrderItemsRequest {
 	r.updateOrderItemRequest = &updateOrderItemRequest
 	return r
 }
 
-func (r ApiUpdateOrderItemsRequest) Execute() (*http.Response, error) {
-	return r.ApiService.UpdateOrderItemsExecute(r)
+func (r FbsUpdateOrderItemsRequest) Execute() (*http.Response, error) {
+	return r.FbsService.UpdateOrderItemsExecute(r)
 }
 
 /*
@@ -25133,27 +25144,26 @@ UpdateOrderItems Удаление товара из заказа или умен
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateOrderItemsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsUpdateOrderItemsRequest
 */
-func (a *FbsAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderItemsRequest {
-	return ApiUpdateOrderItemsRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) FbsUpdateOrderItemsRequest {
+	return FbsUpdateOrderItemsRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*http.Response, error) {
+func (a *FbsAPIService) UpdateOrderItemsExecute(r FbsUpdateOrderItemsRequest) (*http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
+		localVarHTTPMethod = http.MethodPut
+		localVarPostBody   interface{}
+		formFiles          []formFile
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateOrderItems")
@@ -25197,14 +25207,14 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -25237,8 +25247,8 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -25248,8 +25258,8 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -25259,8 +25269,8 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -25270,8 +25280,8 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -25281,8 +25291,8 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -25292,8 +25302,8 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 				newErr.error = err.Error()
 				return localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarHTTPResponse, newErr
 	}
@@ -25301,21 +25311,21 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStatusRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
-	orderId int64
+type FbsUpdateOrderStatusRequest struct {
+	ctx                      context.Context
+	FbsService               *FbsAPIService
+	campaignId               int64
+	orderId                  int64
 	updateOrderStatusRequest *UpdateOrderStatusRequest
 }
 
-func (r ApiUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) ApiUpdateOrderStatusRequest {
+func (r FbsUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) FbsUpdateOrderStatusRequest {
 	r.updateOrderStatusRequest = &updateOrderStatusRequest
 	return r
 }
 
-func (r ApiUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
-	return r.ApiService.UpdateOrderStatusExecute(r)
+func (r FbsUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
+	return r.FbsService.UpdateOrderStatusExecute(r)
 }
 
 /*
@@ -25332,29 +25342,29 @@ UpdateOrderStatus Изменение статуса одного заказа
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @param orderId Идентификатор заказа.
- @return ApiUpdateOrderStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@param orderId Идентификатор заказа.
+	@return FbsUpdateOrderStatusRequest
 */
-func (a *FbsAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderStatusRequest {
-	return ApiUpdateOrderStatusRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) FbsUpdateOrderStatusRequest {
+	return FbsUpdateOrderStatusRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
-		orderId: orderId,
+		orderId:    orderId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOrderStatusResponse
-func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
+//
+//	@return UpdateOrderStatusResponse
+func (a *FbsAPIService) UpdateOrderStatusExecute(r FbsUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOrderStatusResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOrderStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateOrderStatus")
@@ -25398,14 +25408,14 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -25438,8 +25448,8 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -25449,8 +25459,8 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -25460,8 +25470,8 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -25471,8 +25481,8 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -25482,8 +25492,8 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -25493,8 +25503,8 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -25511,20 +25521,20 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStatusesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsUpdateOrderStatusesRequest struct {
+	ctx                        context.Context
+	FbsService                 *FbsAPIService
+	campaignId                 int64
 	updateOrderStatusesRequest *UpdateOrderStatusesRequest
 }
 
-func (r ApiUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) ApiUpdateOrderStatusesRequest {
+func (r FbsUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) FbsUpdateOrderStatusesRequest {
 	r.updateOrderStatusesRequest = &updateOrderStatusesRequest
 	return r
 }
 
-func (r ApiUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
-	return r.ApiService.UpdateOrderStatusesExecute(r)
+func (r FbsUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
+	return r.FbsService.UpdateOrderStatusesExecute(r)
 }
 
 /*
@@ -25543,27 +25553,27 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 |**⚙️ Лимит:** 100 000 заказов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateOrderStatusesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsUpdateOrderStatusesRequest
 */
-func (a *FbsAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) ApiUpdateOrderStatusesRequest {
-	return ApiUpdateOrderStatusesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) FbsUpdateOrderStatusesRequest {
+	return FbsUpdateOrderStatusesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateOrderStatusesResponse
-func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
+//
+//	@return UpdateOrderStatusesResponse
+func (a *FbsAPIService) UpdateOrderStatusesExecute(r FbsUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateOrderStatusesResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateOrderStatusesResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateOrderStatuses")
@@ -25606,14 +25616,14 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -25646,8 +25656,8 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -25657,8 +25667,8 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -25668,8 +25678,8 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -25679,8 +25689,8 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -25690,8 +25700,8 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -25701,8 +25711,8 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -25719,20 +25729,20 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePricesRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsUpdatePricesRequest struct {
+	ctx                 context.Context
+	FbsService          *FbsAPIService
+	campaignId          int64
 	updatePricesRequest *UpdatePricesRequest
 }
 
-func (r ApiUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) ApiUpdatePricesRequest {
+func (r FbsUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) FbsUpdatePricesRequest {
 	r.updatePricesRequest = &updatePricesRequest
 	return r
 }
 
-func (r ApiUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdatePricesExecute(r)
+func (r FbsUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.UpdatePricesExecute(r)
 }
 
 /*
@@ -25759,27 +25769,27 @@ UpdatePrices Установка цен на товары в конкретном
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdatePricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsUpdatePricesRequest
 */
-func (a *FbsAPIService) UpdatePrices(ctx context.Context, campaignId int64) ApiUpdatePricesRequest {
-	return ApiUpdatePricesRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdatePrices(ctx context.Context, campaignId int64) FbsUpdatePricesRequest {
+	return FbsUpdatePricesRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) UpdatePricesExecute(r FbsUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdatePrices")
@@ -25822,14 +25832,14 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -25862,8 +25872,8 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -25873,8 +25883,8 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -25884,8 +25894,8 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -25895,8 +25905,8 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -25906,8 +25916,8 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
@@ -25917,8 +25927,8 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -25928,8 +25938,8 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -25946,20 +25956,20 @@ func (a *FbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePromoOffersRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	businessId int64
+type FbsUpdatePromoOffersRequest struct {
+	ctx                      context.Context
+	FbsService               *FbsAPIService
+	businessId               int64
 	updatePromoOffersRequest *UpdatePromoOffersRequest
 }
 
-func (r ApiUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) ApiUpdatePromoOffersRequest {
+func (r FbsUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) FbsUpdatePromoOffersRequest {
 	r.updatePromoOffersRequest = &updatePromoOffersRequest
 	return r
 }
 
-func (r ApiUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
-	return r.ApiService.UpdatePromoOffersExecute(r)
+func (r FbsUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
+	return r.FbsService.UpdatePromoOffersExecute(r)
 }
 
 /*
@@ -25974,27 +25984,27 @@ UpdatePromoOffers Добавление товаров в акцию или из�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
- @return ApiUpdatePromoOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return FbsUpdatePromoOffersRequest
 */
-func (a *FbsAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) ApiUpdatePromoOffersRequest {
-	return ApiUpdatePromoOffersRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) FbsUpdatePromoOffersRequest {
+	return FbsUpdatePromoOffersRequest{
+		FbsService: a,
+		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdatePromoOffersResponse
-func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
+//
+//	@return UpdatePromoOffersResponse
+func (a *FbsAPIService) UpdatePromoOffersExecute(r FbsUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdatePromoOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdatePromoOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdatePromoOffers")
@@ -26037,14 +26047,14 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -26077,8 +26087,8 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -26088,8 +26098,8 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -26099,8 +26109,8 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -26110,8 +26120,8 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -26121,8 +26131,8 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -26132,8 +26142,8 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -26150,20 +26160,20 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateStocksRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsUpdateStocksRequest struct {
+	ctx                 context.Context
+	FbsService          *FbsAPIService
+	campaignId          int64
 	updateStocksRequest *UpdateStocksRequest
 }
 
-func (r ApiUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) ApiUpdateStocksRequest {
+func (r FbsUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) FbsUpdateStocksRequest {
 	r.updateStocksRequest = &updateStocksRequest
 	return r
 }
 
-func (r ApiUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateStocksExecute(r)
+func (r FbsUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.FbsService.UpdateStocksExecute(r)
 }
 
 /*
@@ -26186,27 +26196,27 @@ UpdateStocks Передача информации об остатках
 |**⚙️ Лимит:** 100 000 товаров в минуту|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateStocksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsUpdateStocksRequest
 */
-func (a *FbsAPIService) UpdateStocks(ctx context.Context, campaignId int64) ApiUpdateStocksRequest {
-	return ApiUpdateStocksRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateStocks(ctx context.Context, campaignId int64) FbsUpdateStocksRequest {
+	return FbsUpdateStocksRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
-func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
+//
+//	@return EmptyApiResponse
+func (a *FbsAPIService) UpdateStocksExecute(r FbsUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPut
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *EmptyApiResponse
+		localVarHTTPMethod  = http.MethodPut
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateStocks")
@@ -26249,14 +26259,14 @@ func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -26289,8 +26299,8 @@ func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -26300,8 +26310,8 @@ func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -26311,8 +26321,8 @@ func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -26322,8 +26332,8 @@ func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -26333,8 +26343,8 @@ func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -26344,8 +26354,8 @@ func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -26362,20 +26372,20 @@ func (a *FbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateWarehouseStatusRequest struct {
-	ctx context.Context
-	ApiService *FbsAPIService
-	campaignId int64
+type FbsUpdateWarehouseStatusRequest struct {
+	ctx                          context.Context
+	FbsService                   *FbsAPIService
+	campaignId                   int64
 	updateWarehouseStatusRequest *UpdateWarehouseStatusRequest
 }
 
-func (r ApiUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) ApiUpdateWarehouseStatusRequest {
+func (r FbsUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) FbsUpdateWarehouseStatusRequest {
 	r.updateWarehouseStatusRequest = &updateWarehouseStatusRequest
 	return r
 }
 
-func (r ApiUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
-	return r.ApiService.UpdateWarehouseStatusExecute(r)
+func (r FbsUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
+	return r.FbsService.UpdateWarehouseStatusExecute(r)
 }
 
 /*
@@ -26390,27 +26400,27 @@ UpdateWarehouseStatus Изменение статуса склада
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
- @return ApiUpdateWarehouseStatusRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	@return FbsUpdateWarehouseStatusRequest
 */
-func (a *FbsAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) ApiUpdateWarehouseStatusRequest {
-	return ApiUpdateWarehouseStatusRequest{
-		ApiService: a,
-		ctx: ctx,
+func (a *FbsAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) FbsUpdateWarehouseStatusRequest {
+	return FbsUpdateWarehouseStatusRequest{
+		FbsService: a,
+		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//  @return UpdateWarehouseStatusResponse
-func (a *FbsAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
+//
+//	@return UpdateWarehouseStatusResponse
+func (a *FbsAPIService) UpdateWarehouseStatusExecute(r FbsUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *UpdateWarehouseStatusResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateWarehouseStatusResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbsAPIService.UpdateWarehouseStatus")
@@ -26453,14 +26463,14 @@ func (a *FbsAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
+			if apiKey, ok := auth["FbsKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Api-Key"] = key
+				localVarHeaderParams["Fbs-Key"] = key
 			}
 		}
 	}
@@ -26493,8 +26503,8 @@ func (a *FbsAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -26504,8 +26514,8 @@ func (a *FbsAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -26515,8 +26525,8 @@ func (a *FbsAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -26526,8 +26536,8 @@ func (a *FbsAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -26537,8 +26547,8 @@ func (a *FbsAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusR
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

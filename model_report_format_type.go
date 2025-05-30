@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// ReportFormatType Формат отчета:  * `FILE` — файл с электронной таблицей (XLSX). * `CSV` — ZIP-архив с CSV-файлами на каждый лист отчета. * `JSON` — ZIP-архив с JSON-файлами на каждый лист отчета. 
+// ReportFormatType Формат отчета:  * `FILE` — файл с электронной таблицей (XLSX). * `CSV` — ZIP-архив с CSV-файлами на каждый лист отчета. * `JSON` — ZIP-архив с JSON-файлами на каждый лист отчета.
 type ReportFormatType string
 
 // List of ReportFormatType
 const (
-	FILE ReportFormatType = "FILE"
-	CSV ReportFormatType = "CSV"
-	JSON ReportFormatType = "JSON"
+	ReportFormatType_FILE ReportFormatType = "FILE"
+	ReportFormatType_CSV  ReportFormatType = "CSV"
+	ReportFormatType_JSON ReportFormatType = "JSON"
 )
 
 // All allowed values of ReportFormatType enum
@@ -110,4 +110,3 @@ func (v *NullableReportFormatType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

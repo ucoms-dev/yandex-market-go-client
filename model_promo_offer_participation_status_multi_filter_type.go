@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,16 +15,16 @@ import (
 	"fmt"
 )
 
-// PromoOfferParticipationStatusMultiFilterType Фильтр для товаров, которые могут участвовать в акции:  * `MANUALLY_ADDED` — товары, которые добавлены вручную.  * `RENEWED` — товары, которые добавлены автоматически из предыдущей акции «Бестселлеры Маркета». Только для акций «Бестселлеры Маркета».  * `RENEW_FAILED` — товары, которые не получилось перенести из предыдущей акции «Бестселлеры Маркета». Только для акций «Бестселлеры Маркета».  * `NOT_MANUALLY_ADDED` — товары, которые не участвуют в акции и те, которые добавлены автоматически.  * `MINIMUM_FOR_PROMOS` — товары с установленным минимумом по цене для акций, который соответствует порогу `maxPromoPrice`. Такие товары участвуют в акции с ценой `maxPromoPrice`. Только для акций «Бестселлеры Маркета».  Если не передать параметр `statuses`, вернутся все товары.  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index). 
+// PromoOfferParticipationStatusMultiFilterType Фильтр для товаров, которые могут участвовать в акции:  * `MANUALLY_ADDED` — товары, которые добавлены вручную.  * `RENEWED` — товары, которые добавлены автоматически из предыдущей акции «Бестселлеры Маркета». Только для акций «Бестселлеры Маркета».  * `RENEW_FAILED` — товары, которые не получилось перенести из предыдущей акции «Бестселлеры Маркета». Только для акций «Бестселлеры Маркета».  * `NOT_MANUALLY_ADDED` — товары, которые не участвуют в акции и те, которые добавлены автоматически.  * `MINIMUM_FOR_PROMOS` — товары с установленным минимумом по цене для акций, который соответствует порогу `maxPromoPrice`. Такие товары участвуют в акции с ценой `maxPromoPrice`. Только для акций «Бестселлеры Маркета».  Если не передать параметр `statuses`, вернутся все товары.  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index).
 type PromoOfferParticipationStatusMultiFilterType string
 
 // List of PromoOfferParticipationStatusMultiFilterType
 const (
-	MANUALLY_ADDED PromoOfferParticipationStatusMultiFilterType = "MANUALLY_ADDED"
-	RENEWED PromoOfferParticipationStatusMultiFilterType = "RENEWED"
-	RENEW_FAILED PromoOfferParticipationStatusMultiFilterType = "RENEW_FAILED"
-	NOT_MANUALLY_ADDED PromoOfferParticipationStatusMultiFilterType = "NOT_MANUALLY_ADDED"
-	MINIMUM_FOR_PROMOS PromoOfferParticipationStatusMultiFilterType = "MINIMUM_FOR_PROMOS"
+	PromoOfferParticipationStatusMultiFilterType_MANUALLY_ADDED     PromoOfferParticipationStatusMultiFilterType = "MANUALLY_ADDED"
+	PromoOfferParticipationStatusMultiFilterType_RENEWED            PromoOfferParticipationStatusMultiFilterType = "RENEWED"
+	PromoOfferParticipationStatusMultiFilterType_RENEW_FAILED       PromoOfferParticipationStatusMultiFilterType = "RENEW_FAILED"
+	PromoOfferParticipationStatusMultiFilterType_NOT_MANUALLY_ADDED PromoOfferParticipationStatusMultiFilterType = "NOT_MANUALLY_ADDED"
+	PromoOfferParticipationStatusMultiFilterType_MINIMUM_FOR_PROMOS PromoOfferParticipationStatusMultiFilterType = "MINIMUM_FOR_PROMOS"
 )
 
 // All allowed values of PromoOfferParticipationStatusMultiFilterType enum
@@ -114,4 +114,3 @@ func (v *NullablePromoOfferParticipationStatusMultiFilterType) UnmarshalJSON(src
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

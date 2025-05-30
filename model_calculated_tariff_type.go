@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,19 +15,19 @@ import (
 	"fmt"
 )
 
-// CalculatedTariffType Услуга Маркета:  * `AGENCY_COMMISSION` — прием платежа покупателя.  * `PAYMENT_TRANSFER` — перевод платежа покупателя.  * `FEE` — размещение товара на Маркете.  * `DELIVERY_TO_CUSTOMER` — доставка покупателю.  * `CROSSREGIONAL_DELIVERY` — доставка в федеральный округ, город или населенный пункт.  * `EXPRESS_DELIVERY` — экспресс-доставка покупателю.  * `SORTING` — обработка заказа.  * `MIDDLE_MILE` — средняя миля.  Подробнее об услугах Маркета читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/introduction/rates/index.html). 
+// CalculatedTariffType Услуга Маркета:  * `AGENCY_COMMISSION` — прием платежа покупателя.  * `PAYMENT_TRANSFER` — перевод платежа покупателя.  * `FEE` — размещение товара на Маркете.  * `DELIVERY_TO_CUSTOMER` — доставка покупателю.  * `CROSSREGIONAL_DELIVERY` — доставка в федеральный округ, город или населенный пункт.  * `EXPRESS_DELIVERY` — экспресс-доставка покупателю.  * `SORTING` — обработка заказа.  * `MIDDLE_MILE` — средняя миля.  Подробнее об услугах Маркета читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/introduction/rates/index.html).
 type CalculatedTariffType string
 
 // List of CalculatedTariffType
 const (
-	AGENCY_COMMISSION CalculatedTariffType = "AGENCY_COMMISSION"
-	PAYMENT_TRANSFER CalculatedTariffType = "PAYMENT_TRANSFER"
-	FEE CalculatedTariffType = "FEE"
-	DELIVERY_TO_CUSTOMER CalculatedTariffType = "DELIVERY_TO_CUSTOMER"
-	CROSSREGIONAL_DELIVERY CalculatedTariffType = "CROSSREGIONAL_DELIVERY"
-	EXPRESS_DELIVERY CalculatedTariffType = "EXPRESS_DELIVERY"
-	SORTING CalculatedTariffType = "SORTING"
-	MIDDLE_MILE CalculatedTariffType = "MIDDLE_MILE"
+	CalculatedTariffType_AGENCY_COMMISSION      CalculatedTariffType = "AGENCY_COMMISSION"
+	CalculatedTariffType_PAYMENT_TRANSFER       CalculatedTariffType = "PAYMENT_TRANSFER"
+	CalculatedTariffType_FEE                    CalculatedTariffType = "FEE"
+	CalculatedTariffType_DELIVERY_TO_CUSTOMER   CalculatedTariffType = "DELIVERY_TO_CUSTOMER"
+	CalculatedTariffType_CROSSREGIONAL_DELIVERY CalculatedTariffType = "CROSSREGIONAL_DELIVERY"
+	CalculatedTariffType_EXPRESS_DELIVERY       CalculatedTariffType = "EXPRESS_DELIVERY"
+	CalculatedTariffType_SORTING                CalculatedTariffType = "SORTING"
+	CalculatedTariffType_MIDDLE_MILE            CalculatedTariffType = "MIDDLE_MILE"
 )
 
 // All allowed values of CalculatedTariffType enum
@@ -120,4 +120,3 @@ func (v *NullableCalculatedTariffType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

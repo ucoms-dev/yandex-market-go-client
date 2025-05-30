@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OrderDeliveryDateReasonType Причина переноса доставки заказа. Возможные причины изменения даты:   - ```USER_MOVED_DELIVERY_DATES``` — покупатель попросил изменить дату или вы договорились привезти ему заказ раньше изначальной даты. Кроме этого указывается для подтверждения даты доставки товаров на заказ с долгой (31-60 дней) доставкой.   - ```PARTNER_MOVED_DELIVERY_DATES``` — магазин не может доставить заказ в срок. 
+// OrderDeliveryDateReasonType Причина переноса доставки заказа. Возможные причины изменения даты:   - ```USER_MOVED_DELIVERY_DATES``` — покупатель попросил изменить дату или вы договорились привезти ему заказ раньше изначальной даты. Кроме этого указывается для подтверждения даты доставки товаров на заказ с долгой (31-60 дней) доставкой.   - ```PARTNER_MOVED_DELIVERY_DATES``` — магазин не может доставить заказ в срок.
 type OrderDeliveryDateReasonType string
 
 // List of OrderDeliveryDateReasonType
 const (
-	USER_MOVED_DELIVERY_DATES OrderDeliveryDateReasonType = "USER_MOVED_DELIVERY_DATES"
-	PARTNER_MOVED_DELIVERY_DATES OrderDeliveryDateReasonType = "PARTNER_MOVED_DELIVERY_DATES"
+	OrderDeliveryDateReasonType_USER_MOVED_DELIVERY_DATES    OrderDeliveryDateReasonType = "USER_MOVED_DELIVERY_DATES"
+	OrderDeliveryDateReasonType_PARTNER_MOVED_DELIVERY_DATES OrderDeliveryDateReasonType = "PARTNER_MOVED_DELIVERY_DATES"
 )
 
 // All allowed values of OrderDeliveryDateReasonType enum
@@ -108,4 +108,3 @@ func (v *NullableOrderDeliveryDateReasonType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

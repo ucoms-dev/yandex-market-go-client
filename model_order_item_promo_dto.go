@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -22,13 +22,13 @@ var _ MappedNullable = &OrderItemPromoDTO{}
 // OrderItemPromoDTO Информация о вознаграждениях партнеру за скидки на товар по промокодам, купонам и акциям.
 type OrderItemPromoDTO struct {
 	Type OrderPromoType `json:"type"`
-	// Размер пользовательской скидки в валюте покупателя. 
+	// Размер пользовательской скидки в валюте покупателя.
 	Discount *float32 `json:"discount,omitempty"`
-	// Вознаграждение партнеру от Маркета за товар, проданный в рамках акции. 
+	// Вознаграждение партнеру от Маркета за товар, проданный в рамках акции.
 	Subsidy float32 `json:"subsidy"`
-	// Идентификатор акции поставщика. 
+	// Идентификатор акции поставщика.
 	ShopPromoId *string `json:"shopPromoId,omitempty"`
-	// Идентификатор акции в рамках соглашения на оказание услуг по продвижению сервиса между Маркетом и партнером. 
+	// Идентификатор акции в рамках соглашения на оказание услуг по продвижению сервиса между Маркетом и партнером.
 	MarketPromoId *string `json:"marketPromoId,omitempty"`
 }
 
@@ -198,7 +198,7 @@ func (o *OrderItemPromoDTO) SetMarketPromoId(v string) {
 }
 
 func (o OrderItemPromoDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -235,10 +235,10 @@ func (o *OrderItemPromoDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -294,5 +294,3 @@ func (v *NullableOrderItemPromoDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

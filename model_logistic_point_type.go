@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,17 +15,17 @@ import (
 	"fmt"
 )
 
-// LogisticPointType Тип логистической точки:    * `WAREHOUSE` — склад.   * `PICKUP_POINT` — обычная точка выдачи заказов (ПВЗ).   * `PICKUP_TERMINAL` — постамат.   * `PICKUP_POST_OFFICE` — отделение почтовой связи (ОПС).   * `PICKUP_MIXED` — торговый зал и пункт выдачи заказов.   * `PICKUP_RETAIL` — торговый зал. 
+// LogisticPointType Тип логистической точки:    * `WAREHOUSE` — склад.   * `PICKUP_POINT` — обычная точка выдачи заказов (ПВЗ).   * `PICKUP_TERMINAL` — постамат.   * `PICKUP_POST_OFFICE` — отделение почтовой связи (ОПС).   * `PICKUP_MIXED` — торговый зал и пункт выдачи заказов.   * `PICKUP_RETAIL` — торговый зал.
 type LogisticPointType string
 
 // List of LogisticPointType
 const (
-	WAREHOUSE LogisticPointType = "WAREHOUSE"
-	PICKUP_POINT LogisticPointType = "PICKUP_POINT"
-	PICKUP_TERMINAL LogisticPointType = "PICKUP_TERMINAL"
-	PICKUP_POST_OFFICE LogisticPointType = "PICKUP_POST_OFFICE"
-	PICKUP_MIXED LogisticPointType = "PICKUP_MIXED"
-	PICKUP_RETAIL LogisticPointType = "PICKUP_RETAIL"
+	LogisticPointType_WAREHOUSE          LogisticPointType = "WAREHOUSE"
+	LogisticPointType_PICKUP_POINT       LogisticPointType = "PICKUP_POINT"
+	LogisticPointType_PICKUP_TERMINAL    LogisticPointType = "PICKUP_TERMINAL"
+	LogisticPointType_PICKUP_POST_OFFICE LogisticPointType = "PICKUP_POST_OFFICE"
+	LogisticPointType_PICKUP_MIXED       LogisticPointType = "PICKUP_MIXED"
+	LogisticPointType_PICKUP_RETAIL      LogisticPointType = "PICKUP_RETAIL"
 )
 
 // All allowed values of LogisticPointType enum
@@ -116,4 +116,3 @@ func (v *NullableLogisticPointType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

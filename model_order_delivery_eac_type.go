@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// OrderDeliveryEacType Тип кода подтверждения ЭАПП:  * `MERCHANT_TO_COURIER` (временно не возвращается) — продавец передает код курьеру для получения невыкупа.  * `COURIER_TO_MERCHANT` — курьер передает код продавцу для получения заказа.  * `CHECKING_BY_MERCHANT` — продавец проверяет код на своей стороне. 
+// OrderDeliveryEacType Тип кода подтверждения ЭАПП:  * `MERCHANT_TO_COURIER` (временно не возвращается) — продавец передает код курьеру для получения невыкупа.  * `COURIER_TO_MERCHANT` — курьер передает код продавцу для получения заказа.  * `CHECKING_BY_MERCHANT` — продавец проверяет код на своей стороне.
 type OrderDeliveryEacType string
 
 // List of OrderDeliveryEacType
 const (
-	MERCHANT_TO_COURIER OrderDeliveryEacType = "MERCHANT_TO_COURIER"
-	COURIER_TO_MERCHANT OrderDeliveryEacType = "COURIER_TO_MERCHANT"
-	CHECKING_BY_MERCHANT OrderDeliveryEacType = "CHECKING_BY_MERCHANT"
+	OrderDeliveryEacType_MERCHANT_TO_COURIER  OrderDeliveryEacType = "MERCHANT_TO_COURIER"
+	OrderDeliveryEacType_COURIER_TO_MERCHANT  OrderDeliveryEacType = "COURIER_TO_MERCHANT"
+	OrderDeliveryEacType_CHECKING_BY_MERCHANT OrderDeliveryEacType = "CHECKING_BY_MERCHANT"
 )
 
 // All allowed values of OrderDeliveryEacType enum
@@ -110,4 +110,3 @@ func (v *NullableOrderDeliveryEacType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

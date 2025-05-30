@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -18,7 +18,7 @@ import (
 // checks if the GetSupplyRequestsRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetSupplyRequestsRequest{}
 
-// GetSupplyRequestsRequest Модель для фильтрации и сортировки заявок на поставку. Фильтры по `requestDateFrom` и `requestDateTo` отбирают заявки по targetLocation->requestedDate и transitLocation->requestedDate. 
+// GetSupplyRequestsRequest Модель для фильтрации и сортировки заявок на поставку. Фильтры по `requestDateFrom` и `requestDateTo` отбирают заявки по targetLocation->requestedDate и transitLocation->requestedDate.
 type GetSupplyRequestsRequest struct {
 	// Идентификаторы заявок.
 	RequestIds []int64 `json:"requestIds,omitempty"`
@@ -32,7 +32,7 @@ type GetSupplyRequestsRequest struct {
 	RequestSubtypes []SupplyRequestSubType `json:"requestSubtypes,omitempty"`
 	// Статусы заявок для фильтрации.
 	RequestStatuses []SupplyRequestStatusType `json:"requestStatuses,omitempty"`
-	Sorting *SupplyRequestSortingDTO `json:"sorting,omitempty"`
+	Sorting         *SupplyRequestSortingDTO  `json:"sorting,omitempty"`
 }
 
 // NewGetSupplyRequestsRequest instantiates a new GetSupplyRequestsRequest object
@@ -117,6 +117,7 @@ func (o *GetSupplyRequestsRequest) HasRequestDateFrom() bool {
 func (o *GetSupplyRequestsRequest) SetRequestDateFrom(v time.Time) {
 	o.RequestDateFrom.Set(&v)
 }
+
 // SetRequestDateFromNil sets the value for RequestDateFrom to be an explicit nil
 func (o *GetSupplyRequestsRequest) SetRequestDateFromNil() {
 	o.RequestDateFrom.Set(nil)
@@ -159,6 +160,7 @@ func (o *GetSupplyRequestsRequest) HasRequestDateTo() bool {
 func (o *GetSupplyRequestsRequest) SetRequestDateTo(v time.Time) {
 	o.RequestDateTo.Set(&v)
 }
+
 // SetRequestDateToNil sets the value for RequestDateTo to be an explicit nil
 func (o *GetSupplyRequestsRequest) SetRequestDateToNil() {
 	o.RequestDateTo.Set(nil)
@@ -301,7 +303,7 @@ func (o *GetSupplyRequestsRequest) SetSorting(v SupplyRequestSortingDTO) {
 }
 
 func (o GetSupplyRequestsRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -369,5 +371,3 @@ func (v *NullableGetSupplyRequestsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

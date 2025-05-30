@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,7 +17,7 @@ import (
 // checks if the ReportLanguageType type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReportLanguageType{}
 
-// ReportLanguageType Язык отчета:  * `RU` — русский язык. * `EN` — английский язык. 
+// ReportLanguageType Язык отчета:  * `RU` — русский язык. * `EN` — английский язык.
 type ReportLanguageType struct {
 }
 
@@ -39,7 +39,7 @@ func NewReportLanguageTypeWithDefaults() *ReportLanguageType {
 }
 
 func (o ReportLanguageType) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -70,7 +70,7 @@ func (v NullableReportLanguageType) IsSet() bool {
 }
 
 func (v *NullableReportLanguageType) Unset() {
-	v.value = nil
+	v.value = ReportLanguageType{}
 	v.isSet = false
 }
 
@@ -86,5 +86,3 @@ func (v *NullableReportLanguageType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

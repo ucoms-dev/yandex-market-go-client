@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -19,9 +19,9 @@ var _ MappedNullable = &CampaignSettingsTimePeriodDTO{}
 
 // CampaignSettingsTimePeriodDTO Период, за который рассчитывается итоговый список нерабочих дней службы доставки.
 type CampaignSettingsTimePeriodDTO struct {
-	// Формат даты: `ДД-ММ-ГГГГ`. 
+	// Формат даты: `ДД-ММ-ГГГГ`.
 	FromDate *string `json:"fromDate,omitempty"`
-	// Формат даты: `ДД-ММ-ГГГГ`. 
+	// Формат даты: `ДД-ММ-ГГГГ`.
 	ToDate *string `json:"toDate,omitempty"`
 }
 
@@ -107,7 +107,7 @@ func (o *CampaignSettingsTimePeriodDTO) SetToDate(v string) {
 }
 
 func (o CampaignSettingsTimePeriodDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,5 +160,3 @@ func (v *NullableCampaignSettingsTimePeriodDTO) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,9 +17,9 @@ import (
 // checks if the DeletePromoOffersResultDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &DeletePromoOffersResultDTO{}
 
-// DeletePromoOffersResultDTO Результат удаления товаров из акции.  Возвращается, только если в запросе был передан параметр `offerIds`. 
+// DeletePromoOffersResultDTO Результат удаления товаров из акции.  Возвращается, только если в запросе был передан параметр `offerIds`.
 type DeletePromoOffersResultDTO struct {
-	// Товары, при удалении которых появились ошибки.  Возвращается, только если есть такие товары. 
+	// Товары, при удалении которых появились ошибки.  Возвращается, только если есть такие товары.
 	RejectedOffers []RejectedPromoOfferDeleteDTO `json:"rejectedOffers,omitempty"`
 }
 
@@ -74,7 +74,7 @@ func (o *DeletePromoOffersResultDTO) SetRejectedOffers(v []RejectedPromoOfferDel
 }
 
 func (o DeletePromoOffersResultDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -124,5 +124,3 @@ func (v *NullableDeletePromoOffersResultDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,10 +11,10 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the GoodsFeedbackDTO type satisfies the MappedNullable interface at compile time
@@ -22,18 +22,18 @@ var _ MappedNullable = &GoodsFeedbackDTO{}
 
 // GoodsFeedbackDTO Отзыв о товаре.
 type GoodsFeedbackDTO struct {
-	// Идентификатор отзыва. 
+	// Идентификатор отзыва.
 	FeedbackId int64 `json:"feedbackId"`
 	// Дата и время создания отзыва.
 	CreatedAt time.Time `json:"createdAt"`
-	// Прочитан ли отзыв.  Принимает значение `false`, если магазин:  * Прочитал отзыв в кабинете продавца на Маркете. * Отметил отзыв прочитанным — метод [POST businesses/{businessId}/goods-feedback/skip-reaction](../../reference/goods-feedback/skipGoodsFeedbacksReaction.md). * Оставил комментарий к отзыву — метод [POST businesses/{businessId}/goods-feedback/comments/update](../../reference/goods-feedback/updateGoodsFeedbackComment.md). 
-	NeedReaction bool `json:"needReaction"`
-	Identifiers GoodsFeedbackIdentifiersDTO `json:"identifiers"`
+	// Прочитан ли отзыв.  Принимает значение `false`, если магазин:  * Прочитал отзыв в кабинете продавца на Маркете. * Отметил отзыв прочитанным — метод [POST businesses/{businessId}/goods-feedback/skip-reaction](../../reference/goods-feedback/skipGoodsFeedbacksReaction.md). * Оставил комментарий к отзыву — метод [POST businesses/{businessId}/goods-feedback/comments/update](../../reference/goods-feedback/updateGoodsFeedbackComment.md).
+	NeedReaction bool                        `json:"needReaction"`
+	Identifiers  GoodsFeedbackIdentifiersDTO `json:"identifiers"`
 	// Имя автора отзыва.
-	Author *string `json:"author,omitempty"`
+	Author      *string                      `json:"author,omitempty"`
 	Description *GoodsFeedbackDescriptionDTO `json:"description,omitempty"`
-	Media *GoodsFeedbackMediaDTO `json:"media,omitempty"`
-	Statistics GoodsFeedbackStatisticsDTO `json:"statistics"`
+	Media       *GoodsFeedbackMediaDTO       `json:"media,omitempty"`
+	Statistics  GoodsFeedbackStatisticsDTO   `json:"statistics"`
 }
 
 type _GoodsFeedbackDTO GoodsFeedbackDTO
@@ -277,7 +277,7 @@ func (o *GoodsFeedbackDTO) SetStatistics(v GoodsFeedbackStatisticsDTO) {
 }
 
 func (o GoodsFeedbackDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -320,10 +320,10 @@ func (o *GoodsFeedbackDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -379,5 +379,3 @@ func (v *NullableGoodsFeedbackDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

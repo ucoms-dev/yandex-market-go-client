@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// GoodsFeedbackCommentStatusType Статус комментария:  * `PUBLISHED` — опубликован. * `UNMODERATED` — не проверен. * `BANNED` — заблокирован. * `DELETED` — удален. 
+// GoodsFeedbackCommentStatusType Статус комментария:  * `PUBLISHED` — опубликован. * `UNMODERATED` — не проверен. * `BANNED` — заблокирован. * `DELETED` — удален.
 type GoodsFeedbackCommentStatusType string
 
 // List of GoodsFeedbackCommentStatusType
 const (
-	PUBLISHED GoodsFeedbackCommentStatusType = "PUBLISHED"
-	UNMODERATED GoodsFeedbackCommentStatusType = "UNMODERATED"
-	BANNED GoodsFeedbackCommentStatusType = "BANNED"
-	DELETED GoodsFeedbackCommentStatusType = "DELETED"
+	GoodsFeedbackCommentStatusType_PUBLISHED   GoodsFeedbackCommentStatusType = "PUBLISHED"
+	GoodsFeedbackCommentStatusType_UNMODERATED GoodsFeedbackCommentStatusType = "UNMODERATED"
+	GoodsFeedbackCommentStatusType_BANNED      GoodsFeedbackCommentStatusType = "BANNED"
+	GoodsFeedbackCommentStatusType_DELETED     GoodsFeedbackCommentStatusType = "DELETED"
 )
 
 // All allowed values of GoodsFeedbackCommentStatusType enum
@@ -112,4 +112,3 @@ func (v *NullableGoodsFeedbackCommentStatusType) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

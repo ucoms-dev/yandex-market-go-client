@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// AgeUnitType Единицы измерения возраста:  * `YEAR` — год. * `MONTH` — месяц. 
+// AgeUnitType Единицы измерения возраста:  * `YEAR` — год. * `MONTH` — месяц.
 type AgeUnitType string
 
 // List of AgeUnitType
 const (
-	YEAR AgeUnitType = "YEAR"
-	MONTH AgeUnitType = "MONTH"
+	AgeUnitType_YEAR  AgeUnitType = "YEAR"
+	AgeUnitType_MONTH AgeUnitType = "MONTH"
 )
 
 // All allowed values of AgeUnitType enum
@@ -108,4 +108,3 @@ func (v *NullableAgeUnitType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

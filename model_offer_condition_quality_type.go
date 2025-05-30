@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// OfferConditionQualityType Внешний вид товара:  * `PERFECT` — идеальный. * `EXCELLENT` — отличный. * `GOOD` — хороший. * `NOT_SPECIFIED` — не выбран. 
+// OfferConditionQualityType Внешний вид товара:  * `PERFECT` — идеальный. * `EXCELLENT` — отличный. * `GOOD` — хороший. * `NOT_SPECIFIED` — не выбран.
 type OfferConditionQualityType string
 
 // List of OfferConditionQualityType
 const (
-	PERFECT OfferConditionQualityType = "PERFECT"
-	EXCELLENT OfferConditionQualityType = "EXCELLENT"
-	GOOD OfferConditionQualityType = "GOOD"
-	NOT_SPECIFIED OfferConditionQualityType = "NOT_SPECIFIED"
+	OfferConditionQualityType_PERFECT       OfferConditionQualityType = "PERFECT"
+	OfferConditionQualityType_EXCELLENT     OfferConditionQualityType = "EXCELLENT"
+	OfferConditionQualityType_GOOD          OfferConditionQualityType = "GOOD"
+	OfferConditionQualityType_NOT_SPECIFIED OfferConditionQualityType = "NOT_SPECIFIED"
 )
 
 // All allowed values of OfferConditionQualityType enum
@@ -112,4 +112,3 @@ func (v *NullableOfferConditionQualityType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

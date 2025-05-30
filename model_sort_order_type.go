@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// SortOrderType Направление сортировки:  - `ASC` — сортировка по возрастанию. - `DESC` — сортировка по убыванию. 
+// SortOrderType Направление сортировки:  - `ASC` — сортировка по возрастанию. - `DESC` — сортировка по убыванию.
 type SortOrderType string
 
 // List of SortOrderType
 const (
-	ASC SortOrderType = "ASC"
-	DESC SortOrderType = "DESC"
+	SortOrderType_ASC  SortOrderType = "ASC"
+	SortOrderType_DESC SortOrderType = "DESC"
 )
 
 // All allowed values of SortOrderType enum
@@ -108,4 +108,3 @@ func (v *NullableSortOrderType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

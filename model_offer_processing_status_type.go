@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,23 +15,23 @@ import (
 	"fmt"
 )
 
-// OfferProcessingStatusType Статус публикации товара:  * `UNKNOWN` — неизвестный статус. * `READY` — товар прошел модерацию. Чтобы разместить его на Маркете, установите для него цену. * `IN_WORK` — товар проходит модерацию. Это занимает несколько дней. * `NEED_INFO` — товар не прошел модерацию из-за ошибок или недостающих сведений в описании товара. Информация о причинах отклонения возвращается в параметре `notes`. * `NEED_MAPPING` — у товара нельзя создать карточку. * `NEED_CONTENT` — для товара без SKU на Маркете (`marketSku`) нужно найти карточку самостоятельно (через API или кабинет продавца на Маркете) или создать ее, если товар еще не продается на Маркете. * `CONTENT_PROCESSING` — товар находится на модерации. * `SUSPENDED` — товар не прошел модерацию, так как Маркет пока не размещает подобные товары. * `REJECTED` — товар не прошел модерацию, так как Маркет не планирует размещать подобные товары. * `REVIEW` — принимается решение о размещении товара. * `CREATE_ERROR` — не удалось создать карточку товара. * `UPDATE_ERROR` — у карточки товара есть непримененные изменения. 
+// OfferProcessingStatusType Статус публикации товара:  * `UNKNOWN` — неизвестный статус. * `READY` — товар прошел модерацию. Чтобы разместить его на Маркете, установите для него цену. * `IN_WORK` — товар проходит модерацию. Это занимает несколько дней. * `NEED_INFO` — товар не прошел модерацию из-за ошибок или недостающих сведений в описании товара. Информация о причинах отклонения возвращается в параметре `notes`. * `NEED_MAPPING` — у товара нельзя создать карточку. * `NEED_CONTENT` — для товара без SKU на Маркете (`marketSku`) нужно найти карточку самостоятельно (через API или кабинет продавца на Маркете) или создать ее, если товар еще не продается на Маркете. * `CONTENT_PROCESSING` — товар находится на модерации. * `SUSPENDED` — товар не прошел модерацию, так как Маркет пока не размещает подобные товары. * `REJECTED` — товар не прошел модерацию, так как Маркет не планирует размещать подобные товары. * `REVIEW` — принимается решение о размещении товара. * `CREATE_ERROR` — не удалось создать карточку товара. * `UPDATE_ERROR` — у карточки товара есть непримененные изменения.
 type OfferProcessingStatusType string
 
 // List of OfferProcessingStatusType
 const (
-	UNKNOWN OfferProcessingStatusType = "UNKNOWN"
-	READY OfferProcessingStatusType = "READY"
-	IN_WORK OfferProcessingStatusType = "IN_WORK"
-	NEED_INFO OfferProcessingStatusType = "NEED_INFO"
-	NEED_MAPPING OfferProcessingStatusType = "NEED_MAPPING"
-	NEED_CONTENT OfferProcessingStatusType = "NEED_CONTENT"
-	CONTENT_PROCESSING OfferProcessingStatusType = "CONTENT_PROCESSING"
-	SUSPENDED OfferProcessingStatusType = "SUSPENDED"
-	REJECTED OfferProcessingStatusType = "REJECTED"
-	REVIEW OfferProcessingStatusType = "REVIEW"
-	CREATE_ERROR OfferProcessingStatusType = "CREATE_ERROR"
-	UPDATE_ERROR OfferProcessingStatusType = "UPDATE_ERROR"
+	OfferProcessingStatusType_UNKNOWN            OfferProcessingStatusType = "UNKNOWN"
+	OfferProcessingStatusType_READY              OfferProcessingStatusType = "READY"
+	OfferProcessingStatusType_IN_WORK            OfferProcessingStatusType = "IN_WORK"
+	OfferProcessingStatusType_NEED_INFO          OfferProcessingStatusType = "NEED_INFO"
+	OfferProcessingStatusType_NEED_MAPPING       OfferProcessingStatusType = "NEED_MAPPING"
+	OfferProcessingStatusType_NEED_CONTENT       OfferProcessingStatusType = "NEED_CONTENT"
+	OfferProcessingStatusType_CONTENT_PROCESSING OfferProcessingStatusType = "CONTENT_PROCESSING"
+	OfferProcessingStatusType_SUSPENDED          OfferProcessingStatusType = "SUSPENDED"
+	OfferProcessingStatusType_REJECTED           OfferProcessingStatusType = "REJECTED"
+	OfferProcessingStatusType_REVIEW             OfferProcessingStatusType = "REVIEW"
+	OfferProcessingStatusType_CREATE_ERROR       OfferProcessingStatusType = "CREATE_ERROR"
+	OfferProcessingStatusType_UPDATE_ERROR       OfferProcessingStatusType = "UPDATE_ERROR"
 )
 
 // All allowed values of OfferProcessingStatusType enum
@@ -128,4 +128,3 @@ func (v *NullableOfferProcessingStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

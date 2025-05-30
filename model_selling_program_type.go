@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// SellingProgramType Модель размещения:  * `FBY` — FBY. * `FBS` — FBS. * `DBS` — DBS. * `EXPRESS` — Экспресс. 
+// SellingProgramType Модель размещения:  * `FBY` — FBY. * `FBS` — FBS. * `DBS` — DBS. * `EXPRESS` — Экспресс.
 type SellingProgramType string
 
 // List of SellingProgramType
 const (
-	FBY SellingProgramType = "FBY"
-	FBS SellingProgramType = "FBS"
-	DBS SellingProgramType = "DBS"
-	EXPRESS SellingProgramType = "EXPRESS"
+	SellingProgramType_FBY     SellingProgramType = "FBY"
+	SellingProgramType_FBS     SellingProgramType = "FBS"
+	SellingProgramType_DBS     SellingProgramType = "DBS"
+	SellingProgramType_EXPRESS SellingProgramType = "EXPRESS"
 )
 
 // All allowed values of SellingProgramType enum
@@ -112,4 +112,3 @@ func (v *NullableSellingProgramType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

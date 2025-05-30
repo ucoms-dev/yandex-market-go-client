@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// CatalogLanguageType Язык:  * `RU` — русский. * `UZ` — узбекский. 
+// CatalogLanguageType Язык:  * `RU` — русский. * `UZ` — узбекский.
 type CatalogLanguageType string
 
 // List of CatalogLanguageType
 const (
-	RU CatalogLanguageType = "RU"
-	UZ CatalogLanguageType = "UZ"
+	CatalogLanguageType_RU CatalogLanguageType = "RU"
+	CatalogLanguageType_UZ CatalogLanguageType = "UZ"
 )
 
 // All allowed values of CatalogLanguageType enum
@@ -108,4 +108,3 @@ func (v *NullableCatalogLanguageType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

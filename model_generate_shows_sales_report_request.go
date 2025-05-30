@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,14 +21,14 @@ var _ MappedNullable = &GenerateShowsSalesReportRequest{}
 
 // GenerateShowsSalesReportRequest Данные, необходимые для генерации отчета.
 type GenerateShowsSalesReportRequest struct {
-	// Идентификатор кабинета.  Указывается, если нужно составить отчет по всем магазинам в кабинете. В запросе обязательно должен быть либо `businessId`, либо `campaignId`, но не оба сразу. 
+	// Идентификатор кабинета.  Указывается, если нужно составить отчет по всем магазинам в кабинете. В запросе обязательно должен быть либо `businessId`, либо `campaignId`, но не оба сразу.
 	BusinessId *int64 `json:"businessId,omitempty"`
-	// Идентификатор кампании.  Указывается, если нужно составить отчет по конкретному магазину. В запросе обязательно должен быть либо `businessId`, либо `campaignId`, но не оба сразу.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
+	// Идентификатор кампании.  Указывается, если нужно составить отчет по конкретному магазину. В запросе обязательно должен быть либо `businessId`, либо `campaignId`, но не оба сразу.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	CampaignId *int64 `json:"campaignId,omitempty"`
 	// Начало периода, включительно.
 	DateFrom string `json:"dateFrom"`
 	// Конец периода, включительно.
-	DateTo string `json:"dateTo"`
+	DateTo   string                 `json:"dateTo"`
 	Grouping ShowsSalesGroupingType `json:"grouping"`
 }
 
@@ -191,7 +191,7 @@ func (o *GenerateShowsSalesReportRequest) SetGrouping(v ShowsSalesGroupingType) 
 }
 
 func (o GenerateShowsSalesReportRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -227,10 +227,10 @@ func (o *GenerateShowsSalesReportRequest) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -286,5 +286,3 @@ func (v *NullableGenerateShowsSalesReportRequest) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

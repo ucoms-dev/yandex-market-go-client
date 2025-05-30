@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,15 +11,15 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the GenerateUnitedOrdersRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenerateUnitedOrdersRequest{}
 
-// GenerateUnitedOrdersRequest Данные, необходимые для генерации отчета. 
+// GenerateUnitedOrdersRequest Данные, необходимые для генерации отчета.
 type GenerateUnitedOrdersRequest struct {
 	// Идентификатор кабинета.
 	BusinessId int64 `json:"businessId"`
@@ -27,7 +27,7 @@ type GenerateUnitedOrdersRequest struct {
 	DateFrom string `json:"dateFrom"`
 	// Конец периода, включительно. Максимальный период — 1 год.
 	DateTo string `json:"dateTo"`
-	// Список идентификаторов кампании тех магазинов, которые нужны в отчете.  Их можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не используйте вместо них идентификаторы магазинов, которые указаны в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
+	// Список идентификаторов кампании тех магазинов, которые нужны в отчете.  Их можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не используйте вместо них идентификаторы магазинов, которые указаны в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	CampaignIds []int64 `json:"campaignIds,omitempty"`
 	// Идентификатор акции, товары из которой нужны в отчете.
 	PromoId *string `json:"promoId,omitempty"`
@@ -193,7 +193,7 @@ func (o *GenerateUnitedOrdersRequest) SetPromoId(v string) {
 }
 
 func (o GenerateUnitedOrdersRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -229,10 +229,10 @@ func (o *GenerateUnitedOrdersRequest) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -288,5 +288,3 @@ func (v *NullableGenerateUnitedOrdersRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

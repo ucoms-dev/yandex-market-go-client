@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,16 +15,16 @@ import (
 	"fmt"
 )
 
-// TimeUnitType Единица измерения времени:  * `HOUR` — час. * `DAY` — сутки. * `WEEK` — неделя. * `MONTH` — месяц. * `YEAR` — год. 
+// TimeUnitType Единица измерения времени:  * `HOUR` — час. * `DAY` — сутки. * `WEEK` — неделя. * `MONTH` — месяц. * `YEAR` — год.
 type TimeUnitType string
 
 // List of TimeUnitType
 const (
-	HOUR TimeUnitType = "HOUR"
-	DAY TimeUnitType = "DAY"
-	WEEK TimeUnitType = "WEEK"
-	MONTH TimeUnitType = "MONTH"
-	YEAR TimeUnitType = "YEAR"
+	TimeUnitType_HOUR  TimeUnitType = "HOUR"
+	TimeUnitType_DAY   TimeUnitType = "DAY"
+	TimeUnitType_WEEK  TimeUnitType = "WEEK"
+	TimeUnitType_MONTH TimeUnitType = "MONTH"
+	TimeUnitType_YEAR  TimeUnitType = "YEAR"
 )
 
 // All allowed values of TimeUnitType enum
@@ -114,4 +114,3 @@ func (v *NullableTimeUnitType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

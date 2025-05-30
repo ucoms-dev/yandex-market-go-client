@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,19 +11,19 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the OutletWorkingScheduleDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OutletWorkingScheduleDTO{}
 
-// OutletWorkingScheduleDTO Список режимов работы точки продаж. 
+// OutletWorkingScheduleDTO Список режимов работы точки продаж.
 type OutletWorkingScheduleDTO struct {
-	// Признак, работает ли точка продаж в дни государственных праздников.  Возможные значения:  * `false` — точка продаж не работает в дни государственных праздников. * `true` — точка продаж работает в дни государственных праздников. 
+	// Признак, работает ли точка продаж в дни государственных праздников.  Возможные значения:  * `false` — точка продаж не работает в дни государственных праздников. * `true` — точка продаж работает в дни государственных праздников.
 	WorkInHoliday *bool `json:"workInHoliday,omitempty"`
-	// Список расписаний работы точки продаж. 
+	// Список расписаний работы точки продаж.
 	ScheduleItems []OutletWorkingScheduleItemDTO `json:"scheduleItems"`
 }
 
@@ -104,7 +104,7 @@ func (o *OutletWorkingScheduleDTO) SetScheduleItems(v []OutletWorkingScheduleIte
 }
 
 func (o OutletWorkingScheduleDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,10 +133,10 @@ func (o *OutletWorkingScheduleDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -192,5 +192,3 @@ func (v *NullableOutletWorkingScheduleDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

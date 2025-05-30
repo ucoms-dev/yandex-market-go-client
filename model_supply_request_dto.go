@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,10 +11,10 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the SupplyRequestDTO type satisfies the MappedNullable interface at compile time
@@ -22,18 +22,18 @@ var _ MappedNullable = &SupplyRequestDTO{}
 
 // SupplyRequestDTO Информация о заявке на поставку, вывоз или утилизацию.
 type SupplyRequestDTO struct {
-	Id SupplyRequestIdDTO `json:"id"`
-	Type SupplyRequestType `json:"type"`
-	Subtype SupplyRequestSubType `json:"subtype"`
-	Status SupplyRequestStatusType `json:"status"`
+	Id      SupplyRequestIdDTO      `json:"id"`
+	Type    SupplyRequestType       `json:"type"`
+	Subtype SupplyRequestSubType    `json:"subtype"`
+	Status  SupplyRequestStatusType `json:"status"`
 	// Дата и время последнего обновления заявки.
-	UpdatedAt time.Time `json:"updatedAt"`
-	Counters SupplyRequestCountersDTO `json:"counters"`
+	UpdatedAt  time.Time                  `json:"updatedAt"`
+	Counters   SupplyRequestCountersDTO   `json:"counters"`
 	ParentLink *SupplyRequestReferenceDTO `json:"parentLink,omitempty"`
 	// Ссылки на дочерние заявки.
-	ChildrenLinks []SupplyRequestReferenceDTO `json:"childrenLinks,omitempty"`
-	TargetLocation SupplyRequestLocationDTO `json:"targetLocation"`
-	TransitLocation *SupplyRequestLocationDTO `json:"transitLocation,omitempty"`
+	ChildrenLinks   []SupplyRequestReferenceDTO `json:"childrenLinks,omitempty"`
+	TargetLocation  SupplyRequestLocationDTO    `json:"targetLocation"`
+	TransitLocation *SupplyRequestLocationDTO   `json:"transitLocation,omitempty"`
 }
 
 type _SupplyRequestDTO SupplyRequestDTO
@@ -328,7 +328,7 @@ func (o *SupplyRequestDTO) SetTransitLocation(v SupplyRequestLocationDTO) {
 }
 
 func (o SupplyRequestDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -375,10 +375,10 @@ func (o *SupplyRequestDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -434,5 +434,3 @@ func (v *NullableSupplyRequestDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

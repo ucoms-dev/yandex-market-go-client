@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,16 +15,16 @@ import (
 	"fmt"
 )
 
-// OutletStatusType Статус точки продаж.  Возможные значения:  * `AT_MODERATION` — проверяется. * `FAILED` — не прошла проверку и отклонена модератором. * `MODERATED` — проверена и одобрена. * `NONMODERATED` — новая точка, нуждается в проверке. * `UNKNOWN` — статус не указан. При определении статуса произошла ошибка. 
+// OutletStatusType Статус точки продаж.  Возможные значения:  * `AT_MODERATION` — проверяется. * `FAILED` — не прошла проверку и отклонена модератором. * `MODERATED` — проверена и одобрена. * `NONMODERATED` — новая точка, нуждается в проверке. * `UNKNOWN` — статус не указан. При определении статуса произошла ошибка.
 type OutletStatusType string
 
 // List of OutletStatusType
 const (
-	AT_MODERATION OutletStatusType = "AT_MODERATION"
-	FAILED OutletStatusType = "FAILED"
-	MODERATED OutletStatusType = "MODERATED"
-	NONMODERATED OutletStatusType = "NONMODERATED"
-	UNKNOWN OutletStatusType = "UNKNOWN"
+	OutletStatusType_AT_MODERATION OutletStatusType = "AT_MODERATION"
+	OutletStatusType_FAILED        OutletStatusType = "FAILED"
+	OutletStatusType_MODERATED     OutletStatusType = "MODERATED"
+	OutletStatusType_NONMODERATED  OutletStatusType = "NONMODERATED"
+	OutletStatusType_UNKNOWN       OutletStatusType = "UNKNOWN"
 )
 
 // All allowed values of OutletStatusType enum
@@ -114,4 +114,3 @@ func (v *NullableOutletStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

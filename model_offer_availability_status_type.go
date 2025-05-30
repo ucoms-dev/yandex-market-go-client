@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// OfferAvailabilityStatusType Планы по поставкам:  * `ACTIVE` — поставки будут. * `INACTIVE` — поставок не будет: товар есть на складе, но вы больше не планируете его поставлять. Через 60 дней после того, как товар закончится на складе, этот статус изменится на `DELISTED`. * `DELISTED` — архив: товар закончился на складе, и его поставок больше не будет. Если товар вернется на склад (например, покупатель вернет заказ), этот статус изменится на `INACTIVE`. 
+// OfferAvailabilityStatusType Планы по поставкам:  * `ACTIVE` — поставки будут. * `INACTIVE` — поставок не будет: товар есть на складе, но вы больше не планируете его поставлять. Через 60 дней после того, как товар закончится на складе, этот статус изменится на `DELISTED`. * `DELISTED` — архив: товар закончился на складе, и его поставок больше не будет. Если товар вернется на склад (например, покупатель вернет заказ), этот статус изменится на `INACTIVE`.
 type OfferAvailabilityStatusType string
 
 // List of OfferAvailabilityStatusType
 const (
-	ACTIVE OfferAvailabilityStatusType = "ACTIVE"
-	INACTIVE OfferAvailabilityStatusType = "INACTIVE"
-	DELISTED OfferAvailabilityStatusType = "DELISTED"
+	OfferAvailabilityStatusType_ACTIVE   OfferAvailabilityStatusType = "ACTIVE"
+	OfferAvailabilityStatusType_INACTIVE OfferAvailabilityStatusType = "INACTIVE"
+	OfferAvailabilityStatusType_DELISTED OfferAvailabilityStatusType = "DELISTED"
 )
 
 // All allowed values of OfferAvailabilityStatusType enum
@@ -110,4 +110,3 @@ func (v *NullableOfferAvailabilityStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
