@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,12 +15,12 @@ import (
 	"fmt"
 )
 
-// OrdersStatsSubsidyOperationType Тип операции с баллами, которые используются для уменьшения стоимости размещения:  * `ACCRUAL` — начисление баллов. * `DEDUCTION` — списание баллов. 
+// OrdersStatsSubsidyOperationType Тип операции с баллами, которые используются для уменьшения стоимости размещения:  * `ACCRUAL` — начисление баллов. * `DEDUCTION` — списание баллов.
 type OrdersStatsSubsidyOperationType string
 
 // List of OrdersStatsSubsidyOperationType
 const (
-	ACCRUAL OrdersStatsSubsidyOperationType = "ACCRUAL"
+	ACCRUAL   OrdersStatsSubsidyOperationType = "ACCRUAL"
 	DEDUCTION OrdersStatsSubsidyOperationType = "DEDUCTION"
 )
 
@@ -108,4 +108,3 @@ func (v *NullableOrdersStatsSubsidyOperationType) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

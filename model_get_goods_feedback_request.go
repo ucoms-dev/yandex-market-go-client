@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -18,18 +18,18 @@ import (
 // checks if the GetGoodsFeedbackRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetGoodsFeedbackRequest{}
 
-// GetGoodsFeedbackRequest Фильтр запроса отзывов в кабинете. 
+// GetGoodsFeedbackRequest Фильтр запроса отзывов в кабинете.
 type GetGoodsFeedbackRequest struct {
-	// Идентификаторы отзывов.  ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым. 
+	// Идентификаторы отзывов.  ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
 	FeedbackIds []int64 `json:"feedbackIds,omitempty"`
-	// Начало периода. Не включительно.  Если параметр не указан, возвращается информация за 6 месяцев до указанной в `dateTimeTo` даты. 
+	// Начало периода. Не включительно.  Если параметр не указан, возвращается информация за 6 месяцев до указанной в `dateTimeTo` даты.
 	DateTimeFrom *time.Time `json:"dateTimeFrom,omitempty"`
-	// Конец периода. Не включительно.  Если параметр не указан, используется текущая дата. 
-	DateTimeTo *time.Time `json:"dateTimeTo,omitempty"`
+	// Конец периода. Не включительно.  Если параметр не указан, используется текущая дата.
+	DateTimeTo     *time.Time                  `json:"dateTimeTo,omitempty"`
 	ReactionStatus *FeedbackReactionStatusType `json:"reactionStatus,omitempty"`
 	// Оценка товара.
 	RatingValues []int32 `json:"ratingValues,omitempty"`
-	// Фильтр по идентификатору модели товара.  Получить идентификатор модели можно с помощью одного из запросов:  * [POST businesses/{businessId}/offer-mappings](../../reference/business-assortment/getOfferMappings.md);  * [POST businesses/{businessId}/offer-cards](../../reference/content/getOfferCardsContentStatus.md). 
+	// Фильтр по идентификатору модели товара.  Получить идентификатор модели можно с помощью одного из запросов:  * [POST businesses/{businessId}/offer-mappings](../../reference/business-assortment/getOfferMappings.md);  * [POST businesses/{businessId}/offer-cards](../../reference/content/getOfferCardsContentStatus.md).
 	// Deprecated
 	ModelIds []int64 `json:"modelIds,omitempty"`
 	// Фильтр отзывов за баллы Плюса.
@@ -284,7 +284,7 @@ func (o *GetGoodsFeedbackRequest) SetPaid(v bool) {
 }
 
 func (o GetGoodsFeedbackRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -352,5 +352,3 @@ func (v *NullableGetGoodsFeedbackRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

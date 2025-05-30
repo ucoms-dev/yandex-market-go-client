@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &PromoOfferUpdateWarningDTO{}
 // PromoOfferUpdateWarningDTO Предупреждение, которое появилось при добавлении товара в акцию или изменении его цен.
 type PromoOfferUpdateWarningDTO struct {
 	Code PromoOfferUpdateWarningCodeType `json:"code"`
-	// Идентификаторы кампаний тех магазинов, для которых получены предупреждения.  Не возвращается, если предупреждения действуют для всех магазинов в кабинете. 
+	// Идентификаторы кампаний тех магазинов, для которых получены предупреждения.  Не возвращается, если предупреждения действуют для всех магазинов в кабинете.
 	CampaignIds []int64 `json:"campaignIds,omitempty"`
 }
 
@@ -104,7 +104,7 @@ func (o *PromoOfferUpdateWarningDTO) SetCampaignIds(v []int64) {
 }
 
 func (o PromoOfferUpdateWarningDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -133,10 +133,10 @@ func (o *PromoOfferUpdateWarningDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -192,5 +192,3 @@ func (v *NullablePromoOfferUpdateWarningDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,12 +15,12 @@ import (
 	"fmt"
 )
 
-// ApiResponseStatusType Тип ответа. Возможные значения: * `OK` — ошибок нет. * `ERROR` — при обработке запроса произошла ошибка. 
+// ApiResponseStatusType Тип ответа. Возможные значения: * `OK` — ошибок нет. * `ERROR` — при обработке запроса произошла ошибка.
 type ApiResponseStatusType string
 
 // List of ApiResponseStatusType
 const (
-	OK ApiResponseStatusType = "OK"
+	OK    ApiResponseStatusType = "OK"
 	ERROR ApiResponseStatusType = "ERROR"
 )
 
@@ -108,4 +108,3 @@ func (v *NullableApiResponseStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

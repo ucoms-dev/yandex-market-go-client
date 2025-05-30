@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,30 +15,30 @@ import (
 	"fmt"
 )
 
-// ReturnDecisionSubreasonType Детали причин возврата:   * `DOES_NOT_FIT`:     * `USER_DID_NOT_LIKE` — товар не понравился.     * `USER_CHANGED_MIND` — передумал покупать.     * `DELIVERED_TOO_LONG` — передумал покупать из-за длительного срока доставки.    * `BAD_QUALITY`:     * `BAD_PACKAGE` — заводская упаковка повреждена.     * `DAMAGED` — царапины, сколы.     * `NOT_WORKING` — не включается, не работает.     * `INCOMPLETENESS` — некомплект (не хватает детали в наборе, к товару).     * `WRAPPING_DAMAGED` — транспортная упаковка повреждена.     * `ITEM_WAS_USED` — следы использования на товаре.     * `BROKEN` — товар разбит.     * `BAD_FLOWERS` — некачественные цветы.    * `WRONG_ITEM`:     * `WRONG_ITEM` — не тот товар.     * `WRONG_COLOR` — цвет не соответствует заявленному.     * `DID_NOT_MATCH_DESCRIPTION` — описание или характеристики не соответствуют заявленным.     * `WRONG_ORDER` — доставили чужой заказ.     * `WRONG_AMOUNT_DELIVERED` — неверное количество товара.     * `PARCEL_MISSING` — часть заказа отсутствует.     * `INCOMPLETE` — заказ не привезли полностью.    * `UNKNOWN` — детали причины не указаны. 
+// ReturnDecisionSubreasonType Детали причин возврата:   * `DOES_NOT_FIT`:     * `USER_DID_NOT_LIKE` — товар не понравился.     * `USER_CHANGED_MIND` — передумал покупать.     * `DELIVERED_TOO_LONG` — передумал покупать из-за длительного срока доставки.    * `BAD_QUALITY`:     * `BAD_PACKAGE` — заводская упаковка повреждена.     * `DAMAGED` — царапины, сколы.     * `NOT_WORKING` — не включается, не работает.     * `INCOMPLETENESS` — некомплект (не хватает детали в наборе, к товару).     * `WRAPPING_DAMAGED` — транспортная упаковка повреждена.     * `ITEM_WAS_USED` — следы использования на товаре.     * `BROKEN` — товар разбит.     * `BAD_FLOWERS` — некачественные цветы.    * `WRONG_ITEM`:     * `WRONG_ITEM` — не тот товар.     * `WRONG_COLOR` — цвет не соответствует заявленному.     * `DID_NOT_MATCH_DESCRIPTION` — описание или характеристики не соответствуют заявленным.     * `WRONG_ORDER` — доставили чужой заказ.     * `WRONG_AMOUNT_DELIVERED` — неверное количество товара.     * `PARCEL_MISSING` — часть заказа отсутствует.     * `INCOMPLETE` — заказ не привезли полностью.    * `UNKNOWN` — детали причины не указаны.
 type ReturnDecisionSubreasonType string
 
 // List of ReturnDecisionSubreasonType
 const (
-	USER_DID_NOT_LIKE ReturnDecisionSubreasonType = "USER_DID_NOT_LIKE"
-	USER_CHANGED_MIND ReturnDecisionSubreasonType = "USER_CHANGED_MIND"
-	DELIVERED_TOO_LONG ReturnDecisionSubreasonType = "DELIVERED_TOO_LONG"
-	BAD_PACKAGE ReturnDecisionSubreasonType = "BAD_PACKAGE"
-	DAMAGED ReturnDecisionSubreasonType = "DAMAGED"
-	NOT_WORKING ReturnDecisionSubreasonType = "NOT_WORKING"
-	INCOMPLETENESS ReturnDecisionSubreasonType = "INCOMPLETENESS"
-	WRONG_ITEM ReturnDecisionSubreasonType = "WRONG_ITEM"
-	WRONG_COLOR ReturnDecisionSubreasonType = "WRONG_COLOR"
+	USER_DID_NOT_LIKE         ReturnDecisionSubreasonType = "USER_DID_NOT_LIKE"
+	USER_CHANGED_MIND         ReturnDecisionSubreasonType = "USER_CHANGED_MIND"
+	DELIVERED_TOO_LONG        ReturnDecisionSubreasonType = "DELIVERED_TOO_LONG"
+	BAD_PACKAGE               ReturnDecisionSubreasonType = "BAD_PACKAGE"
+	DAMAGED                   ReturnDecisionSubreasonType = "DAMAGED"
+	NOT_WORKING               ReturnDecisionSubreasonType = "NOT_WORKING"
+	INCOMPLETENESS            ReturnDecisionSubreasonType = "INCOMPLETENESS"
+	WRONG_ITEM                ReturnDecisionSubreasonType = "WRONG_ITEM"
+	WRONG_COLOR               ReturnDecisionSubreasonType = "WRONG_COLOR"
 	DID_NOT_MATCH_DESCRIPTION ReturnDecisionSubreasonType = "DID_NOT_MATCH_DESCRIPTION"
-	WRONG_ORDER ReturnDecisionSubreasonType = "WRONG_ORDER"
-	WRONG_AMOUNT_DELIVERED ReturnDecisionSubreasonType = "WRONG_AMOUNT_DELIVERED"
-	WRAPPING_DAMAGED ReturnDecisionSubreasonType = "WRAPPING_DAMAGED"
-	ITEM_WAS_USED ReturnDecisionSubreasonType = "ITEM_WAS_USED"
-	BROKEN ReturnDecisionSubreasonType = "BROKEN"
-	BAD_FLOWERS ReturnDecisionSubreasonType = "BAD_FLOWERS"
-	PARCEL_MISSING ReturnDecisionSubreasonType = "PARCEL_MISSING"
-	INCOMPLETE ReturnDecisionSubreasonType = "INCOMPLETE"
-	UNKNOWN ReturnDecisionSubreasonType = "UNKNOWN"
+	WRONG_ORDER               ReturnDecisionSubreasonType = "WRONG_ORDER"
+	WRONG_AMOUNT_DELIVERED    ReturnDecisionSubreasonType = "WRONG_AMOUNT_DELIVERED"
+	WRAPPING_DAMAGED          ReturnDecisionSubreasonType = "WRAPPING_DAMAGED"
+	ITEM_WAS_USED             ReturnDecisionSubreasonType = "ITEM_WAS_USED"
+	BROKEN                    ReturnDecisionSubreasonType = "BROKEN"
+	BAD_FLOWERS               ReturnDecisionSubreasonType = "BAD_FLOWERS"
+	PARCEL_MISSING            ReturnDecisionSubreasonType = "PARCEL_MISSING"
+	INCOMPLETE                ReturnDecisionSubreasonType = "INCOMPLETE"
+	UNKNOWN                   ReturnDecisionSubreasonType = "UNKNOWN"
 )
 
 // All allowed values of ReturnDecisionSubreasonType enum
@@ -142,4 +142,3 @@ func (v *NullableReturnDecisionSubreasonType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,16 +15,16 @@ import (
 	"fmt"
 )
 
-// TurnoverType Оценка оборачиваемости.  |enum|Диапазон оборачиваемости|Комментарий| |-|-|-| |`LOW`|`turnoverDays` ≥ 120|| |`ALMOST_LOW`|100 ≤ `turnoverDays` < 120|| |`HIGH`|45 ≤ `turnoverDays` < 100|| |`VERY_HIGH`|0 ≤ `turnoverDays` < 45|| |`NO_SALES`|—|Продаж нет.| |`FREE_STORE`|Любое значение.|Платить за хранение товаров этой категории не требуется.| 
+// TurnoverType Оценка оборачиваемости.  |enum|Диапазон оборачиваемости|Комментарий| |-|-|-| |`LOW`|`turnoverDays` ≥ 120|| |`ALMOST_LOW`|100 ≤ `turnoverDays` < 120|| |`HIGH`|45 ≤ `turnoverDays` < 100|| |`VERY_HIGH`|0 ≤ `turnoverDays` < 45|| |`NO_SALES`|—|Продаж нет.| |`FREE_STORE`|Любое значение.|Платить за хранение товаров этой категории не требуется.|
 type TurnoverType string
 
 // List of TurnoverType
 const (
-	LOW TurnoverType = "LOW"
+	LOW        TurnoverType = "LOW"
 	ALMOST_LOW TurnoverType = "ALMOST_LOW"
-	HIGH TurnoverType = "HIGH"
-	VERY_HIGH TurnoverType = "VERY_HIGH"
-	NO_SALES TurnoverType = "NO_SALES"
+	HIGH       TurnoverType = "HIGH"
+	VERY_HIGH  TurnoverType = "VERY_HIGH"
+	NO_SALES   TurnoverType = "NO_SALES"
 	FREE_STORE TurnoverType = "FREE_STORE"
 )
 
@@ -116,4 +116,3 @@ func (v *NullableTurnoverType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

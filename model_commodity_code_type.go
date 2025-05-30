@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// CommodityCodeType Тип товарного кода:  * `CUSTOMS_COMMODITY_CODE` — код товара в единой Товарной номенклатуре внешнеэкономической деятельности (ТН ВЭД) — 10 или 14 цифр без пробелов. * `IKPU_CODE` — идентификационный код продукции и услуг (ИКПУ) в Узбекистане – 17 цифр без пробелов.  Не передавайте несколько кодов одного типа. 
+// CommodityCodeType Тип товарного кода:  * `CUSTOMS_COMMODITY_CODE` — код товара в единой Товарной номенклатуре внешнеэкономической деятельности (ТН ВЭД) — 10 или 14 цифр без пробелов. * `IKPU_CODE` — идентификационный код продукции и услуг (ИКПУ) в Узбекистане – 17 цифр без пробелов.  Не передавайте несколько кодов одного типа.
 type CommodityCodeType string
 
 // List of CommodityCodeType
 const (
 	CUSTOMS_COMMODITY_CODE CommodityCodeType = "CUSTOMS_COMMODITY_CODE"
-	IKPU_CODE CommodityCodeType = "IKPU_CODE"
+	IKPU_CODE              CommodityCodeType = "IKPU_CODE"
 )
 
 // All allowed values of CommodityCodeType enum
@@ -108,4 +108,3 @@ func (v *NullableCommodityCodeType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

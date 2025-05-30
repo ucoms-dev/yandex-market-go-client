@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -19,8 +19,8 @@ var _ MappedNullable = &GetRegionWithChildrenResponse{}
 
 // GetRegionWithChildrenResponse struct for GetRegionWithChildrenResponse
 type GetRegionWithChildrenResponse struct {
-	Pager *FlippingPagerDTO `json:"pager,omitempty"`
-	Regions *RegionDTO `json:"regions,omitempty"`
+	Pager   *FlippingPagerDTO `json:"pager,omitempty"`
+	Regions *RegionDTO        `json:"regions,omitempty"`
 }
 
 // NewGetRegionWithChildrenResponse instantiates a new GetRegionWithChildrenResponse object
@@ -105,7 +105,7 @@ func (o *GetRegionWithChildrenResponse) SetRegions(v RegionDTO) {
 }
 
 func (o GetRegionWithChildrenResponse) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -158,5 +158,3 @@ func (v *NullableGetRegionWithChildrenResponse) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

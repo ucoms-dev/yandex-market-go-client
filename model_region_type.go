@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,22 +15,22 @@ import (
 	"fmt"
 )
 
-// RegionType Тип региона.  Возможные значения:  * `CITY_DISTRICT` — район города.  * `CITY` — крупный город.  * `CONTINENT` — континент.  * `COUNTRY_DISTRICT` — область.  * `COUNTRY` — страна.  * `REGION` — регион.  * `REPUBLIC_AREA` — район субъекта федерации.  * `REPUBLIC` — субъект федерации.  * `SUBWAY_STATION` — станция метро.  * `VILLAGE` — город.  * `OTHER` — неизвестный регион. 
+// RegionType Тип региона.  Возможные значения:  * `CITY_DISTRICT` — район города.  * `CITY` — крупный город.  * `CONTINENT` — континент.  * `COUNTRY_DISTRICT` — область.  * `COUNTRY` — страна.  * `REGION` — регион.  * `REPUBLIC_AREA` — район субъекта федерации.  * `REPUBLIC` — субъект федерации.  * `SUBWAY_STATION` — станция метро.  * `VILLAGE` — город.  * `OTHER` — неизвестный регион.
 type RegionType string
 
 // List of RegionType
 const (
-	OTHER RegionType = "OTHER"
-	CONTINENT RegionType = "CONTINENT"
-	REGION RegionType = "REGION"
-	COUNTRY RegionType = "COUNTRY"
+	OTHER            RegionType = "OTHER"
+	CONTINENT        RegionType = "CONTINENT"
+	REGION           RegionType = "REGION"
+	COUNTRY          RegionType = "COUNTRY"
 	COUNTRY_DISTRICT RegionType = "COUNTRY_DISTRICT"
-	REPUBLIC RegionType = "REPUBLIC"
-	CITY RegionType = "CITY"
-	VILLAGE RegionType = "VILLAGE"
-	CITY_DISTRICT RegionType = "CITY_DISTRICT"
-	SUBWAY_STATION RegionType = "SUBWAY_STATION"
-	REPUBLIC_AREA RegionType = "REPUBLIC_AREA"
+	REPUBLIC         RegionType = "REPUBLIC"
+	CITY             RegionType = "CITY"
+	VILLAGE          RegionType = "VILLAGE"
+	CITY_DISTRICT    RegionType = "CITY_DISTRICT"
+	SUBWAY_STATION   RegionType = "SUBWAY_STATION"
+	REPUBLIC_AREA    RegionType = "REPUBLIC_AREA"
 )
 
 // All allowed values of RegionType enum
@@ -126,4 +126,3 @@ func (v *NullableRegionType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

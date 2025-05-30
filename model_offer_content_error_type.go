@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,19 +15,19 @@ import (
 	"fmt"
 )
 
-// OfferContentErrorType Типы ошибок и предупреждений:  * `OFFER_NOT_FOUND` — такого товара нет в каталоге. * `UNKNOWN_CATEGORY` — указана неизвестная категория. * `INVALID_CATEGORY` — указана нелистовая категория. Укажите ту, которая не имеет дочерних категорий. * `UNKNOWN_PARAMETER` — передана характеристика, которой нет среди характеристик категории. * `UNEXPECTED_BOOLEAN_VALUE` — вместо boolean-значения передано что-то другое. * `NUMBER_FORMAT` — передана строка, не обозначающая число, вместо числа. * `INVALID_UNIT_ID` — передана единица измерения, недопустимая для характеристики. * `INVALID_GROUP_ID_LENGTH` — в названии превышено допустимое значение символов — 255. * `INVALID_GROUP_ID_CHARACTERS` — переданы [недопустимые символы](*ascii-code).  Проверить, какие категорийные характеристики доступны для заданной категории, и получить их настройки можно с помощью запроса [POST category/{categoryId}/parameters](../../reference/content/getCategoryContentParameters). 
+// OfferContentErrorType Типы ошибок и предупреждений:  * `OFFER_NOT_FOUND` — такого товара нет в каталоге. * `UNKNOWN_CATEGORY` — указана неизвестная категория. * `INVALID_CATEGORY` — указана нелистовая категория. Укажите ту, которая не имеет дочерних категорий. * `UNKNOWN_PARAMETER` — передана характеристика, которой нет среди характеристик категории. * `UNEXPECTED_BOOLEAN_VALUE` — вместо boolean-значения передано что-то другое. * `NUMBER_FORMAT` — передана строка, не обозначающая число, вместо числа. * `INVALID_UNIT_ID` — передана единица измерения, недопустимая для характеристики. * `INVALID_GROUP_ID_LENGTH` — в названии превышено допустимое значение символов — 255. * `INVALID_GROUP_ID_CHARACTERS` — переданы [недопустимые символы](*ascii-code).  Проверить, какие категорийные характеристики доступны для заданной категории, и получить их настройки можно с помощью запроса [POST category/{categoryId}/parameters](../../reference/content/getCategoryContentParameters).
 type OfferContentErrorType string
 
 // List of OfferContentErrorType
 const (
-	OFFER_NOT_FOUND OfferContentErrorType = "OFFER_NOT_FOUND"
-	UNKNOWN_CATEGORY OfferContentErrorType = "UNKNOWN_CATEGORY"
-	INVALID_CATEGORY OfferContentErrorType = "INVALID_CATEGORY"
-	UNKNOWN_PARAMETER OfferContentErrorType = "UNKNOWN_PARAMETER"
-	UNEXPECTED_BOOLEAN_VALUE OfferContentErrorType = "UNEXPECTED_BOOLEAN_VALUE"
-	NUMBER_FORMAT OfferContentErrorType = "NUMBER_FORMAT"
-	INVALID_UNIT_ID OfferContentErrorType = "INVALID_UNIT_ID"
-	INVALID_GROUP_ID_LENGTH OfferContentErrorType = "INVALID_GROUP_ID_LENGTH"
+	OFFER_NOT_FOUND             OfferContentErrorType = "OFFER_NOT_FOUND"
+	UNKNOWN_CATEGORY            OfferContentErrorType = "UNKNOWN_CATEGORY"
+	INVALID_CATEGORY            OfferContentErrorType = "INVALID_CATEGORY"
+	UNKNOWN_PARAMETER           OfferContentErrorType = "UNKNOWN_PARAMETER"
+	UNEXPECTED_BOOLEAN_VALUE    OfferContentErrorType = "UNEXPECTED_BOOLEAN_VALUE"
+	NUMBER_FORMAT               OfferContentErrorType = "NUMBER_FORMAT"
+	INVALID_UNIT_ID             OfferContentErrorType = "INVALID_UNIT_ID"
+	INVALID_GROUP_ID_LENGTH     OfferContentErrorType = "INVALID_GROUP_ID_LENGTH"
 	INVALID_GROUP_ID_CHARACTERS OfferContentErrorType = "INVALID_GROUP_ID_CHARACTERS"
 )
 
@@ -122,4 +122,3 @@ func (v *NullableOfferContentErrorType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

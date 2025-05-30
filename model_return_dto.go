@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,37 +11,37 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the ReturnDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReturnDTO{}
 
-// ReturnDTO Невыкуп или возврат в заказе.  Параметров `logisticPickupPoint`, `shipmentRecipientType` и `shipmentStatus` может не быть в случае возврата:   * С опцией **Быстрый возврат денег за дешевый брак**, когда товар остается у покупателя (`fastReturn=true`).   * По заказу от бизнеса, если:     * статус возврата `STARTED_BY_USER` или `WAITING_FOR_DECISION`;     * возврат отменен до передачи товара.  Статус возврата денег `refundStatus` актуален только для `returnType=RETURN`. 
+// ReturnDTO Невыкуп или возврат в заказе.  Параметров `logisticPickupPoint`, `shipmentRecipientType` и `shipmentStatus` может не быть в случае возврата:   * С опцией **Быстрый возврат денег за дешевый брак**, когда товар остается у покупателя (`fastReturn=true`).   * По заказу от бизнеса, если:     * статус возврата `STARTED_BY_USER` или `WAITING_FOR_DECISION`;     * возврат отменен до передачи товара.  Статус возврата денег `refundStatus` актуален только для `returnType=RETURN`.
 type ReturnDTO struct {
 	// Идентификатор невыкупа или возврата.
 	Id int64 `json:"id"`
 	// Номер заказа.
 	OrderId int64 `json:"orderId"`
-	// Дата создания невыкупа или возврата клиентом.  Формат даты: ISO 8601 со смещением относительно UTC. 
+	// Дата создания невыкупа или возврата клиентом.  Формат даты: ISO 8601 со смещением относительно UTC.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
-	// Дата обновления невыкупа или возврата.  Формат даты: ISO 8601 со смещением относительно UTC. 
-	UpdateDate *time.Time `json:"updateDate,omitempty"`
-	RefundStatus *RefundStatusType `json:"refundStatus,omitempty"`
-	LogisticPickupPoint *LogisticPickupPointDTO `json:"logisticPickupPoint,omitempty"`
-	ShipmentRecipientType *RecipientType `json:"shipmentRecipientType,omitempty"`
-	ShipmentStatus *ReturnShipmentStatusType `json:"shipmentStatus,omitempty"`
-	// {% note warning \"Вместо него используйте `amount`.\" %}     {% endnote %}  Сумма возврата в копейках. 
+	// Дата обновления невыкупа или возврата.  Формат даты: ISO 8601 со смещением относительно UTC.
+	UpdateDate            *time.Time                `json:"updateDate,omitempty"`
+	RefundStatus          *RefundStatusType         `json:"refundStatus,omitempty"`
+	LogisticPickupPoint   *LogisticPickupPointDTO   `json:"logisticPickupPoint,omitempty"`
+	ShipmentRecipientType *RecipientType            `json:"shipmentRecipientType,omitempty"`
+	ShipmentStatus        *ReturnShipmentStatusType `json:"shipmentStatus,omitempty"`
+	// {% note warning \"Вместо него используйте `amount`.\" %}     {% endnote %}  Сумма возврата в копейках.
 	// Deprecated
-	RefundAmount *int64 `json:"refundAmount,omitempty"`
-	Amount *CurrencyValueDTO `json:"amount,omitempty"`
+	RefundAmount *int64            `json:"refundAmount,omitempty"`
+	Amount       *CurrencyValueDTO `json:"amount,omitempty"`
 	// Список товаров в невыкупе или возврате.
-	Items []ReturnItemDTO `json:"items"`
-	ReturnType ReturnType `json:"returnType"`
-	// Используется ли опция **Быстрый возврат денег за дешевый брак**.  Актуально только для `returnType=RETURN`. 
+	Items      []ReturnItemDTO `json:"items"`
+	ReturnType ReturnType      `json:"returnType"`
+	// Используется ли опция **Быстрый возврат денег за дешевый брак**.  Актуально только для `returnType=RETURN`.
 	FastReturn *bool `json:"fastReturn,omitempty"`
 }
 
@@ -456,7 +456,7 @@ func (o *ReturnDTO) SetFastReturn(v bool) {
 }
 
 func (o ReturnDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -515,10 +515,10 @@ func (o *ReturnDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -574,5 +574,3 @@ func (v *NullableReturnDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,26 +15,26 @@ import (
 	"fmt"
 )
 
-// OrderStatsStatusType Текущий статус заказа:  * `CANCELLED_BEFORE_PROCESSING` — заказ отменен до начала его обработки.  * `CANCELLED_IN_DELIVERY` — заказ отменен во время его доставки.  * `CANCELLED_IN_PROCESSING` — заказ отменен во время его обработки.  * `DELIVERY` — заказ передан службе доставки.  * `DELIVERED` — заказ доставлен.  * `PARTIALLY_DELIVERED` — заказ частично доставлен.      {% note warning \"Статус заказа может перейти в `PARTIALLY_DELIVERED` не сразу\" %}      Если в доставленном заказе был невыкуп, статус изменится только после получения заказа на складе Маркета.      {% endnote %}  * `PARTIALLY_RETURNED` — заказ частично возвращен покупателем.  * `PENDING` — заказ ожидает подтверждения.  * `PICKUP` — заказ доставлен в пункт выдачи.  * `PROCESSING` — заказ в обработке.  * `RESERVED` — товар зарезервирован на складе.  * `RETURNED` — заказ полностью возвращен покупателем.  * `UNKNOWN` — неизвестный статус заказа.  * `UNPAID` — заказ от юридического лица ожидает оплаты.  * `LOST` — заказ утерян. 
+// OrderStatsStatusType Текущий статус заказа:  * `CANCELLED_BEFORE_PROCESSING` — заказ отменен до начала его обработки.  * `CANCELLED_IN_DELIVERY` — заказ отменен во время его доставки.  * `CANCELLED_IN_PROCESSING` — заказ отменен во время его обработки.  * `DELIVERY` — заказ передан службе доставки.  * `DELIVERED` — заказ доставлен.  * `PARTIALLY_DELIVERED` — заказ частично доставлен.      {% note warning \"Статус заказа может перейти в `PARTIALLY_DELIVERED` не сразу\" %}      Если в доставленном заказе был невыкуп, статус изменится только после получения заказа на складе Маркета.      {% endnote %}  * `PARTIALLY_RETURNED` — заказ частично возвращен покупателем.  * `PENDING` — заказ ожидает подтверждения.  * `PICKUP` — заказ доставлен в пункт выдачи.  * `PROCESSING` — заказ в обработке.  * `RESERVED` — товар зарезервирован на складе.  * `RETURNED` — заказ полностью возвращен покупателем.  * `UNKNOWN` — неизвестный статус заказа.  * `UNPAID` — заказ от юридического лица ожидает оплаты.  * `LOST` — заказ утерян.
 type OrderStatsStatusType string
 
 // List of OrderStatsStatusType
 const (
 	CANCELLED_BEFORE_PROCESSING OrderStatsStatusType = "CANCELLED_BEFORE_PROCESSING"
-	CANCELLED_IN_DELIVERY OrderStatsStatusType = "CANCELLED_IN_DELIVERY"
-	CANCELLED_IN_PROCESSING OrderStatsStatusType = "CANCELLED_IN_PROCESSING"
-	DELIVERY OrderStatsStatusType = "DELIVERY"
-	DELIVERED OrderStatsStatusType = "DELIVERED"
-	PARTIALLY_DELIVERED OrderStatsStatusType = "PARTIALLY_DELIVERED"
-	PARTIALLY_RETURNED OrderStatsStatusType = "PARTIALLY_RETURNED"
-	PENDING OrderStatsStatusType = "PENDING"
-	PICKUP OrderStatsStatusType = "PICKUP"
-	PROCESSING OrderStatsStatusType = "PROCESSING"
-	RESERVED OrderStatsStatusType = "RESERVED"
-	RETURNED OrderStatsStatusType = "RETURNED"
-	UNKNOWN OrderStatsStatusType = "UNKNOWN"
-	UNPAID OrderStatsStatusType = "UNPAID"
-	LOST OrderStatsStatusType = "LOST"
+	CANCELLED_IN_DELIVERY       OrderStatsStatusType = "CANCELLED_IN_DELIVERY"
+	CANCELLED_IN_PROCESSING     OrderStatsStatusType = "CANCELLED_IN_PROCESSING"
+	DELIVERY                    OrderStatsStatusType = "DELIVERY"
+	DELIVERED                   OrderStatsStatusType = "DELIVERED"
+	PARTIALLY_DELIVERED         OrderStatsStatusType = "PARTIALLY_DELIVERED"
+	PARTIALLY_RETURNED          OrderStatsStatusType = "PARTIALLY_RETURNED"
+	PENDING                     OrderStatsStatusType = "PENDING"
+	PICKUP                      OrderStatsStatusType = "PICKUP"
+	PROCESSING                  OrderStatsStatusType = "PROCESSING"
+	RESERVED                    OrderStatsStatusType = "RESERVED"
+	RETURNED                    OrderStatsStatusType = "RETURNED"
+	UNKNOWN                     OrderStatsStatusType = "UNKNOWN"
+	UNPAID                      OrderStatsStatusType = "UNPAID"
+	LOST                        OrderStatsStatusType = "LOST"
 )
 
 // All allowed values of OrderStatsStatusType enum
@@ -134,4 +134,3 @@ func (v *NullableOrderStatsStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

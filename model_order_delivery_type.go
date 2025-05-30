@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,16 +15,16 @@ import (
 	"fmt"
 )
 
-// OrderDeliveryType Способ доставки заказа:  * `DELIVERY` — курьерская доставка.  * `PICKUP` — самовывоз.  * `POST` — почта.  * `DIGITAL` — для цифровых товаров.  * `UNKNOWN` — неизвестный тип. 
+// OrderDeliveryType Способ доставки заказа:  * `DELIVERY` — курьерская доставка.  * `PICKUP` — самовывоз.  * `POST` — почта.  * `DIGITAL` — для цифровых товаров.  * `UNKNOWN` — неизвестный тип.
 type OrderDeliveryType string
 
 // List of OrderDeliveryType
 const (
 	DELIVERY OrderDeliveryType = "DELIVERY"
-	PICKUP OrderDeliveryType = "PICKUP"
-	POST OrderDeliveryType = "POST"
-	DIGITAL OrderDeliveryType = "DIGITAL"
-	UNKNOWN OrderDeliveryType = "UNKNOWN"
+	PICKUP   OrderDeliveryType = "PICKUP"
+	POST     OrderDeliveryType = "POST"
+	DIGITAL  OrderDeliveryType = "DIGITAL"
+	UNKNOWN  OrderDeliveryType = "UNKNOWN"
 )
 
 // All allowed values of OrderDeliveryType enum
@@ -114,4 +114,3 @@ func (v *NullableOrderDeliveryType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,18 +15,18 @@ import (
 	"fmt"
 )
 
-// BenefitType Типы дополнительных инструментов продвижения:  * `BESTS` — участие в акции «Бестселлеры Маркета». * `SPLIT_0_0_4` — возможность оплаты со Сплитом сроком на 4 месяца. * `SPLIT_0_0_6` — возможность оплаты со Сплитом сроком на 6 месяцев. * `SPLIT_0_0_12` — возможность оплаты со Сплитом сроком на 12 месяцев. * `MARKET_SUBSIDY_1_4` — скидка от Маркета от 1 до 4%. * `MARKET_SUBSIDY_5_9` — скидка от Маркета от 5 до 9%. * `MARKET_SUBSIDY_10` — скидка от Маркета от 10%. 
+// BenefitType Типы дополнительных инструментов продвижения:  * `BESTS` — участие в акции «Бестселлеры Маркета». * `SPLIT_0_0_4` — возможность оплаты со Сплитом сроком на 4 месяца. * `SPLIT_0_0_6` — возможность оплаты со Сплитом сроком на 6 месяцев. * `SPLIT_0_0_12` — возможность оплаты со Сплитом сроком на 12 месяцев. * `MARKET_SUBSIDY_1_4` — скидка от Маркета от 1 до 4%. * `MARKET_SUBSIDY_5_9` — скидка от Маркета от 5 до 9%. * `MARKET_SUBSIDY_10` — скидка от Маркета от 10%.
 type BenefitType string
 
 // List of BenefitType
 const (
-	BESTS BenefitType = "BESTS"
-	SPLIT_0_0_4 BenefitType = "SPLIT_0_0_4"
-	SPLIT_0_0_6 BenefitType = "SPLIT_0_0_6"
-	SPLIT_0_0_12 BenefitType = "SPLIT_0_0_12"
+	BESTS              BenefitType = "BESTS"
+	SPLIT_0_0_4        BenefitType = "SPLIT_0_0_4"
+	SPLIT_0_0_6        BenefitType = "SPLIT_0_0_6"
+	SPLIT_0_0_12       BenefitType = "SPLIT_0_0_12"
 	MARKET_SUBSIDY_1_4 BenefitType = "MARKET_SUBSIDY_1_4"
 	MARKET_SUBSIDY_5_9 BenefitType = "MARKET_SUBSIDY_5_9"
-	MARKET_SUBSIDY_10 BenefitType = "MARKET_SUBSIDY_10"
+	MARKET_SUBSIDY_10  BenefitType = "MARKET_SUBSIDY_10"
 )
 
 // All allowed values of BenefitType enum
@@ -118,4 +118,3 @@ func (v *NullableBenefitType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

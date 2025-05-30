@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// ReportStatusType Статус генерации отчета:  * `PENDING` — отчет ожидает генерации. * `PROCESSING` — отчет генерируется. * `FAILED` — во время генерации произошла ошибка. * `DONE` — отчет готов. 
+// ReportStatusType Статус генерации отчета:  * `PENDING` — отчет ожидает генерации. * `PROCESSING` — отчет генерируется. * `FAILED` — во время генерации произошла ошибка. * `DONE` — отчет готов.
 type ReportStatusType string
 
 // List of ReportStatusType
 const (
-	PENDING ReportStatusType = "PENDING"
+	PENDING    ReportStatusType = "PENDING"
 	PROCESSING ReportStatusType = "PROCESSING"
-	FAILED ReportStatusType = "FAILED"
-	DONE ReportStatusType = "DONE"
+	FAILED     ReportStatusType = "FAILED"
+	DONE       ReportStatusType = "DONE"
 )
 
 // All allowed values of ReportStatusType enum
@@ -112,4 +112,3 @@ func (v *NullableReportStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

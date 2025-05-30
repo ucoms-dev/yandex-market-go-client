@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,10 +11,10 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the GetChatInfoDTO type satisfies the MappedNullable interface at compile time
@@ -25,12 +25,12 @@ type GetChatInfoDTO struct {
 	// Идентификатор чата.
 	ChatId int64 `json:"chatId"`
 	// Идентификатор заказа.
-	OrderId int64 `json:"orderId"`
-	Type ChatType `json:"type"`
-	Status ChatStatusType `json:"status"`
-	// Дата и время создания чата.  Формат даты: ISO 8601 со смещением относительно UTC. 
+	OrderId int64          `json:"orderId"`
+	Type    ChatType       `json:"type"`
+	Status  ChatStatusType `json:"status"`
+	// Дата и время создания чата.  Формат даты: ISO 8601 со смещением относительно UTC.
 	CreatedAt time.Time `json:"createdAt"`
-	// Дата и время последнего сообщения в чате.  Формат даты: ISO 8601 со смещением относительно UTC. 
+	// Дата и время последнего сообщения в чате.  Формат даты: ISO 8601 со смещением относительно UTC.
 	UpdatedAt time.Time `json:"updatedAt"`
 }
 
@@ -204,7 +204,7 @@ func (o *GetChatInfoDTO) SetUpdatedAt(v time.Time) {
 }
 
 func (o GetChatInfoDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -240,10 +240,10 @@ func (o *GetChatInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -299,5 +299,3 @@ func (v *NullableGetChatInfoDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

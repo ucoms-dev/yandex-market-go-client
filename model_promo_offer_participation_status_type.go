@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,17 +15,17 @@ import (
 	"fmt"
 )
 
-// PromoOfferParticipationStatusType Статус товара в акции:  * `AUTO` — добавлен автоматически во всех магазинах кабинета, в которых товар доступен для покупки.  * `PARTIALLY_AUTO` — добавлен автоматически у части магазинов.  * `MANUAL` — добавлен вручную.  * `NOT_PARTICIPATING` — не участвует в акции.  * `RENEWED` — успешно перенесен из предыдущей акции «Бестселлеры Маркета». Только для акций «Бестселлеры Маркета».  * `RENEW_FAILED` — не получилось перенести из предыдущей акции «Бестселлеры Маркета». Только для акций «Бестселлеры Маркета».  * `MINIMUM_FOR_PROMOS` — участвует в акции с ценой `maxPromoPrice` (установлен минимум по цене для акций, который соответствует порогу `maxPromoPrice`). Только для акций «Бестселлеры Маркета».  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index). 
+// PromoOfferParticipationStatusType Статус товара в акции:  * `AUTO` — добавлен автоматически во всех магазинах кабинета, в которых товар доступен для покупки.  * `PARTIALLY_AUTO` — добавлен автоматически у части магазинов.  * `MANUAL` — добавлен вручную.  * `NOT_PARTICIPATING` — не участвует в акции.  * `RENEWED` — успешно перенесен из предыдущей акции «Бестселлеры Маркета». Только для акций «Бестселлеры Маркета».  * `RENEW_FAILED` — не получилось перенести из предыдущей акции «Бестселлеры Маркета». Только для акций «Бестселлеры Маркета».  * `MINIMUM_FOR_PROMOS` — участвует в акции с ценой `maxPromoPrice` (установлен минимум по цене для акций, который соответствует порогу `maxPromoPrice`). Только для акций «Бестселлеры Маркета».  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index).
 type PromoOfferParticipationStatusType string
 
 // List of PromoOfferParticipationStatusType
 const (
-	AUTO PromoOfferParticipationStatusType = "AUTO"
-	PARTIALLY_AUTO PromoOfferParticipationStatusType = "PARTIALLY_AUTO"
-	MANUAL PromoOfferParticipationStatusType = "MANUAL"
-	NOT_PARTICIPATING PromoOfferParticipationStatusType = "NOT_PARTICIPATING"
-	RENEWED PromoOfferParticipationStatusType = "RENEWED"
-	RENEW_FAILED PromoOfferParticipationStatusType = "RENEW_FAILED"
+	AUTO               PromoOfferParticipationStatusType = "AUTO"
+	PARTIALLY_AUTO     PromoOfferParticipationStatusType = "PARTIALLY_AUTO"
+	MANUAL             PromoOfferParticipationStatusType = "MANUAL"
+	NOT_PARTICIPATING  PromoOfferParticipationStatusType = "NOT_PARTICIPATING"
+	RENEWED            PromoOfferParticipationStatusType = "RENEWED"
+	RENEW_FAILED       PromoOfferParticipationStatusType = "RENEW_FAILED"
 	MINIMUM_FOR_PROMOS PromoOfferParticipationStatusType = "MINIMUM_FOR_PROMOS"
 )
 
@@ -118,4 +118,3 @@ func (v *NullablePromoOfferParticipationStatusType) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

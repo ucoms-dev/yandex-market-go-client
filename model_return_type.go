@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// ReturnType Тип заказа для фильтрации:  * `UNREDEEMED` — невыкуп.  * `RETURN` — возврат.  Если не указывать, в ответе будут и невыкупы, и возвраты. 
+// ReturnType Тип заказа для фильтрации:  * `UNREDEEMED` — невыкуп.  * `RETURN` — возврат.  Если не указывать, в ответе будут и невыкупы, и возвраты.
 type ReturnType string
 
 // List of ReturnType
 const (
 	UNREDEEMED ReturnType = "UNREDEEMED"
-	RETURN ReturnType = "RETURN"
+	RETURN     ReturnType = "RETURN"
 )
 
 // All allowed values of ReturnType enum
@@ -108,4 +108,3 @@ func (v *NullableReturnType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

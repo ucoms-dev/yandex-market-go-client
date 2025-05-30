@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,19 +15,19 @@ import (
 	"fmt"
 )
 
-// QualityRatingComponentType Составляющие индекса качества.  **Для модели DBS:** * `DBS_CANCELLATION_RATE` — доля отмененных товаров. * `DBS_LATE_DELIVERY_RATE` — доля заказов, доставленных после плановой даты.  **Для моделей FBS и Экспресс:** * `FBS_CANCELLATION_RATE` — доля отмененных товаров. * `FBS_LATE_SHIP_RATE` — доля не вовремя отгруженных заказов.  **Для модели FBY:** * `FBY_LATE_DELIVERY_RATE` — доля товаров, которые приехали на склад с опозданием. * `FBY_CANCELLATION_RATE` — доля отмененных или недоставленных товаров. * `FBY_DELIVERY_DIFF_RATE` — доля товаров, которые не прибыли вместе с поставкой или которые не приняли. * `FBY_LATE_EDITING_RATE` — доля товаров, которые поздно убрали из заявки. 
+// QualityRatingComponentType Составляющие индекса качества.  **Для модели DBS:** * `DBS_CANCELLATION_RATE` — доля отмененных товаров. * `DBS_LATE_DELIVERY_RATE` — доля заказов, доставленных после плановой даты.  **Для моделей FBS и Экспресс:** * `FBS_CANCELLATION_RATE` — доля отмененных товаров. * `FBS_LATE_SHIP_RATE` — доля не вовремя отгруженных заказов.  **Для модели FBY:** * `FBY_LATE_DELIVERY_RATE` — доля товаров, которые приехали на склад с опозданием. * `FBY_CANCELLATION_RATE` — доля отмененных или недоставленных товаров. * `FBY_DELIVERY_DIFF_RATE` — доля товаров, которые не прибыли вместе с поставкой или которые не приняли. * `FBY_LATE_EDITING_RATE` — доля товаров, которые поздно убрали из заявки.
 type QualityRatingComponentType string
 
 // List of QualityRatingComponentType
 const (
-	DBS_CANCELLATION_RATE QualityRatingComponentType = "DBS_CANCELLATION_RATE"
+	DBS_CANCELLATION_RATE  QualityRatingComponentType = "DBS_CANCELLATION_RATE"
 	DBS_LATE_DELIVERY_RATE QualityRatingComponentType = "DBS_LATE_DELIVERY_RATE"
-	FBS_CANCELLATION_RATE QualityRatingComponentType = "FBS_CANCELLATION_RATE"
-	FBS_LATE_SHIP_RATE QualityRatingComponentType = "FBS_LATE_SHIP_RATE"
+	FBS_CANCELLATION_RATE  QualityRatingComponentType = "FBS_CANCELLATION_RATE"
+	FBS_LATE_SHIP_RATE     QualityRatingComponentType = "FBS_LATE_SHIP_RATE"
 	FBY_LATE_DELIVERY_RATE QualityRatingComponentType = "FBY_LATE_DELIVERY_RATE"
-	FBY_CANCELLATION_RATE QualityRatingComponentType = "FBY_CANCELLATION_RATE"
+	FBY_CANCELLATION_RATE  QualityRatingComponentType = "FBY_CANCELLATION_RATE"
 	FBY_DELIVERY_DIFF_RATE QualityRatingComponentType = "FBY_DELIVERY_DIFF_RATE"
-	FBY_LATE_EDITING_RATE QualityRatingComponentType = "FBY_LATE_EDITING_RATE"
+	FBY_LATE_EDITING_RATE  QualityRatingComponentType = "FBY_LATE_EDITING_RATE"
 )
 
 // All allowed values of QualityRatingComponentType enum
@@ -120,4 +120,3 @@ func (v *NullableQualityRatingComponentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

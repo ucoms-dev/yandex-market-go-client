@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,34 +15,34 @@ import (
 	"fmt"
 )
 
-// SupplyRequestDocumentType Тип документа:  * **Документы, которые загружает магазин**   * `SUPPLY` — список товаров.   * `ADDITIONAL_SUPPLY` — список товаров в дополнительной поставке.   * `VIRTUAL_DISTRIBUTION_CENTER_SUPPLY` — список товаров в [мультипоставке](*multisupply).   * `TRANSFER` — список товаров для утилизации.   * `WITHDRAW` — список товаров для вывоза.  * **Поставка товаров**   * `VALIDATION_ERRORS` — ошибки по товарам в поставке.   * `CARGO_UNITS` — ярлыки для грузомест.  * **Дополнительная поставка и непринятые товары**   * `ADDITIONAL_SUPPLY_ACCEPTABLE_GOODS` — товары, которые подходят для дополнительной поставки.   * `ADDITIONAL_SUPPLY_UNACCEPTABLE_GOODS` — вывоз непринятых товаров.  * **Маркировка товаров**   * `INBOUND_UTD` — входящий УПД.   * `OUTBOUND_UTD` — исходящий УПД.   * `IDENTIFIERS` — коды маркировки товаров.   * `CIS_FACT` — принятые товары с кодами маркировки.   * `ITEMS_WITH_CISES` — товары, для которых нужна маркировка.   * `REPORT_OF_WITHDRAW_WITH_CISES` — маркированные товары для вывоза со склада.   * `SECONDARY_ACCEPTANCE_CISES` — маркированные товары, которые приняты после вторичной приемки.   * `RNPT_FACT` — принятые товары с регистрационным номером партии товара (РНПТ).  * **Акты**   * `ACT_OF_WITHDRAW` — акт возврата.   * `ANOMALY_CONTAINERS_WITHDRAW_ACT` — акт изъятия непринятого товара.   * `ACT_OF_WITHDRAW_FROM_STORAGE` — акт списания с ответственного хранения.   * `ACT_OF_RECEPTION_TRANSFER` — акт приема-передачи.   * `ACT_OF_DISCREPANCY` — акт о расхождениях.   * `SECONDARY_RECEPTION_ACT` — акт вторичной приемки. 
+// SupplyRequestDocumentType Тип документа:  * **Документы, которые загружает магазин**   * `SUPPLY` — список товаров.   * `ADDITIONAL_SUPPLY` — список товаров в дополнительной поставке.   * `VIRTUAL_DISTRIBUTION_CENTER_SUPPLY` — список товаров в [мультипоставке](*multisupply).   * `TRANSFER` — список товаров для утилизации.   * `WITHDRAW` — список товаров для вывоза.  * **Поставка товаров**   * `VALIDATION_ERRORS` — ошибки по товарам в поставке.   * `CARGO_UNITS` — ярлыки для грузомест.  * **Дополнительная поставка и непринятые товары**   * `ADDITIONAL_SUPPLY_ACCEPTABLE_GOODS` — товары, которые подходят для дополнительной поставки.   * `ADDITIONAL_SUPPLY_UNACCEPTABLE_GOODS` — вывоз непринятых товаров.  * **Маркировка товаров**   * `INBOUND_UTD` — входящий УПД.   * `OUTBOUND_UTD` — исходящий УПД.   * `IDENTIFIERS` — коды маркировки товаров.   * `CIS_FACT` — принятые товары с кодами маркировки.   * `ITEMS_WITH_CISES` — товары, для которых нужна маркировка.   * `REPORT_OF_WITHDRAW_WITH_CISES` — маркированные товары для вывоза со склада.   * `SECONDARY_ACCEPTANCE_CISES` — маркированные товары, которые приняты после вторичной приемки.   * `RNPT_FACT` — принятые товары с регистрационным номером партии товара (РНПТ).  * **Акты**   * `ACT_OF_WITHDRAW` — акт возврата.   * `ANOMALY_CONTAINERS_WITHDRAW_ACT` — акт изъятия непринятого товара.   * `ACT_OF_WITHDRAW_FROM_STORAGE` — акт списания с ответственного хранения.   * `ACT_OF_RECEPTION_TRANSFER` — акт приема-передачи.   * `ACT_OF_DISCREPANCY` — акт о расхождениях.   * `SECONDARY_RECEPTION_ACT` — акт вторичной приемки.
 type SupplyRequestDocumentType string
 
 // List of SupplyRequestDocumentType
 const (
-	SUPPLY SupplyRequestDocumentType = "SUPPLY"
-	ADDITIONAL_SUPPLY SupplyRequestDocumentType = "ADDITIONAL_SUPPLY"
-	VIRTUAL_DISTRIBUTION_CENTER_SUPPLY SupplyRequestDocumentType = "VIRTUAL_DISTRIBUTION_CENTER_SUPPLY"
-	TRANSFER SupplyRequestDocumentType = "TRANSFER"
-	INBOUND_UTD SupplyRequestDocumentType = "INBOUND_UTD"
-	OUTBOUND_UTD SupplyRequestDocumentType = "OUTBOUND_UTD"
-	ADDITIONAL_SUPPLY_ACCEPTABLE_GOODS SupplyRequestDocumentType = "ADDITIONAL_SUPPLY_ACCEPTABLE_GOODS"
+	SUPPLY                               SupplyRequestDocumentType = "SUPPLY"
+	ADDITIONAL_SUPPLY                    SupplyRequestDocumentType = "ADDITIONAL_SUPPLY"
+	VIRTUAL_DISTRIBUTION_CENTER_SUPPLY   SupplyRequestDocumentType = "VIRTUAL_DISTRIBUTION_CENTER_SUPPLY"
+	TRANSFER                             SupplyRequestDocumentType = "TRANSFER"
+	INBOUND_UTD                          SupplyRequestDocumentType = "INBOUND_UTD"
+	OUTBOUND_UTD                         SupplyRequestDocumentType = "OUTBOUND_UTD"
+	ADDITIONAL_SUPPLY_ACCEPTABLE_GOODS   SupplyRequestDocumentType = "ADDITIONAL_SUPPLY_ACCEPTABLE_GOODS"
 	ADDITIONAL_SUPPLY_UNACCEPTABLE_GOODS SupplyRequestDocumentType = "ADDITIONAL_SUPPLY_UNACCEPTABLE_GOODS"
-	VALIDATION_ERRORS SupplyRequestDocumentType = "VALIDATION_ERRORS"
-	WITHDRAW SupplyRequestDocumentType = "WITHDRAW"
-	ACT_OF_WITHDRAW SupplyRequestDocumentType = "ACT_OF_WITHDRAW"
-	ANOMALY_CONTAINERS_WITHDRAW_ACT SupplyRequestDocumentType = "ANOMALY_CONTAINERS_WITHDRAW_ACT"
-	ACT_OF_WITHDRAW_FROM_STORAGE SupplyRequestDocumentType = "ACT_OF_WITHDRAW_FROM_STORAGE"
-	ACT_OF_RECEPTION_TRANSFER SupplyRequestDocumentType = "ACT_OF_RECEPTION_TRANSFER"
-	ACT_OF_DISCREPANCY SupplyRequestDocumentType = "ACT_OF_DISCREPANCY"
-	SECONDARY_RECEPTION_ACT SupplyRequestDocumentType = "SECONDARY_RECEPTION_ACT"
-	CARGO_UNITS SupplyRequestDocumentType = "CARGO_UNITS"
-	IDENTIFIERS SupplyRequestDocumentType = "IDENTIFIERS"
-	CIS_FACT SupplyRequestDocumentType = "CIS_FACT"
-	ITEMS_WITH_CISES SupplyRequestDocumentType = "ITEMS_WITH_CISES"
-	REPORT_OF_WITHDRAW_WITH_CISES SupplyRequestDocumentType = "REPORT_OF_WITHDRAW_WITH_CISES"
-	SECONDARY_ACCEPTANCE_CISES SupplyRequestDocumentType = "SECONDARY_ACCEPTANCE_CISES"
-	RNPT_FACT SupplyRequestDocumentType = "RNPT_FACT"
+	VALIDATION_ERRORS                    SupplyRequestDocumentType = "VALIDATION_ERRORS"
+	WITHDRAW                             SupplyRequestDocumentType = "WITHDRAW"
+	ACT_OF_WITHDRAW                      SupplyRequestDocumentType = "ACT_OF_WITHDRAW"
+	ANOMALY_CONTAINERS_WITHDRAW_ACT      SupplyRequestDocumentType = "ANOMALY_CONTAINERS_WITHDRAW_ACT"
+	ACT_OF_WITHDRAW_FROM_STORAGE         SupplyRequestDocumentType = "ACT_OF_WITHDRAW_FROM_STORAGE"
+	ACT_OF_RECEPTION_TRANSFER            SupplyRequestDocumentType = "ACT_OF_RECEPTION_TRANSFER"
+	ACT_OF_DISCREPANCY                   SupplyRequestDocumentType = "ACT_OF_DISCREPANCY"
+	SECONDARY_RECEPTION_ACT              SupplyRequestDocumentType = "SECONDARY_RECEPTION_ACT"
+	CARGO_UNITS                          SupplyRequestDocumentType = "CARGO_UNITS"
+	IDENTIFIERS                          SupplyRequestDocumentType = "IDENTIFIERS"
+	CIS_FACT                             SupplyRequestDocumentType = "CIS_FACT"
+	ITEMS_WITH_CISES                     SupplyRequestDocumentType = "ITEMS_WITH_CISES"
+	REPORT_OF_WITHDRAW_WITH_CISES        SupplyRequestDocumentType = "REPORT_OF_WITHDRAW_WITH_CISES"
+	SECONDARY_ACCEPTANCE_CISES           SupplyRequestDocumentType = "SECONDARY_ACCEPTANCE_CISES"
+	RNPT_FACT                            SupplyRequestDocumentType = "RNPT_FACT"
 )
 
 // All allowed values of SupplyRequestDocumentType enum
@@ -150,4 +150,3 @@ func (v *NullableSupplyRequestDocumentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

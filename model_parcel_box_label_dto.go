@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &ParcelBoxLabelDTO{}
 
 // ParcelBoxLabelDTO Информация о ярлыке для коробки.
 type ParcelBoxLabelDTO struct {
-	// Соответствует URL, по которому выполняется запрос [GET campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes/{boxId}/label](../../reference/orders/generateOrderLabel.md). 
+	// Соответствует URL, по которому выполняется запрос [GET campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes/{boxId}/label](../../reference/orders/generateOrderLabel.md).
 	Url string `json:"url"`
 	// Юридическое название магазина.
 	SupplierName string `json:"supplierName"`
@@ -29,17 +29,17 @@ type ParcelBoxLabelDTO struct {
 	DeliveryServiceName string `json:"deliveryServiceName"`
 	// Идентификатор заказа в системе Маркета.
 	OrderId int64 `json:"orderId"`
-	// Идентификатор заказа в информационной системе магазина.  Совпадает с `orderId`, если Маркету неизвестен номер заказа в системе магазина. 
+	// Идентификатор заказа в информационной системе магазина.  Совпадает с `orderId`, если Маркету неизвестен номер заказа в системе магазина.
 	OrderNum string `json:"orderNum"`
 	// Фамилия и инициалы получателя заказа.
 	RecipientName string `json:"recipientName"`
 	// Идентификатор коробки.
 	BoxId int64 `json:"boxId"`
-	// Идентификатор коробки в информационной системе магазина.  Возвращается в формате: `номер заказа на Маркете-номер коробки`. Например, `7206821‑1`, `7206821‑2` и т. д. 
+	// Идентификатор коробки в информационной системе магазина.  Возвращается в формате: `номер заказа на Маркете-номер коробки`. Например, `7206821‑1`, `7206821‑2` и т. д.
 	FulfilmentId string `json:"fulfilmentId"`
-	// Номер коробки в заказе. Возвращается в формате: `номер места/общее количество мест`. 
+	// Номер коробки в заказе. Возвращается в формате: `номер места/общее количество мест`.
 	Place string `json:"place"`
-	// Общая масса всех товаров в заказе.  Возвращается в формате: `weight кг`. 
+	// Общая масса всех товаров в заказе.  Возвращается в формате: `weight кг`.
 	// Deprecated
 	Weight string `json:"weight"`
 	// Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md).
@@ -412,7 +412,7 @@ func (o *ParcelBoxLabelDTO) SetShipmentDate(v string) {
 }
 
 func (o ParcelBoxLabelDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -464,10 +464,10 @@ func (o *ParcelBoxLabelDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -523,5 +523,3 @@ func (v *NullableParcelBoxLabelDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

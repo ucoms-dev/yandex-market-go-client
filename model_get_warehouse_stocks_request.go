@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,15 +17,15 @@ import (
 // checks if the GetWarehouseStocksRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetWarehouseStocksRequest{}
 
-// GetWarehouseStocksRequest Фильтры для запроса остатков. 
+// GetWarehouseStocksRequest Фильтры для запроса остатков.
 type GetWarehouseStocksRequest struct {
-	// Идентификатор склада.  Если параметр указан, возвращаются только товары в наличии на переданном складе.  **Для модели FBY:** получить список складов Маркета можно с помощью метода [GET warehouses](../../reference/warehouses/getFulfillmentWarehouses.md). 
+	// Идентификатор склада.  Если параметр указан, возвращаются только товары в наличии на переданном складе.  **Для модели FBY:** получить список складов Маркета можно с помощью метода [GET warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).
 	StocksWarehouseId *int64 `json:"stocksWarehouseId,omitempty"`
-	// **Только для модели FBY**  Возвращать ли информацию по оборачиваемости.  Значение по умолчанию: `false`. Если информация нужна, передайте значение `true`. 
+	// **Только для модели FBY**  Возвращать ли информацию по оборачиваемости.  Значение по умолчанию: `false`. Если информация нужна, передайте значение `true`.
 	WithTurnover *bool `json:"withTurnover,omitempty"`
-	// Фильтр по нахождению в архиве.  Передайте `true`, чтобы получить информацию об остатках товаров, которые находятся в архиве. Если фильтр не заполнен или передано `false`, в ответе возвращается информация о товарах, которые не находятся в архиве. 
+	// Фильтр по нахождению в архиве.  Передайте `true`, чтобы получить информацию об остатках товаров, которые находятся в архиве. Если фильтр не заполнен или передано `false`, в ответе возвращается информация о товарах, которые не находятся в архиве.
 	Archived *bool `json:"archived,omitempty"`
-	// Фильтр по вашим SKU товаров.  Возвращается информация об остатках всех переданных SKU, включая товары в архиве.  {% note warning \"Такой список возвращается только целиком\" %}  Если вы запрашиваете информацию по конкретным SKU, не заполняйте:  * `page_token` * `limit` * `archived` * `stocksOnWarehouse`  {% endnote %}    
+	// Фильтр по вашим SKU товаров.  Возвращается информация об остатках всех переданных SKU, включая товары в архиве.  {% note warning \"Такой список возвращается только целиком\" %}  Если вы запрашиваете информацию по конкретным SKU, не заполняйте:  * `page_token` * `limit` * `archived` * `stocksOnWarehouse`  {% endnote %}
 	OfferIds []string `json:"offerIds,omitempty"`
 }
 
@@ -180,7 +180,7 @@ func (o *GetWarehouseStocksRequest) SetOfferIds(v []string) {
 }
 
 func (o GetWarehouseStocksRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -239,5 +239,3 @@ func (v *NullableGetWarehouseStocksRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

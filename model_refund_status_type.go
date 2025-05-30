@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,25 +15,25 @@ import (
 	"fmt"
 )
 
-// RefundStatusType Статус возврата денег:  * `STARTED_BY_USER` — создан клиентом из личного кабинета.  * `REFUND_IN_PROGRESS` — ждет решение о возврате денег.  * `REFUNDED` — по возврату проведены все возвратные денежные транзакции.  * `FAILED` — невозможно провести возврат покупателю.  * `WAITING_FOR_DECISION` — ожидает решения.  * `DECISION_MADE` — по возврату принято решение.  * `REFUNDED_WITH_BONUSES` — возврат осуществлен баллами Плюса или промокодом.  * `REFUNDED_BY_SHOP` — магазин сделал самостоятельно возврат денег.  * `COMPLETE_WITHOUT_REFUND` — возврат денег не требуется.  * `CANCELLED` — возврат отменен.  * `PREMODERATION_DISPUTE` — по возврату открыт спор.  * `PREMODERATION_DECISION_WAITING` — ожидает решения.  * `PREMODERATION_DECISION_MADE` — по возврату принято решение.  * `UNKNOWN` — неизвестный статус. 
+// RefundStatusType Статус возврата денег:  * `STARTED_BY_USER` — создан клиентом из личного кабинета.  * `REFUND_IN_PROGRESS` — ждет решение о возврате денег.  * `REFUNDED` — по возврату проведены все возвратные денежные транзакции.  * `FAILED` — невозможно провести возврат покупателю.  * `WAITING_FOR_DECISION` — ожидает решения.  * `DECISION_MADE` — по возврату принято решение.  * `REFUNDED_WITH_BONUSES` — возврат осуществлен баллами Плюса или промокодом.  * `REFUNDED_BY_SHOP` — магазин сделал самостоятельно возврат денег.  * `COMPLETE_WITHOUT_REFUND` — возврат денег не требуется.  * `CANCELLED` — возврат отменен.  * `PREMODERATION_DISPUTE` — по возврату открыт спор.  * `PREMODERATION_DECISION_WAITING` — ожидает решения.  * `PREMODERATION_DECISION_MADE` — по возврату принято решение.  * `UNKNOWN` — неизвестный статус.
 type RefundStatusType string
 
 // List of RefundStatusType
 const (
-	STARTED_BY_USER RefundStatusType = "STARTED_BY_USER"
-	REFUND_IN_PROGRESS RefundStatusType = "REFUND_IN_PROGRESS"
-	REFUNDED RefundStatusType = "REFUNDED"
-	FAILED RefundStatusType = "FAILED"
-	WAITING_FOR_DECISION RefundStatusType = "WAITING_FOR_DECISION"
-	DECISION_MADE RefundStatusType = "DECISION_MADE"
-	REFUNDED_WITH_BONUSES RefundStatusType = "REFUNDED_WITH_BONUSES"
-	REFUNDED_BY_SHOP RefundStatusType = "REFUNDED_BY_SHOP"
-	CANCELLED RefundStatusType = "CANCELLED"
-	COMPLETE_WITHOUT_REFUND RefundStatusType = "COMPLETE_WITHOUT_REFUND"
-	PREMODERATION_DISPUTE RefundStatusType = "PREMODERATION_DISPUTE"
+	STARTED_BY_USER                RefundStatusType = "STARTED_BY_USER"
+	REFUND_IN_PROGRESS             RefundStatusType = "REFUND_IN_PROGRESS"
+	REFUNDED                       RefundStatusType = "REFUNDED"
+	FAILED                         RefundStatusType = "FAILED"
+	WAITING_FOR_DECISION           RefundStatusType = "WAITING_FOR_DECISION"
+	DECISION_MADE                  RefundStatusType = "DECISION_MADE"
+	REFUNDED_WITH_BONUSES          RefundStatusType = "REFUNDED_WITH_BONUSES"
+	REFUNDED_BY_SHOP               RefundStatusType = "REFUNDED_BY_SHOP"
+	CANCELLED                      RefundStatusType = "CANCELLED"
+	COMPLETE_WITHOUT_REFUND        RefundStatusType = "COMPLETE_WITHOUT_REFUND"
+	PREMODERATION_DISPUTE          RefundStatusType = "PREMODERATION_DISPUTE"
 	PREMODERATION_DECISION_WAITING RefundStatusType = "PREMODERATION_DECISION_WAITING"
-	PREMODERATION_DECISION_MADE RefundStatusType = "PREMODERATION_DECISION_MADE"
-	UNKNOWN RefundStatusType = "UNKNOWN"
+	PREMODERATION_DECISION_MADE    RefundStatusType = "PREMODERATION_DECISION_MADE"
+	UNKNOWN                        RefundStatusType = "UNKNOWN"
 )
 
 // All allowed values of RefundStatusType enum
@@ -132,4 +132,3 @@ func (v *NullableRefundStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

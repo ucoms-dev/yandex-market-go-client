@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,21 +17,21 @@ import (
 // checks if the OrderDeliveryAddressDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderDeliveryAddressDTO{}
 
-// OrderDeliveryAddressDTO Адрес доставки.  Указывается, если параметр `type` принимает значение `DELIVERY`, `POST` или `PICKUP` (только для модели DBS). Если `type=PICKUP`, возвращается адрес пункта выдачи. 
+// OrderDeliveryAddressDTO Адрес доставки.  Указывается, если параметр `type` принимает значение `DELIVERY`, `POST` или `PICKUP` (только для модели DBS). Если `type=PICKUP`, возвращается адрес пункта выдачи.
 type OrderDeliveryAddressDTO struct {
-	// Страна. 
+	// Страна.
 	Country *string `json:"country,omitempty"`
-	// Почтовый индекс.  Указывается, если выбрана доставка почтой (`delivery type=POST`). 
+	// Почтовый индекс.  Указывается, если выбрана доставка почтой (`delivery type=POST`).
 	Postcode *string `json:"postcode,omitempty"`
-	// Город или населенный пункт. 
+	// Город или населенный пункт.
 	City *string `json:"city,omitempty"`
 	// Район.
 	District *string `json:"district,omitempty"`
 	// Станция метро.
 	Subway *string `json:"subway,omitempty"`
-	// Улица. 
+	// Улица.
 	Street *string `json:"street,omitempty"`
-	// Дом или владение. 
+	// Дом или владение.
 	House *string `json:"house,omitempty"`
 	// Корпус или строение.
 	Block *string `json:"block,omitempty"`
@@ -43,11 +43,11 @@ type OrderDeliveryAddressDTO struct {
 	Floor *string `json:"floor,omitempty"`
 	// Квартира или офис.
 	Apartment *string `json:"apartment,omitempty"`
-	// Телефон получателя заказа. 
+	// Телефон получателя заказа.
 	Phone *string `json:"phone,omitempty"`
-	// Фамилия, имя и отчество получателя заказа. 
+	// Фамилия, имя и отчество получателя заказа.
 	Recipient *string `json:"recipient,omitempty"`
-	Gps *GpsDTO `json:"gps,omitempty"`
+	Gps       *GpsDTO `json:"gps,omitempty"`
 }
 
 // NewOrderDeliveryAddressDTO instantiates a new OrderDeliveryAddressDTO object
@@ -548,7 +548,7 @@ func (o *OrderDeliveryAddressDTO) SetGps(v GpsDTO) {
 }
 
 func (o OrderDeliveryAddressDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -640,5 +640,3 @@ func (v *NullableOrderDeliveryAddressDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

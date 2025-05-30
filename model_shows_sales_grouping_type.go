@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// ShowsSalesGroupingType Группировка данных отчета. Возможные значения: * `CATEGORIES` — группировка по категориям. * `OFFERS` — группировка по товарам. 
+// ShowsSalesGroupingType Группировка данных отчета. Возможные значения: * `CATEGORIES` — группировка по категориям. * `OFFERS` — группировка по товарам.
 type ShowsSalesGroupingType string
 
 // List of ShowsSalesGroupingType
 const (
 	CATEGORIES ShowsSalesGroupingType = "CATEGORIES"
-	OFFERS ShowsSalesGroupingType = "OFFERS"
+	OFFERS     ShowsSalesGroupingType = "OFFERS"
 )
 
 // All allowed values of ShowsSalesGroupingType enum
@@ -108,4 +108,3 @@ func (v *NullableShowsSalesGroupingType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

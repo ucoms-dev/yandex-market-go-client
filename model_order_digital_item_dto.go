@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,16 +21,16 @@ var _ MappedNullable = &OrderDigitalItemDTO{}
 
 // OrderDigitalItemDTO Цифровой товар.
 type OrderDigitalItemDTO struct {
-	// Идентификатор товара в заказе.  Он приходит в ответе на запрос [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md) — параметр `id` в `items`. 
+	// Идентификатор товара в заказе.  Он приходит в ответе на запрос [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md) — параметр `id` в `items`.
 	Id int64 `json:"id"`
-	// {% note warning \"Вместо него используйте `codes`\" %}  Совместное использование обоих параметров приведет к ошибке.  {% endnote %}  Сам ключ. 
+	// {% note warning \"Вместо него используйте `codes`\" %}  Совместное использование обоих параметров приведет к ошибке.  {% endnote %}  Сам ключ.
 	// Deprecated
 	Code *string `json:"code,omitempty"`
 	// Ключи, относящиеся к товару.
 	Codes []string `json:"codes,omitempty"`
 	// Инструкция по активации.
 	Slip string `json:"slip"`
-	// Дата, до которой нужно активировать ключи. Если ключи действуют бессрочно, укажите любую дату в отдаленном будущем.  Формат даты: `ГГГГ-ММ-ДД`. 
+	// Дата, до которой нужно активировать ключи. Если ключи действуют бессрочно, укажите любую дату в отдаленном будущем.  Формат даты: `ГГГГ-ММ-ДД`.
 	ActivateTill string `json:"activate_till"`
 }
 
@@ -197,7 +197,7 @@ func (o *OrderDigitalItemDTO) SetActivateTill(v string) {
 }
 
 func (o OrderDigitalItemDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -233,10 +233,10 @@ func (o *OrderDigitalItemDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -292,5 +292,3 @@ func (v *NullableOrderDigitalItemDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

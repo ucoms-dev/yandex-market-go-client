@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// SupplyRequestSortAttributeType По какому параметру сортировать заявки:  * `ID` — идентификатор заявки. * `REQUESTED_DATE` — дата поставки на склад хранения.      Если товары проходили через транзитный склад, сортирует по датам поставки на оба склада. * `UPDATED_AT` — время обновления заявки. * `STATUS` — статус заявки. 
+// SupplyRequestSortAttributeType По какому параметру сортировать заявки:  * `ID` — идентификатор заявки. * `REQUESTED_DATE` — дата поставки на склад хранения.      Если товары проходили через транзитный склад, сортирует по датам поставки на оба склада. * `UPDATED_AT` — время обновления заявки. * `STATUS` — статус заявки.
 type SupplyRequestSortAttributeType string
 
 // List of SupplyRequestSortAttributeType
 const (
-	ID SupplyRequestSortAttributeType = "ID"
+	ID             SupplyRequestSortAttributeType = "ID"
 	REQUESTED_DATE SupplyRequestSortAttributeType = "REQUESTED_DATE"
-	UPDATED_AT SupplyRequestSortAttributeType = "UPDATED_AT"
-	STATUS SupplyRequestSortAttributeType = "STATUS"
+	UPDATED_AT     SupplyRequestSortAttributeType = "UPDATED_AT"
+	STATUS         SupplyRequestSortAttributeType = "STATUS"
 )
 
 // All allowed values of SupplyRequestSortAttributeType enum
@@ -112,4 +112,3 @@ func (v *NullableSupplyRequestSortAttributeType) UnmarshalJSON(src []byte) error
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

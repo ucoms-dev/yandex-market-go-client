@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,39 +21,39 @@ var _ MappedNullable = &OrderDeliveryDTO{}
 
 // OrderDeliveryDTO Информация о доставке.
 type OrderDeliveryDTO struct {
-	// Идентификатор доставки, присвоенный магазином.  Указывается, только если магазин передал данный идентификатор в ответе на запрос методом `POST cart`. 
+	// Идентификатор доставки, присвоенный магазином.  Указывается, только если магазин передал данный идентификатор в ответе на запрос методом `POST cart`.
 	// Deprecated
-	Id *string `json:"id,omitempty"`
+	Id   *string           `json:"id,omitempty"`
 	Type OrderDeliveryType `json:"type"`
 	// Наименование службы доставки.
 	ServiceName string `json:"serviceName"`
-	// {% note warning \"Стоимость доставки смотрите в параметре `deliveryTotal`.\" %}     {% endnote %}  Стоимость доставки в валюте заказа. 
+	// {% note warning \"Стоимость доставки смотрите в параметре `deliveryTotal`.\" %}     {% endnote %}  Стоимость доставки в валюте заказа.
 	// Deprecated
-	Price *float32 `json:"price,omitempty"`
+	Price               *float32                 `json:"price,omitempty"`
 	DeliveryPartnerType OrderDeliveryPartnerType `json:"deliveryPartnerType"`
-	Courier *OrderCourierDTO `json:"courier,omitempty"`
-	Dates OrderDeliveryDatesDTO `json:"dates"`
-	Region *RegionDTO `json:"region,omitempty"`
-	Address *OrderDeliveryAddressDTO `json:"address,omitempty"`
-	Vat *OrderVatType `json:"vat,omitempty"`
+	Courier             *OrderCourierDTO         `json:"courier,omitempty"`
+	Dates               OrderDeliveryDatesDTO    `json:"dates"`
+	Region              *RegionDTO               `json:"region,omitempty"`
+	Address             *OrderDeliveryAddressDTO `json:"address,omitempty"`
+	Vat                 *OrderVatType            `json:"vat,omitempty"`
 	// Идентификатор службы доставки.
-	DeliveryServiceId int64 `json:"deliveryServiceId"`
-	LiftType *OrderLiftType `json:"liftType,omitempty"`
+	DeliveryServiceId int64          `json:"deliveryServiceId"`
+	LiftType          *OrderLiftType `json:"liftType,omitempty"`
 	// Стоимость подъема на этаж.
 	LiftPrice *float32 `json:"liftPrice,omitempty"`
 	// Идентификатор пункта самовывоза, присвоенный магазином.
 	OutletCode *string `json:"outletCode,omitempty"`
-	// Формат даты: `ДД-ММ-ГГГГ`. 
-	OutletStorageLimitDate *string `json:"outletStorageLimitDate,omitempty"`
-	DispatchType *OrderDeliveryDispatchType `json:"dispatchType,omitempty"`
+	// Формат даты: `ДД-ММ-ГГГГ`.
+	OutletStorageLimitDate *string                    `json:"outletStorageLimitDate,omitempty"`
+	DispatchType           *OrderDeliveryDispatchType `json:"dispatchType,omitempty"`
 	// Информация для отслеживания перемещений посылки.
 	Tracks []OrderTrackDTO `json:"tracks,omitempty"`
 	// Информация о посылках.
 	Shipments []OrderShipmentDTO `json:"shipments,omitempty"`
 	// Приблизительная ли дата доставки.
-	Estimated *bool `json:"estimated,omitempty"`
-	EacType *OrderDeliveryEacType `json:"eacType,omitempty"`
-	// Код подтверждения ЭАПП (для типа `MERCHANT_TO_COURIER`). 
+	Estimated *bool                 `json:"estimated,omitempty"`
+	EacType   *OrderDeliveryEacType `json:"eacType,omitempty"`
+	// Код подтверждения ЭАПП (для типа `MERCHANT_TO_COURIER`).
 	EacCode *string `json:"eacCode,omitempty"`
 }
 
@@ -722,7 +722,7 @@ func (o *OrderDeliveryDTO) SetEacCode(v string) {
 }
 
 func (o OrderDeliveryDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -804,10 +804,10 @@ func (o *OrderDeliveryDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -863,5 +863,3 @@ func (v *NullableOrderDeliveryDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

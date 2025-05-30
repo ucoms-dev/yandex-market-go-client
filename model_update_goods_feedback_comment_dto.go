@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,9 +21,9 @@ var _ MappedNullable = &UpdateGoodsFeedbackCommentDTO{}
 
 // UpdateGoodsFeedbackCommentDTO Комментарий к отзыву или другому комментарию.
 type UpdateGoodsFeedbackCommentDTO struct {
-	// Идентификатор комментария к отзыву. 
+	// Идентификатор комментария к отзыву.
 	Id *int64 `json:"id,omitempty"`
-	// Идентификатор комментария к отзыву. 
+	// Идентификатор комментария к отзыву.
 	ParentId *int64 `json:"parentId,omitempty"`
 	// Текст комментария.
 	Text string `json:"text"`
@@ -138,7 +138,7 @@ func (o *UpdateGoodsFeedbackCommentDTO) SetText(v string) {
 }
 
 func (o UpdateGoodsFeedbackCommentDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -170,10 +170,10 @@ func (o *UpdateGoodsFeedbackCommentDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -229,5 +229,3 @@ func (v *NullableUpdateGoodsFeedbackCommentDTO) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

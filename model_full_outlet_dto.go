@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,28 +21,28 @@ var _ MappedNullable = &FullOutletDTO{}
 
 // FullOutletDTO Информация о точке продаж.
 type FullOutletDTO struct {
-	// Название точки продаж. 
-	Name string `json:"name"`
+	// Название точки продаж.
+	Name string     `json:"name"`
 	Type OutletType `json:"type"`
-	// Координаты точки продаж.  Формат: долгота, широта. Разделители: запятая и / или пробел. Например, `20.4522144, 54.7104264`.  Если параметр не передан, координаты будут определены по значениям параметров, вложенных в `address`. 
+	// Координаты точки продаж.  Формат: долгота, широта. Разделители: запятая и / или пробел. Например, `20.4522144, 54.7104264`.  Если параметр не передан, координаты будут определены по значениям параметров, вложенных в `address`.
 	Coords *string `json:"coords,omitempty"`
-	// Признак основной точки продаж.  Возможные значения:  * `false` — неосновная точка продаж. * `true` — основная точка продаж. 
+	// Признак основной точки продаж.  Возможные значения:  * `false` — неосновная точка продаж. * `true` — основная точка продаж.
 	IsMain *bool `json:"isMain,omitempty"`
 	// Идентификатор точки продаж, присвоенный магазином.
-	ShopOutletCode *string `json:"shopOutletCode,omitempty"`
-	Visibility *OutletVisibilityType `json:"visibility,omitempty"`
-	Address OutletAddressDTO `json:"address"`
-	// Номера телефонов точки продаж. Передавайте в формате: `+7 (999) 999-99-99`. 
-	Phones []string `json:"phones"`
+	ShopOutletCode *string               `json:"shopOutletCode,omitempty"`
+	Visibility     *OutletVisibilityType `json:"visibility,omitempty"`
+	Address        OutletAddressDTO      `json:"address"`
+	// Номера телефонов точки продаж. Передавайте в формате: `+7 (999) 999-99-99`.
+	Phones          []string                 `json:"phones"`
 	WorkingSchedule OutletWorkingScheduleDTO `json:"workingSchedule"`
-	// Информация об условиях доставки для данной точки продаж.  Обязательный параметр, если параметр `type=DEPOT` или `type=MIXED`. 
+	// Информация об условиях доставки для данной точки продаж.  Обязательный параметр, если параметр `type=DEPOT` или `type=MIXED`.
 	DeliveryRules []OutletDeliveryRuleDTO `json:"deliveryRules,omitempty"`
 	// Срок хранения заказа в собственном пункте выдачи заказов. Считается в днях.
 	StoragePeriod *int64 `json:"storagePeriod,omitempty"`
 	// Идентификатор точки продаж, присвоенный Маркетом.
-	Id int64 `json:"id"`
+	Id     int64             `json:"id"`
 	Status *OutletStatusType `json:"status,omitempty"`
-	Region *RegionDTO `json:"region,omitempty"`
+	Region *RegionDTO        `json:"region,omitempty"`
 	// Идентификатор точки продаж, заданный магазином.
 	ShopOutletId *string `json:"shopOutletId,omitempty"`
 	// Рабочее время.
@@ -574,7 +574,7 @@ func (o *FullOutletDTO) SetModerationReason(v string) {
 }
 
 func (o FullOutletDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -643,10 +643,10 @@ func (o *FullOutletDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -702,5 +702,3 @@ func (v *NullableFullOutletDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

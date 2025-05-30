@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// AddOffersToArchiveErrorType Причина, по которой товар не удалось поместить в архив:  * `OFFER_HAS_STOCKS` — товар хранится на складе Маркета.  * `UNKNOWN` — неизвестная причина ошибки. Скорее всего произошел сбой на стороне Маркета. Если ошибка повторяется долгое время, обратитесь в поддержку. 
+// AddOffersToArchiveErrorType Причина, по которой товар не удалось поместить в архив:  * `OFFER_HAS_STOCKS` — товар хранится на складе Маркета.  * `UNKNOWN` — неизвестная причина ошибки. Скорее всего произошел сбой на стороне Маркета. Если ошибка повторяется долгое время, обратитесь в поддержку.
 type AddOffersToArchiveErrorType string
 
 // List of AddOffersToArchiveErrorType
 const (
 	OFFER_HAS_STOCKS AddOffersToArchiveErrorType = "OFFER_HAS_STOCKS"
-	UNKNOWN AddOffersToArchiveErrorType = "UNKNOWN"
+	UNKNOWN          AddOffersToArchiveErrorType = "UNKNOWN"
 )
 
 // All allowed values of AddOffersToArchiveErrorType enum
@@ -108,4 +108,3 @@ func (v *NullableAddOffersToArchiveErrorType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

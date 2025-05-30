@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,7 +17,7 @@ import (
 // checks if the ForwardScrollingPagerDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ForwardScrollingPagerDTO{}
 
-// ForwardScrollingPagerDTO Идентификатор следующей страницы. 
+// ForwardScrollingPagerDTO Идентификатор следующей страницы.
 type ForwardScrollingPagerDTO struct {
 	// Идентификатор следующей страницы результатов.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
@@ -73,7 +73,7 @@ func (o *ForwardScrollingPagerDTO) SetNextPageToken(v string) {
 }
 
 func (o ForwardScrollingPagerDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -123,5 +123,3 @@ func (v *NullableForwardScrollingPagerDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -20,9 +20,9 @@ var _ MappedNullable = &OrdersStatsPriceDTO{}
 // OrdersStatsPriceDTO Цена или скидки на товар.
 type OrdersStatsPriceDTO struct {
 	Type *OrdersStatsPriceType `json:"type,omitempty"`
-	// Цена или скидка на единицу товара в заказе.  Точность — два знака после запятой. 
+	// Цена или скидка на единицу товара в заказе.  Точность — два знака после запятой.
 	CostPerItem *float32 `json:"costPerItem,omitempty"`
-	// Суммарная цена или скидка на все единицы товара в заказе.  Точность — два знака после запятой. 
+	// Суммарная цена или скидка на все единицы товара в заказе.  Точность — два знака после запятой.
 	Total *float32 `json:"total,omitempty"`
 }
 
@@ -140,7 +140,7 @@ func (o *OrdersStatsPriceDTO) SetTotal(v float32) {
 }
 
 func (o OrdersStatsPriceDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -196,5 +196,3 @@ func (v *NullableOrdersStatsPriceDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

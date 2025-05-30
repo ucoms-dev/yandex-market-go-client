@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,29 +15,29 @@ import (
 	"fmt"
 )
 
-// OrderPromoType Тип скидки:  * `DIRECT_DISCOUNT` — прямая скидка, которую устанавливает продавец или Маркет.  * `BLUE_SET` — комплекты.  * `BLUE_FLASH` — флеш-акция.  * `MARKET_COUPON` — скидка по промокоду Маркета.  * `MARKET_PROMOCODE` — скидка по промокоду магазина.  * `MARKET_BLUE` — скидка на Маркете.  * `CHEAPEST_AS_GIFT` — самый дешевый товар в подарок.  * `CASHBACK` — кешбэк.  * `SPREAD_DISCOUNT_COUNT` — скидка за количество одинаковых товаров.  * `SPREAD_DISCOUNT_RECEIPT` — скидка от суммы чека.  * `DISCOUNT_BY_PAYMENT_TYPE` — прямая скидка при оплате картой Плюса.  * `PERCENT_DISCOUNT` — прямая скидка в процентах.  * `DCO_EXTRA_DISCOUNT` — дополнительная скидка, необходимая для расчета субсидии от Маркета.  * `UNKNOWN` — неизвестный тип.  Устаревшие типы:  * `GENERIC_BUNDLE`.  * `MARKET_COIN`.  * `PRICE_DROP_AS_YOU_SHOP`.  * `SECRET_SALE`. 
+// OrderPromoType Тип скидки:  * `DIRECT_DISCOUNT` — прямая скидка, которую устанавливает продавец или Маркет.  * `BLUE_SET` — комплекты.  * `BLUE_FLASH` — флеш-акция.  * `MARKET_COUPON` — скидка по промокоду Маркета.  * `MARKET_PROMOCODE` — скидка по промокоду магазина.  * `MARKET_BLUE` — скидка на Маркете.  * `CHEAPEST_AS_GIFT` — самый дешевый товар в подарок.  * `CASHBACK` — кешбэк.  * `SPREAD_DISCOUNT_COUNT` — скидка за количество одинаковых товаров.  * `SPREAD_DISCOUNT_RECEIPT` — скидка от суммы чека.  * `DISCOUNT_BY_PAYMENT_TYPE` — прямая скидка при оплате картой Плюса.  * `PERCENT_DISCOUNT` — прямая скидка в процентах.  * `DCO_EXTRA_DISCOUNT` — дополнительная скидка, необходимая для расчета субсидии от Маркета.  * `UNKNOWN` — неизвестный тип.  Устаревшие типы:  * `GENERIC_BUNDLE`.  * `MARKET_COIN`.  * `PRICE_DROP_AS_YOU_SHOP`.  * `SECRET_SALE`.
 type OrderPromoType string
 
 // List of OrderPromoType
 const (
-	DIRECT_DISCOUNT OrderPromoType = "DIRECT_DISCOUNT"
-	BLUE_SET OrderPromoType = "BLUE_SET"
-	BLUE_FLASH OrderPromoType = "BLUE_FLASH"
-	GENERIC_BUNDLE OrderPromoType = "GENERIC_BUNDLE"
-	MARKET_COUPON OrderPromoType = "MARKET_COUPON"
-	MARKET_PROMOCODE OrderPromoType = "MARKET_PROMOCODE"
-	MARKET_BLUE OrderPromoType = "MARKET_BLUE"
-	MARKET_COIN OrderPromoType = "MARKET_COIN"
-	PRICE_DROP_AS_YOU_SHOP OrderPromoType = "PRICE_DROP_AS_YOU_SHOP"
-	SECRET_SALE OrderPromoType = "SECRET_SALE"
-	CHEAPEST_AS_GIFT OrderPromoType = "CHEAPEST_AS_GIFT"
-	CASHBACK OrderPromoType = "CASHBACK"
-	SPREAD_DISCOUNT_COUNT OrderPromoType = "SPREAD_DISCOUNT_COUNT"
-	SPREAD_DISCOUNT_RECEIPT OrderPromoType = "SPREAD_DISCOUNT_RECEIPT"
+	DIRECT_DISCOUNT          OrderPromoType = "DIRECT_DISCOUNT"
+	BLUE_SET                 OrderPromoType = "BLUE_SET"
+	BLUE_FLASH               OrderPromoType = "BLUE_FLASH"
+	GENERIC_BUNDLE           OrderPromoType = "GENERIC_BUNDLE"
+	MARKET_COUPON            OrderPromoType = "MARKET_COUPON"
+	MARKET_PROMOCODE         OrderPromoType = "MARKET_PROMOCODE"
+	MARKET_BLUE              OrderPromoType = "MARKET_BLUE"
+	MARKET_COIN              OrderPromoType = "MARKET_COIN"
+	PRICE_DROP_AS_YOU_SHOP   OrderPromoType = "PRICE_DROP_AS_YOU_SHOP"
+	SECRET_SALE              OrderPromoType = "SECRET_SALE"
+	CHEAPEST_AS_GIFT         OrderPromoType = "CHEAPEST_AS_GIFT"
+	CASHBACK                 OrderPromoType = "CASHBACK"
+	SPREAD_DISCOUNT_COUNT    OrderPromoType = "SPREAD_DISCOUNT_COUNT"
+	SPREAD_DISCOUNT_RECEIPT  OrderPromoType = "SPREAD_DISCOUNT_RECEIPT"
 	DISCOUNT_BY_PAYMENT_TYPE OrderPromoType = "DISCOUNT_BY_PAYMENT_TYPE"
-	PERCENT_DISCOUNT OrderPromoType = "PERCENT_DISCOUNT"
-	DCO_EXTRA_DISCOUNT OrderPromoType = "DCO_EXTRA_DISCOUNT"
-	UNKNOWN OrderPromoType = "UNKNOWN"
+	PERCENT_DISCOUNT         OrderPromoType = "PERCENT_DISCOUNT"
+	DCO_EXTRA_DISCOUNT       OrderPromoType = "DCO_EXTRA_DISCOUNT"
+	UNKNOWN                  OrderPromoType = "UNKNOWN"
 )
 
 // All allowed values of OrderPromoType enum
@@ -140,4 +140,3 @@ func (v *NullableOrderPromoType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,23 +15,23 @@ import (
 	"fmt"
 )
 
-// ReturnInstanceStatusType Логистический статус конкретного товара:  * `CREATED` — возврат создан.  * `RECEIVED` — возврат принят у отправителя.  * `IN_TRANSIT` — возврат в пути.  * `READY_FOR_PICKUP` — возврат готов к выдаче магазину.  * `PICKED` — возврат выдан магазину.  * `RECEIVED_ON_FULFILLMENT` — возврат принят на складе Маркета.  * `CANCELLED` — возврат отменен.  * `LOST` — возврат утерян.  * `UTILIZED` — возврат утилизирован.  * `PREPARED_FOR_UTILIZATION` — возврат готов к утилизации.  * `EXPROPRIATED` — товары в возврате направлены на перепродажу.  * `NOT_IN_DEMAND` — возврат не забрали с почты. 
+// ReturnInstanceStatusType Логистический статус конкретного товара:  * `CREATED` — возврат создан.  * `RECEIVED` — возврат принят у отправителя.  * `IN_TRANSIT` — возврат в пути.  * `READY_FOR_PICKUP` — возврат готов к выдаче магазину.  * `PICKED` — возврат выдан магазину.  * `RECEIVED_ON_FULFILLMENT` — возврат принят на складе Маркета.  * `CANCELLED` — возврат отменен.  * `LOST` — возврат утерян.  * `UTILIZED` — возврат утилизирован.  * `PREPARED_FOR_UTILIZATION` — возврат готов к утилизации.  * `EXPROPRIATED` — товары в возврате направлены на перепродажу.  * `NOT_IN_DEMAND` — возврат не забрали с почты.
 type ReturnInstanceStatusType string
 
 // List of ReturnInstanceStatusType
 const (
-	CREATED ReturnInstanceStatusType = "CREATED"
-	RECEIVED ReturnInstanceStatusType = "RECEIVED"
-	IN_TRANSIT ReturnInstanceStatusType = "IN_TRANSIT"
-	READY_FOR_PICKUP ReturnInstanceStatusType = "READY_FOR_PICKUP"
-	PICKED ReturnInstanceStatusType = "PICKED"
-	RECEIVED_ON_FULFILLMENT ReturnInstanceStatusType = "RECEIVED_ON_FULFILLMENT"
-	CANCELLED ReturnInstanceStatusType = "CANCELLED"
-	LOST ReturnInstanceStatusType = "LOST"
-	UTILIZED ReturnInstanceStatusType = "UTILIZED"
+	CREATED                  ReturnInstanceStatusType = "CREATED"
+	RECEIVED                 ReturnInstanceStatusType = "RECEIVED"
+	IN_TRANSIT               ReturnInstanceStatusType = "IN_TRANSIT"
+	READY_FOR_PICKUP         ReturnInstanceStatusType = "READY_FOR_PICKUP"
+	PICKED                   ReturnInstanceStatusType = "PICKED"
+	RECEIVED_ON_FULFILLMENT  ReturnInstanceStatusType = "RECEIVED_ON_FULFILLMENT"
+	CANCELLED                ReturnInstanceStatusType = "CANCELLED"
+	LOST                     ReturnInstanceStatusType = "LOST"
+	UTILIZED                 ReturnInstanceStatusType = "UTILIZED"
 	PREPARED_FOR_UTILIZATION ReturnInstanceStatusType = "PREPARED_FOR_UTILIZATION"
-	EXPROPRIATED ReturnInstanceStatusType = "EXPROPRIATED"
-	NOT_IN_DEMAND ReturnInstanceStatusType = "NOT_IN_DEMAND"
+	EXPROPRIATED             ReturnInstanceStatusType = "EXPROPRIATED"
+	NOT_IN_DEMAND            ReturnInstanceStatusType = "NOT_IN_DEMAND"
 )
 
 // All allowed values of ReturnInstanceStatusType enum
@@ -128,4 +128,3 @@ func (v *NullableReturnInstanceStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

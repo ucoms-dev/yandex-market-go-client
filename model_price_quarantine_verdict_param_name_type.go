@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// PriceQuarantineVerdictParamNameType Имя параметра причины скрытия товара по цене.  * `CURRENT_PRICE` — цена, из-за которой товар попал в карантин. * `LAST_VALID_PRICE` — последняя цена до попадания в карантин (только для карантина типа `PRICE_CHANGE`). * `MIN_PRICE` — порог попадания в карантин (только для карантина типов `LOW_PRICE` и `LOW_PRICE_PROMO`). * `CURRENCY` — валюта. 
+// PriceQuarantineVerdictParamNameType Имя параметра причины скрытия товара по цене.  * `CURRENT_PRICE` — цена, из-за которой товар попал в карантин. * `LAST_VALID_PRICE` — последняя цена до попадания в карантин (только для карантина типа `PRICE_CHANGE`). * `MIN_PRICE` — порог попадания в карантин (только для карантина типов `LOW_PRICE` и `LOW_PRICE_PROMO`). * `CURRENCY` — валюта.
 type PriceQuarantineVerdictParamNameType string
 
 // List of PriceQuarantineVerdictParamNameType
 const (
-	CURRENT_PRICE PriceQuarantineVerdictParamNameType = "CURRENT_PRICE"
+	CURRENT_PRICE    PriceQuarantineVerdictParamNameType = "CURRENT_PRICE"
 	LAST_VALID_PRICE PriceQuarantineVerdictParamNameType = "LAST_VALID_PRICE"
-	MIN_PRICE PriceQuarantineVerdictParamNameType = "MIN_PRICE"
-	CURRENCY PriceQuarantineVerdictParamNameType = "CURRENCY"
+	MIN_PRICE        PriceQuarantineVerdictParamNameType = "MIN_PRICE"
+	CURRENCY         PriceQuarantineVerdictParamNameType = "CURRENCY"
 )
 
 // All allowed values of PriceQuarantineVerdictParamNameType enum
@@ -112,4 +112,3 @@ func (v *NullablePriceQuarantineVerdictParamNameType) UnmarshalJSON(src []byte) 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

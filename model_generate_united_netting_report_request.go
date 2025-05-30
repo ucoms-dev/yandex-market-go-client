@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,16 +11,16 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the GenerateUnitedNettingReportRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenerateUnitedNettingReportRequest{}
 
-// GenerateUnitedNettingReportRequest Данные, необходимые для генерации отчета: идентификатор кампании, период, за который нужен отчет, а также фильтры. 
+// GenerateUnitedNettingReportRequest Данные, необходимые для генерации отчета: идентификатор кампании, период, за который нужен отчет, а также фильтры.
 type GenerateUnitedNettingReportRequest struct {
 	// Идентификатор кабинета.
 	BusinessId int64 `json:"businessId"`
@@ -37,13 +37,13 @@ type GenerateUnitedNettingReportRequest struct {
 	// Номер платежного поручения.
 	BankOrderId *int64 `json:"bankOrderId,omitempty"`
 	// Дата платежного поручения.
-	BankOrderDateTime *time.Time `json:"bankOrderDateTime,omitempty"`
-	MonthOfYear *MonthOfYearDTO `json:"monthOfYear,omitempty"`
-	// Список моделей, которые нужны в отчете. 
+	BankOrderDateTime *time.Time      `json:"bankOrderDateTime,omitempty"`
+	MonthOfYear       *MonthOfYearDTO `json:"monthOfYear,omitempty"`
+	// Список моделей, которые нужны в отчете.
 	PlacementPrograms []PlacementType `json:"placementPrograms,omitempty"`
 	// Список ИНН, которые нужны в отчете.
 	Inns []string `json:"inns,omitempty"`
-	// Список идентификаторов кампании тех магазинов, которые нужны в отчете.  Их можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не используйте вместо них идентификаторы магазинов, которые указаны в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах. 
+	// Список идентификаторов кампании тех магазинов, которые нужны в отчете.  Их можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не используйте вместо них идентификаторы магазинов, которые указаны в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	CampaignIds []int64 `json:"campaignIds,omitempty"`
 }
 
@@ -421,7 +421,7 @@ func (o *GenerateUnitedNettingReportRequest) SetCampaignIds(v []int64) {
 }
 
 func (o GenerateUnitedNettingReportRequest) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -477,10 +477,10 @@ func (o *GenerateUnitedNettingReportRequest) UnmarshalJSON(data []byte) (err err
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -536,5 +536,3 @@ func (v *NullableGenerateUnitedNettingReportRequest) UnmarshalJSON(src []byte) e
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

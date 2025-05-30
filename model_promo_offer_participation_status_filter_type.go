@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,12 +15,12 @@ import (
 	"fmt"
 )
 
-// PromoOfferParticipationStatusFilterType Фильтр для товаров, которые добавлены в акцию вручную:  * `MANUALLY_ADDED` — товары, которые добавлены вручную.  * `NOT_MANUALLY_ADDED`— товары, которые не участвуют в акции и те, которые добавлены автоматически.  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index). 
+// PromoOfferParticipationStatusFilterType Фильтр для товаров, которые добавлены в акцию вручную:  * `MANUALLY_ADDED` — товары, которые добавлены вручную.  * `NOT_MANUALLY_ADDED`— товары, которые не участвуют в акции и те, которые добавлены автоматически.  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index).
 type PromoOfferParticipationStatusFilterType string
 
 // List of PromoOfferParticipationStatusFilterType
 const (
-	MANUALLY_ADDED PromoOfferParticipationStatusFilterType = "MANUALLY_ADDED"
+	MANUALLY_ADDED     PromoOfferParticipationStatusFilterType = "MANUALLY_ADDED"
 	NOT_MANUALLY_ADDED PromoOfferParticipationStatusFilterType = "NOT_MANUALLY_ADDED"
 )
 
@@ -108,4 +108,3 @@ func (v *NullablePromoOfferParticipationStatusFilterType) UnmarshalJSON(src []by
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

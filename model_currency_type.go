@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// CurrencyType Коды валют:  * `RUR` — российский рубль. * `UAH` — украинская гривна. * `BYR` — белорусский рубль. * `KZT` — казахстанский тенге. * `UZS` — узбекский сум. 
+// CurrencyType Коды валют:  * `RUR` — российский рубль. * `UAH` — украинская гривна. * `BYR` — белорусский рубль. * `KZT` — казахстанский тенге. * `UZS` — узбекский сум.
 type CurrencyType string
 
 // List of CurrencyType
@@ -141,8 +141,8 @@ const (
 	ZAR CurrencyType = "ZAR"
 	KRW CurrencyType = "KRW"
 	NAD CurrencyType = "NAD"
-	TL CurrencyType = "TL"
-	UE CurrencyType = "UE"
+	TL  CurrencyType = "TL"
+	UE  CurrencyType = "UE"
 )
 
 // All allowed values of CurrencyType enum
@@ -350,4 +350,3 @@ func (v *NullableCurrencyType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

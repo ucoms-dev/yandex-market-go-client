@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,12 +15,12 @@ import (
 	"fmt"
 )
 
-// FeedbackReactionStatusType Статус реакции на отзыв:  * `ALL` — все отзывы.  * `NEED_REACTION` — отзывы, на которые нужно ответить. 
+// FeedbackReactionStatusType Статус реакции на отзыв:  * `ALL` — все отзывы.  * `NEED_REACTION` — отзывы, на которые нужно ответить.
 type FeedbackReactionStatusType string
 
 // List of FeedbackReactionStatusType
 const (
-	ALL FeedbackReactionStatusType = "ALL"
+	ALL           FeedbackReactionStatusType = "ALL"
 	NEED_REACTION FeedbackReactionStatusType = "NEED_REACTION"
 )
 
@@ -108,4 +108,3 @@ func (v *NullableFeedbackReactionStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// MechanicsType Тип акции:  * `DIRECT_DISCOUNT` — прямая скидка.  * `BLUE_FLASH` — флеш-акция.  * `MARKET_PROMOCODE` — скидка по промокоду. 
+// MechanicsType Тип акции:  * `DIRECT_DISCOUNT` — прямая скидка.  * `BLUE_FLASH` — флеш-акция.  * `MARKET_PROMOCODE` — скидка по промокоду.
 type MechanicsType string
 
 // List of MechanicsType
 const (
-	DIRECT_DISCOUNT MechanicsType = "DIRECT_DISCOUNT"
-	BLUE_FLASH MechanicsType = "BLUE_FLASH"
+	DIRECT_DISCOUNT  MechanicsType = "DIRECT_DISCOUNT"
+	BLUE_FLASH       MechanicsType = "BLUE_FLASH"
 	MARKET_PROMOCODE MechanicsType = "MARKET_PROMOCODE"
 )
 
@@ -110,4 +110,3 @@ func (v *NullableMechanicsType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

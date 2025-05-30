@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,10 +11,10 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
-	"time"
 	"bytes"
+	"encoding/json"
 	"fmt"
+	"time"
 )
 
 // checks if the ChatMessageDTO type satisfies the MappedNullable interface at compile time
@@ -24,12 +24,12 @@ var _ MappedNullable = &ChatMessageDTO{}
 type ChatMessageDTO struct {
 	// Идентификатор сообщения.
 	MessageId int64 `json:"messageId"`
-	// Дата и время создания сообщения.  Формат даты: ISO 8601 со смещением относительно UTC. 
-	CreatedAt time.Time `json:"createdAt"`
-	Sender ChatMessageSenderType `json:"sender"`
-	// Текст сообщения.  Необязательный параметр, если возвращается параметр `payload`. 
+	// Дата и время создания сообщения.  Формат даты: ISO 8601 со смещением относительно UTC.
+	CreatedAt time.Time             `json:"createdAt"`
+	Sender    ChatMessageSenderType `json:"sender"`
+	// Текст сообщения.  Необязательный параметр, если возвращается параметр `payload`.
 	Message *string `json:"message,omitempty"`
-	// Информация о приложенных к сообщению файлах.  Необязательный параметр, если возвращается параметр `message`. 
+	// Информация о приложенных к сообщению файлах.  Необязательный параметр, если возвращается параметр `message`.
 	Payload []ChatMessagePayloadDTO `json:"payload,omitempty"`
 }
 
@@ -193,7 +193,7 @@ func (o *ChatMessageDTO) SetPayload(v []ChatMessagePayloadDTO) {
 }
 
 func (o ChatMessageDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -229,10 +229,10 @@ func (o *ChatMessageDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -288,5 +288,3 @@ func (v *NullableChatMessageDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

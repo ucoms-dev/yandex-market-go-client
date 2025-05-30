@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// WarehouseStatusType Статус склада:  * `DISABLED_MANUALLY` – отключен вами. * `OTHER` – другой статус. Например, склад включен или отключен Маркетом. 
+// WarehouseStatusType Статус склада:  * `DISABLED_MANUALLY` – отключен вами. * `OTHER` – другой статус. Например, склад включен или отключен Маркетом.
 type WarehouseStatusType string
 
 // List of WarehouseStatusType
 const (
 	DISABLED_MANUALLY WarehouseStatusType = "DISABLED_MANUALLY"
-	OTHER WarehouseStatusType = "OTHER"
+	OTHER             WarehouseStatusType = "OTHER"
 )
 
 // All allowed values of WarehouseStatusType enum
@@ -108,4 +108,3 @@ func (v *NullableWarehouseStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

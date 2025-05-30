@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// MediaFileUploadStateType Состояние загрузки медиафайла:  * `UPLOADING` — загружается. * `UPLOADED` — успешно загружен. * `FAILED` — при загрузке произошла ошибка. Повторите попытку позже. 
+// MediaFileUploadStateType Состояние загрузки медиафайла:  * `UPLOADING` — загружается. * `UPLOADED` — успешно загружен. * `FAILED` — при загрузке произошла ошибка. Повторите попытку позже.
 type MediaFileUploadStateType string
 
 // List of MediaFileUploadStateType
 const (
 	UPLOADING MediaFileUploadStateType = "UPLOADING"
-	UPLOADED MediaFileUploadStateType = "UPLOADED"
-	FAILED MediaFileUploadStateType = "FAILED"
+	UPLOADED  MediaFileUploadStateType = "UPLOADED"
+	FAILED    MediaFileUploadStateType = "FAILED"
 )
 
 // All allowed values of MediaFileUploadStateType enum
@@ -110,4 +110,3 @@ func (v *NullableMediaFileUploadStateType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

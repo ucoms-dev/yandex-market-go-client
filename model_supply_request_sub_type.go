@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,29 +15,29 @@ import (
 	"fmt"
 )
 
-// SupplyRequestSubType Подтип заявки:  * `DEFAULT` — поставка товаров на склад хранения или вывоз с него. * `XDOC` — поставка товаров через транзитный склад или вывоз с него. * `INVENTORYING_SUPPLY` — инвентаризация на складе по запросу магазина. * `INVENTORYING_SUPPLY_WAREHOUSE_BASED_PER_SUPPLIER` — инвентаризация на складе по запросу склада. * `MOVEMENT_SUPPLY` — входящее перемещение между складами.      При перемещении между складами создаются 2 заявки — `MOVEMENT_SUPPLY` и `MOVEMENT_WITHDRAW`. * `ADDITIONAL_SUPPLY` — дополнительная поставка непринятых товаров. * `VIRTUAL_DISTRIBUTION_CENTER` — родительская заявка при [мультипоставке](*multisupply). * `VIRTUAL_DISTRIBUTION_CENTER_CHILD` — дочерняя заявка при [мультипоставке](*multisupply). * `FORCE_PLAN` — автоматическая утилизация по запросу склада. * `FORCE_PLAN_ANOMALY_PER_SUPPLY` — утилизация непринятых товаров. * `PLAN_BY_SUPPLIER` — утилизация по запросу магазина. * `ANOMALY_WITHDRAW` — вывоз непринятых товаров. * `FIX_LOST_INVENTORYING` — товары, которые не нашли после второй инвентаризации. * `OPER_LOST_INVENTORYING` — товары, которые не нашли после первой инвентаризации. * `MOVEMENT_WITHDRAW` — исходящее перемещение между складами.      При перемещении между складами создаются 2 заявки — `MOVEMENT_SUPPLY` и `MOVEMENT_WITHDRAW`. * `MISGRADING_SUPPLY` — пересортица в большую сторону. * `MISGRADING_WITHDRAW` — пересортица в меньшую сторону. * `MAN_UTIL` — ручная утилизация по запросу склада. 
+// SupplyRequestSubType Подтип заявки:  * `DEFAULT` — поставка товаров на склад хранения или вывоз с него. * `XDOC` — поставка товаров через транзитный склад или вывоз с него. * `INVENTORYING_SUPPLY` — инвентаризация на складе по запросу магазина. * `INVENTORYING_SUPPLY_WAREHOUSE_BASED_PER_SUPPLIER` — инвентаризация на складе по запросу склада. * `MOVEMENT_SUPPLY` — входящее перемещение между складами.      При перемещении между складами создаются 2 заявки — `MOVEMENT_SUPPLY` и `MOVEMENT_WITHDRAW`. * `ADDITIONAL_SUPPLY` — дополнительная поставка непринятых товаров. * `VIRTUAL_DISTRIBUTION_CENTER` — родительская заявка при [мультипоставке](*multisupply). * `VIRTUAL_DISTRIBUTION_CENTER_CHILD` — дочерняя заявка при [мультипоставке](*multisupply). * `FORCE_PLAN` — автоматическая утилизация по запросу склада. * `FORCE_PLAN_ANOMALY_PER_SUPPLY` — утилизация непринятых товаров. * `PLAN_BY_SUPPLIER` — утилизация по запросу магазина. * `ANOMALY_WITHDRAW` — вывоз непринятых товаров. * `FIX_LOST_INVENTORYING` — товары, которые не нашли после второй инвентаризации. * `OPER_LOST_INVENTORYING` — товары, которые не нашли после первой инвентаризации. * `MOVEMENT_WITHDRAW` — исходящее перемещение между складами.      При перемещении между складами создаются 2 заявки — `MOVEMENT_SUPPLY` и `MOVEMENT_WITHDRAW`. * `MISGRADING_SUPPLY` — пересортица в большую сторону. * `MISGRADING_WITHDRAW` — пересортица в меньшую сторону. * `MAN_UTIL` — ручная утилизация по запросу склада.
 type SupplyRequestSubType string
 
 // List of SupplyRequestSubType
 const (
-	DEFAULT SupplyRequestSubType = "DEFAULT"
-	XDOC SupplyRequestSubType = "XDOC"
-	INVENTORYING_SUPPLY SupplyRequestSubType = "INVENTORYING_SUPPLY"
+	DEFAULT                                          SupplyRequestSubType = "DEFAULT"
+	XDOC                                             SupplyRequestSubType = "XDOC"
+	INVENTORYING_SUPPLY                              SupplyRequestSubType = "INVENTORYING_SUPPLY"
 	INVENTORYING_SUPPLY_WAREHOUSE_BASED_PER_SUPPLIER SupplyRequestSubType = "INVENTORYING_SUPPLY_WAREHOUSE_BASED_PER_SUPPLIER"
-	MOVEMENT_SUPPLY SupplyRequestSubType = "MOVEMENT_SUPPLY"
-	ADDITIONAL_SUPPLY SupplyRequestSubType = "ADDITIONAL_SUPPLY"
-	VIRTUAL_DISTRIBUTION_CENTER SupplyRequestSubType = "VIRTUAL_DISTRIBUTION_CENTER"
-	VIRTUAL_DISTRIBUTION_CENTER_CHILD SupplyRequestSubType = "VIRTUAL_DISTRIBUTION_CENTER_CHILD"
-	FORCE_PLAN SupplyRequestSubType = "FORCE_PLAN"
-	FORCE_PLAN_ANOMALY_PER_SUPPLY SupplyRequestSubType = "FORCE_PLAN_ANOMALY_PER_SUPPLY"
-	PLAN_BY_SUPPLIER SupplyRequestSubType = "PLAN_BY_SUPPLIER"
-	ANOMALY_WITHDRAW SupplyRequestSubType = "ANOMALY_WITHDRAW"
-	FIX_LOST_INVENTORYING SupplyRequestSubType = "FIX_LOST_INVENTORYING"
-	OPER_LOST_INVENTORYING SupplyRequestSubType = "OPER_LOST_INVENTORYING"
-	MOVEMENT_WITHDRAW SupplyRequestSubType = "MOVEMENT_WITHDRAW"
-	MISGRADING_SUPPLY SupplyRequestSubType = "MISGRADING_SUPPLY"
-	MISGRADING_WITHDRAW SupplyRequestSubType = "MISGRADING_WITHDRAW"
-	MAN_UTIL SupplyRequestSubType = "MAN_UTIL"
+	MOVEMENT_SUPPLY                                  SupplyRequestSubType = "MOVEMENT_SUPPLY"
+	ADDITIONAL_SUPPLY                                SupplyRequestSubType = "ADDITIONAL_SUPPLY"
+	VIRTUAL_DISTRIBUTION_CENTER                      SupplyRequestSubType = "VIRTUAL_DISTRIBUTION_CENTER"
+	VIRTUAL_DISTRIBUTION_CENTER_CHILD                SupplyRequestSubType = "VIRTUAL_DISTRIBUTION_CENTER_CHILD"
+	FORCE_PLAN                                       SupplyRequestSubType = "FORCE_PLAN"
+	FORCE_PLAN_ANOMALY_PER_SUPPLY                    SupplyRequestSubType = "FORCE_PLAN_ANOMALY_PER_SUPPLY"
+	PLAN_BY_SUPPLIER                                 SupplyRequestSubType = "PLAN_BY_SUPPLIER"
+	ANOMALY_WITHDRAW                                 SupplyRequestSubType = "ANOMALY_WITHDRAW"
+	FIX_LOST_INVENTORYING                            SupplyRequestSubType = "FIX_LOST_INVENTORYING"
+	OPER_LOST_INVENTORYING                           SupplyRequestSubType = "OPER_LOST_INVENTORYING"
+	MOVEMENT_WITHDRAW                                SupplyRequestSubType = "MOVEMENT_WITHDRAW"
+	MISGRADING_SUPPLY                                SupplyRequestSubType = "MISGRADING_SUPPLY"
+	MISGRADING_WITHDRAW                              SupplyRequestSubType = "MISGRADING_WITHDRAW"
+	MAN_UTIL                                         SupplyRequestSubType = "MAN_UTIL"
 )
 
 // All allowed values of SupplyRequestSubType enum
@@ -140,4 +140,3 @@ func (v *NullableSupplyRequestSubType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

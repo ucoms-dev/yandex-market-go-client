@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -21,12 +21,12 @@ var _ MappedNullable = &OrdersStatsPaymentDTO{}
 type OrdersStatsPaymentDTO struct {
 	// Идентификатор денежного перевода.
 	Id *string `json:"id,omitempty"`
-	// Дата денежного перевода.  Формат даты: `ГГГГ-ММ-ДД`. 
-	Date *string `json:"date,omitempty"`
-	Type *OrdersStatsPaymentType `json:"type,omitempty"`
+	// Дата денежного перевода.  Формат даты: `ГГГГ-ММ-ДД`.
+	Date   *string                       `json:"date,omitempty"`
+	Type   *OrdersStatsPaymentType       `json:"type,omitempty"`
 	Source *OrdersStatsPaymentSourceType `json:"source,omitempty"`
-	// Сумма денежного перевода.  Точность — два знака после запятой. 
-	Total *float32 `json:"total,omitempty"`
+	// Сумма денежного перевода.  Точность — два знака после запятой.
+	Total        *float32                    `json:"total,omitempty"`
 	PaymentOrder *OrdersStatsPaymentOrderDTO `json:"paymentOrder,omitempty"`
 }
 
@@ -240,7 +240,7 @@ func (o *OrdersStatsPaymentDTO) SetPaymentOrder(v OrdersStatsPaymentOrderDTO) {
 }
 
 func (o OrdersStatsPaymentDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -305,5 +305,3 @@ func (v *NullableOrdersStatsPaymentDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

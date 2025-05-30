@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// OrderDeliveryPartnerType Тип сотрудничества со службой доставки в рамках конкретного заказа:  * `SHOP` — магазин работает со службой доставки напрямую или доставляет заказы самостоятельно.  * `YANDEX_MARKET` — магазин работает со службой доставки через Маркет.  * `UNKNOWN` — неизвестный тип. 
+// OrderDeliveryPartnerType Тип сотрудничества со службой доставки в рамках конкретного заказа:  * `SHOP` — магазин работает со службой доставки напрямую или доставляет заказы самостоятельно.  * `YANDEX_MARKET` — магазин работает со службой доставки через Маркет.  * `UNKNOWN` — неизвестный тип.
 type OrderDeliveryPartnerType string
 
 // List of OrderDeliveryPartnerType
 const (
-	SHOP OrderDeliveryPartnerType = "SHOP"
+	SHOP          OrderDeliveryPartnerType = "SHOP"
 	YANDEX_MARKET OrderDeliveryPartnerType = "YANDEX_MARKET"
-	UNKNOWN OrderDeliveryPartnerType = "UNKNOWN"
+	UNKNOWN       OrderDeliveryPartnerType = "UNKNOWN"
 )
 
 // All allowed values of OrderDeliveryPartnerType enum
@@ -110,4 +110,3 @@ func (v *NullableOrderDeliveryPartnerType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,13 +15,13 @@ import (
 	"fmt"
 )
 
-// OrdersStatsStockType Тип товара:  * `FIT` — товар надлежащего качества.  * `DEFECT` — товар бракованный.  * `EXPIRED` — товар с истекшим сроком годности. 
+// OrdersStatsStockType Тип товара:  * `FIT` — товар надлежащего качества.  * `DEFECT` — товар бракованный.  * `EXPIRED` — товар с истекшим сроком годности.
 type OrdersStatsStockType string
 
 // List of OrdersStatsStockType
 const (
-	FIT OrdersStatsStockType = "FIT"
-	DEFECT OrdersStatsStockType = "DEFECT"
+	FIT     OrdersStatsStockType = "FIT"
+	DEFECT  OrdersStatsStockType = "DEFECT"
 	EXPIRED OrdersStatsStockType = "EXPIRED"
 )
 
@@ -110,4 +110,3 @@ func (v *NullableOrdersStatsStockType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

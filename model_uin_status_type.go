@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// UinStatusType Статус проверки УИНа:  * `FAILED` — не прошел проверку.  * `IN_PROGRESS` — в процессе проверки.  * `NOT_ON_VALIDATION` — УИН не отправлен на проверку или переданы не все УИНы в заказе.  * `OK` — проверка успешно пройдена. 
+// UinStatusType Статус проверки УИНа:  * `FAILED` — не прошел проверку.  * `IN_PROGRESS` — в процессе проверки.  * `NOT_ON_VALIDATION` — УИН не отправлен на проверку или переданы не все УИНы в заказе.  * `OK` — проверка успешно пройдена.
 type UinStatusType string
 
 // List of UinStatusType
 const (
-	OK UinStatusType = "OK"
-	IN_PROGRESS UinStatusType = "IN_PROGRESS"
-	FAILED UinStatusType = "FAILED"
+	OK                UinStatusType = "OK"
+	IN_PROGRESS       UinStatusType = "IN_PROGRESS"
+	FAILED            UinStatusType = "FAILED"
 	NOT_ON_VALIDATION UinStatusType = "NOT_ON_VALIDATION"
 )
 
@@ -112,4 +112,3 @@ func (v *NullableUinStatusType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

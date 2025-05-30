@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,12 +15,12 @@ import (
 	"fmt"
 )
 
-// OrderCancellationReasonType Варианты причин, по которым заказ не может быть отменен.  * `ORDER_DELIVERED` — заказ уже доставлен. * `ORDER_IN_DELIVERY` — заказ уже у курьера. 
+// OrderCancellationReasonType Варианты причин, по которым заказ не может быть отменен.  * `ORDER_DELIVERED` — заказ уже доставлен. * `ORDER_IN_DELIVERY` — заказ уже у курьера.
 type OrderCancellationReasonType string
 
 // List of OrderCancellationReasonType
 const (
-	ORDER_DELIVERED OrderCancellationReasonType = "ORDER_DELIVERED"
+	ORDER_DELIVERED   OrderCancellationReasonType = "ORDER_DELIVERED"
 	ORDER_IN_DELIVERY OrderCancellationReasonType = "ORDER_IN_DELIVERY"
 )
 
@@ -108,4 +108,3 @@ func (v *NullableOrderCancellationReasonType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

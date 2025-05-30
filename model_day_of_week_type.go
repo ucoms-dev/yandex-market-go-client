@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,18 +15,18 @@ import (
 	"fmt"
 )
 
-// DayOfWeekType День недели:  * `MONDAY` — понедельник. * `TUESDAY` — вторник. * `WEDNESDAY` — среда. * `THURSDAY` — четверг. * `FRIDAY` — пятница. * `SATURDAY` — суббота. * `SUNDAY` — воскресенье. 
+// DayOfWeekType День недели:  * `MONDAY` — понедельник. * `TUESDAY` — вторник. * `WEDNESDAY` — среда. * `THURSDAY` — четверг. * `FRIDAY` — пятница. * `SATURDAY` — суббота. * `SUNDAY` — воскресенье.
 type DayOfWeekType string
 
 // List of DayOfWeekType
 const (
-	MONDAY DayOfWeekType = "MONDAY"
-	TUESDAY DayOfWeekType = "TUESDAY"
+	MONDAY    DayOfWeekType = "MONDAY"
+	TUESDAY   DayOfWeekType = "TUESDAY"
 	WEDNESDAY DayOfWeekType = "WEDNESDAY"
-	THURSDAY DayOfWeekType = "THURSDAY"
-	FRIDAY DayOfWeekType = "FRIDAY"
-	SATURDAY DayOfWeekType = "SATURDAY"
-	SUNDAY DayOfWeekType = "SUNDAY"
+	THURSDAY  DayOfWeekType = "THURSDAY"
+	FRIDAY    DayOfWeekType = "FRIDAY"
+	SATURDAY  DayOfWeekType = "SATURDAY"
+	SUNDAY    DayOfWeekType = "SUNDAY"
 )
 
 // All allowed values of DayOfWeekType enum
@@ -118,4 +118,3 @@ func (v *NullableDayOfWeekType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

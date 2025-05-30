@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,15 +15,15 @@ import (
 	"fmt"
 )
 
-// PaymentFrequencyType Частота выплат:  * `DAILY` — ежедневно. * `WEEKLY` — раз в неделю. * `BIWEEKLY` — раз в две недели. * `MONTHLY` — раз в месяц.  Подробнее о графике выплат читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/introduction/rates/acquiring.html). 
+// PaymentFrequencyType Частота выплат:  * `DAILY` — ежедневно. * `WEEKLY` — раз в неделю. * `BIWEEKLY` — раз в две недели. * `MONTHLY` — раз в месяц.  Подробнее о графике выплат читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/introduction/rates/acquiring.html).
 type PaymentFrequencyType string
 
 // List of PaymentFrequencyType
 const (
-	DAILY PaymentFrequencyType = "DAILY"
-	WEEKLY PaymentFrequencyType = "WEEKLY"
+	DAILY    PaymentFrequencyType = "DAILY"
+	WEEKLY   PaymentFrequencyType = "WEEKLY"
 	BIWEEKLY PaymentFrequencyType = "BIWEEKLY"
-	MONTHLY PaymentFrequencyType = "MONTHLY"
+	MONTHLY  PaymentFrequencyType = "MONTHLY"
 )
 
 // All allowed values of PaymentFrequencyType enum
@@ -112,4 +112,3 @@ func (v *NullablePaymentFrequencyType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,21 +17,21 @@ import (
 // checks if the GetMappingDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetMappingDTO{}
 
-// GetMappingDTO Информация о товарах в каталоге. 
+// GetMappingDTO Информация о товарах в каталоге.
 type GetMappingDTO struct {
 	// SKU на Маркете.
 	MarketSku *int64 `json:"marketSku,omitempty"`
-	// Название карточки товара.  Может отсутствовать в ответе, если товар еще не привязан к карточке. 
+	// Название карточки товара.  Может отсутствовать в ответе, если товар еще не привязан к карточке.
 	MarketSkuName *string `json:"marketSkuName,omitempty"`
-	// Идентификатор модели на Маркете.  Может отсутствовать в ответе, если товар еще не привязан к карточке. 
+	// Идентификатор модели на Маркете.  Может отсутствовать в ответе, если товар еще не привязан к карточке.
 	// Deprecated
 	MarketModelId *int64 `json:"marketModelId,omitempty"`
-	// Название модели на Маркете.  Может отсутствовать в ответе, если товар еще не привязан к карточке. 
+	// Название модели на Маркете.  Может отсутствовать в ответе, если товар еще не привязан к карточке.
 	// Deprecated
 	MarketModelName *string `json:"marketModelName,omitempty"`
-	// Идентификатор категории на Маркете, в которую попал товар.  Может отсутствовать в ответе, если Маркет еще не определил категорию товара. 
+	// Идентификатор категории на Маркете, в которую попал товар.  Может отсутствовать в ответе, если Маркет еще не определил категорию товара.
 	MarketCategoryId *int64 `json:"marketCategoryId,omitempty"`
-	// Название категории карточки на Маркете.  Может отсутствовать в ответе, если Маркет еще не определил категорию товара. 
+	// Название категории карточки на Маркете.  Может отсутствовать в ответе, если Маркет еще не определил категорию товара.
 	MarketCategoryName *string `json:"marketCategoryName,omitempty"`
 }
 
@@ -251,7 +251,7 @@ func (o *GetMappingDTO) SetMarketCategoryName(v string) {
 }
 
 func (o GetMappingDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -316,5 +316,3 @@ func (v *NullableGetMappingDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

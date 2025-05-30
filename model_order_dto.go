@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -22,15 +22,15 @@ var _ MappedNullable = &OrderDTO{}
 // OrderDTO Заказ.
 type OrderDTO struct {
 	// Идентификатор заказа.
-	Id int64 `json:"id"`
-	Status OrderStatusType `json:"status"`
-	Substatus OrderSubstatusType `json:"substatus"`
-	CreationDate string `json:"creationDate"`
-	UpdatedAt *string `json:"updatedAt,omitempty"`
-	Currency CurrencyType `json:"currency"`
-	// Платеж покупателя. 
+	Id           int64              `json:"id"`
+	Status       OrderStatusType    `json:"status"`
+	Substatus    OrderSubstatusType `json:"substatus"`
+	CreationDate string             `json:"creationDate"`
+	UpdatedAt    *string            `json:"updatedAt,omitempty"`
+	Currency     CurrencyType       `json:"currency"`
+	// Платеж покупателя.
 	ItemsTotal float32 `json:"itemsTotal"`
-	// Стоимость доставки. 
+	// Стоимость доставки.
 	DeliveryTotal float32 `json:"deliveryTotal"`
 	// Стоимость всех товаров в заказе в валюте покупателя после применения скидок и без учета стоимости доставки.
 	// Deprecated
@@ -38,27 +38,27 @@ type OrderDTO struct {
 	// Стоимость всех товаров в заказе в валюте покупателя после применения скидок и с учетом стоимости доставки.
 	// Deprecated
 	BuyerTotal *float32 `json:"buyerTotal,omitempty"`
-	// Стоимость всех товаров в заказе в валюте покупателя без учета стоимости доставки и до применения скидок по:  * акциям; * купонам; * промокодам. 
+	// Стоимость всех товаров в заказе в валюте покупателя без учета стоимости доставки и до применения скидок по:  * акциям; * купонам; * промокодам.
 	BuyerItemsTotalBeforeDiscount float32 `json:"buyerItemsTotalBeforeDiscount"`
 	// Стоимость всех товаров в заказе в валюте покупателя до применения скидок и с учетом стоимости доставки (`buyerItemsTotalBeforeDiscount` + стоимость доставки).
 	// Deprecated
-	BuyerTotalBeforeDiscount *float32 `json:"buyerTotalBeforeDiscount,omitempty"`
-	PaymentType OrderPaymentType `json:"paymentType"`
-	PaymentMethod OrderPaymentMethodType `json:"paymentMethod"`
-	// Тип заказа:  * `false` — настоящий заказ покупателя.  * `true` — [тестовый](../../concepts/sandbox.md) заказ Маркета. 
+	BuyerTotalBeforeDiscount *float32               `json:"buyerTotalBeforeDiscount,omitempty"`
+	PaymentType              OrderPaymentType       `json:"paymentType"`
+	PaymentMethod            OrderPaymentMethodType `json:"paymentMethod"`
+	// Тип заказа:  * `false` — настоящий заказ покупателя.  * `true` — [тестовый](../../concepts/sandbox.md) заказ Маркета.
 	Fake bool `json:"fake"`
 	// Список товаров в заказе.
 	Items []OrderItemDTO `json:"items"`
 	// Список субсидий по типам.
 	Subsidies []OrderSubsidyDTO `json:"subsidies,omitempty"`
-	Delivery OrderDeliveryDTO `json:"delivery"`
-	Buyer OrderBuyerDTO `json:"buyer"`
+	Delivery  OrderDeliveryDTO  `json:"delivery"`
+	Buyer     OrderBuyerDTO     `json:"buyer"`
 	// Комментарий к заказу.
-	Notes *string `json:"notes,omitempty"`
+	Notes     *string            `json:"notes,omitempty"`
 	TaxSystem OrderTaxSystemType `json:"taxSystem"`
-	// **Только для модели DBS**  Запрошена ли отмена. 
-	CancelRequested *bool `json:"cancelRequested,omitempty"`
-	ExpiryDate *string `json:"expiryDate,omitempty"`
+	// **Только для модели DBS**  Запрошена ли отмена.
+	CancelRequested *bool   `json:"cancelRequested,omitempty"`
+	ExpiryDate      *string `json:"expiryDate,omitempty"`
 }
 
 type _OrderDTO OrderDTO
@@ -722,7 +722,7 @@ func (o *OrderDTO) SetExpiryDate(v string) {
 }
 
 func (o OrderDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -800,10 +800,10 @@ func (o *OrderDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -859,5 +859,3 @@ func (v *NullableOrderDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

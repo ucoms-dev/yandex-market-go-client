@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,13 +17,13 @@ import (
 // checks if the OrderBusinessDocumentsDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderBusinessDocumentsDTO{}
 
-// OrderBusinessDocumentsDTO Информация о документах. 
+// OrderBusinessDocumentsDTO Информация о документах.
 type OrderBusinessDocumentsDTO struct {
-	Upd *DocumentDTO `json:"upd,omitempty"`
-	Ukd *DocumentDTO `json:"ukd,omitempty"`
+	Upd        *DocumentDTO `json:"upd,omitempty"`
+	Ukd        *DocumentDTO `json:"ukd,omitempty"`
 	TorgTwelve *DocumentDTO `json:"torgTwelve,omitempty"`
-	Sf *DocumentDTO `json:"sf,omitempty"`
-	Ksf *DocumentDTO `json:"ksf,omitempty"`
+	Sf         *DocumentDTO `json:"sf,omitempty"`
+	Ksf        *DocumentDTO `json:"ksf,omitempty"`
 }
 
 // NewOrderBusinessDocumentsDTO instantiates a new OrderBusinessDocumentsDTO object
@@ -204,7 +204,7 @@ func (o *OrderBusinessDocumentsDTO) SetKsf(v DocumentDTO) {
 }
 
 func (o OrderBusinessDocumentsDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -266,5 +266,3 @@ func (v *NullableOrderBusinessDocumentsDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,9 +17,9 @@ import (
 // checks if the PromoOfferAutoParticipatingDetailsDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &PromoOfferAutoParticipatingDetailsDTO{}
 
-// PromoOfferAutoParticipatingDetailsDTO Информация об автоматическом добавлении товара в акцию.  Причины, по которым товар не был добавлен автоматически в других магазинах, можно узнать в кабинете продавца на Маркете на странице акции.  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index). 
+// PromoOfferAutoParticipatingDetailsDTO Информация об автоматическом добавлении товара в акцию.  Причины, по которым товар не был добавлен автоматически в других магазинах, можно узнать в кабинете продавца на Маркете на странице акции.  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index).
 type PromoOfferAutoParticipatingDetailsDTO struct {
-	// Идентификаторы кампаний тех магазинов, в которых товар добавлен в акцию автоматически.  Возвращается, если статус товара в акции — `PARTIALLY_AUTO`. 
+	// Идентификаторы кампаний тех магазинов, в которых товар добавлен в акцию автоматически.  Возвращается, если статус товара в акции — `PARTIALLY_AUTO`.
 	CampaignIds []int64 `json:"campaignIds,omitempty"`
 }
 
@@ -74,7 +74,7 @@ func (o *PromoOfferAutoParticipatingDetailsDTO) SetCampaignIds(v []int64) {
 }
 
 func (o PromoOfferAutoParticipatingDetailsDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -124,5 +124,3 @@ func (v *NullablePromoOfferAutoParticipatingDetailsDTO) UnmarshalJSON(src []byte
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,19 +15,19 @@ import (
 	"fmt"
 )
 
-// OrderTaxSystemType Система налогообложения (СНО) магазина на момент оформления заказа:  * `ECHN` — единый сельскохозяйственный налог (ЕСХН).  * `ENVD` — единый налог на вмененный доход (ЕНВД).  * `OSN` — общая система налогообложения (ОСН).  * `PSN` — патентная система налогообложения (ПСН).  * `USN` — упрощенная система налогообложения (УСН).  * `USN_MINUS_COST` — упрощенная система налогообложения, доходы, уменьшенные на величину расходов (УСН «Доходы минус расходы»).  * `NPD` — налог на профессиональный доход (НПД).  * `UNKNOWN_VALUE` — неизвестное значение. Используется только совместно с параметром `payment-method=YANDEX`. 
+// OrderTaxSystemType Система налогообложения (СНО) магазина на момент оформления заказа:  * `ECHN` — единый сельскохозяйственный налог (ЕСХН).  * `ENVD` — единый налог на вмененный доход (ЕНВД).  * `OSN` — общая система налогообложения (ОСН).  * `PSN` — патентная система налогообложения (ПСН).  * `USN` — упрощенная система налогообложения (УСН).  * `USN_MINUS_COST` — упрощенная система налогообложения, доходы, уменьшенные на величину расходов (УСН «Доходы минус расходы»).  * `NPD` — налог на профессиональный доход (НПД).  * `UNKNOWN_VALUE` — неизвестное значение. Используется только совместно с параметром `payment-method=YANDEX`.
 type OrderTaxSystemType string
 
 // List of OrderTaxSystemType
 const (
-	OSN OrderTaxSystemType = "OSN"
-	USN OrderTaxSystemType = "USN"
+	OSN            OrderTaxSystemType = "OSN"
+	USN            OrderTaxSystemType = "USN"
 	USN_MINUS_COST OrderTaxSystemType = "USN_MINUS_COST"
-	ENVD OrderTaxSystemType = "ENVD"
-	ECHN OrderTaxSystemType = "ECHN"
-	PSN OrderTaxSystemType = "PSN"
-	NPD OrderTaxSystemType = "NPD"
-	UNKNOWN_VALUE OrderTaxSystemType = "UNKNOWN_VALUE"
+	ENVD           OrderTaxSystemType = "ENVD"
+	ECHN           OrderTaxSystemType = "ECHN"
+	PSN            OrderTaxSystemType = "PSN"
+	NPD            OrderTaxSystemType = "NPD"
+	UNKNOWN_VALUE  OrderTaxSystemType = "UNKNOWN_VALUE"
 )
 
 // All allowed values of OrderTaxSystemType enum
@@ -120,4 +120,3 @@ func (v *NullableOrderTaxSystemType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

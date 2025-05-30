@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,25 +15,25 @@ import (
 	"fmt"
 )
 
-// ApiKeyScopeType Доступы к методам:  * `ALL_METHODS` — полное управление кабинетом. * `ALL_METHODS_READ_ONLY` — просмотр всей информации в кабинете. * `INVENTORY_AND_ORDER_PROCESSING` — обработка заказов и учет товаров. * `INVENTORY_AND_ORDER_PROCESSING_READ_ONLY` — просмотр информации о заказах. * `PRICING` — управление ценами. * `PRICING_READ_ONLY` — просмотр цен. * `OFFERS_AND_CARDS_MANAGEMENT` — управление товарами и карточками. * `OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY` — просмотр товаров и карточек. * `PROMOTION` — продвижение товаров. * `PROMOTION_READ_ONLY` — просмотр информации о продвижении товаров. * `FINANCE_AND_ACCOUNTING` — просмотр финансовой информации и отчётности. * `COMMUNICATION` — общение с покупателями. * `SETTINGS_MANAGEMENT` — настройка магазинов. * `SUPPLIES_MANAGEMENT_READ_ONLY` — получение информации по FBY-заявкам. 
+// ApiKeyScopeType Доступы к методам:  * `ALL_METHODS` — полное управление кабинетом. * `ALL_METHODS_READ_ONLY` — просмотр всей информации в кабинете. * `INVENTORY_AND_ORDER_PROCESSING` — обработка заказов и учет товаров. * `INVENTORY_AND_ORDER_PROCESSING_READ_ONLY` — просмотр информации о заказах. * `PRICING` — управление ценами. * `PRICING_READ_ONLY` — просмотр цен. * `OFFERS_AND_CARDS_MANAGEMENT` — управление товарами и карточками. * `OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY` — просмотр товаров и карточек. * `PROMOTION` — продвижение товаров. * `PROMOTION_READ_ONLY` — просмотр информации о продвижении товаров. * `FINANCE_AND_ACCOUNTING` — просмотр финансовой информации и отчётности. * `COMMUNICATION` — общение с покупателями. * `SETTINGS_MANAGEMENT` — настройка магазинов. * `SUPPLIES_MANAGEMENT_READ_ONLY` — получение информации по FBY-заявкам.
 type ApiKeyScopeType string
 
 // List of ApiKeyScopeType
 const (
-	ALL_METHODS ApiKeyScopeType = "ALL_METHODS"
-	ALL_METHODS_READ_ONLY ApiKeyScopeType = "ALL_METHODS_READ_ONLY"
-	INVENTORY_AND_ORDER_PROCESSING ApiKeyScopeType = "INVENTORY_AND_ORDER_PROCESSING"
+	ALL_METHODS                              ApiKeyScopeType = "ALL_METHODS"
+	ALL_METHODS_READ_ONLY                    ApiKeyScopeType = "ALL_METHODS_READ_ONLY"
+	INVENTORY_AND_ORDER_PROCESSING           ApiKeyScopeType = "INVENTORY_AND_ORDER_PROCESSING"
 	INVENTORY_AND_ORDER_PROCESSING_READ_ONLY ApiKeyScopeType = "INVENTORY_AND_ORDER_PROCESSING_READ_ONLY"
-	PRICING ApiKeyScopeType = "PRICING"
-	PRICING_READ_ONLY ApiKeyScopeType = "PRICING_READ_ONLY"
-	OFFERS_AND_CARDS_MANAGEMENT ApiKeyScopeType = "OFFERS_AND_CARDS_MANAGEMENT"
-	OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY ApiKeyScopeType = "OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY"
-	PROMOTION ApiKeyScopeType = "PROMOTION"
-	PROMOTION_READ_ONLY ApiKeyScopeType = "PROMOTION_READ_ONLY"
-	FINANCE_AND_ACCOUNTING ApiKeyScopeType = "FINANCE_AND_ACCOUNTING"
-	COMMUNICATION ApiKeyScopeType = "COMMUNICATION"
-	SETTINGS_MANAGEMENT ApiKeyScopeType = "SETTINGS_MANAGEMENT"
-	SUPPLIES_MANAGEMENT_READ_ONLY ApiKeyScopeType = "SUPPLIES_MANAGEMENT_READ_ONLY"
+	PRICING                                  ApiKeyScopeType = "PRICING"
+	PRICING_READ_ONLY                        ApiKeyScopeType = "PRICING_READ_ONLY"
+	OFFERS_AND_CARDS_MANAGEMENT              ApiKeyScopeType = "OFFERS_AND_CARDS_MANAGEMENT"
+	OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY    ApiKeyScopeType = "OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY"
+	PROMOTION                                ApiKeyScopeType = "PROMOTION"
+	PROMOTION_READ_ONLY                      ApiKeyScopeType = "PROMOTION_READ_ONLY"
+	FINANCE_AND_ACCOUNTING                   ApiKeyScopeType = "FINANCE_AND_ACCOUNTING"
+	COMMUNICATION                            ApiKeyScopeType = "COMMUNICATION"
+	SETTINGS_MANAGEMENT                      ApiKeyScopeType = "SETTINGS_MANAGEMENT"
+	SUPPLIES_MANAGEMENT_READ_ONLY            ApiKeyScopeType = "SUPPLIES_MANAGEMENT_READ_ONLY"
 )
 
 // All allowed values of ApiKeyScopeType enum
@@ -132,4 +132,3 @@ func (v *NullableApiKeyScopeType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

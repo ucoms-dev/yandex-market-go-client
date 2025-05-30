@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -21,13 +21,13 @@ var _ MappedNullable = &CampaignSettingsScheduleDTO{}
 
 // CampaignSettingsScheduleDTO Расписание работы службы доставки в своем регионе.
 type CampaignSettingsScheduleDTO struct {
-	// Признак работы службы доставки в государственные праздники. Возможные значения. * `false` — служба доставки не работает в праздничные дни. * `true` — служба доставки работает в праздничные дни. 
+	// Признак работы службы доставки в государственные праздники. Возможные значения. * `false` — служба доставки не работает в праздничные дни. * `true` — служба доставки работает в праздничные дни.
 	AvailableOnHolidays *bool `json:"availableOnHolidays,omitempty"`
 	// Список дней, в которые служба доставки не работает. Дни магазин указал в кабинете продавца на Маркете.
 	CustomHolidays []string `json:"customHolidays"`
 	// Список выходных и праздничных дней, в которые служба доставки работает. Дни магазин указал в кабинете продавца на Маркете.
-	CustomWorkingDays []string `json:"customWorkingDays"`
-	Period *CampaignSettingsTimePeriodDTO `json:"period,omitempty"`
+	CustomWorkingDays []string                       `json:"customWorkingDays"`
+	Period            *CampaignSettingsTimePeriodDTO `json:"period,omitempty"`
 	// Итоговый список нерабочих дней службы доставки. Список рассчитывается с учетом выходных, нерабочих дней и государственных праздников. Информацию по ним магазин указывает в кабинете продавца на Маркете.
 	TotalHolidays []string `json:"totalHolidays"`
 	// Список выходных дней недели и государственных праздников.
@@ -218,7 +218,7 @@ func (o *CampaignSettingsScheduleDTO) SetWeeklyHolidays(v []int32) {
 }
 
 func (o CampaignSettingsScheduleDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -256,10 +256,10 @@ func (o *CampaignSettingsScheduleDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -315,5 +315,3 @@ func (v *NullableCampaignSettingsScheduleDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

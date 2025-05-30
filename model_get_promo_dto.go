@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,8 +11,8 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
@@ -24,15 +24,15 @@ type GetPromoDTO struct {
 	// Идентификатор акции.
 	Id string `json:"id"`
 	// Название акции.
-	Name string `json:"name"`
+	Name   string         `json:"name"`
 	Period PromoPeriodDTO `json:"period"`
-	// Участвует или участвовал ли продавец в этой акции.  Для текущих и будущих акций возвращается со значением `true`, если в акции есть товары, которые были добавлены вручную. Если товары не участвуют в акции или добавлены в нее автоматически, параметр возвращается со значением `false`.  Для прошедших акций всегда возвращается со значением `true`.  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index). 
-	Participating bool `json:"participating"`
+	// Участвует или участвовал ли продавец в этой акции.  Для текущих и будущих акций возвращается со значением `true`, если в акции есть товары, которые были добавлены вручную. Если товары не участвуют в акции или добавлены в нее автоматически, параметр возвращается со значением `false`.  Для прошедших акций всегда возвращается со значением `true`.  Об автоматическом и ручном добавлении товаров в акцию читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/index).
+	Participating  bool                      `json:"participating"`
 	AssortmentInfo GetPromoAssortmentInfoDTO `json:"assortmentInfo"`
-	MechanicsInfo GetPromoMechanicsInfoDTO `json:"mechanicsInfo"`
+	MechanicsInfo  GetPromoMechanicsInfoDTO  `json:"mechanicsInfo"`
 	BestsellerInfo GetPromoBestsellerInfoDTO `json:"bestsellerInfo"`
 	// Список каналов продвижения товаров.
-	Channels []ChannelType `json:"channels,omitempty"`
+	Channels    []ChannelType           `json:"channels,omitempty"`
 	Constraints *GetPromoConstraintsDTO `json:"constraints,omitempty"`
 }
 
@@ -296,7 +296,7 @@ func (o *GetPromoDTO) SetConstraints(v GetPromoConstraintsDTO) {
 }
 
 func (o GetPromoDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -340,10 +340,10 @@ func (o *GetPromoDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -399,5 +399,3 @@ func (v *NullableGetPromoDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,23 +11,23 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the OfferWeightDimensionsDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OfferWeightDimensionsDTO{}
 
-// OfferWeightDimensionsDTO Габариты упаковки и вес товара.  Если товар занимает несколько коробок, перед измерением размеров сложите их компактно.  ![Схема измерения многоместных грузов](../../_images/reference/boxes-measure.png) 
+// OfferWeightDimensionsDTO Габариты упаковки и вес товара.  Если товар занимает несколько коробок, перед измерением размеров сложите их компактно.  ![Схема измерения многоместных грузов](../../_images/reference/boxes-measure.png)
 type OfferWeightDimensionsDTO struct {
-	// Длина упаковки в см. 
+	// Длина упаковки в см.
 	Length float32 `json:"length"`
-	// Ширина упаковки в см. 
+	// Ширина упаковки в см.
 	Width float32 `json:"width"`
-	// Высота упаковки в см. 
+	// Высота упаковки в см.
 	Height float32 `json:"height"`
-	// Вес товара в кг с учетом упаковки (брутто). 
+	// Вес товара в кг с учетом упаковки (брутто).
 	Weight float32 `json:"weight"`
 }
 
@@ -151,7 +151,7 @@ func (o *OfferWeightDimensionsDTO) SetWeight(v float32) {
 }
 
 func (o OfferWeightDimensionsDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -183,10 +183,10 @@ func (o *OfferWeightDimensionsDTO) UnmarshalJSON(data []byte) (err error) {
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -242,5 +242,3 @@ func (v *NullableOfferWeightDimensionsDTO) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,11 +17,11 @@ import (
 // checks if the UpdatePromoOfferDiscountParamsDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UpdatePromoOfferDiscountParamsDTO{}
 
-// UpdatePromoOfferDiscountParamsDTO Параметры товара в акции с типом `DIRECT_DISCOUNT` или `BLUE_FLASH`.  Обязательный параметр для акций с этими типами. 
+// UpdatePromoOfferDiscountParamsDTO Параметры товара в акции с типом `DIRECT_DISCOUNT` или `BLUE_FLASH`.  Обязательный параметр для акций с этими типами.
 type UpdatePromoOfferDiscountParamsDTO struct {
-	// Зачеркнутая цена — та, по которой товар продавался до акции.  Указывается в рублях.  Число должно быть целым. 
+	// Зачеркнутая цена — та, по которой товар продавался до акции.  Указывается в рублях.  Число должно быть целым.
 	Price *int64 `json:"price,omitempty"`
-	// Цена по акции — та, по которой вы хотите продавать товар.  Указывается в рублях.  Число должно быть целым. 
+	// Цена по акции — та, по которой вы хотите продавать товар.  Указывается в рублях.  Число должно быть целым.
 	PromoPrice *int64 `json:"promoPrice,omitempty"`
 }
 
@@ -107,7 +107,7 @@ func (o *UpdatePromoOfferDiscountParamsDTO) SetPromoPrice(v int64) {
 }
 
 func (o UpdatePromoOfferDiscountParamsDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -160,5 +160,3 @@ func (v *NullableUpdatePromoOfferDiscountParamsDTO) UnmarshalJSON(src []byte) er
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

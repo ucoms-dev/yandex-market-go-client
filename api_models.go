@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -19,25 +19,24 @@ import (
 	"strings"
 )
 
-
 // ModelsAPIService ModelsAPI service
 type ModelsAPIService service
 
 type ApiGetModelRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ModelsAPIService
-	modelId int64
-	regionId *int64
-	currency *CurrencyType
+	modelId    int64
+	regionId   *int64
+	currency   *CurrencyType
 }
 
-// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
+// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
 func (r ApiGetModelRequest) RegionId(regionId int64) ApiGetModelRequest {
 	r.regionId = &regionId
 	return r
 }
 
-// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина). 
+// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
 func (r ApiGetModelRequest) Currency(currency CurrencyType) ApiGetModelRequest {
 	r.currency = &currency
 	return r
@@ -59,30 +58,31 @@ GetModel Информация об одной модели
 |**⚙️ Лимит:** 100 000 моделей в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param modelId Идентификатор модели товара.
- @return ApiGetModelRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param modelId Идентификатор модели товара.
+	@return ApiGetModelRequest
 
 Deprecated
 */
 func (a *ModelsAPIService) GetModel(ctx context.Context, modelId int64) ApiGetModelRequest {
 	return ApiGetModelRequest{
 		ApiService: a,
-		ctx: ctx,
-		modelId: modelId,
+		ctx:        ctx,
+		modelId:    modelId,
 	}
 }
 
 // Execute executes the request
-//  @return GetModelsResponse
+//
+//	@return GetModelsResponse
+//
 // Deprecated
 func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetModelsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetModelsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ModelsAPIService.GetModel")
@@ -167,8 +167,8 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -178,8 +178,8 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -189,8 +189,8 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -200,8 +200,8 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -211,8 +211,8 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -222,8 +222,8 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -241,29 +241,29 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 }
 
 type ApiGetModelOffersRequest struct {
-	ctx context.Context
-	ApiService *ModelsAPIService
-	modelId int64
-	regionId *int64
-	currency *CurrencyType
+	ctx          context.Context
+	ApiService   *ModelsAPIService
+	modelId      int64
+	regionId     *int64
+	currency     *CurrencyType
 	orderByPrice *SortOrderType
-	count *int32
-	page *int32
+	count        *int32
+	page         *int32
 }
 
-// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
+// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
 func (r ApiGetModelOffersRequest) RegionId(regionId int64) ApiGetModelOffersRequest {
 	r.regionId = &regionId
 	return r
 }
 
-// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина). 
+// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
 func (r ApiGetModelOffersRequest) Currency(currency CurrencyType) ApiGetModelOffersRequest {
 	r.currency = &currency
 	return r
 }
 
-// Направление сортировки по цене.  Возможные значения: * &#x60;ASC&#x60; — сортировка по возрастанию. * &#x60;DESC&#x60; — сортировка по убыванию.  Значение по умолчанию: предложения выводятся в произвольном порядке. 
+// Направление сортировки по цене.  Возможные значения: * &#x60;ASC&#x60; — сортировка по возрастанию. * &#x60;DESC&#x60; — сортировка по убыванию.  Значение по умолчанию: предложения выводятся в произвольном порядке.
 func (r ApiGetModelOffersRequest) OrderByPrice(orderByPrice SortOrderType) ApiGetModelOffersRequest {
 	r.orderByPrice = &orderByPrice
 	return r
@@ -275,7 +275,7 @@ func (r ApiGetModelOffersRequest) Count(count int32) ApiGetModelOffersRequest {
 	return r
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
 func (r ApiGetModelOffersRequest) Page(page int32) ApiGetModelOffersRequest {
 	r.page = &page
 	return r
@@ -301,30 +301,31 @@ GetModelOffers Список предложений для одной модел�
 |**⚙️ Лимит:** 100 000 предложений в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param modelId Идентификатор модели товара.
- @return ApiGetModelOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param modelId Идентификатор модели товара.
+	@return ApiGetModelOffersRequest
 
 Deprecated
 */
 func (a *ModelsAPIService) GetModelOffers(ctx context.Context, modelId int64) ApiGetModelOffersRequest {
 	return ApiGetModelOffersRequest{
 		ApiService: a,
-		ctx: ctx,
-		modelId: modelId,
+		ctx:        ctx,
+		modelId:    modelId,
 	}
 }
 
 // Execute executes the request
-//  @return GetModelsOffersResponse
+//
+//	@return GetModelsOffersResponse
+//
 // Deprecated
 func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetModelsOffersResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetModelsOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ModelsAPIService.GetModelOffers")
@@ -424,8 +425,8 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -435,8 +436,8 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -446,8 +447,8 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -457,8 +458,8 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -468,8 +469,8 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -479,8 +480,8 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -498,14 +499,14 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 }
 
 type ApiGetModelsRequest struct {
-	ctx context.Context
-	ApiService *ModelsAPIService
-	regionId *int64
+	ctx              context.Context
+	ApiService       *ModelsAPIService
+	regionId         *int64
 	getModelsRequest *GetModelsRequest
-	currency *CurrencyType
+	currency         *CurrencyType
 }
 
-// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
+// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
 func (r ApiGetModelsRequest) RegionId(regionId int64) ApiGetModelsRequest {
 	r.regionId = &regionId
 	return r
@@ -516,7 +517,7 @@ func (r ApiGetModelsRequest) GetModelsRequest(getModelsRequest GetModelsRequest)
 	return r
 }
 
-// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина). 
+// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
 func (r ApiGetModelsRequest) Currency(currency CurrencyType) ApiGetModelsRequest {
 	r.currency = &currency
 	return r
@@ -540,28 +541,29 @@ GetModels Информация о нескольких моделях
 |**⚙️ Лимит:** 100 000 моделей в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetModelsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetModelsRequest
 
 Deprecated
 */
 func (a *ModelsAPIService) GetModels(ctx context.Context) ApiGetModelsRequest {
 	return ApiGetModelsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetModelsResponse
+//
+//	@return GetModelsResponse
+//
 // Deprecated
 func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetModelsResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetModelsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ModelsAPIService.GetModels")
@@ -647,8 +649,8 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -658,8 +660,8 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -669,8 +671,8 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -680,8 +682,8 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -691,8 +693,8 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -702,8 +704,8 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -721,15 +723,15 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 }
 
 type ApiGetModelsOffersRequest struct {
-	ctx context.Context
-	ApiService *ModelsAPIService
-	regionId *int64
+	ctx              context.Context
+	ApiService       *ModelsAPIService
+	regionId         *int64
 	getModelsRequest *GetModelsRequest
-	currency *CurrencyType
-	orderByPrice *SortOrderType
+	currency         *CurrencyType
+	orderByPrice     *SortOrderType
 }
 
-// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
+// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
 func (r ApiGetModelsOffersRequest) RegionId(regionId int64) ApiGetModelsOffersRequest {
 	r.regionId = &regionId
 	return r
@@ -740,13 +742,13 @@ func (r ApiGetModelsOffersRequest) GetModelsRequest(getModelsRequest GetModelsRe
 	return r
 }
 
-// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина). 
+// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
 func (r ApiGetModelsOffersRequest) Currency(currency CurrencyType) ApiGetModelsOffersRequest {
 	r.currency = &currency
 	return r
 }
 
-// Направление сортировки по цене.  Возможные значения: * &#x60;ASC&#x60; — сортировка по возрастанию. * &#x60;DESC&#x60; — сортировка по убыванию.  Значение по умолчанию: предложения выводятся в произвольном порядке. 
+// Направление сортировки по цене.  Возможные значения: * &#x60;ASC&#x60; — сортировка по возрастанию. * &#x60;DESC&#x60; — сортировка по убыванию.  Значение по умолчанию: предложения выводятся в произвольном порядке.
 func (r ApiGetModelsOffersRequest) OrderByPrice(orderByPrice SortOrderType) ApiGetModelsOffersRequest {
 	r.orderByPrice = &orderByPrice
 	return r
@@ -774,28 +776,29 @@ GetModelsOffers Список предложений для нескольких 
 |**⚙️ Лимит:** 100 000 предложений в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetModelsOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiGetModelsOffersRequest
 
 Deprecated
 */
 func (a *ModelsAPIService) GetModelsOffers(ctx context.Context) ApiGetModelsOffersRequest {
 	return ApiGetModelsOffersRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetModelsOffersResponse
+//
+//	@return GetModelsOffersResponse
+//
 // Deprecated
 func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodPost
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *GetModelsOffersResponse
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetModelsOffersResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ModelsAPIService.GetModelsOffers")
@@ -884,8 +887,8 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -895,8 +898,8 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -906,8 +909,8 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -917,8 +920,8 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -928,8 +931,8 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -939,8 +942,8 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -958,13 +961,13 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 }
 
 type ApiSearchModelsRequest struct {
-	ctx context.Context
+	ctx        context.Context
 	ApiService *ModelsAPIService
-	query *string
-	regionId *int64
-	currency *CurrencyType
-	page *int32
-	pageSize *int32
+	query      *string
+	regionId   *int64
+	currency   *CurrencyType
+	page       *int32
+	pageSize   *int32
 }
 
 // Поисковый запрос по названию модели товара.
@@ -973,25 +976,25 @@ func (r ApiSearchModelsRequest) Query(query string) ApiSearchModelsRequest {
 	return r
 }
 
-// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
+// Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
 func (r ApiSearchModelsRequest) RegionId(regionId int64) ApiSearchModelsRequest {
 	r.regionId = &regionId
 	return r
 }
 
-// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина). 
+// Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
 func (r ApiSearchModelsRequest) Currency(currency CurrencyType) ApiSearchModelsRequest {
 	r.currency = &currency
 	return r
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
+// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
 func (r ApiSearchModelsRequest) Page(page int32) ApiSearchModelsRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;. 
+// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
 func (r ApiSearchModelsRequest) PageSize(pageSize int32) ApiSearchModelsRequest {
 	r.pageSize = &pageSize
 	return r
@@ -1015,28 +1018,29 @@ SearchModels Поиск модели товара
 |**⚙️ Лимит:** 100 000 моделей в час|
 |-|
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiSearchModelsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return ApiSearchModelsRequest
 
 Deprecated
 */
 func (a *ModelsAPIService) SearchModels(ctx context.Context) ApiSearchModelsRequest {
 	return ApiSearchModelsRequest{
 		ApiService: a,
-		ctx: ctx,
+		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//  @return SearchModelsResponse
+//
+//	@return SearchModelsResponse
+//
 // Deprecated
 func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*SearchModelsResponse, *http.Response, error) {
 	var (
-		localVarHTTPMethod   = http.MethodGet
-		localVarPostBody     interface{}
-		formFiles            []formFile
-		localVarReturnValue  *SearchModelsResponse
+		localVarHTTPMethod  = http.MethodGet
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SearchModelsResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ModelsAPIService.SearchModels")
@@ -1130,8 +1134,8 @@ func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*Searc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
@@ -1141,8 +1145,8 @@ func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*Searc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
@@ -1152,8 +1156,8 @@ func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*Searc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
@@ -1163,8 +1167,8 @@ func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*Searc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
@@ -1174,8 +1178,8 @@ func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*Searc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
@@ -1185,8 +1189,8 @@ func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*Searc
 				newErr.error = err.Error()
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
-					newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-					newErr.model = v
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}

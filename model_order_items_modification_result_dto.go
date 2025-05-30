@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -11,15 +11,15 @@ API version: LATEST
 package openapi
 
 import (
-	"encoding/json"
 	"bytes"
+	"encoding/json"
 	"fmt"
 )
 
 // checks if the OrderItemsModificationResultDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderItemsModificationResultDTO{}
 
-// OrderItemsModificationResultDTO Краткие сведения о промаркированных товарах. Параметр возвращается, если ответ `OK`. 
+// OrderItemsModificationResultDTO Краткие сведения о промаркированных товарах. Параметр возвращается, если ответ `OK`.
 type OrderItemsModificationResultDTO struct {
 	// Список позиций в заказе, подлежащих маркировке.
 	Items []BriefOrderItemDTO `json:"items"`
@@ -70,7 +70,7 @@ func (o *OrderItemsModificationResultDTO) SetItems(v []BriefOrderItemDTO) {
 }
 
 func (o OrderItemsModificationResultDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -96,10 +96,10 @@ func (o *OrderItemsModificationResultDTO) UnmarshalJSON(data []byte) (err error)
 	err = json.Unmarshal(data, &allProperties)
 
 	if err != nil {
-		return err;
+		return err
 	}
 
-	for _, requiredProperty := range(requiredProperties) {
+	for _, requiredProperty := range requiredProperties {
 		if _, exists := allProperties[requiredProperty]; !exists {
 			return fmt.Errorf("no value given for required property %v", requiredProperty)
 		}
@@ -155,5 +155,3 @@ func (v *NullableOrderItemsModificationResultDTO) UnmarshalJSON(src []byte) erro
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-

@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -15,14 +15,14 @@ import (
 	"fmt"
 )
 
-// OrderPaymentType Тип оплаты заказа:  * `PREPAID` — оплата при оформлении заказа.  * `POSTPAID` — оплата при получении заказа.  * `UNKNOWN` — неизвестный тип.  Если параметр отсутствует, заказ будет оплачен при получении. 
+// OrderPaymentType Тип оплаты заказа:  * `PREPAID` — оплата при оформлении заказа.  * `POSTPAID` — оплата при получении заказа.  * `UNKNOWN` — неизвестный тип.  Если параметр отсутствует, заказ будет оплачен при получении.
 type OrderPaymentType string
 
 // List of OrderPaymentType
 const (
-	PREPAID OrderPaymentType = "PREPAID"
+	PREPAID  OrderPaymentType = "PREPAID"
 	POSTPAID OrderPaymentType = "POSTPAID"
-	UNKNOWN OrderPaymentType = "UNKNOWN"
+	UNKNOWN  OrderPaymentType = "UNKNOWN"
 )
 
 // All allowed values of OrderPaymentType enum
@@ -110,4 +110,3 @@ func (v *NullableOrderPaymentType) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-

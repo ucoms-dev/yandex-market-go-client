@@ -1,7 +1,7 @@
 /*
 Партнерский API Маркета
 
-API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов. 
+API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
 API version: LATEST
 */
@@ -17,7 +17,7 @@ import (
 // checks if the GoodsStatsWeightDimensionsDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GoodsStatsWeightDimensionsDTO{}
 
-// GoodsStatsWeightDimensionsDTO Информация о весе и габаритах товара.  Если товар уже привязан к карточке (`marketSku`), в ответе вернутся габариты из карточки Маркета, а не размеры, которые вы передаете. 
+// GoodsStatsWeightDimensionsDTO Информация о весе и габаритах товара.  Если товар уже привязан к карточке (`marketSku`), в ответе вернутся габариты из карточки Маркета, а не размеры, которые вы передаете.
 type GoodsStatsWeightDimensionsDTO struct {
 	// Длина товара в сантиметрах.
 	Length *float32 `json:"length,omitempty"`
@@ -175,7 +175,7 @@ func (o *GoodsStatsWeightDimensionsDTO) SetWeight(v float32) {
 }
 
 func (o GoodsStatsWeightDimensionsDTO) MarshalJSON() ([]byte, error) {
-	toSerialize,err := o.ToMap()
+	toSerialize, err := o.ToMap()
 	if err != nil {
 		return []byte{}, err
 	}
@@ -234,5 +234,3 @@ func (v *NullableGoodsStatsWeightDimensionsDTO) UnmarshalJSON(src []byte) error 
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
