@@ -24,21 +24,21 @@ import (
 // DbsAPIService DbsAPI service
 type DbsAPIService service
 
-type ApiAcceptOrderCancellationRequest struct {
+type DbsAcceptOrderCancellationRequest struct {
 	ctx                            context.Context
-	ApiService                     *DbsAPIService
+	DbsService                     *DbsAPIService
 	campaignId                     int64
 	orderId                        int64
 	acceptOrderCancellationRequest *AcceptOrderCancellationRequest
 }
 
-func (r ApiAcceptOrderCancellationRequest) AcceptOrderCancellationRequest(acceptOrderCancellationRequest AcceptOrderCancellationRequest) ApiAcceptOrderCancellationRequest {
+func (r DbsAcceptOrderCancellationRequest) AcceptOrderCancellationRequest(acceptOrderCancellationRequest AcceptOrderCancellationRequest) DbsAcceptOrderCancellationRequest {
 	r.acceptOrderCancellationRequest = &acceptOrderCancellationRequest
 	return r
 }
 
-func (r ApiAcceptOrderCancellationRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.AcceptOrderCancellationExecute(r)
+func (r DbsAcceptOrderCancellationRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.AcceptOrderCancellationExecute(r)
 }
 
 /*
@@ -69,11 +69,11 @@ AcceptOrderCancellation Отмена заказа покупателем
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiAcceptOrderCancellationRequest
+	@return DbsAcceptOrderCancellationRequest
 */
-func (a *DbsAPIService) AcceptOrderCancellation(ctx context.Context, campaignId int64, orderId int64) ApiAcceptOrderCancellationRequest {
-	return ApiAcceptOrderCancellationRequest{
-		ApiService: a,
+func (a *DbsAPIService) AcceptOrderCancellation(ctx context.Context, campaignId int64, orderId int64) DbsAcceptOrderCancellationRequest {
+	return DbsAcceptOrderCancellationRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -83,7 +83,7 @@ func (a *DbsAPIService) AcceptOrderCancellation(ctx context.Context, campaignId 
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancellationRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) AcceptOrderCancellationExecute(r DbsAcceptOrderCancellationRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -245,21 +245,21 @@ func (a *DbsAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancellat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAddHiddenOffersRequest struct {
+type DbsAddHiddenOffersRequest struct {
 	ctx                    context.Context
-	ApiService             *DbsAPIService
+	DbsService             *DbsAPIService
 	campaignId             int64
 	addHiddenOffersRequest *AddHiddenOffersRequest
 }
 
 // Запрос на скрытие оферов.
-func (r ApiAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersRequest AddHiddenOffersRequest) ApiAddHiddenOffersRequest {
+func (r DbsAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersRequest AddHiddenOffersRequest) DbsAddHiddenOffersRequest {
 	r.addHiddenOffersRequest = &addHiddenOffersRequest
 	return r
 }
 
-func (r ApiAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.AddHiddenOffersExecute(r)
+func (r DbsAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.AddHiddenOffersExecute(r)
 }
 
 /*
@@ -280,11 +280,11 @@ AddHiddenOffers Скрытие товаров и настройки скрыти
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiAddHiddenOffersRequest
+	@return DbsAddHiddenOffersRequest
 */
-func (a *DbsAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) ApiAddHiddenOffersRequest {
-	return ApiAddHiddenOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) DbsAddHiddenOffersRequest {
+	return DbsAddHiddenOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -293,7 +293,7 @@ func (a *DbsAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) A
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) AddHiddenOffersExecute(r DbsAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -454,20 +454,20 @@ func (a *DbsAPIService) AddHiddenOffersExecute(r ApiAddHiddenOffersRequest) (*Em
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAddOffersToArchiveRequest struct {
+type DbsAddOffersToArchiveRequest struct {
 	ctx                       context.Context
-	ApiService                *DbsAPIService
+	DbsService                *DbsAPIService
 	businessId                int64
 	addOffersToArchiveRequest *AddOffersToArchiveRequest
 }
 
-func (r ApiAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) ApiAddOffersToArchiveRequest {
+func (r DbsAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) DbsAddOffersToArchiveRequest {
 	r.addOffersToArchiveRequest = &addOffersToArchiveRequest
 	return r
 }
 
-func (r ApiAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
-	return r.ApiService.AddOffersToArchiveExecute(r)
+func (r DbsAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
+	return r.DbsService.AddOffersToArchiveExecute(r)
 }
 
 /*
@@ -488,11 +488,11 @@ AddOffersToArchive Добавление товаров в архив
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiAddOffersToArchiveRequest
+	@return DbsAddOffersToArchiveRequest
 */
-func (a *DbsAPIService) AddOffersToArchive(ctx context.Context, businessId int64) ApiAddOffersToArchiveRequest {
-	return ApiAddOffersToArchiveRequest{
-		ApiService: a,
+func (a *DbsAPIService) AddOffersToArchive(ctx context.Context, businessId int64) DbsAddOffersToArchiveRequest {
+	return DbsAddOffersToArchiveRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -501,7 +501,7 @@ func (a *DbsAPIService) AddOffersToArchive(ctx context.Context, businessId int64
 // Execute executes the request
 //
 //	@return AddOffersToArchiveResponse
-func (a *DbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
+func (a *DbsAPIService) AddOffersToArchiveExecute(r DbsAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -673,19 +673,19 @@ func (a *DbsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCalculateTariffsRequest struct {
+type DbsCalculateTariffsRequest struct {
 	ctx                     context.Context
-	ApiService              *DbsAPIService
+	DbsService              *DbsAPIService
 	calculateTariffsRequest *CalculateTariffsRequest
 }
 
-func (r ApiCalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) ApiCalculateTariffsRequest {
+func (r DbsCalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) DbsCalculateTariffsRequest {
 	r.calculateTariffsRequest = &calculateTariffsRequest
 	return r
 }
 
-func (r ApiCalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
-	return r.ApiService.CalculateTariffsExecute(r)
+func (r DbsCalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
+	return r.DbsService.CalculateTariffsExecute(r)
 }
 
 /*
@@ -704,11 +704,11 @@ CalculateTariffs Калькулятор стоимости услуг
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCalculateTariffsRequest
+	@return DbsCalculateTariffsRequest
 */
-func (a *DbsAPIService) CalculateTariffs(ctx context.Context) ApiCalculateTariffsRequest {
-	return ApiCalculateTariffsRequest{
-		ApiService: a,
+func (a *DbsAPIService) CalculateTariffs(ctx context.Context) DbsCalculateTariffsRequest {
+	return DbsCalculateTariffsRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -716,7 +716,7 @@ func (a *DbsAPIService) CalculateTariffs(ctx context.Context) ApiCalculateTariff
 // Execute executes the request
 //
 //	@return CalculateTariffsResponse
-func (a *DbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
+func (a *DbsAPIService) CalculateTariffsExecute(r DbsCalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -873,20 +873,20 @@ func (a *DbsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfirmBusinessPricesRequest struct {
+type DbsConfirmBusinessPricesRequest struct {
 	ctx                  context.Context
-	ApiService           *DbsAPIService
+	DbsService           *DbsAPIService
 	businessId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r ApiConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ApiConfirmBusinessPricesRequest {
+func (r DbsConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) DbsConfirmBusinessPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r ApiConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.ConfirmBusinessPricesExecute(r)
+func (r DbsConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.ConfirmBusinessPricesExecute(r)
 }
 
 /*
@@ -905,11 +905,11 @@ ConfirmBusinessPrices Удаление товара из карантина по
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiConfirmBusinessPricesRequest
+	@return DbsConfirmBusinessPricesRequest
 */
-func (a *DbsAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) ApiConfirmBusinessPricesRequest {
-	return ApiConfirmBusinessPricesRequest{
-		ApiService: a,
+func (a *DbsAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) DbsConfirmBusinessPricesRequest {
+	return DbsConfirmBusinessPricesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -918,7 +918,7 @@ func (a *DbsAPIService) ConfirmBusinessPrices(ctx context.Context, businessId in
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) ConfirmBusinessPricesExecute(r DbsConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1090,20 +1090,20 @@ func (a *DbsAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfirmCampaignPricesRequest struct {
+type DbsConfirmCampaignPricesRequest struct {
 	ctx                  context.Context
-	ApiService           *DbsAPIService
+	DbsService           *DbsAPIService
 	campaignId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r ApiConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ApiConfirmCampaignPricesRequest {
+func (r DbsConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) DbsConfirmCampaignPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r ApiConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.ConfirmCampaignPricesExecute(r)
+func (r DbsConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.ConfirmCampaignPricesExecute(r)
 }
 
 /*
@@ -1122,11 +1122,11 @@ ConfirmCampaignPrices Удаление товара из карантина по
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiConfirmCampaignPricesRequest
+	@return DbsConfirmCampaignPricesRequest
 */
-func (a *DbsAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) ApiConfirmCampaignPricesRequest {
-	return ApiConfirmCampaignPricesRequest{
-		ApiService: a,
+func (a *DbsAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) DbsConfirmCampaignPricesRequest {
+	return DbsConfirmCampaignPricesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -1135,7 +1135,7 @@ func (a *DbsAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId in
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) ConfirmCampaignPricesExecute(r DbsConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1307,21 +1307,21 @@ func (a *DbsAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateChatRequest struct {
+type DbsCreateChatRequest struct {
 	ctx               context.Context
-	ApiService        *DbsAPIService
+	DbsService        *DbsAPIService
 	businessId        int64
 	createChatRequest *CreateChatRequest
 }
 
 // description
-func (r ApiCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) ApiCreateChatRequest {
+func (r DbsCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) DbsCreateChatRequest {
 	r.createChatRequest = &createChatRequest
 	return r
 }
 
-func (r ApiCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
-	return r.ApiService.CreateChatExecute(r)
+func (r DbsCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
+	return r.DbsService.CreateChatExecute(r)
 }
 
 /*
@@ -1336,11 +1336,11 @@ CreateChat Создание нового чата с покупателем
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiCreateChatRequest
+	@return DbsCreateChatRequest
 */
-func (a *DbsAPIService) CreateChat(ctx context.Context, businessId int64) ApiCreateChatRequest {
-	return ApiCreateChatRequest{
-		ApiService: a,
+func (a *DbsAPIService) CreateChat(ctx context.Context, businessId int64) DbsCreateChatRequest {
+	return DbsCreateChatRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -1349,7 +1349,7 @@ func (a *DbsAPIService) CreateChat(ctx context.Context, businessId int64) ApiCre
 // Execute executes the request
 //
 //	@return CreateChatResponse
-func (a *DbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
+func (a *DbsAPIService) CreateChatExecute(r DbsCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1510,20 +1510,20 @@ func (a *DbsAPIService) CreateChatExecute(r ApiCreateChatRequest) (*CreateChatRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiCreateOutletRequest struct {
+type DbsCreateOutletRequest struct {
 	ctx                 context.Context
-	ApiService          *DbsAPIService
+	DbsService          *DbsAPIService
 	campaignId          int64
 	changeOutletRequest *ChangeOutletRequest
 }
 
-func (r ApiCreateOutletRequest) ChangeOutletRequest(changeOutletRequest ChangeOutletRequest) ApiCreateOutletRequest {
+func (r DbsCreateOutletRequest) ChangeOutletRequest(changeOutletRequest ChangeOutletRequest) DbsCreateOutletRequest {
 	r.changeOutletRequest = &changeOutletRequest
 	return r
 }
 
-func (r ApiCreateOutletRequest) Execute() (*CreateOutletResponse, *http.Response, error) {
-	return r.ApiService.CreateOutletExecute(r)
+func (r DbsCreateOutletRequest) Execute() (*CreateOutletResponse, *http.Response, error) {
+	return r.DbsService.CreateOutletExecute(r)
 }
 
 /*
@@ -1538,11 +1538,11 @@ CreateOutlet Создание точки продаж
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiCreateOutletRequest
+	@return DbsCreateOutletRequest
 */
-func (a *DbsAPIService) CreateOutlet(ctx context.Context, campaignId int64) ApiCreateOutletRequest {
-	return ApiCreateOutletRequest{
-		ApiService: a,
+func (a *DbsAPIService) CreateOutlet(ctx context.Context, campaignId int64) DbsCreateOutletRequest {
+	return DbsCreateOutletRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -1551,7 +1551,7 @@ func (a *DbsAPIService) CreateOutlet(ctx context.Context, campaignId int64) ApiC
 // Execute executes the request
 //
 //	@return CreateOutletResponse
-func (a *DbsAPIService) CreateOutletExecute(r ApiCreateOutletRequest) (*CreateOutletResponse, *http.Response, error) {
+func (a *DbsAPIService) CreateOutletExecute(r DbsCreateOutletRequest) (*CreateOutletResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1701,20 +1701,20 @@ func (a *DbsAPIService) CreateOutletExecute(r ApiCreateOutletRequest) (*CreateOu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteCampaignOffersRequest struct {
+type DbsDeleteCampaignOffersRequest struct {
 	ctx                         context.Context
-	ApiService                  *DbsAPIService
+	DbsService                  *DbsAPIService
 	campaignId                  int64
 	deleteCampaignOffersRequest *DeleteCampaignOffersRequest
 }
 
-func (r ApiDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) ApiDeleteCampaignOffersRequest {
+func (r DbsDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) DbsDeleteCampaignOffersRequest {
 	r.deleteCampaignOffersRequest = &deleteCampaignOffersRequest
 	return r
 }
 
-func (r ApiDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
-	return r.ApiService.DeleteCampaignOffersExecute(r)
+func (r DbsDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
+	return r.DbsService.DeleteCampaignOffersExecute(r)
 }
 
 /*
@@ -1737,11 +1737,11 @@ DeleteCampaignOffers Удаление товаров из ассортимент
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiDeleteCampaignOffersRequest
+	@return DbsDeleteCampaignOffersRequest
 */
-func (a *DbsAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) ApiDeleteCampaignOffersRequest {
-	return ApiDeleteCampaignOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) DbsDeleteCampaignOffersRequest {
+	return DbsDeleteCampaignOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -1750,7 +1750,7 @@ func (a *DbsAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int
 // Execute executes the request
 //
 //	@return DeleteCampaignOffersResponse
-func (a *DbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) DeleteCampaignOffersExecute(r DbsDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1922,20 +1922,20 @@ func (a *DbsAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteGoodsFeedbackCommentRequest struct {
+type DbsDeleteGoodsFeedbackCommentRequest struct {
 	ctx                               context.Context
-	ApiService                        *DbsAPIService
+	DbsService                        *DbsAPIService
 	businessId                        int64
 	deleteGoodsFeedbackCommentRequest *DeleteGoodsFeedbackCommentRequest
 }
 
-func (r ApiDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) ApiDeleteGoodsFeedbackCommentRequest {
+func (r DbsDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) DbsDeleteGoodsFeedbackCommentRequest {
 	r.deleteGoodsFeedbackCommentRequest = &deleteGoodsFeedbackCommentRequest
 	return r
 }
 
-func (r ApiDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.DeleteGoodsFeedbackCommentExecute(r)
+func (r DbsDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.DeleteGoodsFeedbackCommentExecute(r)
 }
 
 /*
@@ -1950,11 +1950,11 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiDeleteGoodsFeedbackCommentRequest
+	@return DbsDeleteGoodsFeedbackCommentRequest
 */
-func (a *DbsAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) ApiDeleteGoodsFeedbackCommentRequest {
-	return ApiDeleteGoodsFeedbackCommentRequest{
-		ApiService: a,
+func (a *DbsAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) DbsDeleteGoodsFeedbackCommentRequest {
+	return DbsDeleteGoodsFeedbackCommentRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -1963,7 +1963,7 @@ func (a *DbsAPIService) DeleteGoodsFeedbackComment(ctx context.Context, business
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) DeleteGoodsFeedbackCommentExecute(r DbsDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2124,21 +2124,21 @@ func (a *DbsAPIService) DeleteGoodsFeedbackCommentExecute(r ApiDeleteGoodsFeedba
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteHiddenOffersRequest struct {
+type DbsDeleteHiddenOffersRequest struct {
 	ctx                       context.Context
-	ApiService                *DbsAPIService
+	DbsService                *DbsAPIService
 	campaignId                int64
 	deleteHiddenOffersRequest *DeleteHiddenOffersRequest
 }
 
 // Запрос на возобновление показа оферов.
-func (r ApiDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHiddenOffersRequest DeleteHiddenOffersRequest) ApiDeleteHiddenOffersRequest {
+func (r DbsDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHiddenOffersRequest DeleteHiddenOffersRequest) DbsDeleteHiddenOffersRequest {
 	r.deleteHiddenOffersRequest = &deleteHiddenOffersRequest
 	return r
 }
 
-func (r ApiDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.DeleteHiddenOffersExecute(r)
+func (r DbsDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.DeleteHiddenOffersExecute(r)
 }
 
 /*
@@ -2159,11 +2159,11 @@ DeleteHiddenOffers Возобновление показа товаров
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiDeleteHiddenOffersRequest
+	@return DbsDeleteHiddenOffersRequest
 */
-func (a *DbsAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) ApiDeleteHiddenOffersRequest {
-	return ApiDeleteHiddenOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) DbsDeleteHiddenOffersRequest {
+	return DbsDeleteHiddenOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -2172,7 +2172,7 @@ func (a *DbsAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) DeleteHiddenOffersExecute(r DbsDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2344,20 +2344,20 @@ func (a *DbsAPIService) DeleteHiddenOffersExecute(r ApiDeleteHiddenOffersRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOffersRequest struct {
+type DbsDeleteOffersRequest struct {
 	ctx                 context.Context
-	ApiService          *DbsAPIService
+	DbsService          *DbsAPIService
 	businessId          int64
 	deleteOffersRequest *DeleteOffersRequest
 }
 
-func (r ApiDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) ApiDeleteOffersRequest {
+func (r DbsDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) DbsDeleteOffersRequest {
 	r.deleteOffersRequest = &deleteOffersRequest
 	return r
 }
 
-func (r ApiDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
-	return r.ApiService.DeleteOffersExecute(r)
+func (r DbsDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
+	return r.DbsService.DeleteOffersExecute(r)
 }
 
 /*
@@ -2372,11 +2372,11 @@ DeleteOffers Удаление товаров из каталога
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiDeleteOffersRequest
+	@return DbsDeleteOffersRequest
 */
-func (a *DbsAPIService) DeleteOffers(ctx context.Context, businessId int64) ApiDeleteOffersRequest {
-	return ApiDeleteOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) DeleteOffers(ctx context.Context, businessId int64) DbsDeleteOffersRequest {
+	return DbsDeleteOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -2385,7 +2385,7 @@ func (a *DbsAPIService) DeleteOffers(ctx context.Context, businessId int64) ApiD
 // Execute executes the request
 //
 //	@return DeleteOffersResponse
-func (a *DbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) DeleteOffersExecute(r DbsDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2557,20 +2557,20 @@ func (a *DbsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOf
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOffersFromArchiveRequest struct {
+type DbsDeleteOffersFromArchiveRequest struct {
 	ctx                            context.Context
-	ApiService                     *DbsAPIService
+	DbsService                     *DbsAPIService
 	businessId                     int64
 	deleteOffersFromArchiveRequest *DeleteOffersFromArchiveRequest
 }
 
-func (r ApiDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) ApiDeleteOffersFromArchiveRequest {
+func (r DbsDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) DbsDeleteOffersFromArchiveRequest {
 	r.deleteOffersFromArchiveRequest = &deleteOffersFromArchiveRequest
 	return r
 }
 
-func (r ApiDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
-	return r.ApiService.DeleteOffersFromArchiveExecute(r)
+func (r DbsDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+	return r.DbsService.DeleteOffersFromArchiveExecute(r)
 }
 
 /*
@@ -2585,11 +2585,11 @@ DeleteOffersFromArchive Удаление товаров из архива
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiDeleteOffersFromArchiveRequest
+	@return DbsDeleteOffersFromArchiveRequest
 */
-func (a *DbsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) ApiDeleteOffersFromArchiveRequest {
-	return ApiDeleteOffersFromArchiveRequest{
-		ApiService: a,
+func (a *DbsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) DbsDeleteOffersFromArchiveRequest {
+	return DbsDeleteOffersFromArchiveRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -2598,7 +2598,7 @@ func (a *DbsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId 
 // Execute executes the request
 //
 //	@return DeleteOffersFromArchiveResponse
-func (a *DbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+func (a *DbsAPIService) DeleteOffersFromArchiveExecute(r DbsDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2770,15 +2770,15 @@ func (a *DbsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArch
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOutletRequest struct {
+type DbsDeleteOutletRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	outletId   int64
 }
 
-func (r ApiDeleteOutletRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.DeleteOutletExecute(r)
+func (r DbsDeleteOutletRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.DeleteOutletExecute(r)
 }
 
 /*
@@ -2794,11 +2794,11 @@ DeleteOutlet Удаление точки продаж
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param outletId Идентификатор точки продаж.
-	@return ApiDeleteOutletRequest
+	@return DbsDeleteOutletRequest
 */
-func (a *DbsAPIService) DeleteOutlet(ctx context.Context, campaignId int64, outletId int64) ApiDeleteOutletRequest {
-	return ApiDeleteOutletRequest{
-		ApiService: a,
+func (a *DbsAPIService) DeleteOutlet(ctx context.Context, campaignId int64, outletId int64) DbsDeleteOutletRequest {
+	return DbsDeleteOutletRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		outletId:   outletId,
@@ -2808,7 +2808,7 @@ func (a *DbsAPIService) DeleteOutlet(ctx context.Context, campaignId int64, outl
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) DeleteOutletExecute(r ApiDeleteOutletRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) DeleteOutletExecute(r DbsDeleteOutletRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
@@ -2968,21 +2968,21 @@ func (a *DbsAPIService) DeleteOutletExecute(r ApiDeleteOutletRequest) (*EmptyApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOutletLicensesRequest struct {
+type DbsDeleteOutletLicensesRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	ids        *[]int64
 }
 
 // Список идентификаторов лицензий для удаления.
-func (r ApiDeleteOutletLicensesRequest) Ids(ids []int64) ApiDeleteOutletLicensesRequest {
+func (r DbsDeleteOutletLicensesRequest) Ids(ids []int64) DbsDeleteOutletLicensesRequest {
 	r.ids = &ids
 	return r
 }
 
-func (r ApiDeleteOutletLicensesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.DeleteOutletLicensesExecute(r)
+func (r DbsDeleteOutletLicensesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.DeleteOutletLicensesExecute(r)
 }
 
 /*
@@ -2997,11 +2997,11 @@ DeleteOutletLicenses Удаление лицензий для точек про�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiDeleteOutletLicensesRequest
+	@return DbsDeleteOutletLicensesRequest
 */
-func (a *DbsAPIService) DeleteOutletLicenses(ctx context.Context, campaignId int64) ApiDeleteOutletLicensesRequest {
-	return ApiDeleteOutletLicensesRequest{
-		ApiService: a,
+func (a *DbsAPIService) DeleteOutletLicenses(ctx context.Context, campaignId int64) DbsDeleteOutletLicensesRequest {
+	return DbsDeleteOutletLicensesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -3010,7 +3010,7 @@ func (a *DbsAPIService) DeleteOutletLicenses(ctx context.Context, campaignId int
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) DeleteOutletLicensesExecute(r ApiDeleteOutletLicensesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) DeleteOutletLicensesExecute(r DbsDeleteOutletLicensesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodDelete
 		localVarPostBody    interface{}
@@ -3173,20 +3173,20 @@ func (a *DbsAPIService) DeleteOutletLicensesExecute(r ApiDeleteOutletLicensesReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeletePromoOffersRequest struct {
+type DbsDeletePromoOffersRequest struct {
 	ctx                      context.Context
-	ApiService               *DbsAPIService
+	DbsService               *DbsAPIService
 	businessId               int64
 	deletePromoOffersRequest *DeletePromoOffersRequest
 }
 
-func (r ApiDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) ApiDeletePromoOffersRequest {
+func (r DbsDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) DbsDeletePromoOffersRequest {
 	r.deletePromoOffersRequest = &deletePromoOffersRequest
 	return r
 }
 
-func (r ApiDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
-	return r.ApiService.DeletePromoOffersExecute(r)
+func (r DbsDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
+	return r.DbsService.DeletePromoOffersExecute(r)
 }
 
 /*
@@ -3203,11 +3203,11 @@ DeletePromoOffers Удаление товаров из акции
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiDeletePromoOffersRequest
+	@return DbsDeletePromoOffersRequest
 */
-func (a *DbsAPIService) DeletePromoOffers(ctx context.Context, businessId int64) ApiDeletePromoOffersRequest {
-	return ApiDeletePromoOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) DeletePromoOffers(ctx context.Context, businessId int64) DbsDeletePromoOffersRequest {
+	return DbsDeletePromoOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -3216,7 +3216,7 @@ func (a *DbsAPIService) DeletePromoOffers(ctx context.Context, businessId int64)
 // Execute executes the request
 //
 //	@return DeletePromoOffersResponse
-func (a *DbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) DeletePromoOffersExecute(r DbsDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3377,26 +3377,26 @@ func (a *DbsAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateBannersStatisticsReportRequest struct {
+type DbsGenerateBannersStatisticsReportRequest struct {
 	ctx                              context.Context
-	ApiService                       *DbsAPIService
+	DbsService                       *DbsAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
 	format                           *ReportFormatType
 }
 
-func (r ApiGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) ApiGenerateBannersStatisticsReportRequest {
+func (r DbsGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) DbsGenerateBannersStatisticsReportRequest {
 	r.generateBannersStatisticsRequest = &generateBannersStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) ApiGenerateBannersStatisticsReportRequest {
+func (r DbsGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) DbsGenerateBannersStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateBannersStatisticsReportExecute(r)
+func (r DbsGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateBannersStatisticsReportExecute(r)
 }
 
 /*
@@ -3414,11 +3414,11 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateBannersStatisticsReportRequest
+	@return DbsGenerateBannersStatisticsReportRequest
 */
-func (a *DbsAPIService) GenerateBannersStatisticsReport(ctx context.Context) ApiGenerateBannersStatisticsReportRequest {
-	return ApiGenerateBannersStatisticsReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateBannersStatisticsReport(ctx context.Context) DbsGenerateBannersStatisticsReportRequest {
+	return DbsGenerateBannersStatisticsReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -3426,7 +3426,7 @@ func (a *DbsAPIService) GenerateBannersStatisticsReport(ctx context.Context) Api
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateBannersStatisticsReportExecute(r DbsGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3578,26 +3578,26 @@ func (a *DbsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBann
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateBoostConsolidatedReportRequest struct {
+type DbsGenerateBoostConsolidatedReportRequest struct {
 	ctx                              context.Context
-	ApiService                       *DbsAPIService
+	DbsService                       *DbsAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
 	format                           *ReportFormatType
 }
 
-func (r ApiGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) ApiGenerateBoostConsolidatedReportRequest {
+func (r DbsGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) DbsGenerateBoostConsolidatedReportRequest {
 	r.generateBoostConsolidatedRequest = &generateBoostConsolidatedRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) ApiGenerateBoostConsolidatedReportRequest {
+func (r DbsGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) DbsGenerateBoostConsolidatedReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateBoostConsolidatedReportExecute(r)
+func (r DbsGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateBoostConsolidatedReportExecute(r)
 }
 
 /*
@@ -3617,11 +3617,11 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateBoostConsolidatedReportRequest
+	@return DbsGenerateBoostConsolidatedReportRequest
 */
-func (a *DbsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) ApiGenerateBoostConsolidatedReportRequest {
-	return ApiGenerateBoostConsolidatedReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) DbsGenerateBoostConsolidatedReportRequest {
+	return DbsGenerateBoostConsolidatedReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -3629,7 +3629,7 @@ func (a *DbsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) Api
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateBoostConsolidatedReportExecute(r DbsGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3781,26 +3781,26 @@ func (a *DbsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoos
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateCompetitorsPositionReportRequest struct {
+type DbsGenerateCompetitorsPositionReportRequest struct {
 	ctx                                      context.Context
-	ApiService                               *DbsAPIService
+	DbsService                               *DbsAPIService
 	generateCompetitorsPositionReportRequest *GenerateCompetitorsPositionReportRequest
 	format                                   *ReportFormatType
 }
 
-func (r ApiGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) ApiGenerateCompetitorsPositionReportRequest {
+func (r DbsGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) DbsGenerateCompetitorsPositionReportRequest {
 	r.generateCompetitorsPositionReportRequest = &generateCompetitorsPositionReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) ApiGenerateCompetitorsPositionReportRequest {
+func (r DbsGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) DbsGenerateCompetitorsPositionReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateCompetitorsPositionReportExecute(r)
+func (r DbsGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateCompetitorsPositionReportExecute(r)
 }
 
 /*
@@ -3824,11 +3824,11 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateCompetitorsPositionReportRequest
+	@return DbsGenerateCompetitorsPositionReportRequest
 */
-func (a *DbsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) ApiGenerateCompetitorsPositionReportRequest {
-	return ApiGenerateCompetitorsPositionReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) DbsGenerateCompetitorsPositionReportRequest {
+	return DbsGenerateCompetitorsPositionReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -3836,7 +3836,7 @@ func (a *DbsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) A
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateCompetitorsPositionReportExecute(r DbsGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3988,26 +3988,26 @@ func (a *DbsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsFeedbackReportRequest struct {
+type DbsGenerateGoodsFeedbackReportRequest struct {
 	ctx                          context.Context
-	ApiService                   *DbsAPIService
+	DbsService                   *DbsAPIService
 	generateGoodsFeedbackRequest *GenerateGoodsFeedbackRequest
 	format                       *ReportFormatType
 }
 
-func (r ApiGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) ApiGenerateGoodsFeedbackReportRequest {
+func (r DbsGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) DbsGenerateGoodsFeedbackReportRequest {
 	r.generateGoodsFeedbackRequest = &generateGoodsFeedbackRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) ApiGenerateGoodsFeedbackReportRequest {
+func (r DbsGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) DbsGenerateGoodsFeedbackReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateGoodsFeedbackReportExecute(r)
+func (r DbsGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateGoodsFeedbackReportExecute(r)
 }
 
 /*
@@ -4025,11 +4025,11 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateGoodsFeedbackReportRequest
+	@return DbsGenerateGoodsFeedbackReportRequest
 */
-func (a *DbsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ApiGenerateGoodsFeedbackReportRequest {
-	return ApiGenerateGoodsFeedbackReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) DbsGenerateGoodsFeedbackReportRequest {
+	return DbsGenerateGoodsFeedbackReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -4037,7 +4037,7 @@ func (a *DbsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ApiGene
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateGoodsFeedbackReportExecute(r DbsGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4189,26 +4189,26 @@ func (a *DbsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFee
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsRealizationReportRequest struct {
+type DbsGenerateGoodsRealizationReportRequest struct {
 	ctx                                   context.Context
-	ApiService                            *DbsAPIService
+	DbsService                            *DbsAPIService
 	generateGoodsRealizationReportRequest *GenerateGoodsRealizationReportRequest
 	format                                *ReportFormatType
 }
 
-func (r ApiGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) ApiGenerateGoodsRealizationReportRequest {
+func (r DbsGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) DbsGenerateGoodsRealizationReportRequest {
 	r.generateGoodsRealizationReportRequest = &generateGoodsRealizationReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) ApiGenerateGoodsRealizationReportRequest {
+func (r DbsGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) DbsGenerateGoodsRealizationReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateGoodsRealizationReportExecute(r)
+func (r DbsGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateGoodsRealizationReportExecute(r)
 }
 
 /*
@@ -4236,11 +4236,11 @@ GenerateGoodsRealizationReport Отчет по реализации
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateGoodsRealizationReportRequest
+	@return DbsGenerateGoodsRealizationReportRequest
 */
-func (a *DbsAPIService) GenerateGoodsRealizationReport(ctx context.Context) ApiGenerateGoodsRealizationReportRequest {
-	return ApiGenerateGoodsRealizationReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateGoodsRealizationReport(ctx context.Context) DbsGenerateGoodsRealizationReportRequest {
+	return DbsGenerateGoodsRealizationReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -4248,7 +4248,7 @@ func (a *DbsAPIService) GenerateGoodsRealizationReport(ctx context.Context) ApiG
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateGoodsRealizationReportExecute(r DbsGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4400,26 +4400,26 @@ func (a *DbsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoods
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateJewelryFiscalReportRequest struct {
+type DbsGenerateJewelryFiscalReportRequest struct {
 	ctx                                context.Context
-	ApiService                         *DbsAPIService
+	DbsService                         *DbsAPIService
 	generateJewelryFiscalReportRequest *GenerateJewelryFiscalReportRequest
 	format                             *ReportFormatType
 }
 
-func (r ApiGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) ApiGenerateJewelryFiscalReportRequest {
+func (r DbsGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) DbsGenerateJewelryFiscalReportRequest {
 	r.generateJewelryFiscalReportRequest = &generateJewelryFiscalReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) ApiGenerateJewelryFiscalReportRequest {
+func (r DbsGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) DbsGenerateJewelryFiscalReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateJewelryFiscalReportExecute(r)
+func (r DbsGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateJewelryFiscalReportExecute(r)
 }
 
 /*
@@ -4437,11 +4437,11 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateJewelryFiscalReportRequest
+	@return DbsGenerateJewelryFiscalReportRequest
 */
-func (a *DbsAPIService) GenerateJewelryFiscalReport(ctx context.Context) ApiGenerateJewelryFiscalReportRequest {
-	return ApiGenerateJewelryFiscalReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateJewelryFiscalReport(ctx context.Context) DbsGenerateJewelryFiscalReportRequest {
+	return DbsGenerateJewelryFiscalReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -4449,7 +4449,7 @@ func (a *DbsAPIService) GenerateJewelryFiscalReport(ctx context.Context) ApiGene
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateJewelryFiscalReportExecute(r DbsGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4601,26 +4601,26 @@ func (a *DbsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryF
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateMassOrderLabelsReportRequest struct {
+type DbsGenerateMassOrderLabelsReportRequest struct {
 	ctx                            context.Context
-	ApiService                     *DbsAPIService
+	DbsService                     *DbsAPIService
 	generateMassOrderLabelsRequest *GenerateMassOrderLabelsRequest
 	format                         *PageFormatType
 }
 
-func (r ApiGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) ApiGenerateMassOrderLabelsReportRequest {
+func (r DbsGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) DbsGenerateMassOrderLabelsReportRequest {
 	r.generateMassOrderLabelsRequest = &generateMassOrderLabelsRequest
 	return r
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) ApiGenerateMassOrderLabelsReportRequest {
+func (r DbsGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) DbsGenerateMassOrderLabelsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateMassOrderLabelsReportExecute(r)
+func (r DbsGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateMassOrderLabelsReportExecute(r)
 }
 
 /*
@@ -4636,11 +4636,11 @@ GenerateMassOrderLabelsReport Готовые ярлыки‑наклейки н�
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateMassOrderLabelsReportRequest
+	@return DbsGenerateMassOrderLabelsReportRequest
 */
-func (a *DbsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ApiGenerateMassOrderLabelsReportRequest {
-	return ApiGenerateMassOrderLabelsReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) DbsGenerateMassOrderLabelsReportRequest {
+	return DbsGenerateMassOrderLabelsReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -4648,7 +4648,7 @@ func (a *DbsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ApiGe
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateMassOrderLabelsReportExecute(r DbsGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4797,9 +4797,9 @@ func (a *DbsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateOrderLabelRequest struct {
+type DbsGenerateOrderLabelRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 	shipmentId int64
@@ -4808,13 +4808,13 @@ type ApiGenerateOrderLabelRequest struct {
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateOrderLabelRequest) Format(format PageFormatType) ApiGenerateOrderLabelRequest {
+func (r DbsGenerateOrderLabelRequest) Format(format PageFormatType) DbsGenerateOrderLabelRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateOrderLabelRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GenerateOrderLabelExecute(r)
+func (r DbsGenerateOrderLabelRequest) Execute() (*os.File, *http.Response, error) {
+	return r.DbsService.GenerateOrderLabelExecute(r)
 }
 
 /*
@@ -4832,11 +4832,11 @@ GenerateOrderLabel Готовый ярлык‑наклейка для коро�
 	@param orderId Идентификатор заказа.
 	@param shipmentId Идентификатор грузоместа.
 	@param boxId Идентификатор коробки.
-	@return ApiGenerateOrderLabelRequest
+	@return DbsGenerateOrderLabelRequest
 */
-func (a *DbsAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) ApiGenerateOrderLabelRequest {
-	return ApiGenerateOrderLabelRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) DbsGenerateOrderLabelRequest {
+	return DbsGenerateOrderLabelRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -4848,7 +4848,7 @@ func (a *DbsAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64
 // Execute executes the request
 //
 //	@return *os.File
-func (a *DbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest) (*os.File, *http.Response, error) {
+func (a *DbsAPIService) GenerateOrderLabelExecute(r DbsGenerateOrderLabelRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -5010,22 +5010,22 @@ func (a *DbsAPIService) GenerateOrderLabelExecute(r ApiGenerateOrderLabelRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateOrderLabelsRequest struct {
+type DbsGenerateOrderLabelsRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 	format     *PageFormatType
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateOrderLabelsRequest) Format(format PageFormatType) ApiGenerateOrderLabelsRequest {
+func (r DbsGenerateOrderLabelsRequest) Format(format PageFormatType) DbsGenerateOrderLabelsRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateOrderLabelsRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GenerateOrderLabelsExecute(r)
+func (r DbsGenerateOrderLabelsRequest) Execute() (*os.File, *http.Response, error) {
+	return r.DbsService.GenerateOrderLabelsExecute(r)
 }
 
 /*
@@ -5043,11 +5043,11 @@ GenerateOrderLabels Готовые ярлыки‑наклейки на все �
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiGenerateOrderLabelsRequest
+	@return DbsGenerateOrderLabelsRequest
 */
-func (a *DbsAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) ApiGenerateOrderLabelsRequest {
-	return ApiGenerateOrderLabelsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) DbsGenerateOrderLabelsRequest {
+	return DbsGenerateOrderLabelsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -5057,7 +5057,7 @@ func (a *DbsAPIService) GenerateOrderLabels(ctx context.Context, campaignId int6
 // Execute executes the request
 //
 //	@return *os.File
-func (a *DbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsRequest) (*os.File, *http.Response, error) {
+func (a *DbsAPIService) GenerateOrderLabelsExecute(r DbsGenerateOrderLabelsRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -5217,26 +5217,26 @@ func (a *DbsAPIService) GenerateOrderLabelsExecute(r ApiGenerateOrderLabelsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratePricesReportRequest struct {
+type DbsGeneratePricesReportRequest struct {
 	ctx                         context.Context
-	ApiService                  *DbsAPIService
+	DbsService                  *DbsAPIService
 	generatePricesReportRequest *GeneratePricesReportRequest
 	format                      *ReportFormatType
 }
 
-func (r ApiGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) ApiGeneratePricesReportRequest {
+func (r DbsGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) DbsGeneratePricesReportRequest {
 	r.generatePricesReportRequest = &generatePricesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGeneratePricesReportRequest) Format(format ReportFormatType) ApiGeneratePricesReportRequest {
+func (r DbsGeneratePricesReportRequest) Format(format ReportFormatType) DbsGeneratePricesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GeneratePricesReportExecute(r)
+func (r DbsGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GeneratePricesReportExecute(r)
 }
 
 /*
@@ -5262,11 +5262,11 @@ GeneratePricesReport Отчет «Цены на рынке»
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGeneratePricesReportRequest
+	@return DbsGeneratePricesReportRequest
 */
-func (a *DbsAPIService) GeneratePricesReport(ctx context.Context) ApiGeneratePricesReportRequest {
-	return ApiGeneratePricesReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GeneratePricesReport(ctx context.Context) DbsGeneratePricesReportRequest {
+	return DbsGeneratePricesReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -5274,7 +5274,7 @@ func (a *DbsAPIService) GeneratePricesReport(ctx context.Context) ApiGeneratePri
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GeneratePricesReportExecute(r DbsGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -5426,26 +5426,26 @@ func (a *DbsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateSalesGeographyReportRequest struct {
+type DbsGenerateSalesGeographyReportRequest struct {
 	ctx                           context.Context
-	ApiService                    *DbsAPIService
+	DbsService                    *DbsAPIService
 	generateSalesGeographyRequest *GenerateSalesGeographyRequest
 	format                        *ReportFormatType
 }
 
-func (r ApiGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) ApiGenerateSalesGeographyReportRequest {
+func (r DbsGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) DbsGenerateSalesGeographyReportRequest {
 	r.generateSalesGeographyRequest = &generateSalesGeographyRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateSalesGeographyReportRequest) Format(format ReportFormatType) ApiGenerateSalesGeographyReportRequest {
+func (r DbsGenerateSalesGeographyReportRequest) Format(format ReportFormatType) DbsGenerateSalesGeographyReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateSalesGeographyReportExecute(r)
+func (r DbsGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateSalesGeographyReportExecute(r)
 }
 
 /*
@@ -5463,11 +5463,11 @@ GenerateSalesGeographyReport Отчет по географии продаж
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateSalesGeographyReportRequest
+	@return DbsGenerateSalesGeographyReportRequest
 */
-func (a *DbsAPIService) GenerateSalesGeographyReport(ctx context.Context) ApiGenerateSalesGeographyReportRequest {
-	return ApiGenerateSalesGeographyReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateSalesGeographyReport(ctx context.Context) DbsGenerateSalesGeographyReportRequest {
+	return DbsGenerateSalesGeographyReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -5475,7 +5475,7 @@ func (a *DbsAPIService) GenerateSalesGeographyReport(ctx context.Context) ApiGen
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateSalesGeographyReportExecute(r DbsGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -5627,26 +5627,26 @@ func (a *DbsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShelfsStatisticsReportRequest struct {
+type DbsGenerateShelfsStatisticsReportRequest struct {
 	ctx                             context.Context
-	ApiService                      *DbsAPIService
+	DbsService                      *DbsAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
 	format                          *ReportFormatType
 }
 
-func (r ApiGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) ApiGenerateShelfsStatisticsReportRequest {
+func (r DbsGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) DbsGenerateShelfsStatisticsReportRequest {
 	r.generateShelfsStatisticsRequest = &generateShelfsStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) ApiGenerateShelfsStatisticsReportRequest {
+func (r DbsGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) DbsGenerateShelfsStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShelfsStatisticsReportExecute(r)
+func (r DbsGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateShelfsStatisticsReportExecute(r)
 }
 
 /*
@@ -5664,11 +5664,11 @@ GenerateShelfsStatisticsReport Отчет по полкам
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateShelfsStatisticsReportRequest
+	@return DbsGenerateShelfsStatisticsReportRequest
 */
-func (a *DbsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ApiGenerateShelfsStatisticsReportRequest {
-	return ApiGenerateShelfsStatisticsReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) DbsGenerateShelfsStatisticsReportRequest {
+	return DbsGenerateShelfsStatisticsReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -5676,7 +5676,7 @@ func (a *DbsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ApiG
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateShelfsStatisticsReportExecute(r DbsGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -5828,26 +5828,26 @@ func (a *DbsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelf
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShowsBoostReportRequest struct {
+type DbsGenerateShowsBoostReportRequest struct {
 	ctx                       context.Context
-	ApiService                *DbsAPIService
+	DbsService                *DbsAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
 	format                    *ReportFormatType
 }
 
-func (r ApiGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) ApiGenerateShowsBoostReportRequest {
+func (r DbsGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) DbsGenerateShowsBoostReportRequest {
 	r.generateShowsBoostRequest = &generateShowsBoostRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShowsBoostReportRequest) Format(format ReportFormatType) ApiGenerateShowsBoostReportRequest {
+func (r DbsGenerateShowsBoostReportRequest) Format(format ReportFormatType) DbsGenerateShowsBoostReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShowsBoostReportExecute(r)
+func (r DbsGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateShowsBoostReportExecute(r)
 }
 
 /*
@@ -5865,11 +5865,11 @@ GenerateShowsBoostReport Отчет по бусту показов
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateShowsBoostReportRequest
+	@return DbsGenerateShowsBoostReportRequest
 */
-func (a *DbsAPIService) GenerateShowsBoostReport(ctx context.Context) ApiGenerateShowsBoostReportRequest {
-	return ApiGenerateShowsBoostReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateShowsBoostReport(ctx context.Context) DbsGenerateShowsBoostReportRequest {
+	return DbsGenerateShowsBoostReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -5877,7 +5877,7 @@ func (a *DbsAPIService) GenerateShowsBoostReport(ctx context.Context) ApiGenerat
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateShowsBoostReportExecute(r DbsGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6029,26 +6029,26 @@ func (a *DbsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShowsSalesReportRequest struct {
+type DbsGenerateShowsSalesReportRequest struct {
 	ctx                             context.Context
-	ApiService                      *DbsAPIService
+	DbsService                      *DbsAPIService
 	generateShowsSalesReportRequest *GenerateShowsSalesReportRequest
 	format                          *ReportFormatType
 }
 
-func (r ApiGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) ApiGenerateShowsSalesReportRequest {
+func (r DbsGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) DbsGenerateShowsSalesReportRequest {
 	r.generateShowsSalesReportRequest = &generateShowsSalesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShowsSalesReportRequest) Format(format ReportFormatType) ApiGenerateShowsSalesReportRequest {
+func (r DbsGenerateShowsSalesReportRequest) Format(format ReportFormatType) DbsGenerateShowsSalesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateShowsSalesReportExecute(r)
+func (r DbsGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateShowsSalesReportExecute(r)
 }
 
 /*
@@ -6066,11 +6066,11 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateShowsSalesReportRequest
+	@return DbsGenerateShowsSalesReportRequest
 */
-func (a *DbsAPIService) GenerateShowsSalesReport(ctx context.Context) ApiGenerateShowsSalesReportRequest {
-	return ApiGenerateShowsSalesReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateShowsSalesReport(ctx context.Context) DbsGenerateShowsSalesReportRequest {
+	return DbsGenerateShowsSalesReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -6078,7 +6078,7 @@ func (a *DbsAPIService) GenerateShowsSalesReport(ctx context.Context) ApiGenerat
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateShowsSalesReportExecute(r DbsGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6230,26 +6230,26 @@ func (a *DbsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateStocksOnWarehousesReportRequest struct {
+type DbsGenerateStocksOnWarehousesReportRequest struct {
 	ctx                                     context.Context
-	ApiService                              *DbsAPIService
+	DbsService                              *DbsAPIService
 	generateStocksOnWarehousesReportRequest *GenerateStocksOnWarehousesReportRequest
 	format                                  *ReportFormatType
 }
 
-func (r ApiGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) ApiGenerateStocksOnWarehousesReportRequest {
+func (r DbsGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) DbsGenerateStocksOnWarehousesReportRequest {
 	r.generateStocksOnWarehousesReportRequest = &generateStocksOnWarehousesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) ApiGenerateStocksOnWarehousesReportRequest {
+func (r DbsGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) DbsGenerateStocksOnWarehousesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateStocksOnWarehousesReportExecute(r)
+func (r DbsGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateStocksOnWarehousesReportExecute(r)
 }
 
 /*
@@ -6272,11 +6272,11 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateStocksOnWarehousesReportRequest
+	@return DbsGenerateStocksOnWarehousesReportRequest
 */
-func (a *DbsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) ApiGenerateStocksOnWarehousesReportRequest {
-	return ApiGenerateStocksOnWarehousesReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) DbsGenerateStocksOnWarehousesReportRequest {
+	return DbsGenerateStocksOnWarehousesReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -6284,7 +6284,7 @@ func (a *DbsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) Ap
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateStocksOnWarehousesReportExecute(r DbsGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6436,33 +6436,33 @@ func (a *DbsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateSto
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedMarketplaceServicesReportRequest struct {
+type DbsGenerateUnitedMarketplaceServicesReportRequest struct {
 	ctx                                            context.Context
-	ApiService                                     *DbsAPIService
+	DbsService                                     *DbsAPIService
 	generateUnitedMarketplaceServicesReportRequest *GenerateUnitedMarketplaceServicesReportRequest
 	format                                         *ReportFormatType
 	language                                       *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r DbsGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) DbsGenerateUnitedMarketplaceServicesReportRequest {
 	r.generateUnitedMarketplaceServicesReportRequest = &generateUnitedMarketplaceServicesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r DbsGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) DbsGenerateUnitedMarketplaceServicesReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r DbsGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) DbsGenerateUnitedMarketplaceServicesReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedMarketplaceServicesReportExecute(r)
+func (r DbsGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateUnitedMarketplaceServicesReportExecute(r)
 }
 
 /*
@@ -6489,11 +6489,11 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateUnitedMarketplaceServicesReportRequest
+	@return DbsGenerateUnitedMarketplaceServicesReportRequest
 */
-func (a *DbsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) ApiGenerateUnitedMarketplaceServicesReportRequest {
-	return ApiGenerateUnitedMarketplaceServicesReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) DbsGenerateUnitedMarketplaceServicesReportRequest {
+	return DbsGenerateUnitedMarketplaceServicesReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -6501,7 +6501,7 @@ func (a *DbsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Cont
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r DbsGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6656,33 +6656,33 @@ func (a *DbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGene
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedNettingReportRequest struct {
+type DbsGenerateUnitedNettingReportRequest struct {
 	ctx                                context.Context
-	ApiService                         *DbsAPIService
+	DbsService                         *DbsAPIService
 	generateUnitedNettingReportRequest *GenerateUnitedNettingReportRequest
 	format                             *ReportFormatType
 	language                           *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) ApiGenerateUnitedNettingReportRequest {
+func (r DbsGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) DbsGenerateUnitedNettingReportRequest {
 	r.generateUnitedNettingReportRequest = &generateUnitedNettingReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedNettingReportRequest) Format(format ReportFormatType) ApiGenerateUnitedNettingReportRequest {
+func (r DbsGenerateUnitedNettingReportRequest) Format(format ReportFormatType) DbsGenerateUnitedNettingReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedNettingReportRequest {
+func (r DbsGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) DbsGenerateUnitedNettingReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedNettingReportExecute(r)
+func (r DbsGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateUnitedNettingReportExecute(r)
 }
 
 /*
@@ -6711,11 +6711,11 @@ GenerateUnitedNettingReport Отчет по платежам
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateUnitedNettingReportRequest
+	@return DbsGenerateUnitedNettingReportRequest
 */
-func (a *DbsAPIService) GenerateUnitedNettingReport(ctx context.Context) ApiGenerateUnitedNettingReportRequest {
-	return ApiGenerateUnitedNettingReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateUnitedNettingReport(ctx context.Context) DbsGenerateUnitedNettingReportRequest {
+	return DbsGenerateUnitedNettingReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -6723,7 +6723,7 @@ func (a *DbsAPIService) GenerateUnitedNettingReport(ctx context.Context) ApiGene
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateUnitedNettingReportExecute(r DbsGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6878,33 +6878,33 @@ func (a *DbsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedOrdersReportRequest struct {
+type DbsGenerateUnitedOrdersReportRequest struct {
 	ctx                         context.Context
-	ApiService                  *DbsAPIService
+	DbsService                  *DbsAPIService
 	generateUnitedOrdersRequest *GenerateUnitedOrdersRequest
 	format                      *ReportFormatType
 	language                    *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) ApiGenerateUnitedOrdersReportRequest {
+func (r DbsGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) DbsGenerateUnitedOrdersReportRequest {
 	r.generateUnitedOrdersRequest = &generateUnitedOrdersRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) ApiGenerateUnitedOrdersReportRequest {
+func (r DbsGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) DbsGenerateUnitedOrdersReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedOrdersReportRequest {
+func (r DbsGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) DbsGenerateUnitedOrdersReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedOrdersReportExecute(r)
+func (r DbsGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateUnitedOrdersReportExecute(r)
 }
 
 /*
@@ -6922,11 +6922,11 @@ GenerateUnitedOrdersReport Отчет по заказам
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateUnitedOrdersReportRequest
+	@return DbsGenerateUnitedOrdersReportRequest
 */
-func (a *DbsAPIService) GenerateUnitedOrdersReport(ctx context.Context) ApiGenerateUnitedOrdersReportRequest {
-	return ApiGenerateUnitedOrdersReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateUnitedOrdersReport(ctx context.Context) DbsGenerateUnitedOrdersReportRequest {
+	return DbsGenerateUnitedOrdersReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -6934,7 +6934,7 @@ func (a *DbsAPIService) GenerateUnitedOrdersReport(ctx context.Context) ApiGener
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateUnitedOrdersReportExecute(r DbsGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7089,26 +7089,26 @@ func (a *DbsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrd
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedReturnsReportRequest struct {
+type DbsGenerateUnitedReturnsReportRequest struct {
 	ctx                          context.Context
-	ApiService                   *DbsAPIService
+	DbsService                   *DbsAPIService
 	generateUnitedReturnsRequest *GenerateUnitedReturnsRequest
 	format                       *ReportFormatType
 }
 
-func (r ApiGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) ApiGenerateUnitedReturnsReportRequest {
+func (r DbsGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) DbsGenerateUnitedReturnsReportRequest {
 	r.generateUnitedReturnsRequest = &generateUnitedReturnsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) ApiGenerateUnitedReturnsReportRequest {
+func (r DbsGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) DbsGenerateUnitedReturnsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.ApiService.GenerateUnitedReturnsReportExecute(r)
+func (r DbsGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.DbsService.GenerateUnitedReturnsReportExecute(r)
 }
 
 /*
@@ -7128,11 +7128,11 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateUnitedReturnsReportRequest
+	@return DbsGenerateUnitedReturnsReportRequest
 */
-func (a *DbsAPIService) GenerateUnitedReturnsReport(ctx context.Context) ApiGenerateUnitedReturnsReportRequest {
-	return ApiGenerateUnitedReturnsReportRequest{
-		ApiService: a,
+func (a *DbsAPIService) GenerateUnitedReturnsReport(ctx context.Context) DbsGenerateUnitedReturnsReportRequest {
+	return DbsGenerateUnitedReturnsReportRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -7140,7 +7140,7 @@ func (a *DbsAPIService) GenerateUnitedReturnsReport(ctx context.Context) ApiGene
 // Execute executes the request
 //
 //	@return GenerateReportResponse
-func (a *DbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+func (a *DbsAPIService) GenerateUnitedReturnsReportExecute(r DbsGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7292,13 +7292,13 @@ func (a *DbsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetAuthTokenInfoRequest struct {
+type DbsGetAuthTokenInfoRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 }
 
-func (r ApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
-	return r.ApiService.GetAuthTokenInfoExecute(r)
+func (r DbsGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+	return r.DbsService.GetAuthTokenInfoExecute(r)
 }
 
 /*
@@ -7316,11 +7316,11 @@ GetAuthTokenInfo Получение информации об авторизац
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetAuthTokenInfoRequest
+	@return DbsGetAuthTokenInfoRequest
 */
-func (a *DbsAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInfoRequest {
-	return ApiGetAuthTokenInfoRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetAuthTokenInfo(ctx context.Context) DbsGetAuthTokenInfoRequest {
+	return DbsGetAuthTokenInfoRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -7328,7 +7328,7 @@ func (a *DbsAPIService) GetAuthTokenInfo(ctx context.Context) ApiGetAuthTokenInf
 // Execute executes the request
 //
 //	@return GetTokenInfoResponse
-func (a *DbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+func (a *DbsAPIService) GetAuthTokenInfoExecute(r DbsGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7469,9 +7469,9 @@ func (a *DbsAPIService) GetAuthTokenInfoExecute(r ApiGetAuthTokenInfoRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBidsInfoForBusinessRequest struct {
+type DbsGetBidsInfoForBusinessRequest struct {
 	ctx                context.Context
-	ApiService         *DbsAPIService
+	DbsService         *DbsAPIService
 	businessId         int64
 	pageToken          *string
 	limit              *int32
@@ -7479,25 +7479,25 @@ type ApiGetBidsInfoForBusinessRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetBidsInfoForBusinessRequest) PageToken(pageToken string) ApiGetBidsInfoForBusinessRequest {
+func (r DbsGetBidsInfoForBusinessRequest) PageToken(pageToken string) DbsGetBidsInfoForBusinessRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetBidsInfoForBusinessRequest) Limit(limit int32) ApiGetBidsInfoForBusinessRequest {
+func (r DbsGetBidsInfoForBusinessRequest) Limit(limit int32) DbsGetBidsInfoForBusinessRequest {
 	r.limit = &limit
 	return r
 }
 
 // description
-func (r ApiGetBidsInfoForBusinessRequest) GetBidsInfoRequest(getBidsInfoRequest GetBidsInfoRequest) ApiGetBidsInfoForBusinessRequest {
+func (r DbsGetBidsInfoForBusinessRequest) GetBidsInfoRequest(getBidsInfoRequest GetBidsInfoRequest) DbsGetBidsInfoForBusinessRequest {
 	r.getBidsInfoRequest = &getBidsInfoRequest
 	return r
 }
 
-func (r ApiGetBidsInfoForBusinessRequest) Execute() (*GetBidsInfoResponse, *http.Response, error) {
-	return r.ApiService.GetBidsInfoForBusinessExecute(r)
+func (r DbsGetBidsInfoForBusinessRequest) Execute() (*GetBidsInfoResponse, *http.Response, error) {
+	return r.DbsService.GetBidsInfoForBusinessExecute(r)
 }
 
 /*
@@ -7520,11 +7520,11 @@ GetBidsInfoForBusiness Информация об установленных ст
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetBidsInfoForBusinessRequest
+	@return DbsGetBidsInfoForBusinessRequest
 */
-func (a *DbsAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) ApiGetBidsInfoForBusinessRequest {
-	return ApiGetBidsInfoForBusinessRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) DbsGetBidsInfoForBusinessRequest {
+	return DbsGetBidsInfoForBusinessRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -7533,7 +7533,7 @@ func (a *DbsAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId i
 // Execute executes the request
 //
 //	@return GetBidsInfoResponse
-func (a *DbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusinessRequest) (*GetBidsInfoResponse, *http.Response, error) {
+func (a *DbsAPIService) GetBidsInfoForBusinessExecute(r DbsGetBidsInfoForBusinessRequest) (*GetBidsInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7697,21 +7697,21 @@ func (a *DbsAPIService) GetBidsInfoForBusinessExecute(r ApiGetBidsInfoForBusines
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBidsRecommendationsRequest struct {
+type DbsGetBidsRecommendationsRequest struct {
 	ctx                           context.Context
-	ApiService                    *DbsAPIService
+	DbsService                    *DbsAPIService
 	businessId                    int64
 	getBidsRecommendationsRequest *GetBidsRecommendationsRequest
 }
 
 // description.
-func (r ApiGetBidsRecommendationsRequest) GetBidsRecommendationsRequest(getBidsRecommendationsRequest GetBidsRecommendationsRequest) ApiGetBidsRecommendationsRequest {
+func (r DbsGetBidsRecommendationsRequest) GetBidsRecommendationsRequest(getBidsRecommendationsRequest GetBidsRecommendationsRequest) DbsGetBidsRecommendationsRequest {
 	r.getBidsRecommendationsRequest = &getBidsRecommendationsRequest
 	return r
 }
 
-func (r ApiGetBidsRecommendationsRequest) Execute() (*GetBidsRecommendationsResponse, *http.Response, error) {
-	return r.ApiService.GetBidsRecommendationsExecute(r)
+func (r DbsGetBidsRecommendationsRequest) Execute() (*GetBidsRecommendationsResponse, *http.Response, error) {
+	return r.DbsService.GetBidsRecommendationsExecute(r)
 }
 
 /*
@@ -7732,11 +7732,11 @@ GetBidsRecommendations Рекомендованные ставки для зад
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetBidsRecommendationsRequest
+	@return DbsGetBidsRecommendationsRequest
 */
-func (a *DbsAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) ApiGetBidsRecommendationsRequest {
-	return ApiGetBidsRecommendationsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) DbsGetBidsRecommendationsRequest {
+	return DbsGetBidsRecommendationsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -7745,7 +7745,7 @@ func (a *DbsAPIService) GetBidsRecommendations(ctx context.Context, businessId i
 // Execute executes the request
 //
 //	@return GetBidsRecommendationsResponse
-func (a *DbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendationsRequest) (*GetBidsRecommendationsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetBidsRecommendationsExecute(r DbsGetBidsRecommendationsRequest) (*GetBidsRecommendationsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7906,34 +7906,34 @@ func (a *DbsAPIService) GetBidsRecommendationsExecute(r ApiGetBidsRecommendation
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBusinessQuarantineOffersRequest struct {
+type DbsGetBusinessQuarantineOffersRequest struct {
 	ctx                        context.Context
-	ApiService                 *DbsAPIService
+	DbsService                 *DbsAPIService
 	businessId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
 	pageToken                  *string
 	limit                      *int32
 }
 
-func (r ApiGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ApiGetBusinessQuarantineOffersRequest {
+func (r DbsGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) DbsGetBusinessQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetBusinessQuarantineOffersRequest) PageToken(pageToken string) ApiGetBusinessQuarantineOffersRequest {
+func (r DbsGetBusinessQuarantineOffersRequest) PageToken(pageToken string) DbsGetBusinessQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetBusinessQuarantineOffersRequest) Limit(limit int32) ApiGetBusinessQuarantineOffersRequest {
+func (r DbsGetBusinessQuarantineOffersRequest) Limit(limit int32) DbsGetBusinessQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
-	return r.ApiService.GetBusinessQuarantineOffersExecute(r)
+func (r DbsGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+	return r.DbsService.GetBusinessQuarantineOffersExecute(r)
 }
 
 /*
@@ -7960,11 +7960,11 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetBusinessQuarantineOffersRequest
+	@return DbsGetBusinessQuarantineOffersRequest
 */
-func (a *DbsAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) ApiGetBusinessQuarantineOffersRequest {
-	return ApiGetBusinessQuarantineOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) DbsGetBusinessQuarantineOffersRequest {
+	return DbsGetBusinessQuarantineOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -7973,7 +7973,7 @@ func (a *DbsAPIService) GetBusinessQuarantineOffers(ctx context.Context, busines
 // Execute executes the request
 //
 //	@return GetQuarantineOffersResponse
-func (a *DbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetBusinessQuarantineOffersExecute(r DbsGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8140,14 +8140,14 @@ func (a *DbsAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuara
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBusinessSettingsRequest struct {
+type DbsGetBusinessSettingsRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	businessId int64
 }
 
-func (r ApiGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
-	return r.ApiService.GetBusinessSettingsExecute(r)
+func (r DbsGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
+	return r.DbsService.GetBusinessSettingsExecute(r)
 }
 
 /*
@@ -8161,11 +8161,11 @@ GetBusinessSettings Настройки кабинета
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetBusinessSettingsRequest
+	@return DbsGetBusinessSettingsRequest
 */
-func (a *DbsAPIService) GetBusinessSettings(ctx context.Context, businessId int64) ApiGetBusinessSettingsRequest {
-	return ApiGetBusinessSettingsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetBusinessSettings(ctx context.Context, businessId int64) DbsGetBusinessSettingsRequest {
+	return DbsGetBusinessSettingsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -8174,7 +8174,7 @@ func (a *DbsAPIService) GetBusinessSettings(ctx context.Context, businessId int6
 // Execute executes the request
 //
 //	@return GetBusinessSettingsResponse
-func (a *DbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetBusinessSettingsExecute(r DbsGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8330,14 +8330,14 @@ func (a *DbsAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignRequest struct {
+type DbsGetCampaignRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignExecute(r)
+func (r DbsGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
+	return r.DbsService.GetCampaignExecute(r)
 }
 
 /*
@@ -8351,11 +8351,11 @@ GetCampaign Информация о магазине
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignRequest
+	@return DbsGetCampaignRequest
 */
-func (a *DbsAPIService) GetCampaign(ctx context.Context, campaignId int64) ApiGetCampaignRequest {
-	return ApiGetCampaignRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCampaign(ctx context.Context, campaignId int64) DbsGetCampaignRequest {
+	return DbsGetCampaignRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -8364,7 +8364,7 @@ func (a *DbsAPIService) GetCampaign(ctx context.Context, campaignId int64) ApiGe
 // Execute executes the request
 //
 //	@return GetCampaignResponse
-func (a *DbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCampaignExecute(r DbsGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -8520,34 +8520,34 @@ func (a *DbsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaig
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignOffersRequest struct {
+type DbsGetCampaignOffersRequest struct {
 	ctx                      context.Context
-	ApiService               *DbsAPIService
+	DbsService               *DbsAPIService
 	campaignId               int64
 	getCampaignOffersRequest *GetCampaignOffersRequest
 	pageToken                *string
 	limit                    *int32
 }
 
-func (r ApiGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) ApiGetCampaignOffersRequest {
+func (r DbsGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) DbsGetCampaignOffersRequest {
 	r.getCampaignOffersRequest = &getCampaignOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetCampaignOffersRequest) PageToken(pageToken string) ApiGetCampaignOffersRequest {
+func (r DbsGetCampaignOffersRequest) PageToken(pageToken string) DbsGetCampaignOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetCampaignOffersRequest) Limit(limit int32) ApiGetCampaignOffersRequest {
+func (r DbsGetCampaignOffersRequest) Limit(limit int32) DbsGetCampaignOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignOffersExecute(r)
+func (r DbsGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
+	return r.DbsService.GetCampaignOffersExecute(r)
 }
 
 /*
@@ -8562,11 +8562,11 @@ GetCampaignOffers Информация о товарах, которые раз�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignOffersRequest
+	@return DbsGetCampaignOffersRequest
 */
-func (a *DbsAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) ApiGetCampaignOffersRequest {
-	return ApiGetCampaignOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) DbsGetCampaignOffersRequest {
+	return DbsGetCampaignOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -8575,7 +8575,7 @@ func (a *DbsAPIService) GetCampaignOffers(ctx context.Context, campaignId int64)
 // Execute executes the request
 //
 //	@return GetCampaignOffersResponse
-func (a *DbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCampaignOffersExecute(r DbsGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8742,34 +8742,34 @@ func (a *DbsAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignQuarantineOffersRequest struct {
+type DbsGetCampaignQuarantineOffersRequest struct {
 	ctx                        context.Context
-	ApiService                 *DbsAPIService
+	DbsService                 *DbsAPIService
 	campaignId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
 	pageToken                  *string
 	limit                      *int32
 }
 
-func (r ApiGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ApiGetCampaignQuarantineOffersRequest {
+func (r DbsGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) DbsGetCampaignQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetCampaignQuarantineOffersRequest) PageToken(pageToken string) ApiGetCampaignQuarantineOffersRequest {
+func (r DbsGetCampaignQuarantineOffersRequest) PageToken(pageToken string) DbsGetCampaignQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetCampaignQuarantineOffersRequest) Limit(limit int32) ApiGetCampaignQuarantineOffersRequest {
+func (r DbsGetCampaignQuarantineOffersRequest) Limit(limit int32) DbsGetCampaignQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignQuarantineOffersExecute(r)
+func (r DbsGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+	return r.DbsService.GetCampaignQuarantineOffersExecute(r)
 }
 
 /*
@@ -8796,11 +8796,11 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignQuarantineOffersRequest
+	@return DbsGetCampaignQuarantineOffersRequest
 */
-func (a *DbsAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) ApiGetCampaignQuarantineOffersRequest {
-	return ApiGetCampaignQuarantineOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) DbsGetCampaignQuarantineOffersRequest {
+	return DbsGetCampaignQuarantineOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -8809,7 +8809,7 @@ func (a *DbsAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaig
 // Execute executes the request
 //
 //	@return GetQuarantineOffersResponse
-func (a *DbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCampaignQuarantineOffersExecute(r DbsGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8976,14 +8976,14 @@ func (a *DbsAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuara
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignRegionRequest struct {
+type DbsGetCampaignRegionRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignRegionExecute(r)
+func (r DbsGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
+	return r.DbsService.GetCampaignRegionExecute(r)
 }
 
 /*
@@ -9003,13 +9003,13 @@ GetCampaignRegion Регион магазина
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignRegionRequest
+	@return DbsGetCampaignRegionRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) ApiGetCampaignRegionRequest {
-	return ApiGetCampaignRegionRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) DbsGetCampaignRegionRequest {
+	return DbsGetCampaignRegionRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -9020,7 +9020,7 @@ func (a *DbsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64)
 //	@return GetCampaignRegionResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCampaignRegionExecute(r DbsGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -9176,14 +9176,14 @@ func (a *DbsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignSettingsRequest struct {
+type DbsGetCampaignSettingsRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignSettingsExecute(r)
+func (r DbsGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
+	return r.DbsService.GetCampaignSettingsExecute(r)
 }
 
 /*
@@ -9197,11 +9197,11 @@ GetCampaignSettings Настройки магазина
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignSettingsRequest
+	@return DbsGetCampaignSettingsRequest
 */
-func (a *DbsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) ApiGetCampaignSettingsRequest {
-	return ApiGetCampaignSettingsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) DbsGetCampaignSettingsRequest {
+	return DbsGetCampaignSettingsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -9210,7 +9210,7 @@ func (a *DbsAPIService) GetCampaignSettings(ctx context.Context, campaignId int6
 // Execute executes the request
 //
 //	@return GetCampaignSettingsResponse
-func (a *DbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCampaignSettingsExecute(r DbsGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -9366,27 +9366,27 @@ func (a *DbsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignsRequest struct {
+type DbsGetCampaignsRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	page       *int32
 	pageSize   *int32
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetCampaignsRequest) Page(page int32) ApiGetCampaignsRequest {
+func (r DbsGetCampaignsRequest) Page(page int32) DbsGetCampaignsRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetCampaignsRequest) PageSize(pageSize int32) ApiGetCampaignsRequest {
+func (r DbsGetCampaignsRequest) PageSize(pageSize int32) DbsGetCampaignsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignsExecute(r)
+func (r DbsGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
+	return r.DbsService.GetCampaignsExecute(r)
 }
 
 /*
@@ -9402,11 +9402,11 @@ GetCampaigns Список магазинов пользователя
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCampaignsRequest
+	@return DbsGetCampaignsRequest
 */
-func (a *DbsAPIService) GetCampaigns(ctx context.Context) ApiGetCampaignsRequest {
-	return ApiGetCampaignsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCampaigns(ctx context.Context) DbsGetCampaignsRequest {
+	return DbsGetCampaignsRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -9414,7 +9414,7 @@ func (a *DbsAPIService) GetCampaigns(ctx context.Context) ApiGetCampaignsRequest
 // Execute executes the request
 //
 //	@return GetCampaignsResponse
-func (a *DbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCampaignsExecute(r DbsGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -9575,19 +9575,19 @@ func (a *DbsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoriesMaxSaleQuantumRequest struct {
+type DbsGetCategoriesMaxSaleQuantumRequest struct {
 	ctx                                context.Context
-	ApiService                         *DbsAPIService
+	DbsService                         *DbsAPIService
 	getCategoriesMaxSaleQuantumRequest *GetCategoriesMaxSaleQuantumRequest
 }
 
-func (r ApiGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) ApiGetCategoriesMaxSaleQuantumRequest {
+func (r DbsGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) DbsGetCategoriesMaxSaleQuantumRequest {
 	r.getCategoriesMaxSaleQuantumRequest = &getCategoriesMaxSaleQuantumRequest
 	return r
 }
 
-func (r ApiGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
-	return r.ApiService.GetCategoriesMaxSaleQuantumExecute(r)
+func (r DbsGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+	return r.DbsService.GetCategoriesMaxSaleQuantumExecute(r)
 }
 
 /*
@@ -9605,11 +9605,11 @@ GetCategoriesMaxSaleQuantum Лимит на установку кванта пр
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCategoriesMaxSaleQuantumRequest
+	@return DbsGetCategoriesMaxSaleQuantumRequest
 */
-func (a *DbsAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) ApiGetCategoriesMaxSaleQuantumRequest {
-	return ApiGetCategoriesMaxSaleQuantumRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) DbsGetCategoriesMaxSaleQuantumRequest {
+	return DbsGetCategoriesMaxSaleQuantumRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -9617,7 +9617,7 @@ func (a *DbsAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) ApiGetC
 // Execute executes the request
 //
 //	@return GetCategoriesMaxSaleQuantumResponse
-func (a *DbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCategoriesMaxSaleQuantumExecute(r DbsGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -9774,19 +9774,19 @@ func (a *DbsAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMax
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoriesTreeRequest struct {
+type DbsGetCategoriesTreeRequest struct {
 	ctx                  context.Context
-	ApiService           *DbsAPIService
+	DbsService           *DbsAPIService
 	getCategoriesRequest *GetCategoriesRequest
 }
 
-func (r ApiGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) ApiGetCategoriesTreeRequest {
+func (r DbsGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) DbsGetCategoriesTreeRequest {
 	r.getCategoriesRequest = &getCategoriesRequest
 	return r
 }
 
-func (r ApiGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
-	return r.ApiService.GetCategoriesTreeExecute(r)
+func (r DbsGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
+	return r.DbsService.GetCategoriesTreeExecute(r)
 }
 
 /*
@@ -9800,11 +9800,11 @@ GetCategoriesTree Дерево категорий
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCategoriesTreeRequest
+	@return DbsGetCategoriesTreeRequest
 */
-func (a *DbsAPIService) GetCategoriesTree(ctx context.Context) ApiGetCategoriesTreeRequest {
-	return ApiGetCategoriesTreeRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCategoriesTree(ctx context.Context) DbsGetCategoriesTreeRequest {
+	return DbsGetCategoriesTreeRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -9812,7 +9812,7 @@ func (a *DbsAPIService) GetCategoriesTree(ctx context.Context) ApiGetCategoriesT
 // Execute executes the request
 //
 //	@return GetCategoriesResponse
-func (a *DbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCategoriesTreeExecute(r DbsGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -9966,14 +9966,14 @@ func (a *DbsAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoryContentParametersRequest struct {
+type DbsGetCategoryContentParametersRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	categoryId int64
 }
 
-func (r ApiGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
-	return r.ApiService.GetCategoryContentParametersExecute(r)
+func (r DbsGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
+	return r.DbsService.GetCategoryContentParametersExecute(r)
 }
 
 /*
@@ -9988,11 +9988,11 @@ GetCategoryContentParameters Списки характеристик товар�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
-	@return ApiGetCategoryContentParametersRequest
+	@return DbsGetCategoryContentParametersRequest
 */
-func (a *DbsAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) ApiGetCategoryContentParametersRequest {
-	return ApiGetCategoryContentParametersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) DbsGetCategoryContentParametersRequest {
+	return DbsGetCategoryContentParametersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		categoryId: categoryId,
 	}
@@ -10001,7 +10001,7 @@ func (a *DbsAPIService) GetCategoryContentParameters(ctx context.Context, catego
 // Execute executes the request
 //
 //	@return GetCategoryContentParametersResponse
-func (a *DbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetCategoryContentParametersExecute(r DbsGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -10157,21 +10157,21 @@ func (a *DbsAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryCont
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatRequest struct {
+type DbsGetChatRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	businessId int64
 	chatId     *int64
 }
 
 // Идентификатор чата.
-func (r ApiGetChatRequest) ChatId(chatId int64) ApiGetChatRequest {
+func (r DbsGetChatRequest) ChatId(chatId int64) DbsGetChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
-func (r ApiGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
-	return r.ApiService.GetChatExecute(r)
+func (r DbsGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
+	return r.DbsService.GetChatExecute(r)
 }
 
 /*
@@ -10194,11 +10194,11 @@ GetChat Получение чата по идентификатору
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetChatRequest
+	@return DbsGetChatRequest
 */
-func (a *DbsAPIService) GetChat(ctx context.Context, businessId int64) ApiGetChatRequest {
-	return ApiGetChatRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetChat(ctx context.Context, businessId int64) DbsGetChatRequest {
+	return DbsGetChatRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -10207,7 +10207,7 @@ func (a *DbsAPIService) GetChat(ctx context.Context, businessId int64) ApiGetCha
 // Execute executes the request
 //
 //	@return GetChatResponse
-func (a *DbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *http.Response, error) {
+func (a *DbsAPIService) GetChatExecute(r DbsGetChatRequest) (*GetChatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -10370,9 +10370,9 @@ func (a *DbsAPIService) GetChatExecute(r ApiGetChatRequest) (*GetChatResponse, *
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatHistoryRequest struct {
+type DbsGetChatHistoryRequest struct {
 	ctx                   context.Context
-	ApiService            *DbsAPIService
+	DbsService            *DbsAPIService
 	businessId            int64
 	chatId                *int64
 	getChatHistoryRequest *GetChatHistoryRequest
@@ -10381,31 +10381,31 @@ type ApiGetChatHistoryRequest struct {
 }
 
 // Идентификатор чата.
-func (r ApiGetChatHistoryRequest) ChatId(chatId int64) ApiGetChatHistoryRequest {
+func (r DbsGetChatHistoryRequest) ChatId(chatId int64) DbsGetChatHistoryRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r ApiGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) ApiGetChatHistoryRequest {
+func (r DbsGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) DbsGetChatHistoryRequest {
 	r.getChatHistoryRequest = &getChatHistoryRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetChatHistoryRequest) PageToken(pageToken string) ApiGetChatHistoryRequest {
+func (r DbsGetChatHistoryRequest) PageToken(pageToken string) DbsGetChatHistoryRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetChatHistoryRequest) Limit(limit int32) ApiGetChatHistoryRequest {
+func (r DbsGetChatHistoryRequest) Limit(limit int32) DbsGetChatHistoryRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
-	return r.ApiService.GetChatHistoryExecute(r)
+func (r DbsGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
+	return r.DbsService.GetChatHistoryExecute(r)
 }
 
 /*
@@ -10420,11 +10420,11 @@ GetChatHistory Получение истории сообщений в чате
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetChatHistoryRequest
+	@return DbsGetChatHistoryRequest
 */
-func (a *DbsAPIService) GetChatHistory(ctx context.Context, businessId int64) ApiGetChatHistoryRequest {
-	return ApiGetChatHistoryRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetChatHistory(ctx context.Context, businessId int64) DbsGetChatHistoryRequest {
+	return DbsGetChatHistoryRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -10433,7 +10433,7 @@ func (a *DbsAPIService) GetChatHistory(ctx context.Context, businessId int64) Ap
 // Execute executes the request
 //
 //	@return GetChatHistoryResponse
-func (a *DbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
+func (a *DbsAPIService) GetChatHistoryExecute(r DbsGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -10607,28 +10607,28 @@ func (a *DbsAPIService) GetChatHistoryExecute(r ApiGetChatHistoryRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatMessageRequest struct {
+type DbsGetChatMessageRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	businessId int64
 	chatId     *int64
 	messageId  *int64
 }
 
 // Идентификатор чата.
-func (r ApiGetChatMessageRequest) ChatId(chatId int64) ApiGetChatMessageRequest {
+func (r DbsGetChatMessageRequest) ChatId(chatId int64) DbsGetChatMessageRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Идентификатор сообщения.
-func (r ApiGetChatMessageRequest) MessageId(messageId int64) ApiGetChatMessageRequest {
+func (r DbsGetChatMessageRequest) MessageId(messageId int64) DbsGetChatMessageRequest {
 	r.messageId = &messageId
 	return r
 }
 
-func (r ApiGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
-	return r.ApiService.GetChatMessageExecute(r)
+func (r DbsGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
+	return r.DbsService.GetChatMessageExecute(r)
 }
 
 /*
@@ -10651,11 +10651,11 @@ GetChatMessage Получение сообщения в чате
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetChatMessageRequest
+	@return DbsGetChatMessageRequest
 */
-func (a *DbsAPIService) GetChatMessage(ctx context.Context, businessId int64) ApiGetChatMessageRequest {
-	return ApiGetChatMessageRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetChatMessage(ctx context.Context, businessId int64) DbsGetChatMessageRequest {
+	return DbsGetChatMessageRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -10664,7 +10664,7 @@ func (a *DbsAPIService) GetChatMessage(ctx context.Context, businessId int64) Ap
 // Execute executes the request
 //
 //	@return GetChatMessageResponse
-func (a *DbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
+func (a *DbsAPIService) GetChatMessageExecute(r DbsGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -10834,9 +10834,9 @@ func (a *DbsAPIService) GetChatMessageExecute(r ApiGetChatMessageRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetChatsRequest struct {
+type DbsGetChatsRequest struct {
 	ctx             context.Context
-	ApiService      *DbsAPIService
+	DbsService      *DbsAPIService
 	businessId      int64
 	getChatsRequest *GetChatsRequest
 	pageToken       *string
@@ -10844,25 +10844,25 @@ type ApiGetChatsRequest struct {
 }
 
 // description
-func (r ApiGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) ApiGetChatsRequest {
+func (r DbsGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) DbsGetChatsRequest {
 	r.getChatsRequest = &getChatsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetChatsRequest) PageToken(pageToken string) ApiGetChatsRequest {
+func (r DbsGetChatsRequest) PageToken(pageToken string) DbsGetChatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetChatsRequest) Limit(limit int32) ApiGetChatsRequest {
+func (r DbsGetChatsRequest) Limit(limit int32) DbsGetChatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
-	return r.ApiService.GetChatsExecute(r)
+func (r DbsGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
+	return r.DbsService.GetChatsExecute(r)
 }
 
 /*
@@ -10885,11 +10885,11 @@ GetChats Получение доступных чатов
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetChatsRequest
+	@return DbsGetChatsRequest
 */
-func (a *DbsAPIService) GetChats(ctx context.Context, businessId int64) ApiGetChatsRequest {
-	return ApiGetChatsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetChats(ctx context.Context, businessId int64) DbsGetChatsRequest {
+	return DbsGetChatsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -10898,7 +10898,7 @@ func (a *DbsAPIService) GetChats(ctx context.Context, businessId int64) ApiGetCh
 // Execute executes the request
 //
 //	@return GetChatsResponse
-func (a *DbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetChatsExecute(r DbsGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -11065,13 +11065,13 @@ func (a *DbsAPIService) GetChatsExecute(r ApiGetChatsRequest) (*GetChatsResponse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetDeliveryServicesRequest struct {
+type DbsGetDeliveryServicesRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 }
 
-func (r ApiGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
-	return r.ApiService.GetDeliveryServicesExecute(r)
+func (r DbsGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
+	return r.DbsService.GetDeliveryServicesExecute(r)
 }
 
 /*
@@ -11084,11 +11084,11 @@ GetDeliveryServices Справочник служб доставки
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetDeliveryServicesRequest
+	@return DbsGetDeliveryServicesRequest
 */
-func (a *DbsAPIService) GetDeliveryServices(ctx context.Context) ApiGetDeliveryServicesRequest {
-	return ApiGetDeliveryServicesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetDeliveryServices(ctx context.Context) DbsGetDeliveryServicesRequest {
+	return DbsGetDeliveryServicesRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -11096,7 +11096,7 @@ func (a *DbsAPIService) GetDeliveryServices(ctx context.Context) ApiGetDeliveryS
 // Execute executes the request
 //
 //	@return GetDeliveryServicesResponse
-func (a *DbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetDeliveryServicesExecute(r DbsGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -11248,34 +11248,34 @@ func (a *DbsAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsFeedbackCommentsRequest struct {
+type DbsGetGoodsFeedbackCommentsRequest struct {
 	ctx                             context.Context
-	ApiService                      *DbsAPIService
+	DbsService                      *DbsAPIService
 	businessId                      int64
 	getGoodsFeedbackCommentsRequest *GetGoodsFeedbackCommentsRequest
 	pageToken                       *string
 	limit                           *int32
 }
 
-func (r ApiGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) ApiGetGoodsFeedbackCommentsRequest {
+func (r DbsGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) DbsGetGoodsFeedbackCommentsRequest {
 	r.getGoodsFeedbackCommentsRequest = &getGoodsFeedbackCommentsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) ApiGetGoodsFeedbackCommentsRequest {
+func (r DbsGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) DbsGetGoodsFeedbackCommentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetGoodsFeedbackCommentsRequest) Limit(limit int32) ApiGetGoodsFeedbackCommentsRequest {
+func (r DbsGetGoodsFeedbackCommentsRequest) Limit(limit int32) DbsGetGoodsFeedbackCommentsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsFeedbackCommentsExecute(r)
+func (r DbsGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
+	return r.DbsService.GetGoodsFeedbackCommentsExecute(r)
 }
 
 /*
@@ -11305,11 +11305,11 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetGoodsFeedbackCommentsRequest
+	@return DbsGetGoodsFeedbackCommentsRequest
 */
-func (a *DbsAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) ApiGetGoodsFeedbackCommentsRequest {
-	return ApiGetGoodsFeedbackCommentsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) DbsGetGoodsFeedbackCommentsRequest {
+	return DbsGetGoodsFeedbackCommentsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -11318,7 +11318,7 @@ func (a *DbsAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId
 // Execute executes the request
 //
 //	@return GetGoodsFeedbackCommentsResponse
-func (a *DbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetGoodsFeedbackCommentsExecute(r DbsGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -11485,9 +11485,9 @@ func (a *DbsAPIService) GetGoodsFeedbackCommentsExecute(r ApiGetGoodsFeedbackCom
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsFeedbacksRequest struct {
+type DbsGetGoodsFeedbacksRequest struct {
 	ctx                     context.Context
-	ApiService              *DbsAPIService
+	DbsService              *DbsAPIService
 	businessId              int64
 	pageToken               *string
 	limit                   *int32
@@ -11495,24 +11495,24 @@ type ApiGetGoodsFeedbacksRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetGoodsFeedbacksRequest) PageToken(pageToken string) ApiGetGoodsFeedbacksRequest {
+func (r DbsGetGoodsFeedbacksRequest) PageToken(pageToken string) DbsGetGoodsFeedbacksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetGoodsFeedbacksRequest) Limit(limit int32) ApiGetGoodsFeedbacksRequest {
+func (r DbsGetGoodsFeedbacksRequest) Limit(limit int32) DbsGetGoodsFeedbacksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetGoodsFeedbacksRequest) GetGoodsFeedbackRequest(getGoodsFeedbackRequest GetGoodsFeedbackRequest) ApiGetGoodsFeedbacksRequest {
+func (r DbsGetGoodsFeedbacksRequest) GetGoodsFeedbackRequest(getGoodsFeedbackRequest GetGoodsFeedbackRequest) DbsGetGoodsFeedbacksRequest {
 	r.getGoodsFeedbackRequest = &getGoodsFeedbackRequest
 	return r
 }
 
-func (r ApiGetGoodsFeedbacksRequest) Execute() (*GetGoodsFeedbackResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsFeedbacksExecute(r)
+func (r DbsGetGoodsFeedbacksRequest) Execute() (*GetGoodsFeedbackResponse, *http.Response, error) {
+	return r.DbsService.GetGoodsFeedbacksExecute(r)
 }
 
 /*
@@ -11539,11 +11539,11 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetGoodsFeedbacksRequest
+	@return DbsGetGoodsFeedbacksRequest
 */
-func (a *DbsAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) ApiGetGoodsFeedbacksRequest {
-	return ApiGetGoodsFeedbacksRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) DbsGetGoodsFeedbacksRequest {
+	return DbsGetGoodsFeedbacksRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -11552,7 +11552,7 @@ func (a *DbsAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64)
 // Execute executes the request
 //
 //	@return GetGoodsFeedbackResponse
-func (a *DbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
+func (a *DbsAPIService) GetGoodsFeedbacksExecute(r DbsGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -11716,20 +11716,20 @@ func (a *DbsAPIService) GetGoodsFeedbacksExecute(r ApiGetGoodsFeedbacksRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetGoodsStatsRequest struct {
+type DbsGetGoodsStatsRequest struct {
 	ctx                  context.Context
-	ApiService           *DbsAPIService
+	DbsService           *DbsAPIService
 	campaignId           int64
 	getGoodsStatsRequest *GetGoodsStatsRequest
 }
 
-func (r ApiGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) ApiGetGoodsStatsRequest {
+func (r DbsGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) DbsGetGoodsStatsRequest {
 	r.getGoodsStatsRequest = &getGoodsStatsRequest
 	return r
 }
 
-func (r ApiGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
-	return r.ApiService.GetGoodsStatsExecute(r)
+func (r DbsGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
+	return r.DbsService.GetGoodsStatsExecute(r)
 }
 
 /*
@@ -11744,11 +11744,11 @@ GetGoodsStats Отчет по товарам
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetGoodsStatsRequest
+	@return DbsGetGoodsStatsRequest
 */
-func (a *DbsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) ApiGetGoodsStatsRequest {
-	return ApiGetGoodsStatsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) DbsGetGoodsStatsRequest {
+	return DbsGetGoodsStatsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -11757,7 +11757,7 @@ func (a *DbsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) Api
 // Execute executes the request
 //
 //	@return GetGoodsStatsResponse
-func (a *DbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetGoodsStatsExecute(r DbsGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -11918,9 +11918,9 @@ func (a *DbsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetHiddenOffersRequest struct {
+type DbsGetHiddenOffersRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	offerId    *[]string
 	pageToken  *string
@@ -11928,25 +11928,25 @@ type ApiGetHiddenOffersRequest struct {
 }
 
 // Идентификатор скрытого предложения.
-func (r ApiGetHiddenOffersRequest) OfferId(offerId []string) ApiGetHiddenOffersRequest {
+func (r DbsGetHiddenOffersRequest) OfferId(offerId []string) DbsGetHiddenOffersRequest {
 	r.offerId = &offerId
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetHiddenOffersRequest) PageToken(pageToken string) ApiGetHiddenOffersRequest {
+func (r DbsGetHiddenOffersRequest) PageToken(pageToken string) DbsGetHiddenOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetHiddenOffersRequest) Limit(limit int32) ApiGetHiddenOffersRequest {
+func (r DbsGetHiddenOffersRequest) Limit(limit int32) DbsGetHiddenOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetHiddenOffersRequest) Execute() (*GetHiddenOffersResponse, *http.Response, error) {
-	return r.ApiService.GetHiddenOffersExecute(r)
+func (r DbsGetHiddenOffersRequest) Execute() (*GetHiddenOffersResponse, *http.Response, error) {
+	return r.DbsService.GetHiddenOffersExecute(r)
 }
 
 /*
@@ -11963,11 +11963,11 @@ GetHiddenOffers Информация о скрытых вами товарах
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetHiddenOffersRequest
+	@return DbsGetHiddenOffersRequest
 */
-func (a *DbsAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) ApiGetHiddenOffersRequest {
-	return ApiGetHiddenOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) DbsGetHiddenOffersRequest {
+	return DbsGetHiddenOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -11976,7 +11976,7 @@ func (a *DbsAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) A
 // Execute executes the request
 //
 //	@return GetHiddenOffersResponse
-func (a *DbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetHiddenOffersExecute(r DbsGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -12130,28 +12130,28 @@ func (a *DbsAPIService) GetHiddenOffersExecute(r ApiGetHiddenOffersRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetModelRequest struct {
+type DbsGetModelRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	modelId    int64
 	regionId   *int64
 	currency   *CurrencyType
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetModelRequest) RegionId(regionId int64) ApiGetModelRequest {
+func (r DbsGetModelRequest) RegionId(regionId int64) DbsGetModelRequest {
 	r.regionId = &regionId
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiGetModelRequest) Currency(currency CurrencyType) ApiGetModelRequest {
+func (r DbsGetModelRequest) Currency(currency CurrencyType) DbsGetModelRequest {
 	r.currency = &currency
 	return r
 }
 
-func (r ApiGetModelRequest) Execute() (*GetModelsResponse, *http.Response, error) {
-	return r.ApiService.GetModelExecute(r)
+func (r DbsGetModelRequest) Execute() (*GetModelsResponse, *http.Response, error) {
+	return r.DbsService.GetModelExecute(r)
 }
 
 /*
@@ -12168,13 +12168,13 @@ GetModel Информация об одной модели
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param modelId Идентификатор модели товара.
-	@return ApiGetModelRequest
+	@return DbsGetModelRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetModel(ctx context.Context, modelId int64) ApiGetModelRequest {
-	return ApiGetModelRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetModel(ctx context.Context, modelId int64) DbsGetModelRequest {
+	return DbsGetModelRequest{
+		DbsService: a,
 		ctx:        ctx,
 		modelId:    modelId,
 	}
@@ -12185,7 +12185,7 @@ func (a *DbsAPIService) GetModel(ctx context.Context, modelId int64) ApiGetModel
 //	@return GetModelsResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetModelExecute(r DbsGetModelRequest) (*GetModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -12348,9 +12348,9 @@ func (a *DbsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsRespons
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetModelOffersRequest struct {
+type DbsGetModelOffersRequest struct {
 	ctx          context.Context
-	ApiService   *DbsAPIService
+	DbsService   *DbsAPIService
 	modelId      int64
 	regionId     *int64
 	currency     *CurrencyType
@@ -12360,37 +12360,37 @@ type ApiGetModelOffersRequest struct {
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetModelOffersRequest) RegionId(regionId int64) ApiGetModelOffersRequest {
+func (r DbsGetModelOffersRequest) RegionId(regionId int64) DbsGetModelOffersRequest {
 	r.regionId = &regionId
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiGetModelOffersRequest) Currency(currency CurrencyType) ApiGetModelOffersRequest {
+func (r DbsGetModelOffersRequest) Currency(currency CurrencyType) DbsGetModelOffersRequest {
 	r.currency = &currency
 	return r
 }
 
 // Направление сортировки по цене.  Возможные значения: * &#x60;ASC&#x60; — сортировка по возрастанию. * &#x60;DESC&#x60; — сортировка по убыванию.  Значение по умолчанию: предложения выводятся в произвольном порядке.
-func (r ApiGetModelOffersRequest) OrderByPrice(orderByPrice SortOrderType) ApiGetModelOffersRequest {
+func (r DbsGetModelOffersRequest) OrderByPrice(orderByPrice SortOrderType) DbsGetModelOffersRequest {
 	r.orderByPrice = &orderByPrice
 	return r
 }
 
 // Количество предложений на странице ответа.
-func (r ApiGetModelOffersRequest) Count(count int32) ApiGetModelOffersRequest {
+func (r DbsGetModelOffersRequest) Count(count int32) DbsGetModelOffersRequest {
 	r.count = &count
 	return r
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetModelOffersRequest) Page(page int32) ApiGetModelOffersRequest {
+func (r DbsGetModelOffersRequest) Page(page int32) DbsGetModelOffersRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiGetModelOffersRequest) Execute() (*GetModelsOffersResponse, *http.Response, error) {
-	return r.ApiService.GetModelOffersExecute(r)
+func (r DbsGetModelOffersRequest) Execute() (*GetModelsOffersResponse, *http.Response, error) {
+	return r.DbsService.GetModelOffersExecute(r)
 }
 
 /*
@@ -12411,13 +12411,13 @@ GetModelOffers Список предложений для одной модел�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param modelId Идентификатор модели товара.
-	@return ApiGetModelOffersRequest
+	@return DbsGetModelOffersRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetModelOffers(ctx context.Context, modelId int64) ApiGetModelOffersRequest {
-	return ApiGetModelOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetModelOffers(ctx context.Context, modelId int64) DbsGetModelOffersRequest {
+	return DbsGetModelOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		modelId:    modelId,
 	}
@@ -12428,7 +12428,7 @@ func (a *DbsAPIService) GetModelOffers(ctx context.Context, modelId int64) ApiGe
 //	@return GetModelsOffersResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetModelOffersExecute(r DbsGetModelOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -12606,33 +12606,33 @@ func (a *DbsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*GetM
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetModelsRequest struct {
+type DbsGetModelsRequest struct {
 	ctx              context.Context
-	ApiService       *DbsAPIService
+	DbsService       *DbsAPIService
 	regionId         *int64
 	getModelsRequest *GetModelsRequest
 	currency         *CurrencyType
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetModelsRequest) RegionId(regionId int64) ApiGetModelsRequest {
+func (r DbsGetModelsRequest) RegionId(regionId int64) DbsGetModelsRequest {
 	r.regionId = &regionId
 	return r
 }
 
-func (r ApiGetModelsRequest) GetModelsRequest(getModelsRequest GetModelsRequest) ApiGetModelsRequest {
+func (r DbsGetModelsRequest) GetModelsRequest(getModelsRequest GetModelsRequest) DbsGetModelsRequest {
 	r.getModelsRequest = &getModelsRequest
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiGetModelsRequest) Currency(currency CurrencyType) ApiGetModelsRequest {
+func (r DbsGetModelsRequest) Currency(currency CurrencyType) DbsGetModelsRequest {
 	r.currency = &currency
 	return r
 }
 
-func (r ApiGetModelsRequest) Execute() (*GetModelsResponse, *http.Response, error) {
-	return r.ApiService.GetModelsExecute(r)
+func (r DbsGetModelsRequest) Execute() (*GetModelsResponse, *http.Response, error) {
+	return r.DbsService.GetModelsExecute(r)
 }
 
 /*
@@ -12650,13 +12650,13 @@ GetModels Информация о нескольких моделях
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetModelsRequest
+	@return DbsGetModelsRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetModels(ctx context.Context) ApiGetModelsRequest {
-	return ApiGetModelsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetModels(ctx context.Context) DbsGetModelsRequest {
+	return DbsGetModelsRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -12666,7 +12666,7 @@ func (a *DbsAPIService) GetModels(ctx context.Context) ApiGetModelsRequest {
 //	@return GetModelsResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetModelsExecute(r DbsGetModelsRequest) (*GetModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -12830,9 +12830,9 @@ func (a *DbsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetModelsOffersRequest struct {
+type DbsGetModelsOffersRequest struct {
 	ctx              context.Context
-	ApiService       *DbsAPIService
+	DbsService       *DbsAPIService
 	regionId         *int64
 	getModelsRequest *GetModelsRequest
 	currency         *CurrencyType
@@ -12840,30 +12840,30 @@ type ApiGetModelsOffersRequest struct {
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetModelsOffersRequest) RegionId(regionId int64) ApiGetModelsOffersRequest {
+func (r DbsGetModelsOffersRequest) RegionId(regionId int64) DbsGetModelsOffersRequest {
 	r.regionId = &regionId
 	return r
 }
 
-func (r ApiGetModelsOffersRequest) GetModelsRequest(getModelsRequest GetModelsRequest) ApiGetModelsOffersRequest {
+func (r DbsGetModelsOffersRequest) GetModelsRequest(getModelsRequest GetModelsRequest) DbsGetModelsOffersRequest {
 	r.getModelsRequest = &getModelsRequest
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiGetModelsOffersRequest) Currency(currency CurrencyType) ApiGetModelsOffersRequest {
+func (r DbsGetModelsOffersRequest) Currency(currency CurrencyType) DbsGetModelsOffersRequest {
 	r.currency = &currency
 	return r
 }
 
 // Направление сортировки по цене.  Возможные значения: * &#x60;ASC&#x60; — сортировка по возрастанию. * &#x60;DESC&#x60; — сортировка по убыванию.  Значение по умолчанию: предложения выводятся в произвольном порядке.
-func (r ApiGetModelsOffersRequest) OrderByPrice(orderByPrice SortOrderType) ApiGetModelsOffersRequest {
+func (r DbsGetModelsOffersRequest) OrderByPrice(orderByPrice SortOrderType) DbsGetModelsOffersRequest {
 	r.orderByPrice = &orderByPrice
 	return r
 }
 
-func (r ApiGetModelsOffersRequest) Execute() (*GetModelsOffersResponse, *http.Response, error) {
-	return r.ApiService.GetModelsOffersExecute(r)
+func (r DbsGetModelsOffersRequest) Execute() (*GetModelsOffersResponse, *http.Response, error) {
+	return r.DbsService.GetModelsOffersExecute(r)
 }
 
 /*
@@ -12885,13 +12885,13 @@ GetModelsOffers Список предложений для нескольких 
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetModelsOffersRequest
+	@return DbsGetModelsOffersRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetModelsOffers(ctx context.Context) ApiGetModelsOffersRequest {
-	return ApiGetModelsOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetModelsOffers(ctx context.Context) DbsGetModelsOffersRequest {
+	return DbsGetModelsOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -12901,7 +12901,7 @@ func (a *DbsAPIService) GetModelsOffers(ctx context.Context) ApiGetModelsOffersR
 //	@return GetModelsOffersResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetModelsOffersExecute(r DbsGetModelsOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -13068,9 +13068,9 @@ func (a *DbsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferCardsContentStatusRequest struct {
+type DbsGetOfferCardsContentStatusRequest struct {
 	ctx                               context.Context
-	ApiService                        *DbsAPIService
+	DbsService                        *DbsAPIService
 	businessId                        int64
 	pageToken                         *string
 	limit                             *int32
@@ -13078,24 +13078,24 @@ type ApiGetOfferCardsContentStatusRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOfferCardsContentStatusRequest) PageToken(pageToken string) ApiGetOfferCardsContentStatusRequest {
+func (r DbsGetOfferCardsContentStatusRequest) PageToken(pageToken string) DbsGetOfferCardsContentStatusRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOfferCardsContentStatusRequest) Limit(limit int32) ApiGetOfferCardsContentStatusRequest {
+func (r DbsGetOfferCardsContentStatusRequest) Limit(limit int32) DbsGetOfferCardsContentStatusRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) ApiGetOfferCardsContentStatusRequest {
+func (r DbsGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) DbsGetOfferCardsContentStatusRequest {
 	r.getOfferCardsContentStatusRequest = &getOfferCardsContentStatusRequest
 	return r
 }
 
-func (r ApiGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
-	return r.ApiService.GetOfferCardsContentStatusExecute(r)
+func (r DbsGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+	return r.DbsService.GetOfferCardsContentStatusExecute(r)
 }
 
 /*
@@ -13116,11 +13116,11 @@ GetOfferCardsContentStatus Получение информации о запол
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetOfferCardsContentStatusRequest
+	@return DbsGetOfferCardsContentStatusRequest
 */
-func (a *DbsAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) ApiGetOfferCardsContentStatusRequest {
-	return ApiGetOfferCardsContentStatusRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) DbsGetOfferCardsContentStatusRequest {
+	return DbsGetOfferCardsContentStatusRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -13129,7 +13129,7 @@ func (a *DbsAPIService) GetOfferCardsContentStatus(ctx context.Context, business
 // Execute executes the request
 //
 //	@return GetOfferCardsContentStatusResponse
-func (a *DbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOfferCardsContentStatusExecute(r DbsGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -13293,9 +13293,9 @@ func (a *DbsAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsCont
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferMappingEntriesRequest struct {
+type DbsGetOfferMappingEntriesRequest struct {
 	ctx          context.Context
-	ApiService   *DbsAPIService
+	DbsService   *DbsAPIService
 	campaignId   int64
 	offerId      *[]string
 	shopSku      *[]string
@@ -13309,61 +13309,61 @@ type ApiGetOfferMappingEntriesRequest struct {
 }
 
 // Идентификатор товара в каталоге.
-func (r ApiGetOfferMappingEntriesRequest) OfferId(offerId []string) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) OfferId(offerId []string) DbsGetOfferMappingEntriesRequest {
 	r.offerId = &offerId
 	return r
 }
 
 // Ваш SKU товара.  Параметр может быть указан несколько раз, например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...shop_sku&#x3D;123&amp;shop_sku&#x3D;129&amp;shop_sku&#x3D;141... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
-func (r ApiGetOfferMappingEntriesRequest) ShopSku(shopSku []string) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) ShopSku(shopSku []string) DbsGetOfferMappingEntriesRequest {
 	r.shopSku = &shopSku
 	return r
 }
 
 // Тип маппинга.
-func (r ApiGetOfferMappingEntriesRequest) MappingKind(mappingKind OfferMappingKindType) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) MappingKind(mappingKind OfferMappingKindType) DbsGetOfferMappingEntriesRequest {
 	r.mappingKind = &mappingKind
 	return r
 }
 
 // Фильтрация по статусу публикации товара:  * &#x60;READY&#x60; — товар прошел модерацию. * &#x60;IN_WORK&#x60; — товар проходит модерацию. * &#x60;NEED_CONTENT&#x60; — для товара без SKU на Маркете marketSku нужно найти карточку самостоятельно или создать ее. * &#x60;NEED_INFO&#x60; — товар не прошел модерацию из-за ошибок или недостающих сведений в описании товара. * &#x60;REJECTED&#x60; — товар не прошел модерацию, так как Маркет не планирует размещать подобные товары. * &#x60;SUSPENDED&#x60; — товар не прошел модерацию, так как Маркет пока не размещает подобные товары. * &#x60;OTHER&#x60; — товар не прошел модерацию по другой причине.  Можно указать несколько статусов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...status&#x3D;READY,IN_WORK... ...status&#x3D;READY&amp;status&#x3D;IN_WORK... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
-func (r ApiGetOfferMappingEntriesRequest) Status(status []OfferProcessingStatusType) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) Status(status []OfferProcessingStatusType) DbsGetOfferMappingEntriesRequest {
 	r.status = &status
 	return r
 }
 
 // Фильтрация по планам поставок товара:  * &#x60;ACTIVE&#x60; — поставки будут. * &#x60;INACTIVE&#x60; — поставок не будет: товар есть на складе, но вы больше не планируете его поставлять. * &#x60;DELISTED&#x60; — архив: товар закончился на складе, и его поставок больше не будет.  Можно указать несколько значений в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...availability&#x3D;INACTIVE,DELISTED... ...availability&#x3D;INACTIVE&amp;availability&#x3D;DELISTED... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
-func (r ApiGetOfferMappingEntriesRequest) Availability(availability []OfferAvailabilityStatusType) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) Availability(availability []OfferAvailabilityStatusType) DbsGetOfferMappingEntriesRequest {
 	r.availability = &availability
 	return r
 }
 
 // Фильтрация по идентификатору категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).  Можно указать несколько идентификаторов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...category_id&#x3D;14727164,14382343... ...category_id&#x3D;14727164&amp;category_id&#x3D;14382343... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
-func (r ApiGetOfferMappingEntriesRequest) CategoryId(categoryId []int32) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) CategoryId(categoryId []int32) DbsGetOfferMappingEntriesRequest {
 	r.categoryId = &categoryId
 	return r
 }
 
 // Фильтрация по бренду товара.  Можно указать несколько брендов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...vendor&#x3D;Aqua%20Minerale,Borjomi... ...vendor&#x3D;Aqua%20Minerale&amp;vendor&#x3D;Borjomi... &#x60;&#x60;&#x60;  Чтобы товар попал в результаты фильтрации, его бренд должен точно совпадать с одним из указанных в запросе. Например, если указан бренд Schwarzkopf, то в результатах не будет товаров Schwarzkopf Professional.  Если в названии бренда есть символы, которые не входят в таблицу ASCII (в том числе кириллические символы), используйте для них URL-кодирование. Например, пробел — %20, апостроф «&#39;» — %27 и т. д. Подробнее см. в разделе [Кодирование URL русскоязычной Википедии](https://ru.wikipedia.org/wiki/URL#Кодирование_URL).  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
-func (r ApiGetOfferMappingEntriesRequest) Vendor(vendor []string) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) Vendor(vendor []string) DbsGetOfferMappingEntriesRequest {
 	r.vendor = &vendor
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOfferMappingEntriesRequest) PageToken(pageToken string) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) PageToken(pageToken string) DbsGetOfferMappingEntriesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOfferMappingEntriesRequest) Limit(limit int32) ApiGetOfferMappingEntriesRequest {
+func (r DbsGetOfferMappingEntriesRequest) Limit(limit int32) DbsGetOfferMappingEntriesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferMappingEntriesRequest) Execute() (*GetOfferMappingEntriesResponse, *http.Response, error) {
-	return r.ApiService.GetOfferMappingEntriesExecute(r)
+func (r DbsGetOfferMappingEntriesRequest) Execute() (*GetOfferMappingEntriesResponse, *http.Response, error) {
+	return r.DbsService.GetOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -13397,13 +13397,13 @@ GetOfferMappingEntries Список товаров в каталоге
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetOfferMappingEntriesRequest
+	@return DbsGetOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) ApiGetOfferMappingEntriesRequest {
-	return ApiGetOfferMappingEntriesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) DbsGetOfferMappingEntriesRequest {
+	return DbsGetOfferMappingEntriesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -13414,7 +13414,7 @@ func (a *DbsAPIService) GetOfferMappingEntries(ctx context.Context, campaignId i
 //	@return GetOfferMappingEntriesResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntriesRequest) (*GetOfferMappingEntriesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOfferMappingEntriesExecute(r DbsGetOfferMappingEntriesRequest) (*GetOfferMappingEntriesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -13597,9 +13597,9 @@ func (a *DbsAPIService) GetOfferMappingEntriesExecute(r ApiGetOfferMappingEntrie
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferMappingsRequest struct {
+type DbsGetOfferMappingsRequest struct {
 	ctx                     context.Context
-	ApiService              *DbsAPIService
+	DbsService              *DbsAPIService
 	businessId              int64
 	pageToken               *string
 	limit                   *int32
@@ -13608,30 +13608,30 @@ type ApiGetOfferMappingsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOfferMappingsRequest) PageToken(pageToken string) ApiGetOfferMappingsRequest {
+func (r DbsGetOfferMappingsRequest) PageToken(pageToken string) DbsGetOfferMappingsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOfferMappingsRequest) Limit(limit int32) ApiGetOfferMappingsRequest {
+func (r DbsGetOfferMappingsRequest) Limit(limit int32) DbsGetOfferMappingsRequest {
 	r.limit = &limit
 	return r
 }
 
 // Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
-func (r ApiGetOfferMappingsRequest) Language(language CatalogLanguageType) ApiGetOfferMappingsRequest {
+func (r DbsGetOfferMappingsRequest) Language(language CatalogLanguageType) DbsGetOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) ApiGetOfferMappingsRequest {
+func (r DbsGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) DbsGetOfferMappingsRequest {
 	r.getOfferMappingsRequest = &getOfferMappingsRequest
 	return r
 }
 
-func (r ApiGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.GetOfferMappingsExecute(r)
+func (r DbsGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
+	return r.DbsService.GetOfferMappingsExecute(r)
 }
 
 /*
@@ -13651,11 +13651,11 @@ GetOfferMappings Информация о товарах в каталоге
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetOfferMappingsRequest
+	@return DbsGetOfferMappingsRequest
 */
-func (a *DbsAPIService) GetOfferMappings(ctx context.Context, businessId int64) ApiGetOfferMappingsRequest {
-	return ApiGetOfferMappingsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOfferMappings(ctx context.Context, businessId int64) DbsGetOfferMappingsRequest {
+	return DbsGetOfferMappingsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -13664,7 +13664,7 @@ func (a *DbsAPIService) GetOfferMappings(ctx context.Context, businessId int64) 
 // Execute executes the request
 //
 //	@return GetOfferMappingsResponse
-func (a *DbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOfferMappingsExecute(r DbsGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -13831,34 +13831,34 @@ func (a *DbsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferRecommendationsRequest struct {
+type DbsGetOfferRecommendationsRequest struct {
 	ctx                            context.Context
-	ApiService                     *DbsAPIService
+	DbsService                     *DbsAPIService
 	businessId                     int64
 	getOfferRecommendationsRequest *GetOfferRecommendationsRequest
 	pageToken                      *string
 	limit                          *int32
 }
 
-func (r ApiGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) ApiGetOfferRecommendationsRequest {
+func (r DbsGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) DbsGetOfferRecommendationsRequest {
 	r.getOfferRecommendationsRequest = &getOfferRecommendationsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOfferRecommendationsRequest) PageToken(pageToken string) ApiGetOfferRecommendationsRequest {
+func (r DbsGetOfferRecommendationsRequest) PageToken(pageToken string) DbsGetOfferRecommendationsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOfferRecommendationsRequest) Limit(limit int32) ApiGetOfferRecommendationsRequest {
+func (r DbsGetOfferRecommendationsRequest) Limit(limit int32) DbsGetOfferRecommendationsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
-	return r.ApiService.GetOfferRecommendationsExecute(r)
+func (r DbsGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
+	return r.DbsService.GetOfferRecommendationsExecute(r)
 }
 
 /*
@@ -13885,11 +13885,11 @@ GetOfferRecommendations Рекомендации Маркета, касающи�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetOfferRecommendationsRequest
+	@return DbsGetOfferRecommendationsRequest
 */
-func (a *DbsAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) ApiGetOfferRecommendationsRequest {
-	return ApiGetOfferRecommendationsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) DbsGetOfferRecommendationsRequest {
+	return DbsGetOfferRecommendationsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -13898,7 +13898,7 @@ func (a *DbsAPIService) GetOfferRecommendations(ctx context.Context, businessId 
 // Execute executes the request
 //
 //	@return GetOfferRecommendationsResponse
-func (a *DbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOfferRecommendationsExecute(r DbsGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -14065,15 +14065,15 @@ func (a *DbsAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendati
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderRequest struct {
+type DbsGetOrderRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r ApiGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
-	return r.ApiService.GetOrderExecute(r)
+func (r DbsGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
+	return r.DbsService.GetOrderExecute(r)
 }
 
 /*
@@ -14099,11 +14099,11 @@ GetOrder Информация об одном заказе
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiGetOrderRequest
+	@return DbsGetOrderRequest
 */
-func (a *DbsAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderRequest {
-	return ApiGetOrderRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) DbsGetOrderRequest {
+	return DbsGetOrderRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14113,7 +14113,7 @@ func (a *DbsAPIService) GetOrder(ctx context.Context, campaignId int64, orderId 
 // Execute executes the request
 //
 //	@return GetOrderResponse
-func (a *DbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOrderExecute(r DbsGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -14270,15 +14270,15 @@ func (a *DbsAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderBusinessBuyerInfoRequest struct {
+type DbsGetOrderBusinessBuyerInfoRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r ApiGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
-	return r.ApiService.GetOrderBusinessBuyerInfoExecute(r)
+func (r DbsGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
+	return r.DbsService.GetOrderBusinessBuyerInfoExecute(r)
 }
 
 /*
@@ -14302,11 +14302,11 @@ GetOrderBusinessBuyerInfo Информация о покупателе — юр�
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiGetOrderBusinessBuyerInfoRequest
+	@return DbsGetOrderBusinessBuyerInfoRequest
 */
-func (a *DbsAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBusinessBuyerInfoRequest {
-	return ApiGetOrderBusinessBuyerInfoRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) DbsGetOrderBusinessBuyerInfoRequest {
+	return DbsGetOrderBusinessBuyerInfoRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14316,7 +14316,7 @@ func (a *DbsAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignI
 // Execute executes the request
 //
 //	@return GetBusinessBuyerInfoResponse
-func (a *DbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOrderBusinessBuyerInfoExecute(r DbsGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -14473,15 +14473,15 @@ func (a *DbsAPIService) GetOrderBusinessBuyerInfoExecute(r ApiGetOrderBusinessBu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderBusinessDocumentsInfoRequest struct {
+type DbsGetOrderBusinessDocumentsInfoRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r ApiGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
-	return r.ApiService.GetOrderBusinessDocumentsInfoExecute(r)
+func (r DbsGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
+	return r.DbsService.GetOrderBusinessDocumentsInfoExecute(r)
 }
 
 /*
@@ -14499,11 +14499,11 @@ GetOrderBusinessDocumentsInfo Информация о документах
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiGetOrderBusinessDocumentsInfoRequest
+	@return DbsGetOrderBusinessDocumentsInfoRequest
 */
-func (a *DbsAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBusinessDocumentsInfoRequest {
-	return ApiGetOrderBusinessDocumentsInfoRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) DbsGetOrderBusinessDocumentsInfoRequest {
+	return DbsGetOrderBusinessDocumentsInfoRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14513,7 +14513,7 @@ func (a *DbsAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campa
 // Execute executes the request
 //
 //	@return GetBusinessDocumentsInfoResponse
-func (a *DbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOrderBusinessDocumentsInfoExecute(r DbsGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -14670,15 +14670,15 @@ func (a *DbsAPIService) GetOrderBusinessDocumentsInfoExecute(r ApiGetOrderBusine
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderBuyerInfoRequest struct {
+type DbsGetOrderBuyerInfoRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r ApiGetOrderBuyerInfoRequest) Execute() (*GetOrderBuyerInfoResponse, *http.Response, error) {
-	return r.ApiService.GetOrderBuyerInfoExecute(r)
+func (r DbsGetOrderBuyerInfoRequest) Execute() (*GetOrderBuyerInfoResponse, *http.Response, error) {
+	return r.DbsService.GetOrderBuyerInfoExecute(r)
 }
 
 /*
@@ -14702,11 +14702,11 @@ GetOrderBuyerInfo Информация о покупателе — физиче�
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiGetOrderBuyerInfoRequest
+	@return DbsGetOrderBuyerInfoRequest
 */
-func (a *DbsAPIService) GetOrderBuyerInfo(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderBuyerInfoRequest {
-	return ApiGetOrderBuyerInfoRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOrderBuyerInfo(ctx context.Context, campaignId int64, orderId int64) DbsGetOrderBuyerInfoRequest {
+	return DbsGetOrderBuyerInfoRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14716,7 +14716,7 @@ func (a *DbsAPIService) GetOrderBuyerInfo(ctx context.Context, campaignId int64,
 // Execute executes the request
 //
 //	@return GetOrderBuyerInfoResponse
-func (a *DbsAPIService) GetOrderBuyerInfoExecute(r ApiGetOrderBuyerInfoRequest) (*GetOrderBuyerInfoResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOrderBuyerInfoExecute(r DbsGetOrderBuyerInfoRequest) (*GetOrderBuyerInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -14873,15 +14873,15 @@ func (a *DbsAPIService) GetOrderBuyerInfoExecute(r ApiGetOrderBuyerInfoRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderLabelsDataRequest struct {
+type DbsGetOrderLabelsDataRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r ApiGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
-	return r.ApiService.GetOrderLabelsDataExecute(r)
+func (r DbsGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
+	return r.DbsService.GetOrderLabelsDataExecute(r)
 }
 
 /*
@@ -14897,11 +14897,11 @@ GetOrderLabelsData Данные для самостоятельного изго
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiGetOrderLabelsDataRequest
+	@return DbsGetOrderLabelsDataRequest
 */
-func (a *DbsAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderLabelsDataRequest {
-	return ApiGetOrderLabelsDataRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) DbsGetOrderLabelsDataRequest {
+	return DbsGetOrderLabelsDataRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14911,7 +14911,7 @@ func (a *DbsAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64
 // Execute executes the request
 //
 //	@return GetOrderLabelsDataResponse
-func (a *DbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest) (*GetOrderLabelsDataResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOrderLabelsDataExecute(r DbsGetOrderLabelsDataRequest) (*GetOrderLabelsDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -15068,9 +15068,9 @@ func (a *DbsAPIService) GetOrderLabelsDataExecute(r ApiGetOrderLabelsDataRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrdersRequest struct {
+type DbsGetOrdersRequest struct {
 	ctx                               context.Context
-	ApiService                        *DbsAPIService
+	DbsService                        *DbsAPIService
 	campaignId                        int64
 	orderIds                          *[]int64
 	status                            *[]OrderStatusType
@@ -15094,121 +15094,121 @@ type ApiGetOrdersRequest struct {
 }
 
 // Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
-func (r ApiGetOrdersRequest) OrderIds(orderIds []int64) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) OrderIds(orderIds []int64) DbsGetOrdersRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
 // Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется.
-func (r ApiGetOrdersRequest) Status(status []OrderStatusType) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) Status(status []OrderStatusType) DbsGetOrdersRequest {
 	r.status = &status
 	return r
 }
 
 // Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется.
-func (r ApiGetOrdersRequest) Substatus(substatus []OrderSubstatusType) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) Substatus(substatus []OrderSubstatusType) DbsGetOrdersRequest {
 	r.substatus = &substatus
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты.
-func (r ApiGetOrdersRequest) FromDate(fromDate string) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) FromDate(fromDate string) DbsGetOrdersRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки.
-func (r ApiGetOrdersRequest) ToDate(toDate string) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) ToDate(toDate string) DbsGetOrdersRequest {
 	r.toDate = &toDate
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
-func (r ApiGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) DbsGetOrdersRequest {
 	r.supplierShipmentDateFrom = &supplierShipmentDateFrom
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки.
-func (r ApiGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) DbsGetOrdersRequest {
 	r.supplierShipmentDateTo = &supplierShipmentDateTo
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
-func (r ApiGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) DbsGetOrdersRequest {
 	r.updatedAtFrom = &updatedAtFrom
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.
-func (r ApiGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) DbsGetOrdersRequest {
 	r.updatedAtTo = &updatedAtTo
 	return r
 }
 
 // Способ отгрузки
-func (r ApiGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) DbsGetOrdersRequest {
 	r.dispatchType = &dispatchType
 	return r
 }
 
 // Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета.
-func (r ApiGetOrdersRequest) Fake(fake bool) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) Fake(fake bool) DbsGetOrdersRequest {
 	r.fake = &fake
 	return r
 }
 
 // Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям.
-func (r ApiGetOrdersRequest) HasCis(hasCis bool) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) HasCis(hasCis bool) DbsGetOrdersRequest {
 	r.hasCis = &hasCis
 	return r
 }
 
 // **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).
-func (r ApiGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) DbsGetOrdersRequest {
 	r.onlyWaitingForCancellationApprove = &onlyWaitingForCancellationApprove
 	return r
 }
 
 // Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется.
-func (r ApiGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) DbsGetOrdersRequest {
 	r.onlyEstimatedDelivery = &onlyEstimatedDelivery
 	return r
 }
 
 // Фильтрация заказов по типу покупателя.
-func (r ApiGetOrdersRequest) BuyerType(buyerType OrderBuyerType) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) BuyerType(buyerType OrderBuyerType) DbsGetOrdersRequest {
 	r.buyerType = &buyerType
 	return r
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetOrdersRequest) Page(page int32) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) Page(page int32) DbsGetOrdersRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetOrdersRequest) PageSize(pageSize int32) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) PageSize(pageSize int32) DbsGetOrdersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOrdersRequest) PageToken(pageToken string) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) PageToken(pageToken string) DbsGetOrdersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOrdersRequest) Limit(limit int32) ApiGetOrdersRequest {
+func (r DbsGetOrdersRequest) Limit(limit int32) DbsGetOrdersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
-	return r.ApiService.GetOrdersExecute(r)
+func (r DbsGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
+	return r.DbsService.GetOrdersExecute(r)
 }
 
 /*
@@ -15255,11 +15255,11 @@ GetOrders Информация о нескольких заказах
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetOrdersRequest
+	@return DbsGetOrdersRequest
 */
-func (a *DbsAPIService) GetOrders(ctx context.Context, campaignId int64) ApiGetOrdersRequest {
-	return ApiGetOrdersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOrders(ctx context.Context, campaignId int64) DbsGetOrdersRequest {
+	return DbsGetOrdersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -15268,7 +15268,7 @@ func (a *DbsAPIService) GetOrders(ctx context.Context, campaignId int64) ApiGetO
 // Execute executes the request
 //
 //	@return GetOrdersResponse
-func (a *DbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOrdersExecute(r DbsGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -15496,9 +15496,9 @@ func (a *DbsAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrdersStatsRequest struct {
+type DbsGetOrdersStatsRequest struct {
 	ctx                   context.Context
-	ApiService            *DbsAPIService
+	DbsService            *DbsAPIService
 	campaignId            int64
 	pageToken             *string
 	limit                 *int32
@@ -15506,24 +15506,24 @@ type ApiGetOrdersStatsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOrdersStatsRequest) PageToken(pageToken string) ApiGetOrdersStatsRequest {
+func (r DbsGetOrdersStatsRequest) PageToken(pageToken string) DbsGetOrdersStatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOrdersStatsRequest) Limit(limit int32) ApiGetOrdersStatsRequest {
+func (r DbsGetOrdersStatsRequest) Limit(limit int32) DbsGetOrdersStatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) ApiGetOrdersStatsRequest {
+func (r DbsGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) DbsGetOrdersStatsRequest {
 	r.getOrdersStatsRequest = &getOrdersStatsRequest
 	return r
 }
 
-func (r ApiGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
-	return r.ApiService.GetOrdersStatsExecute(r)
+func (r DbsGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
+	return r.DbsService.GetOrdersStatsExecute(r)
 }
 
 /*
@@ -15548,11 +15548,11 @@ GetOrdersStats Детальная информация по заказам
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetOrdersStatsRequest
+	@return DbsGetOrdersStatsRequest
 */
-func (a *DbsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) ApiGetOrdersStatsRequest {
-	return ApiGetOrdersStatsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) DbsGetOrdersStatsRequest {
+	return DbsGetOrdersStatsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -15561,7 +15561,7 @@ func (a *DbsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) Ap
 // Execute executes the request
 //
 //	@return GetOrdersStatsResponse
-func (a *DbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOrdersStatsExecute(r DbsGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -15725,15 +15725,15 @@ func (a *DbsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetO
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOutletRequest struct {
+type DbsGetOutletRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	outletId   int64
 }
 
-func (r ApiGetOutletRequest) Execute() (*GetOutletResponse, *http.Response, error) {
-	return r.ApiService.GetOutletExecute(r)
+func (r DbsGetOutletRequest) Execute() (*GetOutletResponse, *http.Response, error) {
+	return r.DbsService.GetOutletExecute(r)
 }
 
 /*
@@ -15749,11 +15749,11 @@ GetOutlet Информация об одной точке продаж
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param outletId Идентификатор точки продаж.
-	@return ApiGetOutletRequest
+	@return DbsGetOutletRequest
 */
-func (a *DbsAPIService) GetOutlet(ctx context.Context, campaignId int64, outletId int64) ApiGetOutletRequest {
-	return ApiGetOutletRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOutlet(ctx context.Context, campaignId int64, outletId int64) DbsGetOutletRequest {
+	return DbsGetOutletRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		outletId:   outletId,
@@ -15763,7 +15763,7 @@ func (a *DbsAPIService) GetOutlet(ctx context.Context, campaignId int64, outletI
 // Execute executes the request
 //
 //	@return GetOutletResponse
-func (a *DbsAPIService) GetOutletExecute(r ApiGetOutletRequest) (*GetOutletResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOutletExecute(r DbsGetOutletRequest) (*GetOutletResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -15923,28 +15923,28 @@ func (a *DbsAPIService) GetOutletExecute(r ApiGetOutletRequest) (*GetOutletRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOutletLicensesRequest struct {
+type DbsGetOutletLicensesRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	outletIds  *[]int64
 	ids        *[]int64
 }
 
 // Список идентификаторов точек продаж, для которых нужно получить информацию о лицензиях. Идентификаторы указываются через запятую.  В запросе должен быть либо параметр &#x60;outletIds&#x60;, либо параметр &#x60;ids&#x60;. Запрос с обоими параметрами или без них приведет к ошибке.
-func (r ApiGetOutletLicensesRequest) OutletIds(outletIds []int64) ApiGetOutletLicensesRequest {
+func (r DbsGetOutletLicensesRequest) OutletIds(outletIds []int64) DbsGetOutletLicensesRequest {
 	r.outletIds = &outletIds
 	return r
 }
 
 // Список идентификаторов лицензий.
-func (r ApiGetOutletLicensesRequest) Ids(ids []int64) ApiGetOutletLicensesRequest {
+func (r DbsGetOutletLicensesRequest) Ids(ids []int64) DbsGetOutletLicensesRequest {
 	r.ids = &ids
 	return r
 }
 
-func (r ApiGetOutletLicensesRequest) Execute() (*GetOutletLicensesResponse, *http.Response, error) {
-	return r.ApiService.GetOutletLicensesExecute(r)
+func (r DbsGetOutletLicensesRequest) Execute() (*GetOutletLicensesResponse, *http.Response, error) {
+	return r.DbsService.GetOutletLicensesExecute(r)
 }
 
 /*
@@ -15959,11 +15959,11 @@ GetOutletLicenses Информация о лицензиях для точек �
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetOutletLicensesRequest
+	@return DbsGetOutletLicensesRequest
 */
-func (a *DbsAPIService) GetOutletLicenses(ctx context.Context, campaignId int64) ApiGetOutletLicensesRequest {
-	return ApiGetOutletLicensesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOutletLicenses(ctx context.Context, campaignId int64) DbsGetOutletLicensesRequest {
+	return DbsGetOutletLicensesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -15972,7 +15972,7 @@ func (a *DbsAPIService) GetOutletLicenses(ctx context.Context, campaignId int64)
 // Execute executes the request
 //
 //	@return GetOutletLicensesResponse
-func (a *DbsAPIService) GetOutletLicensesExecute(r ApiGetOutletLicensesRequest) (*GetOutletLicensesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOutletLicensesExecute(r DbsGetOutletLicensesRequest) (*GetOutletLicensesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -16134,9 +16134,9 @@ func (a *DbsAPIService) GetOutletLicensesExecute(r ApiGetOutletLicensesRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOutletsRequest struct {
+type DbsGetOutletsRequest struct {
 	ctx            context.Context
-	ApiService     *DbsAPIService
+	DbsService     *DbsAPIService
 	campaignId     int64
 	pageToken      *string
 	regionId       *int64
@@ -16145,32 +16145,32 @@ type ApiGetOutletsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOutletsRequest) PageToken(pageToken string) ApiGetOutletsRequest {
+func (r DbsGetOutletsRequest) PageToken(pageToken string) DbsGetOutletsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Идентификатор региона. Если задать идентификатор родительского региона любого уровня, в выходных данных будут отображены точки продаж всех дочерних регионов. Идентификатор региона можно получить c помощью метода [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetOutletsRequest) RegionId(regionId int64) ApiGetOutletsRequest {
+func (r DbsGetOutletsRequest) RegionId(regionId int64) DbsGetOutletsRequest {
 	r.regionId = &regionId
 	return r
 }
 
 // Идентификатор точки продаж, присвоенный магазином.
-func (r ApiGetOutletsRequest) ShopOutletCode(shopOutletCode string) ApiGetOutletsRequest {
+func (r DbsGetOutletsRequest) ShopOutletCode(shopOutletCode string) DbsGetOutletsRequest {
 	r.shopOutletCode = &shopOutletCode
 	return r
 }
 
 // {% note warning \&quot;Вместо него используйте &#x60;region_id&#x60;.\&quot; %}     {% endnote %}
 // Deprecated
-func (r ApiGetOutletsRequest) RegionId2(regionId2 int64) ApiGetOutletsRequest {
+func (r DbsGetOutletsRequest) RegionId2(regionId2 int64) DbsGetOutletsRequest {
 	r.regionId2 = &regionId2
 	return r
 }
 
-func (r ApiGetOutletsRequest) Execute() (*GetOutletsResponse, *http.Response, error) {
-	return r.ApiService.GetOutletsExecute(r)
+func (r DbsGetOutletsRequest) Execute() (*GetOutletsResponse, *http.Response, error) {
+	return r.DbsService.GetOutletsExecute(r)
 }
 
 /*
@@ -16185,11 +16185,11 @@ GetOutlets Информация о нескольких точках прода�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetOutletsRequest
+	@return DbsGetOutletsRequest
 */
-func (a *DbsAPIService) GetOutlets(ctx context.Context, campaignId int64) ApiGetOutletsRequest {
-	return ApiGetOutletsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetOutlets(ctx context.Context, campaignId int64) DbsGetOutletsRequest {
+	return DbsGetOutletsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -16198,7 +16198,7 @@ func (a *DbsAPIService) GetOutlets(ctx context.Context, campaignId int64) ApiGet
 // Execute executes the request
 //
 //	@return GetOutletsResponse
-func (a *DbsAPIService) GetOutletsExecute(r ApiGetOutletsRequest) (*GetOutletsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetOutletsExecute(r DbsGetOutletsRequest) (*GetOutletsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -16366,9 +16366,9 @@ func (a *DbsAPIService) GetOutletsExecute(r ApiGetOutletsRequest) (*GetOutletsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPagedWarehousesRequest struct {
+type DbsGetPagedWarehousesRequest struct {
 	ctx                       context.Context
-	ApiService                *DbsAPIService
+	DbsService                *DbsAPIService
 	businessId                int64
 	pageToken                 *string
 	limit                     *int32
@@ -16376,24 +16376,24 @@ type ApiGetPagedWarehousesRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetPagedWarehousesRequest) PageToken(pageToken string) ApiGetPagedWarehousesRequest {
+func (r DbsGetPagedWarehousesRequest) PageToken(pageToken string) DbsGetPagedWarehousesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetPagedWarehousesRequest) Limit(limit int32) ApiGetPagedWarehousesRequest {
+func (r DbsGetPagedWarehousesRequest) Limit(limit int32) DbsGetPagedWarehousesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) ApiGetPagedWarehousesRequest {
+func (r DbsGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) DbsGetPagedWarehousesRequest {
 	r.getPagedWarehousesRequest = &getPagedWarehousesRequest
 	return r
 }
 
-func (r ApiGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
-	return r.ApiService.GetPagedWarehousesExecute(r)
+func (r DbsGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
+	return r.DbsService.GetPagedWarehousesExecute(r)
 }
 
 /*
@@ -16414,11 +16414,11 @@ GetPagedWarehouses Список складов
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetPagedWarehousesRequest
+	@return DbsGetPagedWarehousesRequest
 */
-func (a *DbsAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) ApiGetPagedWarehousesRequest {
-	return ApiGetPagedWarehousesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) DbsGetPagedWarehousesRequest {
+	return DbsGetPagedWarehousesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -16427,7 +16427,7 @@ func (a *DbsAPIService) GetPagedWarehouses(ctx context.Context, businessId int64
 // Execute executes the request
 //
 //	@return GetPagedWarehousesResponse
-func (a *DbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetPagedWarehousesExecute(r DbsGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -16580,9 +16580,9 @@ func (a *DbsAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPricesRequest struct {
+type DbsGetPricesRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	pageToken  *string
 	limit      *int32
@@ -16590,25 +16590,25 @@ type ApiGetPricesRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetPricesRequest) PageToken(pageToken string) ApiGetPricesRequest {
+func (r DbsGetPricesRequest) PageToken(pageToken string) DbsGetPricesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetPricesRequest) Limit(limit int32) ApiGetPricesRequest {
+func (r DbsGetPricesRequest) Limit(limit int32) DbsGetPricesRequest {
 	r.limit = &limit
 	return r
 }
 
 // Фильтр по нахождению в архиве.
-func (r ApiGetPricesRequest) Archived(archived bool) ApiGetPricesRequest {
+func (r DbsGetPricesRequest) Archived(archived bool) DbsGetPricesRequest {
 	r.archived = &archived
 	return r
 }
 
-func (r ApiGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
-	return r.ApiService.GetPricesExecute(r)
+func (r DbsGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
+	return r.DbsService.GetPricesExecute(r)
 }
 
 /*
@@ -16637,13 +16637,13 @@ GetPrices Список цен
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetPricesRequest
+	@return DbsGetPricesRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetPrices(ctx context.Context, campaignId int64) ApiGetPricesRequest {
-	return ApiGetPricesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetPrices(ctx context.Context, campaignId int64) DbsGetPricesRequest {
+	return DbsGetPricesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -16654,7 +16654,7 @@ func (a *DbsAPIService) GetPrices(ctx context.Context, campaignId int64) ApiGetP
 //	@return GetPricesResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetPricesExecute(r DbsGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -16822,9 +16822,9 @@ func (a *DbsAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPricesByOfferIdsRequest struct {
+type DbsGetPricesByOfferIdsRequest struct {
 	ctx                        context.Context
-	ApiService                 *DbsAPIService
+	DbsService                 *DbsAPIService
 	campaignId                 int64
 	pageToken                  *string
 	limit                      *int32
@@ -16832,24 +16832,24 @@ type ApiGetPricesByOfferIdsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetPricesByOfferIdsRequest) PageToken(pageToken string) ApiGetPricesByOfferIdsRequest {
+func (r DbsGetPricesByOfferIdsRequest) PageToken(pageToken string) DbsGetPricesByOfferIdsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetPricesByOfferIdsRequest) Limit(limit int32) ApiGetPricesByOfferIdsRequest {
+func (r DbsGetPricesByOfferIdsRequest) Limit(limit int32) DbsGetPricesByOfferIdsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) ApiGetPricesByOfferIdsRequest {
+func (r DbsGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) DbsGetPricesByOfferIdsRequest {
 	r.getPricesByOfferIdsRequest = &getPricesByOfferIdsRequest
 	return r
 }
 
-func (r ApiGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
-	return r.ApiService.GetPricesByOfferIdsExecute(r)
+func (r DbsGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
+	return r.DbsService.GetPricesByOfferIdsExecute(r)
 }
 
 /*
@@ -16874,11 +16874,11 @@ GetPricesByOfferIds Просмотр цен на указанные товары
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetPricesByOfferIdsRequest
+	@return DbsGetPricesByOfferIdsRequest
 */
-func (a *DbsAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) ApiGetPricesByOfferIdsRequest {
-	return ApiGetPricesByOfferIdsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) DbsGetPricesByOfferIdsRequest {
+	return DbsGetPricesByOfferIdsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -16887,7 +16887,7 @@ func (a *DbsAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int6
 // Execute executes the request
 //
 //	@return GetPricesByOfferIdsResponse
-func (a *DbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetPricesByOfferIdsExecute(r DbsGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -17051,34 +17051,34 @@ func (a *DbsAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPromoOffersRequest struct {
+type DbsGetPromoOffersRequest struct {
 	ctx                   context.Context
-	ApiService            *DbsAPIService
+	DbsService            *DbsAPIService
 	businessId            int64
 	getPromoOffersRequest *GetPromoOffersRequest
 	pageToken             *string
 	limit                 *int32
 }
 
-func (r ApiGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) ApiGetPromoOffersRequest {
+func (r DbsGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) DbsGetPromoOffersRequest {
 	r.getPromoOffersRequest = &getPromoOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetPromoOffersRequest) PageToken(pageToken string) ApiGetPromoOffersRequest {
+func (r DbsGetPromoOffersRequest) PageToken(pageToken string) DbsGetPromoOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetPromoOffersRequest) Limit(limit int32) ApiGetPromoOffersRequest {
+func (r DbsGetPromoOffersRequest) Limit(limit int32) DbsGetPromoOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
-	return r.ApiService.GetPromoOffersExecute(r)
+func (r DbsGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
+	return r.DbsService.GetPromoOffersExecute(r)
 }
 
 /*
@@ -17101,11 +17101,11 @@ GetPromoOffers Получение списка товаров, которые у
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetPromoOffersRequest
+	@return DbsGetPromoOffersRequest
 */
-func (a *DbsAPIService) GetPromoOffers(ctx context.Context, businessId int64) ApiGetPromoOffersRequest {
-	return ApiGetPromoOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetPromoOffers(ctx context.Context, businessId int64) DbsGetPromoOffersRequest {
+	return DbsGetPromoOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -17114,7 +17114,7 @@ func (a *DbsAPIService) GetPromoOffers(ctx context.Context, businessId int64) Ap
 // Execute executes the request
 //
 //	@return GetPromoOffersResponse
-func (a *DbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) GetPromoOffersExecute(r DbsGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -17281,20 +17281,20 @@ func (a *DbsAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPromosRequest struct {
+type DbsGetPromosRequest struct {
 	ctx              context.Context
-	ApiService       *DbsAPIService
+	DbsService       *DbsAPIService
 	businessId       int64
 	getPromosRequest *GetPromosRequest
 }
 
-func (r ApiGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) ApiGetPromosRequest {
+func (r DbsGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) DbsGetPromosRequest {
 	r.getPromosRequest = &getPromosRequest
 	return r
 }
 
-func (r ApiGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
-	return r.ApiService.GetPromosExecute(r)
+func (r DbsGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
+	return r.DbsService.GetPromosExecute(r)
 }
 
 /*
@@ -17319,11 +17319,11 @@ GetPromos Получение списка акций
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetPromosRequest
+	@return DbsGetPromosRequest
 */
-func (a *DbsAPIService) GetPromos(ctx context.Context, businessId int64) ApiGetPromosRequest {
-	return ApiGetPromosRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetPromos(ctx context.Context, businessId int64) DbsGetPromosRequest {
+	return DbsGetPromosRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -17332,7 +17332,7 @@ func (a *DbsAPIService) GetPromos(ctx context.Context, businessId int64) ApiGetP
 // Execute executes the request
 //
 //	@return GetPromosResponse
-func (a *DbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
+func (a *DbsAPIService) GetPromosExecute(r DbsGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -17490,14 +17490,14 @@ func (a *DbsAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetQualityRatingDetailsRequest struct {
+type DbsGetQualityRatingDetailsRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 }
 
-func (r ApiGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
-	return r.ApiService.GetQualityRatingDetailsExecute(r)
+func (r DbsGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
+	return r.DbsService.GetQualityRatingDetailsExecute(r)
 }
 
 /*
@@ -17512,11 +17512,11 @@ GetQualityRatingDetails Заказы, которые повлияли на ин�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetQualityRatingDetailsRequest
+	@return DbsGetQualityRatingDetailsRequest
 */
-func (a *DbsAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) ApiGetQualityRatingDetailsRequest {
-	return ApiGetQualityRatingDetailsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) DbsGetQualityRatingDetailsRequest {
+	return DbsGetQualityRatingDetailsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -17525,7 +17525,7 @@ func (a *DbsAPIService) GetQualityRatingDetails(ctx context.Context, campaignId 
 // Execute executes the request
 //
 //	@return GetQualityRatingDetailsResponse
-func (a *DbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDetailsRequest) (*GetQualityRatingDetailsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetQualityRatingDetailsExecute(r DbsGetQualityRatingDetailsRequest) (*GetQualityRatingDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -17681,20 +17681,20 @@ func (a *DbsAPIService) GetQualityRatingDetailsExecute(r ApiGetQualityRatingDeta
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetQualityRatingsRequest struct {
+type DbsGetQualityRatingsRequest struct {
 	ctx                     context.Context
-	ApiService              *DbsAPIService
+	DbsService              *DbsAPIService
 	businessId              int64
 	getQualityRatingRequest *GetQualityRatingRequest
 }
 
-func (r ApiGetQualityRatingsRequest) GetQualityRatingRequest(getQualityRatingRequest GetQualityRatingRequest) ApiGetQualityRatingsRequest {
+func (r DbsGetQualityRatingsRequest) GetQualityRatingRequest(getQualityRatingRequest GetQualityRatingRequest) DbsGetQualityRatingsRequest {
 	r.getQualityRatingRequest = &getQualityRatingRequest
 	return r
 }
 
-func (r ApiGetQualityRatingsRequest) Execute() (*GetQualityRatingResponse, *http.Response, error) {
-	return r.ApiService.GetQualityRatingsExecute(r)
+func (r DbsGetQualityRatingsRequest) Execute() (*GetQualityRatingResponse, *http.Response, error) {
+	return r.DbsService.GetQualityRatingsExecute(r)
 }
 
 /*
@@ -17711,11 +17711,11 @@ GetQualityRatings Индекс качества магазинов
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetQualityRatingsRequest
+	@return DbsGetQualityRatingsRequest
 */
-func (a *DbsAPIService) GetQualityRatings(ctx context.Context, businessId int64) ApiGetQualityRatingsRequest {
-	return ApiGetQualityRatingsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetQualityRatings(ctx context.Context, businessId int64) DbsGetQualityRatingsRequest {
+	return DbsGetQualityRatingsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -17724,7 +17724,7 @@ func (a *DbsAPIService) GetQualityRatings(ctx context.Context, businessId int64)
 // Execute executes the request
 //
 //	@return GetQualityRatingResponse
-func (a *DbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) (*GetQualityRatingResponse, *http.Response, error) {
+func (a *DbsAPIService) GetQualityRatingsExecute(r DbsGetQualityRatingsRequest) (*GetQualityRatingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -17885,13 +17885,13 @@ func (a *DbsAPIService) GetQualityRatingsExecute(r ApiGetQualityRatingsRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetRegionsCodesRequest struct {
+type DbsGetRegionsCodesRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 }
 
-func (r ApiGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
-	return r.ApiService.GetRegionsCodesExecute(r)
+func (r DbsGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
+	return r.DbsService.GetRegionsCodesExecute(r)
 }
 
 /*
@@ -17907,11 +17907,11 @@ GetRegionsCodes Список допустимых кодов стран
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRegionsCodesRequest
+	@return DbsGetRegionsCodesRequest
 */
-func (a *DbsAPIService) GetRegionsCodes(ctx context.Context) ApiGetRegionsCodesRequest {
-	return ApiGetRegionsCodesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetRegionsCodes(ctx context.Context) DbsGetRegionsCodesRequest {
+	return DbsGetRegionsCodesRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -17919,7 +17919,7 @@ func (a *DbsAPIService) GetRegionsCodes(ctx context.Context) ApiGetRegionsCodesR
 // Execute executes the request
 //
 //	@return GetRegionsCodesResponse
-func (a *DbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetRegionsCodesExecute(r DbsGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -18060,14 +18060,14 @@ func (a *DbsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReportInfoRequest struct {
+type DbsGetReportInfoRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	reportId   string
 }
 
-func (r ApiGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
-	return r.ApiService.GetReportInfoExecute(r)
+func (r DbsGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
+	return r.DbsService.GetReportInfoExecute(r)
 }
 
 /*
@@ -18084,11 +18084,11 @@ GetReportInfo Получение заданного отчета
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param reportId Идентификатор отчета, который вы получили после запуска генерации.
-	@return ApiGetReportInfoRequest
+	@return DbsGetReportInfoRequest
 */
-func (a *DbsAPIService) GetReportInfo(ctx context.Context, reportId string) ApiGetReportInfoRequest {
-	return ApiGetReportInfoRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetReportInfo(ctx context.Context, reportId string) DbsGetReportInfoRequest {
+	return DbsGetReportInfoRequest{
+		DbsService: a,
 		ctx:        ctx,
 		reportId:   reportId,
 	}
@@ -18097,7 +18097,7 @@ func (a *DbsAPIService) GetReportInfo(ctx context.Context, reportId string) ApiG
 // Execute executes the request
 //
 //	@return GetReportInfoResponse
-func (a *DbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
+func (a *DbsAPIService) GetReportInfoExecute(r DbsGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -18256,16 +18256,16 @@ func (a *DbsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetRep
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnRequest struct {
+type DbsGetReturnRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 	returnId   int64
 }
 
-func (r ApiGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
-	return r.ApiService.GetReturnExecute(r)
+func (r DbsGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
+	return r.DbsService.GetReturnExecute(r)
 }
 
 /*
@@ -18290,11 +18290,11 @@ GetReturn Информация о невыкупе или возврате
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
 	@param returnId Идентификатор невыкупа или возврата.
-	@return ApiGetReturnRequest
+	@return DbsGetReturnRequest
 */
-func (a *DbsAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiGetReturnRequest {
-	return ApiGetReturnRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) DbsGetReturnRequest {
+	return DbsGetReturnRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -18305,7 +18305,7 @@ func (a *DbsAPIService) GetReturn(ctx context.Context, campaignId int64, orderId
 // Execute executes the request
 //
 //	@return GetReturnResponse
-func (a *DbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnResponse, *http.Response, error) {
+func (a *DbsAPIService) GetReturnExecute(r DbsGetReturnRequest) (*GetReturnResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -18463,16 +18463,16 @@ func (a *DbsAPIService) GetReturnExecute(r ApiGetReturnRequest) (*GetReturnRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnApplicationRequest struct {
+type DbsGetReturnApplicationRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 	returnId   int64
 }
 
-func (r ApiGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GetReturnApplicationExecute(r)
+func (r DbsGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
+	return r.DbsService.GetReturnApplicationExecute(r)
 }
 
 /*
@@ -18489,11 +18489,11 @@ GetReturnApplication Получение заявления на возврат
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
 	@param returnId Идентификатор невыкупа или возврата.
-	@return ApiGetReturnApplicationRequest
+	@return DbsGetReturnApplicationRequest
 */
-func (a *DbsAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiGetReturnApplicationRequest {
-	return ApiGetReturnApplicationRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) DbsGetReturnApplicationRequest {
+	return DbsGetReturnApplicationRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -18504,7 +18504,7 @@ func (a *DbsAPIService) GetReturnApplication(ctx context.Context, campaignId int
 // Execute executes the request
 //
 //	@return *os.File
-func (a *DbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationRequest) (*os.File, *http.Response, error) {
+func (a *DbsAPIService) GetReturnApplicationExecute(r DbsGetReturnApplicationRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -18662,9 +18662,9 @@ func (a *DbsAPIService) GetReturnApplicationExecute(r ApiGetReturnApplicationReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnPhotoRequest struct {
+type DbsGetReturnPhotoRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 	returnId   int64
@@ -18672,8 +18672,8 @@ type ApiGetReturnPhotoRequest struct {
 	imageHash  string
 }
 
-func (r ApiGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
-	return r.ApiService.GetReturnPhotoExecute(r)
+func (r DbsGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
+	return r.DbsService.GetReturnPhotoExecute(r)
 }
 
 /*
@@ -18692,11 +18692,11 @@ GetReturnPhoto Получение фотографий товаров в воз�
 	@param returnId Идентификатор невыкупа или возврата.
 	@param itemId Идентификатор товара в возврате.
 	@param imageHash Хеш ссылки изображения для загрузки.
-	@return ApiGetReturnPhotoRequest
+	@return DbsGetReturnPhotoRequest
 */
-func (a *DbsAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) ApiGetReturnPhotoRequest {
-	return ApiGetReturnPhotoRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) DbsGetReturnPhotoRequest {
+	return DbsGetReturnPhotoRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -18709,7 +18709,7 @@ func (a *DbsAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, or
 // Execute executes the request
 //
 //	@return *os.File
-func (a *DbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.File, *http.Response, error) {
+func (a *DbsAPIService) GetReturnPhotoExecute(r DbsGetReturnPhotoRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -18869,9 +18869,9 @@ func (a *DbsAPIService) GetReturnPhotoExecute(r ApiGetReturnPhotoRequest) (*os.F
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReturnsRequest struct {
+type DbsGetReturnsRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	pageToken  *string
 	limit      *int32
@@ -18885,63 +18885,63 @@ type ApiGetReturnsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetReturnsRequest) PageToken(pageToken string) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) PageToken(pageToken string) DbsGetReturnsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetReturnsRequest) Limit(limit int32) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) Limit(limit int32) DbsGetReturnsRequest {
 	r.limit = &limit
 	return r
 }
 
 // Идентификаторы заказов — для фильтрации результатов.  Несколько идентификаторов перечисляются через запятую без пробела.
-func (r ApiGetReturnsRequest) OrderIds(orderIds []int64) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) OrderIds(orderIds []int64) DbsGetReturnsRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
 // Статусы невыкупов или возвратов — для фильтрации результатов.  Несколько статусов перечисляются через запятую.
-func (r ApiGetReturnsRequest) Statuses(statuses []RefundStatusType) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) Statuses(statuses []RefundStatusType) DbsGetReturnsRequest {
 	r.statuses = &statuses
 	return r
 }
 
 // Тип заказа для фильтрации:  * &#x60;UNREDEEMED&#x60; — невыкуп.  * &#x60;RETURN&#x60; — возврат.  Если не указать, в ответе будут и невыкупы, и возвраты.
-func (r ApiGetReturnsRequest) Type_(type_ ReturnType) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) Type_(type_ ReturnType) DbsGetReturnsRequest {
 	r.type_ = &type_
 	return r
 }
 
 // Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.
-func (r ApiGetReturnsRequest) FromDate(fromDate string) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) FromDate(fromDate string) DbsGetReturnsRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
 // Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.
-func (r ApiGetReturnsRequest) ToDate(toDate string) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) ToDate(toDate string) DbsGetReturnsRequest {
 	r.toDate = &toDate
 	return r
 }
 
 // {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
-func (r ApiGetReturnsRequest) FromDate2(fromDate2 string) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) FromDate2(fromDate2 string) DbsGetReturnsRequest {
 	r.fromDate2 = &fromDate2
 	return r
 }
 
 // {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
-func (r ApiGetReturnsRequest) ToDate2(toDate2 string) ApiGetReturnsRequest {
+func (r DbsGetReturnsRequest) ToDate2(toDate2 string) DbsGetReturnsRequest {
 	r.toDate2 = &toDate2
 	return r
 }
 
-func (r ApiGetReturnsRequest) Execute() (*GetReturnsResponse, *http.Response, error) {
-	return r.ApiService.GetReturnsExecute(r)
+func (r DbsGetReturnsRequest) Execute() (*GetReturnsResponse, *http.Response, error) {
+	return r.DbsService.GetReturnsExecute(r)
 }
 
 /*
@@ -18966,11 +18966,11 @@ GetReturns Список невыкупов и возвратов
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetReturnsRequest
+	@return DbsGetReturnsRequest
 */
-func (a *DbsAPIService) GetReturns(ctx context.Context, campaignId int64) ApiGetReturnsRequest {
-	return ApiGetReturnsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetReturns(ctx context.Context, campaignId int64) DbsGetReturnsRequest {
+	return DbsGetReturnsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -18979,7 +18979,7 @@ func (a *DbsAPIService) GetReturns(ctx context.Context, campaignId int64) ApiGet
 // Execute executes the request
 //
 //	@return GetReturnsResponse
-func (a *DbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetReturnsExecute(r DbsGetReturnsRequest) (*GetReturnsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -19162,9 +19162,9 @@ func (a *DbsAPIService) GetReturnsExecute(r ApiGetReturnsRequest) (*GetReturnsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetStocksRequest struct {
+type DbsGetStocksRequest struct {
 	ctx                       context.Context
-	ApiService                *DbsAPIService
+	DbsService                *DbsAPIService
 	campaignId                int64
 	pageToken                 *string
 	limit                     *int32
@@ -19172,24 +19172,24 @@ type ApiGetStocksRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetStocksRequest) PageToken(pageToken string) ApiGetStocksRequest {
+func (r DbsGetStocksRequest) PageToken(pageToken string) DbsGetStocksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetStocksRequest) Limit(limit int32) ApiGetStocksRequest {
+func (r DbsGetStocksRequest) Limit(limit int32) DbsGetStocksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) ApiGetStocksRequest {
+func (r DbsGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) DbsGetStocksRequest {
 	r.getWarehouseStocksRequest = &getWarehouseStocksRequest
 	return r
 }
 
-func (r ApiGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
-	return r.ApiService.GetStocksExecute(r)
+func (r DbsGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
+	return r.DbsService.GetStocksExecute(r)
 }
 
 /*
@@ -19214,11 +19214,11 @@ GetStocks Информация об остатках и оборачиваемо
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetStocksRequest
+	@return DbsGetStocksRequest
 */
-func (a *DbsAPIService) GetStocks(ctx context.Context, campaignId int64) ApiGetStocksRequest {
-	return ApiGetStocksRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetStocks(ctx context.Context, campaignId int64) DbsGetStocksRequest {
+	return DbsGetStocksRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -19227,7 +19227,7 @@ func (a *DbsAPIService) GetStocks(ctx context.Context, campaignId int64) ApiGetS
 // Execute executes the request
 //
 //	@return GetWarehouseStocksResponse
-func (a *DbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
+func (a *DbsAPIService) GetStocksExecute(r DbsGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -19380,20 +19380,20 @@ func (a *DbsAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseSt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedOfferMappingEntriesRequest struct {
+type DbsGetSuggestedOfferMappingEntriesRequest struct {
 	ctx                                    context.Context
-	ApiService                             *DbsAPIService
+	DbsService                             *DbsAPIService
 	campaignId                             int64
 	getSuggestedOfferMappingEntriesRequest *GetSuggestedOfferMappingEntriesRequest
 }
 
-func (r ApiGetSuggestedOfferMappingEntriesRequest) GetSuggestedOfferMappingEntriesRequest(getSuggestedOfferMappingEntriesRequest GetSuggestedOfferMappingEntriesRequest) ApiGetSuggestedOfferMappingEntriesRequest {
+func (r DbsGetSuggestedOfferMappingEntriesRequest) GetSuggestedOfferMappingEntriesRequest(getSuggestedOfferMappingEntriesRequest GetSuggestedOfferMappingEntriesRequest) DbsGetSuggestedOfferMappingEntriesRequest {
 	r.getSuggestedOfferMappingEntriesRequest = &getSuggestedOfferMappingEntriesRequest
 	return r
 }
 
-func (r ApiGetSuggestedOfferMappingEntriesRequest) Execute() (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedOfferMappingEntriesExecute(r)
+func (r DbsGetSuggestedOfferMappingEntriesRequest) Execute() (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
+	return r.DbsService.GetSuggestedOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -19418,13 +19418,13 @@ GetSuggestedOfferMappingEntries Рекомендованные карточки 
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetSuggestedOfferMappingEntriesRequest
+	@return DbsGetSuggestedOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) ApiGetSuggestedOfferMappingEntriesRequest {
-	return ApiGetSuggestedOfferMappingEntriesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) DbsGetSuggestedOfferMappingEntriesRequest {
+	return DbsGetSuggestedOfferMappingEntriesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -19435,7 +19435,7 @@ func (a *DbsAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, cam
 //	@return GetSuggestedOfferMappingEntriesResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggestedOfferMappingEntriesRequest) (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetSuggestedOfferMappingEntriesExecute(r DbsGetSuggestedOfferMappingEntriesRequest) (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -19596,20 +19596,20 @@ func (a *DbsAPIService) GetSuggestedOfferMappingEntriesExecute(r ApiGetSuggested
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedOfferMappingsRequest struct {
+type DbsGetSuggestedOfferMappingsRequest struct {
 	ctx                              context.Context
-	ApiService                       *DbsAPIService
+	DbsService                       *DbsAPIService
 	businessId                       int64
 	getSuggestedOfferMappingsRequest *GetSuggestedOfferMappingsRequest
 }
 
-func (r ApiGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) ApiGetSuggestedOfferMappingsRequest {
+func (r DbsGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) DbsGetSuggestedOfferMappingsRequest {
 	r.getSuggestedOfferMappingsRequest = &getSuggestedOfferMappingsRequest
 	return r
 }
 
-func (r ApiGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedOfferMappingsExecute(r)
+func (r DbsGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+	return r.DbsService.GetSuggestedOfferMappingsExecute(r)
 }
 
 /*
@@ -19641,13 +19641,13 @@ GetSuggestedOfferMappings Просмотр карточек на Маркете,
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetSuggestedOfferMappingsRequest
+	@return DbsGetSuggestedOfferMappingsRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) ApiGetSuggestedOfferMappingsRequest {
-	return ApiGetSuggestedOfferMappingsRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) DbsGetSuggestedOfferMappingsRequest {
+	return DbsGetSuggestedOfferMappingsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -19658,7 +19658,7 @@ func (a *DbsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessI
 //	@return GetSuggestedOfferMappingsResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+func (a *DbsAPIService) GetSuggestedOfferMappingsExecute(r DbsGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -19816,20 +19816,20 @@ func (a *DbsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferM
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedPricesRequest struct {
+type DbsGetSuggestedPricesRequest struct {
 	ctx                  context.Context
-	ApiService           *DbsAPIService
+	DbsService           *DbsAPIService
 	campaignId           int64
 	suggestPricesRequest *SuggestPricesRequest
 }
 
-func (r ApiGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) ApiGetSuggestedPricesRequest {
+func (r DbsGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) DbsGetSuggestedPricesRequest {
 	r.suggestPricesRequest = &suggestPricesRequest
 	return r
 }
 
-func (r ApiGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedPricesExecute(r)
+func (r DbsGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
+	return r.DbsService.GetSuggestedPricesExecute(r)
 }
 
 /*
@@ -19864,13 +19864,13 @@ GetSuggestedPrices Цены для продвижения товаров
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetSuggestedPricesRequest
+	@return DbsGetSuggestedPricesRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) ApiGetSuggestedPricesRequest {
-	return ApiGetSuggestedPricesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) DbsGetSuggestedPricesRequest {
+	return DbsGetSuggestedPricesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -19881,7 +19881,7 @@ func (a *DbsAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64
 //	@return SuggestPricesResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetSuggestedPricesExecute(r DbsGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -20042,14 +20042,14 @@ func (a *DbsAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetWarehousesRequest struct {
+type DbsGetWarehousesRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	businessId int64
 }
 
-func (r ApiGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
-	return r.ApiService.GetWarehousesExecute(r)
+func (r DbsGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
+	return r.DbsService.GetWarehousesExecute(r)
 }
 
 /*
@@ -20072,13 +20072,13 @@ GetWarehouses Список складов и групп складов
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetWarehousesRequest
+	@return DbsGetWarehousesRequest
 
 Deprecated
 */
-func (a *DbsAPIService) GetWarehouses(ctx context.Context, businessId int64) ApiGetWarehousesRequest {
-	return ApiGetWarehousesRequest{
-		ApiService: a,
+func (a *DbsAPIService) GetWarehouses(ctx context.Context, businessId int64) DbsGetWarehousesRequest {
+	return DbsGetWarehousesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -20089,7 +20089,7 @@ func (a *DbsAPIService) GetWarehouses(ctx context.Context, businessId int64) Api
 //	@return GetWarehousesResponse
 //
 // Deprecated
-func (a *DbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
+func (a *DbsAPIService) GetWarehousesExecute(r DbsGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -20245,21 +20245,21 @@ func (a *DbsAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWar
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProvideOrderDigitalCodesRequest struct {
+type DbsProvideOrderDigitalCodesRequest struct {
 	ctx                             context.Context
-	ApiService                      *DbsAPIService
+	DbsService                      *DbsAPIService
 	campaignId                      int64
 	orderId                         int64
 	provideOrderDigitalCodesRequest *ProvideOrderDigitalCodesRequest
 }
 
-func (r ApiProvideOrderDigitalCodesRequest) ProvideOrderDigitalCodesRequest(provideOrderDigitalCodesRequest ProvideOrderDigitalCodesRequest) ApiProvideOrderDigitalCodesRequest {
+func (r DbsProvideOrderDigitalCodesRequest) ProvideOrderDigitalCodesRequest(provideOrderDigitalCodesRequest ProvideOrderDigitalCodesRequest) DbsProvideOrderDigitalCodesRequest {
 	r.provideOrderDigitalCodesRequest = &provideOrderDigitalCodesRequest
 	return r
 }
 
-func (r ApiProvideOrderDigitalCodesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.ProvideOrderDigitalCodesExecute(r)
+func (r DbsProvideOrderDigitalCodesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.ProvideOrderDigitalCodesExecute(r)
 }
 
 /*
@@ -20289,11 +20289,11 @@ ProvideOrderDigitalCodes Передача ключей цифровых това
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiProvideOrderDigitalCodesRequest
+	@return DbsProvideOrderDigitalCodesRequest
 */
-func (a *DbsAPIService) ProvideOrderDigitalCodes(ctx context.Context, campaignId int64, orderId int64) ApiProvideOrderDigitalCodesRequest {
-	return ApiProvideOrderDigitalCodesRequest{
-		ApiService: a,
+func (a *DbsAPIService) ProvideOrderDigitalCodes(ctx context.Context, campaignId int64, orderId int64) DbsProvideOrderDigitalCodesRequest {
+	return DbsProvideOrderDigitalCodesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -20303,7 +20303,7 @@ func (a *DbsAPIService) ProvideOrderDigitalCodes(ctx context.Context, campaignId
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigitalCodesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) ProvideOrderDigitalCodesExecute(r DbsProvideOrderDigitalCodesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -20465,21 +20465,21 @@ func (a *DbsAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigital
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProvideOrderItemIdentifiersRequest struct {
+type DbsProvideOrderItemIdentifiersRequest struct {
 	ctx                                context.Context
-	ApiService                         *DbsAPIService
+	DbsService                         *DbsAPIService
 	campaignId                         int64
 	orderId                            int64
 	provideOrderItemIdentifiersRequest *ProvideOrderItemIdentifiersRequest
 }
 
-func (r ApiProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) ApiProvideOrderItemIdentifiersRequest {
+func (r DbsProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) DbsProvideOrderItemIdentifiersRequest {
 	r.provideOrderItemIdentifiersRequest = &provideOrderItemIdentifiersRequest
 	return r
 }
 
-func (r ApiProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
-	return r.ApiService.ProvideOrderItemIdentifiersExecute(r)
+func (r DbsProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+	return r.DbsService.ProvideOrderItemIdentifiersExecute(r)
 }
 
 /*
@@ -20517,11 +20517,11 @@ ProvideOrderItemIdentifiers Передача кодов маркировки е�
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiProvideOrderItemIdentifiersRequest
+	@return DbsProvideOrderItemIdentifiersRequest
 */
-func (a *DbsAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) ApiProvideOrderItemIdentifiersRequest {
-	return ApiProvideOrderItemIdentifiersRequest{
-		ApiService: a,
+func (a *DbsAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) DbsProvideOrderItemIdentifiersRequest {
+	return DbsProvideOrderItemIdentifiersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -20531,7 +20531,7 @@ func (a *DbsAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaig
 // Execute executes the request
 //
 //	@return ProvideOrderItemIdentifiersResponse
-func (a *DbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+func (a *DbsAPIService) ProvideOrderItemIdentifiersExecute(r DbsProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -20693,21 +20693,21 @@ func (a *DbsAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItem
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPutBidsForBusinessRequest struct {
+type DbsPutBidsForBusinessRequest struct {
 	ctx               context.Context
-	ApiService        *DbsAPIService
+	DbsService        *DbsAPIService
 	businessId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
 
 // description
-func (r ApiPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) ApiPutBidsForBusinessRequest {
+func (r DbsPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) DbsPutBidsForBusinessRequest {
 	r.putSkuBidsRequest = &putSkuBidsRequest
 	return r
 }
 
-func (r ApiPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.PutBidsForBusinessExecute(r)
+func (r DbsPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.PutBidsForBusinessExecute(r)
 }
 
 /*
@@ -20754,11 +20754,11 @@ PutBidsForBusiness Включение буста продаж и установ�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiPutBidsForBusinessRequest
+	@return DbsPutBidsForBusinessRequest
 */
-func (a *DbsAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) ApiPutBidsForBusinessRequest {
-	return ApiPutBidsForBusinessRequest{
-		ApiService: a,
+func (a *DbsAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) DbsPutBidsForBusinessRequest {
+	return DbsPutBidsForBusinessRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -20767,7 +20767,7 @@ func (a *DbsAPIService) PutBidsForBusiness(ctx context.Context, businessId int64
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) PutBidsForBusinessExecute(r DbsPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -20928,21 +20928,21 @@ func (a *DbsAPIService) PutBidsForBusinessExecute(r ApiPutBidsForBusinessRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiPutBidsForCampaignRequest struct {
+type DbsPutBidsForCampaignRequest struct {
 	ctx               context.Context
-	ApiService        *DbsAPIService
+	DbsService        *DbsAPIService
 	campaignId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
 
 // description
-func (r ApiPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) ApiPutBidsForCampaignRequest {
+func (r DbsPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) DbsPutBidsForCampaignRequest {
 	r.putSkuBidsRequest = &putSkuBidsRequest
 	return r
 }
 
-func (r ApiPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.PutBidsForCampaignExecute(r)
+func (r DbsPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.PutBidsForCampaignExecute(r)
 }
 
 /*
@@ -20983,11 +20983,11 @@ PutBidsForCampaign Включение буста продаж и установ�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiPutBidsForCampaignRequest
+	@return DbsPutBidsForCampaignRequest
 */
-func (a *DbsAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) ApiPutBidsForCampaignRequest {
-	return ApiPutBidsForCampaignRequest{
-		ApiService: a,
+func (a *DbsAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) DbsPutBidsForCampaignRequest {
+	return DbsPutBidsForCampaignRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -20996,7 +20996,7 @@ func (a *DbsAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) PutBidsForCampaignExecute(r DbsPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -21157,9 +21157,9 @@ func (a *DbsAPIService) PutBidsForCampaignExecute(r ApiPutBidsForCampaignRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchModelsRequest struct {
+type DbsSearchModelsRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	query      *string
 	regionId   *int64
 	currency   *CurrencyType
@@ -21168,37 +21168,37 @@ type ApiSearchModelsRequest struct {
 }
 
 // Поисковый запрос по названию модели товара.
-func (r ApiSearchModelsRequest) Query(query string) ApiSearchModelsRequest {
+func (r DbsSearchModelsRequest) Query(query string) DbsSearchModelsRequest {
 	r.query = &query
 	return r
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiSearchModelsRequest) RegionId(regionId int64) ApiSearchModelsRequest {
+func (r DbsSearchModelsRequest) RegionId(regionId int64) DbsSearchModelsRequest {
 	r.regionId = &regionId
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiSearchModelsRequest) Currency(currency CurrencyType) ApiSearchModelsRequest {
+func (r DbsSearchModelsRequest) Currency(currency CurrencyType) DbsSearchModelsRequest {
 	r.currency = &currency
 	return r
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiSearchModelsRequest) Page(page int32) ApiSearchModelsRequest {
+func (r DbsSearchModelsRequest) Page(page int32) DbsSearchModelsRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiSearchModelsRequest) PageSize(pageSize int32) ApiSearchModelsRequest {
+func (r DbsSearchModelsRequest) PageSize(pageSize int32) DbsSearchModelsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiSearchModelsRequest) Execute() (*SearchModelsResponse, *http.Response, error) {
-	return r.ApiService.SearchModelsExecute(r)
+func (r DbsSearchModelsRequest) Execute() (*SearchModelsResponse, *http.Response, error) {
+	return r.DbsService.SearchModelsExecute(r)
 }
 
 /*
@@ -21216,13 +21216,13 @@ SearchModels Поиск модели товара
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSearchModelsRequest
+	@return DbsSearchModelsRequest
 
 Deprecated
 */
-func (a *DbsAPIService) SearchModels(ctx context.Context) ApiSearchModelsRequest {
-	return ApiSearchModelsRequest{
-		ApiService: a,
+func (a *DbsAPIService) SearchModels(ctx context.Context) DbsSearchModelsRequest {
+	return DbsSearchModelsRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -21232,7 +21232,7 @@ func (a *DbsAPIService) SearchModels(ctx context.Context) ApiSearchModelsRequest
 //	@return SearchModelsResponse
 //
 // Deprecated
-func (a *DbsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*SearchModelsResponse, *http.Response, error) {
+func (a *DbsAPIService) SearchModelsExecute(r DbsSearchModelsRequest) (*SearchModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -21404,28 +21404,28 @@ func (a *DbsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*SearchMo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionChildrenRequest struct {
+type DbsSearchRegionChildrenRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	regionId   int64
 	page       *int32
 	pageSize   *int32
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiSearchRegionChildrenRequest) Page(page int32) ApiSearchRegionChildrenRequest {
+func (r DbsSearchRegionChildrenRequest) Page(page int32) DbsSearchRegionChildrenRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiSearchRegionChildrenRequest) PageSize(pageSize int32) ApiSearchRegionChildrenRequest {
+func (r DbsSearchRegionChildrenRequest) PageSize(pageSize int32) DbsSearchRegionChildrenRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiSearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionChildrenExecute(r)
+func (r DbsSearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
+	return r.DbsService.SearchRegionChildrenExecute(r)
 }
 
 /*
@@ -21444,11 +21444,11 @@ SearchRegionChildren Информация о дочерних регионах
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-	@return ApiSearchRegionChildrenRequest
+	@return DbsSearchRegionChildrenRequest
 */
-func (a *DbsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) ApiSearchRegionChildrenRequest {
-	return ApiSearchRegionChildrenRequest{
-		ApiService: a,
+func (a *DbsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) DbsSearchRegionChildrenRequest {
+	return DbsSearchRegionChildrenRequest{
+		DbsService: a,
 		ctx:        ctx,
 		regionId:   regionId,
 	}
@@ -21457,7 +21457,7 @@ func (a *DbsAPIService) SearchRegionChildren(ctx context.Context, regionId int64
 // Execute executes the request
 //
 //	@return GetRegionWithChildrenResponse
-func (a *DbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
+func (a *DbsAPIService) SearchRegionChildrenExecute(r DbsSearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -21619,14 +21619,14 @@ func (a *DbsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionsByIdRequest struct {
+type DbsSearchRegionsByIdRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	regionId   int64
 }
 
-func (r ApiSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionsByIdExecute(r)
+func (r DbsSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+	return r.DbsService.SearchRegionsByIdExecute(r)
 }
 
 /*
@@ -21645,11 +21645,11 @@ SearchRegionsById Информация о регионе
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-	@return ApiSearchRegionsByIdRequest
+	@return DbsSearchRegionsByIdRequest
 */
-func (a *DbsAPIService) SearchRegionsById(ctx context.Context, regionId int64) ApiSearchRegionsByIdRequest {
-	return ApiSearchRegionsByIdRequest{
-		ApiService: a,
+func (a *DbsAPIService) SearchRegionsById(ctx context.Context, regionId int64) DbsSearchRegionsByIdRequest {
+	return DbsSearchRegionsByIdRequest{
+		DbsService: a,
 		ctx:        ctx,
 		regionId:   regionId,
 	}
@@ -21658,7 +21658,7 @@ func (a *DbsAPIService) SearchRegionsById(ctx context.Context, regionId int64) A
 // Execute executes the request
 //
 //	@return GetRegionsResponse
-func (a *DbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
+func (a *DbsAPIService) SearchRegionsByIdExecute(r DbsSearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -21800,34 +21800,34 @@ func (a *DbsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionsByNameRequest struct {
+type DbsSearchRegionsByNameRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	name       *string
 	pageToken  *string
 	limit      *int32
 }
 
 // Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;.
-func (r ApiSearchRegionsByNameRequest) Name(name string) ApiSearchRegionsByNameRequest {
+func (r DbsSearchRegionsByNameRequest) Name(name string) DbsSearchRegionsByNameRequest {
 	r.name = &name
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiSearchRegionsByNameRequest) PageToken(pageToken string) ApiSearchRegionsByNameRequest {
+func (r DbsSearchRegionsByNameRequest) PageToken(pageToken string) DbsSearchRegionsByNameRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiSearchRegionsByNameRequest) Limit(limit int32) ApiSearchRegionsByNameRequest {
+func (r DbsSearchRegionsByNameRequest) Limit(limit int32) DbsSearchRegionsByNameRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
-	return r.ApiService.SearchRegionsByNameExecute(r)
+func (r DbsSearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+	return r.DbsService.SearchRegionsByNameExecute(r)
 }
 
 /*
@@ -21847,11 +21847,11 @@ SearchRegionsByName Поиск регионов по их имени
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSearchRegionsByNameRequest
+	@return DbsSearchRegionsByNameRequest
 */
-func (a *DbsAPIService) SearchRegionsByName(ctx context.Context) ApiSearchRegionsByNameRequest {
-	return ApiSearchRegionsByNameRequest{
-		ApiService: a,
+func (a *DbsAPIService) SearchRegionsByName(ctx context.Context) DbsSearchRegionsByNameRequest {
+	return DbsSearchRegionsByNameRequest{
+		DbsService: a,
 		ctx:        ctx,
 	}
 }
@@ -21859,7 +21859,7 @@ func (a *DbsAPIService) SearchRegionsByName(ctx context.Context) ApiSearchRegion
 // Execute executes the request
 //
 //	@return GetRegionsResponse
-func (a *DbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
+func (a *DbsAPIService) SearchRegionsByNameExecute(r DbsSearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -21999,28 +21999,28 @@ func (a *DbsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSendFileToChatRequest struct {
+type DbsSendFileToChatRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	businessId int64
 	chatId     *int64
 	file       *os.File
 }
 
 // Идентификатор чата.
-func (r ApiSendFileToChatRequest) ChatId(chatId int64) ApiSendFileToChatRequest {
+func (r DbsSendFileToChatRequest) ChatId(chatId int64) DbsSendFileToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Содержимое файла. Максимальный размер файла — 5 Мбайт.
-func (r ApiSendFileToChatRequest) File(file *os.File) ApiSendFileToChatRequest {
+func (r DbsSendFileToChatRequest) File(file *os.File) DbsSendFileToChatRequest {
 	r.file = file
 	return r
 }
 
-func (r ApiSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SendFileToChatExecute(r)
+func (r DbsSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.SendFileToChatExecute(r)
 }
 
 /*
@@ -22035,11 +22035,11 @@ SendFileToChat Отправка файла в чат
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiSendFileToChatRequest
+	@return DbsSendFileToChatRequest
 */
-func (a *DbsAPIService) SendFileToChat(ctx context.Context, businessId int64) ApiSendFileToChatRequest {
-	return ApiSendFileToChatRequest{
-		ApiService: a,
+func (a *DbsAPIService) SendFileToChat(ctx context.Context, businessId int64) DbsSendFileToChatRequest {
+	return DbsSendFileToChatRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -22048,7 +22048,7 @@ func (a *DbsAPIService) SendFileToChat(ctx context.Context, businessId int64) Ap
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) SendFileToChatExecute(r DbsSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -22229,28 +22229,28 @@ func (a *DbsAPIService) SendFileToChatExecute(r ApiSendFileToChatRequest) (*Empt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSendMessageToChatRequest struct {
+type DbsSendMessageToChatRequest struct {
 	ctx                      context.Context
-	ApiService               *DbsAPIService
+	DbsService               *DbsAPIService
 	businessId               int64
 	chatId                   *int64
 	sendMessageToChatRequest *SendMessageToChatRequest
 }
 
 // Идентификатор чата.
-func (r ApiSendMessageToChatRequest) ChatId(chatId int64) ApiSendMessageToChatRequest {
+func (r DbsSendMessageToChatRequest) ChatId(chatId int64) DbsSendMessageToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r ApiSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) ApiSendMessageToChatRequest {
+func (r DbsSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) DbsSendMessageToChatRequest {
 	r.sendMessageToChatRequest = &sendMessageToChatRequest
 	return r
 }
 
-func (r ApiSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SendMessageToChatExecute(r)
+func (r DbsSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.SendMessageToChatExecute(r)
 }
 
 /*
@@ -22265,11 +22265,11 @@ SendMessageToChat Отправка сообщения в чат
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiSendMessageToChatRequest
+	@return DbsSendMessageToChatRequest
 */
-func (a *DbsAPIService) SendMessageToChat(ctx context.Context, businessId int64) ApiSendMessageToChatRequest {
-	return ApiSendMessageToChatRequest{
-		ApiService: a,
+func (a *DbsAPIService) SendMessageToChat(ctx context.Context, businessId int64) DbsSendMessageToChatRequest {
+	return DbsSendMessageToChatRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -22278,7 +22278,7 @@ func (a *DbsAPIService) SendMessageToChat(ctx context.Context, businessId int64)
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) SendMessageToChatExecute(r DbsSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -22446,21 +22446,21 @@ func (a *DbsAPIService) SendMessageToChatExecute(r ApiSendMessageToChatRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderBoxLayoutRequest struct {
+type DbsSetOrderBoxLayoutRequest struct {
 	ctx                      context.Context
-	ApiService               *DbsAPIService
+	DbsService               *DbsAPIService
 	campaignId               int64
 	orderId                  int64
 	setOrderBoxLayoutRequest *SetOrderBoxLayoutRequest
 }
 
-func (r ApiSetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) ApiSetOrderBoxLayoutRequest {
+func (r DbsSetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) DbsSetOrderBoxLayoutRequest {
 	r.setOrderBoxLayoutRequest = &setOrderBoxLayoutRequest
 	return r
 }
 
-func (r ApiSetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
-	return r.ApiService.SetOrderBoxLayoutExecute(r)
+func (r DbsSetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
+	return r.DbsService.SetOrderBoxLayoutExecute(r)
 }
 
 /*
@@ -22720,11 +22720,11 @@ SetOrderBoxLayout Подготовка заказа
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiSetOrderBoxLayoutRequest
+	@return DbsSetOrderBoxLayoutRequest
 */
-func (a *DbsAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) ApiSetOrderBoxLayoutRequest {
-	return ApiSetOrderBoxLayoutRequest{
-		ApiService: a,
+func (a *DbsAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) DbsSetOrderBoxLayoutRequest {
+	return DbsSetOrderBoxLayoutRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -22734,7 +22734,7 @@ func (a *DbsAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64,
 // Execute executes the request
 //
 //	@return SetOrderBoxLayoutResponse
-func (a *DbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
+func (a *DbsAPIService) SetOrderBoxLayoutExecute(r DbsSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -22896,21 +22896,21 @@ func (a *DbsAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderDeliveryDateRequest struct {
+type DbsSetOrderDeliveryDateRequest struct {
 	ctx                         context.Context
-	ApiService                  *DbsAPIService
+	DbsService                  *DbsAPIService
 	campaignId                  int64
 	orderId                     int64
 	setOrderDeliveryDateRequest *SetOrderDeliveryDateRequest
 }
 
-func (r ApiSetOrderDeliveryDateRequest) SetOrderDeliveryDateRequest(setOrderDeliveryDateRequest SetOrderDeliveryDateRequest) ApiSetOrderDeliveryDateRequest {
+func (r DbsSetOrderDeliveryDateRequest) SetOrderDeliveryDateRequest(setOrderDeliveryDateRequest SetOrderDeliveryDateRequest) DbsSetOrderDeliveryDateRequest {
 	r.setOrderDeliveryDateRequest = &setOrderDeliveryDateRequest
 	return r
 }
 
-func (r ApiSetOrderDeliveryDateRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SetOrderDeliveryDateExecute(r)
+func (r DbsSetOrderDeliveryDateRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.SetOrderDeliveryDateExecute(r)
 }
 
 /*
@@ -22926,11 +22926,11 @@ SetOrderDeliveryDate Изменение даты доставки заказа
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiSetOrderDeliveryDateRequest
+	@return DbsSetOrderDeliveryDateRequest
 */
-func (a *DbsAPIService) SetOrderDeliveryDate(ctx context.Context, campaignId int64, orderId int64) ApiSetOrderDeliveryDateRequest {
-	return ApiSetOrderDeliveryDateRequest{
-		ApiService: a,
+func (a *DbsAPIService) SetOrderDeliveryDate(ctx context.Context, campaignId int64, orderId int64) DbsSetOrderDeliveryDateRequest {
+	return DbsSetOrderDeliveryDateRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -22940,7 +22940,7 @@ func (a *DbsAPIService) SetOrderDeliveryDate(ctx context.Context, campaignId int
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) SetOrderDeliveryDateExecute(r ApiSetOrderDeliveryDateRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) SetOrderDeliveryDateExecute(r DbsSetOrderDeliveryDateRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -23102,21 +23102,21 @@ func (a *DbsAPIService) SetOrderDeliveryDateExecute(r ApiSetOrderDeliveryDateReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderDeliveryTrackCodeRequest struct {
+type DbsSetOrderDeliveryTrackCodeRequest struct {
 	ctx                              context.Context
-	ApiService                       *DbsAPIService
+	DbsService                       *DbsAPIService
 	campaignId                       int64
 	orderId                          int64
 	setOrderDeliveryTrackCodeRequest *SetOrderDeliveryTrackCodeRequest
 }
 
-func (r ApiSetOrderDeliveryTrackCodeRequest) SetOrderDeliveryTrackCodeRequest(setOrderDeliveryTrackCodeRequest SetOrderDeliveryTrackCodeRequest) ApiSetOrderDeliveryTrackCodeRequest {
+func (r DbsSetOrderDeliveryTrackCodeRequest) SetOrderDeliveryTrackCodeRequest(setOrderDeliveryTrackCodeRequest SetOrderDeliveryTrackCodeRequest) DbsSetOrderDeliveryTrackCodeRequest {
 	r.setOrderDeliveryTrackCodeRequest = &setOrderDeliveryTrackCodeRequest
 	return r
 }
 
-func (r ApiSetOrderDeliveryTrackCodeRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SetOrderDeliveryTrackCodeExecute(r)
+func (r DbsSetOrderDeliveryTrackCodeRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.SetOrderDeliveryTrackCodeExecute(r)
 }
 
 /*
@@ -23134,11 +23134,11 @@ SetOrderDeliveryTrackCode Передача трек‑номера посылк�
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiSetOrderDeliveryTrackCodeRequest
+	@return DbsSetOrderDeliveryTrackCodeRequest
 */
-func (a *DbsAPIService) SetOrderDeliveryTrackCode(ctx context.Context, campaignId int64, orderId int64) ApiSetOrderDeliveryTrackCodeRequest {
-	return ApiSetOrderDeliveryTrackCodeRequest{
-		ApiService: a,
+func (a *DbsAPIService) SetOrderDeliveryTrackCode(ctx context.Context, campaignId int64, orderId int64) DbsSetOrderDeliveryTrackCodeRequest {
+	return DbsSetOrderDeliveryTrackCodeRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -23148,7 +23148,7 @@ func (a *DbsAPIService) SetOrderDeliveryTrackCode(ctx context.Context, campaignI
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) SetOrderDeliveryTrackCodeExecute(r ApiSetOrderDeliveryTrackCodeRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) SetOrderDeliveryTrackCodeExecute(r DbsSetOrderDeliveryTrackCodeRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -23310,22 +23310,22 @@ func (a *DbsAPIService) SetOrderDeliveryTrackCodeExecute(r ApiSetOrderDeliveryTr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderShipmentBoxesRequest struct {
+type DbsSetOrderShipmentBoxesRequest struct {
 	ctx                          context.Context
-	ApiService                   *DbsAPIService
+	DbsService                   *DbsAPIService
 	campaignId                   int64
 	orderId                      int64
 	shipmentId                   int64
 	setOrderShipmentBoxesRequest *SetOrderShipmentBoxesRequest
 }
 
-func (r ApiSetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) ApiSetOrderShipmentBoxesRequest {
+func (r DbsSetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) DbsSetOrderShipmentBoxesRequest {
 	r.setOrderShipmentBoxesRequest = &setOrderShipmentBoxesRequest
 	return r
 }
 
-func (r ApiSetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
-	return r.ApiService.SetOrderShipmentBoxesExecute(r)
+func (r DbsSetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+	return r.DbsService.SetOrderShipmentBoxesExecute(r)
 }
 
 /*
@@ -23405,11 +23405,11 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
 	@param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
-	@return ApiSetOrderShipmentBoxesRequest
+	@return DbsSetOrderShipmentBoxesRequest
 */
-func (a *DbsAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) ApiSetOrderShipmentBoxesRequest {
-	return ApiSetOrderShipmentBoxesRequest{
-		ApiService: a,
+func (a *DbsAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) DbsSetOrderShipmentBoxesRequest {
+	return DbsSetOrderShipmentBoxesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -23420,7 +23420,7 @@ func (a *DbsAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId in
 // Execute executes the request
 //
 //	@return SetOrderShipmentBoxesResponse
-func (a *DbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+func (a *DbsAPIService) SetOrderShipmentBoxesExecute(r DbsSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -23583,22 +23583,22 @@ func (a *DbsAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetReturnDecisionRequest struct {
+type DbsSetReturnDecisionRequest struct {
 	ctx                      context.Context
-	ApiService               *DbsAPIService
+	DbsService               *DbsAPIService
 	campaignId               int64
 	orderId                  int64
 	returnId                 int64
 	setReturnDecisionRequest *SetReturnDecisionRequest
 }
 
-func (r ApiSetReturnDecisionRequest) SetReturnDecisionRequest(setReturnDecisionRequest SetReturnDecisionRequest) ApiSetReturnDecisionRequest {
+func (r DbsSetReturnDecisionRequest) SetReturnDecisionRequest(setReturnDecisionRequest SetReturnDecisionRequest) DbsSetReturnDecisionRequest {
 	r.setReturnDecisionRequest = &setReturnDecisionRequest
 	return r
 }
 
-func (r ApiSetReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SetReturnDecisionExecute(r)
+func (r DbsSetReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.SetReturnDecisionExecute(r)
 }
 
 /*
@@ -23615,11 +23615,11 @@ SetReturnDecision Принятие или изменение решения по
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
 	@param returnId Идентификатор невыкупа или возврата.
-	@return ApiSetReturnDecisionRequest
+	@return DbsSetReturnDecisionRequest
 */
-func (a *DbsAPIService) SetReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiSetReturnDecisionRequest {
-	return ApiSetReturnDecisionRequest{
-		ApiService: a,
+func (a *DbsAPIService) SetReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) DbsSetReturnDecisionRequest {
+	return DbsSetReturnDecisionRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -23630,7 +23630,7 @@ func (a *DbsAPIService) SetReturnDecision(ctx context.Context, campaignId int64,
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) SetReturnDecisionExecute(r ApiSetReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) SetReturnDecisionExecute(r DbsSetReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -23793,20 +23793,20 @@ func (a *DbsAPIService) SetReturnDecisionExecute(r ApiSetReturnDecisionRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSkipGoodsFeedbacksReactionRequest struct {
+type DbsSkipGoodsFeedbacksReactionRequest struct {
 	ctx                              context.Context
-	ApiService                       *DbsAPIService
+	DbsService                       *DbsAPIService
 	businessId                       int64
 	skipGoodsFeedbackReactionRequest *SkipGoodsFeedbackReactionRequest
 }
 
-func (r ApiSkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) ApiSkipGoodsFeedbacksReactionRequest {
+func (r DbsSkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) DbsSkipGoodsFeedbacksReactionRequest {
 	r.skipGoodsFeedbackReactionRequest = &skipGoodsFeedbackReactionRequest
 	return r
 }
 
-func (r ApiSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SkipGoodsFeedbacksReactionExecute(r)
+func (r DbsSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.SkipGoodsFeedbacksReactionExecute(r)
 }
 
 /*
@@ -23821,11 +23821,11 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiSkipGoodsFeedbacksReactionRequest
+	@return DbsSkipGoodsFeedbacksReactionRequest
 */
-func (a *DbsAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) ApiSkipGoodsFeedbacksReactionRequest {
-	return ApiSkipGoodsFeedbacksReactionRequest{
-		ApiService: a,
+func (a *DbsAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) DbsSkipGoodsFeedbacksReactionRequest {
+	return DbsSkipGoodsFeedbacksReactionRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -23834,7 +23834,7 @@ func (a *DbsAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, business
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) SkipGoodsFeedbacksReactionExecute(r DbsSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -23995,9 +23995,9 @@ func (a *DbsAPIService) SkipGoodsFeedbacksReactionExecute(r ApiSkipGoodsFeedback
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSubmitReturnDecisionRequest struct {
+type DbsSubmitReturnDecisionRequest struct {
 	ctx        context.Context
-	ApiService *DbsAPIService
+	DbsService *DbsAPIService
 	campaignId int64
 	orderId    int64
 	returnId   int64
@@ -24005,13 +24005,13 @@ type ApiSubmitReturnDecisionRequest struct {
 }
 
 // description
-func (r ApiSubmitReturnDecisionRequest) Body(body map[string]interface{}) ApiSubmitReturnDecisionRequest {
+func (r DbsSubmitReturnDecisionRequest) Body(body map[string]interface{}) DbsSubmitReturnDecisionRequest {
 	r.body = &body
 	return r
 }
 
-func (r ApiSubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.SubmitReturnDecisionExecute(r)
+func (r DbsSubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.SubmitReturnDecisionExecute(r)
 }
 
 /*
@@ -24028,11 +24028,11 @@ SubmitReturnDecision Подтверждение решения по возвра
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
 	@param returnId Идентификатор невыкупа или возврата.
-	@return ApiSubmitReturnDecisionRequest
+	@return DbsSubmitReturnDecisionRequest
 */
-func (a *DbsAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) ApiSubmitReturnDecisionRequest {
-	return ApiSubmitReturnDecisionRequest{
-		ApiService: a,
+func (a *DbsAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) DbsSubmitReturnDecisionRequest {
+	return DbsSubmitReturnDecisionRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -24043,7 +24043,7 @@ func (a *DbsAPIService) SubmitReturnDecision(ctx context.Context, campaignId int
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) SubmitReturnDecisionExecute(r DbsSubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -24203,20 +24203,20 @@ func (a *DbsAPIService) SubmitReturnDecisionExecute(r ApiSubmitReturnDecisionReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateBusinessPricesRequest struct {
+type DbsUpdateBusinessPricesRequest struct {
 	ctx                         context.Context
-	ApiService                  *DbsAPIService
+	DbsService                  *DbsAPIService
 	businessId                  int64
 	updateBusinessPricesRequest *UpdateBusinessPricesRequest
 }
 
-func (r ApiUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) ApiUpdateBusinessPricesRequest {
+func (r DbsUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) DbsUpdateBusinessPricesRequest {
 	r.updateBusinessPricesRequest = &updateBusinessPricesRequest
 	return r
 }
 
-func (r ApiUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateBusinessPricesExecute(r)
+func (r DbsUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdateBusinessPricesExecute(r)
 }
 
 /*
@@ -24239,11 +24239,11 @@ UpdateBusinessPrices Установка цен на товары для всех
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdateBusinessPricesRequest
+	@return DbsUpdateBusinessPricesRequest
 */
-func (a *DbsAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) ApiUpdateBusinessPricesRequest {
-	return ApiUpdateBusinessPricesRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) DbsUpdateBusinessPricesRequest {
+	return DbsUpdateBusinessPricesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -24252,7 +24252,7 @@ func (a *DbsAPIService) UpdateBusinessPrices(ctx context.Context, businessId int
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateBusinessPricesExecute(r DbsUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -24424,20 +24424,20 @@ func (a *DbsAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateCampaignOffersRequest struct {
+type DbsUpdateCampaignOffersRequest struct {
 	ctx                         context.Context
-	ApiService                  *DbsAPIService
+	DbsService                  *DbsAPIService
 	campaignId                  int64
 	updateCampaignOffersRequest *UpdateCampaignOffersRequest
 }
 
-func (r ApiUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) ApiUpdateCampaignOffersRequest {
+func (r DbsUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) DbsUpdateCampaignOffersRequest {
 	r.updateCampaignOffersRequest = &updateCampaignOffersRequest
 	return r
 }
 
-func (r ApiUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateCampaignOffersExecute(r)
+func (r DbsUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdateCampaignOffersExecute(r)
 }
 
 /*
@@ -24452,11 +24452,11 @@ UpdateCampaignOffers Изменение условий продажи товар
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateCampaignOffersRequest
+	@return DbsUpdateCampaignOffersRequest
 */
-func (a *DbsAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) ApiUpdateCampaignOffersRequest {
-	return ApiUpdateCampaignOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) DbsUpdateCampaignOffersRequest {
+	return DbsUpdateCampaignOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -24465,7 +24465,7 @@ func (a *DbsAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateCampaignOffersExecute(r DbsUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -24637,21 +24637,21 @@ func (a *DbsAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateExternalOrderIdRequest struct {
+type DbsUpdateExternalOrderIdRequest struct {
 	ctx                          context.Context
-	ApiService                   *DbsAPIService
+	DbsService                   *DbsAPIService
 	campaignId                   int64
 	orderId                      int64
 	updateExternalOrderIdRequest *UpdateExternalOrderIdRequest
 }
 
-func (r ApiUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) ApiUpdateExternalOrderIdRequest {
+func (r DbsUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) DbsUpdateExternalOrderIdRequest {
 	r.updateExternalOrderIdRequest = &updateExternalOrderIdRequest
 	return r
 }
 
-func (r ApiUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateExternalOrderIdExecute(r)
+func (r DbsUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdateExternalOrderIdExecute(r)
 }
 
 /*
@@ -24669,11 +24669,11 @@ UpdateExternalOrderId Передача или изменение дополни�
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiUpdateExternalOrderIdRequest
+	@return DbsUpdateExternalOrderIdRequest
 */
-func (a *DbsAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) ApiUpdateExternalOrderIdRequest {
-	return ApiUpdateExternalOrderIdRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) DbsUpdateExternalOrderIdRequest {
+	return DbsUpdateExternalOrderIdRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -24683,7 +24683,7 @@ func (a *DbsAPIService) UpdateExternalOrderId(ctx context.Context, campaignId in
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateExternalOrderIdExecute(r DbsUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -24845,20 +24845,20 @@ func (a *DbsAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateGoodsFeedbackCommentRequest struct {
+type DbsUpdateGoodsFeedbackCommentRequest struct {
 	ctx                               context.Context
-	ApiService                        *DbsAPIService
+	DbsService                        *DbsAPIService
 	businessId                        int64
 	updateGoodsFeedbackCommentRequest *UpdateGoodsFeedbackCommentRequest
 }
 
-func (r ApiUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) ApiUpdateGoodsFeedbackCommentRequest {
+func (r DbsUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) DbsUpdateGoodsFeedbackCommentRequest {
 	r.updateGoodsFeedbackCommentRequest = &updateGoodsFeedbackCommentRequest
 	return r
 }
 
-func (r ApiUpdateGoodsFeedbackCommentRequest) Execute() (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
-	return r.ApiService.UpdateGoodsFeedbackCommentExecute(r)
+func (r DbsUpdateGoodsFeedbackCommentRequest) Execute() (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
+	return r.DbsService.UpdateGoodsFeedbackCommentExecute(r)
 }
 
 /*
@@ -24887,11 +24887,11 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdateGoodsFeedbackCommentRequest
+	@return DbsUpdateGoodsFeedbackCommentRequest
 */
-func (a *DbsAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) ApiUpdateGoodsFeedbackCommentRequest {
-	return ApiUpdateGoodsFeedbackCommentRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) DbsUpdateGoodsFeedbackCommentRequest {
+	return DbsUpdateGoodsFeedbackCommentRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -24900,7 +24900,7 @@ func (a *DbsAPIService) UpdateGoodsFeedbackComment(ctx context.Context, business
 // Execute executes the request
 //
 //	@return UpdateGoodsFeedbackCommentResponse
-func (a *DbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateGoodsFeedbackCommentExecute(r DbsUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -25061,20 +25061,20 @@ func (a *DbsAPIService) UpdateGoodsFeedbackCommentExecute(r ApiUpdateGoodsFeedba
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferContentRequest struct {
+type DbsUpdateOfferContentRequest struct {
 	ctx                       context.Context
-	ApiService                *DbsAPIService
+	DbsService                *DbsAPIService
 	businessId                int64
 	updateOfferContentRequest *UpdateOfferContentRequest
 }
 
-func (r ApiUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) ApiUpdateOfferContentRequest {
+func (r DbsUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) DbsUpdateOfferContentRequest {
 	r.updateOfferContentRequest = &updateOfferContentRequest
 	return r
 }
 
-func (r ApiUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferContentExecute(r)
+func (r DbsUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
+	return r.DbsService.UpdateOfferContentExecute(r)
 }
 
 /*
@@ -25103,11 +25103,11 @@ UpdateOfferContent Редактирование категорийных хар�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdateOfferContentRequest
+	@return DbsUpdateOfferContentRequest
 */
-func (a *DbsAPIService) UpdateOfferContent(ctx context.Context, businessId int64) ApiUpdateOfferContentRequest {
-	return ApiUpdateOfferContentRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOfferContent(ctx context.Context, businessId int64) DbsUpdateOfferContentRequest {
+	return DbsUpdateOfferContentRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -25116,7 +25116,7 @@ func (a *DbsAPIService) UpdateOfferContent(ctx context.Context, businessId int64
 // Execute executes the request
 //
 //	@return UpdateOfferContentResponse
-func (a *DbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateOfferContentExecute(r DbsUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -25288,20 +25288,20 @@ func (a *DbsAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferMappingEntriesRequest struct {
+type DbsUpdateOfferMappingEntriesRequest struct {
 	ctx                            context.Context
-	ApiService                     *DbsAPIService
+	DbsService                     *DbsAPIService
 	campaignId                     int64
 	updateOfferMappingEntryRequest *UpdateOfferMappingEntryRequest
 }
 
-func (r ApiUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(updateOfferMappingEntryRequest UpdateOfferMappingEntryRequest) ApiUpdateOfferMappingEntriesRequest {
+func (r DbsUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(updateOfferMappingEntryRequest UpdateOfferMappingEntryRequest) DbsUpdateOfferMappingEntriesRequest {
 	r.updateOfferMappingEntryRequest = &updateOfferMappingEntryRequest
 	return r
 }
 
-func (r ApiUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferMappingEntriesExecute(r)
+func (r DbsUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdateOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -25343,13 +25343,13 @@ UpdateOfferMappingEntries Добавление и редактирование �
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateOfferMappingEntriesRequest
+	@return DbsUpdateOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *DbsAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) ApiUpdateOfferMappingEntriesRequest {
-	return ApiUpdateOfferMappingEntriesRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) DbsUpdateOfferMappingEntriesRequest {
+	return DbsUpdateOfferMappingEntriesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -25360,7 +25360,7 @@ func (a *DbsAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignI
 //	@return EmptyApiResponse
 //
 // Deprecated
-func (a *DbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateOfferMappingEntriesExecute(r DbsUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -25532,27 +25532,27 @@ func (a *DbsAPIService) UpdateOfferMappingEntriesExecute(r ApiUpdateOfferMapping
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferMappingsRequest struct {
+type DbsUpdateOfferMappingsRequest struct {
 	ctx                        context.Context
-	ApiService                 *DbsAPIService
+	DbsService                 *DbsAPIService
 	businessId                 int64
 	updateOfferMappingsRequest *UpdateOfferMappingsRequest
 	language                   *CatalogLanguageType
 }
 
-func (r ApiUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) ApiUpdateOfferMappingsRequest {
+func (r DbsUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) DbsUpdateOfferMappingsRequest {
 	r.updateOfferMappingsRequest = &updateOfferMappingsRequest
 	return r
 }
 
 // Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
-func (r ApiUpdateOfferMappingsRequest) Language(language CatalogLanguageType) ApiUpdateOfferMappingsRequest {
+func (r DbsUpdateOfferMappingsRequest) Language(language CatalogLanguageType) DbsUpdateOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
-	return r.ApiService.UpdateOfferMappingsExecute(r)
+func (r DbsUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
+	return r.DbsService.UpdateOfferMappingsExecute(r)
 }
 
 /*
@@ -25631,11 +25631,11 @@ SKU товара можно изменить в кабинете продавц�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdateOfferMappingsRequest
+	@return DbsUpdateOfferMappingsRequest
 */
-func (a *DbsAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) ApiUpdateOfferMappingsRequest {
-	return ApiUpdateOfferMappingsRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) DbsUpdateOfferMappingsRequest {
+	return DbsUpdateOfferMappingsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -25644,7 +25644,7 @@ func (a *DbsAPIService) UpdateOfferMappings(ctx context.Context, businessId int6
 // Execute executes the request
 //
 //	@return UpdateOfferMappingsResponse
-func (a *DbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateOfferMappingsExecute(r DbsUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -25819,21 +25819,21 @@ func (a *DbsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderItemsRequest struct {
+type DbsUpdateOrderItemsRequest struct {
 	ctx                    context.Context
-	ApiService             *DbsAPIService
+	DbsService             *DbsAPIService
 	campaignId             int64
 	orderId                int64
 	updateOrderItemRequest *UpdateOrderItemRequest
 }
 
-func (r ApiUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) ApiUpdateOrderItemsRequest {
+func (r DbsUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) DbsUpdateOrderItemsRequest {
 	r.updateOrderItemRequest = &updateOrderItemRequest
 	return r
 }
 
-func (r ApiUpdateOrderItemsRequest) Execute() (*http.Response, error) {
-	return r.ApiService.UpdateOrderItemsExecute(r)
+func (r DbsUpdateOrderItemsRequest) Execute() (*http.Response, error) {
+	return r.DbsService.UpdateOrderItemsExecute(r)
 }
 
 /*
@@ -25889,11 +25889,11 @@ UpdateOrderItems Удаление товара из заказа или умен
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiUpdateOrderItemsRequest
+	@return DbsUpdateOrderItemsRequest
 */
-func (a *DbsAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderItemsRequest {
-	return ApiUpdateOrderItemsRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) DbsUpdateOrderItemsRequest {
+	return DbsUpdateOrderItemsRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -25901,7 +25901,7 @@ func (a *DbsAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, 
 }
 
 // Execute executes the request
-func (a *DbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*http.Response, error) {
+func (a *DbsAPIService) UpdateOrderItemsExecute(r DbsUpdateOrderItemsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPut
 		localVarPostBody   interface{}
@@ -26053,21 +26053,21 @@ func (a *DbsAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStatusRequest struct {
+type DbsUpdateOrderStatusRequest struct {
 	ctx                      context.Context
-	ApiService               *DbsAPIService
+	DbsService               *DbsAPIService
 	campaignId               int64
 	orderId                  int64
 	updateOrderStatusRequest *UpdateOrderStatusRequest
 }
 
-func (r ApiUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) ApiUpdateOrderStatusRequest {
+func (r DbsUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) DbsUpdateOrderStatusRequest {
 	r.updateOrderStatusRequest = &updateOrderStatusRequest
 	return r
 }
 
-func (r ApiUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
-	return r.ApiService.UpdateOrderStatusExecute(r)
+func (r DbsUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
+	return r.DbsService.UpdateOrderStatusExecute(r)
 }
 
 /*
@@ -26087,11 +26087,11 @@ UpdateOrderStatus Изменение статуса одного заказа
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiUpdateOrderStatusRequest
+	@return DbsUpdateOrderStatusRequest
 */
-func (a *DbsAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderStatusRequest {
-	return ApiUpdateOrderStatusRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) DbsUpdateOrderStatusRequest {
+	return DbsUpdateOrderStatusRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -26101,7 +26101,7 @@ func (a *DbsAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64,
 // Execute executes the request
 //
 //	@return UpdateOrderStatusResponse
-func (a *DbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateOrderStatusExecute(r DbsUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -26263,20 +26263,20 @@ func (a *DbsAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStatusesRequest struct {
+type DbsUpdateOrderStatusesRequest struct {
 	ctx                        context.Context
-	ApiService                 *DbsAPIService
+	DbsService                 *DbsAPIService
 	campaignId                 int64
 	updateOrderStatusesRequest *UpdateOrderStatusesRequest
 }
 
-func (r ApiUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) ApiUpdateOrderStatusesRequest {
+func (r DbsUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) DbsUpdateOrderStatusesRequest {
 	r.updateOrderStatusesRequest = &updateOrderStatusesRequest
 	return r
 }
 
-func (r ApiUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
-	return r.ApiService.UpdateOrderStatusesExecute(r)
+func (r DbsUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
+	return r.DbsService.UpdateOrderStatusesExecute(r)
 }
 
 /*
@@ -26297,11 +26297,11 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateOrderStatusesRequest
+	@return DbsUpdateOrderStatusesRequest
 */
-func (a *DbsAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) ApiUpdateOrderStatusesRequest {
-	return ApiUpdateOrderStatusesRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) DbsUpdateOrderStatusesRequest {
+	return DbsUpdateOrderStatusesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -26310,7 +26310,7 @@ func (a *DbsAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int6
 // Execute executes the request
 //
 //	@return UpdateOrderStatusesResponse
-func (a *DbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateOrderStatusesExecute(r DbsUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -26471,21 +26471,21 @@ func (a *DbsAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStorageLimitRequest struct {
+type DbsUpdateOrderStorageLimitRequest struct {
 	ctx                            context.Context
-	ApiService                     *DbsAPIService
+	DbsService                     *DbsAPIService
 	campaignId                     int64
 	orderId                        int64
 	updateOrderStorageLimitRequest *UpdateOrderStorageLimitRequest
 }
 
-func (r ApiUpdateOrderStorageLimitRequest) UpdateOrderStorageLimitRequest(updateOrderStorageLimitRequest UpdateOrderStorageLimitRequest) ApiUpdateOrderStorageLimitRequest {
+func (r DbsUpdateOrderStorageLimitRequest) UpdateOrderStorageLimitRequest(updateOrderStorageLimitRequest UpdateOrderStorageLimitRequest) DbsUpdateOrderStorageLimitRequest {
 	r.updateOrderStorageLimitRequest = &updateOrderStorageLimitRequest
 	return r
 }
 
-func (r ApiUpdateOrderStorageLimitRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateOrderStorageLimitExecute(r)
+func (r DbsUpdateOrderStorageLimitRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdateOrderStorageLimitExecute(r)
 }
 
 /*
@@ -26505,11 +26505,11 @@ UpdateOrderStorageLimit Продление срока хранения зака�
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param orderId Идентификатор заказа.
-	@return ApiUpdateOrderStorageLimitRequest
+	@return DbsUpdateOrderStorageLimitRequest
 */
-func (a *DbsAPIService) UpdateOrderStorageLimit(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderStorageLimitRequest {
-	return ApiUpdateOrderStorageLimitRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOrderStorageLimit(ctx context.Context, campaignId int64, orderId int64) DbsUpdateOrderStorageLimitRequest {
+	return DbsUpdateOrderStorageLimitRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -26519,7 +26519,7 @@ func (a *DbsAPIService) UpdateOrderStorageLimit(ctx context.Context, campaignId 
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) UpdateOrderStorageLimitExecute(r ApiUpdateOrderStorageLimitRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateOrderStorageLimitExecute(r DbsUpdateOrderStorageLimitRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -26681,21 +26681,21 @@ func (a *DbsAPIService) UpdateOrderStorageLimitExecute(r ApiUpdateOrderStorageLi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOutletRequest struct {
+type DbsUpdateOutletRequest struct {
 	ctx                 context.Context
-	ApiService          *DbsAPIService
+	DbsService          *DbsAPIService
 	campaignId          int64
 	outletId            int64
 	changeOutletRequest *ChangeOutletRequest
 }
 
-func (r ApiUpdateOutletRequest) ChangeOutletRequest(changeOutletRequest ChangeOutletRequest) ApiUpdateOutletRequest {
+func (r DbsUpdateOutletRequest) ChangeOutletRequest(changeOutletRequest ChangeOutletRequest) DbsUpdateOutletRequest {
 	r.changeOutletRequest = &changeOutletRequest
 	return r
 }
 
-func (r ApiUpdateOutletRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateOutletExecute(r)
+func (r DbsUpdateOutletRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdateOutletExecute(r)
 }
 
 /*
@@ -26711,11 +26711,11 @@ UpdateOutlet Изменение информации о точке продаж
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
 	@param outletId Идентификатор точки продаж.
-	@return ApiUpdateOutletRequest
+	@return DbsUpdateOutletRequest
 */
-func (a *DbsAPIService) UpdateOutlet(ctx context.Context, campaignId int64, outletId int64) ApiUpdateOutletRequest {
-	return ApiUpdateOutletRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOutlet(ctx context.Context, campaignId int64, outletId int64) DbsUpdateOutletRequest {
+	return DbsUpdateOutletRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		outletId:   outletId,
@@ -26725,7 +26725,7 @@ func (a *DbsAPIService) UpdateOutlet(ctx context.Context, campaignId int64, outl
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) UpdateOutletExecute(r ApiUpdateOutletRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateOutletExecute(r DbsUpdateOutletRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -26890,20 +26890,20 @@ func (a *DbsAPIService) UpdateOutletExecute(r ApiUpdateOutletRequest) (*EmptyApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOutletLicensesRequest struct {
+type DbsUpdateOutletLicensesRequest struct {
 	ctx                        context.Context
-	ApiService                 *DbsAPIService
+	DbsService                 *DbsAPIService
 	campaignId                 int64
 	updateOutletLicenseRequest *UpdateOutletLicenseRequest
 }
 
-func (r ApiUpdateOutletLicensesRequest) UpdateOutletLicenseRequest(updateOutletLicenseRequest UpdateOutletLicenseRequest) ApiUpdateOutletLicensesRequest {
+func (r DbsUpdateOutletLicensesRequest) UpdateOutletLicenseRequest(updateOutletLicenseRequest UpdateOutletLicenseRequest) DbsUpdateOutletLicensesRequest {
 	r.updateOutletLicenseRequest = &updateOutletLicenseRequest
 	return r
 }
 
-func (r ApiUpdateOutletLicensesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateOutletLicensesExecute(r)
+func (r DbsUpdateOutletLicensesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdateOutletLicensesExecute(r)
 }
 
 /*
@@ -26920,11 +26920,11 @@ UpdateOutletLicenses Создание и изменение лицензий д�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateOutletLicensesRequest
+	@return DbsUpdateOutletLicensesRequest
 */
-func (a *DbsAPIService) UpdateOutletLicenses(ctx context.Context, campaignId int64) ApiUpdateOutletLicensesRequest {
-	return ApiUpdateOutletLicensesRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateOutletLicenses(ctx context.Context, campaignId int64) DbsUpdateOutletLicensesRequest {
+	return DbsUpdateOutletLicensesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -26933,7 +26933,7 @@ func (a *DbsAPIService) UpdateOutletLicenses(ctx context.Context, campaignId int
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) UpdateOutletLicensesExecute(r ApiUpdateOutletLicensesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateOutletLicensesExecute(r DbsUpdateOutletLicensesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -27094,20 +27094,20 @@ func (a *DbsAPIService) UpdateOutletLicensesExecute(r ApiUpdateOutletLicensesReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePricesRequest struct {
+type DbsUpdatePricesRequest struct {
 	ctx                 context.Context
-	ApiService          *DbsAPIService
+	DbsService          *DbsAPIService
 	campaignId          int64
 	updatePricesRequest *UpdatePricesRequest
 }
 
-func (r ApiUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) ApiUpdatePricesRequest {
+func (r DbsUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) DbsUpdatePricesRequest {
 	r.updatePricesRequest = &updatePricesRequest
 	return r
 }
 
-func (r ApiUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdatePricesExecute(r)
+func (r DbsUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdatePricesExecute(r)
 }
 
 /*
@@ -27136,11 +27136,11 @@ UpdatePrices Установка цен на товары в конкретном
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdatePricesRequest
+	@return DbsUpdatePricesRequest
 */
-func (a *DbsAPIService) UpdatePrices(ctx context.Context, campaignId int64) ApiUpdatePricesRequest {
-	return ApiUpdatePricesRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdatePrices(ctx context.Context, campaignId int64) DbsUpdatePricesRequest {
+	return DbsUpdatePricesRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -27149,7 +27149,7 @@ func (a *DbsAPIService) UpdatePrices(ctx context.Context, campaignId int64) ApiU
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdatePricesExecute(r DbsUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -27321,20 +27321,20 @@ func (a *DbsAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePromoOffersRequest struct {
+type DbsUpdatePromoOffersRequest struct {
 	ctx                      context.Context
-	ApiService               *DbsAPIService
+	DbsService               *DbsAPIService
 	businessId               int64
 	updatePromoOffersRequest *UpdatePromoOffersRequest
 }
 
-func (r ApiUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) ApiUpdatePromoOffersRequest {
+func (r DbsUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) DbsUpdatePromoOffersRequest {
 	r.updatePromoOffersRequest = &updatePromoOffersRequest
 	return r
 }
 
-func (r ApiUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
-	return r.ApiService.UpdatePromoOffersExecute(r)
+func (r DbsUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
+	return r.DbsService.UpdatePromoOffersExecute(r)
 }
 
 /*
@@ -27351,11 +27351,11 @@ UpdatePromoOffers Добавление товаров в акцию или из�
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdatePromoOffersRequest
+	@return DbsUpdatePromoOffersRequest
 */
-func (a *DbsAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) ApiUpdatePromoOffersRequest {
-	return ApiUpdatePromoOffersRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) DbsUpdatePromoOffersRequest {
+	return DbsUpdatePromoOffersRequest{
+		DbsService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
@@ -27364,7 +27364,7 @@ func (a *DbsAPIService) UpdatePromoOffers(ctx context.Context, businessId int64)
 // Execute executes the request
 //
 //	@return UpdatePromoOffersResponse
-func (a *DbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdatePromoOffersExecute(r DbsUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -27525,20 +27525,20 @@ func (a *DbsAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateStocksRequest struct {
+type DbsUpdateStocksRequest struct {
 	ctx                 context.Context
-	ApiService          *DbsAPIService
+	DbsService          *DbsAPIService
 	campaignId          int64
 	updateStocksRequest *UpdateStocksRequest
 }
 
-func (r ApiUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) ApiUpdateStocksRequest {
+func (r DbsUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) DbsUpdateStocksRequest {
 	r.updateStocksRequest = &updateStocksRequest
 	return r
 }
 
-func (r ApiUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.ApiService.UpdateStocksExecute(r)
+func (r DbsUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.DbsService.UpdateStocksExecute(r)
 }
 
 /*
@@ -27563,11 +27563,11 @@ UpdateStocks Передача информации об остатках
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateStocksRequest
+	@return DbsUpdateStocksRequest
 */
-func (a *DbsAPIService) UpdateStocks(ctx context.Context, campaignId int64) ApiUpdateStocksRequest {
-	return ApiUpdateStocksRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateStocks(ctx context.Context, campaignId int64) DbsUpdateStocksRequest {
+	return DbsUpdateStocksRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -27576,7 +27576,7 @@ func (a *DbsAPIService) UpdateStocks(ctx context.Context, campaignId int64) ApiU
 // Execute executes the request
 //
 //	@return EmptyApiResponse
-func (a *DbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateStocksExecute(r DbsUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -27737,20 +27737,20 @@ func (a *DbsAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateWarehouseStatusRequest struct {
+type DbsUpdateWarehouseStatusRequest struct {
 	ctx                          context.Context
-	ApiService                   *DbsAPIService
+	DbsService                   *DbsAPIService
 	campaignId                   int64
 	updateWarehouseStatusRequest *UpdateWarehouseStatusRequest
 }
 
-func (r ApiUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) ApiUpdateWarehouseStatusRequest {
+func (r DbsUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) DbsUpdateWarehouseStatusRequest {
 	r.updateWarehouseStatusRequest = &updateWarehouseStatusRequest
 	return r
 }
 
-func (r ApiUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
-	return r.ApiService.UpdateWarehouseStatusExecute(r)
+func (r DbsUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
+	return r.DbsService.UpdateWarehouseStatusExecute(r)
 }
 
 /*
@@ -27767,11 +27767,11 @@ UpdateWarehouseStatus Изменение статуса склада
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateWarehouseStatusRequest
+	@return DbsUpdateWarehouseStatusRequest
 */
-func (a *DbsAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) ApiUpdateWarehouseStatusRequest {
-	return ApiUpdateWarehouseStatusRequest{
-		ApiService: a,
+func (a *DbsAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) DbsUpdateWarehouseStatusRequest {
+	return DbsUpdateWarehouseStatusRequest{
+		DbsService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
@@ -27780,7 +27780,7 @@ func (a *DbsAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId in
 // Execute executes the request
 //
 //	@return UpdateWarehouseStatusResponse
-func (a *DbsAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
+func (a *DbsAPIService) UpdateWarehouseStatusExecute(r DbsUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
