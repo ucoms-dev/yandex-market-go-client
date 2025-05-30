@@ -20,9 +20,9 @@ type OrderDeliveryEacType string
 
 // List of OrderDeliveryEacType
 const (
-	MERCHANT_TO_COURIER  OrderDeliveryEacType = "MERCHANT_TO_COURIER"
-	COURIER_TO_MERCHANT  OrderDeliveryEacType = "COURIER_TO_MERCHANT"
-	CHECKING_BY_MERCHANT OrderDeliveryEacType = "CHECKING_BY_MERCHANT"
+	OrderDeliveryEacType_MERCHANT_TO_COURIER  OrderDeliveryEacType = "MERCHANT_TO_COURIER"
+	OrderDeliveryEacType_COURIER_TO_MERCHANT  OrderDeliveryEacType = "COURIER_TO_MERCHANT"
+	OrderDeliveryEacType_CHECKING_BY_MERCHANT OrderDeliveryEacType = "CHECKING_BY_MERCHANT"
 )
 
 // All allowed values of OrderDeliveryEacType enum

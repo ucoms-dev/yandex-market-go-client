@@ -20,18 +20,18 @@ type OrderVatType string
 
 // List of OrderVatType
 const (
-	NO_VAT        OrderVatType = "NO_VAT"
-	VAT_0         OrderVatType = "VAT_0"
-	VAT_10        OrderVatType = "VAT_10"
-	VAT_10_110    OrderVatType = "VAT_10_110"
-	VAT_20        OrderVatType = "VAT_20"
-	VAT_20_120    OrderVatType = "VAT_20_120"
-	VAT_18        OrderVatType = "VAT_18"
-	VAT_18_118    OrderVatType = "VAT_18_118"
-	VAT_12        OrderVatType = "VAT_12"
-	VAT_05        OrderVatType = "VAT_05"
-	VAT_07        OrderVatType = "VAT_07"
-	UNKNOWN_VALUE OrderVatType = "UNKNOWN_VALUE"
+	OrderVatType_NO_VAT        OrderVatType = "NO_VAT"
+	OrderVatType_VAT_0         OrderVatType = "VAT_0"
+	OrderVatType_VAT_10        OrderVatType = "VAT_10"
+	OrderVatType_VAT_10_110    OrderVatType = "VAT_10_110"
+	OrderVatType_VAT_20        OrderVatType = "VAT_20"
+	OrderVatType_VAT_20_120    OrderVatType = "VAT_20_120"
+	OrderVatType_VAT_18        OrderVatType = "VAT_18"
+	OrderVatType_VAT_18_118    OrderVatType = "VAT_18_118"
+	OrderVatType_VAT_12        OrderVatType = "VAT_12"
+	OrderVatType_VAT_05        OrderVatType = "VAT_05"
+	OrderVatType_VAT_07        OrderVatType = "VAT_07"
+	OrderVatType_UNKNOWN_VALUE OrderVatType = "UNKNOWN_VALUE"
 )
 
 // All allowed values of OrderVatType enum

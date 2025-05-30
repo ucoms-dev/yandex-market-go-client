@@ -20,8 +20,8 @@ type ShipmentPalletLabelPageFormatType string
 
 // List of ShipmentPalletLabelPageFormatType
 const (
-	A4 ShipmentPalletLabelPageFormatType = "A4"
-	A8 ShipmentPalletLabelPageFormatType = "A8"
+	ShipmentPalletLabelPageFormatType_A4 ShipmentPalletLabelPageFormatType = "A4"
+	ShipmentPalletLabelPageFormatType_A8 ShipmentPalletLabelPageFormatType = "A8"
 )
 
 // All allowed values of ShipmentPalletLabelPageFormatType enum

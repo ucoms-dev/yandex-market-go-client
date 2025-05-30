@@ -20,16 +20,16 @@ type RejectedPromoOfferUpdateReasonType string
 
 // List of RejectedPromoOfferUpdateReasonType
 const (
-	OFFER_DOES_NOT_EXIST                RejectedPromoOfferUpdateReasonType = "OFFER_DOES_NOT_EXIST"
-	OFFER_DUPLICATION                   RejectedPromoOfferUpdateReasonType = "OFFER_DUPLICATION"
-	OFFER_NOT_ELIGIBLE_FOR_PROMO        RejectedPromoOfferUpdateReasonType = "OFFER_NOT_ELIGIBLE_FOR_PROMO"
-	OFFER_PROMOS_MAX_BYTE_SIZE_EXCEEDED RejectedPromoOfferUpdateReasonType = "OFFER_PROMOS_MAX_BYTE_SIZE_EXCEEDED"
-	DEADLINE_FOR_FOCUS_PROMOS_EXCEEDED  RejectedPromoOfferUpdateReasonType = "DEADLINE_FOR_FOCUS_PROMOS_EXCEEDED"
-	EMPTY_OLD_PRICE                     RejectedPromoOfferUpdateReasonType = "EMPTY_OLD_PRICE"
-	EMPTY_PROMO_PRICE                   RejectedPromoOfferUpdateReasonType = "EMPTY_PROMO_PRICE"
-	MAX_PROMO_PRICE_EXCEEDED            RejectedPromoOfferUpdateReasonType = "MAX_PROMO_PRICE_EXCEEDED"
-	PROMO_PRICE_BIGGER_THAN_MAX         RejectedPromoOfferUpdateReasonType = "PROMO_PRICE_BIGGER_THAN_MAX"
-	PROMO_PRICE_SMALLER_THAN_MIN        RejectedPromoOfferUpdateReasonType = "PROMO_PRICE_SMALLER_THAN_MIN"
+	RejectedPromoOfferUpdateReasonType_OFFER_DOES_NOT_EXIST                RejectedPromoOfferUpdateReasonType = "OFFER_DOES_NOT_EXIST"
+	RejectedPromoOfferUpdateReasonType_OFFER_DUPLICATION                   RejectedPromoOfferUpdateReasonType = "OFFER_DUPLICATION"
+	RejectedPromoOfferUpdateReasonType_OFFER_NOT_ELIGIBLE_FOR_PROMO        RejectedPromoOfferUpdateReasonType = "OFFER_NOT_ELIGIBLE_FOR_PROMO"
+	RejectedPromoOfferUpdateReasonType_OFFER_PROMOS_MAX_BYTE_SIZE_EXCEEDED RejectedPromoOfferUpdateReasonType = "OFFER_PROMOS_MAX_BYTE_SIZE_EXCEEDED"
+	RejectedPromoOfferUpdateReasonType_DEADLINE_FOR_FOCUS_PROMOS_EXCEEDED  RejectedPromoOfferUpdateReasonType = "DEADLINE_FOR_FOCUS_PROMOS_EXCEEDED"
+	RejectedPromoOfferUpdateReasonType_EMPTY_OLD_PRICE                     RejectedPromoOfferUpdateReasonType = "EMPTY_OLD_PRICE"
+	RejectedPromoOfferUpdateReasonType_EMPTY_PROMO_PRICE                   RejectedPromoOfferUpdateReasonType = "EMPTY_PROMO_PRICE"
+	RejectedPromoOfferUpdateReasonType_MAX_PROMO_PRICE_EXCEEDED            RejectedPromoOfferUpdateReasonType = "MAX_PROMO_PRICE_EXCEEDED"
+	RejectedPromoOfferUpdateReasonType_PROMO_PRICE_BIGGER_THAN_MAX         RejectedPromoOfferUpdateReasonType = "PROMO_PRICE_BIGGER_THAN_MAX"
+	RejectedPromoOfferUpdateReasonType_PROMO_PRICE_SMALLER_THAN_MIN        RejectedPromoOfferUpdateReasonType = "PROMO_PRICE_SMALLER_THAN_MIN"
 )
 
 // All allowed values of RejectedPromoOfferUpdateReasonType enum

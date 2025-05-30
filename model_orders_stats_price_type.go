@@ -20,9 +20,9 @@ type OrdersStatsPriceType string
 
 // List of OrdersStatsPriceType
 const (
-	BUYER       OrdersStatsPriceType = "BUYER"
-	CASHBACK    OrdersStatsPriceType = "CASHBACK"
-	MARKETPLACE OrdersStatsPriceType = "MARKETPLACE"
+	OrdersStatsPriceType_BUYER       OrdersStatsPriceType = "BUYER"
+	OrdersStatsPriceType_CASHBACK    OrdersStatsPriceType = "CASHBACK"
+	OrdersStatsPriceType_MARKETPLACE OrdersStatsPriceType = "MARKETPLACE"
 )
 
 // All allowed values of OrdersStatsPriceType enum

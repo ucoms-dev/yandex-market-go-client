@@ -20,9 +20,9 @@ type OrderItemTagType string
 
 // List of OrderItemTagType
 const (
-	ULTIMA   OrderItemTagType = "ULTIMA"
-	SAFE_TAG OrderItemTagType = "SAFE_TAG"
-	TURBO    OrderItemTagType = "TURBO"
+	OrderItemTagType_ULTIMA   OrderItemTagType = "ULTIMA"
+	OrderItemTagType_SAFE_TAG OrderItemTagType = "SAFE_TAG"
+	OrderItemTagType_TURBO    OrderItemTagType = "TURBO"
 )
 
 // All allowed values of OrderItemTagType enum

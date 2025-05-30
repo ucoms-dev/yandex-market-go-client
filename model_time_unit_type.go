@@ -20,11 +20,11 @@ type TimeUnitType string
 
 // List of TimeUnitType
 const (
-	HOUR  TimeUnitType = "HOUR"
-	DAY   TimeUnitType = "DAY"
-	WEEK  TimeUnitType = "WEEK"
-	MONTH TimeUnitType = "MONTH"
-	YEAR  TimeUnitType = "YEAR"
+	TimeUnitType_HOUR  TimeUnitType = "HOUR"
+	TimeUnitType_DAY   TimeUnitType = "DAY"
+	TimeUnitType_WEEK  TimeUnitType = "WEEK"
+	TimeUnitType_MONTH TimeUnitType = "MONTH"
+	TimeUnitType_YEAR  TimeUnitType = "YEAR"
 )
 
 // All allowed values of TimeUnitType enum

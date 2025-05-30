@@ -20,8 +20,8 @@ type OrdersStatsSubsidyOperationType string
 
 // List of OrdersStatsSubsidyOperationType
 const (
-	ACCRUAL   OrdersStatsSubsidyOperationType = "ACCRUAL"
-	DEDUCTION OrdersStatsSubsidyOperationType = "DEDUCTION"
+	OrdersStatsSubsidyOperationType_ACCRUAL   OrdersStatsSubsidyOperationType = "ACCRUAL"
+	OrdersStatsSubsidyOperationType_DEDUCTION OrdersStatsSubsidyOperationType = "DEDUCTION"
 )
 
 // All allowed values of OrdersStatsSubsidyOperationType enum

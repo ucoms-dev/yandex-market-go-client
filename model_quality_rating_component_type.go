@@ -20,14 +20,14 @@ type QualityRatingComponentType string
 
 // List of QualityRatingComponentType
 const (
-	DBS_CANCELLATION_RATE  QualityRatingComponentType = "DBS_CANCELLATION_RATE"
-	DBS_LATE_DELIVERY_RATE QualityRatingComponentType = "DBS_LATE_DELIVERY_RATE"
-	FBS_CANCELLATION_RATE  QualityRatingComponentType = "FBS_CANCELLATION_RATE"
-	FBS_LATE_SHIP_RATE     QualityRatingComponentType = "FBS_LATE_SHIP_RATE"
-	FBY_LATE_DELIVERY_RATE QualityRatingComponentType = "FBY_LATE_DELIVERY_RATE"
-	FBY_CANCELLATION_RATE  QualityRatingComponentType = "FBY_CANCELLATION_RATE"
-	FBY_DELIVERY_DIFF_RATE QualityRatingComponentType = "FBY_DELIVERY_DIFF_RATE"
-	FBY_LATE_EDITING_RATE  QualityRatingComponentType = "FBY_LATE_EDITING_RATE"
+	QualityRatingComponentType_DBS_CANCELLATION_RATE  QualityRatingComponentType = "DBS_CANCELLATION_RATE"
+	QualityRatingComponentType_DBS_LATE_DELIVERY_RATE QualityRatingComponentType = "DBS_LATE_DELIVERY_RATE"
+	QualityRatingComponentType_FBS_CANCELLATION_RATE  QualityRatingComponentType = "FBS_CANCELLATION_RATE"
+	QualityRatingComponentType_FBS_LATE_SHIP_RATE     QualityRatingComponentType = "FBS_LATE_SHIP_RATE"
+	QualityRatingComponentType_FBY_LATE_DELIVERY_RATE QualityRatingComponentType = "FBY_LATE_DELIVERY_RATE"
+	QualityRatingComponentType_FBY_CANCELLATION_RATE  QualityRatingComponentType = "FBY_CANCELLATION_RATE"
+	QualityRatingComponentType_FBY_DELIVERY_DIFF_RATE QualityRatingComponentType = "FBY_DELIVERY_DIFF_RATE"
+	QualityRatingComponentType_FBY_LATE_EDITING_RATE  QualityRatingComponentType = "FBY_LATE_EDITING_RATE"
 )
 
 // All allowed values of QualityRatingComponentType enum

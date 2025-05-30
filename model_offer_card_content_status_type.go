@@ -20,8 +20,8 @@ type OfferCardContentStatusType string
 
 // List of OfferCardContentStatusType
 const (
-	UPDATING OfferCardContentStatusType = "UPDATING"
-	ACTUAL   OfferCardContentStatusType = "ACTUAL"
+	OfferCardContentStatusType_UPDATING OfferCardContentStatusType = "UPDATING"
+	OfferCardContentStatusType_ACTUAL   OfferCardContentStatusType = "ACTUAL"
 )
 
 // All allowed values of OfferCardContentStatusType enum

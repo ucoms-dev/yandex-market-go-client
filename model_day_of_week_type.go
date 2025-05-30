@@ -20,13 +20,13 @@ type DayOfWeekType string
 
 // List of DayOfWeekType
 const (
-	MONDAY    DayOfWeekType = "MONDAY"
-	TUESDAY   DayOfWeekType = "TUESDAY"
-	WEDNESDAY DayOfWeekType = "WEDNESDAY"
-	THURSDAY  DayOfWeekType = "THURSDAY"
-	FRIDAY    DayOfWeekType = "FRIDAY"
-	SATURDAY  DayOfWeekType = "SATURDAY"
-	SUNDAY    DayOfWeekType = "SUNDAY"
+	DayOfWeekType_MONDAY    DayOfWeekType = "MONDAY"
+	DayOfWeekType_TUESDAY   DayOfWeekType = "TUESDAY"
+	DayOfWeekType_WEDNESDAY DayOfWeekType = "WEDNESDAY"
+	DayOfWeekType_THURSDAY  DayOfWeekType = "THURSDAY"
+	DayOfWeekType_FRIDAY    DayOfWeekType = "FRIDAY"
+	DayOfWeekType_SATURDAY  DayOfWeekType = "SATURDAY"
+	DayOfWeekType_SUNDAY    DayOfWeekType = "SUNDAY"
 )
 
 // All allowed values of DayOfWeekType enum

@@ -20,9 +20,9 @@ type EacVerificationStatusType string
 
 // List of EacVerificationStatusType
 const (
-	ACCEPTED    EacVerificationStatusType = "ACCEPTED"
-	REJECTED    EacVerificationStatusType = "REJECTED"
-	NEED_UPDATE EacVerificationStatusType = "NEED_UPDATE"
+	EacVerificationStatusType_ACCEPTED    EacVerificationStatusType = "ACCEPTED"
+	EacVerificationStatusType_REJECTED    EacVerificationStatusType = "REJECTED"
+	EacVerificationStatusType_NEED_UPDATE EacVerificationStatusType = "NEED_UPDATE"
 )
 
 // All allowed values of EacVerificationStatusType enum

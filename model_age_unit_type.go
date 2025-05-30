@@ -20,8 +20,8 @@ type AgeUnitType string
 
 // List of AgeUnitType
 const (
-	YEAR  AgeUnitType = "YEAR"
-	MONTH AgeUnitType = "MONTH"
+	AgeUnitType_YEAR  AgeUnitType = "YEAR"
+	AgeUnitType_MONTH AgeUnitType = "MONTH"
 )
 
 // All allowed values of AgeUnitType enum

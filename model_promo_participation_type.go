@@ -20,8 +20,8 @@ type PromoParticipationType string
 
 // List of PromoParticipationType
 const (
-	PARTICIPATING_NOW PromoParticipationType = "PARTICIPATING_NOW"
-	PARTICIPATED      PromoParticipationType = "PARTICIPATED"
+	PromoParticipationType_PARTICIPATING_NOW PromoParticipationType = "PARTICIPATING_NOW"
+	PromoParticipationType_PARTICIPATED      PromoParticipationType = "PARTICIPATED"
 )
 
 // All allowed values of PromoParticipationType enum

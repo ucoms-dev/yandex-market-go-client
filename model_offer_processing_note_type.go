@@ -20,22 +20,22 @@ type OfferProcessingNoteType string
 
 // List of OfferProcessingNoteType
 const (
-	ASSORTMENT                      OfferProcessingNoteType = "ASSORTMENT"
-	CANCELLED                       OfferProcessingNoteType = "CANCELLED"
-	CONFLICTING_INFORMATION         OfferProcessingNoteType = "CONFLICTING_INFORMATION"
-	OTHER                           OfferProcessingNoteType = "OTHER"
-	DEPARTMENT_FROZEN               OfferProcessingNoteType = "DEPARTMENT_FROZEN"
-	INCORRECT_INFORMATION           OfferProcessingNoteType = "INCORRECT_INFORMATION"
-	LEGAL_CONFLICT                  OfferProcessingNoteType = "LEGAL_CONFLICT"
-	NEED_CLASSIFICATION_INFORMATION OfferProcessingNoteType = "NEED_CLASSIFICATION_INFORMATION"
-	NEED_INFORMATION                OfferProcessingNoteType = "NEED_INFORMATION"
-	NEED_PICTURES                   OfferProcessingNoteType = "NEED_PICTURES"
-	NEED_VENDOR                     OfferProcessingNoteType = "NEED_VENDOR"
-	NO_CATEGORY                     OfferProcessingNoteType = "NO_CATEGORY"
-	NO_KNOWLEDGE                    OfferProcessingNoteType = "NO_KNOWLEDGE"
-	NO_PARAMETERS_IN_SHOP_TITLE     OfferProcessingNoteType = "NO_PARAMETERS_IN_SHOP_TITLE"
-	NO_SIZE_MEASURE                 OfferProcessingNoteType = "NO_SIZE_MEASURE"
-	SAMPLE_LINE                     OfferProcessingNoteType = "SAMPLE_LINE"
+	OfferProcessingNoteType_ASSORTMENT                      OfferProcessingNoteType = "ASSORTMENT"
+	OfferProcessingNoteType_CANCELLED                       OfferProcessingNoteType = "CANCELLED"
+	OfferProcessingNoteType_CONFLICTING_INFORMATION         OfferProcessingNoteType = "CONFLICTING_INFORMATION"
+	OfferProcessingNoteType_OTHER                           OfferProcessingNoteType = "OTHER"
+	OfferProcessingNoteType_DEPARTMENT_FROZEN               OfferProcessingNoteType = "DEPARTMENT_FROZEN"
+	OfferProcessingNoteType_INCORRECT_INFORMATION           OfferProcessingNoteType = "INCORRECT_INFORMATION"
+	OfferProcessingNoteType_LEGAL_CONFLICT                  OfferProcessingNoteType = "LEGAL_CONFLICT"
+	OfferProcessingNoteType_NEED_CLASSIFICATION_INFORMATION OfferProcessingNoteType = "NEED_CLASSIFICATION_INFORMATION"
+	OfferProcessingNoteType_NEED_INFORMATION                OfferProcessingNoteType = "NEED_INFORMATION"
+	OfferProcessingNoteType_NEED_PICTURES                   OfferProcessingNoteType = "NEED_PICTURES"
+	OfferProcessingNoteType_NEED_VENDOR                     OfferProcessingNoteType = "NEED_VENDOR"
+	OfferProcessingNoteType_NO_CATEGORY                     OfferProcessingNoteType = "NO_CATEGORY"
+	OfferProcessingNoteType_NO_KNOWLEDGE                    OfferProcessingNoteType = "NO_KNOWLEDGE"
+	OfferProcessingNoteType_NO_PARAMETERS_IN_SHOP_TITLE     OfferProcessingNoteType = "NO_PARAMETERS_IN_SHOP_TITLE"
+	OfferProcessingNoteType_NO_SIZE_MEASURE                 OfferProcessingNoteType = "NO_SIZE_MEASURE"
+	OfferProcessingNoteType_SAMPLE_LINE                     OfferProcessingNoteType = "SAMPLE_LINE"
 )
 
 // All allowed values of OfferProcessingNoteType enum

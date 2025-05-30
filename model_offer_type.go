@@ -20,13 +20,13 @@ type OfferType string
 
 // List of OfferType
 const (
-	DEFAULT      OfferType = "DEFAULT"
-	MEDICINE     OfferType = "MEDICINE"
-	BOOK         OfferType = "BOOK"
-	AUDIOBOOK    OfferType = "AUDIOBOOK"
-	ARTIST_TITLE OfferType = "ARTIST_TITLE"
-	ON_DEMAND    OfferType = "ON_DEMAND"
-	ALCOHOL      OfferType = "ALCOHOL"
+	OfferType_DEFAULT      OfferType = "DEFAULT"
+	OfferType_MEDICINE     OfferType = "MEDICINE"
+	OfferType_BOOK         OfferType = "BOOK"
+	OfferType_AUDIOBOOK    OfferType = "AUDIOBOOK"
+	OfferType_ARTIST_TITLE OfferType = "ARTIST_TITLE"
+	OfferType_ON_DEMAND    OfferType = "ON_DEMAND"
+	OfferType_ALCOHOL      OfferType = "ALCOHOL"
 )
 
 // All allowed values of OfferType enum

@@ -20,9 +20,9 @@ type OrdersStatsSubsidyType string
 
 // List of OrdersStatsSubsidyType
 const (
-	YANDEX_CASHBACK OrdersStatsSubsidyType = "YANDEX_CASHBACK"
-	SUBSIDY         OrdersStatsSubsidyType = "SUBSIDY"
-	DELIVERY        OrdersStatsSubsidyType = "DELIVERY"
+	OrdersStatsSubsidyType_YANDEX_CASHBACK OrdersStatsSubsidyType = "YANDEX_CASHBACK"
+	OrdersStatsSubsidyType_SUBSIDY         OrdersStatsSubsidyType = "SUBSIDY"
+	OrdersStatsSubsidyType_DELIVERY        OrdersStatsSubsidyType = "DELIVERY"
 )
 
 // All allowed values of OrdersStatsSubsidyType enum

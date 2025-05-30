@@ -20,10 +20,10 @@ type OutletType string
 
 // List of OutletType
 const (
-	DEPOT       OutletType = "DEPOT"
-	MIXED       OutletType = "MIXED"
-	RETAIL      OutletType = "RETAIL"
-	NOT_DEFINED OutletType = "NOT_DEFINED"
+	OutletType_DEPOT       OutletType = "DEPOT"
+	OutletType_MIXED       OutletType = "MIXED"
+	OutletType_RETAIL      OutletType = "RETAIL"
+	OutletType_NOT_DEFINED OutletType = "NOT_DEFINED"
 )
 
 // All allowed values of OutletType enum

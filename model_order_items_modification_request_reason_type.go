@@ -20,8 +20,8 @@ type OrderItemsModificationRequestReasonType string
 
 // List of OrderItemsModificationRequestReasonType
 const (
-	PARTNER_REQUESTED_REMOVE OrderItemsModificationRequestReasonType = "PARTNER_REQUESTED_REMOVE"
-	USER_REQUESTED_REMOVE    OrderItemsModificationRequestReasonType = "USER_REQUESTED_REMOVE"
+	OrderItemsModificationRequestReasonType_PARTNER_REQUESTED_REMOVE OrderItemsModificationRequestReasonType = "PARTNER_REQUESTED_REMOVE"
+	OrderItemsModificationRequestReasonType_USER_REQUESTED_REMOVE    OrderItemsModificationRequestReasonType = "USER_REQUESTED_REMOVE"
 )
 
 // All allowed values of OrderItemsModificationRequestReasonType enum

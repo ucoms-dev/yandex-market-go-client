@@ -20,8 +20,8 @@ type OrderCancellationReasonType string
 
 // List of OrderCancellationReasonType
 const (
-	ORDER_DELIVERED   OrderCancellationReasonType = "ORDER_DELIVERED"
-	ORDER_IN_DELIVERY OrderCancellationReasonType = "ORDER_IN_DELIVERY"
+	OrderCancellationReasonType_ORDER_DELIVERED   OrderCancellationReasonType = "ORDER_DELIVERED"
+	OrderCancellationReasonType_ORDER_IN_DELIVERY OrderCancellationReasonType = "ORDER_IN_DELIVERY"
 )
 
 // All allowed values of OrderCancellationReasonType enum

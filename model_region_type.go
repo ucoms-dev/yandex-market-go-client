@@ -20,17 +20,17 @@ type RegionType string
 
 // List of RegionType
 const (
-	OTHER            RegionType = "OTHER"
-	CONTINENT        RegionType = "CONTINENT"
-	REGION           RegionType = "REGION"
-	COUNTRY          RegionType = "COUNTRY"
-	COUNTRY_DISTRICT RegionType = "COUNTRY_DISTRICT"
-	REPUBLIC         RegionType = "REPUBLIC"
-	CITY             RegionType = "CITY"
-	VILLAGE          RegionType = "VILLAGE"
-	CITY_DISTRICT    RegionType = "CITY_DISTRICT"
-	SUBWAY_STATION   RegionType = "SUBWAY_STATION"
-	REPUBLIC_AREA    RegionType = "REPUBLIC_AREA"
+	RegionType_OTHER            RegionType = "OTHER"
+	RegionType_CONTINENT        RegionType = "CONTINENT"
+	RegionType_REGION           RegionType = "REGION"
+	RegionType_COUNTRY          RegionType = "COUNTRY"
+	RegionType_COUNTRY_DISTRICT RegionType = "COUNTRY_DISTRICT"
+	RegionType_REPUBLIC         RegionType = "REPUBLIC"
+	RegionType_CITY             RegionType = "CITY"
+	RegionType_VILLAGE          RegionType = "VILLAGE"
+	RegionType_CITY_DISTRICT    RegionType = "CITY_DISTRICT"
+	RegionType_SUBWAY_STATION   RegionType = "SUBWAY_STATION"
+	RegionType_REPUBLIC_AREA    RegionType = "REPUBLIC_AREA"
 )
 
 // All allowed values of RegionType enum

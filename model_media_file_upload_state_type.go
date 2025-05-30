@@ -20,9 +20,9 @@ type MediaFileUploadStateType string
 
 // List of MediaFileUploadStateType
 const (
-	UPLOADING MediaFileUploadStateType = "UPLOADING"
-	UPLOADED  MediaFileUploadStateType = "UPLOADED"
-	FAILED    MediaFileUploadStateType = "FAILED"
+	MediaFileUploadStateType_UPLOADING MediaFileUploadStateType = "UPLOADING"
+	MediaFileUploadStateType_UPLOADED  MediaFileUploadStateType = "UPLOADED"
+	MediaFileUploadStateType_FAILED    MediaFileUploadStateType = "FAILED"
 )
 
 // All allowed values of MediaFileUploadStateType enum

@@ -20,9 +20,9 @@ type ReportFormatType string
 
 // List of ReportFormatType
 const (
-	FILE ReportFormatType = "FILE"
-	CSV  ReportFormatType = "CSV"
-	JSON ReportFormatType = "JSON"
+	ReportFormatType_FILE ReportFormatType = "FILE"
+	ReportFormatType_CSV  ReportFormatType = "CSV"
+	ReportFormatType_JSON ReportFormatType = "JSON"
 )
 
 // All allowed values of ReportFormatType enum

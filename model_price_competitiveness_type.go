@@ -20,9 +20,9 @@ type PriceCompetitivenessType string
 
 // List of PriceCompetitivenessType
 const (
-	OPTIMAL PriceCompetitivenessType = "OPTIMAL"
-	AVERAGE PriceCompetitivenessType = "AVERAGE"
-	LOW     PriceCompetitivenessType = "LOW"
+	PriceCompetitivenessType_OPTIMAL PriceCompetitivenessType = "OPTIMAL"
+	PriceCompetitivenessType_AVERAGE PriceCompetitivenessType = "AVERAGE"
+	PriceCompetitivenessType_LOW     PriceCompetitivenessType = "LOW"
 )
 
 // All allowed values of PriceCompetitivenessType enum

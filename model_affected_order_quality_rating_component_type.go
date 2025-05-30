@@ -20,10 +20,10 @@ type AffectedOrderQualityRatingComponentType string
 
 // List of AffectedOrderQualityRatingComponentType
 const (
-	DBS_CANCELLATION_RATE  AffectedOrderQualityRatingComponentType = "DBS_CANCELLATION_RATE"
-	DBS_LATE_DELIVERY_RATE AffectedOrderQualityRatingComponentType = "DBS_LATE_DELIVERY_RATE"
-	FBS_CANCELLATION_RATE  AffectedOrderQualityRatingComponentType = "FBS_CANCELLATION_RATE"
-	FBS_LATE_SHIP_RATE     AffectedOrderQualityRatingComponentType = "FBS_LATE_SHIP_RATE"
+	AffectedOrderQualityRatingComponentType_DBS_CANCELLATION_RATE  AffectedOrderQualityRatingComponentType = "DBS_CANCELLATION_RATE"
+	AffectedOrderQualityRatingComponentType_DBS_LATE_DELIVERY_RATE AffectedOrderQualityRatingComponentType = "DBS_LATE_DELIVERY_RATE"
+	AffectedOrderQualityRatingComponentType_FBS_CANCELLATION_RATE  AffectedOrderQualityRatingComponentType = "FBS_CANCELLATION_RATE"
+	AffectedOrderQualityRatingComponentType_FBS_LATE_SHIP_RATE     AffectedOrderQualityRatingComponentType = "FBS_LATE_SHIP_RATE"
 )
 
 // All allowed values of AffectedOrderQualityRatingComponentType enum

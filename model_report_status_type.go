@@ -20,10 +20,10 @@ type ReportStatusType string
 
 // List of ReportStatusType
 const (
-	PENDING    ReportStatusType = "PENDING"
-	PROCESSING ReportStatusType = "PROCESSING"
-	FAILED     ReportStatusType = "FAILED"
-	DONE       ReportStatusType = "DONE"
+	ReportStatusType_PENDING    ReportStatusType = "PENDING"
+	ReportStatusType_PROCESSING ReportStatusType = "PROCESSING"
+	ReportStatusType_FAILED     ReportStatusType = "FAILED"
+	ReportStatusType_DONE       ReportStatusType = "DONE"
 )
 
 // All allowed values of ReportStatusType enum
