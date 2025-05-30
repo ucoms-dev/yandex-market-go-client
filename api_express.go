@@ -37,7 +37,7 @@ func (r ExpressAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersReq
 	return r
 }
 
-func (r ExpressAddHiddenOffersRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.AddHiddenOffersExecute(r)
 }
 
@@ -71,13 +71,13 @@ func (a *ExpressAPIService) AddHiddenOffers(ctx context.Context, campaignId int6
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) AddHiddenOffersExecute(r ExpressAddHiddenOffersRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) AddHiddenOffersExecute(r ExpressAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.AddHiddenOffers")
@@ -187,7 +187,7 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ExpressAddHiddenOffersReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -198,7 +198,7 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ExpressAddHiddenOffersReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -209,7 +209,7 @@ func (a *ExpressAPIService) AddHiddenOffersExecute(r ExpressAddHiddenOffersReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -395,7 +395,7 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ExpressAddOffersToArchiv
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -406,7 +406,7 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ExpressAddOffersToArchiv
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -417,7 +417,7 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ExpressAddOffersToArchiv
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -428,7 +428,7 @@ func (a *ExpressAPIService) AddOffersToArchiveExecute(r ExpressAddOffersToArchiv
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -606,7 +606,7 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ExpressCalculateTariffsReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -617,7 +617,7 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ExpressCalculateTariffsReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -628,7 +628,7 @@ func (a *ExpressAPIService) CalculateTariffsExecute(r ExpressCalculateTariffsReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -664,7 +664,7 @@ func (r ExpressConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesR
 	return r
 }
 
-func (r ExpressConfirmBusinessPricesRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.ConfirmBusinessPricesExecute(r)
 }
 
@@ -696,13 +696,13 @@ func (a *ExpressAPIService) ConfirmBusinessPrices(ctx context.Context, businessI
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ExpressConfirmBusinessPricesRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ExpressConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.ConfirmBusinessPrices")
@@ -812,7 +812,7 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ExpressConfirmBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -823,7 +823,7 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ExpressConfirmBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -834,7 +834,7 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ExpressConfirmBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -845,7 +845,7 @@ func (a *ExpressAPIService) ConfirmBusinessPricesExecute(r ExpressConfirmBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -881,7 +881,7 @@ func (r ExpressConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesR
 	return r
 }
 
-func (r ExpressConfirmCampaignPricesRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.ConfirmCampaignPricesExecute(r)
 }
 
@@ -913,13 +913,13 @@ func (a *ExpressAPIService) ConfirmCampaignPrices(ctx context.Context, campaignI
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ExpressConfirmCampaignPricesRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ExpressConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.ConfirmCampaignPrices")
@@ -1029,7 +1029,7 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ExpressConfirmCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1040,7 +1040,7 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ExpressConfirmCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1051,7 +1051,7 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ExpressConfirmCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1062,7 +1062,7 @@ func (a *ExpressAPIService) ConfirmCampaignPricesExecute(r ExpressConfirmCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1243,7 +1243,7 @@ func (a *ExpressAPIService) CreateChatExecute(r ExpressExpressCreateChatRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1254,7 +1254,7 @@ func (a *ExpressAPIService) CreateChatExecute(r ExpressExpressCreateChatRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1265,7 +1265,7 @@ func (a *ExpressAPIService) CreateChatExecute(r ExpressExpressCreateChatRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1453,7 +1453,7 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ExpressDeleteCampaignO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1464,7 +1464,7 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ExpressDeleteCampaignO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1475,7 +1475,7 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ExpressDeleteCampaignO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1486,7 +1486,7 @@ func (a *ExpressAPIService) DeleteCampaignOffersExecute(r ExpressDeleteCampaignO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1522,7 +1522,7 @@ func (r ExpressDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequ
 	return r
 }
 
-func (r ExpressDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.DeleteGoodsFeedbackCommentExecute(r)
 }
 
@@ -1550,13 +1550,13 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackComment(ctx context.Context, busi
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ExpressDeleteGoodsFeedbackCommentRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ExpressDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.DeleteGoodsFeedbackComment")
@@ -1666,7 +1666,7 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ExpressDeleteGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1677,7 +1677,7 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ExpressDeleteGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1688,7 +1688,7 @@ func (a *ExpressAPIService) DeleteGoodsFeedbackCommentExecute(r ExpressDeleteGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1725,7 +1725,7 @@ func (r ExpressDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHidden
 	return r
 }
 
-func (r ExpressDeleteHiddenOffersRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.DeleteHiddenOffersExecute(r)
 }
 
@@ -1759,13 +1759,13 @@ func (a *ExpressAPIService) DeleteHiddenOffers(ctx context.Context, campaignId i
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ExpressDeleteHiddenOffersRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ExpressDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.DeleteHiddenOffers")
@@ -1875,7 +1875,7 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ExpressDeleteHiddenOffer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1886,7 +1886,7 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ExpressDeleteHiddenOffer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1897,7 +1897,7 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ExpressDeleteHiddenOffer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1908,7 +1908,7 @@ func (a *ExpressAPIService) DeleteHiddenOffersExecute(r ExpressDeleteHiddenOffer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2088,7 +2088,7 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ExpressDeleteOffersRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2099,7 +2099,7 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ExpressDeleteOffersRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2110,7 +2110,7 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ExpressDeleteOffersRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2121,7 +2121,7 @@ func (a *ExpressAPIService) DeleteOffersExecute(r ExpressDeleteOffersRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2301,7 +2301,7 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ExpressDeleteOffers
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2312,7 +2312,7 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ExpressDeleteOffers
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2323,7 +2323,7 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ExpressDeleteOffers
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2334,7 +2334,7 @@ func (a *ExpressAPIService) DeleteOffersFromArchiveExecute(r ExpressDeleteOffers
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2516,7 +2516,7 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ExpressDeletePromoOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2527,7 +2527,7 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ExpressDeletePromoOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2538,7 +2538,7 @@ func (a *ExpressAPIService) DeletePromoOffersExecute(r ExpressDeletePromoOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2728,7 +2728,7 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ExpressGene
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2739,7 +2739,7 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ExpressGene
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2931,7 +2931,7 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ExpressGene
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2942,7 +2942,7 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ExpressGene
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3138,7 +3138,7 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ExpressGe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3149,7 +3149,7 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ExpressGe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3339,7 +3339,7 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ExpressGenerate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3350,7 +3350,7 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ExpressGenerate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3550,7 +3550,7 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ExpressGener
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3561,7 +3561,7 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ExpressGener
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3751,7 +3751,7 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ExpressGenerate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3762,7 +3762,7 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ExpressGenerate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3947,7 +3947,7 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ExpressGenera
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3958,7 +3958,7 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ExpressGenera
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4149,7 +4149,7 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ExpressGenerateOrderLabe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4160,7 +4160,7 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ExpressGenerateOrderLabe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4171,7 +4171,7 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ExpressGenerateOrderLabe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4356,7 +4356,7 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ExpressGenerateOrderLab
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4367,7 +4367,7 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ExpressGenerateOrderLab
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4378,7 +4378,7 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ExpressGenerateOrderLab
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4576,7 +4576,7 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ExpressGeneratePricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4587,7 +4587,7 @@ func (a *ExpressAPIService) GeneratePricesReportExecute(r ExpressGeneratePricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4777,7 +4777,7 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ExpressGenerat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4788,7 +4788,7 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ExpressGenerat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4978,7 +4978,7 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ExpressGener
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4989,7 +4989,7 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ExpressGener
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5179,7 +5179,7 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ExpressGenerateSho
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5190,7 +5190,7 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ExpressGenerateSho
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5380,7 +5380,7 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ExpressGenerateSho
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5391,7 +5391,7 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ExpressGenerateSho
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5586,7 +5586,7 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ExpressGen
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5597,7 +5597,7 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ExpressGen
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5806,7 +5806,7 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Exp
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5817,7 +5817,7 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Exp
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6028,7 +6028,7 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ExpressGenerate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6039,7 +6039,7 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ExpressGenerate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6239,7 +6239,7 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ExpressGenerateU
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6250,7 +6250,7 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ExpressGenerateU
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6442,7 +6442,7 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ExpressGenerate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6453,7 +6453,7 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ExpressGenerate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6619,7 +6619,7 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ExpressExpressGetAuthToken
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6630,7 +6630,7 @@ func (a *ExpressAPIService) GetAuthTokenInfoExecute(r ExpressExpressGetAuthToken
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6836,7 +6836,7 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ExpressGetBidsInfoFo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6847,7 +6847,7 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ExpressGetBidsInfoFo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6858,7 +6858,7 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ExpressGetBidsInfoFo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7045,7 +7045,7 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ExpressGetBidsRecomm
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7056,7 +7056,7 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ExpressGetBidsRecomm
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7067,7 +7067,7 @@ func (a *ExpressAPIService) GetBidsRecommendationsExecute(r ExpressGetBidsRecomm
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7279,7 +7279,7 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ExpressGetBusin
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7290,7 +7290,7 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ExpressGetBusin
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7301,7 +7301,7 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ExpressGetBusin
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7469,7 +7469,7 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ExpressGetBusinessSetti
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7480,7 +7480,7 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ExpressGetBusinessSetti
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7491,7 +7491,7 @@ func (a *ExpressAPIService) GetBusinessSettingsExecute(r ExpressGetBusinessSetti
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7659,7 +7659,7 @@ func (a *ExpressAPIService) GetCampaignExecute(r ExpressGetCampaignRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7670,7 +7670,7 @@ func (a *ExpressAPIService) GetCampaignExecute(r ExpressGetCampaignRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7681,7 +7681,7 @@ func (a *ExpressAPIService) GetCampaignExecute(r ExpressGetCampaignRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7881,7 +7881,7 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ExpressGetCampaignOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7892,7 +7892,7 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ExpressGetCampaignOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7903,7 +7903,7 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ExpressGetCampaignOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8115,7 +8115,7 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ExpressGetCampa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8126,7 +8126,7 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ExpressGetCampa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8137,7 +8137,7 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ExpressGetCampa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8315,7 +8315,7 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ExpressGetCampaignRegionR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8326,7 +8326,7 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ExpressGetCampaignRegionR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8337,7 +8337,7 @@ func (a *ExpressAPIService) GetCampaignRegionExecute(r ExpressGetCampaignRegionR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8505,7 +8505,7 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ExpressGetCampaignSetti
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8516,7 +8516,7 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ExpressGetCampaignSetti
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8527,7 +8527,7 @@ func (a *ExpressAPIService) GetCampaignSettingsExecute(r ExpressGetCampaignSetti
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8714,7 +8714,7 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ExpressGetCampaignsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8725,7 +8725,7 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ExpressGetCampaignsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8736,7 +8736,7 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ExpressGetCampaignsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8913,7 +8913,7 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ExpressGetCateg
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8924,7 +8924,7 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ExpressGetCateg
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8935,7 +8935,7 @@ func (a *ExpressAPIService) GetCategoriesMaxSaleQuantumExecute(r ExpressGetCateg
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9105,7 +9105,7 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ExpressGetCategoriesTreeR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9116,7 +9116,7 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ExpressGetCategoriesTreeR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9127,7 +9127,7 @@ func (a *ExpressAPIService) GetCategoriesTreeExecute(r ExpressGetCategoriesTreeR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9296,7 +9296,7 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ExpressGetCate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9307,7 +9307,7 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ExpressGetCate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9318,7 +9318,7 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ExpressGetCate
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9509,7 +9509,7 @@ func (a *ExpressAPIService) GetChatExecute(r ExpressExpressGetChatRequest) (*Get
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9520,7 +9520,7 @@ func (a *ExpressAPIService) GetChatExecute(r ExpressExpressGetChatRequest) (*Get
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9531,7 +9531,7 @@ func (a *ExpressAPIService) GetChatExecute(r ExpressExpressGetChatRequest) (*Get
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9746,7 +9746,7 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ExpressExpressGetChatHistory
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9757,7 +9757,7 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ExpressExpressGetChatHistory
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9768,7 +9768,7 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ExpressExpressGetChatHistory
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9973,7 +9973,7 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ExpressExpressGetChatMessage
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9984,7 +9984,7 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ExpressExpressGetChatMessage
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9995,7 +9995,7 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ExpressExpressGetChatMessage
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10204,7 +10204,7 @@ func (a *ExpressAPIService) GetChatsExecute(r ExpressExpressGetChatsRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10215,7 +10215,7 @@ func (a *ExpressAPIService) GetChatsExecute(r ExpressExpressGetChatsRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10226,7 +10226,7 @@ func (a *ExpressAPIService) GetChatsExecute(r ExpressExpressGetChatsRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10387,7 +10387,7 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ExpressGetDeliveryServi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10398,7 +10398,7 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ExpressGetDeliveryServi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10409,7 +10409,7 @@ func (a *ExpressAPIService) GetDeliveryServicesExecute(r ExpressGetDeliveryServi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10624,7 +10624,7 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ExpressGetGoodsFee
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10635,7 +10635,7 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ExpressGetGoodsFee
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10646,7 +10646,7 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ExpressGetGoodsFee
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10855,7 +10855,7 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ExpressGetGoodsFeedbacksR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10866,7 +10866,7 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ExpressGetGoodsFeedbacksR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10877,7 +10877,7 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ExpressGetGoodsFeedbacksR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11057,7 +11057,7 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ExpressGetGoodsStatsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11068,7 +11068,7 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ExpressGetGoodsStatsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11079,7 +11079,7 @@ func (a *ExpressAPIService) GetGoodsStatsExecute(r ExpressGetGoodsStatsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11280,7 +11280,7 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ExpressGetHiddenOffersReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11291,7 +11291,7 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ExpressGetHiddenOffersReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11494,7 +11494,7 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ExpressGetOfferC
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11505,7 +11505,7 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ExpressGetOfferC
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11516,7 +11516,7 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ExpressGetOfferC
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11798,7 +11798,7 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ExpressGetOfferMappi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11809,7 +11809,7 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ExpressGetOfferMappi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11820,7 +11820,7 @@ func (a *ExpressAPIService) GetOfferMappingEntriesExecute(r ExpressGetOfferMappi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12032,7 +12032,7 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ExpressGetOfferMappingsReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12043,7 +12043,7 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ExpressGetOfferMappingsReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12054,7 +12054,7 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ExpressGetOfferMappingsReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12266,7 +12266,7 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ExpressGetOfferReco
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12277,7 +12277,7 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ExpressGetOfferReco
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12288,7 +12288,7 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ExpressGetOfferReco
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12471,7 +12471,7 @@ func (a *ExpressAPIService) GetOrderExecute(r ExpressGetOrderRequest) (*GetOrder
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12482,7 +12482,7 @@ func (a *ExpressAPIService) GetOrderExecute(r ExpressGetOrderRequest) (*GetOrder
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12493,7 +12493,7 @@ func (a *ExpressAPIService) GetOrderExecute(r ExpressGetOrderRequest) (*GetOrder
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12674,7 +12674,7 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ExpressGetOrderBu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12685,7 +12685,7 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ExpressGetOrderBu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12696,7 +12696,7 @@ func (a *ExpressAPIService) GetOrderBusinessBuyerInfoExecute(r ExpressGetOrderBu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12871,7 +12871,7 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ExpressGetOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12882,7 +12882,7 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ExpressGetOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12893,7 +12893,7 @@ func (a *ExpressAPIService) GetOrderBusinessDocumentsInfoExecute(r ExpressGetOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13071,7 +13071,7 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ExpressGetOrderId
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13082,7 +13082,7 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ExpressGetOrderId
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13093,7 +13093,7 @@ func (a *ExpressAPIService) GetOrderIdentifiersStatusExecute(r ExpressGetOrderId
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13266,7 +13266,7 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ExpressGetOrderLabelsDat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13277,7 +13277,7 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ExpressGetOrderLabelsDat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13288,7 +13288,7 @@ func (a *ExpressAPIService) GetOrderLabelsDataExecute(r ExpressGetOrderLabelsDat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13694,7 +13694,7 @@ func (a *ExpressAPIService) GetOrdersExecute(r ExpressGetOrdersRequest) (*GetOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13705,7 +13705,7 @@ func (a *ExpressAPIService) GetOrdersExecute(r ExpressGetOrdersRequest) (*GetOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13716,7 +13716,7 @@ func (a *ExpressAPIService) GetOrdersExecute(r ExpressGetOrdersRequest) (*GetOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13923,7 +13923,7 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ExpressGetOrdersStatsRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13934,7 +13934,7 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ExpressGetOrdersStatsRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13945,7 +13945,7 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ExpressGetOrdersStatsRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14148,7 +14148,7 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ExpressGetPagedWarehouse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14159,7 +14159,7 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ExpressGetPagedWarehouse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14379,7 +14379,7 @@ func (a *ExpressAPIService) GetPricesExecute(r ExpressGetPricesRequest) (*GetPri
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14390,7 +14390,7 @@ func (a *ExpressAPIService) GetPricesExecute(r ExpressGetPricesRequest) (*GetPri
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14401,7 +14401,7 @@ func (a *ExpressAPIService) GetPricesExecute(r ExpressGetPricesRequest) (*GetPri
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14608,7 +14608,7 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ExpressGetPricesByOffer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14619,7 +14619,7 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ExpressGetPricesByOffer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14630,7 +14630,7 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ExpressGetPricesByOffer
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14838,7 +14838,7 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ExpressGetPromoOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14849,7 +14849,7 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ExpressGetPromoOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14860,7 +14860,7 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ExpressGetPromoOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15047,7 +15047,7 @@ func (a *ExpressAPIService) GetPromosExecute(r ExpressGetPromosRequest) (*GetPro
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15058,7 +15058,7 @@ func (a *ExpressAPIService) GetPromosExecute(r ExpressGetPromosRequest) (*GetPro
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15069,7 +15069,7 @@ func (a *ExpressAPIService) GetPromosExecute(r ExpressGetPromosRequest) (*GetPro
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15238,7 +15238,7 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ExpressGetQualityRa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15249,7 +15249,7 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ExpressGetQualityRa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15260,7 +15260,7 @@ func (a *ExpressAPIService) GetQualityRatingDetailsExecute(r ExpressGetQualityRa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15442,7 +15442,7 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ExpressGetQualityRatingsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15453,7 +15453,7 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ExpressGetQualityRatingsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15464,7 +15464,7 @@ func (a *ExpressAPIService) GetQualityRatingsExecute(r ExpressGetQualityRatingsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15617,7 +15617,7 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ExpressGetRegionsCodesReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15628,7 +15628,7 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ExpressGetRegionsCodesReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15639,7 +15639,7 @@ func (a *ExpressAPIService) GetRegionsCodesExecute(r ExpressGetRegionsCodesReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15813,7 +15813,7 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ExpressGetReportInfoRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15824,7 +15824,7 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ExpressGetReportInfoRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15835,7 +15835,7 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ExpressGetReportInfoRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16020,7 +16020,7 @@ func (a *ExpressAPIService) GetReturnExecute(r ExpressGetReturnRequest) (*GetRet
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16031,7 +16031,7 @@ func (a *ExpressAPIService) GetReturnExecute(r ExpressGetReturnRequest) (*GetRet
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16042,7 +16042,7 @@ func (a *ExpressAPIService) GetReturnExecute(r ExpressGetReturnRequest) (*GetRet
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16219,7 +16219,7 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ExpressGetReturnApplic
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16230,7 +16230,7 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ExpressGetReturnApplic
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16241,7 +16241,7 @@ func (a *ExpressAPIService) GetReturnApplicationExecute(r ExpressGetReturnApplic
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16426,7 +16426,7 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ExpressGetReturnPhotoRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16437,7 +16437,7 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ExpressGetReturnPhotoRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16448,7 +16448,7 @@ func (a *ExpressAPIService) GetReturnPhotoExecute(r ExpressGetReturnPhotoRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16719,7 +16719,7 @@ func (a *ExpressAPIService) GetReturnsExecute(r ExpressGetReturnsRequest) (*GetR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16730,7 +16730,7 @@ func (a *ExpressAPIService) GetReturnsExecute(r ExpressGetReturnsRequest) (*GetR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16741,7 +16741,7 @@ func (a *ExpressAPIService) GetReturnsExecute(r ExpressGetReturnsRequest) (*GetR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16948,7 +16948,7 @@ func (a *ExpressAPIService) GetStocksExecute(r ExpressGetStocksRequest) (*GetWar
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16959,7 +16959,7 @@ func (a *ExpressAPIService) GetStocksExecute(r ExpressGetStocksRequest) (*GetWar
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17153,7 +17153,7 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ExpressGetS
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17164,7 +17164,7 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ExpressGetS
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17175,7 +17175,7 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingEntriesExecute(r ExpressGetS
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17373,7 +17373,7 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ExpressGetSuggest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17384,7 +17384,7 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ExpressGetSuggest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17395,7 +17395,7 @@ func (a *ExpressAPIService) GetSuggestedOfferMappingsExecute(r ExpressGetSuggest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17599,7 +17599,7 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ExpressGetSuggestedPrice
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17610,7 +17610,7 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ExpressGetSuggestedPrice
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17621,7 +17621,7 @@ func (a *ExpressAPIService) GetSuggestedPricesExecute(r ExpressGetSuggestedPrice
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17802,7 +17802,7 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ExpressGetWarehousesRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17813,7 +17813,7 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ExpressGetWarehousesRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17824,7 +17824,7 @@ func (a *ExpressAPIService) GetWarehousesExecute(r ExpressGetWarehousesRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18030,7 +18030,7 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ExpressProvideO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18041,7 +18041,7 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ExpressProvideO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18052,7 +18052,7 @@ func (a *ExpressAPIService) ProvideOrderItemIdentifiersExecute(r ExpressProvideO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18089,7 +18089,7 @@ func (r ExpressPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest Pu
 	return r
 }
 
-func (r ExpressPutBidsForBusinessRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.PutBidsForBusinessExecute(r)
 }
 
@@ -18149,13 +18149,13 @@ func (a *ExpressAPIService) PutBidsForBusiness(ctx context.Context, businessId i
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) PutBidsForBusinessExecute(r ExpressPutBidsForBusinessRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) PutBidsForBusinessExecute(r ExpressPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.PutBidsForBusiness")
@@ -18265,7 +18265,7 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ExpressPutBidsForBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18276,7 +18276,7 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ExpressPutBidsForBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18287,7 +18287,7 @@ func (a *ExpressAPIService) PutBidsForBusinessExecute(r ExpressPutBidsForBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18324,7 +18324,7 @@ func (r ExpressPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest Pu
 	return r
 }
 
-func (r ExpressPutBidsForCampaignRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.PutBidsForCampaignExecute(r)
 }
 
@@ -18378,13 +18378,13 @@ func (a *ExpressAPIService) PutBidsForCampaign(ctx context.Context, campaignId i
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) PutBidsForCampaignExecute(r ExpressPutBidsForCampaignRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) PutBidsForCampaignExecute(r ExpressPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.PutBidsForCampaign")
@@ -18494,7 +18494,7 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ExpressPutBidsForCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18505,7 +18505,7 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ExpressPutBidsForCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18516,7 +18516,7 @@ func (a *ExpressAPIService) PutBidsForCampaignExecute(r ExpressPutBidsForCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18709,7 +18709,7 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ExpressSearchRegionChi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18720,7 +18720,7 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ExpressSearchRegionChi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18731,7 +18731,7 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ExpressSearchRegionChi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18890,7 +18890,7 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ExpressSearchRegionsByIdR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18901,7 +18901,7 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ExpressSearchRegionsByIdR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18912,7 +18912,7 @@ func (a *ExpressAPIService) SearchRegionsByIdExecute(r ExpressSearchRegionsByIdR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19100,7 +19100,7 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ExpressSearchRegionsByN
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19111,7 +19111,7 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ExpressSearchRegionsByN
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19155,7 +19155,7 @@ func (r ExpressExpressSendFileToChatRequest) File(file *os.File) ExpressExpressS
 	return r
 }
 
-func (r ExpressExpressSendFileToChatRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressExpressSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.SendFileToChatExecute(r)
 }
 
@@ -19183,13 +19183,13 @@ func (a *ExpressAPIService) SendFileToChat(ctx context.Context, businessId int64
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) SendFileToChatExecute(r ExpressExpressSendFileToChatRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) SendFileToChatExecute(r ExpressExpressSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SendFileToChat")
@@ -19319,7 +19319,7 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ExpressExpressSendFileToChat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19330,7 +19330,7 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ExpressExpressSendFileToChat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19341,7 +19341,7 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ExpressExpressSendFileToChat
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19385,7 +19385,7 @@ func (r ExpressExpressSendMessageToChatRequest) SendMessageToChatRequest(sendMes
 	return r
 }
 
-func (r ExpressExpressSendMessageToChatRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressExpressSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.SendMessageToChatExecute(r)
 }
 
@@ -19413,13 +19413,13 @@ func (a *ExpressAPIService) SendMessageToChat(ctx context.Context, businessId in
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) SendMessageToChatExecute(r ExpressExpressSendMessageToChatRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) SendMessageToChatExecute(r ExpressExpressSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SendMessageToChat")
@@ -19536,7 +19536,7 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ExpressExpressSendMessage
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19547,7 +19547,7 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ExpressExpressSendMessage
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19558,7 +19558,7 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ExpressExpressSendMessage
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19986,7 +19986,7 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ExpressSetOrderBoxLayoutR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19997,7 +19997,7 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ExpressSetOrderBoxLayoutR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20008,7 +20008,7 @@ func (a *ExpressAPIService) SetOrderBoxLayoutExecute(r ExpressSetOrderBoxLayoutR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20259,7 +20259,7 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ExpressSetOrderShipme
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20270,7 +20270,7 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ExpressSetOrderShipme
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20281,7 +20281,7 @@ func (a *ExpressAPIService) SetOrderShipmentBoxesExecute(r ExpressSetOrderShipme
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20317,7 +20317,7 @@ func (r ExpressSkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionReque
 	return r
 }
 
-func (r ExpressSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.SkipGoodsFeedbacksReactionExecute(r)
 }
 
@@ -20345,13 +20345,13 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, busi
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ExpressSkipGoodsFeedbacksReactionRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ExpressSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SkipGoodsFeedbacksReaction")
@@ -20461,7 +20461,7 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ExpressSkipGoods
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20472,7 +20472,7 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ExpressSkipGoods
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20483,7 +20483,7 @@ func (a *ExpressAPIService) SkipGoodsFeedbacksReactionExecute(r ExpressSkipGoods
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20522,7 +20522,7 @@ func (r ExpressSubmitReturnDecisionRequest) Body(body map[string]interface{}) Ex
 	return r
 }
 
-func (r ExpressSubmitReturnDecisionRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressSubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.SubmitReturnDecisionExecute(r)
 }
 
@@ -20554,13 +20554,13 @@ func (a *ExpressAPIService) SubmitReturnDecision(ctx context.Context, campaignId
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ExpressSubmitReturnDecisionRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ExpressSubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.SubmitReturnDecision")
@@ -20669,7 +20669,7 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ExpressSubmitReturnDec
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20680,7 +20680,7 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ExpressSubmitReturnDec
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20691,7 +20691,7 @@ func (a *ExpressAPIService) SubmitReturnDecisionExecute(r ExpressSubmitReturnDec
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20727,7 +20727,7 @@ func (r ExpressUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBu
 	return r
 }
 
-func (r ExpressUpdateBusinessPricesRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.UpdateBusinessPricesExecute(r)
 }
 
@@ -20763,13 +20763,13 @@ func (a *ExpressAPIService) UpdateBusinessPrices(ctx context.Context, businessId
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ExpressUpdateBusinessPricesRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ExpressUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateBusinessPrices")
@@ -20879,7 +20879,7 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ExpressUpdateBusinessP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20890,7 +20890,7 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ExpressUpdateBusinessP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20901,7 +20901,7 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ExpressUpdateBusinessP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20912,7 +20912,7 @@ func (a *ExpressAPIService) UpdateBusinessPricesExecute(r ExpressUpdateBusinessP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20948,7 +20948,7 @@ func (r ExpressUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCa
 	return r
 }
 
-func (r ExpressUpdateCampaignOffersRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.UpdateCampaignOffersExecute(r)
 }
 
@@ -20976,13 +20976,13 @@ func (a *ExpressAPIService) UpdateCampaignOffers(ctx context.Context, campaignId
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ExpressUpdateCampaignOffersRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ExpressUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateCampaignOffers")
@@ -21092,7 +21092,7 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ExpressUpdateCampaignO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21103,7 +21103,7 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ExpressUpdateCampaignO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21114,7 +21114,7 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ExpressUpdateCampaignO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21125,7 +21125,7 @@ func (a *ExpressAPIService) UpdateCampaignOffersExecute(r ExpressUpdateCampaignO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21162,7 +21162,7 @@ func (r ExpressUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(update
 	return r
 }
 
-func (r ExpressUpdateExternalOrderIdRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.UpdateExternalOrderIdExecute(r)
 }
 
@@ -21194,13 +21194,13 @@ func (a *ExpressAPIService) UpdateExternalOrderId(ctx context.Context, campaignI
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ExpressUpdateExternalOrderIdRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ExpressUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateExternalOrderId")
@@ -21311,7 +21311,7 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ExpressUpdateExternal
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21322,7 +21322,7 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ExpressUpdateExternal
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21333,7 +21333,7 @@ func (a *ExpressAPIService) UpdateExternalOrderIdExecute(r ExpressUpdateExternal
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21527,7 +21527,7 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ExpressUpdateGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21538,7 +21538,7 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ExpressUpdateGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21549,7 +21549,7 @@ func (a *ExpressAPIService) UpdateGoodsFeedbackCommentExecute(r ExpressUpdateGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21743,7 +21743,7 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ExpressUpdateOfferConten
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21754,7 +21754,7 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ExpressUpdateOfferConten
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21765,7 +21765,7 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ExpressUpdateOfferConten
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21776,7 +21776,7 @@ func (a *ExpressAPIService) UpdateOfferContentExecute(r ExpressUpdateOfferConten
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21812,7 +21812,7 @@ func (r ExpressUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(
 	return r
 }
 
-func (r ExpressUpdateOfferMappingEntriesRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.UpdateOfferMappingEntriesExecute(r)
 }
 
@@ -21869,15 +21869,15 @@ func (a *ExpressAPIService) UpdateOfferMappingEntries(ctx context.Context, campa
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
+//	@return EmptyApiResponse
 //
 // Deprecated
-func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ExpressUpdateOfferMappingEntriesRequest) (*EmptyExpressResponse, *http.Response, error) {
+func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ExpressUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateOfferMappingEntries")
@@ -21987,7 +21987,7 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ExpressUpdateOffe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -21998,7 +21998,7 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ExpressUpdateOffe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22009,7 +22009,7 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ExpressUpdateOffe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22020,7 +22020,7 @@ func (a *ExpressAPIService) UpdateOfferMappingEntriesExecute(r ExpressUpdateOffe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22274,7 +22274,7 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ExpressUpdateOfferMappi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22285,7 +22285,7 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ExpressUpdateOfferMappi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22296,7 +22296,7 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ExpressUpdateOfferMappi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22307,7 +22307,7 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ExpressUpdateOfferMappi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22528,7 +22528,7 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ExpressUpdateOrderItemsReq
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22539,7 +22539,7 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ExpressUpdateOrderItemsReq
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22550,7 +22550,7 @@ func (a *ExpressAPIService) UpdateOrderItemsExecute(r ExpressUpdateOrderItemsReq
 			return localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22729,7 +22729,7 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ExpressUpdateOrderStatusR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22740,7 +22740,7 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ExpressUpdateOrderStatusR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22751,7 +22751,7 @@ func (a *ExpressAPIService) UpdateOrderStatusExecute(r ExpressUpdateOrderStatusR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22937,7 +22937,7 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ExpressUpdateOrderStatu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22948,7 +22948,7 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ExpressUpdateOrderStatu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22959,7 +22959,7 @@ func (a *ExpressAPIService) UpdateOrderStatusesExecute(r ExpressUpdateOrderStatu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -22995,7 +22995,7 @@ func (r ExpressUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest Upda
 	return r
 }
 
-func (r ExpressUpdatePricesRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.UpdatePricesExecute(r)
 }
 
@@ -23037,13 +23037,13 @@ func (a *ExpressAPIService) UpdatePrices(ctx context.Context, campaignId int64) 
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) UpdatePricesExecute(r ExpressUpdatePricesRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdatePricesExecute(r ExpressUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdatePrices")
@@ -23153,7 +23153,7 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ExpressUpdatePricesRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23164,7 +23164,7 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ExpressUpdatePricesRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23175,7 +23175,7 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ExpressUpdatePricesRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v ExpressLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23186,7 +23186,7 @@ func (a *ExpressAPIService) UpdatePricesExecute(r ExpressUpdatePricesRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23368,7 +23368,7 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ExpressUpdatePromoOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23379,7 +23379,7 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ExpressUpdatePromoOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23390,7 +23390,7 @@ func (a *ExpressAPIService) UpdatePromoOffersExecute(r ExpressUpdatePromoOffersR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23426,7 +23426,7 @@ func (r ExpressUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest Upda
 	return r
 }
 
-func (r ExpressUpdateStocksRequest) Execute() (*EmptyExpressResponse, *http.Response, error) {
+func (r ExpressUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ExpressService.UpdateStocksExecute(r)
 }
 
@@ -23464,13 +23464,13 @@ func (a *ExpressAPIService) UpdateStocks(ctx context.Context, campaignId int64) 
 
 // Execute executes the request
 //
-//	@return EmptyExpressResponse
-func (a *ExpressAPIService) UpdateStocksExecute(r ExpressUpdateStocksRequest) (*EmptyExpressResponse, *http.Response, error) {
+//	@return EmptyApiResponse
+func (a *ExpressAPIService) UpdateStocksExecute(r ExpressUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *EmptyExpressResponse
+		localVarReturnValue *EmptyApiResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ExpressAPIService.UpdateStocks")
@@ -23580,7 +23580,7 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ExpressUpdateStocksRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23591,7 +23591,7 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ExpressUpdateStocksRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23602,7 +23602,7 @@ func (a *ExpressAPIService) UpdateStocksExecute(r ExpressUpdateStocksRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23784,7 +23784,7 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ExpressUpdateWarehous
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23795,7 +23795,7 @@ func (a *ExpressAPIService) UpdateWarehouseStatusExecute(r ExpressUpdateWarehous
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -23990,7 +23990,7 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ExpressVerifyOrderEacRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ExpressNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -24001,7 +24001,7 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ExpressVerifyOrderEacRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ExpressLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -24012,7 +24012,7 @@ func (a *ExpressAPIService) VerifyOrderEacExecute(r ExpressVerifyOrderEacRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ExpressServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

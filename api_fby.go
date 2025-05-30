@@ -154,7 +154,7 @@ func (a *FbyAPIService) AddHiddenOffersExecute(r FbyAddHiddenOffersRequest) (*Em
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -165,7 +165,7 @@ func (a *FbyAPIService) AddHiddenOffersExecute(r FbyAddHiddenOffersRequest) (*Em
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -176,7 +176,7 @@ func (a *FbyAPIService) AddHiddenOffersExecute(r FbyAddHiddenOffersRequest) (*Em
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -187,7 +187,7 @@ func (a *FbyAPIService) AddHiddenOffersExecute(r FbyAddHiddenOffersRequest) (*Em
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -198,7 +198,7 @@ func (a *FbyAPIService) AddHiddenOffersExecute(r FbyAddHiddenOffersRequest) (*Em
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -209,7 +209,7 @@ func (a *FbyAPIService) AddHiddenOffersExecute(r FbyAddHiddenOffersRequest) (*Em
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -362,7 +362,7 @@ func (a *FbyAPIService) AddOffersToArchiveExecute(r FbyAddOffersToArchiveRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -373,7 +373,7 @@ func (a *FbyAPIService) AddOffersToArchiveExecute(r FbyAddOffersToArchiveRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -384,7 +384,7 @@ func (a *FbyAPIService) AddOffersToArchiveExecute(r FbyAddOffersToArchiveRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -395,7 +395,7 @@ func (a *FbyAPIService) AddOffersToArchiveExecute(r FbyAddOffersToArchiveRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -406,7 +406,7 @@ func (a *FbyAPIService) AddOffersToArchiveExecute(r FbyAddOffersToArchiveRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -417,7 +417,7 @@ func (a *FbyAPIService) AddOffersToArchiveExecute(r FbyAddOffersToArchiveRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -428,7 +428,7 @@ func (a *FbyAPIService) AddOffersToArchiveExecute(r FbyAddOffersToArchiveRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -573,7 +573,7 @@ func (a *FbyAPIService) CalculateTariffsExecute(r FbyCalculateTariffsRequest) (*
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -584,7 +584,7 @@ func (a *FbyAPIService) CalculateTariffsExecute(r FbyCalculateTariffsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -595,7 +595,7 @@ func (a *FbyAPIService) CalculateTariffsExecute(r FbyCalculateTariffsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -606,7 +606,7 @@ func (a *FbyAPIService) CalculateTariffsExecute(r FbyCalculateTariffsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -617,7 +617,7 @@ func (a *FbyAPIService) CalculateTariffsExecute(r FbyCalculateTariffsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -628,7 +628,7 @@ func (a *FbyAPIService) CalculateTariffsExecute(r FbyCalculateTariffsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -779,7 +779,7 @@ func (a *FbyAPIService) ConfirmBusinessPricesExecute(r FbyConfirmBusinessPricesR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -790,7 +790,7 @@ func (a *FbyAPIService) ConfirmBusinessPricesExecute(r FbyConfirmBusinessPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -801,7 +801,7 @@ func (a *FbyAPIService) ConfirmBusinessPricesExecute(r FbyConfirmBusinessPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -812,7 +812,7 @@ func (a *FbyAPIService) ConfirmBusinessPricesExecute(r FbyConfirmBusinessPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -823,7 +823,7 @@ func (a *FbyAPIService) ConfirmBusinessPricesExecute(r FbyConfirmBusinessPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -834,7 +834,7 @@ func (a *FbyAPIService) ConfirmBusinessPricesExecute(r FbyConfirmBusinessPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -845,7 +845,7 @@ func (a *FbyAPIService) ConfirmBusinessPricesExecute(r FbyConfirmBusinessPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -996,7 +996,7 @@ func (a *FbyAPIService) ConfirmCampaignPricesExecute(r FbyConfirmCampaignPricesR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1007,7 +1007,7 @@ func (a *FbyAPIService) ConfirmCampaignPricesExecute(r FbyConfirmCampaignPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1018,7 +1018,7 @@ func (a *FbyAPIService) ConfirmCampaignPricesExecute(r FbyConfirmCampaignPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1029,7 +1029,7 @@ func (a *FbyAPIService) ConfirmCampaignPricesExecute(r FbyConfirmCampaignPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1040,7 +1040,7 @@ func (a *FbyAPIService) ConfirmCampaignPricesExecute(r FbyConfirmCampaignPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1051,7 +1051,7 @@ func (a *FbyAPIService) ConfirmCampaignPricesExecute(r FbyConfirmCampaignPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1062,7 +1062,7 @@ func (a *FbyAPIService) ConfirmCampaignPricesExecute(r FbyConfirmCampaignPricesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1210,7 +1210,7 @@ func (a *FbyAPIService) CreateChatExecute(r FbyFbyCreateChatRequest) (*CreateCha
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1221,7 +1221,7 @@ func (a *FbyAPIService) CreateChatExecute(r FbyFbyCreateChatRequest) (*CreateCha
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1232,7 +1232,7 @@ func (a *FbyAPIService) CreateChatExecute(r FbyFbyCreateChatRequest) (*CreateCha
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1243,7 +1243,7 @@ func (a *FbyAPIService) CreateChatExecute(r FbyFbyCreateChatRequest) (*CreateCha
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1254,7 +1254,7 @@ func (a *FbyAPIService) CreateChatExecute(r FbyFbyCreateChatRequest) (*CreateCha
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1265,7 +1265,7 @@ func (a *FbyAPIService) CreateChatExecute(r FbyFbyCreateChatRequest) (*CreateCha
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1420,7 +1420,7 @@ func (a *FbyAPIService) DeleteCampaignOffersExecute(r FbyDeleteCampaignOffersReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1431,7 +1431,7 @@ func (a *FbyAPIService) DeleteCampaignOffersExecute(r FbyDeleteCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1442,7 +1442,7 @@ func (a *FbyAPIService) DeleteCampaignOffersExecute(r FbyDeleteCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1453,7 +1453,7 @@ func (a *FbyAPIService) DeleteCampaignOffersExecute(r FbyDeleteCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1464,7 +1464,7 @@ func (a *FbyAPIService) DeleteCampaignOffersExecute(r FbyDeleteCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1475,7 +1475,7 @@ func (a *FbyAPIService) DeleteCampaignOffersExecute(r FbyDeleteCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1486,7 +1486,7 @@ func (a *FbyAPIService) DeleteCampaignOffersExecute(r FbyDeleteCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1633,7 +1633,7 @@ func (a *FbyAPIService) DeleteGoodsFeedbackCommentExecute(r FbyDeleteGoodsFeedba
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1644,7 +1644,7 @@ func (a *FbyAPIService) DeleteGoodsFeedbackCommentExecute(r FbyDeleteGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1655,7 +1655,7 @@ func (a *FbyAPIService) DeleteGoodsFeedbackCommentExecute(r FbyDeleteGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1666,7 +1666,7 @@ func (a *FbyAPIService) DeleteGoodsFeedbackCommentExecute(r FbyDeleteGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1677,7 +1677,7 @@ func (a *FbyAPIService) DeleteGoodsFeedbackCommentExecute(r FbyDeleteGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1688,7 +1688,7 @@ func (a *FbyAPIService) DeleteGoodsFeedbackCommentExecute(r FbyDeleteGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1842,7 +1842,7 @@ func (a *FbyAPIService) DeleteHiddenOffersExecute(r FbyDeleteHiddenOffersRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1853,7 +1853,7 @@ func (a *FbyAPIService) DeleteHiddenOffersExecute(r FbyDeleteHiddenOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1864,7 +1864,7 @@ func (a *FbyAPIService) DeleteHiddenOffersExecute(r FbyDeleteHiddenOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1875,7 +1875,7 @@ func (a *FbyAPIService) DeleteHiddenOffersExecute(r FbyDeleteHiddenOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1886,7 +1886,7 @@ func (a *FbyAPIService) DeleteHiddenOffersExecute(r FbyDeleteHiddenOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1897,7 +1897,7 @@ func (a *FbyAPIService) DeleteHiddenOffersExecute(r FbyDeleteHiddenOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -1908,7 +1908,7 @@ func (a *FbyAPIService) DeleteHiddenOffersExecute(r FbyDeleteHiddenOffersRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2055,7 +2055,7 @@ func (a *FbyAPIService) DeleteOffersExecute(r FbyDeleteOffersRequest) (*DeleteOf
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2066,7 +2066,7 @@ func (a *FbyAPIService) DeleteOffersExecute(r FbyDeleteOffersRequest) (*DeleteOf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2077,7 +2077,7 @@ func (a *FbyAPIService) DeleteOffersExecute(r FbyDeleteOffersRequest) (*DeleteOf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2088,7 +2088,7 @@ func (a *FbyAPIService) DeleteOffersExecute(r FbyDeleteOffersRequest) (*DeleteOf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2099,7 +2099,7 @@ func (a *FbyAPIService) DeleteOffersExecute(r FbyDeleteOffersRequest) (*DeleteOf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2110,7 +2110,7 @@ func (a *FbyAPIService) DeleteOffersExecute(r FbyDeleteOffersRequest) (*DeleteOf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2121,7 +2121,7 @@ func (a *FbyAPIService) DeleteOffersExecute(r FbyDeleteOffersRequest) (*DeleteOf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2268,7 +2268,7 @@ func (a *FbyAPIService) DeleteOffersFromArchiveExecute(r FbyDeleteOffersFromArch
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2279,7 +2279,7 @@ func (a *FbyAPIService) DeleteOffersFromArchiveExecute(r FbyDeleteOffersFromArch
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2290,7 +2290,7 @@ func (a *FbyAPIService) DeleteOffersFromArchiveExecute(r FbyDeleteOffersFromArch
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2301,7 +2301,7 @@ func (a *FbyAPIService) DeleteOffersFromArchiveExecute(r FbyDeleteOffersFromArch
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2312,7 +2312,7 @@ func (a *FbyAPIService) DeleteOffersFromArchiveExecute(r FbyDeleteOffersFromArch
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2323,7 +2323,7 @@ func (a *FbyAPIService) DeleteOffersFromArchiveExecute(r FbyDeleteOffersFromArch
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2334,7 +2334,7 @@ func (a *FbyAPIService) DeleteOffersFromArchiveExecute(r FbyDeleteOffersFromArch
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2483,7 +2483,7 @@ func (a *FbyAPIService) DeletePromoOffersExecute(r FbyDeletePromoOffersRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2494,7 +2494,7 @@ func (a *FbyAPIService) DeletePromoOffersExecute(r FbyDeletePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2505,7 +2505,7 @@ func (a *FbyAPIService) DeletePromoOffersExecute(r FbyDeletePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2516,7 +2516,7 @@ func (a *FbyAPIService) DeletePromoOffersExecute(r FbyDeletePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2527,7 +2527,7 @@ func (a *FbyAPIService) DeletePromoOffersExecute(r FbyDeletePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2538,7 +2538,7 @@ func (a *FbyAPIService) DeletePromoOffersExecute(r FbyDeletePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2695,7 +2695,7 @@ func (a *FbyAPIService) GenerateBannersStatisticsReportExecute(r FbyGenerateBann
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2706,7 +2706,7 @@ func (a *FbyAPIService) GenerateBannersStatisticsReportExecute(r FbyGenerateBann
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2717,7 +2717,7 @@ func (a *FbyAPIService) GenerateBannersStatisticsReportExecute(r FbyGenerateBann
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2728,7 +2728,7 @@ func (a *FbyAPIService) GenerateBannersStatisticsReportExecute(r FbyGenerateBann
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2739,7 +2739,7 @@ func (a *FbyAPIService) GenerateBannersStatisticsReportExecute(r FbyGenerateBann
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2898,7 +2898,7 @@ func (a *FbyAPIService) GenerateBoostConsolidatedReportExecute(r FbyGenerateBoos
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2909,7 +2909,7 @@ func (a *FbyAPIService) GenerateBoostConsolidatedReportExecute(r FbyGenerateBoos
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2920,7 +2920,7 @@ func (a *FbyAPIService) GenerateBoostConsolidatedReportExecute(r FbyGenerateBoos
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2931,7 +2931,7 @@ func (a *FbyAPIService) GenerateBoostConsolidatedReportExecute(r FbyGenerateBoos
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -2942,7 +2942,7 @@ func (a *FbyAPIService) GenerateBoostConsolidatedReportExecute(r FbyGenerateBoos
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3105,7 +3105,7 @@ func (a *FbyAPIService) GenerateCompetitorsPositionReportExecute(r FbyGenerateCo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3116,7 +3116,7 @@ func (a *FbyAPIService) GenerateCompetitorsPositionReportExecute(r FbyGenerateCo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3127,7 +3127,7 @@ func (a *FbyAPIService) GenerateCompetitorsPositionReportExecute(r FbyGenerateCo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3138,7 +3138,7 @@ func (a *FbyAPIService) GenerateCompetitorsPositionReportExecute(r FbyGenerateCo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3149,7 +3149,7 @@ func (a *FbyAPIService) GenerateCompetitorsPositionReportExecute(r FbyGenerateCo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3306,7 +3306,7 @@ func (a *FbyAPIService) GenerateGoodsFeedbackReportExecute(r FbyGenerateGoodsFee
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3317,7 +3317,7 @@ func (a *FbyAPIService) GenerateGoodsFeedbackReportExecute(r FbyGenerateGoodsFee
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3328,7 +3328,7 @@ func (a *FbyAPIService) GenerateGoodsFeedbackReportExecute(r FbyGenerateGoodsFee
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3339,7 +3339,7 @@ func (a *FbyAPIService) GenerateGoodsFeedbackReportExecute(r FbyGenerateGoodsFee
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3350,7 +3350,7 @@ func (a *FbyAPIService) GenerateGoodsFeedbackReportExecute(r FbyGenerateGoodsFee
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3507,7 +3507,7 @@ func (a *FbyAPIService) GenerateGoodsMovementReportExecute(r FbyGenerateGoodsMov
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3518,7 +3518,7 @@ func (a *FbyAPIService) GenerateGoodsMovementReportExecute(r FbyGenerateGoodsMov
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3529,7 +3529,7 @@ func (a *FbyAPIService) GenerateGoodsMovementReportExecute(r FbyGenerateGoodsMov
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3540,7 +3540,7 @@ func (a *FbyAPIService) GenerateGoodsMovementReportExecute(r FbyGenerateGoodsMov
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3551,7 +3551,7 @@ func (a *FbyAPIService) GenerateGoodsMovementReportExecute(r FbyGenerateGoodsMov
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3718,7 +3718,7 @@ func (a *FbyAPIService) GenerateGoodsRealizationReportExecute(r FbyGenerateGoods
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3729,7 +3729,7 @@ func (a *FbyAPIService) GenerateGoodsRealizationReportExecute(r FbyGenerateGoods
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3740,7 +3740,7 @@ func (a *FbyAPIService) GenerateGoodsRealizationReportExecute(r FbyGenerateGoods
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3751,7 +3751,7 @@ func (a *FbyAPIService) GenerateGoodsRealizationReportExecute(r FbyGenerateGoods
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3762,7 +3762,7 @@ func (a *FbyAPIService) GenerateGoodsRealizationReportExecute(r FbyGenerateGoods
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3919,7 +3919,7 @@ func (a *FbyAPIService) GenerateGoodsTurnoverReportExecute(r FbyGenerateGoodsTur
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3930,7 +3930,7 @@ func (a *FbyAPIService) GenerateGoodsTurnoverReportExecute(r FbyGenerateGoodsTur
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3941,7 +3941,7 @@ func (a *FbyAPIService) GenerateGoodsTurnoverReportExecute(r FbyGenerateGoodsTur
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3952,7 +3952,7 @@ func (a *FbyAPIService) GenerateGoodsTurnoverReportExecute(r FbyGenerateGoodsTur
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -3963,7 +3963,7 @@ func (a *FbyAPIService) GenerateGoodsTurnoverReportExecute(r FbyGenerateGoodsTur
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4120,7 +4120,7 @@ func (a *FbyAPIService) GenerateJewelryFiscalReportExecute(r FbyGenerateJewelryF
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4131,7 +4131,7 @@ func (a *FbyAPIService) GenerateJewelryFiscalReportExecute(r FbyGenerateJewelryF
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4142,7 +4142,7 @@ func (a *FbyAPIService) GenerateJewelryFiscalReportExecute(r FbyGenerateJewelryF
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4153,7 +4153,7 @@ func (a *FbyAPIService) GenerateJewelryFiscalReportExecute(r FbyGenerateJewelryF
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4164,7 +4164,7 @@ func (a *FbyAPIService) GenerateJewelryFiscalReportExecute(r FbyGenerateJewelryF
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4329,7 +4329,7 @@ func (a *FbyAPIService) GeneratePricesReportExecute(r FbyGeneratePricesReportReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4340,7 +4340,7 @@ func (a *FbyAPIService) GeneratePricesReportExecute(r FbyGeneratePricesReportReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4351,7 +4351,7 @@ func (a *FbyAPIService) GeneratePricesReportExecute(r FbyGeneratePricesReportReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4362,7 +4362,7 @@ func (a *FbyAPIService) GeneratePricesReportExecute(r FbyGeneratePricesReportReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4373,7 +4373,7 @@ func (a *FbyAPIService) GeneratePricesReportExecute(r FbyGeneratePricesReportReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4530,7 +4530,7 @@ func (a *FbyAPIService) GenerateSalesGeographyReportExecute(r FbyGenerateSalesGe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4541,7 +4541,7 @@ func (a *FbyAPIService) GenerateSalesGeographyReportExecute(r FbyGenerateSalesGe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4552,7 +4552,7 @@ func (a *FbyAPIService) GenerateSalesGeographyReportExecute(r FbyGenerateSalesGe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4563,7 +4563,7 @@ func (a *FbyAPIService) GenerateSalesGeographyReportExecute(r FbyGenerateSalesGe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4574,7 +4574,7 @@ func (a *FbyAPIService) GenerateSalesGeographyReportExecute(r FbyGenerateSalesGe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4731,7 +4731,7 @@ func (a *FbyAPIService) GenerateShelfsStatisticsReportExecute(r FbyGenerateShelf
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4742,7 +4742,7 @@ func (a *FbyAPIService) GenerateShelfsStatisticsReportExecute(r FbyGenerateShelf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4753,7 +4753,7 @@ func (a *FbyAPIService) GenerateShelfsStatisticsReportExecute(r FbyGenerateShelf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4764,7 +4764,7 @@ func (a *FbyAPIService) GenerateShelfsStatisticsReportExecute(r FbyGenerateShelf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4775,7 +4775,7 @@ func (a *FbyAPIService) GenerateShelfsStatisticsReportExecute(r FbyGenerateShelf
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4932,7 +4932,7 @@ func (a *FbyAPIService) GenerateShowsBoostReportExecute(r FbyGenerateShowsBoostR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4943,7 +4943,7 @@ func (a *FbyAPIService) GenerateShowsBoostReportExecute(r FbyGenerateShowsBoostR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4954,7 +4954,7 @@ func (a *FbyAPIService) GenerateShowsBoostReportExecute(r FbyGenerateShowsBoostR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4965,7 +4965,7 @@ func (a *FbyAPIService) GenerateShowsBoostReportExecute(r FbyGenerateShowsBoostR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -4976,7 +4976,7 @@ func (a *FbyAPIService) GenerateShowsBoostReportExecute(r FbyGenerateShowsBoostR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5133,7 +5133,7 @@ func (a *FbyAPIService) GenerateShowsSalesReportExecute(r FbyGenerateShowsSalesR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5144,7 +5144,7 @@ func (a *FbyAPIService) GenerateShowsSalesReportExecute(r FbyGenerateShowsSalesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5155,7 +5155,7 @@ func (a *FbyAPIService) GenerateShowsSalesReportExecute(r FbyGenerateShowsSalesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5166,7 +5166,7 @@ func (a *FbyAPIService) GenerateShowsSalesReportExecute(r FbyGenerateShowsSalesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5177,7 +5177,7 @@ func (a *FbyAPIService) GenerateShowsSalesReportExecute(r FbyGenerateShowsSalesR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5339,7 +5339,7 @@ func (a *FbyAPIService) GenerateStocksOnWarehousesReportExecute(r FbyGenerateSto
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5350,7 +5350,7 @@ func (a *FbyAPIService) GenerateStocksOnWarehousesReportExecute(r FbyGenerateSto
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5361,7 +5361,7 @@ func (a *FbyAPIService) GenerateStocksOnWarehousesReportExecute(r FbyGenerateSto
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5372,7 +5372,7 @@ func (a *FbyAPIService) GenerateStocksOnWarehousesReportExecute(r FbyGenerateSto
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5383,7 +5383,7 @@ func (a *FbyAPIService) GenerateStocksOnWarehousesReportExecute(r FbyGenerateSto
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5559,7 +5559,7 @@ func (a *FbyAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbyGene
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5570,7 +5570,7 @@ func (a *FbyAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbyGene
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5581,7 +5581,7 @@ func (a *FbyAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbyGene
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5592,7 +5592,7 @@ func (a *FbyAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbyGene
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5603,7 +5603,7 @@ func (a *FbyAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbyGene
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5781,7 +5781,7 @@ func (a *FbyAPIService) GenerateUnitedNettingReportExecute(r FbyGenerateUnitedNe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5792,7 +5792,7 @@ func (a *FbyAPIService) GenerateUnitedNettingReportExecute(r FbyGenerateUnitedNe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5803,7 +5803,7 @@ func (a *FbyAPIService) GenerateUnitedNettingReportExecute(r FbyGenerateUnitedNe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5814,7 +5814,7 @@ func (a *FbyAPIService) GenerateUnitedNettingReportExecute(r FbyGenerateUnitedNe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5825,7 +5825,7 @@ func (a *FbyAPIService) GenerateUnitedNettingReportExecute(r FbyGenerateUnitedNe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -5992,7 +5992,7 @@ func (a *FbyAPIService) GenerateUnitedOrdersReportExecute(r FbyGenerateUnitedOrd
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6003,7 +6003,7 @@ func (a *FbyAPIService) GenerateUnitedOrdersReportExecute(r FbyGenerateUnitedOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6014,7 +6014,7 @@ func (a *FbyAPIService) GenerateUnitedOrdersReportExecute(r FbyGenerateUnitedOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6025,7 +6025,7 @@ func (a *FbyAPIService) GenerateUnitedOrdersReportExecute(r FbyGenerateUnitedOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6036,7 +6036,7 @@ func (a *FbyAPIService) GenerateUnitedOrdersReportExecute(r FbyGenerateUnitedOrd
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6195,7 +6195,7 @@ func (a *FbyAPIService) GenerateUnitedReturnsReportExecute(r FbyGenerateUnitedRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6206,7 +6206,7 @@ func (a *FbyAPIService) GenerateUnitedReturnsReportExecute(r FbyGenerateUnitedRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6217,7 +6217,7 @@ func (a *FbyAPIService) GenerateUnitedReturnsReportExecute(r FbyGenerateUnitedRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6228,7 +6228,7 @@ func (a *FbyAPIService) GenerateUnitedReturnsReportExecute(r FbyGenerateUnitedRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6239,7 +6239,7 @@ func (a *FbyAPIService) GenerateUnitedReturnsReportExecute(r FbyGenerateUnitedRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6372,7 +6372,7 @@ func (a *FbyAPIService) GetAuthTokenInfoExecute(r FbyFbyGetAuthTokenInfoRequest)
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6383,7 +6383,7 @@ func (a *FbyAPIService) GetAuthTokenInfoExecute(r FbyFbyGetAuthTokenInfoRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6394,7 +6394,7 @@ func (a *FbyAPIService) GetAuthTokenInfoExecute(r FbyFbyGetAuthTokenInfoRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6405,7 +6405,7 @@ func (a *FbyAPIService) GetAuthTokenInfoExecute(r FbyFbyGetAuthTokenInfoRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6416,7 +6416,7 @@ func (a *FbyAPIService) GetAuthTokenInfoExecute(r FbyFbyGetAuthTokenInfoRequest)
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6589,7 +6589,7 @@ func (a *FbyAPIService) GetBidsInfoForBusinessExecute(r FbyGetBidsInfoForBusines
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6600,7 +6600,7 @@ func (a *FbyAPIService) GetBidsInfoForBusinessExecute(r FbyGetBidsInfoForBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6611,7 +6611,7 @@ func (a *FbyAPIService) GetBidsInfoForBusinessExecute(r FbyGetBidsInfoForBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6622,7 +6622,7 @@ func (a *FbyAPIService) GetBidsInfoForBusinessExecute(r FbyGetBidsInfoForBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6633,7 +6633,7 @@ func (a *FbyAPIService) GetBidsInfoForBusinessExecute(r FbyGetBidsInfoForBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6644,7 +6644,7 @@ func (a *FbyAPIService) GetBidsInfoForBusinessExecute(r FbyGetBidsInfoForBusines
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6798,7 +6798,7 @@ func (a *FbyAPIService) GetBidsRecommendationsExecute(r FbyGetBidsRecommendation
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6809,7 +6809,7 @@ func (a *FbyAPIService) GetBidsRecommendationsExecute(r FbyGetBidsRecommendation
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6820,7 +6820,7 @@ func (a *FbyAPIService) GetBidsRecommendationsExecute(r FbyGetBidsRecommendation
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6831,7 +6831,7 @@ func (a *FbyAPIService) GetBidsRecommendationsExecute(r FbyGetBidsRecommendation
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6842,7 +6842,7 @@ func (a *FbyAPIService) GetBidsRecommendationsExecute(r FbyGetBidsRecommendation
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -6853,7 +6853,7 @@ func (a *FbyAPIService) GetBidsRecommendationsExecute(r FbyGetBidsRecommendation
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7032,7 +7032,7 @@ func (a *FbyAPIService) GetBusinessQuarantineOffersExecute(r FbyGetBusinessQuara
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7043,7 +7043,7 @@ func (a *FbyAPIService) GetBusinessQuarantineOffersExecute(r FbyGetBusinessQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7054,7 +7054,7 @@ func (a *FbyAPIService) GetBusinessQuarantineOffersExecute(r FbyGetBusinessQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7065,7 +7065,7 @@ func (a *FbyAPIService) GetBusinessQuarantineOffersExecute(r FbyGetBusinessQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7076,7 +7076,7 @@ func (a *FbyAPIService) GetBusinessQuarantineOffersExecute(r FbyGetBusinessQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7087,7 +7087,7 @@ func (a *FbyAPIService) GetBusinessQuarantineOffersExecute(r FbyGetBusinessQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7222,7 +7222,7 @@ func (a *FbyAPIService) GetBusinessSettingsExecute(r FbyGetBusinessSettingsReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7233,7 +7233,7 @@ func (a *FbyAPIService) GetBusinessSettingsExecute(r FbyGetBusinessSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7244,7 +7244,7 @@ func (a *FbyAPIService) GetBusinessSettingsExecute(r FbyGetBusinessSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7255,7 +7255,7 @@ func (a *FbyAPIService) GetBusinessSettingsExecute(r FbyGetBusinessSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7266,7 +7266,7 @@ func (a *FbyAPIService) GetBusinessSettingsExecute(r FbyGetBusinessSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7277,7 +7277,7 @@ func (a *FbyAPIService) GetBusinessSettingsExecute(r FbyGetBusinessSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7412,7 +7412,7 @@ func (a *FbyAPIService) GetCampaignExecute(r FbyGetCampaignRequest) (*GetCampaig
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7423,7 +7423,7 @@ func (a *FbyAPIService) GetCampaignExecute(r FbyGetCampaignRequest) (*GetCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7434,7 +7434,7 @@ func (a *FbyAPIService) GetCampaignExecute(r FbyGetCampaignRequest) (*GetCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7445,7 +7445,7 @@ func (a *FbyAPIService) GetCampaignExecute(r FbyGetCampaignRequest) (*GetCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7456,7 +7456,7 @@ func (a *FbyAPIService) GetCampaignExecute(r FbyGetCampaignRequest) (*GetCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7467,7 +7467,7 @@ func (a *FbyAPIService) GetCampaignExecute(r FbyGetCampaignRequest) (*GetCampaig
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7634,7 +7634,7 @@ func (a *FbyAPIService) GetCampaignOffersExecute(r FbyGetCampaignOffersRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7645,7 +7645,7 @@ func (a *FbyAPIService) GetCampaignOffersExecute(r FbyGetCampaignOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7656,7 +7656,7 @@ func (a *FbyAPIService) GetCampaignOffersExecute(r FbyGetCampaignOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7667,7 +7667,7 @@ func (a *FbyAPIService) GetCampaignOffersExecute(r FbyGetCampaignOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7678,7 +7678,7 @@ func (a *FbyAPIService) GetCampaignOffersExecute(r FbyGetCampaignOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7689,7 +7689,7 @@ func (a *FbyAPIService) GetCampaignOffersExecute(r FbyGetCampaignOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7868,7 +7868,7 @@ func (a *FbyAPIService) GetCampaignQuarantineOffersExecute(r FbyGetCampaignQuara
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7879,7 +7879,7 @@ func (a *FbyAPIService) GetCampaignQuarantineOffersExecute(r FbyGetCampaignQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7890,7 +7890,7 @@ func (a *FbyAPIService) GetCampaignQuarantineOffersExecute(r FbyGetCampaignQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7901,7 +7901,7 @@ func (a *FbyAPIService) GetCampaignQuarantineOffersExecute(r FbyGetCampaignQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7912,7 +7912,7 @@ func (a *FbyAPIService) GetCampaignQuarantineOffersExecute(r FbyGetCampaignQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -7923,7 +7923,7 @@ func (a *FbyAPIService) GetCampaignQuarantineOffersExecute(r FbyGetCampaignQuara
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8068,7 +8068,7 @@ func (a *FbyAPIService) GetCampaignRegionExecute(r FbyGetCampaignRegionRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8079,7 +8079,7 @@ func (a *FbyAPIService) GetCampaignRegionExecute(r FbyGetCampaignRegionRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8090,7 +8090,7 @@ func (a *FbyAPIService) GetCampaignRegionExecute(r FbyGetCampaignRegionRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8101,7 +8101,7 @@ func (a *FbyAPIService) GetCampaignRegionExecute(r FbyGetCampaignRegionRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8112,7 +8112,7 @@ func (a *FbyAPIService) GetCampaignRegionExecute(r FbyGetCampaignRegionRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8123,7 +8123,7 @@ func (a *FbyAPIService) GetCampaignRegionExecute(r FbyGetCampaignRegionRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8258,7 +8258,7 @@ func (a *FbyAPIService) GetCampaignSettingsExecute(r FbyGetCampaignSettingsReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8269,7 +8269,7 @@ func (a *FbyAPIService) GetCampaignSettingsExecute(r FbyGetCampaignSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8280,7 +8280,7 @@ func (a *FbyAPIService) GetCampaignSettingsExecute(r FbyGetCampaignSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8291,7 +8291,7 @@ func (a *FbyAPIService) GetCampaignSettingsExecute(r FbyGetCampaignSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8302,7 +8302,7 @@ func (a *FbyAPIService) GetCampaignSettingsExecute(r FbyGetCampaignSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8313,7 +8313,7 @@ func (a *FbyAPIService) GetCampaignSettingsExecute(r FbyGetCampaignSettingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8467,7 +8467,7 @@ func (a *FbyAPIService) GetCampaignsExecute(r FbyGetCampaignsRequest) (*GetCampa
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8478,7 +8478,7 @@ func (a *FbyAPIService) GetCampaignsExecute(r FbyGetCampaignsRequest) (*GetCampa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8489,7 +8489,7 @@ func (a *FbyAPIService) GetCampaignsExecute(r FbyGetCampaignsRequest) (*GetCampa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8500,7 +8500,7 @@ func (a *FbyAPIService) GetCampaignsExecute(r FbyGetCampaignsRequest) (*GetCampa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8511,7 +8511,7 @@ func (a *FbyAPIService) GetCampaignsExecute(r FbyGetCampaignsRequest) (*GetCampa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8522,7 +8522,7 @@ func (a *FbyAPIService) GetCampaignsExecute(r FbyGetCampaignsRequest) (*GetCampa
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8666,7 +8666,7 @@ func (a *FbyAPIService) GetCategoriesMaxSaleQuantumExecute(r FbyGetCategoriesMax
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8677,7 +8677,7 @@ func (a *FbyAPIService) GetCategoriesMaxSaleQuantumExecute(r FbyGetCategoriesMax
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8688,7 +8688,7 @@ func (a *FbyAPIService) GetCategoriesMaxSaleQuantumExecute(r FbyGetCategoriesMax
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8699,7 +8699,7 @@ func (a *FbyAPIService) GetCategoriesMaxSaleQuantumExecute(r FbyGetCategoriesMax
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8710,7 +8710,7 @@ func (a *FbyAPIService) GetCategoriesMaxSaleQuantumExecute(r FbyGetCategoriesMax
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8721,7 +8721,7 @@ func (a *FbyAPIService) GetCategoriesMaxSaleQuantumExecute(r FbyGetCategoriesMax
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8858,7 +8858,7 @@ func (a *FbyAPIService) GetCategoriesTreeExecute(r FbyGetCategoriesTreeRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8869,7 +8869,7 @@ func (a *FbyAPIService) GetCategoriesTreeExecute(r FbyGetCategoriesTreeRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8880,7 +8880,7 @@ func (a *FbyAPIService) GetCategoriesTreeExecute(r FbyGetCategoriesTreeRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8891,7 +8891,7 @@ func (a *FbyAPIService) GetCategoriesTreeExecute(r FbyGetCategoriesTreeRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8902,7 +8902,7 @@ func (a *FbyAPIService) GetCategoriesTreeExecute(r FbyGetCategoriesTreeRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -8913,7 +8913,7 @@ func (a *FbyAPIService) GetCategoriesTreeExecute(r FbyGetCategoriesTreeRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9049,7 +9049,7 @@ func (a *FbyAPIService) GetCategoryContentParametersExecute(r FbyGetCategoryCont
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9060,7 +9060,7 @@ func (a *FbyAPIService) GetCategoryContentParametersExecute(r FbyGetCategoryCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9071,7 +9071,7 @@ func (a *FbyAPIService) GetCategoryContentParametersExecute(r FbyGetCategoryCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9082,7 +9082,7 @@ func (a *FbyAPIService) GetCategoryContentParametersExecute(r FbyGetCategoryCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9093,7 +9093,7 @@ func (a *FbyAPIService) GetCategoryContentParametersExecute(r FbyGetCategoryCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9104,7 +9104,7 @@ func (a *FbyAPIService) GetCategoryContentParametersExecute(r FbyGetCategoryCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9262,7 +9262,7 @@ func (a *FbyAPIService) GetChatExecute(r FbyFbyGetChatRequest) (*GetChatResponse
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9273,7 +9273,7 @@ func (a *FbyAPIService) GetChatExecute(r FbyFbyGetChatRequest) (*GetChatResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9284,7 +9284,7 @@ func (a *FbyAPIService) GetChatExecute(r FbyFbyGetChatRequest) (*GetChatResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9295,7 +9295,7 @@ func (a *FbyAPIService) GetChatExecute(r FbyFbyGetChatRequest) (*GetChatResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9306,7 +9306,7 @@ func (a *FbyAPIService) GetChatExecute(r FbyFbyGetChatRequest) (*GetChatResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9317,7 +9317,7 @@ func (a *FbyAPIService) GetChatExecute(r FbyFbyGetChatRequest) (*GetChatResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9499,7 +9499,7 @@ func (a *FbyAPIService) GetChatHistoryExecute(r FbyFbyGetChatHistoryRequest) (*G
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9510,7 +9510,7 @@ func (a *FbyAPIService) GetChatHistoryExecute(r FbyFbyGetChatHistoryRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9521,7 +9521,7 @@ func (a *FbyAPIService) GetChatHistoryExecute(r FbyFbyGetChatHistoryRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9532,7 +9532,7 @@ func (a *FbyAPIService) GetChatHistoryExecute(r FbyFbyGetChatHistoryRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9543,7 +9543,7 @@ func (a *FbyAPIService) GetChatHistoryExecute(r FbyFbyGetChatHistoryRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9554,7 +9554,7 @@ func (a *FbyAPIService) GetChatHistoryExecute(r FbyFbyGetChatHistoryRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9726,7 +9726,7 @@ func (a *FbyAPIService) GetChatMessageExecute(r FbyFbyGetChatMessageRequest) (*G
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9737,7 +9737,7 @@ func (a *FbyAPIService) GetChatMessageExecute(r FbyFbyGetChatMessageRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9748,7 +9748,7 @@ func (a *FbyAPIService) GetChatMessageExecute(r FbyFbyGetChatMessageRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9759,7 +9759,7 @@ func (a *FbyAPIService) GetChatMessageExecute(r FbyFbyGetChatMessageRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9770,7 +9770,7 @@ func (a *FbyAPIService) GetChatMessageExecute(r FbyFbyGetChatMessageRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9781,7 +9781,7 @@ func (a *FbyAPIService) GetChatMessageExecute(r FbyFbyGetChatMessageRequest) (*G
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9957,7 +9957,7 @@ func (a *FbyAPIService) GetChatsExecute(r FbyFbyGetChatsRequest) (*GetChatsRespo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9968,7 +9968,7 @@ func (a *FbyAPIService) GetChatsExecute(r FbyFbyGetChatsRequest) (*GetChatsRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9979,7 +9979,7 @@ func (a *FbyAPIService) GetChatsExecute(r FbyFbyGetChatsRequest) (*GetChatsRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9990,7 +9990,7 @@ func (a *FbyAPIService) GetChatsExecute(r FbyFbyGetChatsRequest) (*GetChatsRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10001,7 +10001,7 @@ func (a *FbyAPIService) GetChatsExecute(r FbyFbyGetChatsRequest) (*GetChatsRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10012,7 +10012,7 @@ func (a *FbyAPIService) GetChatsExecute(r FbyFbyGetChatsRequest) (*GetChatsRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10141,7 +10141,7 @@ func (a *FbyAPIService) GetFulfillmentWarehousesExecute(r FbyGetFulfillmentWareh
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10152,7 +10152,7 @@ func (a *FbyAPIService) GetFulfillmentWarehousesExecute(r FbyGetFulfillmentWareh
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10163,7 +10163,7 @@ func (a *FbyAPIService) GetFulfillmentWarehousesExecute(r FbyGetFulfillmentWareh
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10174,7 +10174,7 @@ func (a *FbyAPIService) GetFulfillmentWarehousesExecute(r FbyGetFulfillmentWareh
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10185,7 +10185,7 @@ func (a *FbyAPIService) GetFulfillmentWarehousesExecute(r FbyGetFulfillmentWareh
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10196,7 +10196,7 @@ func (a *FbyAPIService) GetFulfillmentWarehousesExecute(r FbyGetFulfillmentWareh
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10378,7 +10378,7 @@ func (a *FbyAPIService) GetGoodsFeedbackCommentsExecute(r FbyGetGoodsFeedbackCom
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10389,7 +10389,7 @@ func (a *FbyAPIService) GetGoodsFeedbackCommentsExecute(r FbyGetGoodsFeedbackCom
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10400,7 +10400,7 @@ func (a *FbyAPIService) GetGoodsFeedbackCommentsExecute(r FbyGetGoodsFeedbackCom
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10411,7 +10411,7 @@ func (a *FbyAPIService) GetGoodsFeedbackCommentsExecute(r FbyGetGoodsFeedbackCom
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10422,7 +10422,7 @@ func (a *FbyAPIService) GetGoodsFeedbackCommentsExecute(r FbyGetGoodsFeedbackCom
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10433,7 +10433,7 @@ func (a *FbyAPIService) GetGoodsFeedbackCommentsExecute(r FbyGetGoodsFeedbackCom
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10609,7 +10609,7 @@ func (a *FbyAPIService) GetGoodsFeedbacksExecute(r FbyGetGoodsFeedbacksRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10620,7 +10620,7 @@ func (a *FbyAPIService) GetGoodsFeedbacksExecute(r FbyGetGoodsFeedbacksRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10631,7 +10631,7 @@ func (a *FbyAPIService) GetGoodsFeedbacksExecute(r FbyGetGoodsFeedbacksRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10642,7 +10642,7 @@ func (a *FbyAPIService) GetGoodsFeedbacksExecute(r FbyGetGoodsFeedbacksRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10653,7 +10653,7 @@ func (a *FbyAPIService) GetGoodsFeedbacksExecute(r FbyGetGoodsFeedbacksRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10664,7 +10664,7 @@ func (a *FbyAPIService) GetGoodsFeedbacksExecute(r FbyGetGoodsFeedbacksRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10811,7 +10811,7 @@ func (a *FbyAPIService) GetGoodsStatsExecute(r FbyGetGoodsStatsRequest) (*GetGoo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10822,7 +10822,7 @@ func (a *FbyAPIService) GetGoodsStatsExecute(r FbyGetGoodsStatsRequest) (*GetGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10833,7 +10833,7 @@ func (a *FbyAPIService) GetGoodsStatsExecute(r FbyGetGoodsStatsRequest) (*GetGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10844,7 +10844,7 @@ func (a *FbyAPIService) GetGoodsStatsExecute(r FbyGetGoodsStatsRequest) (*GetGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10855,7 +10855,7 @@ func (a *FbyAPIService) GetGoodsStatsExecute(r FbyGetGoodsStatsRequest) (*GetGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -10866,7 +10866,7 @@ func (a *FbyAPIService) GetGoodsStatsExecute(r FbyGetGoodsStatsRequest) (*GetGoo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11034,7 +11034,7 @@ func (a *FbyAPIService) GetHiddenOffersExecute(r FbyGetHiddenOffersRequest) (*Ge
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11045,7 +11045,7 @@ func (a *FbyAPIService) GetHiddenOffersExecute(r FbyGetHiddenOffersRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11056,7 +11056,7 @@ func (a *FbyAPIService) GetHiddenOffersExecute(r FbyGetHiddenOffersRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11067,7 +11067,7 @@ func (a *FbyAPIService) GetHiddenOffersExecute(r FbyGetHiddenOffersRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11078,7 +11078,7 @@ func (a *FbyAPIService) GetHiddenOffersExecute(r FbyGetHiddenOffersRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11248,7 +11248,7 @@ func (a *FbyAPIService) GetOfferCardsContentStatusExecute(r FbyGetOfferCardsCont
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11259,7 +11259,7 @@ func (a *FbyAPIService) GetOfferCardsContentStatusExecute(r FbyGetOfferCardsCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11270,7 +11270,7 @@ func (a *FbyAPIService) GetOfferCardsContentStatusExecute(r FbyGetOfferCardsCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11281,7 +11281,7 @@ func (a *FbyAPIService) GetOfferCardsContentStatusExecute(r FbyGetOfferCardsCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11292,7 +11292,7 @@ func (a *FbyAPIService) GetOfferCardsContentStatusExecute(r FbyGetOfferCardsCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11303,7 +11303,7 @@ func (a *FbyAPIService) GetOfferCardsContentStatusExecute(r FbyGetOfferCardsCont
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11552,7 +11552,7 @@ func (a *FbyAPIService) GetOfferMappingEntriesExecute(r FbyGetOfferMappingEntrie
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11563,7 +11563,7 @@ func (a *FbyAPIService) GetOfferMappingEntriesExecute(r FbyGetOfferMappingEntrie
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11574,7 +11574,7 @@ func (a *FbyAPIService) GetOfferMappingEntriesExecute(r FbyGetOfferMappingEntrie
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11585,7 +11585,7 @@ func (a *FbyAPIService) GetOfferMappingEntriesExecute(r FbyGetOfferMappingEntrie
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11596,7 +11596,7 @@ func (a *FbyAPIService) GetOfferMappingEntriesExecute(r FbyGetOfferMappingEntrie
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11607,7 +11607,7 @@ func (a *FbyAPIService) GetOfferMappingEntriesExecute(r FbyGetOfferMappingEntrie
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11786,7 +11786,7 @@ func (a *FbyAPIService) GetOfferMappingsExecute(r FbyGetOfferMappingsRequest) (*
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11797,7 +11797,7 @@ func (a *FbyAPIService) GetOfferMappingsExecute(r FbyGetOfferMappingsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11808,7 +11808,7 @@ func (a *FbyAPIService) GetOfferMappingsExecute(r FbyGetOfferMappingsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11819,7 +11819,7 @@ func (a *FbyAPIService) GetOfferMappingsExecute(r FbyGetOfferMappingsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11830,7 +11830,7 @@ func (a *FbyAPIService) GetOfferMappingsExecute(r FbyGetOfferMappingsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -11841,7 +11841,7 @@ func (a *FbyAPIService) GetOfferMappingsExecute(r FbyGetOfferMappingsRequest) (*
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12020,7 +12020,7 @@ func (a *FbyAPIService) GetOfferRecommendationsExecute(r FbyGetOfferRecommendati
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12031,7 +12031,7 @@ func (a *FbyAPIService) GetOfferRecommendationsExecute(r FbyGetOfferRecommendati
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12042,7 +12042,7 @@ func (a *FbyAPIService) GetOfferRecommendationsExecute(r FbyGetOfferRecommendati
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12053,7 +12053,7 @@ func (a *FbyAPIService) GetOfferRecommendationsExecute(r FbyGetOfferRecommendati
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12064,7 +12064,7 @@ func (a *FbyAPIService) GetOfferRecommendationsExecute(r FbyGetOfferRecommendati
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12075,7 +12075,7 @@ func (a *FbyAPIService) GetOfferRecommendationsExecute(r FbyGetOfferRecommendati
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12225,7 +12225,7 @@ func (a *FbyAPIService) GetOrderExecute(r FbyGetOrderRequest) (*GetOrderResponse
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12236,7 +12236,7 @@ func (a *FbyAPIService) GetOrderExecute(r FbyGetOrderRequest) (*GetOrderResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12247,7 +12247,7 @@ func (a *FbyAPIService) GetOrderExecute(r FbyGetOrderRequest) (*GetOrderResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12258,7 +12258,7 @@ func (a *FbyAPIService) GetOrderExecute(r FbyGetOrderRequest) (*GetOrderResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12269,7 +12269,7 @@ func (a *FbyAPIService) GetOrderExecute(r FbyGetOrderRequest) (*GetOrderResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12280,7 +12280,7 @@ func (a *FbyAPIService) GetOrderExecute(r FbyGetOrderRequest) (*GetOrderResponse
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12428,7 +12428,7 @@ func (a *FbyAPIService) GetOrderBusinessBuyerInfoExecute(r FbyGetOrderBusinessBu
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12439,7 +12439,7 @@ func (a *FbyAPIService) GetOrderBusinessBuyerInfoExecute(r FbyGetOrderBusinessBu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12450,7 +12450,7 @@ func (a *FbyAPIService) GetOrderBusinessBuyerInfoExecute(r FbyGetOrderBusinessBu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12461,7 +12461,7 @@ func (a *FbyAPIService) GetOrderBusinessBuyerInfoExecute(r FbyGetOrderBusinessBu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12472,7 +12472,7 @@ func (a *FbyAPIService) GetOrderBusinessBuyerInfoExecute(r FbyGetOrderBusinessBu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12483,7 +12483,7 @@ func (a *FbyAPIService) GetOrderBusinessBuyerInfoExecute(r FbyGetOrderBusinessBu
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12625,7 +12625,7 @@ func (a *FbyAPIService) GetOrderBusinessDocumentsInfoExecute(r FbyGetOrderBusine
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12636,7 +12636,7 @@ func (a *FbyAPIService) GetOrderBusinessDocumentsInfoExecute(r FbyGetOrderBusine
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12647,7 +12647,7 @@ func (a *FbyAPIService) GetOrderBusinessDocumentsInfoExecute(r FbyGetOrderBusine
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12658,7 +12658,7 @@ func (a *FbyAPIService) GetOrderBusinessDocumentsInfoExecute(r FbyGetOrderBusine
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12669,7 +12669,7 @@ func (a *FbyAPIService) GetOrderBusinessDocumentsInfoExecute(r FbyGetOrderBusine
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -12680,7 +12680,7 @@ func (a *FbyAPIService) GetOrderBusinessDocumentsInfoExecute(r FbyGetOrderBusine
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13053,7 +13053,7 @@ func (a *FbyAPIService) GetOrdersExecute(r FbyGetOrdersRequest) (*GetOrdersRespo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13064,7 +13064,7 @@ func (a *FbyAPIService) GetOrdersExecute(r FbyGetOrdersRequest) (*GetOrdersRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13075,7 +13075,7 @@ func (a *FbyAPIService) GetOrdersExecute(r FbyGetOrdersRequest) (*GetOrdersRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13086,7 +13086,7 @@ func (a *FbyAPIService) GetOrdersExecute(r FbyGetOrdersRequest) (*GetOrdersRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13097,7 +13097,7 @@ func (a *FbyAPIService) GetOrdersExecute(r FbyGetOrdersRequest) (*GetOrdersRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13108,7 +13108,7 @@ func (a *FbyAPIService) GetOrdersExecute(r FbyGetOrdersRequest) (*GetOrdersRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13282,7 +13282,7 @@ func (a *FbyAPIService) GetOrdersStatsExecute(r FbyGetOrdersStatsRequest) (*GetO
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13293,7 +13293,7 @@ func (a *FbyAPIService) GetOrdersStatsExecute(r FbyGetOrdersStatsRequest) (*GetO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13304,7 +13304,7 @@ func (a *FbyAPIService) GetOrdersStatsExecute(r FbyGetOrdersStatsRequest) (*GetO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13315,7 +13315,7 @@ func (a *FbyAPIService) GetOrdersStatsExecute(r FbyGetOrdersStatsRequest) (*GetO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13326,7 +13326,7 @@ func (a *FbyAPIService) GetOrdersStatsExecute(r FbyGetOrdersStatsRequest) (*GetO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13337,7 +13337,7 @@ func (a *FbyAPIService) GetOrdersStatsExecute(r FbyGetOrdersStatsRequest) (*GetO
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13524,7 +13524,7 @@ func (a *FbyAPIService) GetPricesExecute(r FbyGetPricesRequest) (*GetPricesRespo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13535,7 +13535,7 @@ func (a *FbyAPIService) GetPricesExecute(r FbyGetPricesRequest) (*GetPricesRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13546,7 +13546,7 @@ func (a *FbyAPIService) GetPricesExecute(r FbyGetPricesRequest) (*GetPricesRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13557,7 +13557,7 @@ func (a *FbyAPIService) GetPricesExecute(r FbyGetPricesRequest) (*GetPricesRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13568,7 +13568,7 @@ func (a *FbyAPIService) GetPricesExecute(r FbyGetPricesRequest) (*GetPricesRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13579,7 +13579,7 @@ func (a *FbyAPIService) GetPricesExecute(r FbyGetPricesRequest) (*GetPricesRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13753,7 +13753,7 @@ func (a *FbyAPIService) GetPricesByOfferIdsExecute(r FbyGetPricesByOfferIdsReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13764,7 +13764,7 @@ func (a *FbyAPIService) GetPricesByOfferIdsExecute(r FbyGetPricesByOfferIdsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13775,7 +13775,7 @@ func (a *FbyAPIService) GetPricesByOfferIdsExecute(r FbyGetPricesByOfferIdsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13786,7 +13786,7 @@ func (a *FbyAPIService) GetPricesByOfferIdsExecute(r FbyGetPricesByOfferIdsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13797,7 +13797,7 @@ func (a *FbyAPIService) GetPricesByOfferIdsExecute(r FbyGetPricesByOfferIdsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13808,7 +13808,7 @@ func (a *FbyAPIService) GetPricesByOfferIdsExecute(r FbyGetPricesByOfferIdsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13983,7 +13983,7 @@ func (a *FbyAPIService) GetPromoOffersExecute(r FbyGetPromoOffersRequest) (*GetP
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -13994,7 +13994,7 @@ func (a *FbyAPIService) GetPromoOffersExecute(r FbyGetPromoOffersRequest) (*GetP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14005,7 +14005,7 @@ func (a *FbyAPIService) GetPromoOffersExecute(r FbyGetPromoOffersRequest) (*GetP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14016,7 +14016,7 @@ func (a *FbyAPIService) GetPromoOffersExecute(r FbyGetPromoOffersRequest) (*GetP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14027,7 +14027,7 @@ func (a *FbyAPIService) GetPromoOffersExecute(r FbyGetPromoOffersRequest) (*GetP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14038,7 +14038,7 @@ func (a *FbyAPIService) GetPromoOffersExecute(r FbyGetPromoOffersRequest) (*GetP
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14192,7 +14192,7 @@ func (a *FbyAPIService) GetPromosExecute(r FbyGetPromosRequest) (*GetPromosRespo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14203,7 +14203,7 @@ func (a *FbyAPIService) GetPromosExecute(r FbyGetPromosRequest) (*GetPromosRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14214,7 +14214,7 @@ func (a *FbyAPIService) GetPromosExecute(r FbyGetPromosRequest) (*GetPromosRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14225,7 +14225,7 @@ func (a *FbyAPIService) GetPromosExecute(r FbyGetPromosRequest) (*GetPromosRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14236,7 +14236,7 @@ func (a *FbyAPIService) GetPromosExecute(r FbyGetPromosRequest) (*GetPromosRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14247,7 +14247,7 @@ func (a *FbyAPIService) GetPromosExecute(r FbyGetPromosRequest) (*GetPromosRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14396,7 +14396,7 @@ func (a *FbyAPIService) GetQualityRatingsExecute(r FbyGetQualityRatingsRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14407,7 +14407,7 @@ func (a *FbyAPIService) GetQualityRatingsExecute(r FbyGetQualityRatingsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14418,7 +14418,7 @@ func (a *FbyAPIService) GetQualityRatingsExecute(r FbyGetQualityRatingsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14429,7 +14429,7 @@ func (a *FbyAPIService) GetQualityRatingsExecute(r FbyGetQualityRatingsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14440,7 +14440,7 @@ func (a *FbyAPIService) GetQualityRatingsExecute(r FbyGetQualityRatingsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14451,7 +14451,7 @@ func (a *FbyAPIService) GetQualityRatingsExecute(r FbyGetQualityRatingsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14582,7 +14582,7 @@ func (a *FbyAPIService) GetRegionsCodesExecute(r FbyGetRegionsCodesRequest) (*Ge
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14593,7 +14593,7 @@ func (a *FbyAPIService) GetRegionsCodesExecute(r FbyGetRegionsCodesRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14604,7 +14604,7 @@ func (a *FbyAPIService) GetRegionsCodesExecute(r FbyGetRegionsCodesRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14615,7 +14615,7 @@ func (a *FbyAPIService) GetRegionsCodesExecute(r FbyGetRegionsCodesRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14626,7 +14626,7 @@ func (a *FbyAPIService) GetRegionsCodesExecute(r FbyGetRegionsCodesRequest) (*Ge
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14767,7 +14767,7 @@ func (a *FbyAPIService) GetReportInfoExecute(r FbyGetReportInfoRequest) (*GetRep
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14778,7 +14778,7 @@ func (a *FbyAPIService) GetReportInfoExecute(r FbyGetReportInfoRequest) (*GetRep
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14789,7 +14789,7 @@ func (a *FbyAPIService) GetReportInfoExecute(r FbyGetReportInfoRequest) (*GetRep
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14800,7 +14800,7 @@ func (a *FbyAPIService) GetReportInfoExecute(r FbyGetReportInfoRequest) (*GetRep
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14811,7 +14811,7 @@ func (a *FbyAPIService) GetReportInfoExecute(r FbyGetReportInfoRequest) (*GetRep
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14822,7 +14822,7 @@ func (a *FbyAPIService) GetReportInfoExecute(r FbyGetReportInfoRequest) (*GetRep
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14974,7 +14974,7 @@ func (a *FbyAPIService) GetReturnExecute(r FbyGetReturnRequest) (*GetReturnRespo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14985,7 +14985,7 @@ func (a *FbyAPIService) GetReturnExecute(r FbyGetReturnRequest) (*GetReturnRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -14996,7 +14996,7 @@ func (a *FbyAPIService) GetReturnExecute(r FbyGetReturnRequest) (*GetReturnRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15007,7 +15007,7 @@ func (a *FbyAPIService) GetReturnExecute(r FbyGetReturnRequest) (*GetReturnRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15018,7 +15018,7 @@ func (a *FbyAPIService) GetReturnExecute(r FbyGetReturnRequest) (*GetReturnRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15029,7 +15029,7 @@ func (a *FbyAPIService) GetReturnExecute(r FbyGetReturnRequest) (*GetReturnRespo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15173,7 +15173,7 @@ func (a *FbyAPIService) GetReturnApplicationExecute(r FbyGetReturnApplicationReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15184,7 +15184,7 @@ func (a *FbyAPIService) GetReturnApplicationExecute(r FbyGetReturnApplicationReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15195,7 +15195,7 @@ func (a *FbyAPIService) GetReturnApplicationExecute(r FbyGetReturnApplicationReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15206,7 +15206,7 @@ func (a *FbyAPIService) GetReturnApplicationExecute(r FbyGetReturnApplicationReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15217,7 +15217,7 @@ func (a *FbyAPIService) GetReturnApplicationExecute(r FbyGetReturnApplicationReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15228,7 +15228,7 @@ func (a *FbyAPIService) GetReturnApplicationExecute(r FbyGetReturnApplicationReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15380,7 +15380,7 @@ func (a *FbyAPIService) GetReturnPhotoExecute(r FbyGetReturnPhotoRequest) (*os.F
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15391,7 +15391,7 @@ func (a *FbyAPIService) GetReturnPhotoExecute(r FbyGetReturnPhotoRequest) (*os.F
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15402,7 +15402,7 @@ func (a *FbyAPIService) GetReturnPhotoExecute(r FbyGetReturnPhotoRequest) (*os.F
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15413,7 +15413,7 @@ func (a *FbyAPIService) GetReturnPhotoExecute(r FbyGetReturnPhotoRequest) (*os.F
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15424,7 +15424,7 @@ func (a *FbyAPIService) GetReturnPhotoExecute(r FbyGetReturnPhotoRequest) (*os.F
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15435,7 +15435,7 @@ func (a *FbyAPIService) GetReturnPhotoExecute(r FbyGetReturnPhotoRequest) (*os.F
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15673,7 +15673,7 @@ func (a *FbyAPIService) GetReturnsExecute(r FbyGetReturnsRequest) (*GetReturnsRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15684,7 +15684,7 @@ func (a *FbyAPIService) GetReturnsExecute(r FbyGetReturnsRequest) (*GetReturnsRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15695,7 +15695,7 @@ func (a *FbyAPIService) GetReturnsExecute(r FbyGetReturnsRequest) (*GetReturnsRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15706,7 +15706,7 @@ func (a *FbyAPIService) GetReturnsExecute(r FbyGetReturnsRequest) (*GetReturnsRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15717,7 +15717,7 @@ func (a *FbyAPIService) GetReturnsExecute(r FbyGetReturnsRequest) (*GetReturnsRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15728,7 +15728,7 @@ func (a *FbyAPIService) GetReturnsExecute(r FbyGetReturnsRequest) (*GetReturnsRe
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15902,7 +15902,7 @@ func (a *FbyAPIService) GetStocksExecute(r FbyGetStocksRequest) (*GetWarehouseSt
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15913,7 +15913,7 @@ func (a *FbyAPIService) GetStocksExecute(r FbyGetStocksRequest) (*GetWarehouseSt
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15924,7 +15924,7 @@ func (a *FbyAPIService) GetStocksExecute(r FbyGetStocksRequest) (*GetWarehouseSt
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15935,7 +15935,7 @@ func (a *FbyAPIService) GetStocksExecute(r FbyGetStocksRequest) (*GetWarehouseSt
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -15946,7 +15946,7 @@ func (a *FbyAPIService) GetStocksExecute(r FbyGetStocksRequest) (*GetWarehouseSt
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16107,7 +16107,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingEntriesExecute(r FbyGetSuggested
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16118,7 +16118,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingEntriesExecute(r FbyGetSuggested
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16129,7 +16129,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingEntriesExecute(r FbyGetSuggested
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16140,7 +16140,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingEntriesExecute(r FbyGetSuggested
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16151,7 +16151,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingEntriesExecute(r FbyGetSuggested
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16162,7 +16162,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingEntriesExecute(r FbyGetSuggested
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16327,7 +16327,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingsExecute(r FbyGetSuggestedOfferM
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16338,7 +16338,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingsExecute(r FbyGetSuggestedOfferM
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16349,7 +16349,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingsExecute(r FbyGetSuggestedOfferM
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16360,7 +16360,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingsExecute(r FbyGetSuggestedOfferM
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16371,7 +16371,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingsExecute(r FbyGetSuggestedOfferM
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16382,7 +16382,7 @@ func (a *FbyAPIService) GetSuggestedOfferMappingsExecute(r FbyGetSuggestedOfferM
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16553,7 +16553,7 @@ func (a *FbyAPIService) GetSuggestedPricesExecute(r FbyGetSuggestedPricesRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16564,7 +16564,7 @@ func (a *FbyAPIService) GetSuggestedPricesExecute(r FbyGetSuggestedPricesRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16575,7 +16575,7 @@ func (a *FbyAPIService) GetSuggestedPricesExecute(r FbyGetSuggestedPricesRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16586,7 +16586,7 @@ func (a *FbyAPIService) GetSuggestedPricesExecute(r FbyGetSuggestedPricesRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16597,7 +16597,7 @@ func (a *FbyAPIService) GetSuggestedPricesExecute(r FbyGetSuggestedPricesRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16608,7 +16608,7 @@ func (a *FbyAPIService) GetSuggestedPricesExecute(r FbyGetSuggestedPricesRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16755,7 +16755,7 @@ func (a *FbyAPIService) GetSupplyRequestDocumentsExecute(r FbyGetSupplyRequestDo
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16766,7 +16766,7 @@ func (a *FbyAPIService) GetSupplyRequestDocumentsExecute(r FbyGetSupplyRequestDo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16777,7 +16777,7 @@ func (a *FbyAPIService) GetSupplyRequestDocumentsExecute(r FbyGetSupplyRequestDo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16788,7 +16788,7 @@ func (a *FbyAPIService) GetSupplyRequestDocumentsExecute(r FbyGetSupplyRequestDo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16799,7 +16799,7 @@ func (a *FbyAPIService) GetSupplyRequestDocumentsExecute(r FbyGetSupplyRequestDo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16810,7 +16810,7 @@ func (a *FbyAPIService) GetSupplyRequestDocumentsExecute(r FbyGetSupplyRequestDo
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16977,7 +16977,7 @@ func (a *FbyAPIService) GetSupplyRequestItemsExecute(r FbyGetSupplyRequestItemsR
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16988,7 +16988,7 @@ func (a *FbyAPIService) GetSupplyRequestItemsExecute(r FbyGetSupplyRequestItemsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -16999,7 +16999,7 @@ func (a *FbyAPIService) GetSupplyRequestItemsExecute(r FbyGetSupplyRequestItemsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17010,7 +17010,7 @@ func (a *FbyAPIService) GetSupplyRequestItemsExecute(r FbyGetSupplyRequestItemsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17021,7 +17021,7 @@ func (a *FbyAPIService) GetSupplyRequestItemsExecute(r FbyGetSupplyRequestItemsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17032,7 +17032,7 @@ func (a *FbyAPIService) GetSupplyRequestItemsExecute(r FbyGetSupplyRequestItemsR
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17196,7 +17196,7 @@ func (a *FbyAPIService) GetSupplyRequestsExecute(r FbyGetSupplyRequestsRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17207,7 +17207,7 @@ func (a *FbyAPIService) GetSupplyRequestsExecute(r FbyGetSupplyRequestsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17218,7 +17218,7 @@ func (a *FbyAPIService) GetSupplyRequestsExecute(r FbyGetSupplyRequestsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17229,7 +17229,7 @@ func (a *FbyAPIService) GetSupplyRequestsExecute(r FbyGetSupplyRequestsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17240,7 +17240,7 @@ func (a *FbyAPIService) GetSupplyRequestsExecute(r FbyGetSupplyRequestsRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17420,7 +17420,7 @@ func (a *FbyAPIService) PutBidsForBusinessExecute(r FbyPutBidsForBusinessRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17431,7 +17431,7 @@ func (a *FbyAPIService) PutBidsForBusinessExecute(r FbyPutBidsForBusinessRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17442,7 +17442,7 @@ func (a *FbyAPIService) PutBidsForBusinessExecute(r FbyPutBidsForBusinessRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17453,7 +17453,7 @@ func (a *FbyAPIService) PutBidsForBusinessExecute(r FbyPutBidsForBusinessRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17464,7 +17464,7 @@ func (a *FbyAPIService) PutBidsForBusinessExecute(r FbyPutBidsForBusinessRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17475,7 +17475,7 @@ func (a *FbyAPIService) PutBidsForBusinessExecute(r FbyPutBidsForBusinessRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17649,7 +17649,7 @@ func (a *FbyAPIService) PutBidsForCampaignExecute(r FbyPutBidsForCampaignRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17660,7 +17660,7 @@ func (a *FbyAPIService) PutBidsForCampaignExecute(r FbyPutBidsForCampaignRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17671,7 +17671,7 @@ func (a *FbyAPIService) PutBidsForCampaignExecute(r FbyPutBidsForCampaignRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17682,7 +17682,7 @@ func (a *FbyAPIService) PutBidsForCampaignExecute(r FbyPutBidsForCampaignRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17693,7 +17693,7 @@ func (a *FbyAPIService) PutBidsForCampaignExecute(r FbyPutBidsForCampaignRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17704,7 +17704,7 @@ func (a *FbyAPIService) PutBidsForCampaignExecute(r FbyPutBidsForCampaignRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17864,7 +17864,7 @@ func (a *FbyAPIService) SearchRegionChildrenExecute(r FbySearchRegionChildrenReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17875,7 +17875,7 @@ func (a *FbyAPIService) SearchRegionChildrenExecute(r FbySearchRegionChildrenReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17886,7 +17886,7 @@ func (a *FbyAPIService) SearchRegionChildrenExecute(r FbySearchRegionChildrenReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17897,7 +17897,7 @@ func (a *FbyAPIService) SearchRegionChildrenExecute(r FbySearchRegionChildrenReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17908,7 +17908,7 @@ func (a *FbyAPIService) SearchRegionChildrenExecute(r FbySearchRegionChildrenReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -17919,7 +17919,7 @@ func (a *FbyAPIService) SearchRegionChildrenExecute(r FbySearchRegionChildrenReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18056,7 +18056,7 @@ func (a *FbyAPIService) SearchRegionsByIdExecute(r FbySearchRegionsByIdRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18067,7 +18067,7 @@ func (a *FbyAPIService) SearchRegionsByIdExecute(r FbySearchRegionsByIdRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18078,7 +18078,7 @@ func (a *FbyAPIService) SearchRegionsByIdExecute(r FbySearchRegionsByIdRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18089,7 +18089,7 @@ func (a *FbyAPIService) SearchRegionsByIdExecute(r FbySearchRegionsByIdRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18100,7 +18100,7 @@ func (a *FbyAPIService) SearchRegionsByIdExecute(r FbySearchRegionsByIdRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18266,7 +18266,7 @@ func (a *FbyAPIService) SearchRegionsByNameExecute(r FbySearchRegionsByNameReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18277,7 +18277,7 @@ func (a *FbyAPIService) SearchRegionsByNameExecute(r FbySearchRegionsByNameReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18288,7 +18288,7 @@ func (a *FbyAPIService) SearchRegionsByNameExecute(r FbySearchRegionsByNameReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18299,7 +18299,7 @@ func (a *FbyAPIService) SearchRegionsByNameExecute(r FbySearchRegionsByNameReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18474,7 +18474,7 @@ func (a *FbyAPIService) SendFileToChatExecute(r FbyFbySendFileToChatRequest) (*E
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18485,7 +18485,7 @@ func (a *FbyAPIService) SendFileToChatExecute(r FbyFbySendFileToChatRequest) (*E
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18496,7 +18496,7 @@ func (a *FbyAPIService) SendFileToChatExecute(r FbyFbySendFileToChatRequest) (*E
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18507,7 +18507,7 @@ func (a *FbyAPIService) SendFileToChatExecute(r FbyFbySendFileToChatRequest) (*E
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18518,7 +18518,7 @@ func (a *FbyAPIService) SendFileToChatExecute(r FbyFbySendFileToChatRequest) (*E
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18529,7 +18529,7 @@ func (a *FbyAPIService) SendFileToChatExecute(r FbyFbySendFileToChatRequest) (*E
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18691,7 +18691,7 @@ func (a *FbyAPIService) SendMessageToChatExecute(r FbyFbySendMessageToChatReques
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18702,7 +18702,7 @@ func (a *FbyAPIService) SendMessageToChatExecute(r FbyFbySendMessageToChatReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18713,7 +18713,7 @@ func (a *FbyAPIService) SendMessageToChatExecute(r FbyFbySendMessageToChatReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18724,7 +18724,7 @@ func (a *FbyAPIService) SendMessageToChatExecute(r FbyFbySendMessageToChatReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18735,7 +18735,7 @@ func (a *FbyAPIService) SendMessageToChatExecute(r FbyFbySendMessageToChatReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18746,7 +18746,7 @@ func (a *FbyAPIService) SendMessageToChatExecute(r FbyFbySendMessageToChatReques
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18893,7 +18893,7 @@ func (a *FbyAPIService) SkipGoodsFeedbacksReactionExecute(r FbySkipGoodsFeedback
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18904,7 +18904,7 @@ func (a *FbyAPIService) SkipGoodsFeedbacksReactionExecute(r FbySkipGoodsFeedback
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18915,7 +18915,7 @@ func (a *FbyAPIService) SkipGoodsFeedbacksReactionExecute(r FbySkipGoodsFeedback
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18926,7 +18926,7 @@ func (a *FbyAPIService) SkipGoodsFeedbacksReactionExecute(r FbySkipGoodsFeedback
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18937,7 +18937,7 @@ func (a *FbyAPIService) SkipGoodsFeedbacksReactionExecute(r FbySkipGoodsFeedback
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -18948,7 +18948,7 @@ func (a *FbyAPIService) SkipGoodsFeedbacksReactionExecute(r FbySkipGoodsFeedback
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19103,7 +19103,7 @@ func (a *FbyAPIService) UpdateBusinessPricesExecute(r FbyUpdateBusinessPricesReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19114,7 +19114,7 @@ func (a *FbyAPIService) UpdateBusinessPricesExecute(r FbyUpdateBusinessPricesReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19125,7 +19125,7 @@ func (a *FbyAPIService) UpdateBusinessPricesExecute(r FbyUpdateBusinessPricesReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19136,7 +19136,7 @@ func (a *FbyAPIService) UpdateBusinessPricesExecute(r FbyUpdateBusinessPricesReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19147,7 +19147,7 @@ func (a *FbyAPIService) UpdateBusinessPricesExecute(r FbyUpdateBusinessPricesReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19158,7 +19158,7 @@ func (a *FbyAPIService) UpdateBusinessPricesExecute(r FbyUpdateBusinessPricesReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19169,7 +19169,7 @@ func (a *FbyAPIService) UpdateBusinessPricesExecute(r FbyUpdateBusinessPricesReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19316,7 +19316,7 @@ func (a *FbyAPIService) UpdateCampaignOffersExecute(r FbyUpdateCampaignOffersReq
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19327,7 +19327,7 @@ func (a *FbyAPIService) UpdateCampaignOffersExecute(r FbyUpdateCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19338,7 +19338,7 @@ func (a *FbyAPIService) UpdateCampaignOffersExecute(r FbyUpdateCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19349,7 +19349,7 @@ func (a *FbyAPIService) UpdateCampaignOffersExecute(r FbyUpdateCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19360,7 +19360,7 @@ func (a *FbyAPIService) UpdateCampaignOffersExecute(r FbyUpdateCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19371,7 +19371,7 @@ func (a *FbyAPIService) UpdateCampaignOffersExecute(r FbyUpdateCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19382,7 +19382,7 @@ func (a *FbyAPIService) UpdateCampaignOffersExecute(r FbyUpdateCampaignOffersReq
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19543,7 +19543,7 @@ func (a *FbyAPIService) UpdateGoodsFeedbackCommentExecute(r FbyUpdateGoodsFeedba
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19554,7 +19554,7 @@ func (a *FbyAPIService) UpdateGoodsFeedbackCommentExecute(r FbyUpdateGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19565,7 +19565,7 @@ func (a *FbyAPIService) UpdateGoodsFeedbackCommentExecute(r FbyUpdateGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19576,7 +19576,7 @@ func (a *FbyAPIService) UpdateGoodsFeedbackCommentExecute(r FbyUpdateGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19587,7 +19587,7 @@ func (a *FbyAPIService) UpdateGoodsFeedbackCommentExecute(r FbyUpdateGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19598,7 +19598,7 @@ func (a *FbyAPIService) UpdateGoodsFeedbackCommentExecute(r FbyUpdateGoodsFeedba
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19759,7 +19759,7 @@ func (a *FbyAPIService) UpdateOfferContentExecute(r FbyUpdateOfferContentRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19770,7 +19770,7 @@ func (a *FbyAPIService) UpdateOfferContentExecute(r FbyUpdateOfferContentRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19781,7 +19781,7 @@ func (a *FbyAPIService) UpdateOfferContentExecute(r FbyUpdateOfferContentRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19792,7 +19792,7 @@ func (a *FbyAPIService) UpdateOfferContentExecute(r FbyUpdateOfferContentRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19803,7 +19803,7 @@ func (a *FbyAPIService) UpdateOfferContentExecute(r FbyUpdateOfferContentRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19814,7 +19814,7 @@ func (a *FbyAPIService) UpdateOfferContentExecute(r FbyUpdateOfferContentRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -19825,7 +19825,7 @@ func (a *FbyAPIService) UpdateOfferContentExecute(r FbyUpdateOfferContentRequest
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20003,7 +20003,7 @@ func (a *FbyAPIService) UpdateOfferMappingEntriesExecute(r FbyUpdateOfferMapping
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20014,7 +20014,7 @@ func (a *FbyAPIService) UpdateOfferMappingEntriesExecute(r FbyUpdateOfferMapping
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20025,7 +20025,7 @@ func (a *FbyAPIService) UpdateOfferMappingEntriesExecute(r FbyUpdateOfferMapping
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20036,7 +20036,7 @@ func (a *FbyAPIService) UpdateOfferMappingEntriesExecute(r FbyUpdateOfferMapping
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20047,7 +20047,7 @@ func (a *FbyAPIService) UpdateOfferMappingEntriesExecute(r FbyUpdateOfferMapping
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20058,7 +20058,7 @@ func (a *FbyAPIService) UpdateOfferMappingEntriesExecute(r FbyUpdateOfferMapping
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20069,7 +20069,7 @@ func (a *FbyAPIService) UpdateOfferMappingEntriesExecute(r FbyUpdateOfferMapping
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20290,7 +20290,7 @@ func (a *FbyAPIService) UpdateOfferMappingsExecute(r FbyUpdateOfferMappingsReque
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20301,7 +20301,7 @@ func (a *FbyAPIService) UpdateOfferMappingsExecute(r FbyUpdateOfferMappingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20312,7 +20312,7 @@ func (a *FbyAPIService) UpdateOfferMappingsExecute(r FbyUpdateOfferMappingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20323,7 +20323,7 @@ func (a *FbyAPIService) UpdateOfferMappingsExecute(r FbyUpdateOfferMappingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20334,7 +20334,7 @@ func (a *FbyAPIService) UpdateOfferMappingsExecute(r FbyUpdateOfferMappingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20345,7 +20345,7 @@ func (a *FbyAPIService) UpdateOfferMappingsExecute(r FbyUpdateOfferMappingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20356,7 +20356,7 @@ func (a *FbyAPIService) UpdateOfferMappingsExecute(r FbyUpdateOfferMappingsReque
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20517,7 +20517,7 @@ func (a *FbyAPIService) UpdatePricesExecute(r FbyUpdatePricesRequest) (*EmptyApi
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20528,7 +20528,7 @@ func (a *FbyAPIService) UpdatePricesExecute(r FbyUpdatePricesRequest) (*EmptyApi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20539,7 +20539,7 @@ func (a *FbyAPIService) UpdatePricesExecute(r FbyUpdatePricesRequest) (*EmptyApi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20550,7 +20550,7 @@ func (a *FbyAPIService) UpdatePricesExecute(r FbyUpdatePricesRequest) (*EmptyApi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20561,7 +20561,7 @@ func (a *FbyAPIService) UpdatePricesExecute(r FbyUpdatePricesRequest) (*EmptyApi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20572,7 +20572,7 @@ func (a *FbyAPIService) UpdatePricesExecute(r FbyUpdatePricesRequest) (*EmptyApi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 423 {
-			var v FbyLockedErrorResponse
+			var v ApiLockedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20583,7 +20583,7 @@ func (a *FbyAPIService) UpdatePricesExecute(r FbyUpdatePricesRequest) (*EmptyApi
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20732,7 +20732,7 @@ func (a *FbyAPIService) UpdatePromoOffersExecute(r FbyUpdatePromoOffersRequest) 
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v FbyClientDataErrorResponse
+			var v ApiClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20743,7 +20743,7 @@ func (a *FbyAPIService) UpdatePromoOffersExecute(r FbyUpdatePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v FbyUnauthorizedErrorResponse
+			var v ApiUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20754,7 +20754,7 @@ func (a *FbyAPIService) UpdatePromoOffersExecute(r FbyUpdatePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v FbyForbiddenErrorResponse
+			var v ApiForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20765,7 +20765,7 @@ func (a *FbyAPIService) UpdatePromoOffersExecute(r FbyUpdatePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v FbyNotFoundErrorResponse
+			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20776,7 +20776,7 @@ func (a *FbyAPIService) UpdatePromoOffersExecute(r FbyUpdatePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v FbyLimitErrorResponse
+			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -20787,7 +20787,7 @@ func (a *FbyAPIService) UpdatePromoOffersExecute(r FbyUpdatePromoOffersRequest) 
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v FbyServerErrorResponse
+			var v ApiServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
