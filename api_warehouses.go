@@ -20,12 +20,12 @@ import (
 // WarehousesAPIService WarehousesAPI service
 type WarehousesAPIService service
 
-type ApiGetFulfillmentWarehousesRequest struct {
+type WarehousesApiGetFulfillmentWarehousesRequest struct {
 	ctx        context.Context
 	ApiService *WarehousesAPIService
 }
 
-func (r ApiGetFulfillmentWarehousesRequest) Execute() (*GetFulfillmentWarehousesResponse, *http.Response, error) {
+func (r WarehousesApiGetFulfillmentWarehousesRequest) Execute() (*GetFulfillmentWarehousesResponse, *http.Response, error) {
 	return r.ApiService.GetFulfillmentWarehousesExecute(r)
 }
 
@@ -40,10 +40,10 @@ GetFulfillmentWarehouses Идентификаторы складов Марке�
 |-|
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetFulfillmentWarehousesRequest
+	@return WarehousesApiGetFulfillmentWarehousesRequest
 */
-func (a *WarehousesAPIService) GetFulfillmentWarehouses(ctx context.Context) ApiGetFulfillmentWarehousesRequest {
-	return ApiGetFulfillmentWarehousesRequest{
+func (a *WarehousesAPIService) GetFulfillmentWarehouses(ctx context.Context) WarehousesApiGetFulfillmentWarehousesRequest {
+	return WarehousesApiGetFulfillmentWarehousesRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
@@ -52,7 +52,7 @@ func (a *WarehousesAPIService) GetFulfillmentWarehouses(ctx context.Context) Api
 // Execute executes the request
 //
 //	@return GetFulfillmentWarehousesResponse
-func (a *WarehousesAPIService) GetFulfillmentWarehousesExecute(r ApiGetFulfillmentWarehousesRequest) (*GetFulfillmentWarehousesResponse, *http.Response, error) {
+func (a *WarehousesAPIService) GetFulfillmentWarehousesExecute(r WarehousesApiGetFulfillmentWarehousesRequest) (*GetFulfillmentWarehousesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -204,7 +204,7 @@ func (a *WarehousesAPIService) GetFulfillmentWarehousesExecute(r ApiGetFulfillme
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPagedWarehousesRequest struct {
+type WarehousesApiGetPagedWarehousesRequest struct {
 	ctx                       context.Context
 	ApiService                *WarehousesAPIService
 	businessId                int64
@@ -214,23 +214,23 @@ type ApiGetPagedWarehousesRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetPagedWarehousesRequest) PageToken(pageToken string) ApiGetPagedWarehousesRequest {
+func (r WarehousesApiGetPagedWarehousesRequest) PageToken(pageToken string) WarehousesApiGetPagedWarehousesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetPagedWarehousesRequest) Limit(limit int32) ApiGetPagedWarehousesRequest {
+func (r WarehousesApiGetPagedWarehousesRequest) Limit(limit int32) WarehousesApiGetPagedWarehousesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) ApiGetPagedWarehousesRequest {
+func (r WarehousesApiGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) WarehousesApiGetPagedWarehousesRequest {
 	r.getPagedWarehousesRequest = &getPagedWarehousesRequest
 	return r
 }
 
-func (r ApiGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
+func (r WarehousesApiGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
 	return r.ApiService.GetPagedWarehousesExecute(r)
 }
 
@@ -252,10 +252,10 @@ GetPagedWarehouses Список складов
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetPagedWarehousesRequest
+	@return WarehousesApiGetPagedWarehousesRequest
 */
-func (a *WarehousesAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) ApiGetPagedWarehousesRequest {
-	return ApiGetPagedWarehousesRequest{
+func (a *WarehousesAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) WarehousesApiGetPagedWarehousesRequest {
+	return WarehousesApiGetPagedWarehousesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -265,7 +265,7 @@ func (a *WarehousesAPIService) GetPagedWarehouses(ctx context.Context, businessI
 // Execute executes the request
 //
 //	@return GetPagedWarehousesResponse
-func (a *WarehousesAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
+func (a *WarehousesAPIService) GetPagedWarehousesExecute(r WarehousesApiGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -418,13 +418,13 @@ func (a *WarehousesAPIService) GetPagedWarehousesExecute(r ApiGetPagedWarehouses
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetWarehousesRequest struct {
+type WarehousesApiGetWarehousesRequest struct {
 	ctx        context.Context
 	ApiService *WarehousesAPIService
 	businessId int64
 }
 
-func (r ApiGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
+func (r WarehousesApiGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
 	return r.ApiService.GetWarehousesExecute(r)
 }
 
@@ -448,12 +448,12 @@ GetWarehouses Список складов и групп складов
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetWarehousesRequest
+	@return WarehousesApiGetWarehousesRequest
 
 Deprecated
 */
-func (a *WarehousesAPIService) GetWarehouses(ctx context.Context, businessId int64) ApiGetWarehousesRequest {
-	return ApiGetWarehousesRequest{
+func (a *WarehousesAPIService) GetWarehouses(ctx context.Context, businessId int64) WarehousesApiGetWarehousesRequest {
+	return WarehousesApiGetWarehousesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -465,7 +465,7 @@ func (a *WarehousesAPIService) GetWarehouses(ctx context.Context, businessId int
 //	@return GetWarehousesResponse
 //
 // Deprecated
-func (a *WarehousesAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
+func (a *WarehousesAPIService) GetWarehousesExecute(r WarehousesApiGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -621,19 +621,19 @@ func (a *WarehousesAPIService) GetWarehousesExecute(r ApiGetWarehousesRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateWarehouseStatusRequest struct {
+type WarehousesApiUpdateWarehouseStatusRequest struct {
 	ctx                          context.Context
 	ApiService                   *WarehousesAPIService
 	campaignId                   int64
 	updateWarehouseStatusRequest *UpdateWarehouseStatusRequest
 }
 
-func (r ApiUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) ApiUpdateWarehouseStatusRequest {
+func (r WarehousesApiUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) WarehousesApiUpdateWarehouseStatusRequest {
 	r.updateWarehouseStatusRequest = &updateWarehouseStatusRequest
 	return r
 }
 
-func (r ApiUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
+func (r WarehousesApiUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
 	return r.ApiService.UpdateWarehouseStatusExecute(r)
 }
 
@@ -651,10 +651,10 @@ UpdateWarehouseStatus Изменение статуса склада
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateWarehouseStatusRequest
+	@return WarehousesApiUpdateWarehouseStatusRequest
 */
-func (a *WarehousesAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) ApiUpdateWarehouseStatusRequest {
-	return ApiUpdateWarehouseStatusRequest{
+func (a *WarehousesAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) WarehousesApiUpdateWarehouseStatusRequest {
+	return WarehousesApiUpdateWarehouseStatusRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -664,7 +664,7 @@ func (a *WarehousesAPIService) UpdateWarehouseStatus(ctx context.Context, campai
 // Execute executes the request
 //
 //	@return UpdateWarehouseStatusResponse
-func (a *WarehousesAPIService) UpdateWarehouseStatusExecute(r ApiUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
+func (a *WarehousesAPIService) UpdateWarehouseStatusExecute(r WarehousesApiUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
