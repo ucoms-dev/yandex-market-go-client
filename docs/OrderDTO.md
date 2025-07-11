@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int64** | Идентификатор заказа. | 
-**Status** | [**OrderStatusType**](OrderStatusType.md) |  | 
+**Id** | **int64** | Идентификатор заказа. |
+**ExternalOrderId** | Pointer to **string** | Дополнительный идентификатор заказа. | [optional]
+**Status** | [**OrderStatusType**](OrderStatusType.md) |  |
 **Substatus** | [**OrderSubstatusType**](OrderSubstatusType.md) |  | 
 **CreationDate** | **string** |  | 
 **UpdatedAt** | Pointer to **string** |  | [optional] 
