@@ -22,12 +22,14 @@ var _ MappedNullable = &OrderDTO{}
 // OrderDTO Заказ.
 type OrderDTO struct {
 	// Идентификатор заказа.
-	Id           int64              `json:"id"`
-	Status       OrderStatusType    `json:"status"`
-	Substatus    OrderSubstatusType `json:"substatus"`
-	CreationDate string             `json:"creationDate"`
-	UpdatedAt    *string            `json:"updatedAt,omitempty"`
-	Currency     CurrencyType       `json:"currency"`
+	Id int64 `json:"id"`
+	// Дополнительный идентификатор заказа.
+	ExternalOrderId *string            `json:"externalOrderId,omitempty"`
+	Status          OrderStatusType    `json:"status"`
+	Substatus       OrderSubstatusType `json:"substatus"`
+	CreationDate    string             `json:"creationDate"`
+	UpdatedAt       *string            `json:"updatedAt,omitempty"`
+	Currency        CurrencyType       `json:"currency"`
 	// Платеж покупателя.
 	ItemsTotal float32 `json:"itemsTotal"`
 	// Стоимость доставки.
@@ -117,6 +119,38 @@ func (o *OrderDTO) GetIdOk() (*int64, bool) {
 // SetId sets field value
 func (o *OrderDTO) SetId(v int64) {
 	o.Id = v
+}
+
+// GetExternalOrderId returns the ExternalOrderId field value if set, zero value otherwise.
+func (o *OrderDTO) GetExternalOrderId() string {
+	if o == nil || IsNil(o.ExternalOrderId) {
+		var ret string
+		return ret
+	}
+	return *o.ExternalOrderId
+}
+
+// GetExternalOrderIdOk returns a tuple with the ExternalOrderId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderDTO) GetExternalOrderIdOk() (*string, bool) {
+	if o == nil || IsNil(o.ExternalOrderId) {
+		return nil, false
+	}
+	return o.ExternalOrderId, true
+}
+
+// HasExternalOrderId returns a boolean if a field has been set.
+func (o *OrderDTO) HasExternalOrderId() bool {
+	if o != nil && !IsNil(o.ExternalOrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalOrderId gets a reference to the given string and assigns it to the ExternalOrderId field.
+func (o *OrderDTO) SetExternalOrderId(v string) {
+	o.ExternalOrderId = &v
 }
 
 // GetStatus returns the Status field value
@@ -732,6 +766,9 @@ func (o OrderDTO) MarshalJSON() ([]byte, error) {
 func (o OrderDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
+	if !IsNil(o.ExternalOrderId) {
+		toSerialize["externalOrderId"] = o.ExternalOrderId
+	}
 	toSerialize["status"] = o.Status
 	toSerialize["substatus"] = o.Substatus
 	toSerialize["creationDate"] = o.CreationDate
