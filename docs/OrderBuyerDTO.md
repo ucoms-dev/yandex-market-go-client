@@ -5,10 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Идентификатор покупателя. | [optional] 
-**LastName** | Pointer to **string** | Фамилия покупателя. | [optional] 
-**FirstName** | Pointer to **string** | Имя покупателя. | [optional] 
-**MiddleName** | Pointer to **string** | Отчество покупателя. | [optional] 
-**Type** | [**OrderBuyerType**](OrderBuyerType.md) |  | 
+**LastName** | Pointer to **string** | Фамилия покупателя. | [optional]
+**FirstName** | Pointer to **string** | Имя покупателя. | [optional]
+**Email** | Pointer to **string** | Электронная почта покупателя. | [optional]
+**MiddleName** | Pointer to **string** | Отчество покупателя. | [optional]
+**Type** | [**OrderBuyerType**](OrderBuyerType.md) |  |
 
 ## Methods
 
@@ -103,6 +104,31 @@ SetFirstName sets FirstName field to given value.
 `func (o *OrderBuyerDTO) HasFirstName() bool`
 
 HasFirstName returns a boolean if a field has been set.
+
+### GetEmail
+
+`func (o *OrderBuyerDTO) GetEmail() string`
+
+GetEmail returns the Email field if non-nil, zero value otherwise.
+
+### GetEmailOk
+
+`func (o *OrderBuyerDTO) GetEmailOk() (*string, bool)`
+
+GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmail
+
+`func (o *OrderBuyerDTO) SetEmail(v string)`
+
+SetEmail sets Email field to given value.
+
+### HasEmail
+
+`func (o *OrderBuyerDTO) HasEmail() bool`
+
+HasEmail returns a boolean if a field has been set.
 
 ### GetMiddleName
 

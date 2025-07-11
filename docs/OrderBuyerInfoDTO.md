@@ -6,9 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Идентификатор покупателя. | [optional] 
 **LastName** | Pointer to **string** | Фамилия покупателя. | [optional] 
-**FirstName** | Pointer to **string** | Имя покупателя. | [optional] 
-**MiddleName** | Pointer to **string** | Отчество покупателя. | [optional] 
-**Type** | [**OrderBuyerType**](OrderBuyerType.md) |  | 
+**FirstName** | Pointer to **string** | Имя покупателя. | [optional]
+**Email** | Pointer to **string** | Электронная почта покупателя. | [optional]
+**MiddleName** | Pointer to **string** | Отчество покупателя. | [optional]
+**Type** | [**OrderBuyerType**](OrderBuyerType.md) |  |
 **Phone** | Pointer to **string** | Подменный номер телефона покупателя. Подробнее о таких номерах читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/orders/dbs/call#fake-number).  Формат номера: &#x60;+&lt;код_страны&gt;&lt;код_региона&gt;&lt;номер_телефона&gt;&#x60;.  | [optional] 
 **Trusted** | Pointer to **bool** | Проверенный покупатель.  Если параметр &#x60;trusted&#x60; вернулся со значением &#x60;true&#x60;, Маркет уже проверил покупателя — не звоните ему. Обработайте заказ как обычно и передайте его курьеру или отвезите в ПВЗ.  При необходимости свяжитесь с покупателем в чате. [Как это сделать](../../step-by-step/chats.md)  Подробнее о звонках покупателю читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/ru/orders/dbs/call).  | [optional] 
 
@@ -105,6 +106,31 @@ SetFirstName sets FirstName field to given value.
 `func (o *OrderBuyerInfoDTO) HasFirstName() bool`
 
 HasFirstName returns a boolean if a field has been set.
+
+### GetEmail
+
+`func (o *OrderBuyerInfoDTO) GetEmail() string`
+
+GetEmail returns the Email field if non-nil, zero value otherwise.
+
+### GetEmailOk
+
+`func (o *OrderBuyerInfoDTO) GetEmailOk() (*string, bool)`
+
+GetEmailOk returns a tuple with the Email field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEmail
+
+`func (o *OrderBuyerInfoDTO) SetEmail(v string)`
+
+SetEmail sets Email field to given value.
+
+### HasEmail
+
+`func (o *OrderBuyerInfoDTO) HasEmail() bool`
+
+HasEmail returns a boolean if a field has been set.
 
 ### GetMiddleName
 
