@@ -9,10 +9,12 @@ Name | Type | Description | Notes
 **City** | Pointer to **string** | Город или населенный пункт.  | [optional] 
 **District** | Pointer to **string** | Район. | [optional] 
 **Subway** | Pointer to **string** | Станция метро. | [optional] 
-**Street** | Pointer to **string** | Улица.  | [optional] 
-**House** | Pointer to **string** | Дом или владение.  | [optional] 
-**Block** | Pointer to **string** | Корпус или строение. | [optional] 
-**Entrance** | Pointer to **string** | Подъезд. | [optional] 
+**Street** | Pointer to **string** | Улица.  | [optional]
+**House** | Pointer to **string** | Дом или владение.  | [optional]
+**Estate** | Pointer to **string** | Номер владения. | [optional]
+**Building** | Pointer to **string** | Номер строения. | [optional]
+**Block** | Pointer to **string** | Корпус или строение. | [optional]
+**Entrance** | Pointer to **string** | Подъезд. | [optional]
 **Entryphone** | Pointer to **string** | Код домофона. | [optional] 
 **Floor** | Pointer to **string** | Этаж. | [optional] 
 **Apartment** | Pointer to **string** | Квартира или офис. | [optional] 
@@ -213,6 +215,56 @@ SetHouse sets House field to given value.
 `func (o *OrderDeliveryAddressDTO) HasHouse() bool`
 
 HasHouse returns a boolean if a field has been set.
+
+### GetEstate
+
+`func (o *OrderDeliveryAddressDTO) GetEstate() string`
+
+GetEstate returns the Estate field if non-nil, zero value otherwise.
+
+### GetEstateOk
+
+`func (o *OrderDeliveryAddressDTO) GetEstateOk() (*string, bool)`
+
+GetEstateOk returns a tuple with the Estate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEstate
+
+`func (o *OrderDeliveryAddressDTO) SetEstate(v string)`
+
+SetEstate sets Estate field to given value.
+
+### HasEstate
+
+`func (o *OrderDeliveryAddressDTO) HasEstate() bool`
+
+HasEstate returns a boolean if a field has been set.
+
+### GetBuilding
+
+`func (o *OrderDeliveryAddressDTO) GetBuilding() string`
+
+GetBuilding returns the Building field if non-nil, zero value otherwise.
+
+### GetBuildingOk
+
+`func (o *OrderDeliveryAddressDTO) GetBuildingOk() (*string, bool)`
+
+GetBuildingOk returns a tuple with the Building field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuilding
+
+`func (o *OrderDeliveryAddressDTO) SetBuilding(v string)`
+
+SetBuilding sets Building field to given value.
+
+### HasBuilding
+
+`func (o *OrderDeliveryAddressDTO) HasBuilding() bool`
+
+HasBuilding returns a boolean if a field has been set.
 
 ### GetBlock
 
