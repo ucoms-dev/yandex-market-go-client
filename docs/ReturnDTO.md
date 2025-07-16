@@ -9,8 +9,9 @@ Name | Type | Description | Notes
 **CreationDate** | Pointer to **time.Time** | Дата создания невыкупа или возврата клиентом.  Формат даты: ISO 8601 со смещением относительно UTC.  | [optional] 
 **UpdateDate** | Pointer to **time.Time** | Дата обновления невыкупа или возврата.  Формат даты: ISO 8601 со смещением относительно UTC.  | [optional] 
 **RefundStatus** | Pointer to [**RefundStatusType**](RefundStatusType.md) |  | [optional] 
-**LogisticPickupPoint** | Pointer to [**LogisticPickupPointDTO**](LogisticPickupPointDTO.md) |  | [optional] 
-**ShipmentRecipientType** | Pointer to [**RecipientType**](RecipientType.md) |  | [optional] 
+**LogisticPickupPoint** | Pointer to [**LogisticPickupPointDTO**](LogisticPickupPointDTO.md) |  | [optional]
+**PickupTillDate** | Pointer to **time.Time** | Дата, до которой нужно забрать возврат из логистического пункта. Формат даты: ISO 8601 со смещением относительно UTC. | [optional]
+**ShipmentRecipientType** | Pointer to [**RecipientType**](RecipientType.md) |  | [optional]
 **ShipmentStatus** | Pointer to [**ReturnShipmentStatusType**](ReturnShipmentStatusType.md) |  | [optional] 
 **RefundAmount** | Pointer to **int64** | {% note warning \&quot;Вместо него используйте &#x60;amount&#x60;.\&quot; %}     {% endnote %}  Сумма возврата в копейках.  | [optional] 
 **Amount** | Pointer to [**CurrencyValueDTO**](CurrencyValueDTO.md) |  | [optional] 
@@ -176,6 +177,31 @@ SetLogisticPickupPoint sets LogisticPickupPoint field to given value.
 `func (o *ReturnDTO) HasLogisticPickupPoint() bool`
 
 HasLogisticPickupPoint returns a boolean if a field has been set.
+
+### GetPickupTillDate
+
+`func (o *ReturnDTO) GetPickupTillDate() time.Time`
+
+GetPickupTillDate returns the PickupTillDate field if non-nil, zero value otherwise.
+
+### GetPickupTillDateOk
+
+`func (o *ReturnDTO) GetPickupTillDateOk() (*time.Time, bool)`
+
+GetPickupTillDateOk returns a tuple with the PickupTillDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPickupTillDate
+
+`func (o *ReturnDTO) SetPickupTillDate(v time.Time)`
+
+SetPickupTillDate sets PickupTillDate field to given value.
+
+### HasPickupTillDate
+
+`func (o *ReturnDTO) HasPickupTillDate() bool`
+
+HasPickupTillDate returns a boolean if a field has been set.
 
 ### GetShipmentRecipientType
 
