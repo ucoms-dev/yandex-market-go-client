@@ -29,10 +29,12 @@ const (
 	RefundStatusType_REFUNDED_WITH_BONUSES          RefundStatusType = "REFUNDED_WITH_BONUSES"
 	RefundStatusType_REFUNDED_BY_SHOP               RefundStatusType = "REFUNDED_BY_SHOP"
 	RefundStatusType_CANCELLED                      RefundStatusType = "CANCELLED"
+	RefundStatusType_REJECTED                       RefundStatusType = "REJECTED"
 	RefundStatusType_COMPLETE_WITHOUT_REFUND        RefundStatusType = "COMPLETE_WITHOUT_REFUND"
 	RefundStatusType_PREMODERATION_DISPUTE          RefundStatusType = "PREMODERATION_DISPUTE"
 	RefundStatusType_PREMODERATION_DECISION_WAITING RefundStatusType = "PREMODERATION_DECISION_WAITING"
 	RefundStatusType_PREMODERATION_DECISION_MADE    RefundStatusType = "PREMODERATION_DECISION_MADE"
+	RefundStatusType_PREMODERATION_SELECT_DELIVERY  RefundStatusType = "PREMODERATION_SELECT_DELIVERY"
 	RefundStatusType_UNKNOWN                        RefundStatusType = "UNKNOWN"
 )
 
@@ -47,10 +49,12 @@ var AllowedRefundStatusTypeEnumValues = []RefundStatusType{
 	"REFUNDED_WITH_BONUSES",
 	"REFUNDED_BY_SHOP",
 	"CANCELLED",
+	"REJECTED",
 	"COMPLETE_WITHOUT_REFUND",
 	"PREMODERATION_DISPUTE",
 	"PREMODERATION_DECISION_WAITING",
 	"PREMODERATION_DECISION_MADE",
+	"PREMODERATION_SELECT_DELIVERY",
 	"UNKNOWN",
 }
 
