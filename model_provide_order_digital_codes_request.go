@@ -108,7 +108,6 @@ func (o *ProvideOrderDigitalCodesRequest) UnmarshalJSON(data []byte) (err error)
 	varProvideOrderDigitalCodesRequest := _ProvideOrderDigitalCodesRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varProvideOrderDigitalCodesRequest)
 
 	if err != nil {

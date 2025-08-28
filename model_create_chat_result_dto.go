@@ -108,7 +108,6 @@ func (o *CreateChatResultDTO) UnmarshalJSON(data []byte) (err error) {
 	varCreateChatResultDTO := _CreateChatResultDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateChatResultDTO)
 
 	if err != nil {

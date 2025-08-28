@@ -183,7 +183,6 @@ func (o *GetPromoBestsellerInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetPromoBestsellerInfoDTO := _GetPromoBestsellerInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetPromoBestsellerInfoDTO)
 
 	if err != nil {

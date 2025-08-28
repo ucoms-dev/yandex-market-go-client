@@ -166,7 +166,6 @@ func (o *QualityRatingDTO) UnmarshalJSON(data []byte) (err error) {
 	varQualityRatingDTO := _QualityRatingDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varQualityRatingDTO)
 
 	if err != nil {

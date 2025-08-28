@@ -108,7 +108,6 @@ func (o *DeleteOffersFromArchiveRequest) UnmarshalJSON(data []byte) (err error) 
 	varDeleteOffersFromArchiveRequest := _DeleteOffersFromArchiveRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDeleteOffersFromArchiveRequest)
 
 	if err != nil {

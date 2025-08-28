@@ -183,7 +183,6 @@ func (o *DeletePromoOffersRequest) UnmarshalJSON(data []byte) (err error) {
 	varDeletePromoOffersRequest := _DeletePromoOffersRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDeletePromoOffersRequest)
 
 	if err != nil {

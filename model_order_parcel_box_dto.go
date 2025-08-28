@@ -137,7 +137,6 @@ func (o *OrderParcelBoxDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderParcelBoxDTO := _OrderParcelBoxDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderParcelBoxDTO)
 
 	if err != nil {

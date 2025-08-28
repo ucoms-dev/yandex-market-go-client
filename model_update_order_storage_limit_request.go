@@ -108,7 +108,6 @@ func (o *UpdateOrderStorageLimitRequest) UnmarshalJSON(data []byte) (err error) 
 	varUpdateOrderStorageLimitRequest := _UpdateOrderStorageLimitRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateOrderStorageLimitRequest)
 
 	if err != nil {

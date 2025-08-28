@@ -173,7 +173,6 @@ func (o *UpdateBusinessPricesDTO) UnmarshalJSON(data []byte) (err error) {
 	varUpdateBusinessPricesDTO := _UpdateBusinessPricesDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateBusinessPricesDTO)
 
 	if err != nil {

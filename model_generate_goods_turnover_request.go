@@ -145,7 +145,6 @@ func (o *GenerateGoodsTurnoverRequest) UnmarshalJSON(data []byte) (err error) {
 	varGenerateGoodsTurnoverRequest := _GenerateGoodsTurnoverRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateGoodsTurnoverRequest)
 
 	if err != nil {

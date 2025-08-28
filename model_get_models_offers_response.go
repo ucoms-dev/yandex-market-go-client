@@ -181,7 +181,6 @@ func (o *GetModelsOffersResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetModelsOffersResponse := _GetModelsOffersResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetModelsOffersResponse)
 
 	if err != nil {

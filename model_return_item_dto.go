@@ -288,7 +288,6 @@ func (o *ReturnItemDTO) UnmarshalJSON(data []byte) (err error) {
 	varReturnItemDTO := _ReturnItemDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReturnItemDTO)
 
 	if err != nil {

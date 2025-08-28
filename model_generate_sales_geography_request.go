@@ -242,7 +242,6 @@ func (o *GenerateSalesGeographyRequest) UnmarshalJSON(data []byte) (err error) {
 	varGenerateSalesGeographyRequest := _GenerateSalesGeographyRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateSalesGeographyRequest)
 
 	if err != nil {

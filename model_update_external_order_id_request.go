@@ -108,7 +108,6 @@ func (o *UpdateExternalOrderIdRequest) UnmarshalJSON(data []byte) (err error) {
 	varUpdateExternalOrderIdRequest := _UpdateExternalOrderIdRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateExternalOrderIdRequest)
 
 	if err != nil {

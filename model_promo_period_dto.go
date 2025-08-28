@@ -138,7 +138,6 @@ func (o *PromoPeriodDTO) UnmarshalJSON(data []byte) (err error) {
 	varPromoPeriodDTO := _PromoPeriodDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPromoPeriodDTO)
 
 	if err != nil {

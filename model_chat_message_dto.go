@@ -241,7 +241,6 @@ func (o *ChatMessageDTO) UnmarshalJSON(data []byte) (err error) {
 	varChatMessageDTO := _ChatMessageDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varChatMessageDTO)
 
 	if err != nil {

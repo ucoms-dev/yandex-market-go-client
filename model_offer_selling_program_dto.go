@@ -135,7 +135,6 @@ func (o *OfferSellingProgramDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferSellingProgramDTO := _OfferSellingProgramDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferSellingProgramDTO)
 
 	if err != nil {

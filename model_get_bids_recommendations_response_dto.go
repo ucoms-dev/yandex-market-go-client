@@ -108,7 +108,6 @@ func (o *GetBidsRecommendationsResponseDTO) UnmarshalJSON(data []byte) (err erro
 	varGetBidsRecommendationsResponseDTO := _GetBidsRecommendationsResponseDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetBidsRecommendationsResponseDTO)
 
 	if err != nil {

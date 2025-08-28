@@ -137,7 +137,6 @@ func (o *SetOrderDeliveryTrackCodeRequest) UnmarshalJSON(data []byte) (err error
 	varSetOrderDeliveryTrackCodeRequest := _SetOrderDeliveryTrackCodeRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSetOrderDeliveryTrackCodeRequest)
 
 	if err != nil {

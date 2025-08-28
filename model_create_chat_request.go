@@ -108,7 +108,6 @@ func (o *CreateChatRequest) UnmarshalJSON(data []byte) (err error) {
 	varCreateChatRequest := _CreateChatRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCreateChatRequest)
 
 	if err != nil {

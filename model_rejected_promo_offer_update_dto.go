@@ -136,7 +136,6 @@ func (o *RejectedPromoOfferUpdateDTO) UnmarshalJSON(data []byte) (err error) {
 	varRejectedPromoOfferUpdateDTO := _RejectedPromoOfferUpdateDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRejectedPromoOfferUpdateDTO)
 
 	if err != nil {

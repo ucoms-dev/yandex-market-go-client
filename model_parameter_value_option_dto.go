@@ -174,7 +174,6 @@ func (o *ParameterValueOptionDTO) UnmarshalJSON(data []byte) (err error) {
 	varParameterValueOptionDTO := _ParameterValueOptionDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varParameterValueOptionDTO)
 
 	if err != nil {

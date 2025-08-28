@@ -217,7 +217,6 @@ func (o *SearchModelsResponse) UnmarshalJSON(data []byte) (err error) {
 	varSearchModelsResponse := _SearchModelsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSearchModelsResponse)
 
 	if err != nil {

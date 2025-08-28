@@ -108,7 +108,6 @@ func (o *TransferOrdersFromShipmentRequest) UnmarshalJSON(data []byte) (err erro
 	varTransferOrdersFromShipmentRequest := _TransferOrdersFromShipmentRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTransferOrdersFromShipmentRequest)
 
 	if err != nil {

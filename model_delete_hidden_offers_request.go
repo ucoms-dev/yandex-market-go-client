@@ -108,7 +108,6 @@ func (o *DeleteHiddenOffersRequest) UnmarshalJSON(data []byte) (err error) {
 	varDeleteHiddenOffersRequest := _DeleteHiddenOffersRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDeleteHiddenOffersRequest)
 
 	if err != nil {

@@ -108,7 +108,6 @@ func (o *CalculateTariffsResponseDTO) UnmarshalJSON(data []byte) (err error) {
 	varCalculateTariffsResponseDTO := _CalculateTariffsResponseDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCalculateTariffsResponseDTO)
 
 	if err != nil {

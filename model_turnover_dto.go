@@ -144,7 +144,6 @@ func (o *TurnoverDTO) UnmarshalJSON(data []byte) (err error) {
 	varTurnoverDTO := _TurnoverDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTurnoverDTO)
 
 	if err != nil {

@@ -136,7 +136,6 @@ func (o *PriceQuarantineVerdictParameterDTO) UnmarshalJSON(data []byte) (err err
 	varPriceQuarantineVerdictParameterDTO := _PriceQuarantineVerdictParameterDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPriceQuarantineVerdictParameterDTO)
 
 	if err != nil {

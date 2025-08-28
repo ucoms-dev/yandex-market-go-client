@@ -194,7 +194,6 @@ func (o *GenerateShelfsStatisticsRequest) UnmarshalJSON(data []byte) (err error)
 	varGenerateShelfsStatisticsRequest := _GenerateShelfsStatisticsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateShelfsStatisticsRequest)
 
 	if err != nil {

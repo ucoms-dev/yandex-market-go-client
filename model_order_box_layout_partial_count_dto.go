@@ -137,7 +137,6 @@ func (o *OrderBoxLayoutPartialCountDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderBoxLayoutPartialCountDTO := _OrderBoxLayoutPartialCountDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderBoxLayoutPartialCountDTO)
 
 	if err != nil {

@@ -137,7 +137,6 @@ func (o *OptionValuesLimitedDTO) UnmarshalJSON(data []byte) (err error) {
 	varOptionValuesLimitedDTO := _OptionValuesLimitedDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOptionValuesLimitedDTO)
 
 	if err != nil {

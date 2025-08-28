@@ -108,7 +108,6 @@ func (o *OrderBoxesLayoutDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderBoxesLayoutDTO := _OrderBoxesLayoutDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderBoxesLayoutDTO)
 
 	if err != nil {

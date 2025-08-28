@@ -334,7 +334,6 @@ func (o *FullOutletLicenseDTO) UnmarshalJSON(data []byte) (err error) {
 	varFullOutletLicenseDTO := _FullOutletLicenseDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varFullOutletLicenseDTO)
 
 	if err != nil {

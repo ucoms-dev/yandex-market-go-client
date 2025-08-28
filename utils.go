@@ -350,9 +350,9 @@ type MappedNullable interface {
 
 // A wrapper for strict JSON decoding
 func newStrictDecoder(data []byte) *json.Decoder {
-	dec := json.NewDecoder(bytes.NewBuffer(data))
-	dec.DisallowUnknownFields()
-	return dec
+	// Relaxed decoder: do not disallow unknown fields to avoid runtime errors
+	// when the server sends additional properties not present in the models.
+	return json.NewDecoder(bytes.NewBuffer(data))
 }
 
 // Prevent trying to import "fmt"

@@ -173,7 +173,6 @@ func (o *GenerateMassOrderLabelsRequest) UnmarshalJSON(data []byte) (err error) 
 	varGenerateMassOrderLabelsRequest := _GenerateMassOrderLabelsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateMassOrderLabelsRequest)
 
 	if err != nil {

@@ -149,7 +149,6 @@ func (o *SetOrderBoxLayoutRequest) UnmarshalJSON(data []byte) (err error) {
 	varSetOrderBoxLayoutRequest := _SetOrderBoxLayoutRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSetOrderBoxLayoutRequest)
 
 	if err != nil {

@@ -175,7 +175,6 @@ func (o *BidRecommendationItemDTO) UnmarshalJSON(data []byte) (err error) {
 	varBidRecommendationItemDTO := _BidRecommendationItemDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varBidRecommendationItemDTO)
 
 	if err != nil {

@@ -108,7 +108,6 @@ func (o *ParcelRequestDTO) UnmarshalJSON(data []byte) (err error) {
 	varParcelRequestDTO := _ParcelRequestDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varParcelRequestDTO)
 
 	if err != nil {

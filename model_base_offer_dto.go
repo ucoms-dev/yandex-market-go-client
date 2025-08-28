@@ -1084,7 +1084,6 @@ func (o *BaseOfferDTO) UnmarshalJSON(data []byte) (err error) {
 	varBaseOfferDTO := _BaseOfferDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varBaseOfferDTO)
 
 	if err != nil {

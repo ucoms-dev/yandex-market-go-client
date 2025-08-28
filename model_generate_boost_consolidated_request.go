@@ -166,7 +166,6 @@ func (o *GenerateBoostConsolidatedRequest) UnmarshalJSON(data []byte) (err error
 	varGenerateBoostConsolidatedRequest := _GenerateBoostConsolidatedRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateBoostConsolidatedRequest)
 
 	if err != nil {

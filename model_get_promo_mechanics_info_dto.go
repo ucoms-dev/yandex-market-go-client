@@ -143,7 +143,6 @@ func (o *GetPromoMechanicsInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetPromoMechanicsInfoDTO := _GetPromoMechanicsInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetPromoMechanicsInfoDTO)
 
 	if err != nil {

@@ -135,7 +135,6 @@ func (o *SupplyRequestSortingDTO) UnmarshalJSON(data []byte) (err error) {
 	varSupplyRequestSortingDTO := _SupplyRequestSortingDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSupplyRequestSortingDTO)
 
 	if err != nil {

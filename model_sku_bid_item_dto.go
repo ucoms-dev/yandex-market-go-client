@@ -137,7 +137,6 @@ func (o *SkuBidItemDTO) UnmarshalJSON(data []byte) (err error) {
 	varSkuBidItemDTO := _SkuBidItemDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSkuBidItemDTO)
 
 	if err != nil {

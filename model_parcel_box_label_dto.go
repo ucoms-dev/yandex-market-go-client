@@ -476,7 +476,6 @@ func (o *ParcelBoxLabelDTO) UnmarshalJSON(data []byte) (err error) {
 	varParcelBoxLabelDTO := _ParcelBoxLabelDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varParcelBoxLabelDTO)
 
 	if err != nil {

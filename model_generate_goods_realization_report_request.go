@@ -166,7 +166,6 @@ func (o *GenerateGoodsRealizationReportRequest) UnmarshalJSON(data []byte) (err 
 	varGenerateGoodsRealizationReportRequest := _GenerateGoodsRealizationReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateGoodsRealizationReportRequest)
 
 	if err != nil {

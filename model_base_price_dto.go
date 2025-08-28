@@ -136,7 +136,6 @@ func (o *BasePriceDTO) UnmarshalJSON(data []byte) (err error) {
 	varBasePriceDTO := _BasePriceDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varBasePriceDTO)
 
 	if err != nil {

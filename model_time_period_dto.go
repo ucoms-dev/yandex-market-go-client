@@ -173,7 +173,6 @@ func (o *TimePeriodDTO) UnmarshalJSON(data []byte) (err error) {
 	varTimePeriodDTO := _TimePeriodDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTimePeriodDTO)
 
 	if err != nil {

@@ -108,7 +108,6 @@ func (o *SignatureDTO) UnmarshalJSON(data []byte) (err error) {
 	varSignatureDTO := _SignatureDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSignatureDTO)
 
 	if err != nil {

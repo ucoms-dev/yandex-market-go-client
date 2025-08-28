@@ -137,7 +137,6 @@ func (o *GetPromoPromocodeInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetPromoPromocodeInfoDTO := _GetPromoPromocodeInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetPromoPromocodeInfoDTO)
 
 	if err != nil {

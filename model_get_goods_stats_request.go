@@ -108,7 +108,6 @@ func (o *GetGoodsStatsRequest) UnmarshalJSON(data []byte) (err error) {
 	varGetGoodsStatsRequest := _GetGoodsStatsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetGoodsStatsRequest)
 
 	if err != nil {

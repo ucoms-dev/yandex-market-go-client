@@ -108,7 +108,6 @@ func (o *SkipGoodsFeedbackReactionRequest) UnmarshalJSON(data []byte) (err error
 	varSkipGoodsFeedbackReactionRequest := _SkipGoodsFeedbackReactionRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSkipGoodsFeedbackReactionRequest)
 
 	if err != nil {

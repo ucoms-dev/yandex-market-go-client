@@ -166,7 +166,6 @@ func (o *GenerateBannersStatisticsRequest) UnmarshalJSON(data []byte) (err error
 	varGenerateBannersStatisticsRequest := _GenerateBannersStatisticsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateBannersStatisticsRequest)
 
 	if err != nil {

@@ -182,7 +182,6 @@ func (o *GetCategoriesMaxSaleQuantumResponse) UnmarshalJSON(data []byte) (err er
 	varGetCategoriesMaxSaleQuantumResponse := _GetCategoriesMaxSaleQuantumResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetCategoriesMaxSaleQuantumResponse)
 
 	if err != nil {

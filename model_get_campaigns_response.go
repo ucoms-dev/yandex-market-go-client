@@ -144,7 +144,6 @@ func (o *GetCampaignsResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetCampaignsResponse := _GetCampaignsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetCampaignsResponse)
 
 	if err != nil {

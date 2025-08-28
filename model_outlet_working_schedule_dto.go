@@ -145,7 +145,6 @@ func (o *OutletWorkingScheduleDTO) UnmarshalJSON(data []byte) (err error) {
 	varOutletWorkingScheduleDTO := _OutletWorkingScheduleDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOutletWorkingScheduleDTO)
 
 	if err != nil {

@@ -145,7 +145,6 @@ func (o *PromoOfferUpdateWarningDTO) UnmarshalJSON(data []byte) (err error) {
 	varPromoOfferUpdateWarningDTO := _PromoOfferUpdateWarningDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPromoOfferUpdateWarningDTO)
 
 	if err != nil {

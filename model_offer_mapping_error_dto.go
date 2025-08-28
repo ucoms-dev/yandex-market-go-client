@@ -173,7 +173,6 @@ func (o *OfferMappingErrorDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferMappingErrorDTO := _OfferMappingErrorDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferMappingErrorDTO)
 
 	if err != nil {

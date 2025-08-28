@@ -137,7 +137,6 @@ func (o *TariffParameterDTO) UnmarshalJSON(data []byte) (err error) {
 	varTariffParameterDTO := _TariffParameterDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varTariffParameterDTO)
 
 	if err != nil {

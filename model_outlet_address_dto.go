@@ -408,7 +408,6 @@ func (o *OutletAddressDTO) UnmarshalJSON(data []byte) (err error) {
 	varOutletAddressDTO := _OutletAddressDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOutletAddressDTO)
 
 	if err != nil {

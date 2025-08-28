@@ -136,7 +136,6 @@ func (o *AgeDTO) UnmarshalJSON(data []byte) (err error) {
 	varAgeDTO := _AgeDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAgeDTO)
 
 	if err != nil {

@@ -108,7 +108,6 @@ func (o *ModelsDTO) UnmarshalJSON(data []byte) (err error) {
 	varModelsDTO := _ModelsDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varModelsDTO)
 
 	if err != nil {

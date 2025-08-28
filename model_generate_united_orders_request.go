@@ -241,7 +241,6 @@ func (o *GenerateUnitedOrdersRequest) UnmarshalJSON(data []byte) (err error) {
 	varGenerateUnitedOrdersRequest := _GenerateUnitedOrdersRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateUnitedOrdersRequest)
 
 	if err != nil {

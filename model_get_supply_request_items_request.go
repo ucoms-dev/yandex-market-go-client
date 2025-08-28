@@ -108,7 +108,6 @@ func (o *GetSupplyRequestItemsRequest) UnmarshalJSON(data []byte) (err error) {
 	varGetSupplyRequestItemsRequest := _GetSupplyRequestItemsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetSupplyRequestItemsRequest)
 
 	if err != nil {

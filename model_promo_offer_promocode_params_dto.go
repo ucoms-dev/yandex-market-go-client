@@ -108,7 +108,6 @@ func (o *PromoOfferPromocodeParamsDTO) UnmarshalJSON(data []byte) (err error) {
 	varPromoOfferPromocodeParamsDTO := _PromoOfferPromocodeParamsDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPromoOfferPromocodeParamsDTO)
 
 	if err != nil {

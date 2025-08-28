@@ -278,7 +278,6 @@ func (o *GenerateUnitedReturnsRequest) UnmarshalJSON(data []byte) (err error) {
 	varGenerateUnitedReturnsRequest := _GenerateUnitedReturnsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateUnitedReturnsRequest)
 
 	if err != nil {

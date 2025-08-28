@@ -108,7 +108,6 @@ func (o *ProvideOrderItemIdentifiersRequest) UnmarshalJSON(data []byte) (err err
 	varProvideOrderItemIdentifiersRequest := _ProvideOrderItemIdentifiersRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varProvideOrderItemIdentifiersRequest)
 
 	if err != nil {

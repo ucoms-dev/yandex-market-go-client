@@ -137,7 +137,6 @@ func (o *GpsDTO) UnmarshalJSON(data []byte) (err error) {
 	varGpsDTO := _GpsDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGpsDTO)
 
 	if err != nil {

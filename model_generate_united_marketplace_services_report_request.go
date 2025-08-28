@@ -527,7 +527,6 @@ func (o *GenerateUnitedMarketplaceServicesReportRequest) UnmarshalJSON(data []by
 	varGenerateUnitedMarketplaceServicesReportRequest := _GenerateUnitedMarketplaceServicesReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateUnitedMarketplaceServicesReportRequest)
 
 	if err != nil {

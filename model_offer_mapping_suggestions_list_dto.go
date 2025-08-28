@@ -108,7 +108,6 @@ func (o *OfferMappingSuggestionsListDTO) UnmarshalJSON(data []byte) (err error) 
 	varOfferMappingSuggestionsListDTO := _OfferMappingSuggestionsListDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferMappingSuggestionsListDTO)
 
 	if err != nil {

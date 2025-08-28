@@ -136,7 +136,6 @@ func (o *SupplyRequestLocationAddressDTO) UnmarshalJSON(data []byte) (err error)
 	varSupplyRequestLocationAddressDTO := _SupplyRequestLocationAddressDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSupplyRequestLocationAddressDTO)
 
 	if err != nil {

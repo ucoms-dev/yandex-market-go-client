@@ -137,7 +137,6 @@ func (o *CategoryParameterUnitDTO) UnmarshalJSON(data []byte) (err error) {
 	varCategoryParameterUnitDTO := _CategoryParameterUnitDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCategoryParameterUnitDTO)
 
 	if err != nil {

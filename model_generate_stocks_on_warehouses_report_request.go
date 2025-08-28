@@ -258,7 +258,6 @@ func (o *GenerateStocksOnWarehousesReportRequest) UnmarshalJSON(data []byte) (er
 	varGenerateStocksOnWarehousesReportRequest := _GenerateStocksOnWarehousesReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateStocksOnWarehousesReportRequest)
 
 	if err != nil {

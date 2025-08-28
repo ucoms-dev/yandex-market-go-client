@@ -136,7 +136,6 @@ func (o *UinDTO) UnmarshalJSON(data []byte) (err error) {
 	varUinDTO := _UinDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUinDTO)
 
 	if err != nil {

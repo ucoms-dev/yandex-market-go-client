@@ -143,7 +143,6 @@ func (o *GetTokenInfoResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetTokenInfoResponse := _GetTokenInfoResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetTokenInfoResponse)
 
 	if err != nil {

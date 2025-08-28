@@ -108,7 +108,6 @@ func (o *ConfirmPricesRequest) UnmarshalJSON(data []byte) (err error) {
 	varConfirmPricesRequest := _ConfirmPricesRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varConfirmPricesRequest)
 
 	if err != nil {

@@ -144,7 +144,6 @@ func (o *AcceptOrderCancellationRequest) UnmarshalJSON(data []byte) (err error) 
 	varAcceptOrderCancellationRequest := _AcceptOrderCancellationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAcceptOrderCancellationRequest)
 
 	if err != nil {

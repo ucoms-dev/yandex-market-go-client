@@ -136,7 +136,6 @@ func (o *CurrencyValueDTO) UnmarshalJSON(data []byte) (err error) {
 	varCurrencyValueDTO := _CurrencyValueDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCurrencyValueDTO)
 
 	if err != nil {

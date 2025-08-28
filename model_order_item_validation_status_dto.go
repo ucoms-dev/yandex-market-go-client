@@ -137,7 +137,6 @@ func (o *OrderItemValidationStatusDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderItemValidationStatusDTO := _OrderItemValidationStatusDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderItemValidationStatusDTO)
 
 	if err != nil {

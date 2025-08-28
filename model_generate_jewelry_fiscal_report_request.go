@@ -166,7 +166,6 @@ func (o *GenerateJewelryFiscalReportRequest) UnmarshalJSON(data []byte) (err err
 	varGenerateJewelryFiscalReportRequest := _GenerateJewelryFiscalReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateJewelryFiscalReportRequest)
 
 	if err != nil {

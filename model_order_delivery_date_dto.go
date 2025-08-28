@@ -108,7 +108,6 @@ func (o *OrderDeliveryDateDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderDeliveryDateDTO := _OrderDeliveryDateDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderDeliveryDateDTO)
 
 	if err != nil {

@@ -195,7 +195,6 @@ func (o *GenerateCompetitorsPositionReportRequest) UnmarshalJSON(data []byte) (e
 	varGenerateCompetitorsPositionReportRequest := _GenerateCompetitorsPositionReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateCompetitorsPositionReportRequest)
 
 	if err != nil {

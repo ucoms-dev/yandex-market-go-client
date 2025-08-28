@@ -284,7 +284,6 @@ func (o *ReportInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varReportInfoDTO := _ReportInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReportInfoDTO)
 
 	if err != nil {

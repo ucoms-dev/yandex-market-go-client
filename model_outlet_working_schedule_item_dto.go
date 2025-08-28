@@ -193,7 +193,6 @@ func (o *OutletWorkingScheduleItemDTO) UnmarshalJSON(data []byte) (err error) {
 	varOutletWorkingScheduleItemDTO := _OutletWorkingScheduleItemDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOutletWorkingScheduleItemDTO)
 
 	if err != nil {

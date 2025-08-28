@@ -443,7 +443,6 @@ func (o *OutletDTO) UnmarshalJSON(data []byte) (err error) {
 	varOutletDTO := _OutletDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOutletDTO)
 
 	if err != nil {

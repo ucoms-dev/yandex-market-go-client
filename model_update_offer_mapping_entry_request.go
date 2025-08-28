@@ -108,7 +108,6 @@ func (o *UpdateOfferMappingEntryRequest) UnmarshalJSON(data []byte) (err error) 
 	varUpdateOfferMappingEntryRequest := _UpdateOfferMappingEntryRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateOfferMappingEntryRequest)
 
 	if err != nil {

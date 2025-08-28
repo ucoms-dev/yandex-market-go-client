@@ -261,7 +261,6 @@ func (o *OutletLicenseDTO) UnmarshalJSON(data []byte) (err error) {
 	varOutletLicenseDTO := _OutletLicenseDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOutletLicenseDTO)
 
 	if err != nil {

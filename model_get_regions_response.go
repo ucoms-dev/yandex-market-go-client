@@ -144,7 +144,6 @@ func (o *GetRegionsResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetRegionsResponse := _GetRegionsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetRegionsResponse)
 
 	if err != nil {

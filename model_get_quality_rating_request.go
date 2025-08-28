@@ -182,7 +182,6 @@ func (o *GetQualityRatingRequest) UnmarshalJSON(data []byte) (err error) {
 	varGetQualityRatingRequest := _GetQualityRatingRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetQualityRatingRequest)
 
 	if err != nil {

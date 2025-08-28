@@ -183,7 +183,6 @@ func (o *GenerateShipmentListDocumentReportRequest) UnmarshalJSON(data []byte) (
 	varGenerateShipmentListDocumentReportRequest := _GenerateShipmentListDocumentReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateShipmentListDocumentReportRequest)
 
 	if err != nil {

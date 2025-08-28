@@ -144,7 +144,6 @@ func (o *OfferCardsContentStatusDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferCardsContentStatusDTO := _OfferCardsContentStatusDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferCardsContentStatusDTO)
 
 	if err != nil {

@@ -144,7 +144,6 @@ func (o *PagedReturnsDTO) UnmarshalJSON(data []byte) (err error) {
 	varPagedReturnsDTO := _PagedReturnsDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPagedReturnsDTO)
 
 	if err != nil {

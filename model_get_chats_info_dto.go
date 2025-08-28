@@ -144,7 +144,6 @@ func (o *GetChatsInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetChatsInfoDTO := _GetChatsInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetChatsInfoDTO)
 
 	if err != nil {

@@ -166,7 +166,6 @@ func (o *GetPriceDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetPriceDTO := _GetPriceDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetPriceDTO)
 
 	if err != nil {
