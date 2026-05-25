@@ -151,6 +151,17 @@ jobs:
           fi
           echo "notes_file=${notes_file}" >> "$GITHUB_OUTPUT"
 
+      - name: Import GPG key for signed commits/tags
+        id: import_gpg
+        if: secrets.CI_GPG_PRIVATE_KEY != ''
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.CI_GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.CI_GPG_PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+          git_tag_gpgsign: true
+
       - name: Commit regenerated client
         id: publish
         run: |
@@ -160,14 +171,23 @@ jobs:
             exit 0
           fi
 
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [[ "${{ steps.import_gpg.outcome }}" == "success" ]]; then
+            git config user.name "${{ steps.import_gpg.outputs.name }}"
+            git config user.email "${{ steps.import_gpg.outputs.email }}"
+          else
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          fi
 
           git add -A
           git commit \
             -m "chore: regenerate Go client (${{ steps.version.outputs.tag_version }})" \
             -m "$(cat "${{ steps.relnotes.outputs.notes_file }}")"
-          git tag -a "${{ steps.version.outputs.tag_version }}" -F "${{ steps.relnotes.outputs.notes_file }}"
+          if [[ "${{ steps.import_gpg.outcome }}" == "success" ]]; then
+            git tag -s "${{ steps.version.outputs.tag_version }}" -F "${{ steps.relnotes.outputs.notes_file }}"
+          else
+            git tag -a "${{ steps.version.outputs.tag_version }}" -F "${{ steps.relnotes.outputs.notes_file }}"
+          fi
           git push
           git push origin "${{ steps.version.outputs.tag_version }}"
           echo "created=true" >> "$GITHUB_OUTPUT"
