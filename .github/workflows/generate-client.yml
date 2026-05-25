@@ -35,6 +35,39 @@ jobs:
         with:
           go-version-file: go.mod
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+
+      - name: Install Codex CLI
+        run: npm install -g @openai/codex
+
+      - name: Authenticate Codex (ChatGPT)
+        id: codex_auth
+        continue-on-error: true
+        env:
+          CODEX_AUTH_JSON: ${{ secrets.CODEX_AUTH_JSON }}
+          CODEX_ACCESS_TOKEN: ${{ secrets.CODEX_ACCESS_TOKEN }}
+        run: |
+          mkdir -p "$HOME/.codex"
+
+          if [ -n "${CODEX_AUTH_JSON}" ]; then
+            printf '%s' "${CODEX_AUTH_JSON}" > "$HOME/.codex/auth.json"
+            chmod 600 "$HOME/.codex/auth.json"
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ -n "${CODEX_ACCESS_TOKEN}" ]; then
+            printf '%s' "${CODEX_ACCESS_TOKEN}" | codex login --with-access-token
+            echo "enabled=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          echo "No CODEX_AUTH_JSON/CODEX_ACCESS_TOKEN provided; AI changelog will use fallback text."
+          echo "enabled=false" >> "$GITHUB_OUTPUT"
+
       - name: Calculate next version
         id: version
         run: |
@@ -71,10 +104,59 @@ jobs:
       - name: Verify generated code
         run: bash ./scripts/verify.sh
 
+      - name: Build release notes context
+        id: relnotes_ctx
+        run: |
+          tmp_context="$(mktemp)"
+          {
+            echo "Generated SDK diff shortstat:"
+            git diff --shortstat || true
+            echo
+            echo "Changed files (name-status):"
+            git diff --name-status || true
+            echo
+            echo "Patch sample (first 1200 lines):"
+            git diff --unified=0 | sed -n '1,1200p'
+          } > "${tmp_context}"
+          echo "context_file=${tmp_context}" >> "$GITHUB_OUTPUT"
+
+      - name: Generate AI changelog for commit/tag/release
+        id: relnotes_ai
+        if: steps.codex_auth.outputs.enabled == 'true'
+        continue-on-error: true
+        run: |
+          notes_file="$(mktemp)"
+          codex_prompt=$'You are preparing release notes for a Go SDK release.\nTask:\n- Read only provided diff context.\n- Output concise Markdown in Russian.\n- Format: one short summary paragraph + 4-10 bullet points.\n- Include a bullet starting with "Риски:" about backward compatibility.\n- Mention uncertainty explicitly where context is insufficient.\n- No headings, no extra text.'
+          cat "${{ steps.relnotes_ctx.outputs.context_file }}" | codex exec -o "${notes_file}" "${codex_prompt}"
+
+          if [ ! -s "${notes_file}" ]; then
+            exit 1
+          fi
+
+          echo "notes_file=${notes_file}" >> "$GITHUB_OUTPUT"
+
+      - name: Prepare release notes fallback
+        id: relnotes
+        run: |
+          notes_file="$(mktemp)"
+          if [ -n "${{ steps.relnotes_ai.outputs.notes_file }}" ] && [ -s "${{ steps.relnotes_ai.outputs.notes_file }}" ]; then
+            cp "${{ steps.relnotes_ai.outputs.notes_file }}" "${notes_file}"
+          else
+            {
+              echo "Автоматическое обновление Go-клиента по актуальной OpenAPI спецификации."
+              echo
+              echo "- AI changelog недоступен (нет auth или ошибка генерации)."
+              echo "- Подробности изменений смотрите в diff этого релиза."
+            } > "${notes_file}"
+          fi
+          echo "notes_file=${notes_file}" >> "$GITHUB_OUTPUT"
+
       - name: Commit regenerated client
+        id: publish
         run: |
           if git diff --quiet; then
             echo "No generated changes."
+            echo "created=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
@@ -82,7 +164,19 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add -A
-          git commit -m "chore: regenerate Go client (${{ steps.version.outputs.tag_version }})"
-          git tag "${{ steps.version.outputs.tag_version }}"
+          git commit \
+            -m "chore: regenerate Go client (${{ steps.version.outputs.tag_version }})" \
+            -m "$(cat "${{ steps.relnotes.outputs.notes_file }}")"
+          git tag -a "${{ steps.version.outputs.tag_version }}" -F "${{ steps.relnotes.outputs.notes_file }}"
           git push
           git push origin "${{ steps.version.outputs.tag_version }}"
+          echo "created=true" >> "$GITHUB_OUTPUT"
+
+      - name: Create GitHub release
+        if: steps.publish.outputs.created == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ steps.version.outputs.tag_version }}" \
+            --notes-file "${{ steps.relnotes.outputs.notes_file }}" \
+            --title "${{ steps.version.outputs.tag_version }}"
