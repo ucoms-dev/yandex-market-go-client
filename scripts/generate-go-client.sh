@@ -136,6 +136,16 @@ fi
 
 "${cmd[@]}"
 
+# openapi-generator v7.13.0 may emit invalid code for these nullable enums:
+# v.value has a non-pointer type, but Unset() assigns nil.
+if [[ -f "${ROOT_DIR}/model_channel_type.go" ]]; then
+  perl -0777 -i -pe 's@func \(v \*NullableChannelType\) Unset\(\) \{\n\tv\.value = nil\n\tv\.isSet = false\n\}@func (v *NullableChannelType) Unset() {\n\tvar zero ChannelType\n\tv.value = zero\n\tv.isSet = false\n}@g' "${ROOT_DIR}/model_channel_type.go"
+fi
+
+if [[ -f "${ROOT_DIR}/model_report_language_type.go" ]]; then
+  perl -0777 -i -pe 's@func \(v \*NullableReportLanguageType\) Unset\(\) \{\n\tv\.value = nil\n\tv\.isSet = false\n\}@func (v *NullableReportLanguageType) Unset() {\n\tvar zero ReportLanguageType\n\tv.value = zero\n\tv.isSet = false\n}@g' "${ROOT_DIR}/model_report_language_type.go"
+fi
+
 go mod tidy >/dev/null
 go fmt ./... >/dev/null
 
