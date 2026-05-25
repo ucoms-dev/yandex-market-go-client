@@ -11,6 +11,7 @@ local_spec_dir_rel="$(read_config_value local_dir)"
 out_dir_rel="$(read_config_value output_dir)"
 package_name="$(read_config_value package_name)"
 package_version="$(read_config_value package_version)"
+template_dir="$(read_config_value template_dir)"
 struct_prefix="$(read_config_value struct_prefix)"
 enum_class_prefix="$(read_config_value enum_class_prefix)"
 skip_validate_spec_default="$(read_config_value skip_validate_spec)"
@@ -102,6 +103,7 @@ cleanup_generated_files() {
 
 spec_for_generator="$(generator_path "${spec_rel}")"
 out_dir_for_generator="$(generator_path "${out_dir_rel}")"
+template_dir_for_generator="$(generator_path "${template_dir}")"
 
 if [[ "${skip_validate_spec}" != "true" ]]; then
   echo "Validating OpenAPI spec ${spec_rel}"
@@ -120,6 +122,7 @@ cmd=(
   -i "${spec_for_generator}"
   -g "${language}"
   -o "${out_dir_for_generator}"
+  -t "${template_dir_for_generator}"
   --git-user-id "${git_user_id}"
   --git-repo-id "${git_repo_id}"
   --global-property "${global_properties}"
@@ -135,16 +138,6 @@ if [[ "${skip_validate_spec}" == "true" ]]; then
 fi
 
 "${cmd[@]}"
-
-# openapi-generator v7.13.0 may emit invalid code for these nullable enums:
-# v.value has a non-pointer type, but Unset() assigns nil.
-if [[ -f "${ROOT_DIR}/model_channel_type.go" ]]; then
-  perl -0777 -i -pe 's@func \(v \*NullableChannelType\) Unset\(\) \{\n\tv\.value = nil\n\tv\.isSet = false\n\}@func (v *NullableChannelType) Unset() {\n\tvar zero ChannelType\n\tv.value = zero\n\tv.isSet = false\n}@g' "${ROOT_DIR}/model_channel_type.go"
-fi
-
-if [[ -f "${ROOT_DIR}/model_report_language_type.go" ]]; then
-  perl -0777 -i -pe 's@func \(v \*NullableReportLanguageType\) Unset\(\) \{\n\tv\.value = nil\n\tv\.isSet = false\n\}@func (v *NullableReportLanguageType) Unset() {\n\tvar zero ReportLanguageType\n\tv.value = zero\n\tv.isSet = false\n}@g' "${ROOT_DIR}/model_report_language_type.go"
-fi
 
 go mod tidy >/dev/null
 go fmt ./... >/dev/null
