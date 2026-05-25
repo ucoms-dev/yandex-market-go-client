@@ -1,0 +1,58 @@
+name: Generate Go client
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - api/**
+      - generation.yaml
+      - openapitools.json
+      - .openapi-generator-ignore
+      - scripts/sync-spec.sh
+      - scripts/generate-go-client.sh
+      - scripts/lib-config.sh
+      - scripts/check-duplicates.sh
+      - scripts/verify.sh
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-actions[bot]'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version-file: go.mod
+
+      - name: Generate client
+        env:
+          OPENAPI_GENERATOR_DOCKER: "1"
+        run: bash ./scripts/generate-go-client.sh
+
+      - name: Verify generated code
+        run: bash ./scripts/verify.sh
+
+      - name: Commit regenerated client
+        run: |
+          if git diff --quiet; then
+            echo "No generated changes."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add -A
+          git commit -m "chore: regenerate Go client"
+          git push

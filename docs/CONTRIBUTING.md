@@ -1,35 +1,62 @@
 # Contributing
 
+## Source of truth
+
+The client is generated from OpenAPI. Do not hand-edit generated API/model files.
+
+- Spec source config: `generation.yaml`
+- Local spec tree: `api/` (`openapi.yaml`, `paths/`, `components/`)
+- OpenAPI generator version pin: `openapitools.json`
+
+## Update and regenerate flow
+
+Use the same sequence locally that CI uses:
+
+```bash
+bash ./scripts/sync-spec.sh
+bash ./scripts/generate-go-client.sh
+bash ./scripts/verify.sh
+```
+
+- `sync-spec.sh` syncs the full upstream OpenAPI tree into `api/`.
+- `generate-go-client.sh` validates spec refs and regenerates the Go client.
+- `verify.sh` runs duplicate-type detection and `go build ./...`.
+
+Spec validation is enabled by default. For emergency local debugging only:
+
+```bash
+SKIP_SPEC_VALIDATE=true bash ./scripts/generate-go-client.sh
+```
+
 ## Duplicate Structs/Types
 
-This client is generated via OpenAPI Generator, which creates:
-- Model files: `model_*.go` (canonical request/response DTOs)
-- API service files: `api_*.go` (service methods and per-endpoint request builder structs)
+This generator creates two families of types:
 
-Per-service request builder structs with similar purposes (e.g., `FbsAddOffersToArchiveRequest`, `FbyAddOffersToArchiveRequest`) are not duplicates — they are service-specific builders that reference a single model type (e.g., `AddOffersToArchiveRequest`).
+- `model_*.go`: canonical DTOs generated from OpenAPI schemas.
+- `api_*.go`: API services and request-builder structs.
 
-### How to check for actual duplicates
+Request-builder structs with similar naming across services (for example,
+`FbsAddOffersToArchiveRequest` and `FbyAddOffersToArchiveRequest`) are expected
+and are not duplicates.
 
-- Duplicate struct/type names across the package (would fail build):
-  ```bash
-  rg -n "^type\s+([A-Za-z0-9_]+)\s+struct\b" \
-    | sed -E 's/^.*type\s+([A-Za-z0-9_]+)\s+struct.*/\1/' \
-    | sort | uniq -d
-  ```
+### How duplicates are checked
 
-- Build verification:
-  ```bash
-  go build ./...
-  ```
+Use the maintained check:
 
-### If a duplicate is introduced
+```bash
+bash ./scripts/check-duplicates.sh
+```
 
-1. Keep the canonical definition in `model_*.go` when it represents a schema from OpenAPI components.
-2. Remove any accidental duplicate struct with the same name from `api/*.go` or other files.
-3. Update references/imports to use the canonical type.
-4. Re-run `go build` to ensure no conflicts remain.
+If a real duplicate appears, keep the canonical model type and remove the
+accidental redeclaration.
 
-### Note on API field drift
+## CI automation
 
-If runtime JSON errors like `json: unknown field "logisticPointId"` appear, the server schema likely changed. Regenerate the client from the updated OpenAPI spec (or add the missing field to the relevant model) rather than duplicating types.
-
+- `update-spec` workflow (daily + manual): updates spec and opens/updates a PR.
+- `update-spec` optionally generates `CHANGELOG.md` via `openai codex` headless (`codex exec`).
+- Codex auth for CI uses ChatGPT login data only (no API key flow).
+- Set `CODEX_AUTH_JSON` secret to full contents of `~/.codex/auth.json` from a machine where `codex login` was done with ChatGPT.
+- `CODEX_ACCESS_TOKEN` secret is supported as fallback for `codex login --with-access-token`.
+- If no `CODEX_AUTH_JSON` or `CODEX_ACCESS_TOKEN` is configured, spec update still runs and PR is created without AI changelog.
+- `generate-client` workflow (push to `main` + manual): regenerates client,
+  verifies, and commits generated changes back to `main` when needed.

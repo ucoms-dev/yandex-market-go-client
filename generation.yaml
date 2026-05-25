@@ -1,0 +1,20 @@
+config_version: 0.1
+
+spec:
+  upstream_repo: https://github.com/yandex-market/yandex-market-partner-api.git
+  upstream_ref: main
+  upstream_dir: openapi
+  local_dir: api
+  local_path: api/openapi.yaml
+
+generator:
+  generator_version: 7.13.0
+  language: go
+  output_dir: .
+  package_name: openapi
+  package_version: 1.0.0
+  struct_prefix: true
+  enum_class_prefix: true
+  skip_validate_spec: false
+  minimal_update: true
+  global_properties: apiTests=false,modelTests=false
