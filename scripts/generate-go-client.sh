@@ -10,7 +10,7 @@ spec_rel="$(read_config_value local_path)"
 local_spec_dir_rel="$(read_config_value local_dir)"
 out_dir_rel="$(read_config_value output_dir)"
 package_name="$(read_config_value package_name)"
-package_version="$(read_config_value package_version)"
+package_version_default="$(read_config_value package_version)"
 template_dir="$(read_config_value template_dir)"
 struct_prefix="$(read_config_value struct_prefix)"
 enum_class_prefix="$(read_config_value enum_class_prefix)"
@@ -20,6 +20,7 @@ global_properties="$(read_config_value global_properties)"
 
 # Allow explicit runtime override. CI should keep validation enabled.
 skip_validate_spec="${SKIP_SPEC_VALIDATE:-${skip_validate_spec_default}}"
+package_version="${PACKAGE_VERSION:-${package_version_default}}"
 
 spec_path="${ROOT_DIR}/${spec_rel}"
 if [[ ! -f "${spec_path}" ]]; then

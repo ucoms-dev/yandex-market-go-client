@@ -35,9 +35,37 @@ jobs:
         with:
           go-version-file: go.mod
 
+      - name: Calculate next version
+        id: version
+        run: |
+          latest_tag="$(git tag -l 'v*' --sort=-version:refname | head -n1)"
+          if [[ -z "${latest_tag}" ]]; then
+            next_version="1.0.0"
+          elif [[ "${latest_tag}" =~ ^v([0-9]+)\.([0-9]+)\.([0-9]+)$ ]]; then
+            major="${BASH_REMATCH[1]}"
+            minor="${BASH_REMATCH[2]}"
+            patch="${BASH_REMATCH[3]}"
+            next_patch=$((patch + 1))
+            next_version="${major}.${minor}.${next_patch}"
+          else
+            echo "Error: latest semver tag does not match vX.Y.Z: ${latest_tag}" >&2
+            exit 1
+          fi
+
+          next_tag="v${next_version}"
+          if git rev-parse -q --verify "refs/tags/${next_tag}" >/dev/null; then
+            echo "Error: tag already exists: ${next_tag}" >&2
+            exit 1
+          fi
+
+          echo "package_version=${next_version}" >> "$GITHUB_OUTPUT"
+          echo "tag_version=${next_tag}" >> "$GITHUB_OUTPUT"
+          echo "Calculated package version: ${next_version}"
+
       - name: Generate client
         env:
           OPENAPI_GENERATOR_DOCKER: "1"
+          PACKAGE_VERSION: ${{ steps.version.outputs.package_version }}
         run: bash ./scripts/generate-go-client.sh
 
       - name: Verify generated code
@@ -54,5 +82,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
           git add -A
-          git commit -m "chore: regenerate Go client"
+          git commit -m "chore: regenerate Go client (${{ steps.version.outputs.tag_version }})"
+          git tag "${{ steps.version.outputs.tag_version }}"
           git push
+          git push origin "${{ steps.version.outputs.tag_version }}"

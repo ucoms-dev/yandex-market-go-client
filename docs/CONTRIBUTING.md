@@ -60,3 +60,8 @@ accidental redeclaration.
 - If no `CODEX_AUTH_JSON` or `CODEX_ACCESS_TOKEN` is configured, spec update still runs and PR is created without AI changelog.
 - `generate-client` workflow (push to `main` + manual): regenerates client,
   verifies, and commits generated changes back to `main` when needed.
+- Release versioning is automated in `generate-client`:
+  - Source of truth is git tags in `vX.Y.Z` format.
+  - CI computes the next patch (`v1.0.9` -> `v1.0.10`) and passes it as `PACKAGE_VERSION` into generation.
+  - If generated files changed, CI commits them and pushes the matching tag.
+  - If there are no generated changes, no commit and no tag are created.
