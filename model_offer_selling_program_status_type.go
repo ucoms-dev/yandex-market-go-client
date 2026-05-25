@@ -20,8 +20,8 @@ type OfferSellingProgramStatusType string
 
 // List of OfferSellingProgramStatusType
 const (
-	OfferSellingProgramStatusType_FINE   OfferSellingProgramStatusType = "FINE"
-	OfferSellingProgramStatusType_REJECT OfferSellingProgramStatusType = "REJECT"
+	OFFERSELLINGPROGRAMSTATUSTYPE_FINE   OfferSellingProgramStatusType = "FINE"
+	OFFERSELLINGPROGRAMSTATUSTYPE_REJECT OfferSellingProgramStatusType = "REJECT"
 )
 
 // All allowed values of OfferSellingProgramStatusType enum

@@ -108,6 +108,7 @@ func (o *UpdateExternalOrderIdRequest) UnmarshalJSON(data []byte) (err error) {
 	varUpdateExternalOrderIdRequest := _UpdateExternalOrderIdRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateExternalOrderIdRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableUpdateExternalOrderIdRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateExternalOrderIdRequest) Unset() {
-	v.value = nil
+	var zero *UpdateExternalOrderIdRequest
+	v.value = zero
 	v.isSet = false
 }
 

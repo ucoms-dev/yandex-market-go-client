@@ -180,6 +180,7 @@ func (o *GetOutletsResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetOutletsResponse := _GetOutletsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetOutletsResponse)
 
 	if err != nil {
@@ -210,7 +211,8 @@ func (v NullableGetOutletsResponse) IsSet() bool {
 }
 
 func (v *NullableGetOutletsResponse) Unset() {
-	v.value = nil
+	var zero *GetOutletsResponse
+	v.value = zero
 	v.isSet = false
 }
 

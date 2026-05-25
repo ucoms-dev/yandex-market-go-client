@@ -20,7 +20,7 @@ type RejectedPromoOfferDeleteReasonType string
 
 // List of RejectedPromoOfferDeleteReasonType
 const (
-	RejectedPromoOfferDeleteReasonType_OFFER_DOES_NOT_EXIST RejectedPromoOfferDeleteReasonType = "OFFER_DOES_NOT_EXIST"
+	REJECTEDPROMOOFFERDELETEREASONTYPE_OFFER_DOES_NOT_EXIST RejectedPromoOfferDeleteReasonType = "OFFER_DOES_NOT_EXIST"
 )
 
 // All allowed values of RejectedPromoOfferDeleteReasonType enum

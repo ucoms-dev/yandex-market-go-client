@@ -108,7 +108,8 @@ func (v NullableGetBidsInfoRequest) IsSet() bool {
 }
 
 func (v *NullableGetBidsInfoRequest) Unset() {
-	v.value = nil
+	var zero *GetBidsInfoRequest
+	v.value = zero
 	v.isSet = false
 }
 

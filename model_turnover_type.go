@@ -20,12 +20,12 @@ type TurnoverType string
 
 // List of TurnoverType
 const (
-	TurnoverType_LOW        TurnoverType = "LOW"
-	TurnoverType_ALMOST_LOW TurnoverType = "ALMOST_LOW"
-	TurnoverType_HIGH       TurnoverType = "HIGH"
-	TurnoverType_VERY_HIGH  TurnoverType = "VERY_HIGH"
-	TurnoverType_NO_SALES   TurnoverType = "NO_SALES"
-	TurnoverType_FREE_STORE TurnoverType = "FREE_STORE"
+	TURNOVERTYPE_LOW        TurnoverType = "LOW"
+	TURNOVERTYPE_ALMOST_LOW TurnoverType = "ALMOST_LOW"
+	TURNOVERTYPE_HIGH       TurnoverType = "HIGH"
+	TURNOVERTYPE_VERY_HIGH  TurnoverType = "VERY_HIGH"
+	TURNOVERTYPE_NO_SALES   TurnoverType = "NO_SALES"
+	TURNOVERTYPE_FREE_STORE TurnoverType = "FREE_STORE"
 )
 
 // All allowed values of TurnoverType enum

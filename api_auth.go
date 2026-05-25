@@ -21,12 +21,12 @@ import (
 // AuthAPIService AuthAPI service
 type AuthAPIService service
 
-type AuthApiGetAuthTokenInfoRequest struct {
+type AuthAPIGetAuthTokenInfoRequest struct {
 	ctx        context.Context
 	ApiService *AuthAPIService
 }
 
-func (r AuthApiGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+func (r AuthAPIGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
 	return r.ApiService.GetAuthTokenInfoExecute(r)
 }
 
@@ -37,6 +37,8 @@ GetAuthTokenInfo Получение информации об авторизац
 
 {% note info "Метод доступен только для Api-Key-токена." %}
 
+
+
 {% endnote %}
 
 Возвращает информацию о переданном авторизационном токене.
@@ -44,20 +46,20 @@ GetAuthTokenInfo Получение информации об авторизац
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return AuthApiGetAuthTokenInfoRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return AuthAPIGetAuthTokenInfoRequest
 */
-func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) AuthApiGetAuthTokenInfoRequest {
-	return AuthApiGetAuthTokenInfoRequest{
+func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) AuthAPIGetAuthTokenInfoRequest {
+	return AuthAPIGetAuthTokenInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetTokenInfoResponse
-func (a *AuthAPIService) GetAuthTokenInfoExecute(r AuthApiGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+//  @return GetTokenInfoResponse
+func (a *AuthAPIService) GetAuthTokenInfoExecute(r AuthAPIGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

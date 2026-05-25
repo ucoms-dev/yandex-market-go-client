@@ -20,10 +20,10 @@ type ChatMessageSenderType string
 
 // List of ChatMessageSenderType
 const (
-	ChatMessageSenderType_PARTNER  ChatMessageSenderType = "PARTNER"
-	ChatMessageSenderType_CUSTOMER ChatMessageSenderType = "CUSTOMER"
-	ChatMessageSenderType_MARKET   ChatMessageSenderType = "MARKET"
-	ChatMessageSenderType_SUPPORT  ChatMessageSenderType = "SUPPORT"
+	CHATMESSAGESENDERTYPE_PARTNER  ChatMessageSenderType = "PARTNER"
+	CHATMESSAGESENDERTYPE_CUSTOMER ChatMessageSenderType = "CUSTOMER"
+	CHATMESSAGESENDERTYPE_MARKET   ChatMessageSenderType = "MARKET"
+	CHATMESSAGESENDERTYPE_SUPPORT  ChatMessageSenderType = "SUPPORT"
 )
 
 // All allowed values of ChatMessageSenderType enum

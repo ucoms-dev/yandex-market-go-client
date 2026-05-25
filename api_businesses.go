@@ -22,13 +22,13 @@ import (
 // BusinessesAPIService BusinessesAPI service
 type BusinessesAPIService service
 
-type ApiGetBusinessSettingsRequest struct {
+type BusinessesAPIGetBusinessSettingsRequest struct {
 	ctx        context.Context
 	ApiService *BusinessesAPIService
 	businessId int64
 }
 
-func (r ApiGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
+func (r BusinessesAPIGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
 	return r.ApiService.GetBusinessSettingsExecute(r)
 }
 
@@ -41,12 +41,13 @@ GetBusinessSettings Настройки кабинета
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetBusinessSettingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return BusinessesAPIGetBusinessSettingsRequest
 */
-func (a *BusinessesAPIService) GetBusinessSettings(ctx context.Context, businessId int64) ApiGetBusinessSettingsRequest {
-	return ApiGetBusinessSettingsRequest{
+func (a *BusinessesAPIService) GetBusinessSettings(ctx context.Context, businessId int64) BusinessesAPIGetBusinessSettingsRequest {
+	return BusinessesAPIGetBusinessSettingsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -54,9 +55,8 @@ func (a *BusinessesAPIService) GetBusinessSettings(ctx context.Context, business
 }
 
 // Execute executes the request
-//
-//	@return GetBusinessSettingsResponse
-func (a *BusinessesAPIService) GetBusinessSettingsExecute(r ApiGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
+//  @return GetBusinessSettingsResponse
+func (a *BusinessesAPIService) GetBusinessSettingsExecute(r BusinessesAPIGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

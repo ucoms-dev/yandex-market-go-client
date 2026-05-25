@@ -20,11 +20,11 @@ type PromoOfferUpdateWarningCodeType string
 
 // List of PromoOfferUpdateWarningCodeType
 const (
-	PromoOfferUpdateWarningCodeType_DEEP_DISCOUNT_OFFER                      PromoOfferUpdateWarningCodeType = "DEEP_DISCOUNT_OFFER"
-	PromoOfferUpdateWarningCodeType_CATALOG_PRICE_IS_LOWER_THAN_PROMO        PromoOfferUpdateWarningCodeType = "CATALOG_PRICE_IS_LOWER_THAN_PROMO"
-	PromoOfferUpdateWarningCodeType_SHOP_PRICES_ARE_LOWER_THAN_PROMO         PromoOfferUpdateWarningCodeType = "SHOP_PRICES_ARE_LOWER_THAN_PROMO"
-	PromoOfferUpdateWarningCodeType_PROMOCODE_PRICE_MORE_THAN_MAX_FAIR_PRICE PromoOfferUpdateWarningCodeType = "PROMOCODE_PRICE_MORE_THAN_MAX_FAIR_PRICE"
-	PromoOfferUpdateWarningCodeType_SHOP_OFFER_NOT_ELIGIBLE_FOR_PROMO        PromoOfferUpdateWarningCodeType = "SHOP_OFFER_NOT_ELIGIBLE_FOR_PROMO"
+	PROMOOFFERUPDATEWARNINGCODETYPE_DEEP_DISCOUNT_OFFER                      PromoOfferUpdateWarningCodeType = "DEEP_DISCOUNT_OFFER"
+	PROMOOFFERUPDATEWARNINGCODETYPE_CATALOG_PRICE_IS_LOWER_THAN_PROMO        PromoOfferUpdateWarningCodeType = "CATALOG_PRICE_IS_LOWER_THAN_PROMO"
+	PROMOOFFERUPDATEWARNINGCODETYPE_SHOP_PRICES_ARE_LOWER_THAN_PROMO         PromoOfferUpdateWarningCodeType = "SHOP_PRICES_ARE_LOWER_THAN_PROMO"
+	PROMOOFFERUPDATEWARNINGCODETYPE_PROMOCODE_PRICE_MORE_THAN_MAX_FAIR_PRICE PromoOfferUpdateWarningCodeType = "PROMOCODE_PRICE_MORE_THAN_MAX_FAIR_PRICE"
+	PROMOOFFERUPDATEWARNINGCODETYPE_SHOP_OFFER_NOT_ELIGIBLE_FOR_PROMO        PromoOfferUpdateWarningCodeType = "SHOP_OFFER_NOT_ELIGIBLE_FOR_PROMO"
 )
 
 // All allowed values of PromoOfferUpdateWarningCodeType enum

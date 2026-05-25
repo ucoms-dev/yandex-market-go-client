@@ -108,6 +108,7 @@ func (o *PutSkuBidsRequest) UnmarshalJSON(data []byte) (err error) {
 	varPutSkuBidsRequest := _PutSkuBidsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPutSkuBidsRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullablePutSkuBidsRequest) IsSet() bool {
 }
 
 func (v *NullablePutSkuBidsRequest) Unset() {
-	v.value = nil
+	var zero *PutSkuBidsRequest
+	v.value = zero
 	v.isSet = false
 }
 

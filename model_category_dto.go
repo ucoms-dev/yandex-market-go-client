@@ -175,6 +175,7 @@ func (o *CategoryDTO) UnmarshalJSON(data []byte) (err error) {
 	varCategoryDTO := _CategoryDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCategoryDTO)
 
 	if err != nil {
@@ -205,7 +206,8 @@ func (v NullableCategoryDTO) IsSet() bool {
 }
 
 func (v *NullableCategoryDTO) Unset() {
-	v.value = nil
+	var zero *CategoryDTO
+	v.value = zero
 	v.isSet = false
 }
 

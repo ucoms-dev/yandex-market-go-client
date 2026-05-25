@@ -253,7 +253,8 @@ func (v NullableCampaignDTO) IsSet() bool {
 }
 
 func (v *NullableCampaignDTO) Unset() {
-	v.value = nil
+	var zero *CampaignDTO
+	v.value = zero
 	v.isSet = false
 }
 

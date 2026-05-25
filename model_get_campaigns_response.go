@@ -144,6 +144,7 @@ func (o *GetCampaignsResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetCampaignsResponse := _GetCampaignsResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetCampaignsResponse)
 
 	if err != nil {
@@ -174,7 +175,8 @@ func (v NullableGetCampaignsResponse) IsSet() bool {
 }
 
 func (v *NullableGetCampaignsResponse) Unset() {
-	v.value = nil
+	var zero *GetCampaignsResponse
+	v.value = zero
 	v.isSet = false
 }
 

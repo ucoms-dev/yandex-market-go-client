@@ -20,8 +20,8 @@ type LanguageType string
 
 // List of LanguageType
 const (
-	LanguageType_RU LanguageType = "RU"
-	LanguageType_EN LanguageType = "EN"
+	LANGUAGETYPE_RU LanguageType = "RU"
+	LANGUAGETYPE_EN LanguageType = "EN"
 )
 
 // All allowed values of LanguageType enum

@@ -16,6 +16,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 	"time"
 )
@@ -23,7 +24,7 @@ import (
 // OrdersAPIService OrdersAPI service
 type OrdersAPIService service
 
-type ApiAcceptOrderCancellationRequest struct {
+type OrdersAPIAcceptOrderCancellationRequest struct {
 	ctx                            context.Context
 	ApiService                     *OrdersAPIService
 	campaignId                     int64
@@ -31,12 +32,12 @@ type ApiAcceptOrderCancellationRequest struct {
 	acceptOrderCancellationRequest *AcceptOrderCancellationRequest
 }
 
-func (r ApiAcceptOrderCancellationRequest) AcceptOrderCancellationRequest(acceptOrderCancellationRequest AcceptOrderCancellationRequest) ApiAcceptOrderCancellationRequest {
+func (r OrdersAPIAcceptOrderCancellationRequest) AcceptOrderCancellationRequest(acceptOrderCancellationRequest AcceptOrderCancellationRequest) OrdersAPIAcceptOrderCancellationRequest {
 	r.acceptOrderCancellationRequest = &acceptOrderCancellationRequest
 	return r
 }
 
-func (r ApiAcceptOrderCancellationRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r OrdersAPIAcceptOrderCancellationRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.AcceptOrderCancellationExecute(r)
 }
 
@@ -51,27 +52,28 @@ AcceptOrderCancellation Отмена заказа покупателем
 
 Если заказ уже передан службе доставки (статус `DELIVERY` или `PICKUP`) и пользователь отменил его, вы можете предупредить службу об отмене в течение 48 часов.
 
-  - Служба доставки узнала об отмене до передачи заказа покупателю — подтвердите отмену с помощью запроса [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation.md).
-  - Заказ уже доставлен — отклоните отмену с помощью этого же запроса. Тогда у покупателя останется заказ, и деньги за него возвращаться не будут.
+  * Служба доставки узнала об отмене до передачи заказа покупателю — подтвердите отмену с помощью запроса [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation.md).
+  * Заказ уже доставлен — отклоните отмену с помощью этого же запроса. Тогда у покупателя останется заказ, и деньги за него возвращаться не будут.
 
 **Как узнать об отмененных заказах:**
 
-  - Отправьте запрос [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md). В его URL добавьте входной параметр `onlyWaitingForCancellationApprove=true`.
-  - В кабинете или через почту — на нее придет уведомление об отмене.
-  - Подключите API-уведомления. Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новая заявка на отмену заказа. [{#T}](../../push-notifications/index.md)
+  * Отправьте запрос [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md). В его URL добавьте входной параметр `onlyWaitingForCancellationApprove=true`.
+  * В кабинете или через почту — на нее придет уведомление об отмене.
+  * Подключите API-уведомления. Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новая заявка на отмену заказа. [{#T}](../../push-notifications/index.md)
 
 Если в течение 48 часов вы не подтвердите или отклоните отмену, заказ будет отменен автоматически.
 
 |**⚙️ Лимит:** 500 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiAcceptOrderCancellationRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPIAcceptOrderCancellationRequest
 */
-func (a *OrdersAPIService) AcceptOrderCancellation(ctx context.Context, campaignId int64, orderId int64) ApiAcceptOrderCancellationRequest {
-	return ApiAcceptOrderCancellationRequest{
+func (a *OrdersAPIService) AcceptOrderCancellation(ctx context.Context, campaignId int64, orderId int64) OrdersAPIAcceptOrderCancellationRequest {
+	return OrdersAPIAcceptOrderCancellationRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -80,9 +82,8 @@ func (a *OrdersAPIService) AcceptOrderCancellation(ctx context.Context, campaign
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancellationRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *OrdersAPIService) AcceptOrderCancellationExecute(r OrdersAPIAcceptOrderCancellationRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -244,14 +245,14 @@ func (a *OrdersAPIService) AcceptOrderCancellationExecute(r ApiAcceptOrderCancel
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderRequest struct {
+type OrdersAPIGetOrderRequest struct {
 	ctx        context.Context
 	ApiService *OrdersAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r ApiGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
+func (r OrdersAPIGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
 	return r.ApiService.GetOrderExecute(r)
 }
 
@@ -275,13 +276,14 @@ GetOrder Информация об одном заказе
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiGetOrderRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPIGetOrderRequest
 */
-func (a *OrdersAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderRequest {
-	return ApiGetOrderRequest{
+func (a *OrdersAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) OrdersAPIGetOrderRequest {
+	return OrdersAPIGetOrderRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -290,9 +292,8 @@ func (a *OrdersAPIService) GetOrder(ctx context.Context, campaignId int64, order
 }
 
 // Execute executes the request
-//
-//	@return GetOrderResponse
-func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
+//  @return GetOrderResponse
+func (a *OrdersAPIService) GetOrderExecute(r OrdersAPIGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -449,14 +450,14 @@ func (a *OrdersAPIService) GetOrderExecute(r ApiGetOrderRequest) (*GetOrderRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrderIdentifiersStatusRequest struct {
+type OrdersAPIGetOrderIdentifiersStatusRequest struct {
 	ctx        context.Context
 	ApiService *OrdersAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r ApiGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
+func (r OrdersAPIGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
 	return r.ApiService.GetOrderIdentifiersStatusExecute(r)
 }
 
@@ -475,13 +476,14 @@ GetOrderIdentifiersStatus Статусы проверки УИНов
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiGetOrderIdentifiersStatusRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPIGetOrderIdentifiersStatusRequest
 */
-func (a *OrdersAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) ApiGetOrderIdentifiersStatusRequest {
-	return ApiGetOrderIdentifiersStatusRequest{
+func (a *OrdersAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) OrdersAPIGetOrderIdentifiersStatusRequest {
+	return OrdersAPIGetOrderIdentifiersStatusRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -490,9 +492,8 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatus(ctx context.Context, campai
 }
 
 // Execute executes the request
-//
-//	@return GetOrderIdentifiersStatusResponse
-func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
+//  @return GetOrderIdentifiersStatusResponse
+func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r OrdersAPIGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -649,7 +650,7 @@ func (a *OrdersAPIService) GetOrderIdentifiersStatusExecute(r ApiGetOrderIdentif
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOrdersRequest struct {
+type OrdersAPIGetOrdersRequest struct {
 	ctx                               context.Context
 	ApiService                        *OrdersAPIService
 	campaignId                        int64
@@ -675,120 +676,120 @@ type ApiGetOrdersRequest struct {
 }
 
 // Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
-func (r ApiGetOrdersRequest) OrderIds(orderIds []int64) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) OrderIds(orderIds []int64) OrdersAPIGetOrdersRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
 // Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется.
-func (r ApiGetOrdersRequest) Status(status []OrderStatusType) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) Status(status []OrderStatusType) OrdersAPIGetOrdersRequest {
 	r.status = &status
 	return r
 }
 
 // Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется.
-func (r ApiGetOrdersRequest) Substatus(substatus []OrderSubstatusType) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) Substatus(substatus []OrderSubstatusType) OrdersAPIGetOrdersRequest {
 	r.substatus = &substatus
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты.
-func (r ApiGetOrdersRequest) FromDate(fromDate string) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) FromDate(fromDate string) OrdersAPIGetOrdersRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки.
-func (r ApiGetOrdersRequest) ToDate(toDate string) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) ToDate(toDate string) OrdersAPIGetOrdersRequest {
 	r.toDate = &toDate
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
-func (r ApiGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) OrdersAPIGetOrdersRequest {
 	r.supplierShipmentDateFrom = &supplierShipmentDateFrom
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки.
-func (r ApiGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) OrdersAPIGetOrdersRequest {
 	r.supplierShipmentDateTo = &supplierShipmentDateTo
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
-func (r ApiGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) OrdersAPIGetOrdersRequest {
 	r.updatedAtFrom = &updatedAtFrom
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.
-func (r ApiGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) OrdersAPIGetOrdersRequest {
 	r.updatedAtTo = &updatedAtTo
 	return r
 }
 
 // Способ отгрузки
-func (r ApiGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) OrdersAPIGetOrdersRequest {
 	r.dispatchType = &dispatchType
 	return r
 }
 
 // Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета.
-func (r ApiGetOrdersRequest) Fake(fake bool) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) Fake(fake bool) OrdersAPIGetOrdersRequest {
 	r.fake = &fake
 	return r
 }
 
 // Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям.
-func (r ApiGetOrdersRequest) HasCis(hasCis bool) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) HasCis(hasCis bool) OrdersAPIGetOrdersRequest {
 	r.hasCis = &hasCis
 	return r
 }
 
 // **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).
-func (r ApiGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) OrdersAPIGetOrdersRequest {
 	r.onlyWaitingForCancellationApprove = &onlyWaitingForCancellationApprove
 	return r
 }
 
 // Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется.
-func (r ApiGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) OrdersAPIGetOrdersRequest {
 	r.onlyEstimatedDelivery = &onlyEstimatedDelivery
 	return r
 }
 
 // Фильтрация заказов по типу покупателя.
-func (r ApiGetOrdersRequest) BuyerType(buyerType OrderBuyerType) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) BuyerType(buyerType OrderBuyerType) OrdersAPIGetOrdersRequest {
 	r.buyerType = &buyerType
 	return r
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetOrdersRequest) Page(page int32) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) Page(page int32) OrdersAPIGetOrdersRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetOrdersRequest) PageSize(pageSize int32) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) PageSize(pageSize int32) OrdersAPIGetOrdersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOrdersRequest) PageToken(pageToken string) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) PageToken(pageToken string) OrdersAPIGetOrdersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOrdersRequest) Limit(limit int32) ApiGetOrdersRequest {
+func (r OrdersAPIGetOrdersRequest) Limit(limit int32) OrdersAPIGetOrdersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
+func (r OrdersAPIGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
 	return r.ApiService.GetOrdersExecute(r)
 }
 
@@ -834,12 +835,13 @@ GetOrders Информация о нескольких заказах
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetOrdersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return OrdersAPIGetOrdersRequest
 */
-func (a *OrdersAPIService) GetOrders(ctx context.Context, campaignId int64) ApiGetOrdersRequest {
-	return ApiGetOrdersRequest{
+func (a *OrdersAPIService) GetOrders(ctx context.Context, campaignId int64) OrdersAPIGetOrdersRequest {
+	return OrdersAPIGetOrdersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -847,9 +849,8 @@ func (a *OrdersAPIService) GetOrders(ctx context.Context, campaignId int64) ApiG
 }
 
 // Execute executes the request
-//
-//	@return GetOrdersResponse
-func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
+//  @return GetOrdersResponse
+func (a *OrdersAPIService) GetOrdersExecute(r OrdersAPIGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -873,76 +874,100 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 	}
 
 	if r.orderIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
+		t := *r.orderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
+		}
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "", "csv")
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
 	}
 	if r.substatus != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", r.substatus, "", "csv")
+		t := *r.substatus
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", t, "form", "multi")
+		}
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
 	}
 	if r.supplierShipmentDateFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "form", "")
 	}
 	if r.supplierShipmentDateTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "form", "")
 	}
 	if r.updatedAtFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "form", "")
 	}
 	if r.updatedAtTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "form", "")
 	}
 	if r.dispatchType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "form", "")
 	}
 	if r.fake != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.fake = &defaultValue
 	}
 	if r.hasCis != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.hasCis = &defaultValue
 	}
 	if r.onlyWaitingForCancellationApprove != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.onlyWaitingForCancellationApprove = &defaultValue
 	}
 	if r.onlyEstimatedDelivery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.onlyEstimatedDelivery = &defaultValue
 	}
 	if r.buyerType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "form", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1077,7 +1102,7 @@ func (a *OrdersAPIService) GetOrdersExecute(r ApiGetOrdersRequest) (*GetOrdersRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProvideOrderDigitalCodesRequest struct {
+type OrdersAPIProvideOrderDigitalCodesRequest struct {
 	ctx                             context.Context
 	ApiService                      *OrdersAPIService
 	campaignId                      int64
@@ -1085,12 +1110,12 @@ type ApiProvideOrderDigitalCodesRequest struct {
 	provideOrderDigitalCodesRequest *ProvideOrderDigitalCodesRequest
 }
 
-func (r ApiProvideOrderDigitalCodesRequest) ProvideOrderDigitalCodesRequest(provideOrderDigitalCodesRequest ProvideOrderDigitalCodesRequest) ApiProvideOrderDigitalCodesRequest {
+func (r OrdersAPIProvideOrderDigitalCodesRequest) ProvideOrderDigitalCodesRequest(provideOrderDigitalCodesRequest ProvideOrderDigitalCodesRequest) OrdersAPIProvideOrderDigitalCodesRequest {
 	r.provideOrderDigitalCodesRequest = &provideOrderDigitalCodesRequest
 	return r
 }
 
-func (r ApiProvideOrderDigitalCodesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r OrdersAPIProvideOrderDigitalCodesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.ProvideOrderDigitalCodesExecute(r)
 }
 
@@ -1118,13 +1143,14 @@ ProvideOrderDigitalCodes Передача ключей цифровых това
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiProvideOrderDigitalCodesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPIProvideOrderDigitalCodesRequest
 */
-func (a *OrdersAPIService) ProvideOrderDigitalCodes(ctx context.Context, campaignId int64, orderId int64) ApiProvideOrderDigitalCodesRequest {
-	return ApiProvideOrderDigitalCodesRequest{
+func (a *OrdersAPIService) ProvideOrderDigitalCodes(ctx context.Context, campaignId int64, orderId int64) OrdersAPIProvideOrderDigitalCodesRequest {
+	return OrdersAPIProvideOrderDigitalCodesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -1133,9 +1159,8 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodes(ctx context.Context, campaig
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigitalCodesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r OrdersAPIProvideOrderDigitalCodesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1297,7 +1322,7 @@ func (a *OrdersAPIService) ProvideOrderDigitalCodesExecute(r ApiProvideOrderDigi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiProvideOrderItemIdentifiersRequest struct {
+type OrdersAPIProvideOrderItemIdentifiersRequest struct {
 	ctx                                context.Context
 	ApiService                         *OrdersAPIService
 	campaignId                         int64
@@ -1305,12 +1330,12 @@ type ApiProvideOrderItemIdentifiersRequest struct {
 	provideOrderItemIdentifiersRequest *ProvideOrderItemIdentifiersRequest
 }
 
-func (r ApiProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) ApiProvideOrderItemIdentifiersRequest {
+func (r OrdersAPIProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) OrdersAPIProvideOrderItemIdentifiersRequest {
 	r.provideOrderItemIdentifiersRequest = &provideOrderItemIdentifiersRequest
 	return r
 }
 
-func (r ApiProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+func (r OrdersAPIProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
 	return r.ApiService.ProvideOrderItemIdentifiersExecute(r)
 }
 
@@ -1346,13 +1371,14 @@ ProvideOrderItemIdentifiers Передача кодов маркировки е�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiProvideOrderItemIdentifiersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPIProvideOrderItemIdentifiersRequest
 */
-func (a *OrdersAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) ApiProvideOrderItemIdentifiersRequest {
-	return ApiProvideOrderItemIdentifiersRequest{
+func (a *OrdersAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) OrdersAPIProvideOrderItemIdentifiersRequest {
+	return OrdersAPIProvideOrderItemIdentifiersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -1361,9 +1387,8 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiers(ctx context.Context, camp
 }
 
 // Execute executes the request
-//
-//	@return ProvideOrderItemIdentifiersResponse
-func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+//  @return ProvideOrderItemIdentifiersResponse
+func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r OrdersAPIProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -1525,7 +1550,7 @@ func (a *OrdersAPIService) ProvideOrderItemIdentifiersExecute(r ApiProvideOrderI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderBoxLayoutRequest struct {
+type OrdersAPISetOrderBoxLayoutRequest struct {
 	ctx                      context.Context
 	ApiService               *OrdersAPIService
 	campaignId               int64
@@ -1533,12 +1558,12 @@ type ApiSetOrderBoxLayoutRequest struct {
 	setOrderBoxLayoutRequest *SetOrderBoxLayoutRequest
 }
 
-func (r ApiSetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) ApiSetOrderBoxLayoutRequest {
+func (r OrdersAPISetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) OrdersAPISetOrderBoxLayoutRequest {
 	r.setOrderBoxLayoutRequest = &setOrderBoxLayoutRequest
 	return r
 }
 
-func (r ApiSetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
+func (r OrdersAPISetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
 	return r.ApiService.SetOrderBoxLayoutExecute(r)
 }
 
@@ -1635,39 +1660,38 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если в одной коробке едут:
 
-  - три единицы одного товара, требующего маркировки;
+  * три единицы одного товара, требующего маркировки;
+  * одна единица другого товара, не требущего маркировки.
 
-  - одна единица другого товара, не требущего маркировки.
-
-    ```json translate=no
-    {
-    "boxes": [
-    {
-    "items": [
-    {
-    "id": 123456,
-    "fullCount": 3,
-    "instances": [
-    {
-    "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-    },
-    {
-    "cis": "010304109478gftJ14545762!\u001dhGt264"
-    },
-    {
-    "cis": "010304109478fRs28323ks23!\u001dhet201"
-    }
-    ]
-    },
-    {
-    "id": 654321,
-    "fullCount": 1
-    }
-    ]
-    }
-    ]
-    }
-    ```
+  ```json translate=no
+  {
+      "boxes": [
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "fullCount": 3,
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          },
+                          {
+                              "cis": "010304109478gftJ14545762!\u001dhGt264"
+                          },
+                          {
+                              "cis": "010304109478fRs28323ks23!\u001dhet201"
+                          }
+                      ]
+                  },
+                  {
+                      "id": 654321,
+                      "fullCount": 1
+                  }
+              ]
+          }
+      ]
+  }
+  ```
 
 {% endcut %}
 
@@ -1675,44 +1699,44 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если товар едет в двух коробках:
 
-	```json translate=no
-	{
-	    "boxes": [
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 1,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 2,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        }
-	    ]
-	}
-	```
+  ```json translate=no
+  {
+      "boxes": [
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 1,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 2,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          }
+      ]
+  }
+  ```
 
 {% endcut %}
 
@@ -1720,89 +1744,90 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если каждый из двух одинаковых товаров едет в двух коробках:
 
-	```json translate=no
-	{
-	    "boxes": [
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 1,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 2,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 1,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 2,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        }
-	    ]
-	}
-	```
+  ```json translate=no
+  {
+      "boxes": [
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 1,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 2,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 1,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 2,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          }
+      ]
+  }
+  ```
 
 {% endcut %}
 
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiSetOrderBoxLayoutRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPISetOrderBoxLayoutRequest
 */
-func (a *OrdersAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) ApiSetOrderBoxLayoutRequest {
-	return ApiSetOrderBoxLayoutRequest{
+func (a *OrdersAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) OrdersAPISetOrderBoxLayoutRequest {
+	return OrdersAPISetOrderBoxLayoutRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -1811,9 +1836,8 @@ func (a *OrdersAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int
 }
 
 // Execute executes the request
-//
-//	@return SetOrderBoxLayoutResponse
-func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
+//  @return SetOrderBoxLayoutResponse
+func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r OrdersAPISetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -1975,7 +1999,7 @@ func (a *OrdersAPIService) SetOrderBoxLayoutExecute(r ApiSetOrderBoxLayoutReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSetOrderShipmentBoxesRequest struct {
+type OrdersAPISetOrderShipmentBoxesRequest struct {
 	ctx                          context.Context
 	ApiService                   *OrdersAPIService
 	campaignId                   int64
@@ -1984,12 +2008,12 @@ type ApiSetOrderShipmentBoxesRequest struct {
 	setOrderShipmentBoxesRequest *SetOrderShipmentBoxesRequest
 }
 
-func (r ApiSetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) ApiSetOrderShipmentBoxesRequest {
+func (r OrdersAPISetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) OrdersAPISetOrderShipmentBoxesRequest {
 	r.setOrderShipmentBoxesRequest = &setOrderShipmentBoxesRequest
 	return r
 }
 
-func (r ApiSetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+func (r OrdersAPISetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
 	return r.ApiService.SetOrderShipmentBoxesExecute(r)
 }
 
@@ -2017,29 +2041,27 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 Структура тела PUT-запроса:
 
 ```text translate=no
-
-	{
-	  "boxes":
-	  [
-	    {
-	      "fulfilmentId": "{string}",
-	      "weight": {int64},
-	      "width": {int64},
-	      "height": {int64},
-	      "depth": {int64},
-	      "items":
-	      [
-	        {
-	          "id": {int64},
-	          "count": {int32}
-	        },
-	        ...
-	      ]
-	    },
-	    ...
-	  ]
-	}
-
+{
+  "boxes":
+  [
+    {
+      "fulfilmentId": "{string}",
+      "weight": {int64},
+      "width": {int64},
+      "height": {int64},
+      "depth": {int64},
+      "items":
+      [
+        {
+          "id": {int64},
+          "count": {int32}
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+}
 ```
 | **Параметр**  | **Тип**  | **Значение**  |
 | ----------- | ----------- | ----------- |
@@ -2066,14 +2088,15 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
-	@return ApiSetOrderShipmentBoxesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
+ @return OrdersAPISetOrderShipmentBoxesRequest
 */
-func (a *OrdersAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) ApiSetOrderShipmentBoxesRequest {
-	return ApiSetOrderShipmentBoxesRequest{
+func (a *OrdersAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) OrdersAPISetOrderShipmentBoxesRequest {
+	return OrdersAPISetOrderShipmentBoxesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -2083,9 +2106,8 @@ func (a *OrdersAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId
 }
 
 // Execute executes the request
-//
-//	@return SetOrderShipmentBoxesResponse
-func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+//  @return SetOrderShipmentBoxesResponse
+func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r OrdersAPISetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -2248,7 +2270,7 @@ func (a *OrdersAPIService) SetOrderShipmentBoxesExecute(r ApiSetOrderShipmentBox
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateExternalOrderIdRequest struct {
+type OrdersAPIUpdateExternalOrderIdRequest struct {
 	ctx                          context.Context
 	ApiService                   *OrdersAPIService
 	campaignId                   int64
@@ -2256,12 +2278,12 @@ type ApiUpdateExternalOrderIdRequest struct {
 	updateExternalOrderIdRequest *UpdateExternalOrderIdRequest
 }
 
-func (r ApiUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) ApiUpdateExternalOrderIdRequest {
+func (r OrdersAPIUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) OrdersAPIUpdateExternalOrderIdRequest {
 	r.updateExternalOrderIdRequest = &updateExternalOrderIdRequest
 	return r
 }
 
-func (r ApiUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r OrdersAPIUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.UpdateExternalOrderIdExecute(r)
 }
 
@@ -2277,13 +2299,14 @@ UpdateExternalOrderId Передача или изменение дополни�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiUpdateExternalOrderIdRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPIUpdateExternalOrderIdRequest
 */
-func (a *OrdersAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) ApiUpdateExternalOrderIdRequest {
-	return ApiUpdateExternalOrderIdRequest{
+func (a *OrdersAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) OrdersAPIUpdateExternalOrderIdRequest {
+	return OrdersAPIUpdateExternalOrderIdRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -2292,9 +2315,8 @@ func (a *OrdersAPIService) UpdateExternalOrderId(ctx context.Context, campaignId
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r OrdersAPIUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2456,7 +2478,7 @@ func (a *OrdersAPIService) UpdateExternalOrderIdExecute(r ApiUpdateExternalOrder
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderItemsRequest struct {
+type OrdersAPIUpdateOrderItemsRequest struct {
 	ctx                    context.Context
 	ApiService             *OrdersAPIService
 	campaignId             int64
@@ -2464,12 +2486,12 @@ type ApiUpdateOrderItemsRequest struct {
 	updateOrderItemRequest *UpdateOrderItemRequest
 }
 
-func (r ApiUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) ApiUpdateOrderItemsRequest {
+func (r OrdersAPIUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) OrdersAPIUpdateOrderItemsRequest {
 	r.updateOrderItemRequest = &updateOrderItemRequest
 	return r
 }
 
-func (r ApiUpdateOrderItemsRequest) Execute() (*http.Response, error) {
+func (r OrdersAPIUpdateOrderItemsRequest) Execute() (*http.Response, error) {
 	return r.ApiService.UpdateOrderItemsExecute(r)
 }
 
@@ -2523,13 +2545,14 @@ UpdateOrderItems Удаление товара из заказа или умен
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiUpdateOrderItemsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPIUpdateOrderItemsRequest
 */
-func (a *OrdersAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderItemsRequest {
-	return ApiUpdateOrderItemsRequest{
+func (a *OrdersAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) OrdersAPIUpdateOrderItemsRequest {
+	return OrdersAPIUpdateOrderItemsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -2538,7 +2561,7 @@ func (a *OrdersAPIService) UpdateOrderItems(ctx context.Context, campaignId int6
 }
 
 // Execute executes the request
-func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest) (*http.Response, error) {
+func (a *OrdersAPIService) UpdateOrderItemsExecute(r OrdersAPIUpdateOrderItemsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPut
 		localVarPostBody   interface{}
@@ -2690,7 +2713,7 @@ func (a *OrdersAPIService) UpdateOrderItemsExecute(r ApiUpdateOrderItemsRequest)
 	return localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStatusRequest struct {
+type OrdersAPIUpdateOrderStatusRequest struct {
 	ctx                      context.Context
 	ApiService               *OrdersAPIService
 	campaignId               int64
@@ -2698,12 +2721,12 @@ type ApiUpdateOrderStatusRequest struct {
 	updateOrderStatusRequest *UpdateOrderStatusRequest
 }
 
-func (r ApiUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) ApiUpdateOrderStatusRequest {
+func (r OrdersAPIUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) OrdersAPIUpdateOrderStatusRequest {
 	r.updateOrderStatusRequest = &updateOrderStatusRequest
 	return r
 }
 
-func (r ApiUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
+func (r OrdersAPIUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
 	return r.ApiService.UpdateOrderStatusExecute(r)
 }
 
@@ -2721,13 +2744,14 @@ UpdateOrderStatus Изменение статуса одного заказа
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return ApiUpdateOrderStatusRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return OrdersAPIUpdateOrderStatusRequest
 */
-func (a *OrdersAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) ApiUpdateOrderStatusRequest {
-	return ApiUpdateOrderStatusRequest{
+func (a *OrdersAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) OrdersAPIUpdateOrderStatusRequest {
+	return OrdersAPIUpdateOrderStatusRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -2736,9 +2760,8 @@ func (a *OrdersAPIService) UpdateOrderStatus(ctx context.Context, campaignId int
 }
 
 // Execute executes the request
-//
-//	@return UpdateOrderStatusResponse
-func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
+//  @return UpdateOrderStatusResponse
+func (a *OrdersAPIService) UpdateOrderStatusExecute(r OrdersAPIUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -2900,19 +2923,19 @@ func (a *OrdersAPIService) UpdateOrderStatusExecute(r ApiUpdateOrderStatusReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOrderStatusesRequest struct {
+type OrdersAPIUpdateOrderStatusesRequest struct {
 	ctx                        context.Context
 	ApiService                 *OrdersAPIService
 	campaignId                 int64
 	updateOrderStatusesRequest *UpdateOrderStatusesRequest
 }
 
-func (r ApiUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) ApiUpdateOrderStatusesRequest {
+func (r OrdersAPIUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) OrdersAPIUpdateOrderStatusesRequest {
 	r.updateOrderStatusesRequest = &updateOrderStatusesRequest
 	return r
 }
 
-func (r ApiUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
+func (r OrdersAPIUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
 	return r.ApiService.UpdateOrderStatusesExecute(r)
 }
 
@@ -2932,12 +2955,13 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 |**⚙️ Лимит:** 100 000 заказов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateOrderStatusesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return OrdersAPIUpdateOrderStatusesRequest
 */
-func (a *OrdersAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) ApiUpdateOrderStatusesRequest {
-	return ApiUpdateOrderStatusesRequest{
+func (a *OrdersAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) OrdersAPIUpdateOrderStatusesRequest {
+	return OrdersAPIUpdateOrderStatusesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -2945,9 +2969,8 @@ func (a *OrdersAPIService) UpdateOrderStatuses(ctx context.Context, campaignId i
 }
 
 // Execute executes the request
-//
-//	@return UpdateOrderStatusesResponse
-func (a *OrdersAPIService) UpdateOrderStatusesExecute(r ApiUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
+//  @return UpdateOrderStatusesResponse
+func (a *OrdersAPIService) UpdateOrderStatusesExecute(r OrdersAPIUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

@@ -20,10 +20,10 @@ type PaymentFrequencyType string
 
 // List of PaymentFrequencyType
 const (
-	PaymentFrequencyType_DAILY    PaymentFrequencyType = "DAILY"
-	PaymentFrequencyType_WEEKLY   PaymentFrequencyType = "WEEKLY"
-	PaymentFrequencyType_BIWEEKLY PaymentFrequencyType = "BIWEEKLY"
-	PaymentFrequencyType_MONTHLY  PaymentFrequencyType = "MONTHLY"
+	PAYMENTFREQUENCYTYPE_DAILY    PaymentFrequencyType = "DAILY"
+	PAYMENTFREQUENCYTYPE_WEEKLY   PaymentFrequencyType = "WEEKLY"
+	PAYMENTFREQUENCYTYPE_BIWEEKLY PaymentFrequencyType = "BIWEEKLY"
+	PAYMENTFREQUENCYTYPE_MONTHLY  PaymentFrequencyType = "MONTHLY"
 )
 
 // All allowed values of PaymentFrequencyType enum

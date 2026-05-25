@@ -108,6 +108,7 @@ func (o *ProvideOrderItemIdentifiersRequest) UnmarshalJSON(data []byte) (err err
 	varProvideOrderItemIdentifiersRequest := _ProvideOrderItemIdentifiersRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varProvideOrderItemIdentifiersRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableProvideOrderItemIdentifiersRequest) IsSet() bool {
 }
 
 func (v *NullableProvideOrderItemIdentifiersRequest) Unset() {
-	v.value = nil
+	var zero *ProvideOrderItemIdentifiersRequest
+	v.value = zero
 	v.isSet = false
 }
 

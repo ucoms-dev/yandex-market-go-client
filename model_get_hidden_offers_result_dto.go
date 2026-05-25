@@ -144,6 +144,7 @@ func (o *GetHiddenOffersResultDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetHiddenOffersResultDTO := _GetHiddenOffersResultDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetHiddenOffersResultDTO)
 
 	if err != nil {
@@ -174,7 +175,8 @@ func (v NullableGetHiddenOffersResultDTO) IsSet() bool {
 }
 
 func (v *NullableGetHiddenOffersResultDTO) Unset() {
-	v.value = nil
+	var zero *GetHiddenOffersResultDTO
+	v.value = zero
 	v.isSet = false
 }
 

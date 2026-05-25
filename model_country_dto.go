@@ -136,6 +136,7 @@ func (o *CountryDTO) UnmarshalJSON(data []byte) (err error) {
 	varCountryDTO := _CountryDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCountryDTO)
 
 	if err != nil {
@@ -166,7 +167,8 @@ func (v NullableCountryDTO) IsSet() bool {
 }
 
 func (v *NullableCountryDTO) Unset() {
-	v.value = nil
+	var zero *CountryDTO
+	v.value = zero
 	v.isSet = false
 }
 

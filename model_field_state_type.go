@@ -20,8 +20,8 @@ type FieldStateType string
 
 // List of FieldStateType
 const (
-	FieldStateType_SPECIFIED FieldStateType = "SPECIFIED"
-	FieldStateType_EMPTY     FieldStateType = "EMPTY"
+	FIELDSTATETYPE_SPECIFIED FieldStateType = "SPECIFIED"
+	FIELDSTATETYPE_EMPTY     FieldStateType = "EMPTY"
 )
 
 // All allowed values of FieldStateType enum

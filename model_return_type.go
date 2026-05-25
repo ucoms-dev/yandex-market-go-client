@@ -20,8 +20,8 @@ type ReturnType string
 
 // List of ReturnType
 const (
-	ReturnType_UNREDEEMED ReturnType = "UNREDEEMED"
-	ReturnType_RETURN     ReturnType = "RETURN"
+	RETURNTYPE_UNREDEEMED ReturnType = "UNREDEEMED"
+	RETURNTYPE_RETURN     ReturnType = "RETURN"
 )
 
 // All allowed values of ReturnType enum

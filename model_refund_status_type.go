@@ -20,22 +20,20 @@ type RefundStatusType string
 
 // List of RefundStatusType
 const (
-	RefundStatusType_STARTED_BY_USER                RefundStatusType = "STARTED_BY_USER"
-	RefundStatusType_REFUND_IN_PROGRESS             RefundStatusType = "REFUND_IN_PROGRESS"
-	RefundStatusType_REFUNDED                       RefundStatusType = "REFUNDED"
-	RefundStatusType_FAILED                         RefundStatusType = "FAILED"
-	RefundStatusType_WAITING_FOR_DECISION           RefundStatusType = "WAITING_FOR_DECISION"
-	RefundStatusType_DECISION_MADE                  RefundStatusType = "DECISION_MADE"
-	RefundStatusType_REFUNDED_WITH_BONUSES          RefundStatusType = "REFUNDED_WITH_BONUSES"
-	RefundStatusType_REFUNDED_BY_SHOP               RefundStatusType = "REFUNDED_BY_SHOP"
-	RefundStatusType_CANCELLED                      RefundStatusType = "CANCELLED"
-	RefundStatusType_REJECTED                       RefundStatusType = "REJECTED"
-	RefundStatusType_COMPLETE_WITHOUT_REFUND        RefundStatusType = "COMPLETE_WITHOUT_REFUND"
-	RefundStatusType_PREMODERATION_DISPUTE          RefundStatusType = "PREMODERATION_DISPUTE"
-	RefundStatusType_PREMODERATION_DECISION_WAITING RefundStatusType = "PREMODERATION_DECISION_WAITING"
-	RefundStatusType_PREMODERATION_DECISION_MADE    RefundStatusType = "PREMODERATION_DECISION_MADE"
-	RefundStatusType_PREMODERATION_SELECT_DELIVERY  RefundStatusType = "PREMODERATION_SELECT_DELIVERY"
-	RefundStatusType_UNKNOWN                        RefundStatusType = "UNKNOWN"
+	REFUNDSTATUSTYPE_STARTED_BY_USER                RefundStatusType = "STARTED_BY_USER"
+	REFUNDSTATUSTYPE_REFUND_IN_PROGRESS             RefundStatusType = "REFUND_IN_PROGRESS"
+	REFUNDSTATUSTYPE_REFUNDED                       RefundStatusType = "REFUNDED"
+	REFUNDSTATUSTYPE_FAILED                         RefundStatusType = "FAILED"
+	REFUNDSTATUSTYPE_WAITING_FOR_DECISION           RefundStatusType = "WAITING_FOR_DECISION"
+	REFUNDSTATUSTYPE_DECISION_MADE                  RefundStatusType = "DECISION_MADE"
+	REFUNDSTATUSTYPE_REFUNDED_WITH_BONUSES          RefundStatusType = "REFUNDED_WITH_BONUSES"
+	REFUNDSTATUSTYPE_REFUNDED_BY_SHOP               RefundStatusType = "REFUNDED_BY_SHOP"
+	REFUNDSTATUSTYPE_CANCELLED                      RefundStatusType = "CANCELLED"
+	REFUNDSTATUSTYPE_COMPLETE_WITHOUT_REFUND        RefundStatusType = "COMPLETE_WITHOUT_REFUND"
+	REFUNDSTATUSTYPE_PREMODERATION_DISPUTE          RefundStatusType = "PREMODERATION_DISPUTE"
+	REFUNDSTATUSTYPE_PREMODERATION_DECISION_WAITING RefundStatusType = "PREMODERATION_DECISION_WAITING"
+	REFUNDSTATUSTYPE_PREMODERATION_DECISION_MADE    RefundStatusType = "PREMODERATION_DECISION_MADE"
+	REFUNDSTATUSTYPE_UNKNOWN                        RefundStatusType = "UNKNOWN"
 )
 
 // All allowed values of RefundStatusType enum
@@ -49,12 +47,10 @@ var AllowedRefundStatusTypeEnumValues = []RefundStatusType{
 	"REFUNDED_WITH_BONUSES",
 	"REFUNDED_BY_SHOP",
 	"CANCELLED",
-	"REJECTED",
 	"COMPLETE_WITHOUT_REFUND",
 	"PREMODERATION_DISPUTE",
 	"PREMODERATION_DECISION_WAITING",
 	"PREMODERATION_DECISION_MADE",
-	"PREMODERATION_SELECT_DELIVERY",
 	"UNKNOWN",
 }
 

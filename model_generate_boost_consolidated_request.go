@@ -166,6 +166,7 @@ func (o *GenerateBoostConsolidatedRequest) UnmarshalJSON(data []byte) (err error
 	varGenerateBoostConsolidatedRequest := _GenerateBoostConsolidatedRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateBoostConsolidatedRequest)
 
 	if err != nil {
@@ -196,7 +197,8 @@ func (v NullableGenerateBoostConsolidatedRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateBoostConsolidatedRequest) Unset() {
-	v.value = nil
+	var zero *GenerateBoostConsolidatedRequest
+	v.value = zero
 	v.isSet = false
 }
 

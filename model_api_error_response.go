@@ -144,7 +144,8 @@ func (v NullableApiErrorResponse) IsSet() bool {
 }
 
 func (v *NullableApiErrorResponse) Unset() {
-	v.value = nil
+	var zero *ApiErrorResponse
+	v.value = zero
 	v.isSet = false
 }
 

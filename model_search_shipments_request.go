@@ -254,6 +254,7 @@ func (o *SearchShipmentsRequest) UnmarshalJSON(data []byte) (err error) {
 	varSearchShipmentsRequest := _SearchShipmentsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSearchShipmentsRequest)
 
 	if err != nil {
@@ -284,7 +285,8 @@ func (v NullableSearchShipmentsRequest) IsSet() bool {
 }
 
 func (v *NullableSearchShipmentsRequest) Unset() {
-	v.value = nil
+	var zero *SearchShipmentsRequest
+	v.value = zero
 	v.isSet = false
 }
 

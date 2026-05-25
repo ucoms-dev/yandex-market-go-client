@@ -145,6 +145,7 @@ func (o *OfferManualDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferManualDTO := _OfferManualDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferManualDTO)
 
 	if err != nil {
@@ -175,7 +176,8 @@ func (v NullableOfferManualDTO) IsSet() bool {
 }
 
 func (v *NullableOfferManualDTO) Unset() {
-	v.value = nil
+	var zero *OfferManualDTO
+	v.value = zero
 	v.isSet = false
 }
 

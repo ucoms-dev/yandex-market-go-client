@@ -137,6 +137,7 @@ func (o *OrderParcelBoxDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderParcelBoxDTO := _OrderParcelBoxDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderParcelBoxDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableOrderParcelBoxDTO) IsSet() bool {
 }
 
 func (v *NullableOrderParcelBoxDTO) Unset() {
-	v.value = nil
+	var zero *OrderParcelBoxDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -166,6 +166,7 @@ func (o *GenerateGoodsRealizationReportRequest) UnmarshalJSON(data []byte) (err 
 	varGenerateGoodsRealizationReportRequest := _GenerateGoodsRealizationReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateGoodsRealizationReportRequest)
 
 	if err != nil {
@@ -196,7 +197,8 @@ func (v NullableGenerateGoodsRealizationReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateGoodsRealizationReportRequest) Unset() {
-	v.value = nil
+	var zero *GenerateGoodsRealizationReportRequest
+	v.value = zero
 	v.isSet = false
 }
 

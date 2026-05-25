@@ -20,8 +20,8 @@ type PromoOfferParticipationStatusFilterType string
 
 // List of PromoOfferParticipationStatusFilterType
 const (
-	PromoOfferParticipationStatusFilterType_MANUALLY_ADDED     PromoOfferParticipationStatusFilterType = "MANUALLY_ADDED"
-	PromoOfferParticipationStatusFilterType_NOT_MANUALLY_ADDED PromoOfferParticipationStatusFilterType = "NOT_MANUALLY_ADDED"
+	PROMOOFFERPARTICIPATIONSTATUSFILTERTYPE_MANUALLY_ADDED     PromoOfferParticipationStatusFilterType = "MANUALLY_ADDED"
+	PROMOOFFERPARTICIPATIONSTATUSFILTERTYPE_NOT_MANUALLY_ADDED PromoOfferParticipationStatusFilterType = "NOT_MANUALLY_ADDED"
 )
 
 // All allowed values of PromoOfferParticipationStatusFilterType enum

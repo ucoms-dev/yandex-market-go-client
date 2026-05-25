@@ -138,6 +138,7 @@ func (o *PromoPeriodDTO) UnmarshalJSON(data []byte) (err error) {
 	varPromoPeriodDTO := _PromoPeriodDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varPromoPeriodDTO)
 
 	if err != nil {
@@ -168,7 +169,8 @@ func (v NullablePromoPeriodDTO) IsSet() bool {
 }
 
 func (v *NullablePromoPeriodDTO) Unset() {
-	v.value = nil
+	var zero *PromoPeriodDTO
+	v.value = zero
 	v.isSet = false
 }
 

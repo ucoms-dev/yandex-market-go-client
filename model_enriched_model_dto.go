@@ -292,7 +292,8 @@ func (v NullableEnrichedModelDTO) IsSet() bool {
 }
 
 func (v *NullableEnrichedModelDTO) Unset() {
-	v.value = nil
+	var zero *EnrichedModelDTO
+	v.value = zero
 	v.isSet = false
 }
 

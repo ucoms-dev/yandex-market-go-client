@@ -136,6 +136,7 @@ func (o *BasePriceDTO) UnmarshalJSON(data []byte) (err error) {
 	varBasePriceDTO := _BasePriceDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varBasePriceDTO)
 
 	if err != nil {
@@ -166,7 +167,8 @@ func (v NullableBasePriceDTO) IsSet() bool {
 }
 
 func (v *NullableBasePriceDTO) Unset() {
-	v.value = nil
+	var zero *BasePriceDTO
+	v.value = zero
 	v.isSet = false
 }
 

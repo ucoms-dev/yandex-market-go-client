@@ -245,6 +245,7 @@ func (o *OrderDigitalItemDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderDigitalItemDTO := _OrderDigitalItemDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderDigitalItemDTO)
 
 	if err != nil {
@@ -275,7 +276,8 @@ func (v NullableOrderDigitalItemDTO) IsSet() bool {
 }
 
 func (v *NullableOrderDigitalItemDTO) Unset() {
-	v.value = nil
+	var zero *OrderDigitalItemDTO
+	v.value = zero
 	v.isSet = false
 }
 

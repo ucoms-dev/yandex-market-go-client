@@ -22,19 +22,19 @@ import (
 // OffersAPIService OffersAPI service
 type OffersAPIService service
 
-type ApiDeleteCampaignOffersRequest struct {
+type OffersAPIDeleteCampaignOffersRequest struct {
 	ctx                         context.Context
 	ApiService                  *OffersAPIService
 	campaignId                  int64
 	deleteCampaignOffersRequest *DeleteCampaignOffersRequest
 }
 
-func (r ApiDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) ApiDeleteCampaignOffersRequest {
+func (r OffersAPIDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) OffersAPIDeleteCampaignOffersRequest {
 	r.deleteCampaignOffersRequest = &deleteCampaignOffersRequest
 	return r
 }
 
-func (r ApiDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
+func (r OffersAPIDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
 	return r.ApiService.DeleteCampaignOffersExecute(r)
 }
 
@@ -56,12 +56,13 @@ DeleteCampaignOffers Удаление товаров из ассортимент
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiDeleteCampaignOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return OffersAPIDeleteCampaignOffersRequest
 */
-func (a *OffersAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) ApiDeleteCampaignOffersRequest {
-	return ApiDeleteCampaignOffersRequest{
+func (a *OffersAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) OffersAPIDeleteCampaignOffersRequest {
+	return OffersAPIDeleteCampaignOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -69,9 +70,8 @@ func (a *OffersAPIService) DeleteCampaignOffers(ctx context.Context, campaignId 
 }
 
 // Execute executes the request
-//
-//	@return DeleteCampaignOffersResponse
-func (a *OffersAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
+//  @return DeleteCampaignOffersResponse
+func (a *OffersAPIService) DeleteCampaignOffersExecute(r OffersAPIDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -243,7 +243,7 @@ func (a *OffersAPIService) DeleteCampaignOffersExecute(r ApiDeleteCampaignOffers
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignOffersRequest struct {
+type OffersAPIGetCampaignOffersRequest struct {
 	ctx                      context.Context
 	ApiService               *OffersAPIService
 	campaignId               int64
@@ -252,24 +252,24 @@ type ApiGetCampaignOffersRequest struct {
 	limit                    *int32
 }
 
-func (r ApiGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) ApiGetCampaignOffersRequest {
+func (r OffersAPIGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) OffersAPIGetCampaignOffersRequest {
 	r.getCampaignOffersRequest = &getCampaignOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetCampaignOffersRequest) PageToken(pageToken string) ApiGetCampaignOffersRequest {
+func (r OffersAPIGetCampaignOffersRequest) PageToken(pageToken string) OffersAPIGetCampaignOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetCampaignOffersRequest) Limit(limit int32) ApiGetCampaignOffersRequest {
+func (r OffersAPIGetCampaignOffersRequest) Limit(limit int32) OffersAPIGetCampaignOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
+func (r OffersAPIGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
 	return r.ApiService.GetCampaignOffersExecute(r)
 }
 
@@ -283,12 +283,13 @@ GetCampaignOffers Информация о товарах, которые раз�
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return OffersAPIGetCampaignOffersRequest
 */
-func (a *OffersAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) ApiGetCampaignOffersRequest {
-	return ApiGetCampaignOffersRequest{
+func (a *OffersAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) OffersAPIGetCampaignOffersRequest {
+	return OffersAPIGetCampaignOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -296,9 +297,8 @@ func (a *OffersAPIService) GetCampaignOffers(ctx context.Context, campaignId int
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignOffersResponse
-func (a *OffersAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
+//  @return GetCampaignOffersResponse
+func (a *OffersAPIService) GetCampaignOffersExecute(r OffersAPIGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -325,10 +325,10 @@ func (a *OffersAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReques
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -465,7 +465,7 @@ func (a *OffersAPIService) GetCampaignOffersExecute(r ApiGetCampaignOffersReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferRecommendationsRequest struct {
+type OffersAPIGetOfferRecommendationsRequest struct {
 	ctx                            context.Context
 	ApiService                     *OffersAPIService
 	businessId                     int64
@@ -474,24 +474,24 @@ type ApiGetOfferRecommendationsRequest struct {
 	limit                          *int32
 }
 
-func (r ApiGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) ApiGetOfferRecommendationsRequest {
+func (r OffersAPIGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) OffersAPIGetOfferRecommendationsRequest {
 	r.getOfferRecommendationsRequest = &getOfferRecommendationsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOfferRecommendationsRequest) PageToken(pageToken string) ApiGetOfferRecommendationsRequest {
+func (r OffersAPIGetOfferRecommendationsRequest) PageToken(pageToken string) OffersAPIGetOfferRecommendationsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOfferRecommendationsRequest) Limit(limit int32) ApiGetOfferRecommendationsRequest {
+func (r OffersAPIGetOfferRecommendationsRequest) Limit(limit int32) OffersAPIGetOfferRecommendationsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
+func (r OffersAPIGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
 	return r.ApiService.GetOfferRecommendationsExecute(r)
 }
 
@@ -517,12 +517,13 @@ GetOfferRecommendations Рекомендации Маркета, касающи�
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetOfferRecommendationsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return OffersAPIGetOfferRecommendationsRequest
 */
-func (a *OffersAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) ApiGetOfferRecommendationsRequest {
-	return ApiGetOfferRecommendationsRequest{
+func (a *OffersAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) OffersAPIGetOfferRecommendationsRequest {
+	return OffersAPIGetOfferRecommendationsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -530,9 +531,8 @@ func (a *OffersAPIService) GetOfferRecommendations(ctx context.Context, business
 }
 
 // Execute executes the request
-//
-//	@return GetOfferRecommendationsResponse
-func (a *OffersAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
+//  @return GetOfferRecommendationsResponse
+func (a *OffersAPIService) GetOfferRecommendationsExecute(r OffersAPIGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -559,10 +559,10 @@ func (a *OffersAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommend
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -699,19 +699,19 @@ func (a *OffersAPIService) GetOfferRecommendationsExecute(r ApiGetOfferRecommend
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateCampaignOffersRequest struct {
+type OffersAPIUpdateCampaignOffersRequest struct {
 	ctx                         context.Context
 	ApiService                  *OffersAPIService
 	campaignId                  int64
 	updateCampaignOffersRequest *UpdateCampaignOffersRequest
 }
 
-func (r ApiUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) ApiUpdateCampaignOffersRequest {
+func (r OffersAPIUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) OffersAPIUpdateCampaignOffersRequest {
 	r.updateCampaignOffersRequest = &updateCampaignOffersRequest
 	return r
 }
 
-func (r ApiUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r OffersAPIUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.UpdateCampaignOffersExecute(r)
 }
 
@@ -725,12 +725,13 @@ UpdateCampaignOffers Изменение условий продажи товар
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateCampaignOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return OffersAPIUpdateCampaignOffersRequest
 */
-func (a *OffersAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) ApiUpdateCampaignOffersRequest {
-	return ApiUpdateCampaignOffersRequest{
+func (a *OffersAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) OffersAPIUpdateCampaignOffersRequest {
+	return OffersAPIUpdateCampaignOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -738,9 +739,8 @@ func (a *OffersAPIService) UpdateCampaignOffers(ctx context.Context, campaignId 
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *OffersAPIService) UpdateCampaignOffersExecute(r ApiUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *OffersAPIService) UpdateCampaignOffersExecute(r OffersAPIUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

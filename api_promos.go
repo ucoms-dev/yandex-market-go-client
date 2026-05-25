@@ -22,19 +22,19 @@ import (
 // PromosAPIService PromosAPI service
 type PromosAPIService service
 
-type ApiDeletePromoOffersRequest struct {
+type PromosAPIDeletePromoOffersRequest struct {
 	ctx                      context.Context
 	ApiService               *PromosAPIService
 	businessId               int64
 	deletePromoOffersRequest *DeletePromoOffersRequest
 }
 
-func (r ApiDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) ApiDeletePromoOffersRequest {
+func (r PromosAPIDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) PromosAPIDeletePromoOffersRequest {
 	r.deletePromoOffersRequest = &deletePromoOffersRequest
 	return r
 }
 
-func (r ApiDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
+func (r PromosAPIDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
 	return r.ApiService.DeletePromoOffersExecute(r)
 }
 
@@ -50,12 +50,13 @@ DeletePromoOffers Удаление товаров из акции
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiDeletePromoOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return PromosAPIDeletePromoOffersRequest
 */
-func (a *PromosAPIService) DeletePromoOffers(ctx context.Context, businessId int64) ApiDeletePromoOffersRequest {
-	return ApiDeletePromoOffersRequest{
+func (a *PromosAPIService) DeletePromoOffers(ctx context.Context, businessId int64) PromosAPIDeletePromoOffersRequest {
+	return PromosAPIDeletePromoOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -63,9 +64,8 @@ func (a *PromosAPIService) DeletePromoOffers(ctx context.Context, businessId int
 }
 
 // Execute executes the request
-//
-//	@return DeletePromoOffersResponse
-func (a *PromosAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
+//  @return DeletePromoOffersResponse
+func (a *PromosAPIService) DeletePromoOffersExecute(r PromosAPIDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -226,7 +226,7 @@ func (a *PromosAPIService) DeletePromoOffersExecute(r ApiDeletePromoOffersReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPromoOffersRequest struct {
+type PromosAPIGetPromoOffersRequest struct {
 	ctx                   context.Context
 	ApiService            *PromosAPIService
 	businessId            int64
@@ -235,24 +235,24 @@ type ApiGetPromoOffersRequest struct {
 	limit                 *int32
 }
 
-func (r ApiGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) ApiGetPromoOffersRequest {
+func (r PromosAPIGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) PromosAPIGetPromoOffersRequest {
 	r.getPromoOffersRequest = &getPromoOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetPromoOffersRequest) PageToken(pageToken string) ApiGetPromoOffersRequest {
+func (r PromosAPIGetPromoOffersRequest) PageToken(pageToken string) PromosAPIGetPromoOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetPromoOffersRequest) Limit(limit int32) ApiGetPromoOffersRequest {
+func (r PromosAPIGetPromoOffersRequest) Limit(limit int32) PromosAPIGetPromoOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
+func (r PromosAPIGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
 	return r.ApiService.GetPromoOffersExecute(r)
 }
 
@@ -274,12 +274,13 @@ GetPromoOffers Получение списка товаров, которые у
 |**⚙️ Лимит:** 10 000 запросов в час, не более 500 товаров в запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetPromoOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return PromosAPIGetPromoOffersRequest
 */
-func (a *PromosAPIService) GetPromoOffers(ctx context.Context, businessId int64) ApiGetPromoOffersRequest {
-	return ApiGetPromoOffersRequest{
+func (a *PromosAPIService) GetPromoOffers(ctx context.Context, businessId int64) PromosAPIGetPromoOffersRequest {
+	return PromosAPIGetPromoOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -287,9 +288,8 @@ func (a *PromosAPIService) GetPromoOffers(ctx context.Context, businessId int64)
 }
 
 // Execute executes the request
-//
-//	@return GetPromoOffersResponse
-func (a *PromosAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
+//  @return GetPromoOffersResponse
+func (a *PromosAPIService) GetPromoOffersExecute(r PromosAPIGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -316,10 +316,10 @@ func (a *PromosAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*G
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -456,19 +456,19 @@ func (a *PromosAPIService) GetPromoOffersExecute(r ApiGetPromoOffersRequest) (*G
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPromosRequest struct {
+type PromosAPIGetPromosRequest struct {
 	ctx              context.Context
 	ApiService       *PromosAPIService
 	businessId       int64
 	getPromosRequest *GetPromosRequest
 }
 
-func (r ApiGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) ApiGetPromosRequest {
+func (r PromosAPIGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) PromosAPIGetPromosRequest {
 	r.getPromosRequest = &getPromosRequest
 	return r
 }
 
-func (r ApiGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
+func (r PromosAPIGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
 	return r.ApiService.GetPromosExecute(r)
 }
 
@@ -492,12 +492,13 @@ GetPromos Получение списка акций
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetPromosRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return PromosAPIGetPromosRequest
 */
-func (a *PromosAPIService) GetPromos(ctx context.Context, businessId int64) ApiGetPromosRequest {
-	return ApiGetPromosRequest{
+func (a *PromosAPIService) GetPromos(ctx context.Context, businessId int64) PromosAPIGetPromosRequest {
+	return PromosAPIGetPromosRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -505,9 +506,8 @@ func (a *PromosAPIService) GetPromos(ctx context.Context, businessId int64) ApiG
 }
 
 // Execute executes the request
-//
-//	@return GetPromosResponse
-func (a *PromosAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
+//  @return GetPromosResponse
+func (a *PromosAPIService) GetPromosExecute(r PromosAPIGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -665,19 +665,19 @@ func (a *PromosAPIService) GetPromosExecute(r ApiGetPromosRequest) (*GetPromosRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePromoOffersRequest struct {
+type PromosAPIUpdatePromoOffersRequest struct {
 	ctx                      context.Context
 	ApiService               *PromosAPIService
 	businessId               int64
 	updatePromoOffersRequest *UpdatePromoOffersRequest
 }
 
-func (r ApiUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) ApiUpdatePromoOffersRequest {
+func (r PromosAPIUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) PromosAPIUpdatePromoOffersRequest {
 	r.updatePromoOffersRequest = &updatePromoOffersRequest
 	return r
 }
 
-func (r ApiUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
+func (r PromosAPIUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
 	return r.ApiService.UpdatePromoOffersExecute(r)
 }
 
@@ -693,12 +693,13 @@ UpdatePromoOffers Добавление товаров в акцию или из�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdatePromoOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return PromosAPIUpdatePromoOffersRequest
 */
-func (a *PromosAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) ApiUpdatePromoOffersRequest {
-	return ApiUpdatePromoOffersRequest{
+func (a *PromosAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) PromosAPIUpdatePromoOffersRequest {
+	return PromosAPIUpdatePromoOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -706,9 +707,8 @@ func (a *PromosAPIService) UpdatePromoOffers(ctx context.Context, businessId int
 }
 
 // Execute executes the request
-//
-//	@return UpdatePromoOffersResponse
-func (a *PromosAPIService) UpdatePromoOffersExecute(r ApiUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
+//  @return UpdatePromoOffersResponse
+func (a *PromosAPIService) UpdatePromoOffersExecute(r PromosAPIUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

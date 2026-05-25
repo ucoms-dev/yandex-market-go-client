@@ -443,6 +443,7 @@ func (o *ChangeOutletRequest) UnmarshalJSON(data []byte) (err error) {
 	varChangeOutletRequest := _ChangeOutletRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varChangeOutletRequest)
 
 	if err != nil {
@@ -473,7 +474,8 @@ func (v NullableChangeOutletRequest) IsSet() bool {
 }
 
 func (v *NullableChangeOutletRequest) Unset() {
-	v.value = nil
+	var zero *ChangeOutletRequest
+	v.value = zero
 	v.isSet = false
 }
 

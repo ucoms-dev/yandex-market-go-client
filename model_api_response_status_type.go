@@ -20,8 +20,8 @@ type ApiResponseStatusType string
 
 // List of ApiResponseStatusType
 const (
-	ApiResponseStatusType_OK    ApiResponseStatusType = "OK"
-	ApiResponseStatusType_ERROR ApiResponseStatusType = "ERROR"
+	APIRESPONSESTATUSTYPE_OK    ApiResponseStatusType = "OK"
+	APIRESPONSESTATUSTYPE_ERROR ApiResponseStatusType = "ERROR"
 )
 
 // All allowed values of ApiResponseStatusType enum

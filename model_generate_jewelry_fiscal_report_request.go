@@ -166,6 +166,7 @@ func (o *GenerateJewelryFiscalReportRequest) UnmarshalJSON(data []byte) (err err
 	varGenerateJewelryFiscalReportRequest := _GenerateJewelryFiscalReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateJewelryFiscalReportRequest)
 
 	if err != nil {
@@ -196,7 +197,8 @@ func (v NullableGenerateJewelryFiscalReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateJewelryFiscalReportRequest) Unset() {
-	v.value = nil
+	var zero *GenerateJewelryFiscalReportRequest
+	v.value = zero
 	v.isSet = false
 }
 

@@ -183,6 +183,7 @@ func (o *GenerateShipmentListDocumentReportRequest) UnmarshalJSON(data []byte) (
 	varGenerateShipmentListDocumentReportRequest := _GenerateShipmentListDocumentReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateShipmentListDocumentReportRequest)
 
 	if err != nil {
@@ -213,7 +214,8 @@ func (v NullableGenerateShipmentListDocumentReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateShipmentListDocumentReportRequest) Unset() {
-	v.value = nil
+	var zero *GenerateShipmentListDocumentReportRequest
+	v.value = zero
 	v.isSet = false
 }
 

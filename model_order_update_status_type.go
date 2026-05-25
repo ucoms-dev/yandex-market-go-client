@@ -20,8 +20,8 @@ type OrderUpdateStatusType string
 
 // List of OrderUpdateStatusType
 const (
-	OrderUpdateStatusType_OK    OrderUpdateStatusType = "OK"
-	OrderUpdateStatusType_ERROR OrderUpdateStatusType = "ERROR"
+	ORDERUPDATESTATUSTYPE_OK    OrderUpdateStatusType = "OK"
+	ORDERUPDATESTATUSTYPE_ERROR OrderUpdateStatusType = "ERROR"
 )
 
 // All allowed values of OrderUpdateStatusType enum

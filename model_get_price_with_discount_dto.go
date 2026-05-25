@@ -203,6 +203,7 @@ func (o *GetPriceWithDiscountDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetPriceWithDiscountDTO := _GetPriceWithDiscountDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetPriceWithDiscountDTO)
 
 	if err != nil {
@@ -233,7 +234,8 @@ func (v NullableGetPriceWithDiscountDTO) IsSet() bool {
 }
 
 func (v *NullableGetPriceWithDiscountDTO) Unset() {
-	v.value = nil
+	var zero *GetPriceWithDiscountDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,12 +20,12 @@ type OrderLiftType string
 
 // List of OrderLiftType
 const (
-	OrderLiftType_NOT_NEEDED     OrderLiftType = "NOT_NEEDED"
-	OrderLiftType_MANUAL         OrderLiftType = "MANUAL"
-	OrderLiftType_ELEVATOR       OrderLiftType = "ELEVATOR"
-	OrderLiftType_CARGO_ELEVATOR OrderLiftType = "CARGO_ELEVATOR"
-	OrderLiftType_FREE           OrderLiftType = "FREE"
-	OrderLiftType_UNKNOWN        OrderLiftType = "UNKNOWN"
+	ORDERLIFTTYPE_NOT_NEEDED     OrderLiftType = "NOT_NEEDED"
+	ORDERLIFTTYPE_MANUAL         OrderLiftType = "MANUAL"
+	ORDERLIFTTYPE_ELEVATOR       OrderLiftType = "ELEVATOR"
+	ORDERLIFTTYPE_CARGO_ELEVATOR OrderLiftType = "CARGO_ELEVATOR"
+	ORDERLIFTTYPE_FREE           OrderLiftType = "FREE"
+	ORDERLIFTTYPE_UNKNOWN        OrderLiftType = "UNKNOWN"
 )
 
 // All allowed values of OrderLiftType enum

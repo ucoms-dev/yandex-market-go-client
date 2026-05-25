@@ -142,7 +142,8 @@ func (v NullableGetOfferMappingsResponse) IsSet() bool {
 }
 
 func (v *NullableGetOfferMappingsResponse) Unset() {
-	v.value = nil
+	var zero *GetOfferMappingsResponse
+	v.value = zero
 	v.isSet = false
 }
 

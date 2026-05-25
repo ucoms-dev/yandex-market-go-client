@@ -144,7 +144,8 @@ func (v NullableScrollingPagerDTO) IsSet() bool {
 }
 
 func (v *NullableScrollingPagerDTO) Unset() {
-	v.value = nil
+	var zero *ScrollingPagerDTO
+	v.value = zero
 	v.isSet = false
 }
 

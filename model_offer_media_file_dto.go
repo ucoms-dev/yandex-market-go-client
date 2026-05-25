@@ -180,7 +180,8 @@ func (v NullableOfferMediaFileDTO) IsSet() bool {
 }
 
 func (v *NullableOfferMediaFileDTO) Unset() {
-	v.value = nil
+	var zero *OfferMediaFileDTO
+	v.value = zero
 	v.isSet = false
 }
 

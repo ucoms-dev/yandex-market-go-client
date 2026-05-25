@@ -143,7 +143,8 @@ func (v NullableOfferProcessingNoteDTO) IsSet() bool {
 }
 
 func (v *NullableOfferProcessingNoteDTO) Unset() {
-	v.value = nil
+	var zero *OfferProcessingNoteDTO
+	v.value = zero
 	v.isSet = false
 }
 

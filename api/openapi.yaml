@@ -41,6 +41,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -48,6 +49,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -140,6 +142,7 @@ paths:
           Используется вместе с параметром `page_size`.
 
           `page_number` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: page
         required: false
@@ -148,18 +151,21 @@ paths:
           format: int32
           maximum: 10000
           type: integer
+        style: form
       - description: |
           Размер страницы.
 
           Используется вместе с параметром `page_number`.
 
           `page_size` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: pageSize
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -244,6 +250,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -251,6 +258,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -335,6 +343,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -342,6 +351,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -433,6 +443,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -440,6 +451,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -525,6 +537,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -532,13 +545,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -648,6 +664,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -655,10 +672,12 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Фильтрация заказов по идентификаторам.
           <br><br>
           ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
+        explode: true
         in: query
         name: orderIds
         required: false
@@ -669,6 +688,7 @@ paths:
             minItems: 1
             type: integer
           type: array
+        style: form
       - description: |
           Статус заказа:
 
@@ -685,6 +705,7 @@ paths:
           * `UNPAID` — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).
 
           Также могут возвращаться другие значения. Обрабатывать их не требуется.
+        explode: true
         in: query
         name: status
         required: false
@@ -693,6 +714,7 @@ paths:
             $ref: '#/components/schemas/OrderStatusType'
           type: array
           uniqueItems: true
+        style: form
       - description: |
           Этап обработки заказа (если он имеет статус `PROCESSING`) или причина отмены заказа (если он имеет статус `CANCELLED`).
 
@@ -741,6 +763,7 @@ paths:
           * `RESERVATION_FAILED` — Маркет не может продолжить дальнейшую обработку заказа.
 
           Также могут возвращаться другие значения. Обрабатывать их не требуется.
+        explode: true
         in: query
         name: substatus
         required: false
@@ -749,6 +772,7 @@ paths:
             $ref: '#/components/schemas/OrderSubstatusType'
           type: array
           uniqueItems: true
+        style: form
       - description: |
           Начальная дата для фильтрации заказов по дате оформления.
 
@@ -757,12 +781,14 @@ paths:
           Между начальной и конечной датой (параметр `toDate`) должно быть не больше 30 дней.
 
           Значение по умолчанию: 30 дней назад от текущей даты.
+        explode: true
         in: query
         name: fromDate
         required: false
         schema:
           format: date
           type: string
+        style: form
       - description: |
           Конечная дата для фильтрации заказов по дате оформления.
 
@@ -775,12 +801,14 @@ paths:
           Значение по умолчанию: текущая дата.
 
           Если промежуток времени между `toDate` и `fromDate` меньше суток, то `toDate` равен `fromDate` + сутки.
+        explode: true
         in: query
         name: toDate
         required: false
         schema:
           format: date
           type: string
+        style: form
       - description: |
           Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр `shipmentDate`).
 
@@ -789,12 +817,14 @@ paths:
           Между начальной и конечной датой (параметр `supplierShipmentDateTo`) должно быть не больше 30 дней.
 
           Начальная дата включается в интервал для фильтрации.
+        explode: true
         in: query
         name: supplierShipmentDateFrom
         required: false
         schema:
           format: date
           type: string
+        style: form
       - description: |
           Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр `shipmentDate`).
 
@@ -805,12 +835,14 @@ paths:
           Конечная дата не включается в интервал для фильтрации.
 
           Если промежуток времени между `supplierShipmentDateTo` и `supplierShipmentDateFrom` меньше суток, то `supplierShipmentDateTo` равен `supplierShipmentDateFrom` + сутки.
+        explode: true
         in: query
         name: supplierShipmentDateTo
         required: false
         schema:
           format: date
           type: string
+        style: form
       - description: |
           Начальная дата для фильтрации заказов по дате и времени обновления (параметр `updatedAt`).
 
@@ -819,12 +851,14 @@ paths:
           Между начальной и конечной датой (параметр `updatedAtTo`) должно быть не больше 30 дней.
 
           Начальная дата включается в интервал для фильтрации.
+        explode: true
         in: query
         name: updatedAtFrom
         required: false
         schema:
           format: date-time
           type: string
+        style: form
       - description: |
           Конечная дата для фильтрации заказов по дате и времени обновления (параметр `updatedAt`).
 
@@ -833,30 +867,36 @@ paths:
           Между начальной (параметр `updatedAtFrom`) и конечной датой должно быть не больше 30 дней.
 
           Конечная дата не включается в интервал для фильтрации.
+        explode: true
         in: query
         name: updatedAtTo
         required: false
         schema:
           format: date-time
           type: string
+        style: form
       - description: Способ отгрузки
+        explode: true
         in: query
         name: dispatchType
         required: false
         schema:
           $ref: '#/components/schemas/OrderDeliveryDispatchType'
+        style: form
       - description: |
           Фильтрация заказов по типам:
 
           * `false` — настоящий заказ покупателя.
 
           * `true` — [тестовый](../../concepts/sandbox.md) заказ Маркета.
+        explode: true
         in: query
         name: fake
         required: false
         schema:
           default: false
           type: boolean
+        style: form
       - description: |
           Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):
 
@@ -865,12 +905,14 @@ paths:
           * `false` — нет.
 
           Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям.
+        explode: true
         in: query
         name: hasCis
         required: false
         schema:
           default: false
           type: boolean
+        style: form
       - description: |
           **Только для модели DBS**
 
@@ -879,30 +921,36 @@ paths:
           При значение `true` возвращаются только заказы, которые находятся в статусе `DELIVERY` или `PICKUP` и которые пользователи решили отменить.
 
           Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).
+        explode: true
         in: query
         name: onlyWaitingForCancellationApprove
         required: false
         schema:
           default: false
           type: boolean
+        style: form
       - description: |
           Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:
 
           * `true` — возвращаются только заказы с неподтвержденной датой доставки.
           * `false` — фильтрация не применяется.
+        explode: true
         in: query
         name: onlyEstimatedDelivery
         required: false
         schema:
           default: false
           type: boolean
+        style: form
       - description: |
           Фильтрация заказов по типу покупателя.
+        explode: true
         in: query
         name: buyerType
         required: false
         schema:
           $ref: '#/components/schemas/OrderBuyerType'
+        style: form
       - description: |
           {% note warning "Если в методе есть `page_token`" %}
 
@@ -917,6 +965,7 @@ paths:
           Используется вместе с параметром `page_size`.
 
           `page_number` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: page
         required: false
@@ -925,18 +974,21 @@ paths:
           format: int32
           maximum: 10000
           type: integer
+        style: form
       - description: |
           Размер страницы.
 
           Используется вместе с параметром `page_number`.
 
           `page_size` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: pageSize
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       - description: |
           Идентификатор страницы c результатами.
 
@@ -946,20 +998,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -1059,6 +1115,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -1066,13 +1123,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1192,6 +1252,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -1199,13 +1260,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1284,6 +1348,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -1291,13 +1356,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1383,6 +1451,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -1390,6 +1459,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1529,6 +1599,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -1536,21 +1607,26 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: |
           Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
+        explode: false
         in: path
         name: shipmentId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1645,6 +1721,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -1652,13 +1729,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -1749,6 +1829,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -1756,13 +1837,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2093,6 +2177,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2100,13 +2185,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2188,6 +2276,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2195,13 +2284,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2285,6 +2377,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2292,13 +2385,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -2372,6 +2468,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2379,13 +2476,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2464,6 +2564,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2471,13 +2572,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2563,6 +2667,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2570,13 +2675,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -2660,6 +2768,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2667,13 +2776,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2754,6 +2866,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2761,13 +2874,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2844,6 +2960,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2851,34 +2968,43 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Идентификатор грузоместа.
+        explode: false
         in: path
         name: shipmentId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Идентификатор коробки.
+        explode: false
         in: path
         name: boxId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: "Настройка размещения ярлыков на странице. Если параметра нет\
           , возвращается PDF с ярлыками формата A7."
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/PageFormatType'
+        style: form
       responses:
         "200":
           content:
@@ -2955,6 +3081,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -2962,20 +3089,25 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: "Настройка размещения ярлыков на странице. Если параметра нет\
           , возвращается PDF с ярлыками формата A7."
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/PageFormatType'
+        style: form
       responses:
         "200":
           content:
@@ -3049,6 +3181,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3056,13 +3189,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -3147,6 +3283,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3154,13 +3291,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -3238,6 +3378,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3245,13 +3386,16 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -3337,6 +3481,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3344,6 +3489,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -3353,24 +3499,29 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       - description: |
           Идентификаторы заказов — для фильтрации результатов.
 
           Несколько идентификаторов перечисляются через запятую без пробела.
+        explode: true
         in: query
         name: orderIds
         required: false
@@ -3382,11 +3533,13 @@ paths:
           maxItems: 50
           type: array
           uniqueItems: true
+        style: form
       - description: |
           Статусы невыкупов или возвратов — для фильтрации результатов.
 
           Несколько статусов перечисляются через запятую.
         example: "STARTED_BY_USER,WAITING_FOR_DECISION"
+        explode: true
         in: query
         name: statuses
         required: false
@@ -3395,6 +3548,7 @@ paths:
             $ref: '#/components/schemas/RefundStatusType'
           type: array
           uniqueItems: true
+        style: form
       - description: |
           Тип заказа для фильтрации:
 
@@ -3403,33 +3557,39 @@ paths:
           * `RETURN` — возврат.
 
           Если не указать, в ответе будут и невыкупы, и возвраты.
+        explode: true
         in: query
         name: type
         required: false
         schema:
           $ref: '#/components/schemas/ReturnType'
+        style: form
       - description: |
           Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
 
           Формат: `ГГГГ-ММ-ДД`.
         example: 2022-10-31
+        explode: true
         in: query
         name: fromDate
         required: false
         schema:
           format: date
           type: string
+        style: form
       - description: |
           Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
 
           Формат: `ГГГГ-ММ-ДД`.
         example: 2022-11-30
+        explode: true
         in: query
         name: toDate
         required: false
         schema:
           format: date
           type: string
+        style: form
       - deprecated: true
         description: |
           {% note warning "Вместо него используйте `fromDate`." %}
@@ -3440,12 +3600,14 @@ paths:
 
           Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
         example: 2022-10-31
+        explode: true
         in: query
         name: from_date
         required: false
         schema:
           format: date
           type: string
+        style: form
       - deprecated: true
         description: |
           {% note warning "Вместо него используйте `toDate`." %}
@@ -3456,12 +3618,14 @@ paths:
 
           Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
         example: 2022-11-30
+        explode: true
         in: query
         name: to_date
         required: false
         schema:
           format: date
           type: string
+        style: form
       responses:
         "200":
           content:
@@ -3545,6 +3709,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3552,20 +3717,25 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Идентификатор невыкупа или возврата.
+        explode: false
         in: path
         name: returnId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -3641,6 +3811,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3648,20 +3819,25 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Идентификатор невыкупа или возврата.
+        explode: false
         in: path
         name: returnId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -3738,6 +3914,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3745,20 +3922,25 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Идентификатор невыкупа или возврата.
+        explode: false
         in: path
         name: returnId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -3838,6 +4020,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3845,20 +4028,25 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Идентификатор невыкупа или возврата.
+        explode: false
         in: path
         name: returnId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -3935,6 +4123,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -3942,33 +4131,42 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор заказа.
+        explode: false
         in: path
         name: orderId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Идентификатор невыкупа или возврата.
+        explode: false
         in: path
         name: returnId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Идентификатор товара в возврате.
+        explode: false
         in: path
         name: itemId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: Хеш ссылки изображения для загрузки.
+        explode: false
         in: path
         name: imageHash
         required: true
         schema:
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -4046,11 +4244,13 @@ paths:
           Название региона.
 
           Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, `Москва`.
+        explode: true
         in: query
         name: name
         required: true
         schema:
           type: string
+        style: form
       - description: |
           Идентификатор страницы c результатами.
 
@@ -4060,20 +4260,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -4146,12 +4350,14 @@ paths:
           Идентификатор региона.
 
           Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+        explode: false
         in: path
         name: regionId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -4230,12 +4436,14 @@ paths:
           Идентификатор региона.
 
           Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+        explode: false
         in: path
         name: regionId
         required: true
         schema:
           format: int64
           type: integer
+        style: simple
       - description: |
           {% note warning "Если в методе есть `page_token`" %}
 
@@ -4250,6 +4458,7 @@ paths:
           Используется вместе с параметром `page_size`.
 
           `page_number` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: page
         required: false
@@ -4258,18 +4467,21 @@ paths:
           format: int32
           maximum: 10000
           type: integer
+        style: form
       - description: |
           Размер страницы.
 
           Используется вместе с параметром `page_number`.
 
           `page_size` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: pageSize
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -4469,6 +4681,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -4476,8 +4689,10 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор склада.
         example: 123123
+        explode: true
         in: query
         name: warehouse_id
         required: false
@@ -4485,6 +4700,7 @@ paths:
           format: int32
           minimum: 1
           type: integer
+        style: form
       - description: |
           Логин пользователя в Яндекс ID, от имени которого будет подписываться электронный акт приема-передачи.
 
@@ -4497,11 +4713,13 @@ paths:
 
             * слева снизу под иконкой пользователя;
             * на странице **Настройки** → **Сотрудники и доступы**.
+        explode: true
         in: query
         name: signatory
         required: false
         schema:
           type: string
+        style: form
       responses:
         "200":
           content:
@@ -4573,6 +4791,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -4580,7 +4799,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -4588,16 +4809,19 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Возвращать ли отмененные заказы.
 
           Значение по умолчанию: `true`. Если возвращать отмененные заказы не нужно, передайте значение `false`.
+        explode: true
         in: query
         name: cancelledOrders
         required: false
         schema:
           default: true
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -4669,6 +4893,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -4676,7 +4901,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -4684,6 +4911,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -4756,6 +4984,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -4763,7 +4992,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -4771,6 +5002,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -4879,6 +5111,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -4886,7 +5119,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -4894,6 +5129,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -4967,6 +5203,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -4974,7 +5211,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -4982,6 +5221,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -5055,6 +5295,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -5062,7 +5303,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -5070,6 +5313,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -5140,6 +5384,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -5147,7 +5392,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -5155,6 +5402,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -5227,6 +5475,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -5234,7 +5483,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -5242,6 +5493,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -5322,6 +5574,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -5329,7 +5582,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -5337,16 +5592,19 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Формат страниц PDF-файла с ярлыками:
 
           * `A4` — по 16 ярлыков на странице.
           * `A8` — по одному ярлыку на странице.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ShipmentPalletLabelPageFormatType'
+        style: form
       responses:
         "200":
           content:
@@ -5423,6 +5681,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -5430,6 +5689,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -5439,20 +5699,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -5543,6 +5807,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -5550,7 +5815,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор отгрузки.
+        explode: false
         in: path
         name: shipmentId
         required: true
@@ -5558,6 +5825,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -5630,6 +5898,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -5637,6 +5906,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -5723,6 +5993,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -5730,6 +6001,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -5739,29 +6011,35 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       - description: |
           Язык, на котором принимаются и возвращаются значения в параметрах `name` и `description`.
 
           Значение по умолчанию: `RU`.
+        explode: true
         in: query
         name: language
         required: false
         schema:
           $ref: '#/components/schemas/CatalogLanguageType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -5901,6 +6179,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -5908,15 +6187,18 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Язык, на котором принимаются и возвращаются значения в параметрах `name` и `description`.
 
           Значение по умолчанию: `RU`.
+        explode: true
         in: query
         name: language
         required: false
         schema:
           $ref: '#/components/schemas/CatalogLanguageType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -6024,6 +6306,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -6031,6 +6314,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -6116,6 +6400,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -6123,6 +6408,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -6206,6 +6492,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -6213,6 +6500,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -6321,6 +6609,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -6328,7 +6617,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор товара в каталоге.
+        explode: true
         in: query
         name: offer_id
         required: false
@@ -6336,6 +6627,7 @@ paths:
           items:
             type: string
           type: array
+        style: form
       - description: |
           Ваш SKU товара.
 
@@ -6346,6 +6638,7 @@ paths:
           ```
 
           В запросе можно указать либо параметр `shopSku`, либо любые параметры для фильтрации товаров. Совместное использование параметра `shopSku` и параметров для фильтрации приведет к ошибке.
+        explode: true
         in: query
         name: shop_sku
         required: false
@@ -6353,12 +6646,15 @@ paths:
           items:
             $ref: '#/components/schemas/ShopSku'
           type: array
+        style: form
       - description: Тип маппинга.
+        explode: true
         in: query
         name: mapping_kind
         required: false
         schema:
           $ref: '#/components/schemas/OfferMappingKindType'
+        style: form
       - description: |
           Фильтрация по статусу публикации товара:
 
@@ -6378,6 +6674,7 @@ paths:
           ```
 
           В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
+        explode: true
         in: query
         name: status
         required: false
@@ -6385,6 +6682,7 @@ paths:
           items:
             $ref: '#/components/schemas/OfferProcessingStatusType'
           type: array
+        style: form
       - description: |
           Фильтрация по планам поставок товара:
 
@@ -6400,6 +6698,7 @@ paths:
           ```
 
           В запросе можно указать либо параметр `shopSku`, либо любые параметры для фильтрации товаров. Совместное использование параметра `shopSku` и параметров для фильтрации приведет к ошибке.
+        explode: true
         in: query
         name: availability
         required: false
@@ -6407,6 +6706,7 @@ paths:
           items:
             $ref: '#/components/schemas/OfferAvailabilityStatusType'
           type: array
+        style: form
       - description: |
           Фильтрация по идентификатору категории на Маркете.
 
@@ -6420,6 +6720,7 @@ paths:
           ```
 
           В запросе можно указать либо параметр `shopSku`, либо любые параметры для фильтрации товаров. Совместное использование параметра `shopSku` и параметров для фильтрации приведет к ошибке.
+        explode: true
         in: query
         name: category_id
         required: false
@@ -6427,6 +6728,7 @@ paths:
           items:
             type: integer
           type: array
+        style: form
       - description: |
           Фильтрация по бренду товара.
 
@@ -6442,6 +6744,7 @@ paths:
           Если в названии бренда есть символы, которые не входят в таблицу ASCII (в том числе кириллические символы), используйте для них URL-кодирование. Например, пробел — %20, апостроф «'» — %27 и т. д. Подробнее см. в разделе [Кодирование URL русскоязычной Википедии](https://ru.wikipedia.org/wiki/URL#Кодирование_URL).
 
           В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
+        explode: true
         in: query
         name: vendor
         required: false
@@ -6449,6 +6752,7 @@ paths:
           items:
             type: string
           type: array
+        style: form
       - description: |
           Идентификатор страницы c результатами.
 
@@ -6458,20 +6762,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -6575,6 +6883,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -6582,6 +6891,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -6678,6 +6988,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -6685,6 +6996,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -6769,6 +7081,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -6776,6 +7089,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -6875,6 +7189,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -6882,6 +7197,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -6982,6 +7298,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -6989,6 +7306,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -6998,27 +7316,33 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       - description: Фильтр по нахождению в архиве.
+        explode: true
         in: query
         name: archived
         required: false
         schema:
           default: false
           type: boolean
+        style: form
       responses:
         "200":
           content:
@@ -7103,6 +7427,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -7110,6 +7435,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -7119,20 +7445,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -7237,6 +7567,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -7244,6 +7575,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -7332,6 +7664,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -7339,6 +7672,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -7348,20 +7682,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -7442,6 +7780,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -7449,6 +7788,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -7546,6 +7886,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -7553,6 +7894,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -7562,20 +7904,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -7661,6 +8007,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -7668,6 +8015,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -7755,6 +8103,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -7762,14 +8111,18 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор скрытого предложения.
+        explode: true
         in: query
         name: offer_id
+        required: false
         schema:
           items:
             $ref: '#/components/schemas/ShopSku'
           type: array
+        style: form
       - description: |
           Идентификатор страницы c результатами.
 
@@ -7779,20 +8132,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -7867,6 +8224,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -7874,6 +8232,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -7960,6 +8319,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -7967,6 +8327,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -8063,6 +8424,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -8070,6 +8432,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -8079,20 +8442,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -8177,6 +8544,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -8184,6 +8552,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -8345,6 +8714,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -8352,6 +8722,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -8361,20 +8732,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -8456,6 +8831,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -8463,6 +8839,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -8539,6 +8916,7 @@ paths:
       parameters:
       - description: |
           Идентификатор отчета, который вы получили после запуска генерации.
+        explode: false
         in: path
         name: reportId
         required: true
@@ -8546,6 +8924,7 @@ paths:
           maxLength: 255
           minLength: 1
           type: string
+        style: simple
       responses:
         "200":
           content:
@@ -8647,17 +9026,21 @@ paths:
       operationId: generateUnitedNettingReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       - description: Язык отчета.
+        explode: true
         in: query
         name: language
         required: false
         schema:
           $ref: '#/components/schemas/ReportLanguageType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -8737,17 +9120,21 @@ paths:
       operationId: generateUnitedMarketplaceServicesReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       - description: Язык отчета.
+        explode: true
         in: query
         name: language
         required: false
         schema:
           $ref: '#/components/schemas/ReportLanguageType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -8818,17 +9205,21 @@ paths:
       operationId: generateUnitedOrdersReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       - description: Язык отчета.
+        explode: true
         in: query
         name: language
         required: false
         schema:
           $ref: '#/components/schemas/ReportLanguageType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -8903,11 +9294,13 @@ paths:
       operationId: generateUnitedReturnsReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -8989,11 +9382,13 @@ paths:
       operationId: generateGoodsRealizationReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9072,11 +9467,13 @@ paths:
       operationId: generatePricesReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9154,11 +9551,13 @@ paths:
       operationId: generateStocksOnWarehousesReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9229,11 +9628,13 @@ paths:
       operationId: generateGoodsMovementReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9302,11 +9703,13 @@ paths:
       operationId: generateShowsSalesReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9383,11 +9786,13 @@ paths:
       operationId: generateCompetitorsPositionReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9459,11 +9864,13 @@ paths:
       operationId: generateGoodsTurnoverReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9534,11 +9941,13 @@ paths:
       operationId: generateBoostConsolidatedReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9675,11 +10084,13 @@ paths:
       operationId: generateShelfsStatisticsReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9750,11 +10161,13 @@ paths:
       parameters:
       - description: "Настройка размещения ярлыков на странице. Если параметра нет\
           , возвращается PDF с ярлыками формата A7."
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/PageFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9826,11 +10239,13 @@ paths:
       operationId: generateGoodsFeedbackReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9903,11 +10318,13 @@ paths:
       operationId: generateShowsBoostReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -9981,11 +10398,13 @@ paths:
       operationId: generateBannersStatisticsReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -10059,11 +10478,13 @@ paths:
       operationId: generateJewelryFiscalReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -10135,11 +10556,13 @@ paths:
       operationId: generateSalesGeographyReport
       parameters:
       - description: Формат отчета.
+        explode: true
         in: query
         name: format
         required: false
         schema:
           $ref: '#/components/schemas/ReportFormatType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -10214,6 +10637,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -10221,6 +10645,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -10230,27 +10655,33 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Идентификатор региона.
           Если задать идентификатор родительского региона любого уровня, в выходных данных будут отображены точки продаж всех дочерних регионов.
           Идентификатор региона можно получить c помощью метода [GET regions](../../reference/regions/searchRegionsByName.md).
+        explode: true
         in: query
         name: region_id
         required: false
         schema:
           format: int64
           type: integer
+        style: form
       - description: "Идентификатор точки продаж, присвоенный магазином."
+        explode: true
         in: query
         name: shop_outlet_code
         required: false
         schema:
           type: string
+        style: form
       - deprecated: true
         description: |
           {% note warning "Вместо него используйте `region_id`." %}
@@ -10258,12 +10689,14 @@ paths:
            
 
           {% endnote %}
+        explode: true
         in: query
         name: regionId
         required: false
         schema:
           format: int64
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -10334,6 +10767,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -10341,6 +10775,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -10418,6 +10853,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -10425,7 +10861,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор точки продаж.
+        explode: false
         in: path
         name: outletId
         required: true
@@ -10433,6 +10871,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -10502,6 +10941,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -10509,7 +10949,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор точки продаж.
+        explode: false
         in: path
         name: outletId
         required: true
@@ -10517,6 +10959,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -10587,6 +11030,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -10594,7 +11038,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор точки продаж.
+        explode: false
         in: path
         name: outletId
         required: true
@@ -10602,6 +11048,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -10678,6 +11125,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -10685,7 +11133,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Список идентификаторов лицензий для удаления.
+        explode: true
         in: query
         name: ids
         required: true
@@ -10696,6 +11146,7 @@ paths:
           minItems: 1
           type: array
           uniqueItems: true
+        style: form
       responses:
         "200":
           content:
@@ -10765,6 +11216,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -10772,10 +11224,12 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Список идентификаторов точек продаж, для которых нужно получить информацию о лицензиях. Идентификаторы указываются через запятую.
 
           В запросе должен быть либо параметр `outletIds`, либо параметр `ids`. Запрос с обоими параметрами или без них приведет к ошибке.
+        explode: true
         in: query
         name: outletIds
         required: false
@@ -10788,7 +11242,9 @@ paths:
           minItems: 1
           type: array
           uniqueItems: true
+        style: form
       - description: Список идентификаторов лицензий.
+        explode: true
         in: query
         name: ids
         required: false
@@ -10799,6 +11255,7 @@ paths:
             type: integer
           type: array
           uniqueItems: true
+        style: form
       responses:
         "200":
           content:
@@ -10871,6 +11328,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -10878,6 +11336,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -10961,6 +11420,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -10968,6 +11428,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -10977,20 +11438,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -11066,6 +11531,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -11073,6 +11539,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -11161,6 +11628,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -11168,6 +11636,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -11242,6 +11711,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -11249,6 +11719,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -11338,6 +11809,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -11345,6 +11817,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -11354,20 +11827,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -11448,6 +11925,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -11455,6 +11933,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -11464,20 +11943,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -11559,6 +12042,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -11566,6 +12050,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -11660,6 +12145,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -11667,6 +12153,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -11760,6 +12247,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -11767,6 +12255,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -11776,20 +12265,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -11870,21 +12363,25 @@ paths:
       operationId: searchModels
       parameters:
       - description: Поисковый запрос по названию модели товара.
+        explode: true
         in: query
         name: query
         required: true
         schema:
           type: string
+        style: form
       - description: |
           Идентификатор региона.
 
           Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+        explode: true
         in: query
         name: regionId
         required: true
         schema:
           format: int64
           type: integer
+        style: form
       - description: |
           Валюта, в которой отображаются цены предложений на страницах с результатами поиска.
 
@@ -11899,11 +12396,13 @@ paths:
           * `UAH` — украинская гривна.
 
           Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
+        explode: true
         in: query
         name: currency
         required: false
         schema:
           $ref: '#/components/schemas/CurrencyType'
+        style: form
       - description: |
           {% note warning "Если в методе есть `page_token`" %}
 
@@ -11918,6 +12417,7 @@ paths:
           Используется вместе с параметром `page_size`.
 
           `page_number` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: page
         required: false
@@ -11926,18 +12426,21 @@ paths:
           format: int32
           maximum: 10000
           type: integer
+        style: form
       - description: |
           Размер страницы.
 
           Используется вместе с параметром `page_number`.
 
           `page_size` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: pageSize
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -12011,12 +12514,14 @@ paths:
           Идентификатор региона.
 
           Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+        explode: true
         in: query
         name: regionId
         required: true
         schema:
           format: int64
           type: integer
+        style: form
       - description: |
           Валюта, в которой отображаются цены предложений на страницах с результатами поиска.
 
@@ -12031,11 +12536,13 @@ paths:
           * `UAH` — украинская гривна.
 
           Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
+        explode: true
         in: query
         name: currency
         required: false
         schema:
           $ref: '#/components/schemas/CurrencyType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -12111,6 +12618,7 @@ paths:
       operationId: getModel
       parameters:
       - description: Идентификатор модели товара.
+        explode: false
         in: path
         name: modelId
         required: true
@@ -12119,16 +12627,19 @@ paths:
           format: int64
           minimum: 0
           type: integer
+        style: simple
       - description: |
           Идентификатор региона.
 
           Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+        explode: true
         in: query
         name: regionId
         required: true
         schema:
           format: int64
           type: integer
+        style: form
       - description: |
           Валюта, в которой отображаются цены предложений на страницах с результатами поиска.
 
@@ -12143,11 +12654,13 @@ paths:
           * `UAH` — украинская гривна.
 
           Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
+        explode: true
         in: query
         name: currency
         required: false
         schema:
           $ref: '#/components/schemas/CurrencyType'
+        style: form
       responses:
         "200":
           content:
@@ -12226,12 +12739,14 @@ paths:
           Идентификатор региона.
 
           Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+        explode: true
         in: query
         name: regionId
         required: true
         schema:
           format: int64
           type: integer
+        style: form
       - description: |
           Валюта, в которой отображаются цены предложений на страницах с результатами поиска.
 
@@ -12246,11 +12761,13 @@ paths:
           * `UAH` — украинская гривна.
 
           Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
+        explode: true
         in: query
         name: currency
         required: false
         schema:
           $ref: '#/components/schemas/CurrencyType'
+        style: form
       - description: |
           Направление сортировки по цене.
 
@@ -12259,11 +12776,13 @@ paths:
           * `DESC` — сортировка по убыванию.
 
           Значение по умолчанию: предложения выводятся в произвольном порядке.
+        explode: true
         in: query
         name: orderByPrice
         required: false
         schema:
           $ref: '#/components/schemas/SortOrderType'
+        style: form
       requestBody:
         content:
           application/json:
@@ -12343,6 +12862,7 @@ paths:
       operationId: getModelOffers
       parameters:
       - description: Идентификатор модели товара.
+        explode: false
         in: path
         name: modelId
         required: true
@@ -12351,16 +12871,19 @@ paths:
           format: int64
           minimum: 0
           type: integer
+        style: simple
       - description: |
           Идентификатор региона.
 
           Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+        explode: true
         in: query
         name: regionId
         required: true
         schema:
           format: int64
           type: integer
+        style: form
       - description: |
           Валюта, в которой отображаются цены предложений на страницах с результатами поиска.
 
@@ -12375,11 +12898,13 @@ paths:
           * `UAH` — украинская гривна.
 
           Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
+        explode: true
         in: query
         name: currency
         required: false
         schema:
           $ref: '#/components/schemas/CurrencyType'
+        style: form
       - description: |
           Направление сортировки по цене.
 
@@ -12388,12 +12913,15 @@ paths:
           * `DESC` — сортировка по убыванию.
 
           Значение по умолчанию: предложения выводятся в произвольном порядке.
+        explode: true
         in: query
         name: orderByPrice
         required: false
         schema:
           $ref: '#/components/schemas/SortOrderType'
+        style: form
       - description: Количество предложений на странице ответа.
+        explode: true
         in: query
         name: count
         required: false
@@ -12401,6 +12929,7 @@ paths:
           default: 10
           format: int32
           type: integer
+        style: form
       - description: |
           {% note warning "Если в методе есть `page_token`" %}
 
@@ -12415,6 +12944,7 @@ paths:
           Используется вместе с параметром `page_size`.
 
           `page_number` игнорируется, если задан `page_token` или `limit`.
+        explode: true
         in: query
         name: page
         required: false
@@ -12423,6 +12953,7 @@ paths:
           format: int32
           maximum: 10000
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -12524,6 +13055,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -12531,6 +13063,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -12641,6 +13174,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -12648,6 +13182,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -12734,6 +13269,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -12741,6 +13277,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -12750,20 +13287,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -12852,6 +13393,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -12859,6 +13401,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -12949,6 +13492,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -12956,6 +13500,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -13030,6 +13575,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -13037,6 +13583,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -13046,20 +13593,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -13208,6 +13759,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -13215,6 +13767,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -13282,6 +13835,7 @@ paths:
           Идентификатор категории на Маркете.
 
           Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
+        explode: false
         in: path
         name: categoryId
         required: true
@@ -13289,6 +13843,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -13365,6 +13920,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -13372,6 +13928,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -13381,20 +13938,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -13485,6 +14046,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -13492,6 +14054,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -13590,6 +14153,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -13597,6 +14161,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -13681,6 +14246,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -13688,6 +14254,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -13697,20 +14264,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -13796,6 +14367,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -13803,7 +14375,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор чата.
+        explode: true
         in: query
         name: chatId
         required: true
@@ -13811,6 +14385,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -13881,6 +14456,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -13888,7 +14464,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор чата.
+        explode: true
         in: query
         name: chatId
         required: true
@@ -13896,6 +14474,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: form
       requestBody:
         content:
           multipart/form-data:
@@ -13979,6 +14558,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -13986,7 +14566,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор чата.
+        explode: true
         in: query
         name: chatId
         required: true
@@ -13994,7 +14576,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: form
       - description: Идентификатор сообщения.
+        explode: true
         in: query
         name: messageId
         required: true
@@ -14002,6 +14586,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: form
       responses:
         "200":
           content:
@@ -14071,6 +14656,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -14078,7 +14664,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор чата.
+        explode: true
         in: query
         name: chatId
         required: true
@@ -14086,6 +14674,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -14161,6 +14750,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -14168,7 +14758,9 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: Идентификатор чата.
+        explode: true
         in: query
         name: chatId
         required: true
@@ -14176,6 +14768,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: form
       - description: |
           Идентификатор страницы c результатами.
 
@@ -14185,20 +14778,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -14514,6 +15111,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -14521,6 +15119,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -14603,6 +15202,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -14610,6 +15210,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       responses:
         "200":
           content:
@@ -14690,6 +15291,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -14697,6 +15299,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -14785,6 +15388,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -14792,6 +15396,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -14801,20 +15406,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -14899,6 +15508,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -14906,6 +15516,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -14985,6 +15596,7 @@ paths:
           Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
           ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+        explode: false
         in: path
         name: businessId
         required: true
@@ -14992,6 +15604,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -15074,6 +15687,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -15081,6 +15695,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -15090,20 +15705,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -15175,6 +15794,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -15182,6 +15802,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       - description: |
           Идентификатор страницы c результатами.
 
@@ -15191,20 +15812,24 @@ paths:
 
           Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
         example: eyBuZXh0SWQ6IDIzNDIgfQ==
+        explode: true
         in: query
         name: page_token
         required: false
         schema:
           type: string
+        style: form
       - description: |
           Количество значений на одной странице.
         example: 20
+        explode: true
         in: query
         name: limit
         required: false
         schema:
           format: int32
           type: integer
+        style: form
       requestBody:
         content:
           application/json:
@@ -15282,6 +15907,7 @@ paths:
             * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
           ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+        explode: false
         in: path
         name: campaignId
         required: true
@@ -15289,6 +15915,7 @@ paths:
           format: int64
           minimum: 1
           type: integer
+        style: simple
       requestBody:
         content:
           application/json:
@@ -15428,6 +16055,7 @@ components:
         Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).
 
         ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+      explode: false
       in: path
       name: businessId
       required: true
@@ -15435,6 +16063,7 @@ components:
         format: int64
         minimum: 1
         type: integer
+      style: simple
     PageNum:
       description: |
         {% note warning "Если в методе есть `page_token`" %}
@@ -15450,6 +16079,7 @@ components:
         Используется вместе с параметром `page_size`.
 
         `page_number` игнорируется, если задан `page_token` или `limit`.
+      explode: true
       in: query
       name: page
       required: false
@@ -15458,6 +16088,7 @@ components:
         format: int32
         maximum: 10000
         type: integer
+      style: form
     PageSize:
       description: |
         Размер страницы.
@@ -15465,12 +16096,14 @@ components:
         Используется вместе с параметром `page_number`.
 
         `page_size` игнорируется, если задан `page_token` или `limit`.
+      explode: true
       in: query
       name: pageSize
       required: false
       schema:
         format: int32
         type: integer
+      style: form
     CampaignId:
       description: |
         Идентификатор кампании.
@@ -15481,6 +16114,7 @@ components:
           * **Лог запросов** → выпадающий список в блоке **Показывать логи**.
 
         ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+      explode: false
       in: path
       name: campaignId
       required: true
@@ -15488,19 +16122,23 @@ components:
         format: int64
         minimum: 1
         type: integer
+      style: simple
     OrderId:
       description: Идентификатор заказа.
+      explode: false
       in: path
       name: orderId
       required: true
       schema:
         format: int64
         type: integer
+      style: simple
     GetOrdersOrderIds:
       description: |
         Фильтрация заказов по идентификаторам.
         <br><br>
         ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
+      explode: true
       in: query
       name: orderIds
       required: false
@@ -15511,6 +16149,7 @@ components:
           minItems: 1
           type: integer
         type: array
+      style: form
     GetOrdersStatus:
       description: |
         Статус заказа:
@@ -15528,6 +16167,7 @@ components:
         * `UNPAID` — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).
 
         Также могут возвращаться другие значения. Обрабатывать их не требуется.
+      explode: true
       in: query
       name: status
       required: false
@@ -15536,6 +16176,7 @@ components:
           $ref: '#/components/schemas/OrderStatusType'
         type: array
         uniqueItems: true
+      style: form
     GetOrdersSubstatus:
       description: |
         Этап обработки заказа (если он имеет статус `PROCESSING`) или причина отмены заказа (если он имеет статус `CANCELLED`).
@@ -15585,6 +16226,7 @@ components:
         * `RESERVATION_FAILED` — Маркет не может продолжить дальнейшую обработку заказа.
 
         Также могут возвращаться другие значения. Обрабатывать их не требуется.
+      explode: true
       in: query
       name: substatus
       required: false
@@ -15593,6 +16235,7 @@ components:
           $ref: '#/components/schemas/OrderSubstatusType'
         type: array
         uniqueItems: true
+      style: form
     GetOrdersFromDate:
       description: |
         Начальная дата для фильтрации заказов по дате оформления.
@@ -15602,12 +16245,14 @@ components:
         Между начальной и конечной датой (параметр `toDate`) должно быть не больше 30 дней.
 
         Значение по умолчанию: 30 дней назад от текущей даты.
+      explode: true
       in: query
       name: fromDate
       required: false
       schema:
         format: date
         type: string
+      style: form
     GetOrdersToDate:
       description: |
         Конечная дата для фильтрации заказов по дате оформления.
@@ -15621,12 +16266,14 @@ components:
         Значение по умолчанию: текущая дата.
 
         Если промежуток времени между `toDate` и `fromDate` меньше суток, то `toDate` равен `fromDate` + сутки.
+      explode: true
       in: query
       name: toDate
       required: false
       schema:
         format: date
         type: string
+      style: form
     GetOrdersSupplierShipmentDateFrom:
       description: |
         Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр `shipmentDate`).
@@ -15636,12 +16283,14 @@ components:
         Между начальной и конечной датой (параметр `supplierShipmentDateTo`) должно быть не больше 30 дней.
 
         Начальная дата включается в интервал для фильтрации.
+      explode: true
       in: query
       name: supplierShipmentDateFrom
       required: false
       schema:
         format: date
         type: string
+      style: form
     GetOrdersSupplierShipmentDateTo:
       description: |
         Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр `shipmentDate`).
@@ -15653,12 +16302,14 @@ components:
         Конечная дата не включается в интервал для фильтрации.
 
         Если промежуток времени между `supplierShipmentDateTo` и `supplierShipmentDateFrom` меньше суток, то `supplierShipmentDateTo` равен `supplierShipmentDateFrom` + сутки.
+      explode: true
       in: query
       name: supplierShipmentDateTo
       required: false
       schema:
         format: date
         type: string
+      style: form
     GetOrdersUpdatedAtFrom:
       description: |
         Начальная дата для фильтрации заказов по дате и времени обновления (параметр `updatedAt`).
@@ -15668,12 +16319,14 @@ components:
         Между начальной и конечной датой (параметр `updatedAtTo`) должно быть не больше 30 дней.
 
         Начальная дата включается в интервал для фильтрации.
+      explode: true
       in: query
       name: updatedAtFrom
       required: false
       schema:
         format: date-time
         type: string
+      style: form
     GetOrdersUpdatedAtTo:
       description: |
         Конечная дата для фильтрации заказов по дате и времени обновления (параметр `updatedAt`).
@@ -15683,19 +16336,23 @@ components:
         Между начальной (параметр `updatedAtFrom`) и конечной датой должно быть не больше 30 дней.
 
         Конечная дата не включается в интервал для фильтрации.
+      explode: true
       in: query
       name: updatedAtTo
       required: false
       schema:
         format: date-time
         type: string
+      style: form
     GetOrdersDispatchType:
       description: Способ отгрузки
+      explode: true
       in: query
       name: dispatchType
       required: false
       schema:
         $ref: '#/components/schemas/OrderDeliveryDispatchType'
+      style: form
     GetOrdersFake:
       description: |
         Фильтрация заказов по типам:
@@ -15703,12 +16360,14 @@ components:
         * `false` — настоящий заказ покупателя.
 
         * `true` — [тестовый](../../concepts/sandbox.md) заказ Маркета.
+      explode: true
       in: query
       name: fake
       required: false
       schema:
         default: false
         type: boolean
+      style: form
     GetOrdersHasCis:
       description: |
         Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):
@@ -15718,12 +16377,14 @@ components:
         * `false` — нет.
 
         Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям.
+      explode: true
       in: query
       name: hasCis
       required: false
       schema:
         default: false
         type: boolean
+      style: form
     GetOrdersOnlyWaitingForCancellationApprove:
       description: |
         **Только для модели DBS**
@@ -15733,32 +16394,38 @@ components:
         При значение `true` возвращаются только заказы, которые находятся в статусе `DELIVERY` или `PICKUP` и которые пользователи решили отменить.
 
         Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).
+      explode: true
       in: query
       name: onlyWaitingForCancellationApprove
       required: false
       schema:
         default: false
         type: boolean
+      style: form
     GetOrdersOnlyEstimatedDelivery:
       description: |
         Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:
 
         * `true` — возвращаются только заказы с неподтвержденной датой доставки.
         * `false` — фильтрация не применяется.
+      explode: true
       in: query
       name: onlyEstimatedDelivery
       required: false
       schema:
         default: false
         type: boolean
+      style: form
     GetOrdersBuyerType:
       description: |
         Фильтрация заказов по типу покупателя.
+      explode: true
       in: query
       name: buyerType
       required: false
       schema:
         $ref: '#/components/schemas/OrderBuyerType'
+      style: form
     PageToken:
       description: |
         Идентификатор страницы c результатами.
@@ -15769,100 +16436,123 @@ components:
 
         Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.
       example: eyBuZXh0SWQ6IDIzNDIgfQ==
+      explode: true
       in: query
       name: page_token
       required: false
       schema:
         type: string
+      style: form
     PageLimit:
       description: |
         Количество значений на одной странице.
       example: 20
+      explode: true
       in: query
       name: limit
       required: false
       schema:
         format: int32
         type: integer
+      style: form
     ShipmentId:
       description: |
         Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
+      explode: false
       in: path
       name: shipmentId
       required: true
       schema:
         format: int64
         type: integer
+      style: simple
     generateOrderLabel_ShipmentId:
       description: Идентификатор грузоместа.
+      explode: false
       in: path
       name: shipmentId
       required: true
       schema:
         format: int64
         type: integer
+      style: simple
     BoxId:
       description: Идентификатор коробки.
+      explode: false
       in: path
       name: boxId
       required: true
       schema:
         format: int64
         type: integer
+      style: simple
     PageFormat:
       description: "Настройка размещения ярлыков на странице. Если параметра нет,\
         \ возвращается PDF с ярлыками формата A7."
+      explode: true
       in: query
       name: format
       required: false
       schema:
         $ref: '#/components/schemas/PageFormatType'
+      style: form
     ReturnId:
       description: Идентификатор невыкупа или возврата.
+      explode: false
       in: path
       name: returnId
       required: true
       schema:
         format: int64
         type: integer
+      style: simple
     ItemId:
       description: Идентификатор товара в возврате.
+      explode: false
       in: path
       name: itemId
       required: true
       schema:
         format: int64
         type: integer
+      style: simple
     ImageHash:
       description: Хеш ссылки изображения для загрузки.
+      explode: false
       in: path
       name: imageHash
       required: true
       schema:
         type: string
+      style: simple
     RegionName:
       description: |
         Название региона.
 
         Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, `Москва`.
+      explode: true
       in: query
       name: name
       required: true
       schema:
         type: string
+      style: form
     RegionId:
       description: |
         Идентификатор региона.
 
         Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+      explode: false
       in: path
       name: regionId
       required: true
       schema:
         format: int64
         type: integer
+      style: simple
     params_ShipmentId:
       description: Идентификатор отгрузки.
+      explode: false
       in: path
       name: shipmentId
       required: true
@@ -15870,40 +16560,48 @@ components:
         format: int64
         minimum: 1
         type: integer
+      style: simple
     CancelledOrders:
       description: |
         Возвращать ли отмененные заказы.
 
         Значение по умолчанию: `true`. Если возвращать отмененные заказы не нужно, передайте значение `false`.
+      explode: true
       in: query
       name: cancelledOrders
       required: false
       schema:
         default: true
         type: boolean
+      style: form
     ShipmentPalletLabelsPageFormat:
       description: |
         Формат страниц PDF-файла с ярлыками:
 
         * `A4` — по 16 ярлыков на странице.
         * `A8` — по одному ярлыку на странице.
+      explode: true
       in: query
       name: format
       required: false
       schema:
         $ref: '#/components/schemas/ShipmentPalletLabelPageFormatType'
+      style: form
     CatalogLanguage:
       description: |
         Язык, на котором принимаются и возвращаются значения в параметрах `name` и `description`.
 
         Значение по умолчанию: `RU`.
+      explode: true
       in: query
       name: language
       required: false
       schema:
         $ref: '#/components/schemas/CatalogLanguageType'
+      style: form
     OfferIds:
       description: Идентификатор товара в каталоге.
+      explode: true
       in: query
       name: offer_id
       required: false
@@ -15911,6 +16609,7 @@ components:
         items:
           type: string
         type: array
+      style: form
     OfferShopSkus:
       description: |
         Ваш SKU товара.
@@ -15922,6 +16621,7 @@ components:
         ```
 
         В запросе можно указать либо параметр `shopSku`, либо любые параметры для фильтрации товаров. Совместное использование параметра `shopSku` и параметров для фильтрации приведет к ошибке.
+      explode: true
       in: query
       name: shop_sku
       required: false
@@ -15929,13 +16629,16 @@ components:
         items:
           $ref: '#/components/schemas/ShopSku'
         type: array
+      style: form
     OfferMappingKind:
       description: Тип маппинга.
+      explode: true
       in: query
       name: mapping_kind
       required: false
       schema:
         $ref: '#/components/schemas/OfferMappingKindType'
+      style: form
     OfferProcessingStatuses:
       description: |
         Фильтрация по статусу публикации товара:
@@ -15956,6 +16659,7 @@ components:
         ```
 
         В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
+      explode: true
       in: query
       name: status
       required: false
@@ -15963,6 +16667,7 @@ components:
         items:
           $ref: '#/components/schemas/OfferProcessingStatusType'
         type: array
+      style: form
     OfferAvailabilityStatuses:
       description: |
         Фильтрация по планам поставок товара:
@@ -15979,6 +16684,7 @@ components:
         ```
 
         В запросе можно указать либо параметр `shopSku`, либо любые параметры для фильтрации товаров. Совместное использование параметра `shopSku` и параметров для фильтрации приведет к ошибке.
+      explode: true
       in: query
       name: availability
       required: false
@@ -15986,6 +16692,7 @@ components:
         items:
           $ref: '#/components/schemas/OfferAvailabilityStatusType'
         type: array
+      style: form
     CategoryIds:
       description: |
         Фильтрация по идентификатору категории на Маркете.
@@ -16000,6 +16707,7 @@ components:
         ```
 
         В запросе можно указать либо параметр `shopSku`, либо любые параметры для фильтрации товаров. Совместное использование параметра `shopSku` и параметров для фильтрации приведет к ошибке.
+      explode: true
       in: query
       name: category_id
       required: false
@@ -16007,6 +16715,7 @@ components:
         items:
           type: integer
         type: array
+      style: form
     VendorNames:
       description: |
         Фильтрация по бренду товара.
@@ -16023,6 +16732,7 @@ components:
         Если в названии бренда есть символы, которые не входят в таблицу ASCII (в том числе кириллические символы), используйте для них URL-кодирование. Например, пробел — %20, апостроф «'» — %27 и т. д. Подробнее см. в разделе [Кодирование URL русскоязычной Википедии](https://ru.wikipedia.org/wiki/URL#Кодирование_URL).
 
         В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
+      explode: true
       in: query
       name: vendor
       required: false
@@ -16030,18 +16740,23 @@ components:
         items:
           type: string
         type: array
+      style: form
     params_OfferIds:
       description: |
         Идентификатор скрытого предложения.
+      explode: true
       in: query
       name: offer_id
+      required: false
       schema:
         items:
           $ref: '#/components/schemas/ShopSku'
         type: array
+      style: form
     ReportId:
       description: |
         Идентификатор отчета, который вы получили после запуска генерации.
+      explode: false
       in: path
       name: reportId
       required: true
@@ -16049,30 +16764,38 @@ components:
         maxLength: 255
         minLength: 1
         type: string
+      style: simple
     ReportFormat:
       description: Формат отчета.
+      explode: true
       in: query
       name: format
       required: false
       schema:
         $ref: '#/components/schemas/ReportFormatType'
+      style: form
     ReportLanguage:
       description: Язык отчета.
+      explode: true
       in: query
       name: language
       required: false
       schema:
         $ref: '#/components/schemas/ReportLanguageType'
+      style: form
     MassOrderLabelsGenerationPageFormat:
       description: "Настройка размещения ярлыков на странице. Если параметра нет,\
         \ возвращается PDF с ярлыками формата A7."
+      explode: true
       in: query
       name: format
       required: false
       schema:
         $ref: '#/components/schemas/PageFormatType'
+      style: form
     OutletId:
       description: Идентификатор точки продаж.
+      explode: false
       in: path
       name: outletId
       required: true
@@ -16080,11 +16803,13 @@ components:
         format: int64
         minimum: 1
         type: integer
+      style: simple
     OutletIds:
       description: |
         Список идентификаторов точек продаж, для которых нужно получить информацию о лицензиях. Идентификаторы указываются через запятую.
 
         В запросе должен быть либо параметр `outletIds`, либо параметр `ids`. Запрос с обоими параметрами или без них приведет к ошибке.
+      explode: true
       in: query
       name: outletIds
       required: false
@@ -16097,8 +16822,10 @@ components:
         minItems: 1
         type: array
         uniqueItems: true
+      style: form
     LicenseIds:
       description: Список идентификаторов лицензий.
+      explode: true
       in: query
       name: ids
       required: false
@@ -16109,8 +16836,10 @@ components:
           type: integer
         type: array
         uniqueItems: true
+      style: form
     DeleteLicenseIds:
       description: Список идентификаторов лицензий для удаления.
+      explode: true
       in: query
       name: ids
       required: true
@@ -16121,24 +16850,29 @@ components:
         minItems: 1
         type: array
         uniqueItems: true
+      style: form
     ModelQuery:
       description: Поисковый запрос по названию модели товара.
+      explode: true
       in: query
       name: query
       required: true
       schema:
         type: string
+      style: form
     ModelRegionId:
       description: |
         Идентификатор региона.
 
         Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+      explode: true
       in: query
       name: regionId
       required: true
       schema:
         format: int64
         type: integer
+      style: form
     Currency:
       description: |
         Валюта, в которой отображаются цены предложений на страницах с результатами поиска.
@@ -16154,13 +16888,16 @@ components:
         * `UAH` — украинская гривна.
 
         Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
+      explode: true
       in: query
       name: currency
       required: false
       schema:
         $ref: '#/components/schemas/CurrencyType'
+      style: form
     ModelId:
       description: Идентификатор модели товара.
+      explode: false
       in: path
       name: modelId
       required: true
@@ -16169,6 +16906,7 @@ components:
         format: int64
         minimum: 0
         type: integer
+      style: simple
     OrderByPrice:
       description: |
         Направление сортировки по цене.
@@ -16178,13 +16916,16 @@ components:
         * `DESC` — сортировка по убыванию.
 
         Значение по умолчанию: предложения выводятся в произвольном порядке.
+      explode: true
       in: query
       name: orderByPrice
       required: false
       schema:
         $ref: '#/components/schemas/SortOrderType'
+      style: form
     ModelPageCount:
       description: Количество предложений на странице ответа.
+      explode: true
       in: query
       name: count
       required: false
@@ -16192,11 +16933,13 @@ components:
         default: 10
         format: int32
         type: integer
+      style: form
     MarketCategoryId:
       description: |
         Идентификатор категории на Маркете.
 
         Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
+      explode: false
       in: path
       name: categoryId
       required: true
@@ -16204,8 +16947,10 @@ components:
         format: int64
         minimum: 1
         type: integer
+      style: simple
     ChatId:
       description: Идентификатор чата.
+      explode: true
       in: query
       name: chatId
       required: true
@@ -16213,8 +16958,10 @@ components:
         format: int64
         minimum: 1
         type: integer
+      style: form
     MessageId:
       description: Идентификатор сообщения.
+      explode: true
       in: query
       name: messageId
       required: true
@@ -16222,6 +16969,7 @@ components:
         format: int64
         minimum: 1
         type: integer
+      style: form
   responses:
     "400":
       content:
@@ -24599,11 +25347,11 @@ components:
             - startDay: MONDAY
               endDay: null
               startTime: 09:59
-              endTime: 23:59
+              endTime: 1439
             - startDay: MONDAY
               endDay: null
               startTime: 09:59
-              endTime: 23:59
+              endTime: 1439
             workInHoliday: true
           shopOutletId: shopOutletId
           shopOutletCode: shopOutletCode
@@ -24656,11 +25404,11 @@ components:
             - startDay: MONDAY
               endDay: null
               startTime: 09:59
-              endTime: 23:59
+              endTime: 1439
             - startDay: MONDAY
               endDay: null
               startTime: 09:59
-              endTime: 23:59
+              endTime: 1439
             workInHoliday: true
           shopOutletId: shopOutletId
           shopOutletCode: shopOutletCode
@@ -24734,11 +25482,11 @@ components:
           - startDay: MONDAY
             endDay: null
             startTime: 09:59
-            endTime: 23:59
+            endTime: 1439
           - startDay: MONDAY
             endDay: null
             startTime: 09:59
-            endTime: 23:59
+            endTime: 1439
           workInHoliday: true
         deliveryRules:
         - priceFreePickup: 7.061401241503109
@@ -24795,11 +25543,11 @@ components:
             - startDay: MONDAY
               endDay: null
               startTime: 09:59
-              endTime: 23:59
+              endTime: 1439
             - startDay: MONDAY
               endDay: null
               startTime: 09:59
-              endTime: 23:59
+              endTime: 1439
             workInHoliday: true
           shopOutletId: shopOutletId
           shopOutletCode: shopOutletCode
@@ -32249,11 +32997,11 @@ components:
           - startDay: MONDAY
             endDay: null
             startTime: 09:59
-            endTime: 23:59
+            endTime: 1439
           - startDay: MONDAY
             endDay: null
             startTime: 09:59
-            endTime: 23:59
+            endTime: 1439
           workInHoliday: true
         shopOutletId: shopOutletId
         shopOutletCode: shopOutletCode
@@ -38227,11 +38975,11 @@ components:
         - startDay: MONDAY
           endDay: null
           startTime: 09:59
-          endTime: 23:59
+          endTime: 1439
         - startDay: MONDAY
           endDay: null
           startTime: 09:59
-          endTime: 23:59
+          endTime: 1439
         workInHoliday: true
       properties:
         workInHoliday:
@@ -41988,7 +42736,7 @@ components:
         startDay: MONDAY
         endDay: null
         startTime: 09:59
-        endTime: 23:59
+        endTime: 1439
       properties:
         startDay:
           $ref: '#/components/schemas/DayOfWeekType'
@@ -42007,7 +42755,7 @@ components:
             Точка продаж работает до указанного часа.
 
             Формат: `ЧЧ:ММ`.
-          example: 23:59
+          example: "1439"
           pattern: "^([0-1][0-9]|2[0-3]):[0-5][0-9]$"
           type: string
       required:

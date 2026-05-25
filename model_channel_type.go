@@ -70,7 +70,8 @@ func (v NullableChannelType) IsSet() bool {
 }
 
 func (v *NullableChannelType) Unset() {
-	v.value = ChannelType{}
+	var zero ChannelType
+	v.value = zero
 	v.isSet = false
 }
 

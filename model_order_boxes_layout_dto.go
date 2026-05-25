@@ -108,6 +108,7 @@ func (o *OrderBoxesLayoutDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderBoxesLayoutDTO := _OrderBoxesLayoutDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderBoxesLayoutDTO)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableOrderBoxesLayoutDTO) IsSet() bool {
 }
 
 func (v *NullableOrderBoxesLayoutDTO) Unset() {
-	v.value = nil
+	var zero *OrderBoxesLayoutDTO
+	v.value = zero
 	v.isSet = false
 }
 

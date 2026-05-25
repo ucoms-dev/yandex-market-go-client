@@ -255,6 +255,7 @@ func (o *OrderBuyerBasicInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderBuyerBasicInfoDTO := _OrderBuyerBasicInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderBuyerBasicInfoDTO)
 
 	if err != nil {
@@ -285,7 +286,8 @@ func (v NullableOrderBuyerBasicInfoDTO) IsSet() bool {
 }
 
 func (v *NullableOrderBuyerBasicInfoDTO) Unset() {
-	v.value = nil
+	var zero *OrderBuyerBasicInfoDTO
+	v.value = zero
 	v.isSet = false
 }
 

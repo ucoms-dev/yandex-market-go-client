@@ -108,6 +108,7 @@ func (o *SetShipmentPalletsCountRequest) UnmarshalJSON(data []byte) (err error) 
 	varSetShipmentPalletsCountRequest := _SetShipmentPalletsCountRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSetShipmentPalletsCountRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableSetShipmentPalletsCountRequest) IsSet() bool {
 }
 
 func (v *NullableSetShipmentPalletsCountRequest) Unset() {
-	v.value = nil
+	var zero *SetShipmentPalletsCountRequest
+	v.value = zero
 	v.isSet = false
 }
 

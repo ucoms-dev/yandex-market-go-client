@@ -22,19 +22,19 @@ import (
 // GoodsStatsAPIService GoodsStatsAPI service
 type GoodsStatsAPIService service
 
-type ApiGetGoodsStatsRequest struct {
+type GoodsStatsAPIGetGoodsStatsRequest struct {
 	ctx                  context.Context
 	ApiService           *GoodsStatsAPIService
 	campaignId           int64
 	getGoodsStatsRequest *GetGoodsStatsRequest
 }
 
-func (r ApiGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) ApiGetGoodsStatsRequest {
+func (r GoodsStatsAPIGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) GoodsStatsAPIGetGoodsStatsRequest {
 	r.getGoodsStatsRequest = &getGoodsStatsRequest
 	return r
 }
 
-func (r ApiGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
+func (r GoodsStatsAPIGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
 	return r.ApiService.GetGoodsStatsExecute(r)
 }
 
@@ -48,12 +48,13 @@ GetGoodsStats Отчет по товарам
 |**⚙️ Лимит:** 5 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetGoodsStatsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return GoodsStatsAPIGetGoodsStatsRequest
 */
-func (a *GoodsStatsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) ApiGetGoodsStatsRequest {
-	return ApiGetGoodsStatsRequest{
+func (a *GoodsStatsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) GoodsStatsAPIGetGoodsStatsRequest {
+	return GoodsStatsAPIGetGoodsStatsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -61,9 +62,8 @@ func (a *GoodsStatsAPIService) GetGoodsStats(ctx context.Context, campaignId int
 }
 
 // Execute executes the request
-//
-//	@return GetGoodsStatsResponse
-func (a *GoodsStatsAPIService) GetGoodsStatsExecute(r ApiGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
+//  @return GetGoodsStatsResponse
+func (a *GoodsStatsAPIService) GetGoodsStatsExecute(r GoodsStatsAPIGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

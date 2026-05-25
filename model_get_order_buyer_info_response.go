@@ -142,7 +142,8 @@ func (v NullableGetOrderBuyerInfoResponse) IsSet() bool {
 }
 
 func (v *NullableGetOrderBuyerInfoResponse) Unset() {
-	v.value = nil
+	var zero *GetOrderBuyerInfoResponse
+	v.value = zero
 	v.isSet = false
 }
 

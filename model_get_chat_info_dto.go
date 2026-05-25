@@ -252,6 +252,7 @@ func (o *GetChatInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetChatInfoDTO := _GetChatInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetChatInfoDTO)
 
 	if err != nil {
@@ -282,7 +283,8 @@ func (v NullableGetChatInfoDTO) IsSet() bool {
 }
 
 func (v *NullableGetChatInfoDTO) Unset() {
-	v.value = nil
+	var zero *GetChatInfoDTO
+	v.value = zero
 	v.isSet = false
 }
 

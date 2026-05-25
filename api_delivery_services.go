@@ -21,12 +21,12 @@ import (
 // DeliveryServicesAPIService DeliveryServicesAPI service
 type DeliveryServicesAPIService service
 
-type ApiGetDeliveryServicesRequest struct {
+type DeliveryServicesAPIGetDeliveryServicesRequest struct {
 	ctx        context.Context
 	ApiService *DeliveryServicesAPIService
 }
 
-func (r ApiGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
+func (r DeliveryServicesAPIGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
 	return r.ApiService.GetDeliveryServicesExecute(r)
 }
 
@@ -39,20 +39,20 @@ GetDeliveryServices Справочник служб доставки
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetDeliveryServicesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return DeliveryServicesAPIGetDeliveryServicesRequest
 */
-func (a *DeliveryServicesAPIService) GetDeliveryServices(ctx context.Context) ApiGetDeliveryServicesRequest {
-	return ApiGetDeliveryServicesRequest{
+func (a *DeliveryServicesAPIService) GetDeliveryServices(ctx context.Context) DeliveryServicesAPIGetDeliveryServicesRequest {
+	return DeliveryServicesAPIGetDeliveryServicesRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetDeliveryServicesResponse
-func (a *DeliveryServicesAPIService) GetDeliveryServicesExecute(r ApiGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
+//  @return GetDeliveryServicesResponse
+func (a *DeliveryServicesAPIService) GetDeliveryServicesExecute(r DeliveryServicesAPIGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}

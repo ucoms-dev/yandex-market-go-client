@@ -290,7 +290,8 @@ func (v NullableLogisticPickupPointDTO) IsSet() bool {
 }
 
 func (v *NullableLogisticPickupPointDTO) Unset() {
-	v.value = nil
+	var zero *LogisticPickupPointDTO
+	v.value = zero
 	v.isSet = false
 }
 

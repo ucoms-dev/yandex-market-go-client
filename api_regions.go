@@ -22,12 +22,12 @@ import (
 // RegionsAPIService RegionsAPI service
 type RegionsAPIService service
 
-type ApiGetRegionsCodesRequest struct {
+type RegionsAPIGetRegionsCodesRequest struct {
 	ctx        context.Context
 	ApiService *RegionsAPIService
 }
 
-func (r ApiGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
+func (r RegionsAPIGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
 	return r.ApiService.GetRegionsCodesExecute(r)
 }
 
@@ -43,20 +43,20 @@ GetRegionsCodes Список допустимых кодов стран
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetRegionsCodesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return RegionsAPIGetRegionsCodesRequest
 */
-func (a *RegionsAPIService) GetRegionsCodes(ctx context.Context) ApiGetRegionsCodesRequest {
-	return ApiGetRegionsCodesRequest{
+func (a *RegionsAPIService) GetRegionsCodes(ctx context.Context) RegionsAPIGetRegionsCodesRequest {
+	return RegionsAPIGetRegionsCodesRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRegionsCodesResponse
-func (a *RegionsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
+//  @return GetRegionsCodesResponse
+func (a *RegionsAPIService) GetRegionsCodesExecute(r RegionsAPIGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -197,7 +197,7 @@ func (a *RegionsAPIService) GetRegionsCodesExecute(r ApiGetRegionsCodesRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionChildrenRequest struct {
+type RegionsAPISearchRegionChildrenRequest struct {
 	ctx        context.Context
 	ApiService *RegionsAPIService
 	regionId   int64
@@ -206,18 +206,18 @@ type ApiSearchRegionChildrenRequest struct {
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiSearchRegionChildrenRequest) Page(page int32) ApiSearchRegionChildrenRequest {
+func (r RegionsAPISearchRegionChildrenRequest) Page(page int32) RegionsAPISearchRegionChildrenRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiSearchRegionChildrenRequest) PageSize(pageSize int32) ApiSearchRegionChildrenRequest {
+func (r RegionsAPISearchRegionChildrenRequest) PageSize(pageSize int32) RegionsAPISearchRegionChildrenRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiSearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
+func (r RegionsAPISearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
 	return r.ApiService.SearchRegionChildrenExecute(r)
 }
 
@@ -235,12 +235,13 @@ SearchRegionChildren Информация о дочерних регионах
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-	@return ApiSearchRegionChildrenRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+ @return RegionsAPISearchRegionChildrenRequest
 */
-func (a *RegionsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) ApiSearchRegionChildrenRequest {
-	return ApiSearchRegionChildrenRequest{
+func (a *RegionsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) RegionsAPISearchRegionChildrenRequest {
+	return RegionsAPISearchRegionChildrenRequest{
 		ApiService: a,
 		ctx:        ctx,
 		regionId:   regionId,
@@ -248,9 +249,8 @@ func (a *RegionsAPIService) SearchRegionChildren(ctx context.Context, regionId i
 }
 
 // Execute executes the request
-//
-//	@return GetRegionWithChildrenResponse
-func (a *RegionsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
+//  @return GetRegionWithChildrenResponse
+func (a *RegionsAPIService) SearchRegionChildrenExecute(r RegionsAPISearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -271,13 +271,13 @@ func (a *RegionsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -412,13 +412,13 @@ func (a *RegionsAPIService) SearchRegionChildrenExecute(r ApiSearchRegionChildre
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionsByIdRequest struct {
+type RegionsAPISearchRegionsByIdRequest struct {
 	ctx        context.Context
 	ApiService *RegionsAPIService
 	regionId   int64
 }
 
-func (r ApiSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+func (r RegionsAPISearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
 	return r.ApiService.SearchRegionsByIdExecute(r)
 }
 
@@ -436,12 +436,13 @@ SearchRegionsById Информация о регионе
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-	@return ApiSearchRegionsByIdRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+ @return RegionsAPISearchRegionsByIdRequest
 */
-func (a *RegionsAPIService) SearchRegionsById(ctx context.Context, regionId int64) ApiSearchRegionsByIdRequest {
-	return ApiSearchRegionsByIdRequest{
+func (a *RegionsAPIService) SearchRegionsById(ctx context.Context, regionId int64) RegionsAPISearchRegionsByIdRequest {
+	return RegionsAPISearchRegionsByIdRequest{
 		ApiService: a,
 		ctx:        ctx,
 		regionId:   regionId,
@@ -449,9 +450,8 @@ func (a *RegionsAPIService) SearchRegionsById(ctx context.Context, regionId int6
 }
 
 // Execute executes the request
-//
-//	@return GetRegionsResponse
-func (a *RegionsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
+//  @return GetRegionsResponse
+func (a *RegionsAPIService) SearchRegionsByIdExecute(r RegionsAPISearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -593,7 +593,7 @@ func (a *RegionsAPIService) SearchRegionsByIdExecute(r ApiSearchRegionsByIdReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchRegionsByNameRequest struct {
+type RegionsAPISearchRegionsByNameRequest struct {
 	ctx        context.Context
 	ApiService *RegionsAPIService
 	name       *string
@@ -602,24 +602,24 @@ type ApiSearchRegionsByNameRequest struct {
 }
 
 // Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;.
-func (r ApiSearchRegionsByNameRequest) Name(name string) ApiSearchRegionsByNameRequest {
+func (r RegionsAPISearchRegionsByNameRequest) Name(name string) RegionsAPISearchRegionsByNameRequest {
 	r.name = &name
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiSearchRegionsByNameRequest) PageToken(pageToken string) ApiSearchRegionsByNameRequest {
+func (r RegionsAPISearchRegionsByNameRequest) PageToken(pageToken string) RegionsAPISearchRegionsByNameRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiSearchRegionsByNameRequest) Limit(limit int32) ApiSearchRegionsByNameRequest {
+func (r RegionsAPISearchRegionsByNameRequest) Limit(limit int32) RegionsAPISearchRegionsByNameRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiSearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+func (r RegionsAPISearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
 	return r.ApiService.SearchRegionsByNameExecute(r)
 }
 
@@ -639,20 +639,20 @@ SearchRegionsByName Поиск регионов по их имени
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSearchRegionsByNameRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return RegionsAPISearchRegionsByNameRequest
 */
-func (a *RegionsAPIService) SearchRegionsByName(ctx context.Context) ApiSearchRegionsByNameRequest {
-	return ApiSearchRegionsByNameRequest{
+func (a *RegionsAPIService) SearchRegionsByName(ctx context.Context) RegionsAPISearchRegionsByNameRequest {
+	return RegionsAPISearchRegionsByNameRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRegionsResponse
-func (a *RegionsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
+//  @return GetRegionsResponse
+func (a *RegionsAPIService) SearchRegionsByNameExecute(r RegionsAPISearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -674,12 +674,12 @@ func (a *RegionsAPIService) SearchRegionsByNameExecute(r ApiSearchRegionsByNameR
 		return localVarReturnValue, nil, reportError("name is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

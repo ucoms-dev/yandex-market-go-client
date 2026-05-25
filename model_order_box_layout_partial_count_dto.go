@@ -137,6 +137,7 @@ func (o *OrderBoxLayoutPartialCountDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderBoxLayoutPartialCountDTO := _OrderBoxLayoutPartialCountDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderBoxLayoutPartialCountDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableOrderBoxLayoutPartialCountDTO) IsSet() bool {
 }
 
 func (v *NullableOrderBoxLayoutPartialCountDTO) Unset() {
-	v.value = nil
+	var zero *OrderBoxLayoutPartialCountDTO
+	v.value = zero
 	v.isSet = false
 }
 

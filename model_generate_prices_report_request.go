@@ -256,7 +256,8 @@ func (v NullableGeneratePricesReportRequest) IsSet() bool {
 }
 
 func (v *NullableGeneratePricesReportRequest) Unset() {
-	v.value = nil
+	var zero *GeneratePricesReportRequest
+	v.value = zero
 	v.isSet = false
 }
 

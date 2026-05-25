@@ -108,6 +108,7 @@ func (o *GetBidsRecommendationsRequest) UnmarshalJSON(data []byte) (err error) {
 	varGetBidsRecommendationsRequest := _GetBidsRecommendationsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetBidsRecommendationsRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableGetBidsRecommendationsRequest) IsSet() bool {
 }
 
 func (v *NullableGetBidsRecommendationsRequest) Unset() {
-	v.value = nil
+	var zero *GetBidsRecommendationsRequest
+	v.value = zero
 	v.isSet = false
 }
 

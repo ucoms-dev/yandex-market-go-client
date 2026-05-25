@@ -20,8 +20,8 @@ type ShipmentType string
 
 // List of ShipmentType
 const (
-	ShipmentType_IMPORT   ShipmentType = "IMPORT"
-	ShipmentType_WITHDRAW ShipmentType = "WITHDRAW"
+	SHIPMENTTYPE_IMPORT   ShipmentType = "IMPORT"
+	SHIPMENTTYPE_WITHDRAW ShipmentType = "WITHDRAW"
 )
 
 // All allowed values of ShipmentType enum

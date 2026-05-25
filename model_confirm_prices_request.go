@@ -108,6 +108,7 @@ func (o *ConfirmPricesRequest) UnmarshalJSON(data []byte) (err error) {
 	varConfirmPricesRequest := _ConfirmPricesRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varConfirmPricesRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableConfirmPricesRequest) IsSet() bool {
 }
 
 func (v *NullableConfirmPricesRequest) Unset() {
-	v.value = nil
+	var zero *ConfirmPricesRequest
+	v.value = zero
 	v.isSet = false
 }
 

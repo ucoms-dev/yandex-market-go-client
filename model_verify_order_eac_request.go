@@ -108,6 +108,7 @@ func (o *VerifyOrderEacRequest) UnmarshalJSON(data []byte) (err error) {
 	varVerifyOrderEacRequest := _VerifyOrderEacRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varVerifyOrderEacRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableVerifyOrderEacRequest) IsSet() bool {
 }
 
 func (v *NullableVerifyOrderEacRequest) Unset() {
-	v.value = nil
+	var zero *VerifyOrderEacRequest
+	v.value = zero
 	v.isSet = false
 }
 

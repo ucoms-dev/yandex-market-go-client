@@ -20,22 +20,22 @@ type OrderPaymentMethodType string
 
 // List of OrderPaymentMethodType
 const (
-	OrderPaymentMethodType_CASH_ON_DELIVERY         OrderPaymentMethodType = "CASH_ON_DELIVERY"
-	OrderPaymentMethodType_CARD_ON_DELIVERY         OrderPaymentMethodType = "CARD_ON_DELIVERY"
-	OrderPaymentMethodType_BOUND_CARD_ON_DELIVERY   OrderPaymentMethodType = "BOUND_CARD_ON_DELIVERY"
-	OrderPaymentMethodType_BNPL_BANK_ON_DELIVERY    OrderPaymentMethodType = "BNPL_BANK_ON_DELIVERY"
-	OrderPaymentMethodType_BNPL_ON_DELIVERY         OrderPaymentMethodType = "BNPL_ON_DELIVERY"
-	OrderPaymentMethodType_YANDEX                   OrderPaymentMethodType = "YANDEX"
-	OrderPaymentMethodType_APPLE_PAY                OrderPaymentMethodType = "APPLE_PAY"
-	OrderPaymentMethodType_EXTERNAL_CERTIFICATE     OrderPaymentMethodType = "EXTERNAL_CERTIFICATE"
-	OrderPaymentMethodType_CREDIT                   OrderPaymentMethodType = "CREDIT"
-	OrderPaymentMethodType_GOOGLE_PAY               OrderPaymentMethodType = "GOOGLE_PAY"
-	OrderPaymentMethodType_TINKOFF_CREDIT           OrderPaymentMethodType = "TINKOFF_CREDIT"
-	OrderPaymentMethodType_SBP                      OrderPaymentMethodType = "SBP"
-	OrderPaymentMethodType_TINKOFF_INSTALLMENTS     OrderPaymentMethodType = "TINKOFF_INSTALLMENTS"
-	OrderPaymentMethodType_B2_B_ACCOUNT_PREPAYMENT  OrderPaymentMethodType = "B2B_ACCOUNT_PREPAYMENT"
-	OrderPaymentMethodType_B2_B_ACCOUNT_POSTPAYMENT OrderPaymentMethodType = "B2B_ACCOUNT_POSTPAYMENT"
-	OrderPaymentMethodType_UNKNOWN                  OrderPaymentMethodType = "UNKNOWN"
+	ORDERPAYMENTMETHODTYPE_CASH_ON_DELIVERY         OrderPaymentMethodType = "CASH_ON_DELIVERY"
+	ORDERPAYMENTMETHODTYPE_CARD_ON_DELIVERY         OrderPaymentMethodType = "CARD_ON_DELIVERY"
+	ORDERPAYMENTMETHODTYPE_BOUND_CARD_ON_DELIVERY   OrderPaymentMethodType = "BOUND_CARD_ON_DELIVERY"
+	ORDERPAYMENTMETHODTYPE_BNPL_BANK_ON_DELIVERY    OrderPaymentMethodType = "BNPL_BANK_ON_DELIVERY"
+	ORDERPAYMENTMETHODTYPE_BNPL_ON_DELIVERY         OrderPaymentMethodType = "BNPL_ON_DELIVERY"
+	ORDERPAYMENTMETHODTYPE_YANDEX                   OrderPaymentMethodType = "YANDEX"
+	ORDERPAYMENTMETHODTYPE_APPLE_PAY                OrderPaymentMethodType = "APPLE_PAY"
+	ORDERPAYMENTMETHODTYPE_EXTERNAL_CERTIFICATE     OrderPaymentMethodType = "EXTERNAL_CERTIFICATE"
+	ORDERPAYMENTMETHODTYPE_CREDIT                   OrderPaymentMethodType = "CREDIT"
+	ORDERPAYMENTMETHODTYPE_GOOGLE_PAY               OrderPaymentMethodType = "GOOGLE_PAY"
+	ORDERPAYMENTMETHODTYPE_TINKOFF_CREDIT           OrderPaymentMethodType = "TINKOFF_CREDIT"
+	ORDERPAYMENTMETHODTYPE_SBP                      OrderPaymentMethodType = "SBP"
+	ORDERPAYMENTMETHODTYPE_TINKOFF_INSTALLMENTS     OrderPaymentMethodType = "TINKOFF_INSTALLMENTS"
+	ORDERPAYMENTMETHODTYPE_B2_B_ACCOUNT_PREPAYMENT  OrderPaymentMethodType = "B2B_ACCOUNT_PREPAYMENT"
+	ORDERPAYMENTMETHODTYPE_B2_B_ACCOUNT_POSTPAYMENT OrderPaymentMethodType = "B2B_ACCOUNT_POSTPAYMENT"
+	ORDERPAYMENTMETHODTYPE_UNKNOWN                  OrderPaymentMethodType = "UNKNOWN"
 )
 
 // All allowed values of OrderPaymentMethodType enum

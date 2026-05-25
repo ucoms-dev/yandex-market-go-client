@@ -108,6 +108,7 @@ func (o *UpdateOfferMappingEntryRequest) UnmarshalJSON(data []byte) (err error) 
 	varUpdateOfferMappingEntryRequest := _UpdateOfferMappingEntryRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateOfferMappingEntryRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableUpdateOfferMappingEntryRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateOfferMappingEntryRequest) Unset() {
-	v.value = nil
+	var zero *UpdateOfferMappingEntryRequest
+	v.value = zero
 	v.isSet = false
 }
 

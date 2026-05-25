@@ -182,6 +182,7 @@ func (o *GetPromoOffersRequest) UnmarshalJSON(data []byte) (err error) {
 	varGetPromoOffersRequest := _GetPromoOffersRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetPromoOffersRequest)
 
 	if err != nil {
@@ -212,7 +213,8 @@ func (v NullableGetPromoOffersRequest) IsSet() bool {
 }
 
 func (v *NullableGetPromoOffersRequest) Unset() {
-	v.value = nil
+	var zero *GetPromoOffersRequest
+	v.value = zero
 	v.isSet = false
 }
 

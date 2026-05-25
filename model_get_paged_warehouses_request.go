@@ -146,7 +146,8 @@ func (v NullableGetPagedWarehousesRequest) IsSet() bool {
 }
 
 func (v *NullableGetPagedWarehousesRequest) Unset() {
-	v.value = nil
+	var zero *GetPagedWarehousesRequest
+	v.value = zero
 	v.isSet = false
 }
 

@@ -108,6 +108,7 @@ func (o *GetModelsRequest) UnmarshalJSON(data []byte) (err error) {
 	varGetModelsRequest := _GetModelsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetModelsRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableGetModelsRequest) IsSet() bool {
 }
 
 func (v *NullableGetModelsRequest) Unset() {
-	v.value = nil
+	var zero *GetModelsRequest
+	v.value = zero
 	v.isSet = false
 }
 

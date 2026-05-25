@@ -108,6 +108,7 @@ func (o *AddOffersToArchiveRequest) UnmarshalJSON(data []byte) (err error) {
 	varAddOffersToArchiveRequest := _AddOffersToArchiveRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAddOffersToArchiveRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableAddOffersToArchiveRequest) IsSet() bool {
 }
 
 func (v *NullableAddOffersToArchiveRequest) Unset() {
-	v.value = nil
+	var zero *AddOffersToArchiveRequest
+	v.value = zero
 	v.isSet = false
 }
 

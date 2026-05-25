@@ -27,8 +27,6 @@ type OrderBuyerInfoDTO struct {
 	LastName *string `json:"lastName,omitempty"`
 	// Имя покупателя.
 	FirstName *string `json:"firstName,omitempty"`
-	// Электронная почта покупателя.
-	Email *string `json:"email,omitempty"`
 	// Отчество покупателя.
 	MiddleName *string        `json:"middleName,omitempty"`
 	Type       OrderBuyerType `json:"type"`
@@ -152,38 +150,6 @@ func (o *OrderBuyerInfoDTO) HasFirstName() bool {
 // SetFirstName gets a reference to the given string and assigns it to the FirstName field.
 func (o *OrderBuyerInfoDTO) SetFirstName(v string) {
 	o.FirstName = &v
-}
-
-// GetEmail returns the Email field value if set, zero value otherwise.
-func (o *OrderBuyerInfoDTO) GetEmail() string {
-	if o == nil || IsNil(o.Email) {
-		var ret string
-		return ret
-	}
-	return *o.Email
-}
-
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrderBuyerInfoDTO) GetEmailOk() (*string, bool) {
-	if o == nil || IsNil(o.Email) {
-		return nil, false
-	}
-	return o.Email, true
-}
-
-// HasEmail returns a boolean if a field has been set.
-func (o *OrderBuyerInfoDTO) HasEmail() bool {
-	if o != nil && !IsNil(o.Email) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given string and assigns it to the Email field.
-func (o *OrderBuyerInfoDTO) SetEmail(v string) {
-	o.Email = &v
 }
 
 // GetMiddleName returns the MiddleName field value if set, zero value otherwise.
@@ -325,9 +291,6 @@ func (o OrderBuyerInfoDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FirstName) {
 		toSerialize["firstName"] = o.FirstName
 	}
-	if !IsNil(o.Email) {
-		toSerialize["email"] = o.Email
-	}
 	if !IsNil(o.MiddleName) {
 		toSerialize["middleName"] = o.MiddleName
 	}
@@ -366,6 +329,7 @@ func (o *OrderBuyerInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderBuyerInfoDTO := _OrderBuyerInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderBuyerInfoDTO)
 
 	if err != nil {
@@ -396,7 +360,8 @@ func (v NullableOrderBuyerInfoDTO) IsSet() bool {
 }
 
 func (v *NullableOrderBuyerInfoDTO) Unset() {
-	v.value = nil
+	var zero *OrderBuyerInfoDTO
+	v.value = zero
 	v.isSet = false
 }
 

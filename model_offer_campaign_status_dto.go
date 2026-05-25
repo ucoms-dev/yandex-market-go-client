@@ -136,6 +136,7 @@ func (o *OfferCampaignStatusDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferCampaignStatusDTO := _OfferCampaignStatusDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferCampaignStatusDTO)
 
 	if err != nil {
@@ -166,7 +167,8 @@ func (v NullableOfferCampaignStatusDTO) IsSet() bool {
 }
 
 func (v *NullableOfferCampaignStatusDTO) Unset() {
-	v.value = nil
+	var zero *OfferCampaignStatusDTO
+	v.value = zero
 	v.isSet = false
 }
 

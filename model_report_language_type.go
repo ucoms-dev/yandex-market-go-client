@@ -70,7 +70,8 @@ func (v NullableReportLanguageType) IsSet() bool {
 }
 
 func (v *NullableReportLanguageType) Unset() {
-	v.value = ReportLanguageType{}
+	var zero ReportLanguageType
+	v.value = zero
 	v.isSet = false
 }
 

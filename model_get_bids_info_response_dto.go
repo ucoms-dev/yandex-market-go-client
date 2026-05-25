@@ -144,6 +144,7 @@ func (o *GetBidsInfoResponseDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetBidsInfoResponseDTO := _GetBidsInfoResponseDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetBidsInfoResponseDTO)
 
 	if err != nil {
@@ -174,7 +175,8 @@ func (v NullableGetBidsInfoResponseDTO) IsSet() bool {
 }
 
 func (v *NullableGetBidsInfoResponseDTO) Unset() {
-	v.value = nil
+	var zero *GetBidsInfoResponseDTO
+	v.value = zero
 	v.isSet = false
 }
 

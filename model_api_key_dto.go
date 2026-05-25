@@ -137,6 +137,7 @@ func (o *ApiKeyDTO) UnmarshalJSON(data []byte) (err error) {
 	varApiKeyDTO := _ApiKeyDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varApiKeyDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableApiKeyDTO) IsSet() bool {
 }
 
 func (v *NullableApiKeyDTO) Unset() {
-	v.value = nil
+	var zero *ApiKeyDTO
+	v.value = zero
 	v.isSet = false
 }
 

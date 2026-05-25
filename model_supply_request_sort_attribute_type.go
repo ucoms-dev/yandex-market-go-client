@@ -20,10 +20,10 @@ type SupplyRequestSortAttributeType string
 
 // List of SupplyRequestSortAttributeType
 const (
-	SupplyRequestSortAttributeType_ID             SupplyRequestSortAttributeType = "ID"
-	SupplyRequestSortAttributeType_REQUESTED_DATE SupplyRequestSortAttributeType = "REQUESTED_DATE"
-	SupplyRequestSortAttributeType_UPDATED_AT     SupplyRequestSortAttributeType = "UPDATED_AT"
-	SupplyRequestSortAttributeType_STATUS         SupplyRequestSortAttributeType = "STATUS"
+	SUPPLYREQUESTSORTATTRIBUTETYPE_ID             SupplyRequestSortAttributeType = "ID"
+	SUPPLYREQUESTSORTATTRIBUTETYPE_REQUESTED_DATE SupplyRequestSortAttributeType = "REQUESTED_DATE"
+	SUPPLYREQUESTSORTATTRIBUTETYPE_UPDATED_AT     SupplyRequestSortAttributeType = "UPDATED_AT"
+	SUPPLYREQUESTSORTATTRIBUTETYPE_STATUS         SupplyRequestSortAttributeType = "STATUS"
 )
 
 // All allowed values of SupplyRequestSortAttributeType enum

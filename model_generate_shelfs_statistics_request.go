@@ -194,6 +194,7 @@ func (o *GenerateShelfsStatisticsRequest) UnmarshalJSON(data []byte) (err error)
 	varGenerateShelfsStatisticsRequest := _GenerateShelfsStatisticsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateShelfsStatisticsRequest)
 
 	if err != nil {
@@ -224,7 +225,8 @@ func (v NullableGenerateShelfsStatisticsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateShelfsStatisticsRequest) Unset() {
-	v.value = nil
+	var zero *GenerateShelfsStatisticsRequest
+	v.value = zero
 	v.isSet = false
 }
 

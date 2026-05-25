@@ -109,6 +109,7 @@ func (o *UpdateTimeDTO) UnmarshalJSON(data []byte) (err error) {
 	varUpdateTimeDTO := _UpdateTimeDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateTimeDTO)
 
 	if err != nil {
@@ -139,7 +140,8 @@ func (v NullableUpdateTimeDTO) IsSet() bool {
 }
 
 func (v *NullableUpdateTimeDTO) Unset() {
-	v.value = nil
+	var zero *UpdateTimeDTO
+	v.value = zero
 	v.isSet = false
 }
 

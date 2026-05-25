@@ -1229,7 +1229,8 @@ func (v NullableMappingsOfferDTO) IsSet() bool {
 }
 
 func (v *NullableMappingsOfferDTO) Unset() {
-	v.value = nil
+	var zero *MappingsOfferDTO
+	v.value = zero
 	v.isSet = false
 }
 

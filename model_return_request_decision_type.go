@@ -20,13 +20,13 @@ type ReturnRequestDecisionType string
 
 // List of ReturnRequestDecisionType
 const (
-	ReturnRequestDecisionType_REFUND_MONEY                    ReturnRequestDecisionType = "REFUND_MONEY"
-	ReturnRequestDecisionType_REFUND_MONEY_INCLUDING_SHIPMENT ReturnRequestDecisionType = "REFUND_MONEY_INCLUDING_SHIPMENT"
-	ReturnRequestDecisionType_REPAIR                          ReturnRequestDecisionType = "REPAIR"
-	ReturnRequestDecisionType_REPLACE                         ReturnRequestDecisionType = "REPLACE"
-	ReturnRequestDecisionType_SEND_TO_EXAMINATION             ReturnRequestDecisionType = "SEND_TO_EXAMINATION"
-	ReturnRequestDecisionType_DECLINE_REFUND                  ReturnRequestDecisionType = "DECLINE_REFUND"
-	ReturnRequestDecisionType_OTHER_DECISION                  ReturnRequestDecisionType = "OTHER_DECISION"
+	RETURNREQUESTDECISIONTYPE_REFUND_MONEY                    ReturnRequestDecisionType = "REFUND_MONEY"
+	RETURNREQUESTDECISIONTYPE_REFUND_MONEY_INCLUDING_SHIPMENT ReturnRequestDecisionType = "REFUND_MONEY_INCLUDING_SHIPMENT"
+	RETURNREQUESTDECISIONTYPE_REPAIR                          ReturnRequestDecisionType = "REPAIR"
+	RETURNREQUESTDECISIONTYPE_REPLACE                         ReturnRequestDecisionType = "REPLACE"
+	RETURNREQUESTDECISIONTYPE_SEND_TO_EXAMINATION             ReturnRequestDecisionType = "SEND_TO_EXAMINATION"
+	RETURNREQUESTDECISIONTYPE_DECLINE_REFUND                  ReturnRequestDecisionType = "DECLINE_REFUND"
+	RETURNREQUESTDECISIONTYPE_OTHER_DECISION                  ReturnRequestDecisionType = "OTHER_DECISION"
 )
 
 // All allowed values of ReturnRequestDecisionType enum

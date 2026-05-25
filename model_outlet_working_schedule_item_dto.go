@@ -193,6 +193,7 @@ func (o *OutletWorkingScheduleItemDTO) UnmarshalJSON(data []byte) (err error) {
 	varOutletWorkingScheduleItemDTO := _OutletWorkingScheduleItemDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOutletWorkingScheduleItemDTO)
 
 	if err != nil {
@@ -223,7 +224,8 @@ func (v NullableOutletWorkingScheduleItemDTO) IsSet() bool {
 }
 
 func (v *NullableOutletWorkingScheduleItemDTO) Unset() {
-	v.value = nil
+	var zero *OutletWorkingScheduleItemDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -108,6 +108,7 @@ func (o *GetRegionsCodesResponse) UnmarshalJSON(data []byte) (err error) {
 	varGetRegionsCodesResponse := _GetRegionsCodesResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetRegionsCodesResponse)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableGetRegionsCodesResponse) IsSet() bool {
 }
 
 func (v *NullableGetRegionsCodesResponse) Unset() {
-	v.value = nil
+	var zero *GetRegionsCodesResponse
+	v.value = zero
 	v.isSet = false
 }
 

@@ -21,18 +21,18 @@ import (
 // TariffsAPIService TariffsAPI service
 type TariffsAPIService service
 
-type ApiCalculateTariffsRequest struct {
+type TariffsAPICalculateTariffsRequest struct {
 	ctx                     context.Context
 	ApiService              *TariffsAPIService
 	calculateTariffsRequest *CalculateTariffsRequest
 }
 
-func (r ApiCalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) ApiCalculateTariffsRequest {
+func (r TariffsAPICalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) TariffsAPICalculateTariffsRequest {
 	r.calculateTariffsRequest = &calculateTariffsRequest
 	return r
 }
 
-func (r ApiCalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
+func (r TariffsAPICalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
 	return r.ApiService.CalculateTariffsExecute(r)
 }
 
@@ -51,20 +51,20 @@ CalculateTariffs Калькулятор стоимости услуг
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiCalculateTariffsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return TariffsAPICalculateTariffsRequest
 */
-func (a *TariffsAPIService) CalculateTariffs(ctx context.Context) ApiCalculateTariffsRequest {
-	return ApiCalculateTariffsRequest{
+func (a *TariffsAPIService) CalculateTariffs(ctx context.Context) TariffsAPICalculateTariffsRequest {
+	return TariffsAPICalculateTariffsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CalculateTariffsResponse
-func (a *TariffsAPIService) CalculateTariffsExecute(r ApiCalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
+//  @return CalculateTariffsResponse
+func (a *TariffsAPIService) CalculateTariffsExecute(r TariffsAPICalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

@@ -527,6 +527,7 @@ func (o *GenerateUnitedMarketplaceServicesReportRequest) UnmarshalJSON(data []by
 	varGenerateUnitedMarketplaceServicesReportRequest := _GenerateUnitedMarketplaceServicesReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateUnitedMarketplaceServicesReportRequest)
 
 	if err != nil {
@@ -557,7 +558,8 @@ func (v NullableGenerateUnitedMarketplaceServicesReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateUnitedMarketplaceServicesReportRequest) Unset() {
-	v.value = nil
+	var zero *GenerateUnitedMarketplaceServicesReportRequest
+	v.value = zero
 	v.isSet = false
 }
 

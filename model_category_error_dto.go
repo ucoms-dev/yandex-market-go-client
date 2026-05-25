@@ -143,7 +143,8 @@ func (v NullableCategoryErrorDTO) IsSet() bool {
 }
 
 func (v *NullableCategoryErrorDTO) Unset() {
-	v.value = nil
+	var zero *CategoryErrorDTO
+	v.value = zero
 	v.isSet = false
 }
 

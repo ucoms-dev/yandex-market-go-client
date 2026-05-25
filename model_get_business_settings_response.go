@@ -142,7 +142,8 @@ func (v NullableGetBusinessSettingsResponse) IsSet() bool {
 }
 
 func (v *NullableGetBusinessSettingsResponse) Unset() {
-	v.value = nil
+	var zero *GetBusinessSettingsResponse
+	v.value = zero
 	v.isSet = false
 }
 

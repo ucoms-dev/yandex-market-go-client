@@ -289,7 +289,8 @@ func (v NullableOrdersStatsPaymentDTO) IsSet() bool {
 }
 
 func (v *NullableOrdersStatsPaymentDTO) Unset() {
-	v.value = nil
+	var zero *OrdersStatsPaymentDTO
+	v.value = zero
 	v.isSet = false
 }
 

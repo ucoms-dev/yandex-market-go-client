@@ -21,18 +21,18 @@ import (
 // CategoriesAPIService CategoriesAPI service
 type CategoriesAPIService service
 
-type ApiGetCategoriesMaxSaleQuantumRequest struct {
+type CategoriesAPIGetCategoriesMaxSaleQuantumRequest struct {
 	ctx                                context.Context
 	ApiService                         *CategoriesAPIService
 	getCategoriesMaxSaleQuantumRequest *GetCategoriesMaxSaleQuantumRequest
 }
 
-func (r ApiGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) ApiGetCategoriesMaxSaleQuantumRequest {
+func (r CategoriesAPIGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) CategoriesAPIGetCategoriesMaxSaleQuantumRequest {
 	r.getCategoriesMaxSaleQuantumRequest = &getCategoriesMaxSaleQuantumRequest
 	return r
 }
 
-func (r ApiGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+func (r CategoriesAPIGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
 	return r.ApiService.GetCategoriesMaxSaleQuantumExecute(r)
 }
 
@@ -50,20 +50,20 @@ GetCategoriesMaxSaleQuantum Лимит на установку кванта пр
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCategoriesMaxSaleQuantumRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return CategoriesAPIGetCategoriesMaxSaleQuantumRequest
 */
-func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) ApiGetCategoriesMaxSaleQuantumRequest {
-	return ApiGetCategoriesMaxSaleQuantumRequest{
+func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) CategoriesAPIGetCategoriesMaxSaleQuantumRequest {
+	return CategoriesAPIGetCategoriesMaxSaleQuantumRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCategoriesMaxSaleQuantumResponse
-func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+//  @return GetCategoriesMaxSaleQuantumResponse
+func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantumExecute(r CategoriesAPIGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -220,18 +220,18 @@ func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantumExecute(r ApiGetCatego
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCategoriesTreeRequest struct {
+type CategoriesAPIGetCategoriesTreeRequest struct {
 	ctx                  context.Context
 	ApiService           *CategoriesAPIService
 	getCategoriesRequest *GetCategoriesRequest
 }
 
-func (r ApiGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) ApiGetCategoriesTreeRequest {
+func (r CategoriesAPIGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) CategoriesAPIGetCategoriesTreeRequest {
 	r.getCategoriesRequest = &getCategoriesRequest
 	return r
 }
 
-func (r ApiGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
+func (r CategoriesAPIGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
 	return r.ApiService.GetCategoriesTreeExecute(r)
 }
 
@@ -245,20 +245,20 @@ GetCategoriesTree Дерево категорий
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCategoriesTreeRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return CategoriesAPIGetCategoriesTreeRequest
 */
-func (a *CategoriesAPIService) GetCategoriesTree(ctx context.Context) ApiGetCategoriesTreeRequest {
-	return ApiGetCategoriesTreeRequest{
+func (a *CategoriesAPIService) GetCategoriesTree(ctx context.Context) CategoriesAPIGetCategoriesTreeRequest {
+	return CategoriesAPIGetCategoriesTreeRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCategoriesResponse
-func (a *CategoriesAPIService) GetCategoriesTreeExecute(r ApiGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
+//  @return GetCategoriesResponse
+func (a *CategoriesAPIService) GetCategoriesTreeExecute(r CategoriesAPIGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

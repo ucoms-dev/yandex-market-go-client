@@ -142,7 +142,8 @@ func (v NullableGetOutletLicensesResponse) IsSet() bool {
 }
 
 func (v *NullableGetOutletLicensesResponse) Unset() {
-	v.value = nil
+	var zero *GetOutletLicensesResponse
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,12 +20,12 @@ type LicenseCheckStatusType string
 
 // List of LicenseCheckStatusType
 const (
-	LicenseCheckStatusType_NEW         LicenseCheckStatusType = "NEW"
-	LicenseCheckStatusType_SUCCESS     LicenseCheckStatusType = "SUCCESS"
-	LicenseCheckStatusType_FAIL        LicenseCheckStatusType = "FAIL"
-	LicenseCheckStatusType_REVOKE      LicenseCheckStatusType = "REVOKE"
-	LicenseCheckStatusType_DONT_WANT   LicenseCheckStatusType = "DONT_WANT"
-	LicenseCheckStatusType_FAIL_MANUAL LicenseCheckStatusType = "FAIL_MANUAL"
+	LICENSECHECKSTATUSTYPE_NEW         LicenseCheckStatusType = "NEW"
+	LICENSECHECKSTATUSTYPE_SUCCESS     LicenseCheckStatusType = "SUCCESS"
+	LICENSECHECKSTATUSTYPE_FAIL        LicenseCheckStatusType = "FAIL"
+	LICENSECHECKSTATUSTYPE_REVOKE      LicenseCheckStatusType = "REVOKE"
+	LICENSECHECKSTATUSTYPE_DONT_WANT   LicenseCheckStatusType = "DONT_WANT"
+	LICENSECHECKSTATUSTYPE_FAIL_MANUAL LicenseCheckStatusType = "FAIL_MANUAL"
 )
 
 // All allowed values of LicenseCheckStatusType enum

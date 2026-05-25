@@ -144,6 +144,7 @@ func (o *AcceptOrderCancellationRequest) UnmarshalJSON(data []byte) (err error) 
 	varAcceptOrderCancellationRequest := _AcceptOrderCancellationRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varAcceptOrderCancellationRequest)
 
 	if err != nil {
@@ -174,7 +175,8 @@ func (v NullableAcceptOrderCancellationRequest) IsSet() bool {
 }
 
 func (v *NullableAcceptOrderCancellationRequest) Unset() {
-	v.value = nil
+	var zero *AcceptOrderCancellationRequest
+	v.value = zero
 	v.isSet = false
 }
 

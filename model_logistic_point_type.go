@@ -20,12 +20,12 @@ type LogisticPointType string
 
 // List of LogisticPointType
 const (
-	LogisticPointType_WAREHOUSE          LogisticPointType = "WAREHOUSE"
-	LogisticPointType_PICKUP_POINT       LogisticPointType = "PICKUP_POINT"
-	LogisticPointType_PICKUP_TERMINAL    LogisticPointType = "PICKUP_TERMINAL"
-	LogisticPointType_PICKUP_POST_OFFICE LogisticPointType = "PICKUP_POST_OFFICE"
-	LogisticPointType_PICKUP_MIXED       LogisticPointType = "PICKUP_MIXED"
-	LogisticPointType_PICKUP_RETAIL      LogisticPointType = "PICKUP_RETAIL"
+	LOGISTICPOINTTYPE_WAREHOUSE          LogisticPointType = "WAREHOUSE"
+	LOGISTICPOINTTYPE_PICKUP_POINT       LogisticPointType = "PICKUP_POINT"
+	LOGISTICPOINTTYPE_PICKUP_TERMINAL    LogisticPointType = "PICKUP_TERMINAL"
+	LOGISTICPOINTTYPE_PICKUP_POST_OFFICE LogisticPointType = "PICKUP_POST_OFFICE"
+	LOGISTICPOINTTYPE_PICKUP_MIXED       LogisticPointType = "PICKUP_MIXED"
+	LOGISTICPOINTTYPE_PICKUP_RETAIL      LogisticPointType = "PICKUP_RETAIL"
 )
 
 // All allowed values of LogisticPointType enum

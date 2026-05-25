@@ -20,8 +20,8 @@ type GoodsFeedbackCommentAuthorType string
 
 // List of GoodsFeedbackCommentAuthorType
 const (
-	GoodsFeedbackCommentAuthorType_USER     GoodsFeedbackCommentAuthorType = "USER"
-	GoodsFeedbackCommentAuthorType_BUSINESS GoodsFeedbackCommentAuthorType = "BUSINESS"
+	GOODSFEEDBACKCOMMENTAUTHORTYPE_USER     GoodsFeedbackCommentAuthorType = "USER"
+	GOODSFEEDBACKCOMMENTAUTHORTYPE_BUSINESS GoodsFeedbackCommentAuthorType = "BUSINESS"
 )
 
 // All allowed values of GoodsFeedbackCommentAuthorType enum

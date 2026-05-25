@@ -20,8 +20,8 @@ type OrdersStatsPaymentType string
 
 // List of OrdersStatsPaymentType
 const (
-	OrdersStatsPaymentType_PAYMENT OrdersStatsPaymentType = "PAYMENT"
-	OrdersStatsPaymentType_REFUND  OrdersStatsPaymentType = "REFUND"
+	ORDERSSTATSPAYMENTTYPE_PAYMENT OrdersStatsPaymentType = "PAYMENT"
+	ORDERSSTATSPAYMENTTYPE_REFUND  OrdersStatsPaymentType = "REFUND"
 )
 
 // All allowed values of OrdersStatsPaymentType enum

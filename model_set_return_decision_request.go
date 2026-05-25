@@ -173,6 +173,7 @@ func (o *SetReturnDecisionRequest) UnmarshalJSON(data []byte) (err error) {
 	varSetReturnDecisionRequest := _SetReturnDecisionRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSetReturnDecisionRequest)
 
 	if err != nil {
@@ -203,7 +204,8 @@ func (v NullableSetReturnDecisionRequest) IsSet() bool {
 }
 
 func (v *NullableSetReturnDecisionRequest) Unset() {
-	v.value = nil
+	var zero *SetReturnDecisionRequest
+	v.value = zero
 	v.isSet = false
 }
 

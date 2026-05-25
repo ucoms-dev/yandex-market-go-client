@@ -136,6 +136,7 @@ func (o *CalculateTariffsOfferInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varCalculateTariffsOfferInfoDTO := _CalculateTariffsOfferInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCalculateTariffsOfferInfoDTO)
 
 	if err != nil {
@@ -166,7 +167,8 @@ func (v NullableCalculateTariffsOfferInfoDTO) IsSet() bool {
 }
 
 func (v *NullableCalculateTariffsOfferInfoDTO) Unset() {
-	v.value = nil
+	var zero *CalculateTariffsOfferInfoDTO
+	v.value = zero
 	v.isSet = false
 }
 

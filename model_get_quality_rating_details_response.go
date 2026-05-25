@@ -142,7 +142,8 @@ func (v NullableGetQualityRatingDetailsResponse) IsSet() bool {
 }
 
 func (v *NullableGetQualityRatingDetailsResponse) Unset() {
-	v.value = nil
+	var zero *GetQualityRatingDetailsResponse
+	v.value = zero
 	v.isSet = false
 }
 

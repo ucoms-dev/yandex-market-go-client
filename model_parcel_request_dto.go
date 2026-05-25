@@ -108,6 +108,7 @@ func (o *ParcelRequestDTO) UnmarshalJSON(data []byte) (err error) {
 	varParcelRequestDTO := _ParcelRequestDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varParcelRequestDTO)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableParcelRequestDTO) IsSet() bool {
 }
 
 func (v *NullableParcelRequestDTO) Unset() {
-	v.value = nil
+	var zero *ParcelRequestDTO
+	v.value = zero
 	v.isSet = false
 }
 

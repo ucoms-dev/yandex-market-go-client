@@ -20,14 +20,14 @@ type CalculatedTariffType string
 
 // List of CalculatedTariffType
 const (
-	CalculatedTariffType_AGENCY_COMMISSION      CalculatedTariffType = "AGENCY_COMMISSION"
-	CalculatedTariffType_PAYMENT_TRANSFER       CalculatedTariffType = "PAYMENT_TRANSFER"
-	CalculatedTariffType_FEE                    CalculatedTariffType = "FEE"
-	CalculatedTariffType_DELIVERY_TO_CUSTOMER   CalculatedTariffType = "DELIVERY_TO_CUSTOMER"
-	CalculatedTariffType_CROSSREGIONAL_DELIVERY CalculatedTariffType = "CROSSREGIONAL_DELIVERY"
-	CalculatedTariffType_EXPRESS_DELIVERY       CalculatedTariffType = "EXPRESS_DELIVERY"
-	CalculatedTariffType_SORTING                CalculatedTariffType = "SORTING"
-	CalculatedTariffType_MIDDLE_MILE            CalculatedTariffType = "MIDDLE_MILE"
+	CALCULATEDTARIFFTYPE_AGENCY_COMMISSION      CalculatedTariffType = "AGENCY_COMMISSION"
+	CALCULATEDTARIFFTYPE_PAYMENT_TRANSFER       CalculatedTariffType = "PAYMENT_TRANSFER"
+	CALCULATEDTARIFFTYPE_FEE                    CalculatedTariffType = "FEE"
+	CALCULATEDTARIFFTYPE_DELIVERY_TO_CUSTOMER   CalculatedTariffType = "DELIVERY_TO_CUSTOMER"
+	CALCULATEDTARIFFTYPE_CROSSREGIONAL_DELIVERY CalculatedTariffType = "CROSSREGIONAL_DELIVERY"
+	CALCULATEDTARIFFTYPE_EXPRESS_DELIVERY       CalculatedTariffType = "EXPRESS_DELIVERY"
+	CALCULATEDTARIFFTYPE_SORTING                CalculatedTariffType = "SORTING"
+	CALCULATEDTARIFFTYPE_MIDDLE_MILE            CalculatedTariffType = "MIDDLE_MILE"
 )
 
 // All allowed values of CalculatedTariffType enum

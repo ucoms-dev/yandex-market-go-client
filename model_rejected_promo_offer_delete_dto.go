@@ -136,6 +136,7 @@ func (o *RejectedPromoOfferDeleteDTO) UnmarshalJSON(data []byte) (err error) {
 	varRejectedPromoOfferDeleteDTO := _RejectedPromoOfferDeleteDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varRejectedPromoOfferDeleteDTO)
 
 	if err != nil {
@@ -166,7 +167,8 @@ func (v NullableRejectedPromoOfferDeleteDTO) IsSet() bool {
 }
 
 func (v *NullableRejectedPromoOfferDeleteDTO) Unset() {
-	v.value = nil
+	var zero *RejectedPromoOfferDeleteDTO
+	v.value = zero
 	v.isSet = false
 }
 

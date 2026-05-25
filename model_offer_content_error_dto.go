@@ -173,6 +173,7 @@ func (o *OfferContentErrorDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferContentErrorDTO := _OfferContentErrorDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferContentErrorDTO)
 
 	if err != nil {
@@ -203,7 +204,8 @@ func (v NullableOfferContentErrorDTO) IsSet() bool {
 }
 
 func (v *NullableOfferContentErrorDTO) Unset() {
-	v.value = nil
+	var zero *OfferContentErrorDTO
+	v.value = zero
 	v.isSet = false
 }
 

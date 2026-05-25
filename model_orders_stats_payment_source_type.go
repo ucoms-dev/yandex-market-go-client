@@ -20,10 +20,10 @@ type OrdersStatsPaymentSourceType string
 
 // List of OrdersStatsPaymentSourceType
 const (
-	OrdersStatsPaymentSourceType_BUYER       OrdersStatsPaymentSourceType = "BUYER"
-	OrdersStatsPaymentSourceType_CASHBACK    OrdersStatsPaymentSourceType = "CASHBACK"
-	OrdersStatsPaymentSourceType_MARKETPLACE OrdersStatsPaymentSourceType = "MARKETPLACE"
-	OrdersStatsPaymentSourceType_SPLIT       OrdersStatsPaymentSourceType = "SPLIT"
+	ORDERSSTATSPAYMENTSOURCETYPE_BUYER       OrdersStatsPaymentSourceType = "BUYER"
+	ORDERSSTATSPAYMENTSOURCETYPE_CASHBACK    OrdersStatsPaymentSourceType = "CASHBACK"
+	ORDERSSTATSPAYMENTSOURCETYPE_MARKETPLACE OrdersStatsPaymentSourceType = "MARKETPLACE"
+	ORDERSSTATSPAYMENTSOURCETYPE_SPLIT       OrdersStatsPaymentSourceType = "SPLIT"
 )
 
 // All allowed values of OrdersStatsPaymentSourceType enum

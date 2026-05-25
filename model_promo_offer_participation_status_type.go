@@ -20,13 +20,13 @@ type PromoOfferParticipationStatusType string
 
 // List of PromoOfferParticipationStatusType
 const (
-	PromoOfferParticipationStatusType_AUTO               PromoOfferParticipationStatusType = "AUTO"
-	PromoOfferParticipationStatusType_PARTIALLY_AUTO     PromoOfferParticipationStatusType = "PARTIALLY_AUTO"
-	PromoOfferParticipationStatusType_MANUAL             PromoOfferParticipationStatusType = "MANUAL"
-	PromoOfferParticipationStatusType_NOT_PARTICIPATING  PromoOfferParticipationStatusType = "NOT_PARTICIPATING"
-	PromoOfferParticipationStatusType_RENEWED            PromoOfferParticipationStatusType = "RENEWED"
-	PromoOfferParticipationStatusType_RENEW_FAILED       PromoOfferParticipationStatusType = "RENEW_FAILED"
-	PromoOfferParticipationStatusType_MINIMUM_FOR_PROMOS PromoOfferParticipationStatusType = "MINIMUM_FOR_PROMOS"
+	PROMOOFFERPARTICIPATIONSTATUSTYPE_AUTO               PromoOfferParticipationStatusType = "AUTO"
+	PROMOOFFERPARTICIPATIONSTATUSTYPE_PARTIALLY_AUTO     PromoOfferParticipationStatusType = "PARTIALLY_AUTO"
+	PROMOOFFERPARTICIPATIONSTATUSTYPE_MANUAL             PromoOfferParticipationStatusType = "MANUAL"
+	PROMOOFFERPARTICIPATIONSTATUSTYPE_NOT_PARTICIPATING  PromoOfferParticipationStatusType = "NOT_PARTICIPATING"
+	PROMOOFFERPARTICIPATIONSTATUSTYPE_RENEWED            PromoOfferParticipationStatusType = "RENEWED"
+	PROMOOFFERPARTICIPATIONSTATUSTYPE_RENEW_FAILED       PromoOfferParticipationStatusType = "RENEW_FAILED"
+	PROMOOFFERPARTICIPATIONSTATUSTYPE_MINIMUM_FOR_PROMOS PromoOfferParticipationStatusType = "MINIMUM_FOR_PROMOS"
 )
 
 // All allowed values of PromoOfferParticipationStatusType enum

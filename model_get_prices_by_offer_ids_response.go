@@ -142,7 +142,8 @@ func (v NullableGetPricesByOfferIdsResponse) IsSet() bool {
 }
 
 func (v *NullableGetPricesByOfferIdsResponse) Unset() {
-	v.value = nil
+	var zero *GetPricesByOfferIdsResponse
+	v.value = zero
 	v.isSet = false
 }
 

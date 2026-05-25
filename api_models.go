@@ -22,7 +22,7 @@ import (
 // ModelsAPIService ModelsAPI service
 type ModelsAPIService service
 
-type ApiGetModelRequest struct {
+type ModelsAPIGetModelRequest struct {
 	ctx        context.Context
 	ApiService *ModelsAPIService
 	modelId    int64
@@ -31,18 +31,18 @@ type ApiGetModelRequest struct {
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetModelRequest) RegionId(regionId int64) ApiGetModelRequest {
+func (r ModelsAPIGetModelRequest) RegionId(regionId int64) ModelsAPIGetModelRequest {
 	r.regionId = &regionId
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiGetModelRequest) Currency(currency CurrencyType) ApiGetModelRequest {
+func (r ModelsAPIGetModelRequest) Currency(currency CurrencyType) ModelsAPIGetModelRequest {
 	r.currency = &currency
 	return r
 }
 
-func (r ApiGetModelRequest) Execute() (*GetModelsResponse, *http.Response, error) {
+func (r ModelsAPIGetModelRequest) Execute() (*GetModelsResponse, *http.Response, error) {
 	return r.ApiService.GetModelExecute(r)
 }
 
@@ -58,14 +58,15 @@ GetModel Информация об одной модели
 |**⚙️ Лимит:** 100 000 моделей в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param modelId Идентификатор модели товара.
-	@return ApiGetModelRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param modelId Идентификатор модели товара.
+ @return ModelsAPIGetModelRequest
 
 Deprecated
 */
-func (a *ModelsAPIService) GetModel(ctx context.Context, modelId int64) ApiGetModelRequest {
-	return ApiGetModelRequest{
+func (a *ModelsAPIService) GetModel(ctx context.Context, modelId int64) ModelsAPIGetModelRequest {
+	return ModelsAPIGetModelRequest{
 		ApiService: a,
 		ctx:        ctx,
 		modelId:    modelId,
@@ -73,11 +74,9 @@ func (a *ModelsAPIService) GetModel(ctx context.Context, modelId int64) ApiGetMo
 }
 
 // Execute executes the request
-//
-//	@return GetModelsResponse
-//
+//  @return GetModelsResponse
 // Deprecated
-func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResponse, *http.Response, error) {
+func (a *ModelsAPIService) GetModelExecute(r ModelsAPIGetModelRequest) (*GetModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -103,9 +102,9 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 		return localVarReturnValue, nil, reportError("regionId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "form", "")
 	if r.currency != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -240,7 +239,7 @@ func (a *ModelsAPIService) GetModelExecute(r ApiGetModelRequest) (*GetModelsResp
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetModelOffersRequest struct {
+type ModelsAPIGetModelOffersRequest struct {
 	ctx          context.Context
 	ApiService   *ModelsAPIService
 	modelId      int64
@@ -252,36 +251,36 @@ type ApiGetModelOffersRequest struct {
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetModelOffersRequest) RegionId(regionId int64) ApiGetModelOffersRequest {
+func (r ModelsAPIGetModelOffersRequest) RegionId(regionId int64) ModelsAPIGetModelOffersRequest {
 	r.regionId = &regionId
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiGetModelOffersRequest) Currency(currency CurrencyType) ApiGetModelOffersRequest {
+func (r ModelsAPIGetModelOffersRequest) Currency(currency CurrencyType) ModelsAPIGetModelOffersRequest {
 	r.currency = &currency
 	return r
 }
 
 // Направление сортировки по цене.  Возможные значения: * &#x60;ASC&#x60; — сортировка по возрастанию. * &#x60;DESC&#x60; — сортировка по убыванию.  Значение по умолчанию: предложения выводятся в произвольном порядке.
-func (r ApiGetModelOffersRequest) OrderByPrice(orderByPrice SortOrderType) ApiGetModelOffersRequest {
+func (r ModelsAPIGetModelOffersRequest) OrderByPrice(orderByPrice SortOrderType) ModelsAPIGetModelOffersRequest {
 	r.orderByPrice = &orderByPrice
 	return r
 }
 
 // Количество предложений на странице ответа.
-func (r ApiGetModelOffersRequest) Count(count int32) ApiGetModelOffersRequest {
+func (r ModelsAPIGetModelOffersRequest) Count(count int32) ModelsAPIGetModelOffersRequest {
 	r.count = &count
 	return r
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetModelOffersRequest) Page(page int32) ApiGetModelOffersRequest {
+func (r ModelsAPIGetModelOffersRequest) Page(page int32) ModelsAPIGetModelOffersRequest {
 	r.page = &page
 	return r
 }
 
-func (r ApiGetModelOffersRequest) Execute() (*GetModelsOffersResponse, *http.Response, error) {
+func (r ModelsAPIGetModelOffersRequest) Execute() (*GetModelsOffersResponse, *http.Response, error) {
 	return r.ApiService.GetModelOffersExecute(r)
 }
 
@@ -301,14 +300,15 @@ GetModelOffers Список предложений для одной модел�
 |**⚙️ Лимит:** 100 000 предложений в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param modelId Идентификатор модели товара.
-	@return ApiGetModelOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param modelId Идентификатор модели товара.
+ @return ModelsAPIGetModelOffersRequest
 
 Deprecated
 */
-func (a *ModelsAPIService) GetModelOffers(ctx context.Context, modelId int64) ApiGetModelOffersRequest {
-	return ApiGetModelOffersRequest{
+func (a *ModelsAPIService) GetModelOffers(ctx context.Context, modelId int64) ModelsAPIGetModelOffersRequest {
+	return ModelsAPIGetModelOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		modelId:    modelId,
@@ -316,11 +316,9 @@ func (a *ModelsAPIService) GetModelOffers(ctx context.Context, modelId int64) Ap
 }
 
 // Execute executes the request
-//
-//	@return GetModelsOffersResponse
-//
+//  @return GetModelsOffersResponse
 // Deprecated
-func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
+func (a *ModelsAPIService) GetModelOffersExecute(r ModelsAPIGetModelOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -346,21 +344,21 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 		return localVarReturnValue, nil, reportError("regionId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "form", "")
 	if r.currency != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "form", "")
 	}
 	if r.orderByPrice != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderByPrice", r.orderByPrice, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderByPrice", r.orderByPrice, "form", "")
 	}
 	if r.count != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "count", r.count, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "count", r.count, "form", "")
 	} else {
 		var defaultValue int32 = 10
 		r.count = &defaultValue
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
@@ -498,7 +496,7 @@ func (a *ModelsAPIService) GetModelOffersExecute(r ApiGetModelOffersRequest) (*G
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetModelsRequest struct {
+type ModelsAPIGetModelsRequest struct {
 	ctx              context.Context
 	ApiService       *ModelsAPIService
 	regionId         *int64
@@ -507,23 +505,23 @@ type ApiGetModelsRequest struct {
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetModelsRequest) RegionId(regionId int64) ApiGetModelsRequest {
+func (r ModelsAPIGetModelsRequest) RegionId(regionId int64) ModelsAPIGetModelsRequest {
 	r.regionId = &regionId
 	return r
 }
 
-func (r ApiGetModelsRequest) GetModelsRequest(getModelsRequest GetModelsRequest) ApiGetModelsRequest {
+func (r ModelsAPIGetModelsRequest) GetModelsRequest(getModelsRequest GetModelsRequest) ModelsAPIGetModelsRequest {
 	r.getModelsRequest = &getModelsRequest
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiGetModelsRequest) Currency(currency CurrencyType) ApiGetModelsRequest {
+func (r ModelsAPIGetModelsRequest) Currency(currency CurrencyType) ModelsAPIGetModelsRequest {
 	r.currency = &currency
 	return r
 }
 
-func (r ApiGetModelsRequest) Execute() (*GetModelsResponse, *http.Response, error) {
+func (r ModelsAPIGetModelsRequest) Execute() (*GetModelsResponse, *http.Response, error) {
 	return r.ApiService.GetModelsExecute(r)
 }
 
@@ -541,24 +539,23 @@ GetModels Информация о нескольких моделях
 |**⚙️ Лимит:** 100 000 моделей в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetModelsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ModelsAPIGetModelsRequest
 
 Deprecated
 */
-func (a *ModelsAPIService) GetModels(ctx context.Context) ApiGetModelsRequest {
-	return ApiGetModelsRequest{
+func (a *ModelsAPIService) GetModels(ctx context.Context) ModelsAPIGetModelsRequest {
+	return ModelsAPIGetModelsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetModelsResponse
-//
+//  @return GetModelsResponse
 // Deprecated
-func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsResponse, *http.Response, error) {
+func (a *ModelsAPIService) GetModelsExecute(r ModelsAPIGetModelsRequest) (*GetModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -583,9 +580,9 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 		return localVarReturnValue, nil, reportError("getModelsRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "form", "")
 	if r.currency != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -722,7 +719,7 @@ func (a *ModelsAPIService) GetModelsExecute(r ApiGetModelsRequest) (*GetModelsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetModelsOffersRequest struct {
+type ModelsAPIGetModelsOffersRequest struct {
 	ctx              context.Context
 	ApiService       *ModelsAPIService
 	regionId         *int64
@@ -732,29 +729,29 @@ type ApiGetModelsOffersRequest struct {
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiGetModelsOffersRequest) RegionId(regionId int64) ApiGetModelsOffersRequest {
+func (r ModelsAPIGetModelsOffersRequest) RegionId(regionId int64) ModelsAPIGetModelsOffersRequest {
 	r.regionId = &regionId
 	return r
 }
 
-func (r ApiGetModelsOffersRequest) GetModelsRequest(getModelsRequest GetModelsRequest) ApiGetModelsOffersRequest {
+func (r ModelsAPIGetModelsOffersRequest) GetModelsRequest(getModelsRequest GetModelsRequest) ModelsAPIGetModelsOffersRequest {
 	r.getModelsRequest = &getModelsRequest
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiGetModelsOffersRequest) Currency(currency CurrencyType) ApiGetModelsOffersRequest {
+func (r ModelsAPIGetModelsOffersRequest) Currency(currency CurrencyType) ModelsAPIGetModelsOffersRequest {
 	r.currency = &currency
 	return r
 }
 
 // Направление сортировки по цене.  Возможные значения: * &#x60;ASC&#x60; — сортировка по возрастанию. * &#x60;DESC&#x60; — сортировка по убыванию.  Значение по умолчанию: предложения выводятся в произвольном порядке.
-func (r ApiGetModelsOffersRequest) OrderByPrice(orderByPrice SortOrderType) ApiGetModelsOffersRequest {
+func (r ModelsAPIGetModelsOffersRequest) OrderByPrice(orderByPrice SortOrderType) ModelsAPIGetModelsOffersRequest {
 	r.orderByPrice = &orderByPrice
 	return r
 }
 
-func (r ApiGetModelsOffersRequest) Execute() (*GetModelsOffersResponse, *http.Response, error) {
+func (r ModelsAPIGetModelsOffersRequest) Execute() (*GetModelsOffersResponse, *http.Response, error) {
 	return r.ApiService.GetModelsOffersExecute(r)
 }
 
@@ -776,24 +773,23 @@ GetModelsOffers Список предложений для нескольких 
 |**⚙️ Лимит:** 100 000 предложений в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetModelsOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ModelsAPIGetModelsOffersRequest
 
 Deprecated
 */
-func (a *ModelsAPIService) GetModelsOffers(ctx context.Context) ApiGetModelsOffersRequest {
-	return ApiGetModelsOffersRequest{
+func (a *ModelsAPIService) GetModelsOffers(ctx context.Context) ModelsAPIGetModelsOffersRequest {
+	return ModelsAPIGetModelsOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetModelsOffersResponse
-//
+//  @return GetModelsOffersResponse
 // Deprecated
-func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
+func (a *ModelsAPIService) GetModelsOffersExecute(r ModelsAPIGetModelsOffersRequest) (*GetModelsOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -818,12 +814,12 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 		return localVarReturnValue, nil, reportError("getModelsRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "form", "")
 	if r.currency != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "form", "")
 	}
 	if r.orderByPrice != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderByPrice", r.orderByPrice, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderByPrice", r.orderByPrice, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -960,7 +956,7 @@ func (a *ModelsAPIService) GetModelsOffersExecute(r ApiGetModelsOffersRequest) (
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiSearchModelsRequest struct {
+type ModelsAPISearchModelsRequest struct {
 	ctx        context.Context
 	ApiService *ModelsAPIService
 	query      *string
@@ -971,36 +967,36 @@ type ApiSearchModelsRequest struct {
 }
 
 // Поисковый запрос по названию модели товара.
-func (r ApiSearchModelsRequest) Query(query string) ApiSearchModelsRequest {
+func (r ModelsAPISearchModelsRequest) Query(query string) ModelsAPISearchModelsRequest {
 	r.query = &query
 	return r
 }
 
 // Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-func (r ApiSearchModelsRequest) RegionId(regionId int64) ApiSearchModelsRequest {
+func (r ModelsAPISearchModelsRequest) RegionId(regionId int64) ModelsAPISearchModelsRequest {
 	r.regionId = &regionId
 	return r
 }
 
 // Валюта, в которой отображаются цены предложений на страницах с результатами поиска.  Возможные значения:  * &#x60;BYN&#x60; — белорусский рубль.  * &#x60;KZT&#x60; — казахстанский тенге.  * &#x60;RUR&#x60; — российский рубль.  * &#x60;UAH&#x60; — украинская гривна.  Значение по умолчанию: используется национальная валюта магазина (национальная валюта страны происхождения магазина).
-func (r ApiSearchModelsRequest) Currency(currency CurrencyType) ApiSearchModelsRequest {
+func (r ModelsAPISearchModelsRequest) Currency(currency CurrencyType) ModelsAPISearchModelsRequest {
 	r.currency = &currency
 	return r
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiSearchModelsRequest) Page(page int32) ApiSearchModelsRequest {
+func (r ModelsAPISearchModelsRequest) Page(page int32) ModelsAPISearchModelsRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiSearchModelsRequest) PageSize(pageSize int32) ApiSearchModelsRequest {
+func (r ModelsAPISearchModelsRequest) PageSize(pageSize int32) ModelsAPISearchModelsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiSearchModelsRequest) Execute() (*SearchModelsResponse, *http.Response, error) {
+func (r ModelsAPISearchModelsRequest) Execute() (*SearchModelsResponse, *http.Response, error) {
 	return r.ApiService.SearchModelsExecute(r)
 }
 
@@ -1018,24 +1014,23 @@ SearchModels Поиск модели товара
 |**⚙️ Лимит:** 100 000 моделей в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiSearchModelsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ModelsAPISearchModelsRequest
 
 Deprecated
 */
-func (a *ModelsAPIService) SearchModels(ctx context.Context) ApiSearchModelsRequest {
-	return ApiSearchModelsRequest{
+func (a *ModelsAPIService) SearchModels(ctx context.Context) ModelsAPISearchModelsRequest {
+	return ModelsAPISearchModelsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return SearchModelsResponse
-//
+//  @return SearchModelsResponse
 // Deprecated
-func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*SearchModelsResponse, *http.Response, error) {
+func (a *ModelsAPIService) SearchModelsExecute(r ModelsAPISearchModelsRequest) (*SearchModelsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -1060,19 +1055,19 @@ func (a *ModelsAPIService) SearchModelsExecute(r ApiSearchModelsRequest) (*Searc
 		return localVarReturnValue, nil, reportError("regionId is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "query", r.query, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId, "form", "")
 	if r.currency != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "currency", r.currency, "form", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -144,6 +144,7 @@ func (o *GetOfferMappingsResultDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetOfferMappingsResultDTO := _GetOfferMappingsResultDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetOfferMappingsResultDTO)
 
 	if err != nil {
@@ -174,7 +175,8 @@ func (v NullableGetOfferMappingsResultDTO) IsSet() bool {
 }
 
 func (v *NullableGetOfferMappingsResultDTO) Unset() {
-	v.value = nil
+	var zero *GetOfferMappingsResultDTO
+	v.value = zero
 	v.isSet = false
 }
 

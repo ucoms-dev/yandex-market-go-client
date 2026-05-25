@@ -20,9 +20,9 @@ type OrderDeliveryPartnerType string
 
 // List of OrderDeliveryPartnerType
 const (
-	OrderDeliveryPartnerType_SHOP          OrderDeliveryPartnerType = "SHOP"
-	OrderDeliveryPartnerType_YANDEX_MARKET OrderDeliveryPartnerType = "YANDEX_MARKET"
-	OrderDeliveryPartnerType_UNKNOWN       OrderDeliveryPartnerType = "UNKNOWN"
+	ORDERDELIVERYPARTNERTYPE_SHOP          OrderDeliveryPartnerType = "SHOP"
+	ORDERDELIVERYPARTNERTYPE_YANDEX_MARKET OrderDeliveryPartnerType = "YANDEX_MARKET"
+	ORDERDELIVERYPARTNERTYPE_UNKNOWN       OrderDeliveryPartnerType = "UNKNOWN"
 )
 
 // All allowed values of OrderDeliveryPartnerType enum

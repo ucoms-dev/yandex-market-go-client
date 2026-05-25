@@ -20,10 +20,10 @@ type PageFormatType string
 
 // List of PageFormatType
 const (
-	PageFormatType_A9_HORIZONTALLY PageFormatType = "A9_HORIZONTALLY"
-	PageFormatType_A9              PageFormatType = "A9"
-	PageFormatType_A7              PageFormatType = "A7"
-	PageFormatType_A4              PageFormatType = "A4"
+	PAGEFORMATTYPE_A9_HORIZONTALLY PageFormatType = "A9_HORIZONTALLY"
+	PAGEFORMATTYPE_A9              PageFormatType = "A9"
+	PAGEFORMATTYPE_A7              PageFormatType = "A7"
+	PAGEFORMATTYPE_A4              PageFormatType = "A4"
 )
 
 // All allowed values of PageFormatType enum

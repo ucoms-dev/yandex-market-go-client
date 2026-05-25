@@ -199,6 +199,7 @@ func (o *OrderLabelDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderLabelDTO := _OrderLabelDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderLabelDTO)
 
 	if err != nil {
@@ -229,7 +230,8 @@ func (v NullableOrderLabelDTO) IsSet() bool {
 }
 
 func (v *NullableOrderLabelDTO) Unset() {
-	v.value = nil
+	var zero *OrderLabelDTO
+	v.value = zero
 	v.isSet = false
 }
 

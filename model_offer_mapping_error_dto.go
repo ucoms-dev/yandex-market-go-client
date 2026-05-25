@@ -173,6 +173,7 @@ func (o *OfferMappingErrorDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferMappingErrorDTO := _OfferMappingErrorDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferMappingErrorDTO)
 
 	if err != nil {
@@ -203,7 +204,8 @@ func (v NullableOfferMappingErrorDTO) IsSet() bool {
 }
 
 func (v *NullableOfferMappingErrorDTO) Unset() {
-	v.value = nil
+	var zero *OfferMappingErrorDTO
+	v.value = zero
 	v.isSet = false
 }
 

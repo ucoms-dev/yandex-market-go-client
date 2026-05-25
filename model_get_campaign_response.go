@@ -106,7 +106,8 @@ func (v NullableGetCampaignResponse) IsSet() bool {
 }
 
 func (v *NullableGetCampaignResponse) Unset() {
-	v.value = nil
+	var zero *GetCampaignResponse
+	v.value = zero
 	v.isSet = false
 }
 

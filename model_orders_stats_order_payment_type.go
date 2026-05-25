@@ -20,9 +20,9 @@ type OrdersStatsOrderPaymentType string
 
 // List of OrdersStatsOrderPaymentType
 const (
-	OrdersStatsOrderPaymentType_POSTPAID OrdersStatsOrderPaymentType = "POSTPAID"
-	OrdersStatsOrderPaymentType_PREPAID  OrdersStatsOrderPaymentType = "PREPAID"
-	OrdersStatsOrderPaymentType_UNKNOWN  OrdersStatsOrderPaymentType = "UNKNOWN"
+	ORDERSSTATSORDERPAYMENTTYPE_POSTPAID OrdersStatsOrderPaymentType = "POSTPAID"
+	ORDERSSTATSORDERPAYMENTTYPE_PREPAID  OrdersStatsOrderPaymentType = "PREPAID"
+	ORDERSSTATSORDERPAYMENTTYPE_UNKNOWN  OrdersStatsOrderPaymentType = "UNKNOWN"
 )
 
 // All allowed values of OrdersStatsOrderPaymentType enum

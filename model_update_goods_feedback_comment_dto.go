@@ -182,6 +182,7 @@ func (o *UpdateGoodsFeedbackCommentDTO) UnmarshalJSON(data []byte) (err error) {
 	varUpdateGoodsFeedbackCommentDTO := _UpdateGoodsFeedbackCommentDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateGoodsFeedbackCommentDTO)
 
 	if err != nil {
@@ -212,7 +213,8 @@ func (v NullableUpdateGoodsFeedbackCommentDTO) IsSet() bool {
 }
 
 func (v *NullableUpdateGoodsFeedbackCommentDTO) Unset() {
-	v.value = nil
+	var zero *UpdateGoodsFeedbackCommentDTO
+	v.value = zero
 	v.isSet = false
 }
 

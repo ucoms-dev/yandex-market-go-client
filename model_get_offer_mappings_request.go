@@ -297,7 +297,8 @@ func (v NullableGetOfferMappingsRequest) IsSet() bool {
 }
 
 func (v *NullableGetOfferMappingsRequest) Unset() {
-	v.value = nil
+	var zero *GetOfferMappingsRequest
+	v.value = zero
 	v.isSet = false
 }
 

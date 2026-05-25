@@ -195,6 +195,7 @@ func (o *OfferWeightDimensionsDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferWeightDimensionsDTO := _OfferWeightDimensionsDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferWeightDimensionsDTO)
 
 	if err != nil {
@@ -225,7 +226,8 @@ func (v NullableOfferWeightDimensionsDTO) IsSet() bool {
 }
 
 func (v *NullableOfferWeightDimensionsDTO) Unset() {
-	v.value = nil
+	var zero *OfferWeightDimensionsDTO
+	v.value = zero
 	v.isSet = false
 }
 

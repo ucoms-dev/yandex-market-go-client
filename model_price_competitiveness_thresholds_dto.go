@@ -142,7 +142,8 @@ func (v NullablePriceCompetitivenessThresholdsDTO) IsSet() bool {
 }
 
 func (v *NullablePriceCompetitivenessThresholdsDTO) Unset() {
-	v.value = nil
+	var zero *PriceCompetitivenessThresholdsDTO
+	v.value = zero
 	v.isSet = false
 }
 

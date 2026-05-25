@@ -20,21 +20,21 @@ type OrderStatsStatusType string
 
 // List of OrderStatsStatusType
 const (
-	OrderStatsStatusType_CANCELLED_BEFORE_PROCESSING OrderStatsStatusType = "CANCELLED_BEFORE_PROCESSING"
-	OrderStatsStatusType_CANCELLED_IN_DELIVERY       OrderStatsStatusType = "CANCELLED_IN_DELIVERY"
-	OrderStatsStatusType_CANCELLED_IN_PROCESSING     OrderStatsStatusType = "CANCELLED_IN_PROCESSING"
-	OrderStatsStatusType_DELIVERY                    OrderStatsStatusType = "DELIVERY"
-	OrderStatsStatusType_DELIVERED                   OrderStatsStatusType = "DELIVERED"
-	OrderStatsStatusType_PARTIALLY_DELIVERED         OrderStatsStatusType = "PARTIALLY_DELIVERED"
-	OrderStatsStatusType_PARTIALLY_RETURNED          OrderStatsStatusType = "PARTIALLY_RETURNED"
-	OrderStatsStatusType_PENDING                     OrderStatsStatusType = "PENDING"
-	OrderStatsStatusType_PICKUP                      OrderStatsStatusType = "PICKUP"
-	OrderStatsStatusType_PROCESSING                  OrderStatsStatusType = "PROCESSING"
-	OrderStatsStatusType_RESERVED                    OrderStatsStatusType = "RESERVED"
-	OrderStatsStatusType_RETURNED                    OrderStatsStatusType = "RETURNED"
-	OrderStatsStatusType_UNKNOWN                     OrderStatsStatusType = "UNKNOWN"
-	OrderStatsStatusType_UNPAID                      OrderStatsStatusType = "UNPAID"
-	OrderStatsStatusType_LOST                        OrderStatsStatusType = "LOST"
+	ORDERSTATSSTATUSTYPE_CANCELLED_BEFORE_PROCESSING OrderStatsStatusType = "CANCELLED_BEFORE_PROCESSING"
+	ORDERSTATSSTATUSTYPE_CANCELLED_IN_DELIVERY       OrderStatsStatusType = "CANCELLED_IN_DELIVERY"
+	ORDERSTATSSTATUSTYPE_CANCELLED_IN_PROCESSING     OrderStatsStatusType = "CANCELLED_IN_PROCESSING"
+	ORDERSTATSSTATUSTYPE_DELIVERY                    OrderStatsStatusType = "DELIVERY"
+	ORDERSTATSSTATUSTYPE_DELIVERED                   OrderStatsStatusType = "DELIVERED"
+	ORDERSTATSSTATUSTYPE_PARTIALLY_DELIVERED         OrderStatsStatusType = "PARTIALLY_DELIVERED"
+	ORDERSTATSSTATUSTYPE_PARTIALLY_RETURNED          OrderStatsStatusType = "PARTIALLY_RETURNED"
+	ORDERSTATSSTATUSTYPE_PENDING                     OrderStatsStatusType = "PENDING"
+	ORDERSTATSSTATUSTYPE_PICKUP                      OrderStatsStatusType = "PICKUP"
+	ORDERSTATSSTATUSTYPE_PROCESSING                  OrderStatsStatusType = "PROCESSING"
+	ORDERSTATSSTATUSTYPE_RESERVED                    OrderStatsStatusType = "RESERVED"
+	ORDERSTATSSTATUSTYPE_RETURNED                    OrderStatsStatusType = "RETURNED"
+	ORDERSTATSSTATUSTYPE_UNKNOWN                     OrderStatsStatusType = "UNKNOWN"
+	ORDERSTATSSTATUSTYPE_UNPAID                      OrderStatsStatusType = "UNPAID"
+	ORDERSTATSSTATUSTYPE_LOST                        OrderStatsStatusType = "LOST"
 )
 
 // All allowed values of OrderStatsStatusType enum

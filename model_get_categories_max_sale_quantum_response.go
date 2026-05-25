@@ -182,6 +182,7 @@ func (o *GetCategoriesMaxSaleQuantumResponse) UnmarshalJSON(data []byte) (err er
 	varGetCategoriesMaxSaleQuantumResponse := _GetCategoriesMaxSaleQuantumResponse{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetCategoriesMaxSaleQuantumResponse)
 
 	if err != nil {
@@ -212,7 +213,8 @@ func (v NullableGetCategoriesMaxSaleQuantumResponse) IsSet() bool {
 }
 
 func (v *NullableGetCategoriesMaxSaleQuantumResponse) Unset() {
-	v.value = nil
+	var zero *GetCategoriesMaxSaleQuantumResponse
+	v.value = zero
 	v.isSet = false
 }
 

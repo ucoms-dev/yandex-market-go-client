@@ -359,28 +359,11 @@ func parameterToJson(obj interface{}) (string, error) {
 // callAPI do the request.
 func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	if c.cfg.Debug {
-		// Structured JSON log for the outgoing request
-		reqInfo := map[string]interface{}{
-			"method": request.Method,
-			"url":    request.URL.String(),
+		dump, err := httputil.DumpRequestOut(request, true)
+		if err != nil {
+			return nil, err
 		}
-		// Headers
-		hdr := make(map[string][]string, len(request.Header))
-		for k, v := range request.Header {
-			hdr[k] = append([]string(nil), v...)
-		}
-		reqInfo["headers"] = hdr
-		// Body preview (safe via DumpRequestOut which uses GetBody)
-		if dump, err := httputil.DumpRequestOut(request, true); err == nil {
-			// limit body preview length to avoid huge logs
-			const maxDump = 4096
-			if len(dump) > maxDump {
-				reqInfo["http_dump"] = string(dump[:maxDump]) + "…"
-			} else {
-				reqInfo["http_dump"] = string(dump)
-			}
-		}
-		logJSON("debug", "http_request", reqInfo)
+		log.Printf("\n%s\n", string(dump))
 	}
 
 	resp, err := c.cfg.HTTPClient.Do(request)
@@ -389,50 +372,13 @@ func (c *APIClient) callAPI(request *http.Request) (*http.Response, error) {
 	}
 
 	if c.cfg.Debug {
-		// Structured JSON log for the incoming response
-		respInfo := map[string]interface{}{
-			"status":      resp.Status,
-			"status_code": resp.StatusCode,
+		dump, err := httputil.DumpResponse(resp, true)
+		if err != nil {
+			return resp, err
 		}
-		// Headers
-		hdr := make(map[string][]string, len(resp.Header))
-		for k, v := range resp.Header {
-			hdr[k] = append([]string(nil), v...)
-		}
-		respInfo["headers"] = hdr
-		// Body preview: read and restore
-		if resp.Body != nil {
-			b, _ := io.ReadAll(resp.Body)
-			resp.Body.Close()
-			resp.Body = io.NopCloser(bytes.NewBuffer(b))
-			const maxDump = 4096
-			if len(b) > maxDump {
-				respInfo["body"] = string(b[:maxDump]) + "…"
-			} else {
-				respInfo["body"] = string(b)
-			}
-		}
-		logJSON("debug", "http_response", respInfo)
+		log.Printf("\n%s\n", string(dump))
 	}
 	return resp, err
-}
-
-// logJSON prints a single-line JSON object with standard fields.
-func logJSON(level, msg string, fields map[string]interface{}) {
-	entry := map[string]interface{}{
-		"level": level,
-		"msg":   msg,
-		"time":  time.Now().Format(time.RFC3339Nano),
-	}
-	for k, v := range fields {
-		entry[k] = v
-	}
-	buf, err := json.Marshal(entry)
-	if err != nil {
-		log.Printf("{\"level\":\"error\",\"msg\":\"log_json_marshal_failed\",\"time\":%q,\"error\":%q}", time.Now().Format(time.RFC3339Nano), err.Error())
-		return
-	}
-	log.Print(string(buf))
 }
 
 // Allow modification of underlying config for alternate implementations and testing
@@ -664,7 +610,10 @@ func addFile(w *multipart.Writer, fieldName, path string) error {
 	if err != nil {
 		return err
 	}
-	defer file.Close()
+	err = file.Close()
+	if err != nil {
+		return err
+	}
 
 	part, err := w.CreateFormFile(fieldName, filepath.Base(path))
 	if err != nil {

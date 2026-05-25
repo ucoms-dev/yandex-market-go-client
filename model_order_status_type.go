@@ -20,18 +20,18 @@ type OrderStatusType string
 
 // List of OrderStatusType
 const (
-	OrderStatusType_PLACING            OrderStatusType = "PLACING"
-	OrderStatusType_RESERVED           OrderStatusType = "RESERVED"
-	OrderStatusType_UNPAID             OrderStatusType = "UNPAID"
-	OrderStatusType_PROCESSING         OrderStatusType = "PROCESSING"
-	OrderStatusType_DELIVERY           OrderStatusType = "DELIVERY"
-	OrderStatusType_PICKUP             OrderStatusType = "PICKUP"
-	OrderStatusType_DELIVERED          OrderStatusType = "DELIVERED"
-	OrderStatusType_CANCELLED          OrderStatusType = "CANCELLED"
-	OrderStatusType_PENDING            OrderStatusType = "PENDING"
-	OrderStatusType_PARTIALLY_RETURNED OrderStatusType = "PARTIALLY_RETURNED"
-	OrderStatusType_RETURNED           OrderStatusType = "RETURNED"
-	OrderStatusType_UNKNOWN            OrderStatusType = "UNKNOWN"
+	ORDERSTATUSTYPE_PLACING            OrderStatusType = "PLACING"
+	ORDERSTATUSTYPE_RESERVED           OrderStatusType = "RESERVED"
+	ORDERSTATUSTYPE_UNPAID             OrderStatusType = "UNPAID"
+	ORDERSTATUSTYPE_PROCESSING         OrderStatusType = "PROCESSING"
+	ORDERSTATUSTYPE_DELIVERY           OrderStatusType = "DELIVERY"
+	ORDERSTATUSTYPE_PICKUP             OrderStatusType = "PICKUP"
+	ORDERSTATUSTYPE_DELIVERED          OrderStatusType = "DELIVERED"
+	ORDERSTATUSTYPE_CANCELLED          OrderStatusType = "CANCELLED"
+	ORDERSTATUSTYPE_PENDING            OrderStatusType = "PENDING"
+	ORDERSTATUSTYPE_PARTIALLY_RETURNED OrderStatusType = "PARTIALLY_RETURNED"
+	ORDERSTATUSTYPE_RETURNED           OrderStatusType = "RETURNED"
+	ORDERSTATUSTYPE_UNKNOWN            OrderStatusType = "UNKNOWN"
 )
 
 // All allowed values of OrderStatusType enum

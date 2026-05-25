@@ -20,8 +20,8 @@ type CampaignSettingsScheduleSourceType string
 
 // List of CampaignSettingsScheduleSourceType
 const (
-	CampaignSettingsScheduleSourceType_WEB CampaignSettingsScheduleSourceType = "WEB"
-	CampaignSettingsScheduleSourceType_YML CampaignSettingsScheduleSourceType = "YML"
+	CAMPAIGNSETTINGSSCHEDULESOURCETYPE_WEB CampaignSettingsScheduleSourceType = "WEB"
+	CAMPAIGNSETTINGSSCHEDULESOURCETYPE_YML CampaignSettingsScheduleSourceType = "YML"
 )
 
 // All allowed values of CampaignSettingsScheduleSourceType enum

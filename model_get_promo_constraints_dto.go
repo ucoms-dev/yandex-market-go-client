@@ -108,7 +108,8 @@ func (v NullableGetPromoConstraintsDTO) IsSet() bool {
 }
 
 func (v *NullableGetPromoConstraintsDTO) Unset() {
-	v.value = nil
+	var zero *GetPromoConstraintsDTO
+	v.value = zero
 	v.isSet = false
 }
 

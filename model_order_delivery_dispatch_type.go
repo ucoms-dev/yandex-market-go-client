@@ -20,10 +20,10 @@ type OrderDeliveryDispatchType string
 
 // List of OrderDeliveryDispatchType
 const (
-	OrderDeliveryDispatchType_UNKNOWN               OrderDeliveryDispatchType = "UNKNOWN"
-	OrderDeliveryDispatchType_BUYER                 OrderDeliveryDispatchType = "BUYER"
-	OrderDeliveryDispatchType_MARKET_BRANDED_OUTLET OrderDeliveryDispatchType = "MARKET_BRANDED_OUTLET"
-	OrderDeliveryDispatchType_SHOP_OUTLET           OrderDeliveryDispatchType = "SHOP_OUTLET"
+	ORDERDELIVERYDISPATCHTYPE_UNKNOWN               OrderDeliveryDispatchType = "UNKNOWN"
+	ORDERDELIVERYDISPATCHTYPE_BUYER                 OrderDeliveryDispatchType = "BUYER"
+	ORDERDELIVERYDISPATCHTYPE_MARKET_BRANDED_OUTLET OrderDeliveryDispatchType = "MARKET_BRANDED_OUTLET"
+	ORDERDELIVERYDISPATCHTYPE_SHOP_OUTLET           OrderDeliveryDispatchType = "SHOP_OUTLET"
 )
 
 // All allowed values of OrderDeliveryDispatchType enum

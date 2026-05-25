@@ -231,6 +231,7 @@ func (o *SupplyRequestLocationDTO) UnmarshalJSON(data []byte) (err error) {
 	varSupplyRequestLocationDTO := _SupplyRequestLocationDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSupplyRequestLocationDTO)
 
 	if err != nil {
@@ -261,7 +262,8 @@ func (v NullableSupplyRequestLocationDTO) IsSet() bool {
 }
 
 func (v *NullableSupplyRequestLocationDTO) Unset() {
-	v.value = nil
+	var zero *SupplyRequestLocationDTO
+	v.value = zero
 	v.isSet = false
 }
 

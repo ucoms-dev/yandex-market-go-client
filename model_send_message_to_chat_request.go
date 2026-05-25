@@ -108,6 +108,7 @@ func (o *SendMessageToChatRequest) UnmarshalJSON(data []byte) (err error) {
 	varSendMessageToChatRequest := _SendMessageToChatRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSendMessageToChatRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableSendMessageToChatRequest) IsSet() bool {
 }
 
 func (v *NullableSendMessageToChatRequest) Unset() {
-	v.value = nil
+	var zero *SendMessageToChatRequest
+	v.value = zero
 	v.isSet = false
 }
 

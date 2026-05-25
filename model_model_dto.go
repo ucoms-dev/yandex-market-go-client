@@ -180,7 +180,8 @@ func (v NullableModelDTO) IsSet() bool {
 }
 
 func (v *NullableModelDTO) Unset() {
-	v.value = nil
+	var zero *ModelDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -489,6 +489,7 @@ func (o *GenerateUnitedNettingReportRequest) UnmarshalJSON(data []byte) (err err
 	varGenerateUnitedNettingReportRequest := _GenerateUnitedNettingReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateUnitedNettingReportRequest)
 
 	if err != nil {
@@ -519,7 +520,8 @@ func (v NullableGenerateUnitedNettingReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateUnitedNettingReportRequest) Unset() {
-	v.value = nil
+	var zero *GenerateUnitedNettingReportRequest
+	v.value = zero
 	v.isSet = false
 }
 

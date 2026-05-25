@@ -142,7 +142,8 @@ func (v NullableGetOfferCardsContentStatusResponse) IsSet() bool {
 }
 
 func (v *NullableGetOfferCardsContentStatusResponse) Unset() {
-	v.value = nil
+	var zero *GetOfferCardsContentStatusResponse
+	v.value = zero
 	v.isSet = false
 }
 

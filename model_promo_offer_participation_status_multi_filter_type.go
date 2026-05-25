@@ -20,11 +20,11 @@ type PromoOfferParticipationStatusMultiFilterType string
 
 // List of PromoOfferParticipationStatusMultiFilterType
 const (
-	PromoOfferParticipationStatusMultiFilterType_MANUALLY_ADDED     PromoOfferParticipationStatusMultiFilterType = "MANUALLY_ADDED"
-	PromoOfferParticipationStatusMultiFilterType_RENEWED            PromoOfferParticipationStatusMultiFilterType = "RENEWED"
-	PromoOfferParticipationStatusMultiFilterType_RENEW_FAILED       PromoOfferParticipationStatusMultiFilterType = "RENEW_FAILED"
-	PromoOfferParticipationStatusMultiFilterType_NOT_MANUALLY_ADDED PromoOfferParticipationStatusMultiFilterType = "NOT_MANUALLY_ADDED"
-	PromoOfferParticipationStatusMultiFilterType_MINIMUM_FOR_PROMOS PromoOfferParticipationStatusMultiFilterType = "MINIMUM_FOR_PROMOS"
+	PROMOOFFERPARTICIPATIONSTATUSMULTIFILTERTYPE_MANUALLY_ADDED     PromoOfferParticipationStatusMultiFilterType = "MANUALLY_ADDED"
+	PROMOOFFERPARTICIPATIONSTATUSMULTIFILTERTYPE_RENEWED            PromoOfferParticipationStatusMultiFilterType = "RENEWED"
+	PROMOOFFERPARTICIPATIONSTATUSMULTIFILTERTYPE_RENEW_FAILED       PromoOfferParticipationStatusMultiFilterType = "RENEW_FAILED"
+	PROMOOFFERPARTICIPATIONSTATUSMULTIFILTERTYPE_NOT_MANUALLY_ADDED PromoOfferParticipationStatusMultiFilterType = "NOT_MANUALLY_ADDED"
+	PROMOOFFERPARTICIPATIONSTATUSMULTIFILTERTYPE_MINIMUM_FOR_PROMOS PromoOfferParticipationStatusMultiFilterType = "MINIMUM_FOR_PROMOS"
 )
 
 // All allowed values of PromoOfferParticipationStatusMultiFilterType enum

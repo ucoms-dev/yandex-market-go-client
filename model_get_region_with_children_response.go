@@ -142,7 +142,8 @@ func (v NullableGetRegionWithChildrenResponse) IsSet() bool {
 }
 
 func (v *NullableGetRegionWithChildrenResponse) Unset() {
-	v.value = nil
+	var zero *GetRegionWithChildrenResponse
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,10 +20,10 @@ type PriceQuarantineVerdictParamNameType string
 
 // List of PriceQuarantineVerdictParamNameType
 const (
-	PriceQuarantineVerdictParamNameType_CURRENT_PRICE    PriceQuarantineVerdictParamNameType = "CURRENT_PRICE"
-	PriceQuarantineVerdictParamNameType_LAST_VALID_PRICE PriceQuarantineVerdictParamNameType = "LAST_VALID_PRICE"
-	PriceQuarantineVerdictParamNameType_MIN_PRICE        PriceQuarantineVerdictParamNameType = "MIN_PRICE"
-	PriceQuarantineVerdictParamNameType_CURRENCY         PriceQuarantineVerdictParamNameType = "CURRENCY"
+	PRICEQUARANTINEVERDICTPARAMNAMETYPE_CURRENT_PRICE    PriceQuarantineVerdictParamNameType = "CURRENT_PRICE"
+	PRICEQUARANTINEVERDICTPARAMNAMETYPE_LAST_VALID_PRICE PriceQuarantineVerdictParamNameType = "LAST_VALID_PRICE"
+	PRICEQUARANTINEVERDICTPARAMNAMETYPE_MIN_PRICE        PriceQuarantineVerdictParamNameType = "MIN_PRICE"
+	PRICEQUARANTINEVERDICTPARAMNAMETYPE_CURRENCY         PriceQuarantineVerdictParamNameType = "CURRENCY"
 )
 
 // All allowed values of PriceQuarantineVerdictParamNameType enum

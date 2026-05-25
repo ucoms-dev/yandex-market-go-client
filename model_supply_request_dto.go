@@ -387,6 +387,7 @@ func (o *SupplyRequestDTO) UnmarshalJSON(data []byte) (err error) {
 	varSupplyRequestDTO := _SupplyRequestDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSupplyRequestDTO)
 
 	if err != nil {
@@ -417,7 +418,8 @@ func (v NullableSupplyRequestDTO) IsSet() bool {
 }
 
 func (v *NullableSupplyRequestDTO) Unset() {
-	v.value = nil
+	var zero *SupplyRequestDTO
+	v.value = zero
 	v.isSet = false
 }
 

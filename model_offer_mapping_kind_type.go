@@ -20,8 +20,8 @@ type OfferMappingKindType string
 
 // List of OfferMappingKindType
 const (
-	OfferMappingKindType_ACTIVE OfferMappingKindType = "ACTIVE"
-	OfferMappingKindType_ALL    OfferMappingKindType = "ALL"
+	OFFERMAPPINGKINDTYPE_ACTIVE OfferMappingKindType = "ACTIVE"
+	OFFERMAPPINGKINDTYPE_ALL    OfferMappingKindType = "ALL"
 )
 
 // All allowed values of OfferMappingKindType enum

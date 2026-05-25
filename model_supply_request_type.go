@@ -20,9 +20,9 @@ type SupplyRequestType string
 
 // List of SupplyRequestType
 const (
-	SupplyRequestType_SUPPLY      SupplyRequestType = "SUPPLY"
-	SupplyRequestType_WITHDRAW    SupplyRequestType = "WITHDRAW"
-	SupplyRequestType_UTILIZATION SupplyRequestType = "UTILIZATION"
+	SUPPLYREQUESTTYPE_SUPPLY      SupplyRequestType = "SUPPLY"
+	SUPPLYREQUESTTYPE_WITHDRAW    SupplyRequestType = "WITHDRAW"
+	SUPPLYREQUESTTYPE_UTILIZATION SupplyRequestType = "UTILIZATION"
 )
 
 // All allowed values of SupplyRequestType enum

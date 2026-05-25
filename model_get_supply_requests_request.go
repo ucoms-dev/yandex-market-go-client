@@ -355,7 +355,8 @@ func (v NullableGetSupplyRequestsRequest) IsSet() bool {
 }
 
 func (v *NullableGetSupplyRequestsRequest) Unset() {
-	v.value = nil
+	var zero *GetSupplyRequestsRequest
+	v.value = zero
 	v.isSet = false
 }
 

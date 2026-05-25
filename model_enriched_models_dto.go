@@ -108,6 +108,7 @@ func (o *EnrichedModelsDTO) UnmarshalJSON(data []byte) (err error) {
 	varEnrichedModelsDTO := _EnrichedModelsDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varEnrichedModelsDTO)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableEnrichedModelsDTO) IsSet() bool {
 }
 
 func (v *NullableEnrichedModelsDTO) Unset() {
-	v.value = nil
+	var zero *EnrichedModelsDTO
+	v.value = zero
 	v.isSet = false
 }
 

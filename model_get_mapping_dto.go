@@ -300,7 +300,8 @@ func (v NullableGetMappingDTO) IsSet() bool {
 }
 
 func (v *NullableGetMappingDTO) Unset() {
-	v.value = nil
+	var zero *GetMappingDTO
+	v.value = zero
 	v.isSet = false
 }
 

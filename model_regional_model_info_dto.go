@@ -143,7 +143,8 @@ func (v NullableRegionalModelInfoDTO) IsSet() bool {
 }
 
 func (v *NullableRegionalModelInfoDTO) Unset() {
-	v.value = nil
+	var zero *RegionalModelInfoDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,10 +20,10 @@ type ParameterType string
 
 // List of ParameterType
 const (
-	ParameterType_TEXT    ParameterType = "TEXT"
-	ParameterType_ENUM    ParameterType = "ENUM"
-	ParameterType_BOOLEAN ParameterType = "BOOLEAN"
-	ParameterType_NUMERIC ParameterType = "NUMERIC"
+	PARAMETERTYPE_TEXT    ParameterType = "TEXT"
+	PARAMETERTYPE_ENUM    ParameterType = "ENUM"
+	PARAMETERTYPE_BOOLEAN ParameterType = "BOOLEAN"
+	PARAMETERTYPE_NUMERIC ParameterType = "NUMERIC"
 )
 
 // All allowed values of ParameterType enum

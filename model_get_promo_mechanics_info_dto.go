@@ -143,6 +143,7 @@ func (o *GetPromoMechanicsInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetPromoMechanicsInfoDTO := _GetPromoMechanicsInfoDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetPromoMechanicsInfoDTO)
 
 	if err != nil {
@@ -173,7 +174,8 @@ func (v NullableGetPromoMechanicsInfoDTO) IsSet() bool {
 }
 
 func (v *NullableGetPromoMechanicsInfoDTO) Unset() {
-	v.value = nil
+	var zero *GetPromoMechanicsInfoDTO
+	v.value = zero
 	v.isSet = false
 }
 

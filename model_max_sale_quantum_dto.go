@@ -182,6 +182,7 @@ func (o *MaxSaleQuantumDTO) UnmarshalJSON(data []byte) (err error) {
 	varMaxSaleQuantumDTO := _MaxSaleQuantumDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varMaxSaleQuantumDTO)
 
 	if err != nil {
@@ -212,7 +213,8 @@ func (v NullableMaxSaleQuantumDTO) IsSet() bool {
 }
 
 func (v *NullableMaxSaleQuantumDTO) Unset() {
-	v.value = nil
+	var zero *MaxSaleQuantumDTO
+	v.value = zero
 	v.isSet = false
 }
 

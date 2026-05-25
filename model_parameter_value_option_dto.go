@@ -174,6 +174,7 @@ func (o *ParameterValueOptionDTO) UnmarshalJSON(data []byte) (err error) {
 	varParameterValueOptionDTO := _ParameterValueOptionDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varParameterValueOptionDTO)
 
 	if err != nil {
@@ -204,7 +205,8 @@ func (v NullableParameterValueOptionDTO) IsSet() bool {
 }
 
 func (v *NullableParameterValueOptionDTO) Unset() {
-	v.value = nil
+	var zero *ParameterValueOptionDTO
+	v.value = zero
 	v.isSet = false
 }
 

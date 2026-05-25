@@ -20,10 +20,10 @@ type UinStatusType string
 
 // List of UinStatusType
 const (
-	UinStatusType_OK                UinStatusType = "OK"
-	UinStatusType_IN_PROGRESS       UinStatusType = "IN_PROGRESS"
-	UinStatusType_FAILED            UinStatusType = "FAILED"
-	UinStatusType_NOT_ON_VALIDATION UinStatusType = "NOT_ON_VALIDATION"
+	UINSTATUSTYPE_OK                UinStatusType = "OK"
+	UINSTATUSTYPE_IN_PROGRESS       UinStatusType = "IN_PROGRESS"
+	UINSTATUSTYPE_FAILED            UinStatusType = "FAILED"
+	UINSTATUSTYPE_NOT_ON_VALIDATION UinStatusType = "NOT_ON_VALIDATION"
 )
 
 // All allowed values of UinStatusType enum

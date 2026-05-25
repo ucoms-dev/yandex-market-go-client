@@ -137,6 +137,7 @@ func (o *SkuBidItemDTO) UnmarshalJSON(data []byte) (err error) {
 	varSkuBidItemDTO := _SkuBidItemDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSkuBidItemDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableSkuBidItemDTO) IsSet() bool {
 }
 
 func (v *NullableSkuBidItemDTO) Unset() {
-	v.value = nil
+	var zero *SkuBidItemDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,20 +20,20 @@ type OrdersStatsCommissionType string
 
 // List of OrdersStatsCommissionType
 const (
-	OrdersStatsCommissionType_FEE                          OrdersStatsCommissionType = "FEE"
-	OrdersStatsCommissionType_FULFILLMENT                  OrdersStatsCommissionType = "FULFILLMENT"
-	OrdersStatsCommissionType_LOYALTY_PARTICIPATION_FEE    OrdersStatsCommissionType = "LOYALTY_PARTICIPATION_FEE"
-	OrdersStatsCommissionType_AUCTION_PROMOTION            OrdersStatsCommissionType = "AUCTION_PROMOTION"
-	OrdersStatsCommissionType_INSTALLMENT                  OrdersStatsCommissionType = "INSTALLMENT"
-	OrdersStatsCommissionType_DELIVERY_TO_CUSTOMER         OrdersStatsCommissionType = "DELIVERY_TO_CUSTOMER"
-	OrdersStatsCommissionType_EXPRESS_DELIVERY_TO_CUSTOMER OrdersStatsCommissionType = "EXPRESS_DELIVERY_TO_CUSTOMER"
-	OrdersStatsCommissionType_AGENCY                       OrdersStatsCommissionType = "AGENCY"
-	OrdersStatsCommissionType_PAYMENT_TRANSFER             OrdersStatsCommissionType = "PAYMENT_TRANSFER"
-	OrdersStatsCommissionType_RETURNED_ORDERS_STORAGE      OrdersStatsCommissionType = "RETURNED_ORDERS_STORAGE"
-	OrdersStatsCommissionType_SORTING                      OrdersStatsCommissionType = "SORTING"
-	OrdersStatsCommissionType_INTAKE_SORTING               OrdersStatsCommissionType = "INTAKE_SORTING"
-	OrdersStatsCommissionType_RETURN_PROCESSING            OrdersStatsCommissionType = "RETURN_PROCESSING"
-	OrdersStatsCommissionType_ILLIQUID_GOODS_SALE          OrdersStatsCommissionType = "ILLIQUID_GOODS_SALE"
+	ORDERSSTATSCOMMISSIONTYPE_FEE                          OrdersStatsCommissionType = "FEE"
+	ORDERSSTATSCOMMISSIONTYPE_FULFILLMENT                  OrdersStatsCommissionType = "FULFILLMENT"
+	ORDERSSTATSCOMMISSIONTYPE_LOYALTY_PARTICIPATION_FEE    OrdersStatsCommissionType = "LOYALTY_PARTICIPATION_FEE"
+	ORDERSSTATSCOMMISSIONTYPE_AUCTION_PROMOTION            OrdersStatsCommissionType = "AUCTION_PROMOTION"
+	ORDERSSTATSCOMMISSIONTYPE_INSTALLMENT                  OrdersStatsCommissionType = "INSTALLMENT"
+	ORDERSSTATSCOMMISSIONTYPE_DELIVERY_TO_CUSTOMER         OrdersStatsCommissionType = "DELIVERY_TO_CUSTOMER"
+	ORDERSSTATSCOMMISSIONTYPE_EXPRESS_DELIVERY_TO_CUSTOMER OrdersStatsCommissionType = "EXPRESS_DELIVERY_TO_CUSTOMER"
+	ORDERSSTATSCOMMISSIONTYPE_AGENCY                       OrdersStatsCommissionType = "AGENCY"
+	ORDERSSTATSCOMMISSIONTYPE_PAYMENT_TRANSFER             OrdersStatsCommissionType = "PAYMENT_TRANSFER"
+	ORDERSSTATSCOMMISSIONTYPE_RETURNED_ORDERS_STORAGE      OrdersStatsCommissionType = "RETURNED_ORDERS_STORAGE"
+	ORDERSSTATSCOMMISSIONTYPE_SORTING                      OrdersStatsCommissionType = "SORTING"
+	ORDERSSTATSCOMMISSIONTYPE_INTAKE_SORTING               OrdersStatsCommissionType = "INTAKE_SORTING"
+	ORDERSSTATSCOMMISSIONTYPE_RETURN_PROCESSING            OrdersStatsCommissionType = "RETURN_PROCESSING"
+	ORDERSSTATSCOMMISSIONTYPE_ILLIQUID_GOODS_SALE          OrdersStatsCommissionType = "ILLIQUID_GOODS_SALE"
 )
 
 // All allowed values of OrdersStatsCommissionType enum

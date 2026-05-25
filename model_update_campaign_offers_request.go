@@ -108,6 +108,7 @@ func (o *UpdateCampaignOffersRequest) UnmarshalJSON(data []byte) (err error) {
 	varUpdateCampaignOffersRequest := _UpdateCampaignOffersRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateCampaignOffersRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableUpdateCampaignOffersRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateCampaignOffersRequest) Unset() {
-	v.value = nil
+	var zero *UpdateCampaignOffersRequest
+	v.value = zero
 	v.isSet = false
 }
 

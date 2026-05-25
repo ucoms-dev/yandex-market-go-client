@@ -22,13 +22,13 @@ import (
 // ContentAPIService ContentAPI service
 type ContentAPIService service
 
-type ApiGetCategoryContentParametersRequest struct {
+type ContentAPIGetCategoryContentParametersRequest struct {
 	ctx        context.Context
 	ApiService *ContentAPIService
 	categoryId int64
 }
 
-func (r ApiGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
+func (r ContentAPIGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
 	return r.ApiService.GetCategoryContentParametersExecute(r)
 }
 
@@ -42,12 +42,13 @@ GetCategoryContentParameters Списки характеристик товар�
 |**⚙️ Лимит:** 100 категорий в минуту |
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
-	@return ApiGetCategoryContentParametersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
+ @return ContentAPIGetCategoryContentParametersRequest
 */
-func (a *ContentAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) ApiGetCategoryContentParametersRequest {
-	return ApiGetCategoryContentParametersRequest{
+func (a *ContentAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) ContentAPIGetCategoryContentParametersRequest {
+	return ContentAPIGetCategoryContentParametersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		categoryId: categoryId,
@@ -55,9 +56,8 @@ func (a *ContentAPIService) GetCategoryContentParameters(ctx context.Context, ca
 }
 
 // Execute executes the request
-//
-//	@return GetCategoryContentParametersResponse
-func (a *ContentAPIService) GetCategoryContentParametersExecute(r ApiGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
+//  @return GetCategoryContentParametersResponse
+func (a *ContentAPIService) GetCategoryContentParametersExecute(r ContentAPIGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -213,7 +213,7 @@ func (a *ContentAPIService) GetCategoryContentParametersExecute(r ApiGetCategory
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferCardsContentStatusRequest struct {
+type ContentAPIGetOfferCardsContentStatusRequest struct {
 	ctx                               context.Context
 	ApiService                        *ContentAPIService
 	businessId                        int64
@@ -223,23 +223,23 @@ type ApiGetOfferCardsContentStatusRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOfferCardsContentStatusRequest) PageToken(pageToken string) ApiGetOfferCardsContentStatusRequest {
+func (r ContentAPIGetOfferCardsContentStatusRequest) PageToken(pageToken string) ContentAPIGetOfferCardsContentStatusRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOfferCardsContentStatusRequest) Limit(limit int32) ApiGetOfferCardsContentStatusRequest {
+func (r ContentAPIGetOfferCardsContentStatusRequest) Limit(limit int32) ContentAPIGetOfferCardsContentStatusRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) ApiGetOfferCardsContentStatusRequest {
+func (r ContentAPIGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) ContentAPIGetOfferCardsContentStatusRequest {
 	r.getOfferCardsContentStatusRequest = &getOfferCardsContentStatusRequest
 	return r
 }
 
-func (r ApiGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+func (r ContentAPIGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
 	return r.ApiService.GetOfferCardsContentStatusExecute(r)
 }
 
@@ -259,12 +259,13 @@ GetOfferCardsContentStatus Получение информации о запол
 |**⚙️ Лимит:** 600 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetOfferCardsContentStatusRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return ContentAPIGetOfferCardsContentStatusRequest
 */
-func (a *ContentAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) ApiGetOfferCardsContentStatusRequest {
-	return ApiGetOfferCardsContentStatusRequest{
+func (a *ContentAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) ContentAPIGetOfferCardsContentStatusRequest {
+	return ContentAPIGetOfferCardsContentStatusRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -272,9 +273,8 @@ func (a *ContentAPIService) GetOfferCardsContentStatus(ctx context.Context, busi
 }
 
 // Execute executes the request
-//
-//	@return GetOfferCardsContentStatusResponse
-func (a *ContentAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+//  @return GetOfferCardsContentStatusResponse
+func (a *ContentAPIService) GetOfferCardsContentStatusExecute(r ContentAPIGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -298,10 +298,10 @@ func (a *ContentAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -438,19 +438,19 @@ func (a *ContentAPIService) GetOfferCardsContentStatusExecute(r ApiGetOfferCards
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferContentRequest struct {
+type ContentAPIUpdateOfferContentRequest struct {
 	ctx                       context.Context
 	ApiService                *ContentAPIService
 	businessId                int64
 	updateOfferContentRequest *UpdateOfferContentRequest
 }
 
-func (r ApiUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) ApiUpdateOfferContentRequest {
+func (r ContentAPIUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) ContentAPIUpdateOfferContentRequest {
 	r.updateOfferContentRequest = &updateOfferContentRequest
 	return r
 }
 
-func (r ApiUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
+func (r ContentAPIUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
 	return r.ApiService.UpdateOfferContentExecute(r)
 }
 
@@ -478,12 +478,13 @@ UpdateOfferContent Редактирование категорийных хар�
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdateOfferContentRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return ContentAPIUpdateOfferContentRequest
 */
-func (a *ContentAPIService) UpdateOfferContent(ctx context.Context, businessId int64) ApiUpdateOfferContentRequest {
-	return ApiUpdateOfferContentRequest{
+func (a *ContentAPIService) UpdateOfferContent(ctx context.Context, businessId int64) ContentAPIUpdateOfferContentRequest {
+	return ContentAPIUpdateOfferContentRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -491,9 +492,8 @@ func (a *ContentAPIService) UpdateOfferContent(ctx context.Context, businessId i
 }
 
 // Execute executes the request
-//
-//	@return UpdateOfferContentResponse
-func (a *ContentAPIService) UpdateOfferContentExecute(r ApiUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
+//  @return UpdateOfferContentResponse
+func (a *ContentAPIService) UpdateOfferContentExecute(r ContentAPIUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

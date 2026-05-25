@@ -22,19 +22,19 @@ import (
 // PriceQuarantineAPIService PriceQuarantineAPI service
 type PriceQuarantineAPIService service
 
-type ApiConfirmBusinessPricesRequest struct {
+type PriceQuarantineAPIConfirmBusinessPricesRequest struct {
 	ctx                  context.Context
 	ApiService           *PriceQuarantineAPIService
 	businessId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r ApiConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ApiConfirmBusinessPricesRequest {
+func (r PriceQuarantineAPIConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) PriceQuarantineAPIConfirmBusinessPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r ApiConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r PriceQuarantineAPIConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.ConfirmBusinessPricesExecute(r)
 }
 
@@ -52,12 +52,13 @@ ConfirmBusinessPrices Удаление товара из карантина по
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiConfirmBusinessPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return PriceQuarantineAPIConfirmBusinessPricesRequest
 */
-func (a *PriceQuarantineAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) ApiConfirmBusinessPricesRequest {
-	return ApiConfirmBusinessPricesRequest{
+func (a *PriceQuarantineAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) PriceQuarantineAPIConfirmBusinessPricesRequest {
+	return PriceQuarantineAPIConfirmBusinessPricesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -65,9 +66,8 @@ func (a *PriceQuarantineAPIService) ConfirmBusinessPrices(ctx context.Context, b
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *PriceQuarantineAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *PriceQuarantineAPIService) ConfirmBusinessPricesExecute(r PriceQuarantineAPIConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -239,19 +239,19 @@ func (a *PriceQuarantineAPIService) ConfirmBusinessPricesExecute(r ApiConfirmBus
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiConfirmCampaignPricesRequest struct {
+type PriceQuarantineAPIConfirmCampaignPricesRequest struct {
 	ctx                  context.Context
 	ApiService           *PriceQuarantineAPIService
 	campaignId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r ApiConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) ApiConfirmCampaignPricesRequest {
+func (r PriceQuarantineAPIConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) PriceQuarantineAPIConfirmCampaignPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r ApiConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r PriceQuarantineAPIConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.ConfirmCampaignPricesExecute(r)
 }
 
@@ -269,12 +269,13 @@ ConfirmCampaignPrices Удаление товара из карантина по
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiConfirmCampaignPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return PriceQuarantineAPIConfirmCampaignPricesRequest
 */
-func (a *PriceQuarantineAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) ApiConfirmCampaignPricesRequest {
-	return ApiConfirmCampaignPricesRequest{
+func (a *PriceQuarantineAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) PriceQuarantineAPIConfirmCampaignPricesRequest {
+	return PriceQuarantineAPIConfirmCampaignPricesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -282,9 +283,8 @@ func (a *PriceQuarantineAPIService) ConfirmCampaignPrices(ctx context.Context, c
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *PriceQuarantineAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *PriceQuarantineAPIService) ConfirmCampaignPricesExecute(r PriceQuarantineAPIConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -456,7 +456,7 @@ func (a *PriceQuarantineAPIService) ConfirmCampaignPricesExecute(r ApiConfirmCam
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBusinessQuarantineOffersRequest struct {
+type PriceQuarantineAPIGetBusinessQuarantineOffersRequest struct {
 	ctx                        context.Context
 	ApiService                 *PriceQuarantineAPIService
 	businessId                 int64
@@ -465,24 +465,24 @@ type ApiGetBusinessQuarantineOffersRequest struct {
 	limit                      *int32
 }
 
-func (r ApiGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ApiGetBusinessQuarantineOffersRequest {
+func (r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) PriceQuarantineAPIGetBusinessQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetBusinessQuarantineOffersRequest) PageToken(pageToken string) ApiGetBusinessQuarantineOffersRequest {
+func (r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) PageToken(pageToken string) PriceQuarantineAPIGetBusinessQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetBusinessQuarantineOffersRequest) Limit(limit int32) ApiGetBusinessQuarantineOffersRequest {
+func (r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) Limit(limit int32) PriceQuarantineAPIGetBusinessQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+func (r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
 	return r.ApiService.GetBusinessQuarantineOffersExecute(r)
 }
 
@@ -508,12 +508,13 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetBusinessQuarantineOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return PriceQuarantineAPIGetBusinessQuarantineOffersRequest
 */
-func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) ApiGetBusinessQuarantineOffersRequest {
-	return ApiGetBusinessQuarantineOffersRequest{
+func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) PriceQuarantineAPIGetBusinessQuarantineOffersRequest {
+	return PriceQuarantineAPIGetBusinessQuarantineOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -521,9 +522,8 @@ func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffers(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return GetQuarantineOffersResponse
-func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffersExecute(r ApiGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+//  @return GetQuarantineOffersResponse
+func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffersExecute(r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -550,10 +550,10 @@ func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffersExecute(r ApiGetB
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -690,7 +690,7 @@ func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffersExecute(r ApiGetB
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignQuarantineOffersRequest struct {
+type PriceQuarantineAPIGetCampaignQuarantineOffersRequest struct {
 	ctx                        context.Context
 	ApiService                 *PriceQuarantineAPIService
 	campaignId                 int64
@@ -699,24 +699,24 @@ type ApiGetCampaignQuarantineOffersRequest struct {
 	limit                      *int32
 }
 
-func (r ApiGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) ApiGetCampaignQuarantineOffersRequest {
+func (r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) PriceQuarantineAPIGetCampaignQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetCampaignQuarantineOffersRequest) PageToken(pageToken string) ApiGetCampaignQuarantineOffersRequest {
+func (r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) PageToken(pageToken string) PriceQuarantineAPIGetCampaignQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetCampaignQuarantineOffersRequest) Limit(limit int32) ApiGetCampaignQuarantineOffersRequest {
+func (r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) Limit(limit int32) PriceQuarantineAPIGetCampaignQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+func (r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
 	return r.ApiService.GetCampaignQuarantineOffersExecute(r)
 }
 
@@ -742,12 +742,13 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignQuarantineOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return PriceQuarantineAPIGetCampaignQuarantineOffersRequest
 */
-func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) ApiGetCampaignQuarantineOffersRequest {
-	return ApiGetCampaignQuarantineOffersRequest{
+func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) PriceQuarantineAPIGetCampaignQuarantineOffersRequest {
+	return PriceQuarantineAPIGetCampaignQuarantineOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -755,9 +756,8 @@ func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffers(ctx context.Cont
 }
 
 // Execute executes the request
-//
-//	@return GetQuarantineOffersResponse
-func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffersExecute(r ApiGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+//  @return GetQuarantineOffersResponse
+func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffersExecute(r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -784,10 +784,10 @@ func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffersExecute(r ApiGetC
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

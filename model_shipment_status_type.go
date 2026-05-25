@@ -20,14 +20,14 @@ type ShipmentStatusType string
 
 // List of ShipmentStatusType
 const (
-	ShipmentStatusType_OUTBOUND_CREATED                ShipmentStatusType = "OUTBOUND_CREATED"
-	ShipmentStatusType_OUTBOUND_READY_FOR_CONFIRMATION ShipmentStatusType = "OUTBOUND_READY_FOR_CONFIRMATION"
-	ShipmentStatusType_OUTBOUND_CONFIRMED              ShipmentStatusType = "OUTBOUND_CONFIRMED"
-	ShipmentStatusType_OUTBOUND_SIGNED                 ShipmentStatusType = "OUTBOUND_SIGNED"
-	ShipmentStatusType_FINISHED                        ShipmentStatusType = "FINISHED"
-	ShipmentStatusType_ACCEPTED                        ShipmentStatusType = "ACCEPTED"
-	ShipmentStatusType_ACCEPTED_WITH_DISCREPANCIES     ShipmentStatusType = "ACCEPTED_WITH_DISCREPANCIES"
-	ShipmentStatusType_ERROR                           ShipmentStatusType = "ERROR"
+	SHIPMENTSTATUSTYPE_OUTBOUND_CREATED                ShipmentStatusType = "OUTBOUND_CREATED"
+	SHIPMENTSTATUSTYPE_OUTBOUND_READY_FOR_CONFIRMATION ShipmentStatusType = "OUTBOUND_READY_FOR_CONFIRMATION"
+	SHIPMENTSTATUSTYPE_OUTBOUND_CONFIRMED              ShipmentStatusType = "OUTBOUND_CONFIRMED"
+	SHIPMENTSTATUSTYPE_OUTBOUND_SIGNED                 ShipmentStatusType = "OUTBOUND_SIGNED"
+	SHIPMENTSTATUSTYPE_FINISHED                        ShipmentStatusType = "FINISHED"
+	SHIPMENTSTATUSTYPE_ACCEPTED                        ShipmentStatusType = "ACCEPTED"
+	SHIPMENTSTATUSTYPE_ACCEPTED_WITH_DISCREPANCIES     ShipmentStatusType = "ACCEPTED_WITH_DISCREPANCIES"
+	SHIPMENTSTATUSTYPE_ERROR                           ShipmentStatusType = "ERROR"
 )
 
 // All allowed values of ShipmentStatusType enum

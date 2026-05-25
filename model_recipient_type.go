@@ -20,9 +20,9 @@ type RecipientType string
 
 // List of RecipientType
 const (
-	RecipientType_SHOP             RecipientType = "SHOP"
-	RecipientType_DELIVERY_SERVICE RecipientType = "DELIVERY_SERVICE"
-	RecipientType_POST             RecipientType = "POST"
+	RECIPIENTTYPE_SHOP             RecipientType = "SHOP"
+	RECIPIENTTYPE_DELIVERY_SERVICE RecipientType = "DELIVERY_SERVICE"
+	RECIPIENTTYPE_POST             RecipientType = "POST"
 )
 
 // All allowed values of RecipientType enum

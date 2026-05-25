@@ -27,8 +27,6 @@ type OrderBuyerDTO struct {
 	LastName *string `json:"lastName,omitempty"`
 	// Имя покупателя.
 	FirstName *string `json:"firstName,omitempty"`
-	// Электронная почта покупателя.
-	Email *string `json:"email,omitempty"`
 	// Отчество покупателя.
 	MiddleName *string        `json:"middleName,omitempty"`
 	Type       OrderBuyerType `json:"type"`
@@ -150,38 +148,6 @@ func (o *OrderBuyerDTO) SetFirstName(v string) {
 	o.FirstName = &v
 }
 
-// GetEmail returns the Email field value if set, zero value otherwise.
-func (o *OrderBuyerDTO) GetEmail() string {
-	if o == nil || IsNil(o.Email) {
-		var ret string
-		return ret
-	}
-	return *o.Email
-}
-
-// GetEmailOk returns a tuple with the Email field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OrderBuyerDTO) GetEmailOk() (*string, bool) {
-	if o == nil || IsNil(o.Email) {
-		return nil, false
-	}
-	return o.Email, true
-}
-
-// HasEmail returns a boolean if a field has been set.
-func (o *OrderBuyerDTO) HasEmail() bool {
-	if o != nil && !IsNil(o.Email) {
-		return true
-	}
-
-	return false
-}
-
-// SetEmail gets a reference to the given string and assigns it to the Email field.
-func (o *OrderBuyerDTO) SetEmail(v string) {
-	o.Email = &v
-}
-
 // GetMiddleName returns the MiddleName field value if set, zero value otherwise.
 func (o *OrderBuyerDTO) GetMiddleName() string {
 	if o == nil || IsNil(o.MiddleName) {
@@ -257,9 +223,6 @@ func (o OrderBuyerDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.FirstName) {
 		toSerialize["firstName"] = o.FirstName
 	}
-	if !IsNil(o.Email) {
-		toSerialize["email"] = o.Email
-	}
 	if !IsNil(o.MiddleName) {
 		toSerialize["middleName"] = o.MiddleName
 	}
@@ -292,6 +255,7 @@ func (o *OrderBuyerDTO) UnmarshalJSON(data []byte) (err error) {
 	varOrderBuyerDTO := _OrderBuyerDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOrderBuyerDTO)
 
 	if err != nil {
@@ -322,7 +286,8 @@ func (v NullableOrderBuyerDTO) IsSet() bool {
 }
 
 func (v *NullableOrderBuyerDTO) Unset() {
-	v.value = nil
+	var zero *OrderBuyerDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -22,19 +22,19 @@ import (
 // BusinessOfferMappingsAPIService BusinessOfferMappingsAPI service
 type BusinessOfferMappingsAPIService service
 
-type ApiAddOffersToArchiveRequest struct {
+type BusinessOfferMappingsAPIAddOffersToArchiveRequest struct {
 	ctx                       context.Context
 	ApiService                *BusinessOfferMappingsAPIService
 	businessId                int64
 	addOffersToArchiveRequest *AddOffersToArchiveRequest
 }
 
-func (r ApiAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) ApiAddOffersToArchiveRequest {
+func (r BusinessOfferMappingsAPIAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) BusinessOfferMappingsAPIAddOffersToArchiveRequest {
 	r.addOffersToArchiveRequest = &addOffersToArchiveRequest
 	return r
 }
 
-func (r ApiAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
+func (r BusinessOfferMappingsAPIAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
 	return r.ApiService.AddOffersToArchiveExecute(r)
 }
 
@@ -54,12 +54,13 @@ AddOffersToArchive Добавление товаров в архив
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiAddOffersToArchiveRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return BusinessOfferMappingsAPIAddOffersToArchiveRequest
 */
-func (a *BusinessOfferMappingsAPIService) AddOffersToArchive(ctx context.Context, businessId int64) ApiAddOffersToArchiveRequest {
-	return ApiAddOffersToArchiveRequest{
+func (a *BusinessOfferMappingsAPIService) AddOffersToArchive(ctx context.Context, businessId int64) BusinessOfferMappingsAPIAddOffersToArchiveRequest {
+	return BusinessOfferMappingsAPIAddOffersToArchiveRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -67,9 +68,8 @@ func (a *BusinessOfferMappingsAPIService) AddOffersToArchive(ctx context.Context
 }
 
 // Execute executes the request
-//
-//	@return AddOffersToArchiveResponse
-func (a *BusinessOfferMappingsAPIService) AddOffersToArchiveExecute(r ApiAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
+//  @return AddOffersToArchiveResponse
+func (a *BusinessOfferMappingsAPIService) AddOffersToArchiveExecute(r BusinessOfferMappingsAPIAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -241,19 +241,19 @@ func (a *BusinessOfferMappingsAPIService) AddOffersToArchiveExecute(r ApiAddOffe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOffersRequest struct {
+type BusinessOfferMappingsAPIDeleteOffersRequest struct {
 	ctx                 context.Context
 	ApiService          *BusinessOfferMappingsAPIService
 	businessId          int64
 	deleteOffersRequest *DeleteOffersRequest
 }
 
-func (r ApiDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) ApiDeleteOffersRequest {
+func (r BusinessOfferMappingsAPIDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) BusinessOfferMappingsAPIDeleteOffersRequest {
 	r.deleteOffersRequest = &deleteOffersRequest
 	return r
 }
 
-func (r ApiDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
+func (r BusinessOfferMappingsAPIDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
 	return r.ApiService.DeleteOffersExecute(r)
 }
 
@@ -267,12 +267,13 @@ DeleteOffers Удаление товаров из каталога
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiDeleteOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return BusinessOfferMappingsAPIDeleteOffersRequest
 */
-func (a *BusinessOfferMappingsAPIService) DeleteOffers(ctx context.Context, businessId int64) ApiDeleteOffersRequest {
-	return ApiDeleteOffersRequest{
+func (a *BusinessOfferMappingsAPIService) DeleteOffers(ctx context.Context, businessId int64) BusinessOfferMappingsAPIDeleteOffersRequest {
+	return BusinessOfferMappingsAPIDeleteOffersRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -280,9 +281,8 @@ func (a *BusinessOfferMappingsAPIService) DeleteOffers(ctx context.Context, busi
 }
 
 // Execute executes the request
-//
-//	@return DeleteOffersResponse
-func (a *BusinessOfferMappingsAPIService) DeleteOffersExecute(r ApiDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
+//  @return DeleteOffersResponse
+func (a *BusinessOfferMappingsAPIService) DeleteOffersExecute(r BusinessOfferMappingsAPIDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -454,19 +454,19 @@ func (a *BusinessOfferMappingsAPIService) DeleteOffersExecute(r ApiDeleteOffersR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiDeleteOffersFromArchiveRequest struct {
+type BusinessOfferMappingsAPIDeleteOffersFromArchiveRequest struct {
 	ctx                            context.Context
 	ApiService                     *BusinessOfferMappingsAPIService
 	businessId                     int64
 	deleteOffersFromArchiveRequest *DeleteOffersFromArchiveRequest
 }
 
-func (r ApiDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) ApiDeleteOffersFromArchiveRequest {
+func (r BusinessOfferMappingsAPIDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) BusinessOfferMappingsAPIDeleteOffersFromArchiveRequest {
 	r.deleteOffersFromArchiveRequest = &deleteOffersFromArchiveRequest
 	return r
 }
 
-func (r ApiDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+func (r BusinessOfferMappingsAPIDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
 	return r.ApiService.DeleteOffersFromArchiveExecute(r)
 }
 
@@ -480,12 +480,13 @@ DeleteOffersFromArchive Удаление товаров из архива
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiDeleteOffersFromArchiveRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return BusinessOfferMappingsAPIDeleteOffersFromArchiveRequest
 */
-func (a *BusinessOfferMappingsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) ApiDeleteOffersFromArchiveRequest {
-	return ApiDeleteOffersFromArchiveRequest{
+func (a *BusinessOfferMappingsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) BusinessOfferMappingsAPIDeleteOffersFromArchiveRequest {
+	return BusinessOfferMappingsAPIDeleteOffersFromArchiveRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -493,9 +494,8 @@ func (a *BusinessOfferMappingsAPIService) DeleteOffersFromArchive(ctx context.Co
 }
 
 // Execute executes the request
-//
-//	@return DeleteOffersFromArchiveResponse
-func (a *BusinessOfferMappingsAPIService) DeleteOffersFromArchiveExecute(r ApiDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+//  @return DeleteOffersFromArchiveResponse
+func (a *BusinessOfferMappingsAPIService) DeleteOffersFromArchiveExecute(r BusinessOfferMappingsAPIDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -667,7 +667,7 @@ func (a *BusinessOfferMappingsAPIService) DeleteOffersFromArchiveExecute(r ApiDe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetOfferMappingsRequest struct {
+type BusinessOfferMappingsAPIGetOfferMappingsRequest struct {
 	ctx                     context.Context
 	ApiService              *BusinessOfferMappingsAPIService
 	businessId              int64
@@ -678,29 +678,29 @@ type ApiGetOfferMappingsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOfferMappingsRequest) PageToken(pageToken string) ApiGetOfferMappingsRequest {
+func (r BusinessOfferMappingsAPIGetOfferMappingsRequest) PageToken(pageToken string) BusinessOfferMappingsAPIGetOfferMappingsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOfferMappingsRequest) Limit(limit int32) ApiGetOfferMappingsRequest {
+func (r BusinessOfferMappingsAPIGetOfferMappingsRequest) Limit(limit int32) BusinessOfferMappingsAPIGetOfferMappingsRequest {
 	r.limit = &limit
 	return r
 }
 
 // Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
-func (r ApiGetOfferMappingsRequest) Language(language CatalogLanguageType) ApiGetOfferMappingsRequest {
+func (r BusinessOfferMappingsAPIGetOfferMappingsRequest) Language(language CatalogLanguageType) BusinessOfferMappingsAPIGetOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) ApiGetOfferMappingsRequest {
+func (r BusinessOfferMappingsAPIGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) BusinessOfferMappingsAPIGetOfferMappingsRequest {
 	r.getOfferMappingsRequest = &getOfferMappingsRequest
 	return r
 }
 
-func (r ApiGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
+func (r BusinessOfferMappingsAPIGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
 	return r.ApiService.GetOfferMappingsExecute(r)
 }
 
@@ -719,12 +719,13 @@ GetOfferMappings Информация о товарах в каталоге
 |**⚙️ Лимит:** 600 запросов в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetOfferMappingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return BusinessOfferMappingsAPIGetOfferMappingsRequest
 */
-func (a *BusinessOfferMappingsAPIService) GetOfferMappings(ctx context.Context, businessId int64) ApiGetOfferMappingsRequest {
-	return ApiGetOfferMappingsRequest{
+func (a *BusinessOfferMappingsAPIService) GetOfferMappings(ctx context.Context, businessId int64) BusinessOfferMappingsAPIGetOfferMappingsRequest {
+	return BusinessOfferMappingsAPIGetOfferMappingsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -732,9 +733,8 @@ func (a *BusinessOfferMappingsAPIService) GetOfferMappings(ctx context.Context, 
 }
 
 // Execute executes the request
-//
-//	@return GetOfferMappingsResponse
-func (a *BusinessOfferMappingsAPIService) GetOfferMappingsExecute(r ApiGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
+//  @return GetOfferMappingsResponse
+func (a *BusinessOfferMappingsAPIService) GetOfferMappingsExecute(r BusinessOfferMappingsAPIGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -758,13 +758,13 @@ func (a *BusinessOfferMappingsAPIService) GetOfferMappingsExecute(r ApiGetOfferM
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -901,19 +901,19 @@ func (a *BusinessOfferMappingsAPIService) GetOfferMappingsExecute(r ApiGetOfferM
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedOfferMappingsRequest struct {
+type BusinessOfferMappingsAPIGetSuggestedOfferMappingsRequest struct {
 	ctx                              context.Context
 	ApiService                       *BusinessOfferMappingsAPIService
 	businessId                       int64
 	getSuggestedOfferMappingsRequest *GetSuggestedOfferMappingsRequest
 }
 
-func (r ApiGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) ApiGetSuggestedOfferMappingsRequest {
+func (r BusinessOfferMappingsAPIGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) BusinessOfferMappingsAPIGetSuggestedOfferMappingsRequest {
 	r.getSuggestedOfferMappingsRequest = &getSuggestedOfferMappingsRequest
 	return r
 }
 
-func (r ApiGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+func (r BusinessOfferMappingsAPIGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
 	return r.ApiService.GetSuggestedOfferMappingsExecute(r)
 }
 
@@ -944,14 +944,15 @@ GetSuggestedOfferMappings Просмотр карточек на Маркете,
 |**⚙️ Лимит:** 100 000 товаров в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiGetSuggestedOfferMappingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return BusinessOfferMappingsAPIGetSuggestedOfferMappingsRequest
 
 Deprecated
 */
-func (a *BusinessOfferMappingsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) ApiGetSuggestedOfferMappingsRequest {
-	return ApiGetSuggestedOfferMappingsRequest{
+func (a *BusinessOfferMappingsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) BusinessOfferMappingsAPIGetSuggestedOfferMappingsRequest {
+	return BusinessOfferMappingsAPIGetSuggestedOfferMappingsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -959,11 +960,9 @@ func (a *BusinessOfferMappingsAPIService) GetSuggestedOfferMappings(ctx context.
 }
 
 // Execute executes the request
-//
-//	@return GetSuggestedOfferMappingsResponse
-//
+//  @return GetSuggestedOfferMappingsResponse
 // Deprecated
-func (a *BusinessOfferMappingsAPIService) GetSuggestedOfferMappingsExecute(r ApiGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+func (a *BusinessOfferMappingsAPIService) GetSuggestedOfferMappingsExecute(r BusinessOfferMappingsAPIGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1121,7 +1120,7 @@ func (a *BusinessOfferMappingsAPIService) GetSuggestedOfferMappingsExecute(r Api
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateOfferMappingsRequest struct {
+type BusinessOfferMappingsAPIUpdateOfferMappingsRequest struct {
 	ctx                        context.Context
 	ApiService                 *BusinessOfferMappingsAPIService
 	businessId                 int64
@@ -1129,18 +1128,18 @@ type ApiUpdateOfferMappingsRequest struct {
 	language                   *CatalogLanguageType
 }
 
-func (r ApiUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) ApiUpdateOfferMappingsRequest {
+func (r BusinessOfferMappingsAPIUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) BusinessOfferMappingsAPIUpdateOfferMappingsRequest {
 	r.updateOfferMappingsRequest = &updateOfferMappingsRequest
 	return r
 }
 
 // Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
-func (r ApiUpdateOfferMappingsRequest) Language(language CatalogLanguageType) ApiUpdateOfferMappingsRequest {
+func (r BusinessOfferMappingsAPIUpdateOfferMappingsRequest) Language(language CatalogLanguageType) BusinessOfferMappingsAPIUpdateOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
+func (r BusinessOfferMappingsAPIUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
 	return r.ApiService.UpdateOfferMappingsExecute(r)
 }
 
@@ -1173,11 +1172,10 @@ UpdateOfferMappings Добавление товаров в каталог и и�
 
 Когда вы добавляете товары в каталог, указывайте значения параметров `name` и `description` на русском языке. Чтобы на витрине они отображались и на другом языке, еще раз выполните запрос `POST businesses/{businessId}/offer-mappings/update`, где укажите:
 
-  - язык в параметре `language`;
+  * язык в параметре `language`;
+  * значения параметров `name` и `description` на указанном языке.
 
-  - значения параметров `name` и `description` на указанном языке.
-
-    Повторно передавать остальные характеристики товара не нужно.
+  Повторно передавать остальные характеристики товара не нужно.
 
 {% endcut %}
 
@@ -1218,12 +1216,13 @@ SKU товара можно изменить в кабинете продавц�
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 100 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdateOfferMappingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return BusinessOfferMappingsAPIUpdateOfferMappingsRequest
 */
-func (a *BusinessOfferMappingsAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) ApiUpdateOfferMappingsRequest {
-	return ApiUpdateOfferMappingsRequest{
+func (a *BusinessOfferMappingsAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) BusinessOfferMappingsAPIUpdateOfferMappingsRequest {
+	return BusinessOfferMappingsAPIUpdateOfferMappingsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -1231,9 +1230,8 @@ func (a *BusinessOfferMappingsAPIService) UpdateOfferMappings(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return UpdateOfferMappingsResponse
-func (a *BusinessOfferMappingsAPIService) UpdateOfferMappingsExecute(r ApiUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
+//  @return UpdateOfferMappingsResponse
+func (a *BusinessOfferMappingsAPIService) UpdateOfferMappingsExecute(r BusinessOfferMappingsAPIUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1260,7 +1258,7 @@ func (a *BusinessOfferMappingsAPIService) UpdateOfferMappingsExecute(r ApiUpdate
 	}
 
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

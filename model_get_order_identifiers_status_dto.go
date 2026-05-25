@@ -108,6 +108,7 @@ func (o *GetOrderIdentifiersStatusDTO) UnmarshalJSON(data []byte) (err error) {
 	varGetOrderIdentifiersStatusDTO := _GetOrderIdentifiersStatusDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGetOrderIdentifiersStatusDTO)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableGetOrderIdentifiersStatusDTO) IsSet() bool {
 }
 
 func (v *NullableGetOrderIdentifiersStatusDTO) Unset() {
-	v.value = nil
+	var zero *GetOrderIdentifiersStatusDTO
+	v.value = zero
 	v.isSet = false
 }
 

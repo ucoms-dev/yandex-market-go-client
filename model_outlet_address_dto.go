@@ -408,6 +408,7 @@ func (o *OutletAddressDTO) UnmarshalJSON(data []byte) (err error) {
 	varOutletAddressDTO := _OutletAddressDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOutletAddressDTO)
 
 	if err != nil {
@@ -438,7 +439,8 @@ func (v NullableOutletAddressDTO) IsSet() bool {
 }
 
 func (v *NullableOutletAddressDTO) Unset() {
-	v.value = nil
+	var zero *OutletAddressDTO
+	v.value = zero
 	v.isSet = false
 }
 

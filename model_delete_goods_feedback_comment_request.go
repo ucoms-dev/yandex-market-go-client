@@ -108,6 +108,7 @@ func (o *DeleteGoodsFeedbackCommentRequest) UnmarshalJSON(data []byte) (err erro
 	varDeleteGoodsFeedbackCommentRequest := _DeleteGoodsFeedbackCommentRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varDeleteGoodsFeedbackCommentRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableDeleteGoodsFeedbackCommentRequest) IsSet() bool {
 }
 
 func (v *NullableDeleteGoodsFeedbackCommentRequest) Unset() {
-	v.value = nil
+	var zero *DeleteGoodsFeedbackCommentRequest
+	v.value = zero
 	v.isSet = false
 }
 

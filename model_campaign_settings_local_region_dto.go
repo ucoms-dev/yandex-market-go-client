@@ -252,7 +252,8 @@ func (v NullableCampaignSettingsLocalRegionDTO) IsSet() bool {
 }
 
 func (v *NullableCampaignSettingsLocalRegionDTO) Unset() {
-	v.value = nil
+	var zero *CampaignSettingsLocalRegionDTO
+	v.value = zero
 	v.isSet = false
 }
 

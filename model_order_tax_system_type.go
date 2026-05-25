@@ -20,14 +20,14 @@ type OrderTaxSystemType string
 
 // List of OrderTaxSystemType
 const (
-	OrderTaxSystemType_OSN            OrderTaxSystemType = "OSN"
-	OrderTaxSystemType_USN            OrderTaxSystemType = "USN"
-	OrderTaxSystemType_USN_MINUS_COST OrderTaxSystemType = "USN_MINUS_COST"
-	OrderTaxSystemType_ENVD           OrderTaxSystemType = "ENVD"
-	OrderTaxSystemType_ECHN           OrderTaxSystemType = "ECHN"
-	OrderTaxSystemType_PSN            OrderTaxSystemType = "PSN"
-	OrderTaxSystemType_NPD            OrderTaxSystemType = "NPD"
-	OrderTaxSystemType_UNKNOWN_VALUE  OrderTaxSystemType = "UNKNOWN_VALUE"
+	ORDERTAXSYSTEMTYPE_OSN            OrderTaxSystemType = "OSN"
+	ORDERTAXSYSTEMTYPE_USN            OrderTaxSystemType = "USN"
+	ORDERTAXSYSTEMTYPE_USN_MINUS_COST OrderTaxSystemType = "USN_MINUS_COST"
+	ORDERTAXSYSTEMTYPE_ENVD           OrderTaxSystemType = "ENVD"
+	ORDERTAXSYSTEMTYPE_ECHN           OrderTaxSystemType = "ECHN"
+	ORDERTAXSYSTEMTYPE_PSN            OrderTaxSystemType = "PSN"
+	ORDERTAXSYSTEMTYPE_NPD            OrderTaxSystemType = "NPD"
+	ORDERTAXSYSTEMTYPE_UNKNOWN_VALUE  OrderTaxSystemType = "UNKNOWN_VALUE"
 )
 
 // All allowed values of OrderTaxSystemType enum

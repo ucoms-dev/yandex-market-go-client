@@ -137,6 +137,7 @@ func (o *CampaignQualityRatingDTO) UnmarshalJSON(data []byte) (err error) {
 	varCampaignQualityRatingDTO := _CampaignQualityRatingDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varCampaignQualityRatingDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableCampaignQualityRatingDTO) IsSet() bool {
 }
 
 func (v *NullableCampaignQualityRatingDTO) Unset() {
-	v.value = nil
+	var zero *CampaignQualityRatingDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,8 +20,8 @@ type CommodityCodeType string
 
 // List of CommodityCodeType
 const (
-	CommodityCodeType_CUSTOMS_COMMODITY_CODE CommodityCodeType = "CUSTOMS_COMMODITY_CODE"
-	CommodityCodeType_IKPU_CODE              CommodityCodeType = "IKPU_CODE"
+	COMMODITYCODETYPE_CUSTOMS_COMMODITY_CODE CommodityCodeType = "CUSTOMS_COMMODITY_CODE"
+	COMMODITYCODETYPE_IKPU_CODE              CommodityCodeType = "IKPU_CODE"
 )
 
 // All allowed values of CommodityCodeType enum

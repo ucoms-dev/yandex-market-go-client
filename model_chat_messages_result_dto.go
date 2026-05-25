@@ -173,6 +173,7 @@ func (o *ChatMessagesResultDTO) UnmarshalJSON(data []byte) (err error) {
 	varChatMessagesResultDTO := _ChatMessagesResultDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varChatMessagesResultDTO)
 
 	if err != nil {
@@ -203,7 +204,8 @@ func (v NullableChatMessagesResultDTO) IsSet() bool {
 }
 
 func (v *NullableChatMessagesResultDTO) Unset() {
-	v.value = nil
+	var zero *ChatMessagesResultDTO
+	v.value = zero
 	v.isSet = false
 }
 

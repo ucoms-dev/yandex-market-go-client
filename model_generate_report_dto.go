@@ -137,6 +137,7 @@ func (o *GenerateReportDTO) UnmarshalJSON(data []byte) (err error) {
 	varGenerateReportDTO := _GenerateReportDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateReportDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableGenerateReportDTO) IsSet() bool {
 }
 
 func (v *NullableGenerateReportDTO) Unset() {
-	v.value = nil
+	var zero *GenerateReportDTO
+	v.value = zero
 	v.isSet = false
 }
 

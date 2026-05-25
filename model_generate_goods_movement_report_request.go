@@ -203,6 +203,7 @@ func (o *GenerateGoodsMovementReportRequest) UnmarshalJSON(data []byte) (err err
 	varGenerateGoodsMovementReportRequest := _GenerateGoodsMovementReportRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateGoodsMovementReportRequest)
 
 	if err != nil {
@@ -233,7 +234,8 @@ func (v NullableGenerateGoodsMovementReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateGoodsMovementReportRequest) Unset() {
-	v.value = nil
+	var zero *GenerateGoodsMovementReportRequest
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,9 +20,9 @@ type PriceQuarantineVerdictType string
 
 // List of PriceQuarantineVerdictType
 const (
-	PriceQuarantineVerdictType_PRICE_CHANGE    PriceQuarantineVerdictType = "PRICE_CHANGE"
-	PriceQuarantineVerdictType_LOW_PRICE       PriceQuarantineVerdictType = "LOW_PRICE"
-	PriceQuarantineVerdictType_LOW_PRICE_PROMO PriceQuarantineVerdictType = "LOW_PRICE_PROMO"
+	PRICEQUARANTINEVERDICTTYPE_PRICE_CHANGE    PriceQuarantineVerdictType = "PRICE_CHANGE"
+	PRICEQUARANTINEVERDICTTYPE_LOW_PRICE       PriceQuarantineVerdictType = "LOW_PRICE"
+	PRICEQUARANTINEVERDICTTYPE_LOW_PRICE_PROMO PriceQuarantineVerdictType = "LOW_PRICE_PROMO"
 )
 
 // All allowed values of PriceQuarantineVerdictType enum

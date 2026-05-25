@@ -108,6 +108,7 @@ func (o *SkipGoodsFeedbackReactionRequest) UnmarshalJSON(data []byte) (err error
 	varSkipGoodsFeedbackReactionRequest := _SkipGoodsFeedbackReactionRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSkipGoodsFeedbackReactionRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableSkipGoodsFeedbackReactionRequest) IsSet() bool {
 }
 
 func (v *NullableSkipGoodsFeedbackReactionRequest) Unset() {
-	v.value = nil
+	var zero *SkipGoodsFeedbackReactionRequest
+	v.value = zero
 	v.isSet = false
 }
 

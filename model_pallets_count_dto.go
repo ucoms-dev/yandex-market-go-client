@@ -144,7 +144,8 @@ func (v NullablePalletsCountDTO) IsSet() bool {
 }
 
 func (v *NullablePalletsCountDTO) Unset() {
-	v.value = nil
+	var zero *PalletsCountDTO
+	v.value = zero
 	v.isSet = false
 }
 

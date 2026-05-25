@@ -194,6 +194,7 @@ func (o *GenerateShowsBoostRequest) UnmarshalJSON(data []byte) (err error) {
 	varGenerateShowsBoostRequest := _GenerateShowsBoostRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateShowsBoostRequest)
 
 	if err != nil {
@@ -224,7 +225,8 @@ func (v NullableGenerateShowsBoostRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateShowsBoostRequest) Unset() {
-	v.value = nil
+	var zero *GenerateShowsBoostRequest
+	v.value = zero
 	v.isSet = false
 }
 

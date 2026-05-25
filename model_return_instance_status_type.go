@@ -20,18 +20,18 @@ type ReturnInstanceStatusType string
 
 // List of ReturnInstanceStatusType
 const (
-	ReturnInstanceStatusType_CREATED                  ReturnInstanceStatusType = "CREATED"
-	ReturnInstanceStatusType_RECEIVED                 ReturnInstanceStatusType = "RECEIVED"
-	ReturnInstanceStatusType_IN_TRANSIT               ReturnInstanceStatusType = "IN_TRANSIT"
-	ReturnInstanceStatusType_READY_FOR_PICKUP         ReturnInstanceStatusType = "READY_FOR_PICKUP"
-	ReturnInstanceStatusType_PICKED                   ReturnInstanceStatusType = "PICKED"
-	ReturnInstanceStatusType_RECEIVED_ON_FULFILLMENT  ReturnInstanceStatusType = "RECEIVED_ON_FULFILLMENT"
-	ReturnInstanceStatusType_CANCELLED                ReturnInstanceStatusType = "CANCELLED"
-	ReturnInstanceStatusType_LOST                     ReturnInstanceStatusType = "LOST"
-	ReturnInstanceStatusType_UTILIZED                 ReturnInstanceStatusType = "UTILIZED"
-	ReturnInstanceStatusType_PREPARED_FOR_UTILIZATION ReturnInstanceStatusType = "PREPARED_FOR_UTILIZATION"
-	ReturnInstanceStatusType_EXPROPRIATED             ReturnInstanceStatusType = "EXPROPRIATED"
-	ReturnInstanceStatusType_NOT_IN_DEMAND            ReturnInstanceStatusType = "NOT_IN_DEMAND"
+	RETURNINSTANCESTATUSTYPE_CREATED                  ReturnInstanceStatusType = "CREATED"
+	RETURNINSTANCESTATUSTYPE_RECEIVED                 ReturnInstanceStatusType = "RECEIVED"
+	RETURNINSTANCESTATUSTYPE_IN_TRANSIT               ReturnInstanceStatusType = "IN_TRANSIT"
+	RETURNINSTANCESTATUSTYPE_READY_FOR_PICKUP         ReturnInstanceStatusType = "READY_FOR_PICKUP"
+	RETURNINSTANCESTATUSTYPE_PICKED                   ReturnInstanceStatusType = "PICKED"
+	RETURNINSTANCESTATUSTYPE_RECEIVED_ON_FULFILLMENT  ReturnInstanceStatusType = "RECEIVED_ON_FULFILLMENT"
+	RETURNINSTANCESTATUSTYPE_CANCELLED                ReturnInstanceStatusType = "CANCELLED"
+	RETURNINSTANCESTATUSTYPE_LOST                     ReturnInstanceStatusType = "LOST"
+	RETURNINSTANCESTATUSTYPE_UTILIZED                 ReturnInstanceStatusType = "UTILIZED"
+	RETURNINSTANCESTATUSTYPE_PREPARED_FOR_UTILIZATION ReturnInstanceStatusType = "PREPARED_FOR_UTILIZATION"
+	RETURNINSTANCESTATUSTYPE_EXPROPRIATED             ReturnInstanceStatusType = "EXPROPRIATED"
+	RETURNINSTANCESTATUSTYPE_NOT_IN_DEMAND            ReturnInstanceStatusType = "NOT_IN_DEMAND"
 )
 
 // All allowed values of ReturnInstanceStatusType enum

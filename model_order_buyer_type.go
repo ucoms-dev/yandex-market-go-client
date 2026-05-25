@@ -20,8 +20,8 @@ type OrderBuyerType string
 
 // List of OrderBuyerType
 const (
-	OrderBuyerType_PERSON   OrderBuyerType = "PERSON"
-	OrderBuyerType_BUSINESS OrderBuyerType = "BUSINESS"
+	ORDERBUYERTYPE_PERSON   OrderBuyerType = "PERSON"
+	ORDERBUYERTYPE_BUSINESS OrderBuyerType = "BUSINESS"
 )
 
 // All allowed values of OrderBuyerType enum

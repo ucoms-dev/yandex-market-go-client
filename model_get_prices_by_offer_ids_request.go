@@ -108,7 +108,8 @@ func (v NullableGetPricesByOfferIdsRequest) IsSet() bool {
 }
 
 func (v *NullableGetPricesByOfferIdsRequest) Unset() {
-	v.value = nil
+	var zero *GetPricesByOfferIdsRequest
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,8 +20,8 @@ type SortOrderType string
 
 // List of SortOrderType
 const (
-	SortOrderType_ASC  SortOrderType = "ASC"
-	SortOrderType_DESC SortOrderType = "DESC"
+	SORTORDERTYPE_ASC  SortOrderType = "ASC"
+	SORTORDERTYPE_DESC SortOrderType = "DESC"
 )
 
 // All allowed values of SortOrderType enum

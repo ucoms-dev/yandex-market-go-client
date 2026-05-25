@@ -20,9 +20,9 @@ type SupplyRequestLocationType string
 
 // List of SupplyRequestLocationType
 const (
-	SupplyRequestLocationType_FULFILLMENT  SupplyRequestLocationType = "FULFILLMENT"
-	SupplyRequestLocationType_XDOC         SupplyRequestLocationType = "XDOC"
-	SupplyRequestLocationType_PICKUP_POINT SupplyRequestLocationType = "PICKUP_POINT"
+	SUPPLYREQUESTLOCATIONTYPE_FULFILLMENT  SupplyRequestLocationType = "FULFILLMENT"
+	SUPPLYREQUESTLOCATIONTYPE_XDOC         SupplyRequestLocationType = "XDOC"
+	SUPPLYREQUESTLOCATIONTYPE_PICKUP_POINT SupplyRequestLocationType = "PICKUP_POINT"
 )
 
 // All allowed values of SupplyRequestLocationType enum

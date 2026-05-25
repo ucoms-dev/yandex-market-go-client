@@ -216,7 +216,8 @@ func (v NullableReturnInstanceDTO) IsSet() bool {
 }
 
 func (v *NullableReturnInstanceDTO) Unset() {
-	v.value = nil
+	var zero *ReturnInstanceDTO
+	v.value = zero
 	v.isSet = false
 }
 

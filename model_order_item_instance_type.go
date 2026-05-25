@@ -20,11 +20,11 @@ type OrderItemInstanceType string
 
 // List of OrderItemInstanceType
 const (
-	OrderItemInstanceType_CIS          OrderItemInstanceType = "CIS"
-	OrderItemInstanceType_CIS_OPTIONAL OrderItemInstanceType = "CIS_OPTIONAL"
-	OrderItemInstanceType_UIN          OrderItemInstanceType = "UIN"
-	OrderItemInstanceType_RNPT         OrderItemInstanceType = "RNPT"
-	OrderItemInstanceType_GTD          OrderItemInstanceType = "GTD"
+	ORDERITEMINSTANCETYPE_CIS          OrderItemInstanceType = "CIS"
+	ORDERITEMINSTANCETYPE_CIS_OPTIONAL OrderItemInstanceType = "CIS_OPTIONAL"
+	ORDERITEMINSTANCETYPE_UIN          OrderItemInstanceType = "UIN"
+	ORDERITEMINSTANCETYPE_RNPT         OrderItemInstanceType = "RNPT"
+	ORDERITEMINSTANCETYPE_GTD          OrderItemInstanceType = "GTD"
 )
 
 // All allowed values of OrderItemInstanceType enum

@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"reflect"
 	"strings"
 	"time"
 )
@@ -24,21 +25,21 @@ import (
 // FbsAPIService FbsAPI service
 type FbsAPIService service
 
-type FbsAddHiddenOffersRequest struct {
+type FbsAPIAddHiddenOffersRequest struct {
 	ctx                    context.Context
-	FbsService             *FbsAPIService
+	ApiService             *FbsAPIService
 	campaignId             int64
 	addHiddenOffersRequest *AddHiddenOffersRequest
 }
 
 // Запрос на скрытие оферов.
-func (r FbsAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersRequest AddHiddenOffersRequest) FbsAddHiddenOffersRequest {
+func (r FbsAPIAddHiddenOffersRequest) AddHiddenOffersRequest(addHiddenOffersRequest AddHiddenOffersRequest) FbsAPIAddHiddenOffersRequest {
 	r.addHiddenOffersRequest = &addHiddenOffersRequest
 	return r
 }
 
-func (r FbsAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.AddHiddenOffersExecute(r)
+func (r FbsAPIAddHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.AddHiddenOffersExecute(r)
 }
 
 /*
@@ -57,22 +58,22 @@ AddHiddenOffers Скрытие товаров и настройки скрыти
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsAddHiddenOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIAddHiddenOffersRequest
 */
-func (a *FbsAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) FbsAddHiddenOffersRequest {
-	return FbsAddHiddenOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) FbsAPIAddHiddenOffersRequest {
+	return FbsAPIAddHiddenOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) AddHiddenOffersExecute(r FbsAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) AddHiddenOffersExecute(r FbsAPIAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -120,14 +121,14 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r FbsAddHiddenOffersRequest) (*Em
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -233,20 +234,20 @@ func (a *FbsAPIService) AddHiddenOffersExecute(r FbsAddHiddenOffersRequest) (*Em
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsAddOffersToArchiveRequest struct {
+type FbsAPIAddOffersToArchiveRequest struct {
 	ctx                       context.Context
-	FbsService                *FbsAPIService
+	ApiService                *FbsAPIService
 	businessId                int64
 	addOffersToArchiveRequest *AddOffersToArchiveRequest
 }
 
-func (r FbsAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) FbsAddOffersToArchiveRequest {
+func (r FbsAPIAddOffersToArchiveRequest) AddOffersToArchiveRequest(addOffersToArchiveRequest AddOffersToArchiveRequest) FbsAPIAddOffersToArchiveRequest {
 	r.addOffersToArchiveRequest = &addOffersToArchiveRequest
 	return r
 }
 
-func (r FbsAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
-	return r.FbsService.AddOffersToArchiveExecute(r)
+func (r FbsAPIAddOffersToArchiveRequest) Execute() (*AddOffersToArchiveResponse, *http.Response, error) {
+	return r.ApiService.AddOffersToArchiveExecute(r)
 }
 
 /*
@@ -265,22 +266,22 @@ AddOffersToArchive Добавление товаров в архив
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsAddOffersToArchiveRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIAddOffersToArchiveRequest
 */
-func (a *FbsAPIService) AddOffersToArchive(ctx context.Context, businessId int64) FbsAddOffersToArchiveRequest {
-	return FbsAddOffersToArchiveRequest{
-		FbsService: a,
+func (a *FbsAPIService) AddOffersToArchive(ctx context.Context, businessId int64) FbsAPIAddOffersToArchiveRequest {
+	return FbsAPIAddOffersToArchiveRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return AddOffersToArchiveResponse
-func (a *FbsAPIService) AddOffersToArchiveExecute(r FbsAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
+//  @return AddOffersToArchiveResponse
+func (a *FbsAPIService) AddOffersToArchiveExecute(r FbsAPIAddOffersToArchiveRequest) (*AddOffersToArchiveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -328,14 +329,14 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r FbsAddOffersToArchiveRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -452,19 +453,19 @@ func (a *FbsAPIService) AddOffersToArchiveExecute(r FbsAddOffersToArchiveRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsCalculateTariffsRequest struct {
+type FbsAPICalculateTariffsRequest struct {
 	ctx                     context.Context
-	FbsService              *FbsAPIService
+	ApiService              *FbsAPIService
 	calculateTariffsRequest *CalculateTariffsRequest
 }
 
-func (r FbsCalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) FbsCalculateTariffsRequest {
+func (r FbsAPICalculateTariffsRequest) CalculateTariffsRequest(calculateTariffsRequest CalculateTariffsRequest) FbsAPICalculateTariffsRequest {
 	r.calculateTariffsRequest = &calculateTariffsRequest
 	return r
 }
 
-func (r FbsCalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
-	return r.FbsService.CalculateTariffsExecute(r)
+func (r FbsAPICalculateTariffsRequest) Execute() (*CalculateTariffsResponse, *http.Response, error) {
+	return r.ApiService.CalculateTariffsExecute(r)
 }
 
 /*
@@ -482,20 +483,20 @@ CalculateTariffs Калькулятор стоимости услуг
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsCalculateTariffsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPICalculateTariffsRequest
 */
-func (a *FbsAPIService) CalculateTariffs(ctx context.Context) FbsCalculateTariffsRequest {
-	return FbsCalculateTariffsRequest{
-		FbsService: a,
+func (a *FbsAPIService) CalculateTariffs(ctx context.Context) FbsAPICalculateTariffsRequest {
+	return FbsAPICalculateTariffsRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CalculateTariffsResponse
-func (a *FbsAPIService) CalculateTariffsExecute(r FbsCalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
+//  @return CalculateTariffsResponse
+func (a *FbsAPIService) CalculateTariffsExecute(r FbsAPICalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -539,14 +540,14 @@ func (a *FbsAPIService) CalculateTariffsExecute(r FbsCalculateTariffsRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -652,20 +653,20 @@ func (a *FbsAPIService) CalculateTariffsExecute(r FbsCalculateTariffsRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsConfirmBusinessPricesRequest struct {
+type FbsAPIConfirmBusinessPricesRequest struct {
 	ctx                  context.Context
-	FbsService           *FbsAPIService
+	ApiService           *FbsAPIService
 	businessId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r FbsConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) FbsConfirmBusinessPricesRequest {
+func (r FbsAPIConfirmBusinessPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) FbsAPIConfirmBusinessPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r FbsConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.ConfirmBusinessPricesExecute(r)
+func (r FbsAPIConfirmBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.ConfirmBusinessPricesExecute(r)
 }
 
 /*
@@ -682,22 +683,22 @@ ConfirmBusinessPrices Удаление товара из карантина по
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsConfirmBusinessPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIConfirmBusinessPricesRequest
 */
-func (a *FbsAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) FbsConfirmBusinessPricesRequest {
-	return FbsConfirmBusinessPricesRequest{
-		FbsService: a,
+func (a *FbsAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) FbsAPIConfirmBusinessPricesRequest {
+	return FbsAPIConfirmBusinessPricesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) ConfirmBusinessPricesExecute(r FbsConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) ConfirmBusinessPricesExecute(r FbsAPIConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -745,14 +746,14 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r FbsConfirmBusinessPricesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -869,20 +870,20 @@ func (a *FbsAPIService) ConfirmBusinessPricesExecute(r FbsConfirmBusinessPricesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsConfirmCampaignPricesRequest struct {
+type FbsAPIConfirmCampaignPricesRequest struct {
 	ctx                  context.Context
-	FbsService           *FbsAPIService
+	ApiService           *FbsAPIService
 	campaignId           int64
 	confirmPricesRequest *ConfirmPricesRequest
 }
 
-func (r FbsConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) FbsConfirmCampaignPricesRequest {
+func (r FbsAPIConfirmCampaignPricesRequest) ConfirmPricesRequest(confirmPricesRequest ConfirmPricesRequest) FbsAPIConfirmCampaignPricesRequest {
 	r.confirmPricesRequest = &confirmPricesRequest
 	return r
 }
 
-func (r FbsConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.ConfirmCampaignPricesExecute(r)
+func (r FbsAPIConfirmCampaignPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.ConfirmCampaignPricesExecute(r)
 }
 
 /*
@@ -899,22 +900,22 @@ ConfirmCampaignPrices Удаление товара из карантина по
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsConfirmCampaignPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIConfirmCampaignPricesRequest
 */
-func (a *FbsAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) FbsConfirmCampaignPricesRequest {
-	return FbsConfirmCampaignPricesRequest{
-		FbsService: a,
+func (a *FbsAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) FbsAPIConfirmCampaignPricesRequest {
+	return FbsAPIConfirmCampaignPricesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) ConfirmCampaignPricesExecute(r FbsConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) ConfirmCampaignPricesExecute(r FbsAPIConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -962,14 +963,14 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r FbsConfirmCampaignPricesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -1086,21 +1087,21 @@ func (a *FbsAPIService) ConfirmCampaignPricesExecute(r FbsConfirmCampaignPricesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsConfirmShipmentRequest struct {
+type FbsAPIConfirmShipmentRequest struct {
 	ctx                    context.Context
-	FbsService             *FbsAPIService
+	ApiService             *FbsAPIService
 	campaignId             int64
 	shipmentId             int64
 	confirmShipmentRequest *ConfirmShipmentRequest
 }
 
-func (r FbsConfirmShipmentRequest) ConfirmShipmentRequest(confirmShipmentRequest ConfirmShipmentRequest) FbsConfirmShipmentRequest {
+func (r FbsAPIConfirmShipmentRequest) ConfirmShipmentRequest(confirmShipmentRequest ConfirmShipmentRequest) FbsAPIConfirmShipmentRequest {
 	r.confirmShipmentRequest = &confirmShipmentRequest
 	return r
 }
 
-func (r FbsConfirmShipmentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.ConfirmShipmentExecute(r)
+func (r FbsAPIConfirmShipmentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.ConfirmShipmentExecute(r)
 }
 
 /*
@@ -1112,14 +1113,15 @@ ConfirmShipment Подтверждение отгрузки
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsConfirmShipmentRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPIConfirmShipmentRequest
 */
-func (a *FbsAPIService) ConfirmShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsConfirmShipmentRequest {
-	return FbsConfirmShipmentRequest{
-		FbsService: a,
+func (a *FbsAPIService) ConfirmShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsAPIConfirmShipmentRequest {
+	return FbsAPIConfirmShipmentRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -1127,9 +1129,8 @@ func (a *FbsAPIService) ConfirmShipment(ctx context.Context, campaignId int64, s
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) ConfirmShipmentExecute(r FbsConfirmShipmentRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) ConfirmShipmentExecute(r FbsAPIConfirmShipmentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1178,14 +1179,14 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r FbsConfirmShipmentRequest) (*Em
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -1291,21 +1292,21 @@ func (a *FbsAPIService) ConfirmShipmentExecute(r FbsConfirmShipmentRequest) (*Em
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsCreateChatRequest struct {
+type FbsAPICreateChatRequest struct {
 	ctx               context.Context
-	FbsService        *FbsAPIService
+	ApiService        *FbsAPIService
 	businessId        int64
 	createChatRequest *CreateChatRequest
 }
 
 // description
-func (r FbsCreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) FbsCreateChatRequest {
+func (r FbsAPICreateChatRequest) CreateChatRequest(createChatRequest CreateChatRequest) FbsAPICreateChatRequest {
 	r.createChatRequest = &createChatRequest
 	return r
 }
 
-func (r FbsCreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
-	return r.FbsService.CreateChatExecute(r)
+func (r FbsAPICreateChatRequest) Execute() (*CreateChatResponse, *http.Response, error) {
+	return r.ApiService.CreateChatExecute(r)
 }
 
 /*
@@ -1318,22 +1319,22 @@ CreateChat Создание нового чата с покупателем
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsCreateChatRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPICreateChatRequest
 */
-func (a *FbsAPIService) CreateChat(ctx context.Context, businessId int64) FbsCreateChatRequest {
-	return FbsCreateChatRequest{
-		FbsService: a,
+func (a *FbsAPIService) CreateChat(ctx context.Context, businessId int64) FbsAPICreateChatRequest {
+	return FbsAPICreateChatRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return CreateChatResponse
-func (a *FbsAPIService) CreateChatExecute(r FbsCreateChatRequest) (*CreateChatResponse, *http.Response, error) {
+//  @return CreateChatResponse
+func (a *FbsAPIService) CreateChatExecute(r FbsAPICreateChatRequest) (*CreateChatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1381,14 +1382,14 @@ func (a *FbsAPIService) CreateChatExecute(r FbsCreateChatRequest) (*CreateChatRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -1494,20 +1495,20 @@ func (a *FbsAPIService) CreateChatExecute(r FbsCreateChatRequest) (*CreateChatRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDeleteCampaignOffersRequest struct {
+type FbsAPIDeleteCampaignOffersRequest struct {
 	ctx                         context.Context
-	FbsService                  *FbsAPIService
+	ApiService                  *FbsAPIService
 	campaignId                  int64
 	deleteCampaignOffersRequest *DeleteCampaignOffersRequest
 }
 
-func (r FbsDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) FbsDeleteCampaignOffersRequest {
+func (r FbsAPIDeleteCampaignOffersRequest) DeleteCampaignOffersRequest(deleteCampaignOffersRequest DeleteCampaignOffersRequest) FbsAPIDeleteCampaignOffersRequest {
 	r.deleteCampaignOffersRequest = &deleteCampaignOffersRequest
 	return r
 }
 
-func (r FbsDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
-	return r.FbsService.DeleteCampaignOffersExecute(r)
+func (r FbsAPIDeleteCampaignOffersRequest) Execute() (*DeleteCampaignOffersResponse, *http.Response, error) {
+	return r.ApiService.DeleteCampaignOffersExecute(r)
 }
 
 /*
@@ -1528,22 +1529,22 @@ DeleteCampaignOffers Удаление товаров из ассортимент
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsDeleteCampaignOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIDeleteCampaignOffersRequest
 */
-func (a *FbsAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) FbsDeleteCampaignOffersRequest {
-	return FbsDeleteCampaignOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) DeleteCampaignOffers(ctx context.Context, campaignId int64) FbsAPIDeleteCampaignOffersRequest {
+	return FbsAPIDeleteCampaignOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteCampaignOffersResponse
-func (a *FbsAPIService) DeleteCampaignOffersExecute(r FbsDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
+//  @return DeleteCampaignOffersResponse
+func (a *FbsAPIService) DeleteCampaignOffersExecute(r FbsAPIDeleteCampaignOffersRequest) (*DeleteCampaignOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1591,14 +1592,14 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r FbsDeleteCampaignOffersReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -1715,20 +1716,20 @@ func (a *FbsAPIService) DeleteCampaignOffersExecute(r FbsDeleteCampaignOffersReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDeleteGoodsFeedbackCommentRequest struct {
+type FbsAPIDeleteGoodsFeedbackCommentRequest struct {
 	ctx                               context.Context
-	FbsService                        *FbsAPIService
+	ApiService                        *FbsAPIService
 	businessId                        int64
 	deleteGoodsFeedbackCommentRequest *DeleteGoodsFeedbackCommentRequest
 }
 
-func (r FbsDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) FbsDeleteGoodsFeedbackCommentRequest {
+func (r FbsAPIDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) FbsAPIDeleteGoodsFeedbackCommentRequest {
 	r.deleteGoodsFeedbackCommentRequest = &deleteGoodsFeedbackCommentRequest
 	return r
 }
 
-func (r FbsDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.DeleteGoodsFeedbackCommentExecute(r)
+func (r FbsAPIDeleteGoodsFeedbackCommentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.DeleteGoodsFeedbackCommentExecute(r)
 }
 
 /*
@@ -1741,22 +1742,22 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsDeleteGoodsFeedbackCommentRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIDeleteGoodsFeedbackCommentRequest
 */
-func (a *FbsAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) FbsDeleteGoodsFeedbackCommentRequest {
-	return FbsDeleteGoodsFeedbackCommentRequest{
-		FbsService: a,
+func (a *FbsAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) FbsAPIDeleteGoodsFeedbackCommentRequest {
+	return FbsAPIDeleteGoodsFeedbackCommentRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r FbsDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r FbsAPIDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1804,14 +1805,14 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r FbsDeleteGoodsFeedba
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -1917,21 +1918,21 @@ func (a *FbsAPIService) DeleteGoodsFeedbackCommentExecute(r FbsDeleteGoodsFeedba
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDeleteHiddenOffersRequest struct {
+type FbsAPIDeleteHiddenOffersRequest struct {
 	ctx                       context.Context
-	FbsService                *FbsAPIService
+	ApiService                *FbsAPIService
 	campaignId                int64
 	deleteHiddenOffersRequest *DeleteHiddenOffersRequest
 }
 
 // Запрос на возобновление показа оферов.
-func (r FbsDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHiddenOffersRequest DeleteHiddenOffersRequest) FbsDeleteHiddenOffersRequest {
+func (r FbsAPIDeleteHiddenOffersRequest) DeleteHiddenOffersRequest(deleteHiddenOffersRequest DeleteHiddenOffersRequest) FbsAPIDeleteHiddenOffersRequest {
 	r.deleteHiddenOffersRequest = &deleteHiddenOffersRequest
 	return r
 }
 
-func (r FbsDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.DeleteHiddenOffersExecute(r)
+func (r FbsAPIDeleteHiddenOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.DeleteHiddenOffersExecute(r)
 }
 
 /*
@@ -1950,22 +1951,22 @@ DeleteHiddenOffers Возобновление показа товаров
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsDeleteHiddenOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIDeleteHiddenOffersRequest
 */
-func (a *FbsAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) FbsDeleteHiddenOffersRequest {
-	return FbsDeleteHiddenOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) FbsAPIDeleteHiddenOffersRequest {
+	return FbsAPIDeleteHiddenOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) DeleteHiddenOffersExecute(r FbsDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) DeleteHiddenOffersExecute(r FbsAPIDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2013,14 +2014,14 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r FbsDeleteHiddenOffersRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -2137,20 +2138,20 @@ func (a *FbsAPIService) DeleteHiddenOffersExecute(r FbsDeleteHiddenOffersRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDeleteOffersRequest struct {
+type FbsAPIDeleteOffersRequest struct {
 	ctx                 context.Context
-	FbsService          *FbsAPIService
+	ApiService          *FbsAPIService
 	businessId          int64
 	deleteOffersRequest *DeleteOffersRequest
 }
 
-func (r FbsDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) FbsDeleteOffersRequest {
+func (r FbsAPIDeleteOffersRequest) DeleteOffersRequest(deleteOffersRequest DeleteOffersRequest) FbsAPIDeleteOffersRequest {
 	r.deleteOffersRequest = &deleteOffersRequest
 	return r
 }
 
-func (r FbsDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
-	return r.FbsService.DeleteOffersExecute(r)
+func (r FbsAPIDeleteOffersRequest) Execute() (*DeleteOffersResponse, *http.Response, error) {
+	return r.ApiService.DeleteOffersExecute(r)
 }
 
 /*
@@ -2163,22 +2164,22 @@ DeleteOffers Удаление товаров из каталога
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsDeleteOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIDeleteOffersRequest
 */
-func (a *FbsAPIService) DeleteOffers(ctx context.Context, businessId int64) FbsDeleteOffersRequest {
-	return FbsDeleteOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) DeleteOffers(ctx context.Context, businessId int64) FbsAPIDeleteOffersRequest {
+	return FbsAPIDeleteOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteOffersResponse
-func (a *FbsAPIService) DeleteOffersExecute(r FbsDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
+//  @return DeleteOffersResponse
+func (a *FbsAPIService) DeleteOffersExecute(r FbsAPIDeleteOffersRequest) (*DeleteOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2226,14 +2227,14 @@ func (a *FbsAPIService) DeleteOffersExecute(r FbsDeleteOffersRequest) (*DeleteOf
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -2350,20 +2351,20 @@ func (a *FbsAPIService) DeleteOffersExecute(r FbsDeleteOffersRequest) (*DeleteOf
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDeleteOffersFromArchiveRequest struct {
+type FbsAPIDeleteOffersFromArchiveRequest struct {
 	ctx                            context.Context
-	FbsService                     *FbsAPIService
+	ApiService                     *FbsAPIService
 	businessId                     int64
 	deleteOffersFromArchiveRequest *DeleteOffersFromArchiveRequest
 }
 
-func (r FbsDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) FbsDeleteOffersFromArchiveRequest {
+func (r FbsAPIDeleteOffersFromArchiveRequest) DeleteOffersFromArchiveRequest(deleteOffersFromArchiveRequest DeleteOffersFromArchiveRequest) FbsAPIDeleteOffersFromArchiveRequest {
 	r.deleteOffersFromArchiveRequest = &deleteOffersFromArchiveRequest
 	return r
 }
 
-func (r FbsDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
-	return r.FbsService.DeleteOffersFromArchiveExecute(r)
+func (r FbsAPIDeleteOffersFromArchiveRequest) Execute() (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+	return r.ApiService.DeleteOffersFromArchiveExecute(r)
 }
 
 /*
@@ -2376,22 +2377,22 @@ DeleteOffersFromArchive Удаление товаров из архива
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsDeleteOffersFromArchiveRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIDeleteOffersFromArchiveRequest
 */
-func (a *FbsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) FbsDeleteOffersFromArchiveRequest {
-	return FbsDeleteOffersFromArchiveRequest{
-		FbsService: a,
+func (a *FbsAPIService) DeleteOffersFromArchive(ctx context.Context, businessId int64) FbsAPIDeleteOffersFromArchiveRequest {
+	return FbsAPIDeleteOffersFromArchiveRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeleteOffersFromArchiveResponse
-func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r FbsDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
+//  @return DeleteOffersFromArchiveResponse
+func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r FbsAPIDeleteOffersFromArchiveRequest) (*DeleteOffersFromArchiveResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2439,14 +2440,14 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r FbsDeleteOffersFromArch
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -2563,20 +2564,20 @@ func (a *FbsAPIService) DeleteOffersFromArchiveExecute(r FbsDeleteOffersFromArch
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDeletePromoOffersRequest struct {
+type FbsAPIDeletePromoOffersRequest struct {
 	ctx                      context.Context
-	FbsService               *FbsAPIService
+	ApiService               *FbsAPIService
 	businessId               int64
 	deletePromoOffersRequest *DeletePromoOffersRequest
 }
 
-func (r FbsDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) FbsDeletePromoOffersRequest {
+func (r FbsAPIDeletePromoOffersRequest) DeletePromoOffersRequest(deletePromoOffersRequest DeletePromoOffersRequest) FbsAPIDeletePromoOffersRequest {
 	r.deletePromoOffersRequest = &deletePromoOffersRequest
 	return r
 }
 
-func (r FbsDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
-	return r.FbsService.DeletePromoOffersExecute(r)
+func (r FbsAPIDeletePromoOffersRequest) Execute() (*DeletePromoOffersResponse, *http.Response, error) {
+	return r.ApiService.DeletePromoOffersExecute(r)
 }
 
 /*
@@ -2591,22 +2592,22 @@ DeletePromoOffers Удаление товаров из акции
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsDeletePromoOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIDeletePromoOffersRequest
 */
-func (a *FbsAPIService) DeletePromoOffers(ctx context.Context, businessId int64) FbsDeletePromoOffersRequest {
-	return FbsDeletePromoOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) DeletePromoOffers(ctx context.Context, businessId int64) FbsAPIDeletePromoOffersRequest {
+	return FbsAPIDeletePromoOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return DeletePromoOffersResponse
-func (a *FbsAPIService) DeletePromoOffersExecute(r FbsDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
+//  @return DeletePromoOffersResponse
+func (a *FbsAPIService) DeletePromoOffersExecute(r FbsAPIDeletePromoOffersRequest) (*DeletePromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2654,14 +2655,14 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r FbsDeletePromoOffersRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -2767,15 +2768,15 @@ func (a *FbsAPIService) DeletePromoOffersExecute(r FbsDeletePromoOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDownloadShipmentActRequest struct {
+type FbsAPIDownloadShipmentActRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r FbsDownloadShipmentActRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.DownloadShipmentActExecute(r)
+func (r FbsAPIDownloadShipmentActRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.DownloadShipmentActExecute(r)
 }
 
 /*
@@ -2801,15 +2802,13 @@ DownloadShipmentAct Получение акта приема-передачи
 || Отправитель                                               | Название вашего юридического лица, указанное в кабинете продавца на Маркете.                                                                                                                                                                                         ||
 || Исполнитель                                               | Название юридического лица сортировочного центра или службы доставки.                                                                                                                                                                                                ||
 || № отправления в системе заказчика                         |
-
-	{% note warning "Поле больше не используется" %}
-
+  {% note warning "Поле больше не используется" %}
 
 
-	{% endnote %}
 
-	Ваш идентификатор заказа, который вы указали в ответе на запрос `POST order/accept` от Маркета.                                                                                                                                                                      ||
+  {% endnote %}
 
+  Ваш идентификатор заказа, который вы указали в ответе на запрос `POST order/accept` от Маркета.                                                                                                                                                                      ||
 || № отправления в системе исполнителя (субподрядчика)       | Идентификатор заказа на Маркете, как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md).                                                                                                                             ||
 || Объявленная ценность                                      | Общая сумма заказа без учета стоимости доставки, как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md) или [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md).                       ||
 || Вес                                                       | Масса брутто грузового места (суммарная масса упаковки и содержимого), как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md) или [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md). ||
@@ -2822,14 +2821,15 @@ DownloadShipmentAct Получение акта приема-передачи
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsDownloadShipmentActRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPIDownloadShipmentActRequest
 */
-func (a *FbsAPIService) DownloadShipmentAct(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentActRequest {
-	return FbsDownloadShipmentActRequest{
-		FbsService: a,
+func (a *FbsAPIService) DownloadShipmentAct(ctx context.Context, campaignId int64, shipmentId int64) FbsAPIDownloadShipmentActRequest {
+	return FbsAPIDownloadShipmentActRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -2837,9 +2837,8 @@ func (a *FbsAPIService) DownloadShipmentAct(ctx context.Context, campaignId int6
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) DownloadShipmentActExecute(r FbsDownloadShipmentActRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) DownloadShipmentActExecute(r FbsAPIDownloadShipmentActRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -2886,14 +2885,14 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r FbsDownloadShipmentActReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -2999,15 +2998,15 @@ func (a *FbsAPIService) DownloadShipmentActExecute(r FbsDownloadShipmentActReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDownloadShipmentDiscrepancyActRequest struct {
+type FbsAPIDownloadShipmentDiscrepancyActRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r FbsDownloadShipmentDiscrepancyActRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.DownloadShipmentDiscrepancyActExecute(r)
+func (r FbsAPIDownloadShipmentDiscrepancyActRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.DownloadShipmentDiscrepancyActExecute(r)
 }
 
 /*
@@ -3019,14 +3018,15 @@ DownloadShipmentDiscrepancyAct Получение акта расхождени�
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsDownloadShipmentDiscrepancyActRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPIDownloadShipmentDiscrepancyActRequest
 */
-func (a *FbsAPIService) DownloadShipmentDiscrepancyAct(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentDiscrepancyActRequest {
-	return FbsDownloadShipmentDiscrepancyActRequest{
-		FbsService: a,
+func (a *FbsAPIService) DownloadShipmentDiscrepancyAct(ctx context.Context, campaignId int64, shipmentId int64) FbsAPIDownloadShipmentDiscrepancyActRequest {
+	return FbsAPIDownloadShipmentDiscrepancyActRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -3034,9 +3034,8 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyAct(ctx context.Context, camp
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r FbsDownloadShipmentDiscrepancyActRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r FbsAPIDownloadShipmentDiscrepancyActRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -3083,14 +3082,14 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r FbsDownloadShipm
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -3196,15 +3195,15 @@ func (a *FbsAPIService) DownloadShipmentDiscrepancyActExecute(r FbsDownloadShipm
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDownloadShipmentInboundActRequest struct {
+type FbsAPIDownloadShipmentInboundActRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r FbsDownloadShipmentInboundActRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.DownloadShipmentInboundActExecute(r)
+func (r FbsAPIDownloadShipmentInboundActRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.DownloadShipmentInboundActExecute(r)
 }
 
 /*
@@ -3219,14 +3218,15 @@ DownloadShipmentInboundAct Получение фактического акта 
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsDownloadShipmentInboundActRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPIDownloadShipmentInboundActRequest
 */
-func (a *FbsAPIService) DownloadShipmentInboundAct(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentInboundActRequest {
-	return FbsDownloadShipmentInboundActRequest{
-		FbsService: a,
+func (a *FbsAPIService) DownloadShipmentInboundAct(ctx context.Context, campaignId int64, shipmentId int64) FbsAPIDownloadShipmentInboundActRequest {
+	return FbsAPIDownloadShipmentInboundActRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -3234,9 +3234,8 @@ func (a *FbsAPIService) DownloadShipmentInboundAct(ctx context.Context, campaign
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) DownloadShipmentInboundActExecute(r FbsDownloadShipmentInboundActRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) DownloadShipmentInboundActExecute(r FbsAPIDownloadShipmentInboundActRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -3283,14 +3282,14 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r FbsDownloadShipmentI
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -3396,22 +3395,22 @@ func (a *FbsAPIService) DownloadShipmentInboundActExecute(r FbsDownloadShipmentI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDownloadShipmentPalletLabelsRequest struct {
+type FbsAPIDownloadShipmentPalletLabelsRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 	format     *ShipmentPalletLabelPageFormatType
 }
 
 // Формат страниц PDF-файла с ярлыками:  * &#x60;A4&#x60; — по 16 ярлыков на странице. * &#x60;A8&#x60; — по одному ярлыку на странице.
-func (r FbsDownloadShipmentPalletLabelsRequest) Format(format ShipmentPalletLabelPageFormatType) FbsDownloadShipmentPalletLabelsRequest {
+func (r FbsAPIDownloadShipmentPalletLabelsRequest) Format(format ShipmentPalletLabelPageFormatType) FbsAPIDownloadShipmentPalletLabelsRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsDownloadShipmentPalletLabelsRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.DownloadShipmentPalletLabelsExecute(r)
+func (r FbsAPIDownloadShipmentPalletLabelsRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.DownloadShipmentPalletLabelsExecute(r)
 }
 
 /*
@@ -3427,14 +3426,15 @@ PDF-файл с ярлыками на каждый короб или палет�
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsDownloadShipmentPalletLabelsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPIDownloadShipmentPalletLabelsRequest
 */
-func (a *FbsAPIService) DownloadShipmentPalletLabels(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentPalletLabelsRequest {
-	return FbsDownloadShipmentPalletLabelsRequest{
-		FbsService: a,
+func (a *FbsAPIService) DownloadShipmentPalletLabels(ctx context.Context, campaignId int64, shipmentId int64) FbsAPIDownloadShipmentPalletLabelsRequest {
+	return FbsAPIDownloadShipmentPalletLabelsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -3442,9 +3442,8 @@ func (a *FbsAPIService) DownloadShipmentPalletLabels(ctx context.Context, campai
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r FbsDownloadShipmentPalletLabelsRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r FbsAPIDownloadShipmentPalletLabelsRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -3472,7 +3471,7 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r FbsDownloadShipmen
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ShipmentPalletLabelPageFormatType = "A8"
 		r.format = &defaultValue
@@ -3497,14 +3496,14 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r FbsDownloadShipmen
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -3610,28 +3609,28 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r FbsDownloadShipmen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDownloadShipmentReceptionTransferActRequest struct {
+type FbsAPIDownloadShipmentReceptionTransferActRequest struct {
 	ctx         context.Context
-	FbsService  *FbsAPIService
+	ApiService  *FbsAPIService
 	campaignId  int64
 	warehouseId *int32
 	signatory   *string
 }
 
 // Идентификатор склада.
-func (r FbsDownloadShipmentReceptionTransferActRequest) WarehouseId(warehouseId int32) FbsDownloadShipmentReceptionTransferActRequest {
+func (r FbsAPIDownloadShipmentReceptionTransferActRequest) WarehouseId(warehouseId int32) FbsAPIDownloadShipmentReceptionTransferActRequest {
 	r.warehouseId = &warehouseId
 	return r
 }
 
 // Логин пользователя в Яндекс ID, от имени которого будет подписываться электронный акт приема-передачи.  Указывается без &#x60;@yandex.ru&#x60;.  Где его найти:  * на странице [Яндекс ID](https://id.yandex.ru); * в [кабинете продавца на Маркете](https://partner.market.yandex.ru/):    * слева снизу под иконкой пользователя;   * на странице **Настройки** → **Сотрудники и доступы**.
-func (r FbsDownloadShipmentReceptionTransferActRequest) Signatory(signatory string) FbsDownloadShipmentReceptionTransferActRequest {
+func (r FbsAPIDownloadShipmentReceptionTransferActRequest) Signatory(signatory string) FbsAPIDownloadShipmentReceptionTransferActRequest {
 	r.signatory = &signatory
 	return r
 }
 
-func (r FbsDownloadShipmentReceptionTransferActRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.DownloadShipmentReceptionTransferActExecute(r)
+func (r FbsAPIDownloadShipmentReceptionTransferActRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.DownloadShipmentReceptionTransferActExecute(r)
 }
 
 /*
@@ -3658,15 +3657,13 @@ DownloadShipmentReceptionTransferAct Подтверждение ближайше
 || Отправитель	                                       | Название вашего юридического лица, указанное в кабинете продавца на Маркете.                                                                                                                                                                                         ||
 || Исполнитель                                         | Название юридического лица сортировочного центра или службы доставки.                                                                                                                                                                                                ||
 || № отправления в системе заказчика                   |
-
-	{% note warning "Поле больше не используется" %}
-
+  {% note warning "Поле больше не используется" %}
 
 
-	{% endnote %}
 
-	Ваш идентификатор заказа, который вы указали в ответе на запрос `POST order/accept` от Маркета.                                                                                                                                                                      ||
+  {% endnote %}
 
+  Ваш идентификатор заказа, который вы указали в ответе на запрос `POST order/accept` от Маркета.                                                                                                                                                                      ||
 || № отправления в системе исполнителя (субподрядчика) | Идентификатор заказа на Маркете, как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md).                                                                                                                             ||
 || Объявленная ценность                                | Общая сумма заказа без учета стоимости доставки, как в выходных данных запроса [GET campaigns/{campaignId}/orders](../../reference/orders/getOrders.md) или [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md).                       ||
 || Стоимость всех товаров в заказе                     | Стоимость всех заказанных товаров.                                                                                                                                                                                                                                   ||
@@ -3680,22 +3677,22 @@ DownloadShipmentReceptionTransferAct Подтверждение ближайше
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsDownloadShipmentReceptionTransferActRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIDownloadShipmentReceptionTransferActRequest
 */
-func (a *FbsAPIService) DownloadShipmentReceptionTransferAct(ctx context.Context, campaignId int64) FbsDownloadShipmentReceptionTransferActRequest {
-	return FbsDownloadShipmentReceptionTransferActRequest{
-		FbsService: a,
+func (a *FbsAPIService) DownloadShipmentReceptionTransferAct(ctx context.Context, campaignId int64) FbsAPIDownloadShipmentReceptionTransferActRequest {
+	return FbsAPIDownloadShipmentReceptionTransferActRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r FbsDownloadShipmentReceptionTransferActRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r FbsAPIDownloadShipmentReceptionTransferActRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -3719,10 +3716,10 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r FbsDownloa
 	}
 
 	if r.warehouseId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "warehouse_id", r.warehouseId, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "warehouse_id", r.warehouseId, "form", "")
 	}
 	if r.signatory != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "signatory", r.signatory, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "signatory", r.signatory, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -3744,14 +3741,14 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r FbsDownloa
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -3857,15 +3854,15 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r FbsDownloa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsDownloadShipmentTransportationWaybillRequest struct {
+type FbsAPIDownloadShipmentTransportationWaybillRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r FbsDownloadShipmentTransportationWaybillRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.DownloadShipmentTransportationWaybillExecute(r)
+func (r FbsAPIDownloadShipmentTransportationWaybillRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.DownloadShipmentTransportationWaybillExecute(r)
 }
 
 /*
@@ -3880,14 +3877,15 @@ DownloadShipmentTransportationWaybill Получение транспортно�
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsDownloadShipmentTransportationWaybillRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPIDownloadShipmentTransportationWaybillRequest
 */
-func (a *FbsAPIService) DownloadShipmentTransportationWaybill(ctx context.Context, campaignId int64, shipmentId int64) FbsDownloadShipmentTransportationWaybillRequest {
-	return FbsDownloadShipmentTransportationWaybillRequest{
-		FbsService: a,
+func (a *FbsAPIService) DownloadShipmentTransportationWaybill(ctx context.Context, campaignId int64, shipmentId int64) FbsAPIDownloadShipmentTransportationWaybillRequest {
+	return FbsAPIDownloadShipmentTransportationWaybillRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -3895,9 +3893,8 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybill(ctx context.Contex
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r FbsDownloadShipmentTransportationWaybillRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r FbsAPIDownloadShipmentTransportationWaybillRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -3944,14 +3941,14 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r FbsDownlo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -4057,26 +4054,26 @@ func (a *FbsAPIService) DownloadShipmentTransportationWaybillExecute(r FbsDownlo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateBannersStatisticsReportRequest struct {
+type FbsAPIGenerateBannersStatisticsReportRequest struct {
 	ctx                              context.Context
-	FbsService                       *FbsAPIService
+	ApiService                       *FbsAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
 	format                           *ReportFormatType
 }
 
-func (r FbsGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) FbsGenerateBannersStatisticsReportRequest {
+func (r FbsAPIGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) FbsAPIGenerateBannersStatisticsReportRequest {
 	r.generateBannersStatisticsRequest = &generateBannersStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) FbsGenerateBannersStatisticsReportRequest {
+func (r FbsAPIGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) FbsAPIGenerateBannersStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateBannersStatisticsReportExecute(r)
+func (r FbsAPIGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateBannersStatisticsReportExecute(r)
 }
 
 /*
@@ -4093,20 +4090,20 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateBannersStatisticsReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateBannersStatisticsReportRequest
 */
-func (a *FbsAPIService) GenerateBannersStatisticsReport(ctx context.Context) FbsGenerateBannersStatisticsReportRequest {
-	return FbsGenerateBannersStatisticsReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateBannersStatisticsReport(ctx context.Context) FbsAPIGenerateBannersStatisticsReportRequest {
+	return FbsAPIGenerateBannersStatisticsReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r FbsGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r FbsAPIGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4129,7 +4126,7 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r FbsGenerateBann
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -4156,14 +4153,14 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r FbsGenerateBann
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -4258,26 +4255,26 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r FbsGenerateBann
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateBoostConsolidatedReportRequest struct {
+type FbsAPIGenerateBoostConsolidatedReportRequest struct {
 	ctx                              context.Context
-	FbsService                       *FbsAPIService
+	ApiService                       *FbsAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
 	format                           *ReportFormatType
 }
 
-func (r FbsGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) FbsGenerateBoostConsolidatedReportRequest {
+func (r FbsAPIGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) FbsAPIGenerateBoostConsolidatedReportRequest {
 	r.generateBoostConsolidatedRequest = &generateBoostConsolidatedRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) FbsGenerateBoostConsolidatedReportRequest {
+func (r FbsAPIGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) FbsAPIGenerateBoostConsolidatedReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateBoostConsolidatedReportExecute(r)
+func (r FbsAPIGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateBoostConsolidatedReportExecute(r)
 }
 
 /*
@@ -4296,20 +4293,20 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateBoostConsolidatedReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateBoostConsolidatedReportRequest
 */
-func (a *FbsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) FbsGenerateBoostConsolidatedReportRequest {
-	return FbsGenerateBoostConsolidatedReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) FbsAPIGenerateBoostConsolidatedReportRequest {
+	return FbsAPIGenerateBoostConsolidatedReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r FbsGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r FbsAPIGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4332,7 +4329,7 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r FbsGenerateBoos
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -4359,14 +4356,14 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r FbsGenerateBoos
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -4461,26 +4458,26 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r FbsGenerateBoos
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateCompetitorsPositionReportRequest struct {
+type FbsAPIGenerateCompetitorsPositionReportRequest struct {
 	ctx                                      context.Context
-	FbsService                               *FbsAPIService
+	ApiService                               *FbsAPIService
 	generateCompetitorsPositionReportRequest *GenerateCompetitorsPositionReportRequest
 	format                                   *ReportFormatType
 }
 
-func (r FbsGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) FbsGenerateCompetitorsPositionReportRequest {
+func (r FbsAPIGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) FbsAPIGenerateCompetitorsPositionReportRequest {
 	r.generateCompetitorsPositionReportRequest = &generateCompetitorsPositionReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) FbsGenerateCompetitorsPositionReportRequest {
+func (r FbsAPIGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) FbsAPIGenerateCompetitorsPositionReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateCompetitorsPositionReportExecute(r)
+func (r FbsAPIGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateCompetitorsPositionReportExecute(r)
 }
 
 /*
@@ -4503,20 +4500,20 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateCompetitorsPositionReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateCompetitorsPositionReportRequest
 */
-func (a *FbsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) FbsGenerateCompetitorsPositionReportRequest {
-	return FbsGenerateCompetitorsPositionReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) FbsAPIGenerateCompetitorsPositionReportRequest {
+	return FbsAPIGenerateCompetitorsPositionReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r FbsGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r FbsAPIGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4539,7 +4536,7 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r FbsGenerateCo
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -4566,14 +4563,14 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r FbsGenerateCo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -4668,26 +4665,26 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r FbsGenerateCo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateGoodsFeedbackReportRequest struct {
+type FbsAPIGenerateGoodsFeedbackReportRequest struct {
 	ctx                          context.Context
-	FbsService                   *FbsAPIService
+	ApiService                   *FbsAPIService
 	generateGoodsFeedbackRequest *GenerateGoodsFeedbackRequest
 	format                       *ReportFormatType
 }
 
-func (r FbsGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) FbsGenerateGoodsFeedbackReportRequest {
+func (r FbsAPIGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) FbsAPIGenerateGoodsFeedbackReportRequest {
 	r.generateGoodsFeedbackRequest = &generateGoodsFeedbackRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) FbsGenerateGoodsFeedbackReportRequest {
+func (r FbsAPIGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) FbsAPIGenerateGoodsFeedbackReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateGoodsFeedbackReportExecute(r)
+func (r FbsAPIGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateGoodsFeedbackReportExecute(r)
 }
 
 /*
@@ -4704,20 +4701,20 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateGoodsFeedbackReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateGoodsFeedbackReportRequest
 */
-func (a *FbsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) FbsGenerateGoodsFeedbackReportRequest {
-	return FbsGenerateGoodsFeedbackReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) FbsAPIGenerateGoodsFeedbackReportRequest {
+	return FbsAPIGenerateGoodsFeedbackReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r FbsGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r FbsAPIGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4740,7 +4737,7 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r FbsGenerateGoodsFee
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -4767,14 +4764,14 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r FbsGenerateGoodsFee
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -4869,26 +4866,26 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r FbsGenerateGoodsFee
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateGoodsRealizationReportRequest struct {
+type FbsAPIGenerateGoodsRealizationReportRequest struct {
 	ctx                                   context.Context
-	FbsService                            *FbsAPIService
+	ApiService                            *FbsAPIService
 	generateGoodsRealizationReportRequest *GenerateGoodsRealizationReportRequest
 	format                                *ReportFormatType
 }
 
-func (r FbsGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) FbsGenerateGoodsRealizationReportRequest {
+func (r FbsAPIGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) FbsAPIGenerateGoodsRealizationReportRequest {
 	r.generateGoodsRealizationReportRequest = &generateGoodsRealizationReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) FbsGenerateGoodsRealizationReportRequest {
+func (r FbsAPIGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) FbsAPIGenerateGoodsRealizationReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateGoodsRealizationReportExecute(r)
+func (r FbsAPIGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateGoodsRealizationReportExecute(r)
 }
 
 /*
@@ -4904,31 +4901,31 @@ GenerateGoodsRealizationReport Отчет по реализации
 
 - FBY, FBS, Экспресс
 
-	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
+  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
 
 - DBS
 
-	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
+  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
 
 {% endlist %}
 
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateGoodsRealizationReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateGoodsRealizationReportRequest
 */
-func (a *FbsAPIService) GenerateGoodsRealizationReport(ctx context.Context) FbsGenerateGoodsRealizationReportRequest {
-	return FbsGenerateGoodsRealizationReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateGoodsRealizationReport(ctx context.Context) FbsAPIGenerateGoodsRealizationReportRequest {
+	return FbsAPIGenerateGoodsRealizationReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r FbsGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r FbsAPIGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -4951,7 +4948,7 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r FbsGenerateGoods
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -4978,14 +4975,14 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r FbsGenerateGoods
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -5080,26 +5077,26 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r FbsGenerateGoods
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateJewelryFiscalReportRequest struct {
+type FbsAPIGenerateJewelryFiscalReportRequest struct {
 	ctx                                context.Context
-	FbsService                         *FbsAPIService
+	ApiService                         *FbsAPIService
 	generateJewelryFiscalReportRequest *GenerateJewelryFiscalReportRequest
 	format                             *ReportFormatType
 }
 
-func (r FbsGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) FbsGenerateJewelryFiscalReportRequest {
+func (r FbsAPIGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) FbsAPIGenerateJewelryFiscalReportRequest {
 	r.generateJewelryFiscalReportRequest = &generateJewelryFiscalReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) FbsGenerateJewelryFiscalReportRequest {
+func (r FbsAPIGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) FbsAPIGenerateJewelryFiscalReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateJewelryFiscalReportExecute(r)
+func (r FbsAPIGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateJewelryFiscalReportExecute(r)
 }
 
 /*
@@ -5116,20 +5113,20 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateJewelryFiscalReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateJewelryFiscalReportRequest
 */
-func (a *FbsAPIService) GenerateJewelryFiscalReport(ctx context.Context) FbsGenerateJewelryFiscalReportRequest {
-	return FbsGenerateJewelryFiscalReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateJewelryFiscalReport(ctx context.Context) FbsAPIGenerateJewelryFiscalReportRequest {
+	return FbsAPIGenerateJewelryFiscalReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r FbsGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r FbsAPIGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -5152,7 +5149,7 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r FbsGenerateJewelryF
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -5179,14 +5176,14 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r FbsGenerateJewelryF
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -5281,26 +5278,26 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r FbsGenerateJewelryF
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateMassOrderLabelsReportRequest struct {
+type FbsAPIGenerateMassOrderLabelsReportRequest struct {
 	ctx                            context.Context
-	FbsService                     *FbsAPIService
+	ApiService                     *FbsAPIService
 	generateMassOrderLabelsRequest *GenerateMassOrderLabelsRequest
 	format                         *PageFormatType
 }
 
-func (r FbsGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) FbsGenerateMassOrderLabelsReportRequest {
+func (r FbsAPIGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) FbsAPIGenerateMassOrderLabelsReportRequest {
 	r.generateMassOrderLabelsRequest = &generateMassOrderLabelsRequest
 	return r
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r FbsGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) FbsGenerateMassOrderLabelsReportRequest {
+func (r FbsAPIGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) FbsAPIGenerateMassOrderLabelsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateMassOrderLabelsReportExecute(r)
+func (r FbsAPIGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateMassOrderLabelsReportExecute(r)
 }
 
 /*
@@ -5315,20 +5312,20 @@ GenerateMassOrderLabelsReport Готовые ярлыки‑наклейки н�
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateMassOrderLabelsReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateMassOrderLabelsReportRequest
 */
-func (a *FbsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) FbsGenerateMassOrderLabelsReportRequest {
-	return FbsGenerateMassOrderLabelsReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) FbsAPIGenerateMassOrderLabelsReportRequest {
+	return FbsAPIGenerateMassOrderLabelsReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r FbsGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r FbsAPIGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -5351,7 +5348,7 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r FbsGenerateMassOr
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -5375,14 +5372,14 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r FbsGenerateMassOr
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -5477,9 +5474,9 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r FbsGenerateMassOr
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateOrderLabelRequest struct {
+type FbsAPIGenerateOrderLabelRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 	shipmentId int64
@@ -5488,13 +5485,13 @@ type FbsGenerateOrderLabelRequest struct {
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r FbsGenerateOrderLabelRequest) Format(format PageFormatType) FbsGenerateOrderLabelRequest {
+func (r FbsAPIGenerateOrderLabelRequest) Format(format PageFormatType) FbsAPIGenerateOrderLabelRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateOrderLabelRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.GenerateOrderLabelExecute(r)
+func (r FbsAPIGenerateOrderLabelRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.GenerateOrderLabelExecute(r)
 }
 
 /*
@@ -5507,16 +5504,17 @@ GenerateOrderLabel Готовый ярлык‑наклейка для коро�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@param shipmentId Идентификатор грузоместа.
-	@param boxId Идентификатор коробки.
-	@return FbsGenerateOrderLabelRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @param shipmentId Идентификатор грузоместа.
+ @param boxId Идентификатор коробки.
+ @return FbsAPIGenerateOrderLabelRequest
 */
-func (a *FbsAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) FbsGenerateOrderLabelRequest {
-	return FbsGenerateOrderLabelRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64, orderId int64, shipmentId int64, boxId int64) FbsAPIGenerateOrderLabelRequest {
+	return FbsAPIGenerateOrderLabelRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -5526,9 +5524,8 @@ func (a *FbsAPIService) GenerateOrderLabel(ctx context.Context, campaignId int64
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) GenerateOrderLabelExecute(r FbsGenerateOrderLabelRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) GenerateOrderLabelExecute(r FbsAPIGenerateOrderLabelRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -5555,7 +5552,7 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r FbsGenerateOrderLabelRequest
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5577,14 +5574,14 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r FbsGenerateOrderLabelRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -5690,22 +5687,22 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r FbsGenerateOrderLabelRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateOrderLabelsRequest struct {
+type FbsAPIGenerateOrderLabelsRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 	format     *PageFormatType
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r FbsGenerateOrderLabelsRequest) Format(format PageFormatType) FbsGenerateOrderLabelsRequest {
+func (r FbsAPIGenerateOrderLabelsRequest) Format(format PageFormatType) FbsAPIGenerateOrderLabelsRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateOrderLabelsRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.GenerateOrderLabelsExecute(r)
+func (r FbsAPIGenerateOrderLabelsRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.GenerateOrderLabelsExecute(r)
 }
 
 /*
@@ -5720,14 +5717,15 @@ GenerateOrderLabels Готовые ярлыки‑наклейки на все �
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsGenerateOrderLabelsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIGenerateOrderLabelsRequest
 */
-func (a *FbsAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) FbsGenerateOrderLabelsRequest {
-	return FbsGenerateOrderLabelsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateOrderLabels(ctx context.Context, campaignId int64, orderId int64) FbsAPIGenerateOrderLabelsRequest {
+	return FbsAPIGenerateOrderLabelsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -5735,9 +5733,8 @@ func (a *FbsAPIService) GenerateOrderLabels(ctx context.Context, campaignId int6
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) GenerateOrderLabelsExecute(r FbsGenerateOrderLabelsRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) GenerateOrderLabelsExecute(r FbsAPIGenerateOrderLabelsRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -5762,7 +5759,7 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r FbsGenerateOrderLabelsReque
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5784,14 +5781,14 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r FbsGenerateOrderLabelsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -5897,26 +5894,26 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r FbsGenerateOrderLabelsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGeneratePricesReportRequest struct {
+type FbsAPIGeneratePricesReportRequest struct {
 	ctx                         context.Context
-	FbsService                  *FbsAPIService
+	ApiService                  *FbsAPIService
 	generatePricesReportRequest *GeneratePricesReportRequest
 	format                      *ReportFormatType
 }
 
-func (r FbsGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) FbsGeneratePricesReportRequest {
+func (r FbsAPIGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) FbsAPIGeneratePricesReportRequest {
 	r.generatePricesReportRequest = &generatePricesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGeneratePricesReportRequest) Format(format ReportFormatType) FbsGeneratePricesReportRequest {
+func (r FbsAPIGeneratePricesReportRequest) Format(format ReportFormatType) FbsAPIGeneratePricesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GeneratePricesReportExecute(r)
+func (r FbsAPIGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GeneratePricesReportExecute(r)
 }
 
 /*
@@ -5941,20 +5938,20 @@ GeneratePricesReport Отчет «Цены на рынке»
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGeneratePricesReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGeneratePricesReportRequest
 */
-func (a *FbsAPIService) GeneratePricesReport(ctx context.Context) FbsGeneratePricesReportRequest {
-	return FbsGeneratePricesReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GeneratePricesReport(ctx context.Context) FbsAPIGeneratePricesReportRequest {
+	return FbsAPIGeneratePricesReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GeneratePricesReportExecute(r FbsGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GeneratePricesReportExecute(r FbsAPIGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -5977,7 +5974,7 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r FbsGeneratePricesReportReq
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -6004,14 +6001,14 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r FbsGeneratePricesReportReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -6106,26 +6103,26 @@ func (a *FbsAPIService) GeneratePricesReportExecute(r FbsGeneratePricesReportReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateSalesGeographyReportRequest struct {
+type FbsAPIGenerateSalesGeographyReportRequest struct {
 	ctx                           context.Context
-	FbsService                    *FbsAPIService
+	ApiService                    *FbsAPIService
 	generateSalesGeographyRequest *GenerateSalesGeographyRequest
 	format                        *ReportFormatType
 }
 
-func (r FbsGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) FbsGenerateSalesGeographyReportRequest {
+func (r FbsAPIGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) FbsAPIGenerateSalesGeographyReportRequest {
 	r.generateSalesGeographyRequest = &generateSalesGeographyRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateSalesGeographyReportRequest) Format(format ReportFormatType) FbsGenerateSalesGeographyReportRequest {
+func (r FbsAPIGenerateSalesGeographyReportRequest) Format(format ReportFormatType) FbsAPIGenerateSalesGeographyReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateSalesGeographyReportExecute(r)
+func (r FbsAPIGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateSalesGeographyReportExecute(r)
 }
 
 /*
@@ -6142,20 +6139,20 @@ GenerateSalesGeographyReport Отчет по географии продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateSalesGeographyReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateSalesGeographyReportRequest
 */
-func (a *FbsAPIService) GenerateSalesGeographyReport(ctx context.Context) FbsGenerateSalesGeographyReportRequest {
-	return FbsGenerateSalesGeographyReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateSalesGeographyReport(ctx context.Context) FbsAPIGenerateSalesGeographyReportRequest {
+	return FbsAPIGenerateSalesGeographyReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r FbsGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r FbsAPIGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6178,7 +6175,7 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r FbsGenerateSalesGe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -6205,14 +6202,14 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r FbsGenerateSalesGe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -6307,26 +6304,26 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r FbsGenerateSalesGe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateShelfsStatisticsReportRequest struct {
+type FbsAPIGenerateShelfsStatisticsReportRequest struct {
 	ctx                             context.Context
-	FbsService                      *FbsAPIService
+	ApiService                      *FbsAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
 	format                          *ReportFormatType
 }
 
-func (r FbsGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) FbsGenerateShelfsStatisticsReportRequest {
+func (r FbsAPIGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) FbsAPIGenerateShelfsStatisticsReportRequest {
 	r.generateShelfsStatisticsRequest = &generateShelfsStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) FbsGenerateShelfsStatisticsReportRequest {
+func (r FbsAPIGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) FbsAPIGenerateShelfsStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateShelfsStatisticsReportExecute(r)
+func (r FbsAPIGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateShelfsStatisticsReportExecute(r)
 }
 
 /*
@@ -6343,20 +6340,20 @@ GenerateShelfsStatisticsReport Отчет по полкам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateShelfsStatisticsReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateShelfsStatisticsReportRequest
 */
-func (a *FbsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) FbsGenerateShelfsStatisticsReportRequest {
-	return FbsGenerateShelfsStatisticsReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) FbsAPIGenerateShelfsStatisticsReportRequest {
+	return FbsAPIGenerateShelfsStatisticsReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r FbsGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r FbsAPIGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6379,7 +6376,7 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r FbsGenerateShelf
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -6406,14 +6403,14 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r FbsGenerateShelf
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -6508,19 +6505,19 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r FbsGenerateShelf
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateShipmentListDocumentReportRequest struct {
+type FbsAPIGenerateShipmentListDocumentReportRequest struct {
 	ctx                                       context.Context
-	FbsService                                *FbsAPIService
+	ApiService                                *FbsAPIService
 	generateShipmentListDocumentReportRequest *GenerateShipmentListDocumentReportRequest
 }
 
-func (r FbsGenerateShipmentListDocumentReportRequest) GenerateShipmentListDocumentReportRequest(generateShipmentListDocumentReportRequest GenerateShipmentListDocumentReportRequest) FbsGenerateShipmentListDocumentReportRequest {
+func (r FbsAPIGenerateShipmentListDocumentReportRequest) GenerateShipmentListDocumentReportRequest(generateShipmentListDocumentReportRequest GenerateShipmentListDocumentReportRequest) FbsAPIGenerateShipmentListDocumentReportRequest {
 	r.generateShipmentListDocumentReportRequest = &generateShipmentListDocumentReportRequest
 	return r
 }
 
-func (r FbsGenerateShipmentListDocumentReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateShipmentListDocumentReportExecute(r)
+func (r FbsAPIGenerateShipmentListDocumentReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateShipmentListDocumentReportExecute(r)
 }
 
 /*
@@ -6535,20 +6532,20 @@ GenerateShipmentListDocumentReport Получение листа сборки
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateShipmentListDocumentReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateShipmentListDocumentReportRequest
 */
-func (a *FbsAPIService) GenerateShipmentListDocumentReport(ctx context.Context) FbsGenerateShipmentListDocumentReportRequest {
-	return FbsGenerateShipmentListDocumentReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateShipmentListDocumentReport(ctx context.Context) FbsAPIGenerateShipmentListDocumentReportRequest {
+	return FbsAPIGenerateShipmentListDocumentReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r FbsGenerateShipmentListDocumentReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r FbsAPIGenerateShipmentListDocumentReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6592,14 +6589,14 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r FbsGenerateS
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -6694,26 +6691,26 @@ func (a *FbsAPIService) GenerateShipmentListDocumentReportExecute(r FbsGenerateS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateShowsBoostReportRequest struct {
+type FbsAPIGenerateShowsBoostReportRequest struct {
 	ctx                       context.Context
-	FbsService                *FbsAPIService
+	ApiService                *FbsAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
 	format                    *ReportFormatType
 }
 
-func (r FbsGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) FbsGenerateShowsBoostReportRequest {
+func (r FbsAPIGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) FbsAPIGenerateShowsBoostReportRequest {
 	r.generateShowsBoostRequest = &generateShowsBoostRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateShowsBoostReportRequest) Format(format ReportFormatType) FbsGenerateShowsBoostReportRequest {
+func (r FbsAPIGenerateShowsBoostReportRequest) Format(format ReportFormatType) FbsAPIGenerateShowsBoostReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateShowsBoostReportExecute(r)
+func (r FbsAPIGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateShowsBoostReportExecute(r)
 }
 
 /*
@@ -6730,20 +6727,20 @@ GenerateShowsBoostReport Отчет по бусту показов
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateShowsBoostReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateShowsBoostReportRequest
 */
-func (a *FbsAPIService) GenerateShowsBoostReport(ctx context.Context) FbsGenerateShowsBoostReportRequest {
-	return FbsGenerateShowsBoostReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateShowsBoostReport(ctx context.Context) FbsAPIGenerateShowsBoostReportRequest {
+	return FbsAPIGenerateShowsBoostReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateShowsBoostReportExecute(r FbsGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateShowsBoostReportExecute(r FbsAPIGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6766,7 +6763,7 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r FbsGenerateShowsBoostR
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -6793,14 +6790,14 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r FbsGenerateShowsBoostR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -6895,26 +6892,26 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r FbsGenerateShowsBoostR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateShowsSalesReportRequest struct {
+type FbsAPIGenerateShowsSalesReportRequest struct {
 	ctx                             context.Context
-	FbsService                      *FbsAPIService
+	ApiService                      *FbsAPIService
 	generateShowsSalesReportRequest *GenerateShowsSalesReportRequest
 	format                          *ReportFormatType
 }
 
-func (r FbsGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) FbsGenerateShowsSalesReportRequest {
+func (r FbsAPIGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) FbsAPIGenerateShowsSalesReportRequest {
 	r.generateShowsSalesReportRequest = &generateShowsSalesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateShowsSalesReportRequest) Format(format ReportFormatType) FbsGenerateShowsSalesReportRequest {
+func (r FbsAPIGenerateShowsSalesReportRequest) Format(format ReportFormatType) FbsAPIGenerateShowsSalesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateShowsSalesReportExecute(r)
+func (r FbsAPIGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateShowsSalesReportExecute(r)
 }
 
 /*
@@ -6931,20 +6928,20 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateShowsSalesReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateShowsSalesReportRequest
 */
-func (a *FbsAPIService) GenerateShowsSalesReport(ctx context.Context) FbsGenerateShowsSalesReportRequest {
-	return FbsGenerateShowsSalesReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateShowsSalesReport(ctx context.Context) FbsAPIGenerateShowsSalesReportRequest {
+	return FbsAPIGenerateShowsSalesReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateShowsSalesReportExecute(r FbsGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateShowsSalesReportExecute(r FbsAPIGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -6967,7 +6964,7 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r FbsGenerateShowsSalesR
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -6994,14 +6991,14 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r FbsGenerateShowsSalesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -7096,26 +7093,26 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r FbsGenerateShowsSalesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateStocksOnWarehousesReportRequest struct {
+type FbsAPIGenerateStocksOnWarehousesReportRequest struct {
 	ctx                                     context.Context
-	FbsService                              *FbsAPIService
+	ApiService                              *FbsAPIService
 	generateStocksOnWarehousesReportRequest *GenerateStocksOnWarehousesReportRequest
 	format                                  *ReportFormatType
 }
 
-func (r FbsGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) FbsGenerateStocksOnWarehousesReportRequest {
+func (r FbsAPIGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) FbsAPIGenerateStocksOnWarehousesReportRequest {
 	r.generateStocksOnWarehousesReportRequest = &generateStocksOnWarehousesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) FbsGenerateStocksOnWarehousesReportRequest {
+func (r FbsAPIGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) FbsAPIGenerateStocksOnWarehousesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateStocksOnWarehousesReportExecute(r)
+func (r FbsAPIGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateStocksOnWarehousesReportExecute(r)
 }
 
 /*
@@ -7137,20 +7134,20 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateStocksOnWarehousesReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateStocksOnWarehousesReportRequest
 */
-func (a *FbsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) FbsGenerateStocksOnWarehousesReportRequest {
-	return FbsGenerateStocksOnWarehousesReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) FbsAPIGenerateStocksOnWarehousesReportRequest {
+	return FbsAPIGenerateStocksOnWarehousesReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r FbsGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r FbsAPIGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7173,7 +7170,7 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r FbsGenerateSto
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -7200,14 +7197,14 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r FbsGenerateSto
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -7302,33 +7299,33 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r FbsGenerateSto
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateUnitedMarketplaceServicesReportRequest struct {
+type FbsAPIGenerateUnitedMarketplaceServicesReportRequest struct {
 	ctx                                            context.Context
-	FbsService                                     *FbsAPIService
+	ApiService                                     *FbsAPIService
 	generateUnitedMarketplaceServicesReportRequest *GenerateUnitedMarketplaceServicesReportRequest
 	format                                         *ReportFormatType
 	language                                       *ReportLanguageType
 }
 
-func (r FbsGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) FbsGenerateUnitedMarketplaceServicesReportRequest {
+func (r FbsAPIGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) FbsAPIGenerateUnitedMarketplaceServicesReportRequest {
 	r.generateUnitedMarketplaceServicesReportRequest = &generateUnitedMarketplaceServicesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) FbsGenerateUnitedMarketplaceServicesReportRequest {
+func (r FbsAPIGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) FbsAPIGenerateUnitedMarketplaceServicesReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r FbsGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) FbsGenerateUnitedMarketplaceServicesReportRequest {
+func (r FbsAPIGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) FbsAPIGenerateUnitedMarketplaceServicesReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r FbsGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateUnitedMarketplaceServicesReportExecute(r)
+func (r FbsAPIGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateUnitedMarketplaceServicesReportExecute(r)
 }
 
 /*
@@ -7354,20 +7351,20 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateUnitedMarketplaceServicesReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateUnitedMarketplaceServicesReportRequest
 */
-func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) FbsGenerateUnitedMarketplaceServicesReportRequest {
-	return FbsGenerateUnitedMarketplaceServicesReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) FbsAPIGenerateUnitedMarketplaceServicesReportRequest {
+	return FbsAPIGenerateUnitedMarketplaceServicesReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbsGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbsAPIGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7390,13 +7387,13 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbsGene
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -7420,14 +7417,14 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbsGene
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -7522,33 +7519,33 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbsGene
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateUnitedNettingReportRequest struct {
+type FbsAPIGenerateUnitedNettingReportRequest struct {
 	ctx                                context.Context
-	FbsService                         *FbsAPIService
+	ApiService                         *FbsAPIService
 	generateUnitedNettingReportRequest *GenerateUnitedNettingReportRequest
 	format                             *ReportFormatType
 	language                           *ReportLanguageType
 }
 
-func (r FbsGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) FbsGenerateUnitedNettingReportRequest {
+func (r FbsAPIGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) FbsAPIGenerateUnitedNettingReportRequest {
 	r.generateUnitedNettingReportRequest = &generateUnitedNettingReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateUnitedNettingReportRequest) Format(format ReportFormatType) FbsGenerateUnitedNettingReportRequest {
+func (r FbsAPIGenerateUnitedNettingReportRequest) Format(format ReportFormatType) FbsAPIGenerateUnitedNettingReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r FbsGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) FbsGenerateUnitedNettingReportRequest {
+func (r FbsAPIGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) FbsAPIGenerateUnitedNettingReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r FbsGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateUnitedNettingReportExecute(r)
+func (r FbsAPIGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateUnitedNettingReportExecute(r)
 }
 
 /*
@@ -7576,20 +7573,20 @@ GenerateUnitedNettingReport Отчет по платежам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateUnitedNettingReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateUnitedNettingReportRequest
 */
-func (a *FbsAPIService) GenerateUnitedNettingReport(ctx context.Context) FbsGenerateUnitedNettingReportRequest {
-	return FbsGenerateUnitedNettingReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateUnitedNettingReport(ctx context.Context) FbsAPIGenerateUnitedNettingReportRequest {
+	return FbsAPIGenerateUnitedNettingReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r FbsGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r FbsAPIGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7612,13 +7609,13 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r FbsGenerateUnitedNe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -7642,14 +7639,14 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r FbsGenerateUnitedNe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -7744,33 +7741,33 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r FbsGenerateUnitedNe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateUnitedOrdersReportRequest struct {
+type FbsAPIGenerateUnitedOrdersReportRequest struct {
 	ctx                         context.Context
-	FbsService                  *FbsAPIService
+	ApiService                  *FbsAPIService
 	generateUnitedOrdersRequest *GenerateUnitedOrdersRequest
 	format                      *ReportFormatType
 	language                    *ReportLanguageType
 }
 
-func (r FbsGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) FbsGenerateUnitedOrdersReportRequest {
+func (r FbsAPIGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) FbsAPIGenerateUnitedOrdersReportRequest {
 	r.generateUnitedOrdersRequest = &generateUnitedOrdersRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) FbsGenerateUnitedOrdersReportRequest {
+func (r FbsAPIGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) FbsAPIGenerateUnitedOrdersReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r FbsGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) FbsGenerateUnitedOrdersReportRequest {
+func (r FbsAPIGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) FbsAPIGenerateUnitedOrdersReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r FbsGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateUnitedOrdersReportExecute(r)
+func (r FbsAPIGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateUnitedOrdersReportExecute(r)
 }
 
 /*
@@ -7787,20 +7784,20 @@ GenerateUnitedOrdersReport Отчет по заказам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateUnitedOrdersReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateUnitedOrdersReportRequest
 */
-func (a *FbsAPIService) GenerateUnitedOrdersReport(ctx context.Context) FbsGenerateUnitedOrdersReportRequest {
-	return FbsGenerateUnitedOrdersReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateUnitedOrdersReport(ctx context.Context) FbsAPIGenerateUnitedOrdersReportRequest {
+	return FbsAPIGenerateUnitedOrdersReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r FbsGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r FbsAPIGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -7823,13 +7820,13 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r FbsGenerateUnitedOrd
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -7853,14 +7850,14 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r FbsGenerateUnitedOrd
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -7955,26 +7952,26 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r FbsGenerateUnitedOrd
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGenerateUnitedReturnsReportRequest struct {
+type FbsAPIGenerateUnitedReturnsReportRequest struct {
 	ctx                          context.Context
-	FbsService                   *FbsAPIService
+	ApiService                   *FbsAPIService
 	generateUnitedReturnsRequest *GenerateUnitedReturnsRequest
 	format                       *ReportFormatType
 }
 
-func (r FbsGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) FbsGenerateUnitedReturnsReportRequest {
+func (r FbsAPIGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) FbsAPIGenerateUnitedReturnsReportRequest {
 	r.generateUnitedReturnsRequest = &generateUnitedReturnsRequest
 	return r
 }
 
 // Формат отчета.
-func (r FbsGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) FbsGenerateUnitedReturnsReportRequest {
+func (r FbsAPIGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) FbsAPIGenerateUnitedReturnsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r FbsGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
-	return r.FbsService.GenerateUnitedReturnsReportExecute(r)
+func (r FbsAPIGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateUnitedReturnsReportExecute(r)
 }
 
 /*
@@ -7993,20 +7990,20 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGenerateUnitedReturnsReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGenerateUnitedReturnsReportRequest
 */
-func (a *FbsAPIService) GenerateUnitedReturnsReport(ctx context.Context) FbsGenerateUnitedReturnsReportRequest {
-	return FbsGenerateUnitedReturnsReportRequest{
-		FbsService: a,
+func (a *FbsAPIService) GenerateUnitedReturnsReport(ctx context.Context) FbsAPIGenerateUnitedReturnsReportRequest {
+	return FbsAPIGenerateUnitedReturnsReportRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r FbsGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r FbsAPIGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8029,7 +8026,7 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r FbsGenerateUnitedRe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -8056,14 +8053,14 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r FbsGenerateUnitedRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -8158,13 +8155,13 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r FbsGenerateUnitedRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetAuthTokenInfoRequest struct {
+type FbsAPIGetAuthTokenInfoRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 }
 
-func (r FbsGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
-	return r.FbsService.GetAuthTokenInfoExecute(r)
+func (r FbsAPIGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.Response, error) {
+	return r.ApiService.GetAuthTokenInfoExecute(r)
 }
 
 /*
@@ -8172,7 +8169,9 @@ GetAuthTokenInfo Получение информации об авторизац
 
 {% include notitle [access](../../_auto/method_scopes/getAuthTokenInfo.md) %}
 
-{% note info "Метод доступен только для Fbs-Key-токена." %}
+{% note info "Метод доступен только для Api-Key-токена." %}
+
+
 
 {% endnote %}
 
@@ -8181,20 +8180,20 @@ GetAuthTokenInfo Получение информации об авторизац
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGetAuthTokenInfoRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGetAuthTokenInfoRequest
 */
-func (a *FbsAPIService) GetAuthTokenInfo(ctx context.Context) FbsGetAuthTokenInfoRequest {
-	return FbsGetAuthTokenInfoRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetAuthTokenInfo(ctx context.Context) FbsAPIGetAuthTokenInfoRequest {
+	return FbsAPIGetAuthTokenInfoRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetTokenInfoResponse
-func (a *FbsAPIService) GetAuthTokenInfoExecute(r FbsGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
+//  @return GetTokenInfoResponse
+func (a *FbsAPIService) GetAuthTokenInfoExecute(r FbsAPIGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8233,14 +8232,14 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r FbsGetAuthTokenInfoRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -8335,9 +8334,9 @@ func (a *FbsAPIService) GetAuthTokenInfoExecute(r FbsGetAuthTokenInfoRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetBidsInfoForBusinessRequest struct {
+type FbsAPIGetBidsInfoForBusinessRequest struct {
 	ctx                context.Context
-	FbsService         *FbsAPIService
+	ApiService         *FbsAPIService
 	businessId         int64
 	pageToken          *string
 	limit              *int32
@@ -8345,25 +8344,25 @@ type FbsGetBidsInfoForBusinessRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetBidsInfoForBusinessRequest) PageToken(pageToken string) FbsGetBidsInfoForBusinessRequest {
+func (r FbsAPIGetBidsInfoForBusinessRequest) PageToken(pageToken string) FbsAPIGetBidsInfoForBusinessRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetBidsInfoForBusinessRequest) Limit(limit int32) FbsGetBidsInfoForBusinessRequest {
+func (r FbsAPIGetBidsInfoForBusinessRequest) Limit(limit int32) FbsAPIGetBidsInfoForBusinessRequest {
 	r.limit = &limit
 	return r
 }
 
 // description
-func (r FbsGetBidsInfoForBusinessRequest) GetBidsInfoRequest(getBidsInfoRequest GetBidsInfoRequest) FbsGetBidsInfoForBusinessRequest {
+func (r FbsAPIGetBidsInfoForBusinessRequest) GetBidsInfoRequest(getBidsInfoRequest GetBidsInfoRequest) FbsAPIGetBidsInfoForBusinessRequest {
 	r.getBidsInfoRequest = &getBidsInfoRequest
 	return r
 }
 
-func (r FbsGetBidsInfoForBusinessRequest) Execute() (*GetBidsInfoResponse, *http.Response, error) {
-	return r.FbsService.GetBidsInfoForBusinessExecute(r)
+func (r FbsAPIGetBidsInfoForBusinessRequest) Execute() (*GetBidsInfoResponse, *http.Response, error) {
+	return r.ApiService.GetBidsInfoForBusinessExecute(r)
 }
 
 /*
@@ -8384,22 +8383,22 @@ GetBidsInfoForBusiness Информация об установленных ст
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetBidsInfoForBusinessRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetBidsInfoForBusinessRequest
 */
-func (a *FbsAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) FbsGetBidsInfoForBusinessRequest {
-	return FbsGetBidsInfoForBusinessRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetBidsInfoForBusiness(ctx context.Context, businessId int64) FbsAPIGetBidsInfoForBusinessRequest {
+	return FbsAPIGetBidsInfoForBusinessRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetBidsInfoResponse
-func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r FbsGetBidsInfoForBusinessRequest) (*GetBidsInfoResponse, *http.Response, error) {
+//  @return GetBidsInfoResponse
+func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r FbsAPIGetBidsInfoForBusinessRequest) (*GetBidsInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8423,10 +8422,10 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r FbsGetBidsInfoForBusines
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -8450,14 +8449,14 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r FbsGetBidsInfoForBusines
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -8563,21 +8562,21 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r FbsGetBidsInfoForBusines
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetBidsRecommendationsRequest struct {
+type FbsAPIGetBidsRecommendationsRequest struct {
 	ctx                           context.Context
-	FbsService                    *FbsAPIService
+	ApiService                    *FbsAPIService
 	businessId                    int64
 	getBidsRecommendationsRequest *GetBidsRecommendationsRequest
 }
 
 // description.
-func (r FbsGetBidsRecommendationsRequest) GetBidsRecommendationsRequest(getBidsRecommendationsRequest GetBidsRecommendationsRequest) FbsGetBidsRecommendationsRequest {
+func (r FbsAPIGetBidsRecommendationsRequest) GetBidsRecommendationsRequest(getBidsRecommendationsRequest GetBidsRecommendationsRequest) FbsAPIGetBidsRecommendationsRequest {
 	r.getBidsRecommendationsRequest = &getBidsRecommendationsRequest
 	return r
 }
 
-func (r FbsGetBidsRecommendationsRequest) Execute() (*GetBidsRecommendationsResponse, *http.Response, error) {
-	return r.FbsService.GetBidsRecommendationsExecute(r)
+func (r FbsAPIGetBidsRecommendationsRequest) Execute() (*GetBidsRecommendationsResponse, *http.Response, error) {
+	return r.ApiService.GetBidsRecommendationsExecute(r)
 }
 
 /*
@@ -8596,22 +8595,22 @@ GetBidsRecommendations Рекомендованные ставки для зад
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetBidsRecommendationsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetBidsRecommendationsRequest
 */
-func (a *FbsAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) FbsGetBidsRecommendationsRequest {
-	return FbsGetBidsRecommendationsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetBidsRecommendations(ctx context.Context, businessId int64) FbsAPIGetBidsRecommendationsRequest {
+	return FbsAPIGetBidsRecommendationsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetBidsRecommendationsResponse
-func (a *FbsAPIService) GetBidsRecommendationsExecute(r FbsGetBidsRecommendationsRequest) (*GetBidsRecommendationsResponse, *http.Response, error) {
+//  @return GetBidsRecommendationsResponse
+func (a *FbsAPIService) GetBidsRecommendationsExecute(r FbsAPIGetBidsRecommendationsRequest) (*GetBidsRecommendationsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8659,14 +8658,14 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r FbsGetBidsRecommendation
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -8772,34 +8771,34 @@ func (a *FbsAPIService) GetBidsRecommendationsExecute(r FbsGetBidsRecommendation
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetBusinessQuarantineOffersRequest struct {
+type FbsAPIGetBusinessQuarantineOffersRequest struct {
 	ctx                        context.Context
-	FbsService                 *FbsAPIService
+	ApiService                 *FbsAPIService
 	businessId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
 	pageToken                  *string
 	limit                      *int32
 }
 
-func (r FbsGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) FbsGetBusinessQuarantineOffersRequest {
+func (r FbsAPIGetBusinessQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) FbsAPIGetBusinessQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetBusinessQuarantineOffersRequest) PageToken(pageToken string) FbsGetBusinessQuarantineOffersRequest {
+func (r FbsAPIGetBusinessQuarantineOffersRequest) PageToken(pageToken string) FbsAPIGetBusinessQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetBusinessQuarantineOffersRequest) Limit(limit int32) FbsGetBusinessQuarantineOffersRequest {
+func (r FbsAPIGetBusinessQuarantineOffersRequest) Limit(limit int32) FbsAPIGetBusinessQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
-	return r.FbsService.GetBusinessQuarantineOffersExecute(r)
+func (r FbsAPIGetBusinessQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+	return r.ApiService.GetBusinessQuarantineOffersExecute(r)
 }
 
 /*
@@ -8824,22 +8823,22 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetBusinessQuarantineOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetBusinessQuarantineOffersRequest
 */
-func (a *FbsAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) FbsGetBusinessQuarantineOffersRequest {
-	return FbsGetBusinessQuarantineOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) FbsAPIGetBusinessQuarantineOffersRequest {
+	return FbsAPIGetBusinessQuarantineOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetQuarantineOffersResponse
-func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r FbsGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+//  @return GetQuarantineOffersResponse
+func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r FbsAPIGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -8866,10 +8865,10 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r FbsGetBusinessQuara
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -8893,14 +8892,14 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r FbsGetBusinessQuara
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -9006,14 +9005,14 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r FbsGetBusinessQuara
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetBusinessSettingsRequest struct {
+type FbsAPIGetBusinessSettingsRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	businessId int64
 }
 
-func (r FbsGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
-	return r.FbsService.GetBusinessSettingsExecute(r)
+func (r FbsAPIGetBusinessSettingsRequest) Execute() (*GetBusinessSettingsResponse, *http.Response, error) {
+	return r.ApiService.GetBusinessSettingsExecute(r)
 }
 
 /*
@@ -9025,22 +9024,22 @@ GetBusinessSettings Настройки кабинета
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetBusinessSettingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetBusinessSettingsRequest
 */
-func (a *FbsAPIService) GetBusinessSettings(ctx context.Context, businessId int64) FbsGetBusinessSettingsRequest {
-	return FbsGetBusinessSettingsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetBusinessSettings(ctx context.Context, businessId int64) FbsAPIGetBusinessSettingsRequest {
+	return FbsAPIGetBusinessSettingsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetBusinessSettingsResponse
-func (a *FbsAPIService) GetBusinessSettingsExecute(r FbsGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
+//  @return GetBusinessSettingsResponse
+func (a *FbsAPIService) GetBusinessSettingsExecute(r FbsAPIGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -9083,14 +9082,14 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r FbsGetBusinessSettingsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -9196,14 +9195,14 @@ func (a *FbsAPIService) GetBusinessSettingsExecute(r FbsGetBusinessSettingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCampaignRequest struct {
+type FbsAPIGetCampaignRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 }
 
-func (r FbsGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
-	return r.FbsService.GetCampaignExecute(r)
+func (r FbsAPIGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
+	return r.ApiService.GetCampaignExecute(r)
 }
 
 /*
@@ -9215,22 +9214,22 @@ GetCampaign Информация о магазине
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetCampaignRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetCampaignRequest
 */
-func (a *FbsAPIService) GetCampaign(ctx context.Context, campaignId int64) FbsGetCampaignRequest {
-	return FbsGetCampaignRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCampaign(ctx context.Context, campaignId int64) FbsAPIGetCampaignRequest {
+	return FbsAPIGetCampaignRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignResponse
-func (a *FbsAPIService) GetCampaignExecute(r FbsGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
+//  @return GetCampaignResponse
+func (a *FbsAPIService) GetCampaignExecute(r FbsAPIGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -9273,14 +9272,14 @@ func (a *FbsAPIService) GetCampaignExecute(r FbsGetCampaignRequest) (*GetCampaig
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -9386,34 +9385,34 @@ func (a *FbsAPIService) GetCampaignExecute(r FbsGetCampaignRequest) (*GetCampaig
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCampaignOffersRequest struct {
+type FbsAPIGetCampaignOffersRequest struct {
 	ctx                      context.Context
-	FbsService               *FbsAPIService
+	ApiService               *FbsAPIService
 	campaignId               int64
 	getCampaignOffersRequest *GetCampaignOffersRequest
 	pageToken                *string
 	limit                    *int32
 }
 
-func (r FbsGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) FbsGetCampaignOffersRequest {
+func (r FbsAPIGetCampaignOffersRequest) GetCampaignOffersRequest(getCampaignOffersRequest GetCampaignOffersRequest) FbsAPIGetCampaignOffersRequest {
 	r.getCampaignOffersRequest = &getCampaignOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetCampaignOffersRequest) PageToken(pageToken string) FbsGetCampaignOffersRequest {
+func (r FbsAPIGetCampaignOffersRequest) PageToken(pageToken string) FbsAPIGetCampaignOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetCampaignOffersRequest) Limit(limit int32) FbsGetCampaignOffersRequest {
+func (r FbsAPIGetCampaignOffersRequest) Limit(limit int32) FbsAPIGetCampaignOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
-	return r.FbsService.GetCampaignOffersExecute(r)
+func (r FbsAPIGetCampaignOffersRequest) Execute() (*GetCampaignOffersResponse, *http.Response, error) {
+	return r.ApiService.GetCampaignOffersExecute(r)
 }
 
 /*
@@ -9426,22 +9425,22 @@ GetCampaignOffers Информация о товарах, которые раз�
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetCampaignOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetCampaignOffersRequest
 */
-func (a *FbsAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) FbsGetCampaignOffersRequest {
-	return FbsGetCampaignOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCampaignOffers(ctx context.Context, campaignId int64) FbsAPIGetCampaignOffersRequest {
+	return FbsAPIGetCampaignOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignOffersResponse
-func (a *FbsAPIService) GetCampaignOffersExecute(r FbsGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
+//  @return GetCampaignOffersResponse
+func (a *FbsAPIService) GetCampaignOffersExecute(r FbsAPIGetCampaignOffersRequest) (*GetCampaignOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -9468,10 +9467,10 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r FbsGetCampaignOffersRequest) 
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -9495,14 +9494,14 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r FbsGetCampaignOffersRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -9608,34 +9607,34 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r FbsGetCampaignOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCampaignQuarantineOffersRequest struct {
+type FbsAPIGetCampaignQuarantineOffersRequest struct {
 	ctx                        context.Context
-	FbsService                 *FbsAPIService
+	ApiService                 *FbsAPIService
 	campaignId                 int64
 	getQuarantineOffersRequest *GetQuarantineOffersRequest
 	pageToken                  *string
 	limit                      *int32
 }
 
-func (r FbsGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) FbsGetCampaignQuarantineOffersRequest {
+func (r FbsAPIGetCampaignQuarantineOffersRequest) GetQuarantineOffersRequest(getQuarantineOffersRequest GetQuarantineOffersRequest) FbsAPIGetCampaignQuarantineOffersRequest {
 	r.getQuarantineOffersRequest = &getQuarantineOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetCampaignQuarantineOffersRequest) PageToken(pageToken string) FbsGetCampaignQuarantineOffersRequest {
+func (r FbsAPIGetCampaignQuarantineOffersRequest) PageToken(pageToken string) FbsAPIGetCampaignQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetCampaignQuarantineOffersRequest) Limit(limit int32) FbsGetCampaignQuarantineOffersRequest {
+func (r FbsAPIGetCampaignQuarantineOffersRequest) Limit(limit int32) FbsAPIGetCampaignQuarantineOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
-	return r.FbsService.GetCampaignQuarantineOffersExecute(r)
+func (r FbsAPIGetCampaignQuarantineOffersRequest) Execute() (*GetQuarantineOffersResponse, *http.Response, error) {
+	return r.ApiService.GetCampaignQuarantineOffersExecute(r)
 }
 
 /*
@@ -9660,22 +9659,22 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetCampaignQuarantineOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetCampaignQuarantineOffersRequest
 */
-func (a *FbsAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) FbsGetCampaignQuarantineOffersRequest {
-	return FbsGetCampaignQuarantineOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) FbsAPIGetCampaignQuarantineOffersRequest {
+	return FbsAPIGetCampaignQuarantineOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetQuarantineOffersResponse
-func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r FbsGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
+//  @return GetQuarantineOffersResponse
+func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r FbsAPIGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -9702,10 +9701,10 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r FbsGetCampaignQuara
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -9729,14 +9728,14 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r FbsGetCampaignQuara
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -9842,14 +9841,14 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r FbsGetCampaignQuara
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCampaignRegionRequest struct {
+type FbsAPIGetCampaignRegionRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 }
 
-func (r FbsGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
-	return r.FbsService.GetCampaignRegionExecute(r)
+func (r FbsAPIGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
+	return r.ApiService.GetCampaignRegionExecute(r)
 }
 
 /*
@@ -9867,26 +9866,25 @@ GetCampaignRegion Регион магазина
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetCampaignRegionRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetCampaignRegionRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) FbsGetCampaignRegionRequest {
-	return FbsGetCampaignRegionRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) FbsAPIGetCampaignRegionRequest {
+	return FbsAPIGetCampaignRegionRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignRegionResponse
-//
+//  @return GetCampaignRegionResponse
 // Deprecated
-func (a *FbsAPIService) GetCampaignRegionExecute(r FbsGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
+func (a *FbsAPIService) GetCampaignRegionExecute(r FbsAPIGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -9929,14 +9927,14 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r FbsGetCampaignRegionRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -10042,14 +10040,14 @@ func (a *FbsAPIService) GetCampaignRegionExecute(r FbsGetCampaignRegionRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCampaignSettingsRequest struct {
+type FbsAPIGetCampaignSettingsRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 }
 
-func (r FbsGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
-	return r.FbsService.GetCampaignSettingsExecute(r)
+func (r FbsAPIGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
+	return r.ApiService.GetCampaignSettingsExecute(r)
 }
 
 /*
@@ -10061,22 +10059,22 @@ GetCampaignSettings Настройки магазина
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetCampaignSettingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetCampaignSettingsRequest
 */
-func (a *FbsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) FbsGetCampaignSettingsRequest {
-	return FbsGetCampaignSettingsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) FbsAPIGetCampaignSettingsRequest {
+	return FbsAPIGetCampaignSettingsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignSettingsResponse
-func (a *FbsAPIService) GetCampaignSettingsExecute(r FbsGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
+//  @return GetCampaignSettingsResponse
+func (a *FbsAPIService) GetCampaignSettingsExecute(r FbsAPIGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -10119,14 +10117,14 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r FbsGetCampaignSettingsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -10232,27 +10230,27 @@ func (a *FbsAPIService) GetCampaignSettingsExecute(r FbsGetCampaignSettingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCampaignsRequest struct {
+type FbsAPIGetCampaignsRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	page       *int32
 	pageSize   *int32
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r FbsGetCampaignsRequest) Page(page int32) FbsGetCampaignsRequest {
+func (r FbsAPIGetCampaignsRequest) Page(page int32) FbsAPIGetCampaignsRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r FbsGetCampaignsRequest) PageSize(pageSize int32) FbsGetCampaignsRequest {
+func (r FbsAPIGetCampaignsRequest) PageSize(pageSize int32) FbsAPIGetCampaignsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r FbsGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
-	return r.FbsService.GetCampaignsExecute(r)
+func (r FbsAPIGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
+	return r.ApiService.GetCampaignsExecute(r)
 }
 
 /*
@@ -10260,27 +10258,27 @@ GetCampaigns Список магазинов пользователя
 
 {% include notitle [access](../../_auto/method_scopes/getCampaigns.md) %}
 
-**Для Fbs-Key-токена:** возвращает список магазинов в кабинете, для которого выдан токен. Нельзя получить список только подагентских магазинов.
+**Для Api-Key-токена:** возвращает список магазинов в кабинете, для которого выдан токен. Нельзя получить список только подагентских магазинов.
 
 **Для OAuth-токена:** возвращает список магазинов, к которым имеет доступ пользователь — владелец авторизационного токена, использованного в запросе. Для агентских пользователей список состоит из подагентских магазинов.
 
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGetCampaignsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGetCampaignsRequest
 */
-func (a *FbsAPIService) GetCampaigns(ctx context.Context) FbsGetCampaignsRequest {
-	return FbsGetCampaignsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCampaigns(ctx context.Context) FbsAPIGetCampaignsRequest {
+	return FbsAPIGetCampaignsRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignsResponse
-func (a *FbsAPIService) GetCampaignsExecute(r FbsGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
+//  @return GetCampaignsResponse
+func (a *FbsAPIService) GetCampaignsExecute(r FbsAPIGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -10300,13 +10298,13 @@ func (a *FbsAPIService) GetCampaignsExecute(r FbsGetCampaignsRequest) (*GetCampa
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10328,14 +10326,14 @@ func (a *FbsAPIService) GetCampaignsExecute(r FbsGetCampaignsRequest) (*GetCampa
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -10441,19 +10439,19 @@ func (a *FbsAPIService) GetCampaignsExecute(r FbsGetCampaignsRequest) (*GetCampa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCategoriesMaxSaleQuantumRequest struct {
+type FbsAPIGetCategoriesMaxSaleQuantumRequest struct {
 	ctx                                context.Context
-	FbsService                         *FbsAPIService
+	ApiService                         *FbsAPIService
 	getCategoriesMaxSaleQuantumRequest *GetCategoriesMaxSaleQuantumRequest
 }
 
-func (r FbsGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) FbsGetCategoriesMaxSaleQuantumRequest {
+func (r FbsAPIGetCategoriesMaxSaleQuantumRequest) GetCategoriesMaxSaleQuantumRequest(getCategoriesMaxSaleQuantumRequest GetCategoriesMaxSaleQuantumRequest) FbsAPIGetCategoriesMaxSaleQuantumRequest {
 	r.getCategoriesMaxSaleQuantumRequest = &getCategoriesMaxSaleQuantumRequest
 	return r
 }
 
-func (r FbsGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
-	return r.FbsService.GetCategoriesMaxSaleQuantumExecute(r)
+func (r FbsAPIGetCategoriesMaxSaleQuantumRequest) Execute() (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+	return r.ApiService.GetCategoriesMaxSaleQuantumExecute(r)
 }
 
 /*
@@ -10470,20 +10468,20 @@ GetCategoriesMaxSaleQuantum Лимит на установку кванта пр
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGetCategoriesMaxSaleQuantumRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGetCategoriesMaxSaleQuantumRequest
 */
-func (a *FbsAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) FbsGetCategoriesMaxSaleQuantumRequest {
-	return FbsGetCategoriesMaxSaleQuantumRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) FbsAPIGetCategoriesMaxSaleQuantumRequest {
+	return FbsAPIGetCategoriesMaxSaleQuantumRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCategoriesMaxSaleQuantumResponse
-func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r FbsGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
+//  @return GetCategoriesMaxSaleQuantumResponse
+func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r FbsAPIGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -10527,14 +10525,14 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r FbsGetCategoriesMax
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -10640,19 +10638,19 @@ func (a *FbsAPIService) GetCategoriesMaxSaleQuantumExecute(r FbsGetCategoriesMax
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCategoriesTreeRequest struct {
+type FbsAPIGetCategoriesTreeRequest struct {
 	ctx                  context.Context
-	FbsService           *FbsAPIService
+	ApiService           *FbsAPIService
 	getCategoriesRequest *GetCategoriesRequest
 }
 
-func (r FbsGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) FbsGetCategoriesTreeRequest {
+func (r FbsAPIGetCategoriesTreeRequest) GetCategoriesRequest(getCategoriesRequest GetCategoriesRequest) FbsAPIGetCategoriesTreeRequest {
 	r.getCategoriesRequest = &getCategoriesRequest
 	return r
 }
 
-func (r FbsGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
-	return r.FbsService.GetCategoriesTreeExecute(r)
+func (r FbsAPIGetCategoriesTreeRequest) Execute() (*GetCategoriesResponse, *http.Response, error) {
+	return r.ApiService.GetCategoriesTreeExecute(r)
 }
 
 /*
@@ -10665,20 +10663,20 @@ GetCategoriesTree Дерево категорий
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGetCategoriesTreeRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGetCategoriesTreeRequest
 */
-func (a *FbsAPIService) GetCategoriesTree(ctx context.Context) FbsGetCategoriesTreeRequest {
-	return FbsGetCategoriesTreeRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCategoriesTree(ctx context.Context) FbsAPIGetCategoriesTreeRequest {
+	return FbsAPIGetCategoriesTreeRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCategoriesResponse
-func (a *FbsAPIService) GetCategoriesTreeExecute(r FbsGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
+//  @return GetCategoriesResponse
+func (a *FbsAPIService) GetCategoriesTreeExecute(r FbsAPIGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -10719,14 +10717,14 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r FbsGetCategoriesTreeRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -10832,14 +10830,14 @@ func (a *FbsAPIService) GetCategoriesTreeExecute(r FbsGetCategoriesTreeRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetCategoryContentParametersRequest struct {
+type FbsAPIGetCategoryContentParametersRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	categoryId int64
 }
 
-func (r FbsGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
-	return r.FbsService.GetCategoryContentParametersExecute(r)
+func (r FbsAPIGetCategoryContentParametersRequest) Execute() (*GetCategoryContentParametersResponse, *http.Response, error) {
+	return r.ApiService.GetCategoryContentParametersExecute(r)
 }
 
 /*
@@ -10852,22 +10850,22 @@ GetCategoryContentParameters Списки характеристик товар�
 |**⚙️ Лимит:** 100 категорий в минуту |
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
-	@return FbsGetCategoryContentParametersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param categoryId Идентификатор категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится интересующий вас товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).
+ @return FbsAPIGetCategoryContentParametersRequest
 */
-func (a *FbsAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) FbsGetCategoryContentParametersRequest {
-	return FbsGetCategoryContentParametersRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetCategoryContentParameters(ctx context.Context, categoryId int64) FbsAPIGetCategoryContentParametersRequest {
+	return FbsAPIGetCategoryContentParametersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		categoryId: categoryId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCategoryContentParametersResponse
-func (a *FbsAPIService) GetCategoryContentParametersExecute(r FbsGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
+//  @return GetCategoryContentParametersResponse
+func (a *FbsAPIService) GetCategoryContentParametersExecute(r FbsAPIGetCategoryContentParametersRequest) (*GetCategoryContentParametersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -10910,14 +10908,14 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r FbsGetCategoryCont
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -11023,21 +11021,21 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r FbsGetCategoryCont
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetChatRequest struct {
+type FbsAPIGetChatRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	businessId int64
 	chatId     *int64
 }
 
 // Идентификатор чата.
-func (r FbsGetChatRequest) ChatId(chatId int64) FbsGetChatRequest {
+func (r FbsAPIGetChatRequest) ChatId(chatId int64) FbsAPIGetChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
-func (r FbsGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
-	return r.FbsService.GetChatExecute(r)
+func (r FbsAPIGetChatRequest) Execute() (*GetChatResponse, *http.Response, error) {
+	return r.ApiService.GetChatExecute(r)
 }
 
 /*
@@ -11058,22 +11056,22 @@ GetChat Получение чата по идентификатору
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetChatRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetChatRequest
 */
-func (a *FbsAPIService) GetChat(ctx context.Context, businessId int64) FbsGetChatRequest {
-	return FbsGetChatRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetChat(ctx context.Context, businessId int64) FbsAPIGetChatRequest {
+	return FbsAPIGetChatRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetChatResponse
-func (a *FbsAPIService) GetChatExecute(r FbsGetChatRequest) (*GetChatResponse, *http.Response, error) {
+//  @return GetChatResponse
+func (a *FbsAPIService) GetChatExecute(r FbsAPIGetChatRequest) (*GetChatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -11102,7 +11100,7 @@ func (a *FbsAPIService) GetChatExecute(r FbsGetChatRequest) (*GetChatResponse, *
 		return localVarReturnValue, nil, reportError("chatId must be greater than 1")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11123,14 +11121,14 @@ func (a *FbsAPIService) GetChatExecute(r FbsGetChatRequest) (*GetChatResponse, *
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -11236,9 +11234,9 @@ func (a *FbsAPIService) GetChatExecute(r FbsGetChatRequest) (*GetChatResponse, *
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetChatHistoryRequest struct {
+type FbsAPIGetChatHistoryRequest struct {
 	ctx                   context.Context
-	FbsService            *FbsAPIService
+	ApiService            *FbsAPIService
 	businessId            int64
 	chatId                *int64
 	getChatHistoryRequest *GetChatHistoryRequest
@@ -11247,31 +11245,31 @@ type FbsGetChatHistoryRequest struct {
 }
 
 // Идентификатор чата.
-func (r FbsGetChatHistoryRequest) ChatId(chatId int64) FbsGetChatHistoryRequest {
+func (r FbsAPIGetChatHistoryRequest) ChatId(chatId int64) FbsAPIGetChatHistoryRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r FbsGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) FbsGetChatHistoryRequest {
+func (r FbsAPIGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryRequest GetChatHistoryRequest) FbsAPIGetChatHistoryRequest {
 	r.getChatHistoryRequest = &getChatHistoryRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetChatHistoryRequest) PageToken(pageToken string) FbsGetChatHistoryRequest {
+func (r FbsAPIGetChatHistoryRequest) PageToken(pageToken string) FbsAPIGetChatHistoryRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetChatHistoryRequest) Limit(limit int32) FbsGetChatHistoryRequest {
+func (r FbsAPIGetChatHistoryRequest) Limit(limit int32) FbsAPIGetChatHistoryRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
-	return r.FbsService.GetChatHistoryExecute(r)
+func (r FbsAPIGetChatHistoryRequest) Execute() (*GetChatHistoryResponse, *http.Response, error) {
+	return r.ApiService.GetChatHistoryExecute(r)
 }
 
 /*
@@ -11284,22 +11282,22 @@ GetChatHistory Получение истории сообщений в чате
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetChatHistoryRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetChatHistoryRequest
 */
-func (a *FbsAPIService) GetChatHistory(ctx context.Context, businessId int64) FbsGetChatHistoryRequest {
-	return FbsGetChatHistoryRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetChatHistory(ctx context.Context, businessId int64) FbsAPIGetChatHistoryRequest {
+	return FbsAPIGetChatHistoryRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetChatHistoryResponse
-func (a *FbsAPIService) GetChatHistoryExecute(r FbsGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
+//  @return GetChatHistoryResponse
+func (a *FbsAPIService) GetChatHistoryExecute(r FbsAPIGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -11331,12 +11329,12 @@ func (a *FbsAPIService) GetChatHistoryExecute(r FbsGetChatHistoryRequest) (*GetC
 		return localVarReturnValue, nil, reportError("getChatHistoryRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -11360,14 +11358,14 @@ func (a *FbsAPIService) GetChatHistoryExecute(r FbsGetChatHistoryRequest) (*GetC
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -11473,28 +11471,28 @@ func (a *FbsAPIService) GetChatHistoryExecute(r FbsGetChatHistoryRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetChatMessageRequest struct {
+type FbsAPIGetChatMessageRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	businessId int64
 	chatId     *int64
 	messageId  *int64
 }
 
 // Идентификатор чата.
-func (r FbsGetChatMessageRequest) ChatId(chatId int64) FbsGetChatMessageRequest {
+func (r FbsAPIGetChatMessageRequest) ChatId(chatId int64) FbsAPIGetChatMessageRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Идентификатор сообщения.
-func (r FbsGetChatMessageRequest) MessageId(messageId int64) FbsGetChatMessageRequest {
+func (r FbsAPIGetChatMessageRequest) MessageId(messageId int64) FbsAPIGetChatMessageRequest {
 	r.messageId = &messageId
 	return r
 }
 
-func (r FbsGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
-	return r.FbsService.GetChatMessageExecute(r)
+func (r FbsAPIGetChatMessageRequest) Execute() (*GetChatMessageResponse, *http.Response, error) {
+	return r.ApiService.GetChatMessageExecute(r)
 }
 
 /*
@@ -11515,22 +11513,22 @@ GetChatMessage Получение сообщения в чате
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetChatMessageRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetChatMessageRequest
 */
-func (a *FbsAPIService) GetChatMessage(ctx context.Context, businessId int64) FbsGetChatMessageRequest {
-	return FbsGetChatMessageRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetChatMessage(ctx context.Context, businessId int64) FbsAPIGetChatMessageRequest {
+	return FbsAPIGetChatMessageRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetChatMessageResponse
-func (a *FbsAPIService) GetChatMessageExecute(r FbsGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
+//  @return GetChatMessageResponse
+func (a *FbsAPIService) GetChatMessageExecute(r FbsAPIGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -11565,8 +11563,8 @@ func (a *FbsAPIService) GetChatMessageExecute(r FbsGetChatMessageRequest) (*GetC
 		return localVarReturnValue, nil, reportError("messageId must be greater than 1")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "messageId", r.messageId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "messageId", r.messageId, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11587,14 +11585,14 @@ func (a *FbsAPIService) GetChatMessageExecute(r FbsGetChatMessageRequest) (*GetC
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -11700,9 +11698,9 @@ func (a *FbsAPIService) GetChatMessageExecute(r FbsGetChatMessageRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetChatsRequest struct {
+type FbsAPIGetChatsRequest struct {
 	ctx             context.Context
-	FbsService      *FbsAPIService
+	ApiService      *FbsAPIService
 	businessId      int64
 	getChatsRequest *GetChatsRequest
 	pageToken       *string
@@ -11710,25 +11708,25 @@ type FbsGetChatsRequest struct {
 }
 
 // description
-func (r FbsGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) FbsGetChatsRequest {
+func (r FbsAPIGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest) FbsAPIGetChatsRequest {
 	r.getChatsRequest = &getChatsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetChatsRequest) PageToken(pageToken string) FbsGetChatsRequest {
+func (r FbsAPIGetChatsRequest) PageToken(pageToken string) FbsAPIGetChatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetChatsRequest) Limit(limit int32) FbsGetChatsRequest {
+func (r FbsAPIGetChatsRequest) Limit(limit int32) FbsAPIGetChatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
-	return r.FbsService.GetChatsExecute(r)
+func (r FbsAPIGetChatsRequest) Execute() (*GetChatsResponse, *http.Response, error) {
+	return r.ApiService.GetChatsExecute(r)
 }
 
 /*
@@ -11749,22 +11747,22 @@ GetChats Получение доступных чатов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetChatsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetChatsRequest
 */
-func (a *FbsAPIService) GetChats(ctx context.Context, businessId int64) FbsGetChatsRequest {
-	return FbsGetChatsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetChats(ctx context.Context, businessId int64) FbsAPIGetChatsRequest {
+	return FbsAPIGetChatsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetChatsResponse
-func (a *FbsAPIService) GetChatsExecute(r FbsGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
+//  @return GetChatsResponse
+func (a *FbsAPIService) GetChatsExecute(r FbsAPIGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -11791,10 +11789,10 @@ func (a *FbsAPIService) GetChatsExecute(r FbsGetChatsRequest) (*GetChatsResponse
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -11818,14 +11816,14 @@ func (a *FbsAPIService) GetChatsExecute(r FbsGetChatsRequest) (*GetChatsResponse
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -11931,13 +11929,13 @@ func (a *FbsAPIService) GetChatsExecute(r FbsGetChatsRequest) (*GetChatsResponse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetDeliveryServicesRequest struct {
+type FbsAPIGetDeliveryServicesRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 }
 
-func (r FbsGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
-	return r.FbsService.GetDeliveryServicesExecute(r)
+func (r FbsAPIGetDeliveryServicesRequest) Execute() (*GetDeliveryServicesResponse, *http.Response, error) {
+	return r.ApiService.GetDeliveryServicesExecute(r)
 }
 
 /*
@@ -11949,20 +11947,20 @@ GetDeliveryServices Справочник служб доставки
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGetDeliveryServicesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGetDeliveryServicesRequest
 */
-func (a *FbsAPIService) GetDeliveryServices(ctx context.Context) FbsGetDeliveryServicesRequest {
-	return FbsGetDeliveryServicesRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetDeliveryServices(ctx context.Context) FbsAPIGetDeliveryServicesRequest {
+	return FbsAPIGetDeliveryServicesRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetDeliveryServicesResponse
-func (a *FbsAPIService) GetDeliveryServicesExecute(r FbsGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
+//  @return GetDeliveryServicesResponse
+func (a *FbsAPIService) GetDeliveryServicesExecute(r FbsAPIGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -12001,14 +11999,14 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r FbsGetDeliveryServicesReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -12114,34 +12112,34 @@ func (a *FbsAPIService) GetDeliveryServicesExecute(r FbsGetDeliveryServicesReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetGoodsFeedbackCommentsRequest struct {
+type FbsAPIGetGoodsFeedbackCommentsRequest struct {
 	ctx                             context.Context
-	FbsService                      *FbsAPIService
+	ApiService                      *FbsAPIService
 	businessId                      int64
 	getGoodsFeedbackCommentsRequest *GetGoodsFeedbackCommentsRequest
 	pageToken                       *string
 	limit                           *int32
 }
 
-func (r FbsGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) FbsGetGoodsFeedbackCommentsRequest {
+func (r FbsAPIGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) FbsAPIGetGoodsFeedbackCommentsRequest {
 	r.getGoodsFeedbackCommentsRequest = &getGoodsFeedbackCommentsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) FbsGetGoodsFeedbackCommentsRequest {
+func (r FbsAPIGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) FbsAPIGetGoodsFeedbackCommentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetGoodsFeedbackCommentsRequest) Limit(limit int32) FbsGetGoodsFeedbackCommentsRequest {
+func (r FbsAPIGetGoodsFeedbackCommentsRequest) Limit(limit int32) FbsAPIGetGoodsFeedbackCommentsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
-	return r.FbsService.GetGoodsFeedbackCommentsExecute(r)
+func (r FbsAPIGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
+	return r.ApiService.GetGoodsFeedbackCommentsExecute(r)
 }
 
 /*
@@ -12151,8 +12149,8 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 Возвращает комментарии к отзыву, кроме:
 
-  - тех, которые удалили пользователи или Маркет;
-  - комментариев к удаленным отзывам.
+  * тех, которые удалили пользователи или Маркет;
+  * комментариев к удаленным отзывам.
 
 {% note tip "Вы также можете настроить API-уведомления" %}
 
@@ -12169,22 +12167,22 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetGoodsFeedbackCommentsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetGoodsFeedbackCommentsRequest
 */
-func (a *FbsAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) FbsGetGoodsFeedbackCommentsRequest {
-	return FbsGetGoodsFeedbackCommentsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) FbsAPIGetGoodsFeedbackCommentsRequest {
+	return FbsAPIGetGoodsFeedbackCommentsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetGoodsFeedbackCommentsResponse
-func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r FbsGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
+//  @return GetGoodsFeedbackCommentsResponse
+func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r FbsAPIGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -12211,10 +12209,10 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r FbsGetGoodsFeedbackCom
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -12238,14 +12236,14 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r FbsGetGoodsFeedbackCom
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -12351,9 +12349,9 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r FbsGetGoodsFeedbackCom
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetGoodsFeedbacksRequest struct {
+type FbsAPIGetGoodsFeedbacksRequest struct {
 	ctx                     context.Context
-	FbsService              *FbsAPIService
+	ApiService              *FbsAPIService
 	businessId              int64
 	pageToken               *string
 	limit                   *int32
@@ -12361,24 +12359,24 @@ type FbsGetGoodsFeedbacksRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetGoodsFeedbacksRequest) PageToken(pageToken string) FbsGetGoodsFeedbacksRequest {
+func (r FbsAPIGetGoodsFeedbacksRequest) PageToken(pageToken string) FbsAPIGetGoodsFeedbacksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetGoodsFeedbacksRequest) Limit(limit int32) FbsGetGoodsFeedbacksRequest {
+func (r FbsAPIGetGoodsFeedbacksRequest) Limit(limit int32) FbsAPIGetGoodsFeedbacksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetGoodsFeedbacksRequest) GetGoodsFeedbackRequest(getGoodsFeedbackRequest GetGoodsFeedbackRequest) FbsGetGoodsFeedbacksRequest {
+func (r FbsAPIGetGoodsFeedbacksRequest) GetGoodsFeedbackRequest(getGoodsFeedbackRequest GetGoodsFeedbackRequest) FbsAPIGetGoodsFeedbacksRequest {
 	r.getGoodsFeedbackRequest = &getGoodsFeedbackRequest
 	return r
 }
 
-func (r FbsGetGoodsFeedbacksRequest) Execute() (*GetGoodsFeedbackResponse, *http.Response, error) {
-	return r.FbsService.GetGoodsFeedbacksExecute(r)
+func (r FbsAPIGetGoodsFeedbacksRequest) Execute() (*GetGoodsFeedbackResponse, *http.Response, error) {
+	return r.ApiService.GetGoodsFeedbacksExecute(r)
 }
 
 /*
@@ -12403,22 +12401,22 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetGoodsFeedbacksRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetGoodsFeedbacksRequest
 */
-func (a *FbsAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) FbsGetGoodsFeedbacksRequest {
-	return FbsGetGoodsFeedbacksRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) FbsAPIGetGoodsFeedbacksRequest {
+	return FbsAPIGetGoodsFeedbacksRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetGoodsFeedbackResponse
-func (a *FbsAPIService) GetGoodsFeedbacksExecute(r FbsGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
+//  @return GetGoodsFeedbackResponse
+func (a *FbsAPIService) GetGoodsFeedbacksExecute(r FbsAPIGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -12442,10 +12440,10 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r FbsGetGoodsFeedbacksRequest) 
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -12469,14 +12467,14 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r FbsGetGoodsFeedbacksRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -12582,20 +12580,20 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r FbsGetGoodsFeedbacksRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetGoodsStatsRequest struct {
+type FbsAPIGetGoodsStatsRequest struct {
 	ctx                  context.Context
-	FbsService           *FbsAPIService
+	ApiService           *FbsAPIService
 	campaignId           int64
 	getGoodsStatsRequest *GetGoodsStatsRequest
 }
 
-func (r FbsGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) FbsGetGoodsStatsRequest {
+func (r FbsAPIGetGoodsStatsRequest) GetGoodsStatsRequest(getGoodsStatsRequest GetGoodsStatsRequest) FbsAPIGetGoodsStatsRequest {
 	r.getGoodsStatsRequest = &getGoodsStatsRequest
 	return r
 }
 
-func (r FbsGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
-	return r.FbsService.GetGoodsStatsExecute(r)
+func (r FbsAPIGetGoodsStatsRequest) Execute() (*GetGoodsStatsResponse, *http.Response, error) {
+	return r.ApiService.GetGoodsStatsExecute(r)
 }
 
 /*
@@ -12608,22 +12606,22 @@ GetGoodsStats Отчет по товарам
 |**⚙️ Лимит:** 5 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetGoodsStatsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetGoodsStatsRequest
 */
-func (a *FbsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) FbsGetGoodsStatsRequest {
-	return FbsGetGoodsStatsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) FbsAPIGetGoodsStatsRequest {
+	return FbsAPIGetGoodsStatsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetGoodsStatsResponse
-func (a *FbsAPIService) GetGoodsStatsExecute(r FbsGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
+//  @return GetGoodsStatsResponse
+func (a *FbsAPIService) GetGoodsStatsExecute(r FbsAPIGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -12671,14 +12669,14 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r FbsGetGoodsStatsRequest) (*GetGoo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -12784,9 +12782,9 @@ func (a *FbsAPIService) GetGoodsStatsExecute(r FbsGetGoodsStatsRequest) (*GetGoo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetHiddenOffersRequest struct {
+type FbsAPIGetHiddenOffersRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	offerId    *[]string
 	pageToken  *string
@@ -12794,25 +12792,25 @@ type FbsGetHiddenOffersRequest struct {
 }
 
 // Идентификатор скрытого предложения.
-func (r FbsGetHiddenOffersRequest) OfferId(offerId []string) FbsGetHiddenOffersRequest {
+func (r FbsAPIGetHiddenOffersRequest) OfferId(offerId []string) FbsAPIGetHiddenOffersRequest {
 	r.offerId = &offerId
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetHiddenOffersRequest) PageToken(pageToken string) FbsGetHiddenOffersRequest {
+func (r FbsAPIGetHiddenOffersRequest) PageToken(pageToken string) FbsAPIGetHiddenOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetHiddenOffersRequest) Limit(limit int32) FbsGetHiddenOffersRequest {
+func (r FbsAPIGetHiddenOffersRequest) Limit(limit int32) FbsAPIGetHiddenOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetHiddenOffersRequest) Execute() (*GetHiddenOffersResponse, *http.Response, error) {
-	return r.FbsService.GetHiddenOffersExecute(r)
+func (r FbsAPIGetHiddenOffersRequest) Execute() (*GetHiddenOffersResponse, *http.Response, error) {
+	return r.ApiService.GetHiddenOffersExecute(r)
 }
 
 /*
@@ -12827,22 +12825,22 @@ GetHiddenOffers Информация о скрытых вами товарах
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetHiddenOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetHiddenOffersRequest
 */
-func (a *FbsAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) FbsGetHiddenOffersRequest {
-	return FbsGetHiddenOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) FbsAPIGetHiddenOffersRequest {
+	return FbsAPIGetHiddenOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetHiddenOffersResponse
-func (a *FbsAPIService) GetHiddenOffersExecute(r FbsGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
+//  @return GetHiddenOffersResponse
+func (a *FbsAPIService) GetHiddenOffersExecute(r FbsAPIGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -12866,13 +12864,21 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r FbsGetHiddenOffersRequest) (*Ge
 	}
 
 	if r.offerId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", r.offerId, "", "csv")
+		t := *r.offerId
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", t, "form", "multi")
+		}
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12894,14 +12900,14 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r FbsGetHiddenOffersRequest) (*Ge
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -12996,9 +13002,9 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r FbsGetHiddenOffersRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOfferCardsContentStatusRequest struct {
+type FbsAPIGetOfferCardsContentStatusRequest struct {
 	ctx                               context.Context
-	FbsService                        *FbsAPIService
+	ApiService                        *FbsAPIService
 	businessId                        int64
 	pageToken                         *string
 	limit                             *int32
@@ -13006,24 +13012,24 @@ type FbsGetOfferCardsContentStatusRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetOfferCardsContentStatusRequest) PageToken(pageToken string) FbsGetOfferCardsContentStatusRequest {
+func (r FbsAPIGetOfferCardsContentStatusRequest) PageToken(pageToken string) FbsAPIGetOfferCardsContentStatusRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetOfferCardsContentStatusRequest) Limit(limit int32) FbsGetOfferCardsContentStatusRequest {
+func (r FbsAPIGetOfferCardsContentStatusRequest) Limit(limit int32) FbsAPIGetOfferCardsContentStatusRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) FbsGetOfferCardsContentStatusRequest {
+func (r FbsAPIGetOfferCardsContentStatusRequest) GetOfferCardsContentStatusRequest(getOfferCardsContentStatusRequest GetOfferCardsContentStatusRequest) FbsAPIGetOfferCardsContentStatusRequest {
 	r.getOfferCardsContentStatusRequest = &getOfferCardsContentStatusRequest
 	return r
 }
 
-func (r FbsGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
-	return r.FbsService.GetOfferCardsContentStatusExecute(r)
+func (r FbsAPIGetOfferCardsContentStatusRequest) Execute() (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+	return r.ApiService.GetOfferCardsContentStatusExecute(r)
 }
 
 /*
@@ -13042,22 +13048,22 @@ GetOfferCardsContentStatus Получение информации о запол
 |**⚙️ Лимит:** 600 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetOfferCardsContentStatusRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetOfferCardsContentStatusRequest
 */
-func (a *FbsAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) FbsGetOfferCardsContentStatusRequest {
-	return FbsGetOfferCardsContentStatusRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOfferCardsContentStatus(ctx context.Context, businessId int64) FbsAPIGetOfferCardsContentStatusRequest {
+	return FbsAPIGetOfferCardsContentStatusRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOfferCardsContentStatusResponse
-func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r FbsGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
+//  @return GetOfferCardsContentStatusResponse
+func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r FbsAPIGetOfferCardsContentStatusRequest) (*GetOfferCardsContentStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -13081,10 +13087,10 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r FbsGetOfferCardsCont
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -13108,14 +13114,14 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r FbsGetOfferCardsCont
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -13221,9 +13227,9 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r FbsGetOfferCardsCont
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOfferMappingEntriesRequest struct {
+type FbsAPIGetOfferMappingEntriesRequest struct {
 	ctx          context.Context
-	FbsService   *FbsAPIService
+	ApiService   *FbsAPIService
 	campaignId   int64
 	offerId      *[]string
 	shopSku      *[]string
@@ -13237,61 +13243,61 @@ type FbsGetOfferMappingEntriesRequest struct {
 }
 
 // Идентификатор товара в каталоге.
-func (r FbsGetOfferMappingEntriesRequest) OfferId(offerId []string) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) OfferId(offerId []string) FbsAPIGetOfferMappingEntriesRequest {
 	r.offerId = &offerId
 	return r
 }
 
 // Ваш SKU товара.  Параметр может быть указан несколько раз, например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...shop_sku&#x3D;123&amp;shop_sku&#x3D;129&amp;shop_sku&#x3D;141... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
-func (r FbsGetOfferMappingEntriesRequest) ShopSku(shopSku []string) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) ShopSku(shopSku []string) FbsAPIGetOfferMappingEntriesRequest {
 	r.shopSku = &shopSku
 	return r
 }
 
 // Тип маппинга.
-func (r FbsGetOfferMappingEntriesRequest) MappingKind(mappingKind OfferMappingKindType) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) MappingKind(mappingKind OfferMappingKindType) FbsAPIGetOfferMappingEntriesRequest {
 	r.mappingKind = &mappingKind
 	return r
 }
 
 // Фильтрация по статусу публикации товара:  * &#x60;READY&#x60; — товар прошел модерацию. * &#x60;IN_WORK&#x60; — товар проходит модерацию. * &#x60;NEED_CONTENT&#x60; — для товара без SKU на Маркете marketSku нужно найти карточку самостоятельно или создать ее. * &#x60;NEED_INFO&#x60; — товар не прошел модерацию из-за ошибок или недостающих сведений в описании товара. * &#x60;REJECTED&#x60; — товар не прошел модерацию, так как Маркет не планирует размещать подобные товары. * &#x60;SUSPENDED&#x60; — товар не прошел модерацию, так как Маркет пока не размещает подобные товары. * &#x60;OTHER&#x60; — товар не прошел модерацию по другой причине.  Можно указать несколько статусов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...status&#x3D;READY,IN_WORK... ...status&#x3D;READY&amp;status&#x3D;IN_WORK... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
-func (r FbsGetOfferMappingEntriesRequest) Status(status []OfferProcessingStatusType) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) Status(status []OfferProcessingStatusType) FbsAPIGetOfferMappingEntriesRequest {
 	r.status = &status
 	return r
 }
 
 // Фильтрация по планам поставок товара:  * &#x60;ACTIVE&#x60; — поставки будут. * &#x60;INACTIVE&#x60; — поставок не будет: товар есть на складе, но вы больше не планируете его поставлять. * &#x60;DELISTED&#x60; — архив: товар закончился на складе, и его поставок больше не будет.  Можно указать несколько значений в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...availability&#x3D;INACTIVE,DELISTED... ...availability&#x3D;INACTIVE&amp;availability&#x3D;DELISTED... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
-func (r FbsGetOfferMappingEntriesRequest) Availability(availability []OfferAvailabilityStatusType) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) Availability(availability []OfferAvailabilityStatusType) FbsAPIGetOfferMappingEntriesRequest {
 	r.availability = &availability
 	return r
 }
 
 // Фильтрация по идентификатору категории на Маркете.  Чтобы узнать идентификатор категории, к которой относится товар, воспользуйтесь запросом [POST categories/tree](../../reference/categories/getCategoriesTree.md).  Можно указать несколько идентификаторов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...category_id&#x3D;14727164,14382343... ...category_id&#x3D;14727164&amp;category_id&#x3D;14382343... &#x60;&#x60;&#x60;  В запросе можно указать либо параметр &#x60;shopSku&#x60;, либо любые параметры для фильтрации товаров. Совместное использование параметра &#x60;shopSku&#x60; и параметров для фильтрации приведет к ошибке.
-func (r FbsGetOfferMappingEntriesRequest) CategoryId(categoryId []int32) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) CategoryId(categoryId []int32) FbsAPIGetOfferMappingEntriesRequest {
 	r.categoryId = &categoryId
 	return r
 }
 
 // Фильтрация по бренду товара.  Можно указать несколько брендов в одном параметре, через запятую, или в нескольких одинаковых параметрах. Например:  &#x60;&#x60;&#x60;text translate&#x3D;no ...vendor&#x3D;Aqua%20Minerale,Borjomi... ...vendor&#x3D;Aqua%20Minerale&amp;vendor&#x3D;Borjomi... &#x60;&#x60;&#x60;  Чтобы товар попал в результаты фильтрации, его бренд должен точно совпадать с одним из указанных в запросе. Например, если указан бренд Schwarzkopf, то в результатах не будет товаров Schwarzkopf Professional.  Если в названии бренда есть символы, которые не входят в таблицу ASCII (в том числе кириллические символы), используйте для них URL-кодирование. Например, пробел — %20, апостроф «&#39;» — %27 и т. д. Подробнее см. в разделе [Кодирование URL русскоязычной Википедии](https://ru.wikipedia.org/wiki/URL#Кодирование_URL).  В запросе можно указать либо параметр shopSku, либо любые параметры для фильтрации товаров. Совместное использование параметра shopSku и параметров для фильтрации приведет к ошибке.
-func (r FbsGetOfferMappingEntriesRequest) Vendor(vendor []string) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) Vendor(vendor []string) FbsAPIGetOfferMappingEntriesRequest {
 	r.vendor = &vendor
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetOfferMappingEntriesRequest) PageToken(pageToken string) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) PageToken(pageToken string) FbsAPIGetOfferMappingEntriesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetOfferMappingEntriesRequest) Limit(limit int32) FbsGetOfferMappingEntriesRequest {
+func (r FbsAPIGetOfferMappingEntriesRequest) Limit(limit int32) FbsAPIGetOfferMappingEntriesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetOfferMappingEntriesRequest) Execute() (*GetOfferMappingEntriesResponse, *http.Response, error) {
-	return r.FbsService.GetOfferMappingEntriesExecute(r)
+func (r FbsAPIGetOfferMappingEntriesRequest) Execute() (*GetOfferMappingEntriesResponse, *http.Response, error) {
+	return r.ApiService.GetOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -13323,26 +13329,25 @@ GetOfferMappingEntries Список товаров в каталоге
 
 [//]: <> (rule: суточный лимит товаров — количество товаров в каталоге магазина * 25)
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetOfferMappingEntriesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) FbsGetOfferMappingEntriesRequest {
-	return FbsGetOfferMappingEntriesRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOfferMappingEntries(ctx context.Context, campaignId int64) FbsAPIGetOfferMappingEntriesRequest {
+	return FbsAPIGetOfferMappingEntriesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOfferMappingEntriesResponse
-//
+//  @return GetOfferMappingEntriesResponse
 // Deprecated
-func (a *FbsAPIService) GetOfferMappingEntriesExecute(r FbsGetOfferMappingEntriesRequest) (*GetOfferMappingEntriesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetOfferMappingEntriesExecute(r FbsAPIGetOfferMappingEntriesRequest) (*GetOfferMappingEntriesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -13366,31 +13371,79 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r FbsGetOfferMappingEntrie
 	}
 
 	if r.offerId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", r.offerId, "", "csv")
+		t := *r.offerId
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", t, "form", "multi")
+		}
 	}
 	if r.shopSku != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "shop_sku", r.shopSku, "", "csv")
+		t := *r.shopSku
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "shop_sku", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "shop_sku", t, "form", "multi")
+		}
 	}
 	if r.mappingKind != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "mapping_kind", r.mappingKind, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "mapping_kind", r.mappingKind, "form", "")
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "", "csv")
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
 	}
 	if r.availability != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "availability", r.availability, "", "csv")
+		t := *r.availability
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "availability", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "availability", t, "form", "multi")
+		}
 	}
 	if r.categoryId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "category_id", r.categoryId, "", "csv")
+		t := *r.categoryId
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "category_id", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "category_id", t, "form", "multi")
+		}
 	}
 	if r.vendor != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "vendor", r.vendor, "", "csv")
+		t := *r.vendor
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "vendor", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "vendor", t, "form", "multi")
+		}
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -13412,14 +13465,14 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r FbsGetOfferMappingEntrie
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -13525,9 +13578,9 @@ func (a *FbsAPIService) GetOfferMappingEntriesExecute(r FbsGetOfferMappingEntrie
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOfferMappingsRequest struct {
+type FbsAPIGetOfferMappingsRequest struct {
 	ctx                     context.Context
-	FbsService              *FbsAPIService
+	ApiService              *FbsAPIService
 	businessId              int64
 	pageToken               *string
 	limit                   *int32
@@ -13536,30 +13589,30 @@ type FbsGetOfferMappingsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetOfferMappingsRequest) PageToken(pageToken string) FbsGetOfferMappingsRequest {
+func (r FbsAPIGetOfferMappingsRequest) PageToken(pageToken string) FbsAPIGetOfferMappingsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetOfferMappingsRequest) Limit(limit int32) FbsGetOfferMappingsRequest {
+func (r FbsAPIGetOfferMappingsRequest) Limit(limit int32) FbsAPIGetOfferMappingsRequest {
 	r.limit = &limit
 	return r
 }
 
 // Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
-func (r FbsGetOfferMappingsRequest) Language(language CatalogLanguageType) FbsGetOfferMappingsRequest {
+func (r FbsAPIGetOfferMappingsRequest) Language(language CatalogLanguageType) FbsAPIGetOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r FbsGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) FbsGetOfferMappingsRequest {
+func (r FbsAPIGetOfferMappingsRequest) GetOfferMappingsRequest(getOfferMappingsRequest GetOfferMappingsRequest) FbsAPIGetOfferMappingsRequest {
 	r.getOfferMappingsRequest = &getOfferMappingsRequest
 	return r
 }
 
-func (r FbsGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
-	return r.FbsService.GetOfferMappingsExecute(r)
+func (r FbsAPIGetOfferMappingsRequest) Execute() (*GetOfferMappingsResponse, *http.Response, error) {
+	return r.ApiService.GetOfferMappingsExecute(r)
 }
 
 /*
@@ -13577,22 +13630,22 @@ GetOfferMappings Информация о товарах в каталоге
 |**⚙️ Лимит:** 600 запросов в минуту, не более 200 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetOfferMappingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetOfferMappingsRequest
 */
-func (a *FbsAPIService) GetOfferMappings(ctx context.Context, businessId int64) FbsGetOfferMappingsRequest {
-	return FbsGetOfferMappingsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOfferMappings(ctx context.Context, businessId int64) FbsAPIGetOfferMappingsRequest {
+	return FbsAPIGetOfferMappingsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOfferMappingsResponse
-func (a *FbsAPIService) GetOfferMappingsExecute(r FbsGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
+//  @return GetOfferMappingsResponse
+func (a *FbsAPIService) GetOfferMappingsExecute(r FbsAPIGetOfferMappingsRequest) (*GetOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -13616,13 +13669,13 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r FbsGetOfferMappingsRequest) (*
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -13646,14 +13699,14 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r FbsGetOfferMappingsRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -13759,34 +13812,34 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r FbsGetOfferMappingsRequest) (*
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOfferRecommendationsRequest struct {
+type FbsAPIGetOfferRecommendationsRequest struct {
 	ctx                            context.Context
-	FbsService                     *FbsAPIService
+	ApiService                     *FbsAPIService
 	businessId                     int64
 	getOfferRecommendationsRequest *GetOfferRecommendationsRequest
 	pageToken                      *string
 	limit                          *int32
 }
 
-func (r FbsGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) FbsGetOfferRecommendationsRequest {
+func (r FbsAPIGetOfferRecommendationsRequest) GetOfferRecommendationsRequest(getOfferRecommendationsRequest GetOfferRecommendationsRequest) FbsAPIGetOfferRecommendationsRequest {
 	r.getOfferRecommendationsRequest = &getOfferRecommendationsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetOfferRecommendationsRequest) PageToken(pageToken string) FbsGetOfferRecommendationsRequest {
+func (r FbsAPIGetOfferRecommendationsRequest) PageToken(pageToken string) FbsAPIGetOfferRecommendationsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetOfferRecommendationsRequest) Limit(limit int32) FbsGetOfferRecommendationsRequest {
+func (r FbsAPIGetOfferRecommendationsRequest) Limit(limit int32) FbsAPIGetOfferRecommendationsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
-	return r.FbsService.GetOfferRecommendationsExecute(r)
+func (r FbsAPIGetOfferRecommendationsRequest) Execute() (*GetOfferRecommendationsResponse, *http.Response, error) {
+	return r.ApiService.GetOfferRecommendationsExecute(r)
 }
 
 /*
@@ -13811,22 +13864,22 @@ GetOfferRecommendations Рекомендации Маркета, касающи�
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetOfferRecommendationsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetOfferRecommendationsRequest
 */
-func (a *FbsAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) FbsGetOfferRecommendationsRequest {
-	return FbsGetOfferRecommendationsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) FbsAPIGetOfferRecommendationsRequest {
+	return FbsAPIGetOfferRecommendationsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOfferRecommendationsResponse
-func (a *FbsAPIService) GetOfferRecommendationsExecute(r FbsGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
+//  @return GetOfferRecommendationsResponse
+func (a *FbsAPIService) GetOfferRecommendationsExecute(r FbsAPIGetOfferRecommendationsRequest) (*GetOfferRecommendationsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -13853,10 +13906,10 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r FbsGetOfferRecommendati
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -13880,14 +13933,14 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r FbsGetOfferRecommendati
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -13993,15 +14046,15 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r FbsGetOfferRecommendati
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOrderRequest struct {
+type FbsAPIGetOrderRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r FbsGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
-	return r.FbsService.GetOrderExecute(r)
+func (r FbsAPIGetOrderRequest) Execute() (*GetOrderResponse, *http.Response, error) {
+	return r.ApiService.GetOrderExecute(r)
 }
 
 /*
@@ -14024,14 +14077,15 @@ GetOrder Информация об одном заказе
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsGetOrderRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIGetOrderRequest
 */
-func (a *FbsAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderRequest {
-	return FbsGetOrderRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOrder(ctx context.Context, campaignId int64, orderId int64) FbsAPIGetOrderRequest {
+	return FbsAPIGetOrderRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14039,9 +14093,8 @@ func (a *FbsAPIService) GetOrder(ctx context.Context, campaignId int64, orderId 
 }
 
 // Execute executes the request
-//
-//	@return GetOrderResponse
-func (a *FbsAPIService) GetOrderExecute(r FbsGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
+//  @return GetOrderResponse
+func (a *FbsAPIService) GetOrderExecute(r FbsAPIGetOrderRequest) (*GetOrderResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -14085,14 +14138,14 @@ func (a *FbsAPIService) GetOrderExecute(r FbsGetOrderRequest) (*GetOrderResponse
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -14198,15 +14251,15 @@ func (a *FbsAPIService) GetOrderExecute(r FbsGetOrderRequest) (*GetOrderResponse
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOrderBusinessBuyerInfoRequest struct {
+type FbsAPIGetOrderBusinessBuyerInfoRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r FbsGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
-	return r.FbsService.GetOrderBusinessBuyerInfoExecute(r)
+func (r FbsAPIGetOrderBusinessBuyerInfoRequest) Execute() (*GetBusinessBuyerInfoResponse, *http.Response, error) {
+	return r.ApiService.GetOrderBusinessBuyerInfoExecute(r)
 }
 
 /*
@@ -14227,14 +14280,15 @@ GetOrderBusinessBuyerInfo Информация о покупателе — юр�
 |**⚙️ Лимит:** 3 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsGetOrderBusinessBuyerInfoRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIGetOrderBusinessBuyerInfoRequest
 */
-func (a *FbsAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderBusinessBuyerInfoRequest {
-	return FbsGetOrderBusinessBuyerInfoRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignId int64, orderId int64) FbsAPIGetOrderBusinessBuyerInfoRequest {
+	return FbsAPIGetOrderBusinessBuyerInfoRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14242,9 +14296,8 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfo(ctx context.Context, campaignI
 }
 
 // Execute executes the request
-//
-//	@return GetBusinessBuyerInfoResponse
-func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r FbsGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
+//  @return GetBusinessBuyerInfoResponse
+func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r FbsAPIGetOrderBusinessBuyerInfoRequest) (*GetBusinessBuyerInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -14288,14 +14341,14 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r FbsGetOrderBusinessBu
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -14401,15 +14454,15 @@ func (a *FbsAPIService) GetOrderBusinessBuyerInfoExecute(r FbsGetOrderBusinessBu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOrderBusinessDocumentsInfoRequest struct {
+type FbsAPIGetOrderBusinessDocumentsInfoRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r FbsGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
-	return r.FbsService.GetOrderBusinessDocumentsInfoExecute(r)
+func (r FbsAPIGetOrderBusinessDocumentsInfoRequest) Execute() (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
+	return r.ApiService.GetOrderBusinessDocumentsInfoExecute(r)
 }
 
 /*
@@ -14424,14 +14477,15 @@ GetOrderBusinessDocumentsInfo Информация о документах
 |**⚙️ Лимит:** 3 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsGetOrderBusinessDocumentsInfoRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIGetOrderBusinessDocumentsInfoRequest
 */
-func (a *FbsAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderBusinessDocumentsInfoRequest {
-	return FbsGetOrderBusinessDocumentsInfoRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campaignId int64, orderId int64) FbsAPIGetOrderBusinessDocumentsInfoRequest {
+	return FbsAPIGetOrderBusinessDocumentsInfoRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14439,9 +14493,8 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfo(ctx context.Context, campa
 }
 
 // Execute executes the request
-//
-//	@return GetBusinessDocumentsInfoResponse
-func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r FbsGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
+//  @return GetBusinessDocumentsInfoResponse
+func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r FbsAPIGetOrderBusinessDocumentsInfoRequest) (*GetBusinessDocumentsInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -14485,14 +14538,14 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r FbsGetOrderBusine
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -14598,15 +14651,15 @@ func (a *FbsAPIService) GetOrderBusinessDocumentsInfoExecute(r FbsGetOrderBusine
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOrderIdentifiersStatusRequest struct {
+type FbsAPIGetOrderIdentifiersStatusRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r FbsGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
-	return r.FbsService.GetOrderIdentifiersStatusExecute(r)
+func (r FbsAPIGetOrderIdentifiersStatusRequest) Execute() (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
+	return r.ApiService.GetOrderIdentifiersStatusExecute(r)
 }
 
 /*
@@ -14624,14 +14677,15 @@ GetOrderIdentifiersStatus Статусы проверки УИНов
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsGetOrderIdentifiersStatusRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIGetOrderIdentifiersStatusRequest
 */
-func (a *FbsAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderIdentifiersStatusRequest {
-	return FbsGetOrderIdentifiersStatusRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignId int64, orderId int64) FbsAPIGetOrderIdentifiersStatusRequest {
+	return FbsAPIGetOrderIdentifiersStatusRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14639,9 +14693,8 @@ func (a *FbsAPIService) GetOrderIdentifiersStatus(ctx context.Context, campaignI
 }
 
 // Execute executes the request
-//
-//	@return GetOrderIdentifiersStatusResponse
-func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r FbsGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
+//  @return GetOrderIdentifiersStatusResponse
+func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r FbsAPIGetOrderIdentifiersStatusRequest) (*GetOrderIdentifiersStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -14685,14 +14738,14 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r FbsGetOrderIdentifier
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -14798,15 +14851,15 @@ func (a *FbsAPIService) GetOrderIdentifiersStatusExecute(r FbsGetOrderIdentifier
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOrderLabelsDataRequest struct {
+type FbsAPIGetOrderLabelsDataRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 }
 
-func (r FbsGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
-	return r.FbsService.GetOrderLabelsDataExecute(r)
+func (r FbsAPIGetOrderLabelsDataRequest) Execute() (*GetOrderLabelsDataResponse, *http.Response, error) {
+	return r.ApiService.GetOrderLabelsDataExecute(r)
 }
 
 /*
@@ -14819,14 +14872,15 @@ GetOrderLabelsData Данные для самостоятельного изго
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsGetOrderLabelsDataRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIGetOrderLabelsDataRequest
 */
-func (a *FbsAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) FbsGetOrderLabelsDataRequest {
-	return FbsGetOrderLabelsDataRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64, orderId int64) FbsAPIGetOrderLabelsDataRequest {
+	return FbsAPIGetOrderLabelsDataRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -14834,9 +14888,8 @@ func (a *FbsAPIService) GetOrderLabelsData(ctx context.Context, campaignId int64
 }
 
 // Execute executes the request
-//
-//	@return GetOrderLabelsDataResponse
-func (a *FbsAPIService) GetOrderLabelsDataExecute(r FbsGetOrderLabelsDataRequest) (*GetOrderLabelsDataResponse, *http.Response, error) {
+//  @return GetOrderLabelsDataResponse
+func (a *FbsAPIService) GetOrderLabelsDataExecute(r FbsAPIGetOrderLabelsDataRequest) (*GetOrderLabelsDataResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -14880,14 +14933,14 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r FbsGetOrderLabelsDataRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -14993,9 +15046,9 @@ func (a *FbsAPIService) GetOrderLabelsDataExecute(r FbsGetOrderLabelsDataRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOrdersRequest struct {
+type FbsAPIGetOrdersRequest struct {
 	ctx                               context.Context
-	FbsService                        *FbsAPIService
+	ApiService                        *FbsAPIService
 	campaignId                        int64
 	orderIds                          *[]int64
 	status                            *[]OrderStatusType
@@ -15019,121 +15072,121 @@ type FbsGetOrdersRequest struct {
 }
 
 // Фильтрация заказов по идентификаторам. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
-func (r FbsGetOrdersRequest) OrderIds(orderIds []int64) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) OrderIds(orderIds []int64) FbsAPIGetOrdersRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
 // Статус заказа:  * &#x60;CANCELLED&#x60; — заказ отменен.  * &#x60;DELIVERED&#x60; — заказ получен покупателем.  * &#x60;DELIVERY&#x60; — заказ передан в службу доставки.  * &#x60;PICKUP&#x60; — заказ доставлен в пункт самовывоза.  * &#x60;PROCESSING&#x60; — заказ находится в обработке.  * &#x60;UNPAID&#x60; — заказ оформлен, но еще не оплачен (если выбрана оплата при оформлении).  Также могут возвращаться другие значения. Обрабатывать их не требуется.
-func (r FbsGetOrdersRequest) Status(status []OrderStatusType) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) Status(status []OrderStatusType) FbsAPIGetOrdersRequest {
 	r.status = &status
 	return r
 }
 
 // Этап обработки заказа (если он имеет статус &#x60;PROCESSING&#x60;) или причина отмены заказа (если он имеет статус &#x60;CANCELLED&#x60;).  Возможные значения для заказа в статусе &#x60;PROCESSING&#x60;:  * &#x60;STARTED&#x60; — заказ подтвержден, его можно начать обрабатывать. * &#x60;READY_TO_SHIP&#x60; — заказ собран и готов к отправке. * &#x60;SHIPPED&#x60; — заказ передан службе доставки.  Возможные значения для заказа в статусе &#x60;CANCELLED&#x60;:  * &#x60;RESERVATION_EXPIRED&#x60; — покупатель не завершил оформление зарезервированного заказа в течение 10 минут.  * &#x60;USER_NOT_PAID&#x60; — покупатель не оплатил заказ (для типа оплаты &#x60;PREPAID&#x60;) в течение 30 минут.  * &#x60;USER_UNREACHABLE&#x60; — не удалось связаться с покупателем. Для отмены с этой причиной необходимо выполнить условия:    * не менее 3 звонков с 8 до 21 в часовом поясе покупателя;   * перерыв между первым и третьим звонком не менее 90 минут;   * соединение не короче 5 секунд.    Если хотя бы одно из этих условий не выполнено (кроме случая, когда номер недоступен), отменить заказ не получится. Вернется ответ с кодом ошибки 400  * &#x60;USER_CHANGED_MIND&#x60; — покупатель отменил заказ по личным причинам.  * &#x60;USER_REFUSED_DELIVERY&#x60; — покупателя не устроили условия доставки.  * &#x60;USER_REFUSED_PRODUCT&#x60; — покупателю не подошел товар.  * &#x60;SHOP_FAILED&#x60; — магазин не может выполнить заказ.  * &#x60;USER_REFUSED_QUALITY&#x60; — покупателя не устроило качество товара.  * &#x60;REPLACING_ORDER&#x60; — покупатель решил заменить товар другим по собственной инициативе.  * &#x60;PROCESSING_EXPIRED&#x60; — значение более не используется.  * &#x60;PICKUP_EXPIRED&#x60; — закончился срок хранения заказа в ПВЗ.  * &#x60;DELIVERY_SERVICE_UNDELIVERED&#x60; — служба доставки не смогла доставить заказ.  * &#x60;CANCELLED_COURIER_NOT_FOUND&#x60; — не удалось найти курьера.  * &#x60;USER_WANTS_TO_CHANGE_DELIVERY_DATE&#x60; — покупатель хочет получить заказ в другой день.  * &#x60;RESERVATION_FAILED&#x60; — Маркет не может продолжить дальнейшую обработку заказа.  Также могут возвращаться другие значения. Обрабатывать их не требуется.
-func (r FbsGetOrdersRequest) Substatus(substatus []OrderSubstatusType) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) Substatus(substatus []OrderSubstatusType) FbsAPIGetOrdersRequest {
 	r.substatus = &substatus
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате оформления.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;toDate&#x60;) должно быть не больше 30 дней.  Значение по умолчанию: 30 дней назад от текущей даты.
-func (r FbsGetOrdersRequest) FromDate(fromDate string) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) FromDate(fromDate string) FbsAPIGetOrdersRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате оформления.  Показываются заказы, созданные до 00:00 указанного дня.  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;fromDate&#x60;) и конечной датой должно быть не больше 30 дней.  Значение по умолчанию: текущая дата.  Если промежуток времени между &#x60;toDate&#x60; и &#x60;fromDate&#x60; меньше суток, то &#x60;toDate&#x60; равен &#x60;fromDate&#x60; + сутки.
-func (r FbsGetOrdersRequest) ToDate(toDate string) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) ToDate(toDate string) FbsAPIGetOrdersRequest {
 	r.toDate = &toDate
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной и конечной датой (параметр &#x60;supplierShipmentDateTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
-func (r FbsGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) SupplierShipmentDateFrom(supplierShipmentDateFrom string) FbsAPIGetOrdersRequest {
 	r.supplierShipmentDateFrom = &supplierShipmentDateFrom
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате отгрузки в службу доставки (параметр &#x60;shipmentDate&#x60;).  Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  Между начальной (параметр &#x60;supplierShipmentDateFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.  Если промежуток времени между &#x60;supplierShipmentDateTo&#x60; и &#x60;supplierShipmentDateFrom&#x60; меньше суток, то &#x60;supplierShipmentDateTo&#x60; равен &#x60;supplierShipmentDateFrom&#x60; + сутки.
-func (r FbsGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) SupplierShipmentDateTo(supplierShipmentDateTo string) FbsAPIGetOrdersRequest {
 	r.supplierShipmentDateTo = &supplierShipmentDateTo
 	return r
 }
 
 // Начальная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной и конечной датой (параметр &#x60;updatedAtTo&#x60;) должно быть не больше 30 дней.  Начальная дата включается в интервал для фильтрации.
-func (r FbsGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) UpdatedAtFrom(updatedAtFrom time.Time) FbsAPIGetOrdersRequest {
 	r.updatedAtFrom = &updatedAtFrom
 	return r
 }
 
 // Конечная дата для фильтрации заказов по дате и времени обновления (параметр &#x60;updatedAt&#x60;).  Формат даты: ISO 8601 со смещением относительно UTC. Например, &#x60;2017-11-21T00:42:42+03:00&#x60;.  Между начальной (параметр &#x60;updatedAtFrom&#x60;) и конечной датой должно быть не больше 30 дней.  Конечная дата не включается в интервал для фильтрации.
-func (r FbsGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) UpdatedAtTo(updatedAtTo time.Time) FbsAPIGetOrdersRequest {
 	r.updatedAtTo = &updatedAtTo
 	return r
 }
 
 // Способ отгрузки
-func (r FbsGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) DispatchType(dispatchType OrderDeliveryDispatchType) FbsAPIGetOrdersRequest {
 	r.dispatchType = &dispatchType
 	return r
 }
 
 // Фильтрация заказов по типам:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета.
-func (r FbsGetOrdersRequest) Fake(fake bool) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) Fake(fake bool) FbsAPIGetOrdersRequest {
 	r.fake = &fake
 	return r
 }
 
 // Нужно ли вернуть только те заказы, в составе которых есть хотя бы один товар с кодом идентификации в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go):  * &#x60;true&#x60; — да.  * &#x60;false&#x60; — нет.  Такие коды присваиваются товарам, которые подлежат маркировке и относятся к определенным категориям.
-func (r FbsGetOrdersRequest) HasCis(hasCis bool) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) HasCis(hasCis bool) FbsAPIGetOrdersRequest {
 	r.hasCis = &hasCis
 	return r
 }
 
 // **Только для модели DBS**  Фильтрация заказов по наличию запросов покупателей на отмену.  При значение &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).
-func (r FbsGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) OnlyWaitingForCancellationApprove(onlyWaitingForCancellationApprove bool) FbsAPIGetOrdersRequest {
 	r.onlyWaitingForCancellationApprove = &onlyWaitingForCancellationApprove
 	return r
 }
 
 // Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется.
-func (r FbsGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) OnlyEstimatedDelivery(onlyEstimatedDelivery bool) FbsAPIGetOrdersRequest {
 	r.onlyEstimatedDelivery = &onlyEstimatedDelivery
 	return r
 }
 
 // Фильтрация заказов по типу покупателя.
-func (r FbsGetOrdersRequest) BuyerType(buyerType OrderBuyerType) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) BuyerType(buyerType OrderBuyerType) FbsAPIGetOrdersRequest {
 	r.buyerType = &buyerType
 	return r
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r FbsGetOrdersRequest) Page(page int32) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) Page(page int32) FbsAPIGetOrdersRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r FbsGetOrdersRequest) PageSize(pageSize int32) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) PageSize(pageSize int32) FbsAPIGetOrdersRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetOrdersRequest) PageToken(pageToken string) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) PageToken(pageToken string) FbsAPIGetOrdersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetOrdersRequest) Limit(limit int32) FbsGetOrdersRequest {
+func (r FbsAPIGetOrdersRequest) Limit(limit int32) FbsAPIGetOrdersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
-	return r.FbsService.GetOrdersExecute(r)
+func (r FbsAPIGetOrdersRequest) Execute() (*GetOrdersResponse, *http.Response, error) {
+	return r.ApiService.GetOrdersExecute(r)
 }
 
 /*
@@ -15178,22 +15231,22 @@ GetOrders Информация о нескольких заказах
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetOrdersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetOrdersRequest
 */
-func (a *FbsAPIService) GetOrders(ctx context.Context, campaignId int64) FbsGetOrdersRequest {
-	return FbsGetOrdersRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOrders(ctx context.Context, campaignId int64) FbsAPIGetOrdersRequest {
+	return FbsAPIGetOrdersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOrdersResponse
-func (a *FbsAPIService) GetOrdersExecute(r FbsGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
+//  @return GetOrdersResponse
+func (a *FbsAPIService) GetOrdersExecute(r FbsAPIGetOrdersRequest) (*GetOrdersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -15217,76 +15270,100 @@ func (a *FbsAPIService) GetOrdersExecute(r FbsGetOrdersRequest) (*GetOrdersRespo
 	}
 
 	if r.orderIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
+		t := *r.orderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
+		}
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "", "csv")
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
 	}
 	if r.substatus != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", r.substatus, "", "csv")
+		t := *r.substatus
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", t, "form", "multi")
+		}
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
 	}
 	if r.supplierShipmentDateFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "form", "")
 	}
 	if r.supplierShipmentDateTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "form", "")
 	}
 	if r.updatedAtFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "form", "")
 	}
 	if r.updatedAtTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "form", "")
 	}
 	if r.dispatchType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "form", "")
 	}
 	if r.fake != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.fake = &defaultValue
 	}
 	if r.hasCis != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.hasCis = &defaultValue
 	}
 	if r.onlyWaitingForCancellationApprove != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.onlyWaitingForCancellationApprove = &defaultValue
 	}
 	if r.onlyEstimatedDelivery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.onlyEstimatedDelivery = &defaultValue
 	}
 	if r.buyerType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "form", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15308,14 +15385,14 @@ func (a *FbsAPIService) GetOrdersExecute(r FbsGetOrdersRequest) (*GetOrdersRespo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -15421,9 +15498,9 @@ func (a *FbsAPIService) GetOrdersExecute(r FbsGetOrdersRequest) (*GetOrdersRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetOrdersStatsRequest struct {
+type FbsAPIGetOrdersStatsRequest struct {
 	ctx                   context.Context
-	FbsService            *FbsAPIService
+	ApiService            *FbsAPIService
 	campaignId            int64
 	pageToken             *string
 	limit                 *int32
@@ -15431,24 +15508,24 @@ type FbsGetOrdersStatsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetOrdersStatsRequest) PageToken(pageToken string) FbsGetOrdersStatsRequest {
+func (r FbsAPIGetOrdersStatsRequest) PageToken(pageToken string) FbsAPIGetOrdersStatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetOrdersStatsRequest) Limit(limit int32) FbsGetOrdersStatsRequest {
+func (r FbsAPIGetOrdersStatsRequest) Limit(limit int32) FbsAPIGetOrdersStatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) FbsGetOrdersStatsRequest {
+func (r FbsAPIGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) FbsAPIGetOrdersStatsRequest {
 	r.getOrdersStatsRequest = &getOrdersStatsRequest
 	return r
 }
 
-func (r FbsGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
-	return r.FbsService.GetOrdersStatsExecute(r)
+func (r FbsAPIGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
+	return r.ApiService.GetOrdersStatsExecute(r)
 }
 
 /*
@@ -15471,22 +15548,22 @@ GetOrdersStats Детальная информация по заказам
 |**⚙️ Лимит:** 1 000 000 заказов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetOrdersStatsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetOrdersStatsRequest
 */
-func (a *FbsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) FbsGetOrdersStatsRequest {
-	return FbsGetOrdersStatsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) FbsAPIGetOrdersStatsRequest {
+	return FbsAPIGetOrdersStatsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetOrdersStatsResponse
-func (a *FbsAPIService) GetOrdersStatsExecute(r FbsGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
+//  @return GetOrdersStatsResponse
+func (a *FbsAPIService) GetOrdersStatsExecute(r FbsAPIGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -15510,10 +15587,10 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r FbsGetOrdersStatsRequest) (*GetO
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -15537,14 +15614,14 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r FbsGetOrdersStatsRequest) (*GetO
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -15650,9 +15727,9 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r FbsGetOrdersStatsRequest) (*GetO
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetPagedWarehousesRequest struct {
+type FbsAPIGetPagedWarehousesRequest struct {
 	ctx                       context.Context
-	FbsService                *FbsAPIService
+	ApiService                *FbsAPIService
 	businessId                int64
 	pageToken                 *string
 	limit                     *int32
@@ -15660,24 +15737,24 @@ type FbsGetPagedWarehousesRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetPagedWarehousesRequest) PageToken(pageToken string) FbsGetPagedWarehousesRequest {
+func (r FbsAPIGetPagedWarehousesRequest) PageToken(pageToken string) FbsAPIGetPagedWarehousesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetPagedWarehousesRequest) Limit(limit int32) FbsGetPagedWarehousesRequest {
+func (r FbsAPIGetPagedWarehousesRequest) Limit(limit int32) FbsAPIGetPagedWarehousesRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) FbsGetPagedWarehousesRequest {
+func (r FbsAPIGetPagedWarehousesRequest) GetPagedWarehousesRequest(getPagedWarehousesRequest GetPagedWarehousesRequest) FbsAPIGetPagedWarehousesRequest {
 	r.getPagedWarehousesRequest = &getPagedWarehousesRequest
 	return r
 }
 
-func (r FbsGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
-	return r.FbsService.GetPagedWarehousesExecute(r)
+func (r FbsAPIGetPagedWarehousesRequest) Execute() (*GetPagedWarehousesResponse, *http.Response, error) {
+	return r.ApiService.GetPagedWarehousesExecute(r)
 }
 
 /*
@@ -15696,22 +15773,22 @@ GetPagedWarehouses Список складов
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetPagedWarehousesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetPagedWarehousesRequest
 */
-func (a *FbsAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) FbsGetPagedWarehousesRequest {
-	return FbsGetPagedWarehousesRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetPagedWarehouses(ctx context.Context, businessId int64) FbsAPIGetPagedWarehousesRequest {
+	return FbsAPIGetPagedWarehousesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetPagedWarehousesResponse
-func (a *FbsAPIService) GetPagedWarehousesExecute(r FbsGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
+//  @return GetPagedWarehousesResponse
+func (a *FbsAPIService) GetPagedWarehousesExecute(r FbsAPIGetPagedWarehousesRequest) (*GetPagedWarehousesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -15735,10 +15812,10 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r FbsGetPagedWarehousesRequest
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -15762,14 +15839,14 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r FbsGetPagedWarehousesRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -15864,9 +15941,9 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r FbsGetPagedWarehousesRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetPricesRequest struct {
+type FbsAPIGetPricesRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	pageToken  *string
 	limit      *int32
@@ -15874,25 +15951,25 @@ type FbsGetPricesRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetPricesRequest) PageToken(pageToken string) FbsGetPricesRequest {
+func (r FbsAPIGetPricesRequest) PageToken(pageToken string) FbsAPIGetPricesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetPricesRequest) Limit(limit int32) FbsGetPricesRequest {
+func (r FbsAPIGetPricesRequest) Limit(limit int32) FbsAPIGetPricesRequest {
 	r.limit = &limit
 	return r
 }
 
 // Фильтр по нахождению в архиве.
-func (r FbsGetPricesRequest) Archived(archived bool) FbsGetPricesRequest {
+func (r FbsAPIGetPricesRequest) Archived(archived bool) FbsAPIGetPricesRequest {
 	r.archived = &archived
 	return r
 }
 
-func (r FbsGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
-	return r.FbsService.GetPricesExecute(r)
+func (r FbsAPIGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
+	return r.ApiService.GetPricesExecute(r)
 }
 
 /*
@@ -15919,26 +15996,25 @@ GetPrices Список цен
 |**⚙️ Лимит:** ```(количество товаров партнера на витрине) * 25``` товаров в сутки|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetPricesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetPrices(ctx context.Context, campaignId int64) FbsGetPricesRequest {
-	return FbsGetPricesRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetPrices(ctx context.Context, campaignId int64) FbsAPIGetPricesRequest {
+	return FbsAPIGetPricesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetPricesResponse
-//
+//  @return GetPricesResponse
 // Deprecated
-func (a *FbsAPIService) GetPricesExecute(r FbsGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetPricesExecute(r FbsAPIGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -15962,13 +16038,13 @@ func (a *FbsAPIService) GetPricesExecute(r FbsGetPricesRequest) (*GetPricesRespo
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.archived != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.archived = &defaultValue
@@ -15993,14 +16069,14 @@ func (a *FbsAPIService) GetPricesExecute(r FbsGetPricesRequest) (*GetPricesRespo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -16106,9 +16182,9 @@ func (a *FbsAPIService) GetPricesExecute(r FbsGetPricesRequest) (*GetPricesRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetPricesByOfferIdsRequest struct {
+type FbsAPIGetPricesByOfferIdsRequest struct {
 	ctx                        context.Context
-	FbsService                 *FbsAPIService
+	ApiService                 *FbsAPIService
 	campaignId                 int64
 	pageToken                  *string
 	limit                      *int32
@@ -16116,24 +16192,24 @@ type FbsGetPricesByOfferIdsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetPricesByOfferIdsRequest) PageToken(pageToken string) FbsGetPricesByOfferIdsRequest {
+func (r FbsAPIGetPricesByOfferIdsRequest) PageToken(pageToken string) FbsAPIGetPricesByOfferIdsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetPricesByOfferIdsRequest) Limit(limit int32) FbsGetPricesByOfferIdsRequest {
+func (r FbsAPIGetPricesByOfferIdsRequest) Limit(limit int32) FbsAPIGetPricesByOfferIdsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) FbsGetPricesByOfferIdsRequest {
+func (r FbsAPIGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) FbsAPIGetPricesByOfferIdsRequest {
 	r.getPricesByOfferIdsRequest = &getPricesByOfferIdsRequest
 	return r
 }
 
-func (r FbsGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
-	return r.FbsService.GetPricesByOfferIdsExecute(r)
+func (r FbsAPIGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
+	return r.ApiService.GetPricesByOfferIdsExecute(r)
 }
 
 /*
@@ -16156,22 +16232,22 @@ GetPricesByOfferIds Просмотр цен на указанные товары
 
 [//]: <> (rule: суточный лимит товаров — количество товаров на витрине * 25)
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetPricesByOfferIdsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetPricesByOfferIdsRequest
 */
-func (a *FbsAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) FbsGetPricesByOfferIdsRequest {
-	return FbsGetPricesByOfferIdsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) FbsAPIGetPricesByOfferIdsRequest {
+	return FbsAPIGetPricesByOfferIdsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetPricesByOfferIdsResponse
-func (a *FbsAPIService) GetPricesByOfferIdsExecute(r FbsGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
+//  @return GetPricesByOfferIdsResponse
+func (a *FbsAPIService) GetPricesByOfferIdsExecute(r FbsAPIGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -16195,10 +16271,10 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r FbsGetPricesByOfferIdsReque
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -16222,14 +16298,14 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r FbsGetPricesByOfferIdsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -16335,34 +16411,34 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r FbsGetPricesByOfferIdsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetPromoOffersRequest struct {
+type FbsAPIGetPromoOffersRequest struct {
 	ctx                   context.Context
-	FbsService            *FbsAPIService
+	ApiService            *FbsAPIService
 	businessId            int64
 	getPromoOffersRequest *GetPromoOffersRequest
 	pageToken             *string
 	limit                 *int32
 }
 
-func (r FbsGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) FbsGetPromoOffersRequest {
+func (r FbsAPIGetPromoOffersRequest) GetPromoOffersRequest(getPromoOffersRequest GetPromoOffersRequest) FbsAPIGetPromoOffersRequest {
 	r.getPromoOffersRequest = &getPromoOffersRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetPromoOffersRequest) PageToken(pageToken string) FbsGetPromoOffersRequest {
+func (r FbsAPIGetPromoOffersRequest) PageToken(pageToken string) FbsAPIGetPromoOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetPromoOffersRequest) Limit(limit int32) FbsGetPromoOffersRequest {
+func (r FbsAPIGetPromoOffersRequest) Limit(limit int32) FbsAPIGetPromoOffersRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
-	return r.FbsService.GetPromoOffersExecute(r)
+func (r FbsAPIGetPromoOffersRequest) Execute() (*GetPromoOffersResponse, *http.Response, error) {
+	return r.ApiService.GetPromoOffersExecute(r)
 }
 
 /*
@@ -16383,22 +16459,22 @@ GetPromoOffers Получение списка товаров, которые у
 |**⚙️ Лимит:** 10 000 запросов в час, не более 500 товаров в запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetPromoOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetPromoOffersRequest
 */
-func (a *FbsAPIService) GetPromoOffers(ctx context.Context, businessId int64) FbsGetPromoOffersRequest {
-	return FbsGetPromoOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetPromoOffers(ctx context.Context, businessId int64) FbsAPIGetPromoOffersRequest {
+	return FbsAPIGetPromoOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetPromoOffersResponse
-func (a *FbsAPIService) GetPromoOffersExecute(r FbsGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
+//  @return GetPromoOffersResponse
+func (a *FbsAPIService) GetPromoOffersExecute(r FbsAPIGetPromoOffersRequest) (*GetPromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -16425,10 +16501,10 @@ func (a *FbsAPIService) GetPromoOffersExecute(r FbsGetPromoOffersRequest) (*GetP
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -16452,14 +16528,14 @@ func (a *FbsAPIService) GetPromoOffersExecute(r FbsGetPromoOffersRequest) (*GetP
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -16565,20 +16641,20 @@ func (a *FbsAPIService) GetPromoOffersExecute(r FbsGetPromoOffersRequest) (*GetP
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetPromosRequest struct {
+type FbsAPIGetPromosRequest struct {
 	ctx              context.Context
-	FbsService       *FbsAPIService
+	ApiService       *FbsAPIService
 	businessId       int64
 	getPromosRequest *GetPromosRequest
 }
 
-func (r FbsGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) FbsGetPromosRequest {
+func (r FbsAPIGetPromosRequest) GetPromosRequest(getPromosRequest GetPromosRequest) FbsAPIGetPromosRequest {
 	r.getPromosRequest = &getPromosRequest
 	return r
 }
 
-func (r FbsGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
-	return r.FbsService.GetPromosExecute(r)
+func (r FbsAPIGetPromosRequest) Execute() (*GetPromosResponse, *http.Response, error) {
+	return r.ApiService.GetPromosExecute(r)
 }
 
 /*
@@ -16601,22 +16677,22 @@ GetPromos Получение списка акций
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetPromosRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetPromosRequest
 */
-func (a *FbsAPIService) GetPromos(ctx context.Context, businessId int64) FbsGetPromosRequest {
-	return FbsGetPromosRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetPromos(ctx context.Context, businessId int64) FbsAPIGetPromosRequest {
+	return FbsAPIGetPromosRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetPromosResponse
-func (a *FbsAPIService) GetPromosExecute(r FbsGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
+//  @return GetPromosResponse
+func (a *FbsAPIService) GetPromosExecute(r FbsAPIGetPromosRequest) (*GetPromosResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -16661,14 +16737,14 @@ func (a *FbsAPIService) GetPromosExecute(r FbsGetPromosRequest) (*GetPromosRespo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -16774,14 +16850,14 @@ func (a *FbsAPIService) GetPromosExecute(r FbsGetPromosRequest) (*GetPromosRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetQualityRatingDetailsRequest struct {
+type FbsAPIGetQualityRatingDetailsRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 }
 
-func (r FbsGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
-	return r.FbsService.GetQualityRatingDetailsExecute(r)
+func (r FbsAPIGetQualityRatingDetailsRequest) Execute() (*GetQualityRatingDetailsResponse, *http.Response, error) {
+	return r.ApiService.GetQualityRatingDetailsExecute(r)
 }
 
 /*
@@ -16794,22 +16870,22 @@ GetQualityRatingDetails Заказы, которые повлияли на ин�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetQualityRatingDetailsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetQualityRatingDetailsRequest
 */
-func (a *FbsAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) FbsGetQualityRatingDetailsRequest {
-	return FbsGetQualityRatingDetailsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetQualityRatingDetails(ctx context.Context, campaignId int64) FbsAPIGetQualityRatingDetailsRequest {
+	return FbsAPIGetQualityRatingDetailsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetQualityRatingDetailsResponse
-func (a *FbsAPIService) GetQualityRatingDetailsExecute(r FbsGetQualityRatingDetailsRequest) (*GetQualityRatingDetailsResponse, *http.Response, error) {
+//  @return GetQualityRatingDetailsResponse
+func (a *FbsAPIService) GetQualityRatingDetailsExecute(r FbsAPIGetQualityRatingDetailsRequest) (*GetQualityRatingDetailsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -16852,14 +16928,14 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r FbsGetQualityRatingDeta
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -16965,20 +17041,20 @@ func (a *FbsAPIService) GetQualityRatingDetailsExecute(r FbsGetQualityRatingDeta
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetQualityRatingsRequest struct {
+type FbsAPIGetQualityRatingsRequest struct {
 	ctx                     context.Context
-	FbsService              *FbsAPIService
+	ApiService              *FbsAPIService
 	businessId              int64
 	getQualityRatingRequest *GetQualityRatingRequest
 }
 
-func (r FbsGetQualityRatingsRequest) GetQualityRatingRequest(getQualityRatingRequest GetQualityRatingRequest) FbsGetQualityRatingsRequest {
+func (r FbsAPIGetQualityRatingsRequest) GetQualityRatingRequest(getQualityRatingRequest GetQualityRatingRequest) FbsAPIGetQualityRatingsRequest {
 	r.getQualityRatingRequest = &getQualityRatingRequest
 	return r
 }
 
-func (r FbsGetQualityRatingsRequest) Execute() (*GetQualityRatingResponse, *http.Response, error) {
-	return r.FbsService.GetQualityRatingsExecute(r)
+func (r FbsAPIGetQualityRatingsRequest) Execute() (*GetQualityRatingResponse, *http.Response, error) {
+	return r.ApiService.GetQualityRatingsExecute(r)
 }
 
 /*
@@ -16993,22 +17069,22 @@ GetQualityRatings Индекс качества магазинов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetQualityRatingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetQualityRatingsRequest
 */
-func (a *FbsAPIService) GetQualityRatings(ctx context.Context, businessId int64) FbsGetQualityRatingsRequest {
-	return FbsGetQualityRatingsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetQualityRatings(ctx context.Context, businessId int64) FbsAPIGetQualityRatingsRequest {
+	return FbsAPIGetQualityRatingsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetQualityRatingResponse
-func (a *FbsAPIService) GetQualityRatingsExecute(r FbsGetQualityRatingsRequest) (*GetQualityRatingResponse, *http.Response, error) {
+//  @return GetQualityRatingResponse
+func (a *FbsAPIService) GetQualityRatingsExecute(r FbsAPIGetQualityRatingsRequest) (*GetQualityRatingResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -17056,14 +17132,14 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r FbsGetQualityRatingsRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -17169,13 +17245,13 @@ func (a *FbsAPIService) GetQualityRatingsExecute(r FbsGetQualityRatingsRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetRegionsCodesRequest struct {
+type FbsAPIGetRegionsCodesRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 }
 
-func (r FbsGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
-	return r.FbsService.GetRegionsCodesExecute(r)
+func (r FbsAPIGetRegionsCodesRequest) Execute() (*GetRegionsCodesResponse, *http.Response, error) {
+	return r.ApiService.GetRegionsCodesExecute(r)
 }
 
 /*
@@ -17190,20 +17266,20 @@ GetRegionsCodes Список допустимых кодов стран
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsGetRegionsCodesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPIGetRegionsCodesRequest
 */
-func (a *FbsAPIService) GetRegionsCodes(ctx context.Context) FbsGetRegionsCodesRequest {
-	return FbsGetRegionsCodesRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetRegionsCodes(ctx context.Context) FbsAPIGetRegionsCodesRequest {
+	return FbsAPIGetRegionsCodesRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRegionsCodesResponse
-func (a *FbsAPIService) GetRegionsCodesExecute(r FbsGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
+//  @return GetRegionsCodesResponse
+func (a *FbsAPIService) GetRegionsCodesExecute(r FbsAPIGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -17242,14 +17318,14 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r FbsGetRegionsCodesRequest) (*Ge
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -17344,14 +17420,14 @@ func (a *FbsAPIService) GetRegionsCodesExecute(r FbsGetRegionsCodesRequest) (*Ge
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetReportInfoRequest struct {
+type FbsAPIGetReportInfoRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	reportId   string
 }
 
-func (r FbsGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
-	return r.FbsService.GetReportInfoExecute(r)
+func (r FbsAPIGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
+	return r.ApiService.GetReportInfoExecute(r)
 }
 
 /*
@@ -17366,22 +17442,22 @@ GetReportInfo Получение заданного отчета
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param reportId Идентификатор отчета, который вы получили после запуска генерации.
-	@return FbsGetReportInfoRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param reportId Идентификатор отчета, который вы получили после запуска генерации.
+ @return FbsAPIGetReportInfoRequest
 */
-func (a *FbsAPIService) GetReportInfo(ctx context.Context, reportId string) FbsGetReportInfoRequest {
-	return FbsGetReportInfoRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetReportInfo(ctx context.Context, reportId string) FbsAPIGetReportInfoRequest {
+	return FbsAPIGetReportInfoRequest{
+		ApiService: a,
 		ctx:        ctx,
 		reportId:   reportId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetReportInfoResponse
-func (a *FbsAPIService) GetReportInfoExecute(r FbsGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
+//  @return GetReportInfoResponse
+func (a *FbsAPIService) GetReportInfoExecute(r FbsAPIGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -17427,14 +17503,14 @@ func (a *FbsAPIService) GetReportInfoExecute(r FbsGetReportInfoRequest) (*GetRep
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -17540,16 +17616,16 @@ func (a *FbsAPIService) GetReportInfoExecute(r FbsGetReportInfoRequest) (*GetRep
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetReturnRequest struct {
+type FbsAPIGetReturnRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 	returnId   int64
 }
 
-func (r FbsGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
-	return r.FbsService.GetReturnExecute(r)
+func (r FbsAPIGetReturnRequest) Execute() (*GetReturnResponse, *http.Response, error) {
+	return r.ApiService.GetReturnExecute(r)
 }
 
 /*
@@ -17570,15 +17646,16 @@ GetReturn Информация о невыкупе или возврате
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@param returnId Идентификатор невыкупа или возврата.
-	@return FbsGetReturnRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @param returnId Идентификатор невыкупа или возврата.
+ @return FbsAPIGetReturnRequest
 */
-func (a *FbsAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsGetReturnRequest {
-	return FbsGetReturnRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetReturn(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsAPIGetReturnRequest {
+	return FbsAPIGetReturnRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -17587,9 +17664,8 @@ func (a *FbsAPIService) GetReturn(ctx context.Context, campaignId int64, orderId
 }
 
 // Execute executes the request
-//
-//	@return GetReturnResponse
-func (a *FbsAPIService) GetReturnExecute(r FbsGetReturnRequest) (*GetReturnResponse, *http.Response, error) {
+//  @return GetReturnResponse
+func (a *FbsAPIService) GetReturnExecute(r FbsAPIGetReturnRequest) (*GetReturnResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -17634,14 +17710,14 @@ func (a *FbsAPIService) GetReturnExecute(r FbsGetReturnRequest) (*GetReturnRespo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -17747,16 +17823,16 @@ func (a *FbsAPIService) GetReturnExecute(r FbsGetReturnRequest) (*GetReturnRespo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetReturnApplicationRequest struct {
+type FbsAPIGetReturnApplicationRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 	returnId   int64
 }
 
-func (r FbsGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.GetReturnApplicationExecute(r)
+func (r FbsAPIGetReturnApplicationRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.GetReturnApplicationExecute(r)
 }
 
 /*
@@ -17769,15 +17845,16 @@ GetReturnApplication Получение заявления на возврат
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@param returnId Идентификатор невыкупа или возврата.
-	@return FbsGetReturnApplicationRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @param returnId Идентификатор невыкупа или возврата.
+ @return FbsAPIGetReturnApplicationRequest
 */
-func (a *FbsAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsGetReturnApplicationRequest {
-	return FbsGetReturnApplicationRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetReturnApplication(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsAPIGetReturnApplicationRequest {
+	return FbsAPIGetReturnApplicationRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -17786,9 +17863,8 @@ func (a *FbsAPIService) GetReturnApplication(ctx context.Context, campaignId int
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) GetReturnApplicationExecute(r FbsGetReturnApplicationRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) GetReturnApplicationExecute(r FbsAPIGetReturnApplicationRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -17833,14 +17909,14 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r FbsGetReturnApplicationReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -17946,9 +18022,9 @@ func (a *FbsAPIService) GetReturnApplicationExecute(r FbsGetReturnApplicationReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetReturnPhotoRequest struct {
+type FbsAPIGetReturnPhotoRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 	returnId   int64
@@ -17956,8 +18032,8 @@ type FbsGetReturnPhotoRequest struct {
 	imageHash  string
 }
 
-func (r FbsGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
-	return r.FbsService.GetReturnPhotoExecute(r)
+func (r FbsAPIGetReturnPhotoRequest) Execute() (*os.File, *http.Response, error) {
+	return r.ApiService.GetReturnPhotoExecute(r)
 }
 
 /*
@@ -17970,17 +18046,18 @@ GetReturnPhoto Получение фотографий товаров в воз�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@param returnId Идентификатор невыкупа или возврата.
-	@param itemId Идентификатор товара в возврате.
-	@param imageHash Хеш ссылки изображения для загрузки.
-	@return FbsGetReturnPhotoRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @param returnId Идентификатор невыкупа или возврата.
+ @param itemId Идентификатор товара в возврате.
+ @param imageHash Хеш ссылки изображения для загрузки.
+ @return FbsAPIGetReturnPhotoRequest
 */
-func (a *FbsAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) FbsGetReturnPhotoRequest {
-	return FbsGetReturnPhotoRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, orderId int64, returnId int64, itemId int64, imageHash string) FbsAPIGetReturnPhotoRequest {
+	return FbsAPIGetReturnPhotoRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -17991,9 +18068,8 @@ func (a *FbsAPIService) GetReturnPhoto(ctx context.Context, campaignId int64, or
 }
 
 // Execute executes the request
-//
-//	@return *os.File
-func (a *FbsAPIService) GetReturnPhotoExecute(r FbsGetReturnPhotoRequest) (*os.File, *http.Response, error) {
+//  @return *os.File
+func (a *FbsAPIService) GetReturnPhotoExecute(r FbsAPIGetReturnPhotoRequest) (*os.File, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -18040,14 +18116,14 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r FbsGetReturnPhotoRequest) (*os.F
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -18153,9 +18229,9 @@ func (a *FbsAPIService) GetReturnPhotoExecute(r FbsGetReturnPhotoRequest) (*os.F
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetReturnsRequest struct {
+type FbsAPIGetReturnsRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	pageToken  *string
 	limit      *int32
@@ -18169,63 +18245,63 @@ type FbsGetReturnsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetReturnsRequest) PageToken(pageToken string) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) PageToken(pageToken string) FbsAPIGetReturnsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetReturnsRequest) Limit(limit int32) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) Limit(limit int32) FbsAPIGetReturnsRequest {
 	r.limit = &limit
 	return r
 }
 
 // Идентификаторы заказов — для фильтрации результатов.  Несколько идентификаторов перечисляются через запятую без пробела.
-func (r FbsGetReturnsRequest) OrderIds(orderIds []int64) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) OrderIds(orderIds []int64) FbsAPIGetReturnsRequest {
 	r.orderIds = &orderIds
 	return r
 }
 
 // Статусы невыкупов или возвратов — для фильтрации результатов.  Несколько статусов перечисляются через запятую.
-func (r FbsGetReturnsRequest) Statuses(statuses []RefundStatusType) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) Statuses(statuses []RefundStatusType) FbsAPIGetReturnsRequest {
 	r.statuses = &statuses
 	return r
 }
 
 // Тип заказа для фильтрации:  * &#x60;UNREDEEMED&#x60; — невыкуп.  * &#x60;RETURN&#x60; — возврат.  Если не указать, в ответе будут и невыкупы, и возвраты.
-func (r FbsGetReturnsRequest) Type_(type_ ReturnType) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) Type_(type_ ReturnType) FbsAPIGetReturnsRequest {
 	r.type_ = &type_
 	return r
 }
 
 // Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.
-func (r FbsGetReturnsRequest) FromDate(fromDate string) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) FromDate(fromDate string) FbsAPIGetReturnsRequest {
 	r.fromDate = &fromDate
 	return r
 }
 
 // Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.
-func (r FbsGetReturnsRequest) ToDate(toDate string) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) ToDate(toDate string) FbsAPIGetReturnsRequest {
 	r.toDate = &toDate
 	return r
 }
 
 // {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
-func (r FbsGetReturnsRequest) FromDate2(fromDate2 string) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) FromDate2(fromDate2 string) FbsAPIGetReturnsRequest {
 	r.fromDate2 = &fromDate2
 	return r
 }
 
 // {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
-func (r FbsGetReturnsRequest) ToDate2(toDate2 string) FbsGetReturnsRequest {
+func (r FbsAPIGetReturnsRequest) ToDate2(toDate2 string) FbsAPIGetReturnsRequest {
 	r.toDate2 = &toDate2
 	return r
 }
 
-func (r FbsGetReturnsRequest) Execute() (*GetReturnsResponse, *http.Response, error) {
-	return r.FbsService.GetReturnsExecute(r)
+func (r FbsAPIGetReturnsRequest) Execute() (*GetReturnsResponse, *http.Response, error) {
+	return r.ApiService.GetReturnsExecute(r)
 }
 
 /*
@@ -18248,22 +18324,22 @@ GetReturns Список невыкупов и возвратов
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetReturnsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetReturnsRequest
 */
-func (a *FbsAPIService) GetReturns(ctx context.Context, campaignId int64) FbsGetReturnsRequest {
-	return FbsGetReturnsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetReturns(ctx context.Context, campaignId int64) FbsAPIGetReturnsRequest {
+	return FbsAPIGetReturnsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetReturnsResponse
-func (a *FbsAPIService) GetReturnsExecute(r FbsGetReturnsRequest) (*GetReturnsResponse, *http.Response, error) {
+//  @return GetReturnsResponse
+func (a *FbsAPIService) GetReturnsExecute(r FbsAPIGetReturnsRequest) (*GetReturnsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -18287,31 +18363,47 @@ func (a *FbsAPIService) GetReturnsExecute(r FbsGetReturnsRequest) (*GetReturnsRe
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.orderIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
+		t := *r.orderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
+		}
 	}
 	if r.statuses != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", r.statuses, "", "csv")
+		t := *r.statuses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", t, "form", "multi")
+		}
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
 	}
 	if r.fromDate2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from_date", r.fromDate2, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from_date", r.fromDate2, "form", "")
 	}
 	if r.toDate2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to_date", r.toDate2, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to_date", r.toDate2, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18333,14 +18425,14 @@ func (a *FbsAPIService) GetReturnsExecute(r FbsGetReturnsRequest) (*GetReturnsRe
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -18446,22 +18538,22 @@ func (a *FbsAPIService) GetReturnsExecute(r FbsGetReturnsRequest) (*GetReturnsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetShipmentRequest struct {
+type FbsAPIGetShipmentRequest struct {
 	ctx             context.Context
-	FbsService      *FbsAPIService
+	ApiService      *FbsAPIService
 	campaignId      int64
 	shipmentId      int64
 	cancelledOrders *bool
 }
 
 // Возвращать ли отмененные заказы.  Значение по умолчанию: &#x60;true&#x60;. Если возвращать отмененные заказы не нужно, передайте значение &#x60;false&#x60;.
-func (r FbsGetShipmentRequest) CancelledOrders(cancelledOrders bool) FbsGetShipmentRequest {
+func (r FbsAPIGetShipmentRequest) CancelledOrders(cancelledOrders bool) FbsAPIGetShipmentRequest {
 	r.cancelledOrders = &cancelledOrders
 	return r
 }
 
-func (r FbsGetShipmentRequest) Execute() (*GetShipmentResponse, *http.Response, error) {
-	return r.FbsService.GetShipmentExecute(r)
+func (r FbsAPIGetShipmentRequest) Execute() (*GetShipmentResponse, *http.Response, error) {
+	return r.ApiService.GetShipmentExecute(r)
 }
 
 /*
@@ -18473,14 +18565,15 @@ GetShipment Получение информации об одной отгруз
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsGetShipmentRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPIGetShipmentRequest
 */
-func (a *FbsAPIService) GetShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsGetShipmentRequest {
-	return FbsGetShipmentRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsAPIGetShipmentRequest {
+	return FbsAPIGetShipmentRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -18488,9 +18581,8 @@ func (a *FbsAPIService) GetShipment(ctx context.Context, campaignId int64, shipm
 }
 
 // Execute executes the request
-//
-//	@return GetShipmentResponse
-func (a *FbsAPIService) GetShipmentExecute(r FbsGetShipmentRequest) (*GetShipmentResponse, *http.Response, error) {
+//  @return GetShipmentResponse
+func (a *FbsAPIService) GetShipmentExecute(r FbsAPIGetShipmentRequest) (*GetShipmentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -18518,7 +18610,7 @@ func (a *FbsAPIService) GetShipmentExecute(r FbsGetShipmentRequest) (*GetShipmen
 	}
 
 	if r.cancelledOrders != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", r.cancelledOrders, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", r.cancelledOrders, "form", "")
 	} else {
 		var defaultValue bool = true
 		r.cancelledOrders = &defaultValue
@@ -18543,14 +18635,14 @@ func (a *FbsAPIService) GetShipmentExecute(r FbsGetShipmentRequest) (*GetShipmen
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -18656,15 +18748,15 @@ func (a *FbsAPIService) GetShipmentExecute(r FbsGetShipmentRequest) (*GetShipmen
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetShipmentOrdersInfoRequest struct {
+type FbsAPIGetShipmentOrdersInfoRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	shipmentId int64
 }
 
-func (r FbsGetShipmentOrdersInfoRequest) Execute() (*GetShipmentOrdersInfoResponse, *http.Response, error) {
-	return r.FbsService.GetShipmentOrdersInfoExecute(r)
+func (r FbsAPIGetShipmentOrdersInfoRequest) Execute() (*GetShipmentOrdersInfoResponse, *http.Response, error) {
+	return r.ApiService.GetShipmentOrdersInfoExecute(r)
 }
 
 /*
@@ -18676,14 +18768,15 @@ GetShipmentOrdersInfo Получение информации о возможн�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsGetShipmentOrdersInfoRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPIGetShipmentOrdersInfoRequest
 */
-func (a *FbsAPIService) GetShipmentOrdersInfo(ctx context.Context, campaignId int64, shipmentId int64) FbsGetShipmentOrdersInfoRequest {
-	return FbsGetShipmentOrdersInfoRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetShipmentOrdersInfo(ctx context.Context, campaignId int64, shipmentId int64) FbsAPIGetShipmentOrdersInfoRequest {
+	return FbsAPIGetShipmentOrdersInfoRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -18691,9 +18784,8 @@ func (a *FbsAPIService) GetShipmentOrdersInfo(ctx context.Context, campaignId in
 }
 
 // Execute executes the request
-//
-//	@return GetShipmentOrdersInfoResponse
-func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r FbsGetShipmentOrdersInfoRequest) (*GetShipmentOrdersInfoResponse, *http.Response, error) {
+//  @return GetShipmentOrdersInfoResponse
+func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r FbsAPIGetShipmentOrdersInfoRequest) (*GetShipmentOrdersInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -18740,14 +18832,14 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r FbsGetShipmentOrdersInfoR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -18853,9 +18945,9 @@ func (a *FbsAPIService) GetShipmentOrdersInfoExecute(r FbsGetShipmentOrdersInfoR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetStocksRequest struct {
+type FbsAPIGetStocksRequest struct {
 	ctx                       context.Context
-	FbsService                *FbsAPIService
+	ApiService                *FbsAPIService
 	campaignId                int64
 	pageToken                 *string
 	limit                     *int32
@@ -18863,24 +18955,24 @@ type FbsGetStocksRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsGetStocksRequest) PageToken(pageToken string) FbsGetStocksRequest {
+func (r FbsAPIGetStocksRequest) PageToken(pageToken string) FbsAPIGetStocksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsGetStocksRequest) Limit(limit int32) FbsGetStocksRequest {
+func (r FbsAPIGetStocksRequest) Limit(limit int32) FbsAPIGetStocksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) FbsGetStocksRequest {
+func (r FbsAPIGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) FbsAPIGetStocksRequest {
 	r.getWarehouseStocksRequest = &getWarehouseStocksRequest
 	return r
 }
 
-func (r FbsGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
-	return r.FbsService.GetStocksExecute(r)
+func (r FbsAPIGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
+	return r.ApiService.GetStocksExecute(r)
 }
 
 /*
@@ -18903,22 +18995,22 @@ GetStocks Информация об остатках и оборачиваемо
 
 [//]: <> (turnover: Среднее количество дней, за которое товар продается. Подробно об оборачиваемости рассказано в Справке Маркета для продавцов https://yandex.ru/support/marketplace/analytics/turnover.html.)
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetStocksRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetStocksRequest
 */
-func (a *FbsAPIService) GetStocks(ctx context.Context, campaignId int64) FbsGetStocksRequest {
-	return FbsGetStocksRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetStocks(ctx context.Context, campaignId int64) FbsAPIGetStocksRequest {
+	return FbsAPIGetStocksRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetWarehouseStocksResponse
-func (a *FbsAPIService) GetStocksExecute(r FbsGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
+//  @return GetWarehouseStocksResponse
+func (a *FbsAPIService) GetStocksExecute(r FbsAPIGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -18942,10 +19034,10 @@ func (a *FbsAPIService) GetStocksExecute(r FbsGetStocksRequest) (*GetWarehouseSt
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -18969,14 +19061,14 @@ func (a *FbsAPIService) GetStocksExecute(r FbsGetStocksRequest) (*GetWarehouseSt
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -19071,20 +19163,20 @@ func (a *FbsAPIService) GetStocksExecute(r FbsGetStocksRequest) (*GetWarehouseSt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetSuggestedOfferMappingEntriesRequest struct {
+type FbsAPIGetSuggestedOfferMappingEntriesRequest struct {
 	ctx                                    context.Context
-	FbsService                             *FbsAPIService
+	ApiService                             *FbsAPIService
 	campaignId                             int64
 	getSuggestedOfferMappingEntriesRequest *GetSuggestedOfferMappingEntriesRequest
 }
 
-func (r FbsGetSuggestedOfferMappingEntriesRequest) GetSuggestedOfferMappingEntriesRequest(getSuggestedOfferMappingEntriesRequest GetSuggestedOfferMappingEntriesRequest) FbsGetSuggestedOfferMappingEntriesRequest {
+func (r FbsAPIGetSuggestedOfferMappingEntriesRequest) GetSuggestedOfferMappingEntriesRequest(getSuggestedOfferMappingEntriesRequest GetSuggestedOfferMappingEntriesRequest) FbsAPIGetSuggestedOfferMappingEntriesRequest {
 	r.getSuggestedOfferMappingEntriesRequest = &getSuggestedOfferMappingEntriesRequest
 	return r
 }
 
-func (r FbsGetSuggestedOfferMappingEntriesRequest) Execute() (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
-	return r.FbsService.GetSuggestedOfferMappingEntriesExecute(r)
+func (r FbsAPIGetSuggestedOfferMappingEntriesRequest) Execute() (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
+	return r.ApiService.GetSuggestedOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -19107,26 +19199,25 @@ GetSuggestedOfferMappingEntries Рекомендованные карточки 
 |**⚙️ Лимит:** 100 000 рекомендаций в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetSuggestedOfferMappingEntriesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetSuggestedOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) FbsGetSuggestedOfferMappingEntriesRequest {
-	return FbsGetSuggestedOfferMappingEntriesRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetSuggestedOfferMappingEntries(ctx context.Context, campaignId int64) FbsAPIGetSuggestedOfferMappingEntriesRequest {
+	return FbsAPIGetSuggestedOfferMappingEntriesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetSuggestedOfferMappingEntriesResponse
-//
+//  @return GetSuggestedOfferMappingEntriesResponse
 // Deprecated
-func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r FbsGetSuggestedOfferMappingEntriesRequest) (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r FbsAPIGetSuggestedOfferMappingEntriesRequest) (*GetSuggestedOfferMappingEntriesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -19174,14 +19265,14 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r FbsGetSuggested
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -19287,20 +19378,20 @@ func (a *FbsAPIService) GetSuggestedOfferMappingEntriesExecute(r FbsGetSuggested
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetSuggestedOfferMappingsRequest struct {
+type FbsAPIGetSuggestedOfferMappingsRequest struct {
 	ctx                              context.Context
-	FbsService                       *FbsAPIService
+	ApiService                       *FbsAPIService
 	businessId                       int64
 	getSuggestedOfferMappingsRequest *GetSuggestedOfferMappingsRequest
 }
 
-func (r FbsGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) FbsGetSuggestedOfferMappingsRequest {
+func (r FbsAPIGetSuggestedOfferMappingsRequest) GetSuggestedOfferMappingsRequest(getSuggestedOfferMappingsRequest GetSuggestedOfferMappingsRequest) FbsAPIGetSuggestedOfferMappingsRequest {
 	r.getSuggestedOfferMappingsRequest = &getSuggestedOfferMappingsRequest
 	return r
 }
 
-func (r FbsGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
-	return r.FbsService.GetSuggestedOfferMappingsExecute(r)
+func (r FbsAPIGetSuggestedOfferMappingsRequest) Execute() (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+	return r.ApiService.GetSuggestedOfferMappingsExecute(r)
 }
 
 /*
@@ -19330,26 +19421,25 @@ GetSuggestedOfferMappings Просмотр карточек на Маркете,
 |**⚙️ Лимит:** 100 000 товаров в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetSuggestedOfferMappingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetSuggestedOfferMappingsRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) FbsGetSuggestedOfferMappingsRequest {
-	return FbsGetSuggestedOfferMappingsRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetSuggestedOfferMappings(ctx context.Context, businessId int64) FbsAPIGetSuggestedOfferMappingsRequest {
+	return FbsAPIGetSuggestedOfferMappingsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetSuggestedOfferMappingsResponse
-//
+//  @return GetSuggestedOfferMappingsResponse
 // Deprecated
-func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r FbsGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
+func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r FbsAPIGetSuggestedOfferMappingsRequest) (*GetSuggestedOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -19394,14 +19484,14 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r FbsGetSuggestedOfferM
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -19507,20 +19597,20 @@ func (a *FbsAPIService) GetSuggestedOfferMappingsExecute(r FbsGetSuggestedOfferM
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetSuggestedPricesRequest struct {
+type FbsAPIGetSuggestedPricesRequest struct {
 	ctx                  context.Context
-	FbsService           *FbsAPIService
+	ApiService           *FbsAPIService
 	campaignId           int64
 	suggestPricesRequest *SuggestPricesRequest
 }
 
-func (r FbsGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) FbsGetSuggestedPricesRequest {
+func (r FbsAPIGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) FbsAPIGetSuggestedPricesRequest {
 	r.suggestPricesRequest = &suggestPricesRequest
 	return r
 }
 
-func (r FbsGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
-	return r.FbsService.GetSuggestedPricesExecute(r)
+func (r FbsAPIGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
+	return r.ApiService.GetSuggestedPricesExecute(r)
 }
 
 /*
@@ -19529,6 +19619,8 @@ GetSuggestedPrices Цены для продвижения товаров
 {% include notitle [access](../../_auto/method_scopes/getSuggestedPrices.md) %}
 
 {% note warning "Не используйте его, это может привести к ошибкам. Информацию о ценах вы можете получить в помощью [отчета «Цены на рынке»](../../reference/reports/generatePricesReport.md)." %}
+
+
 
 {% endnote %}
 
@@ -19553,26 +19645,25 @@ GetSuggestedPrices Цены для продвижения товаров
 |**⚙️ Лимит:** 100 000 товаров в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsGetSuggestedPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIGetSuggestedPricesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) FbsGetSuggestedPricesRequest {
-	return FbsGetSuggestedPricesRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) FbsAPIGetSuggestedPricesRequest {
+	return FbsAPIGetSuggestedPricesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return SuggestPricesResponse
-//
+//  @return SuggestPricesResponse
 // Deprecated
-func (a *FbsAPIService) GetSuggestedPricesExecute(r FbsGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetSuggestedPricesExecute(r FbsAPIGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -19620,14 +19711,14 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r FbsGetSuggestedPricesRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -19733,14 +19824,14 @@ func (a *FbsAPIService) GetSuggestedPricesExecute(r FbsGetSuggestedPricesRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsGetWarehousesRequest struct {
+type FbsAPIGetWarehousesRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	businessId int64
 }
 
-func (r FbsGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
-	return r.FbsService.GetWarehousesExecute(r)
+func (r FbsAPIGetWarehousesRequest) Execute() (*GetWarehousesResponse, *http.Response, error) {
+	return r.ApiService.GetWarehousesExecute(r)
 }
 
 /*
@@ -19761,26 +19852,25 @@ GetWarehouses Список складов и групп складов
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsGetWarehousesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIGetWarehousesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) GetWarehouses(ctx context.Context, businessId int64) FbsGetWarehousesRequest {
-	return FbsGetWarehousesRequest{
-		FbsService: a,
+func (a *FbsAPIService) GetWarehouses(ctx context.Context, businessId int64) FbsAPIGetWarehousesRequest {
+	return FbsAPIGetWarehousesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetWarehousesResponse
-//
+//  @return GetWarehousesResponse
 // Deprecated
-func (a *FbsAPIService) GetWarehousesExecute(r FbsGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
+func (a *FbsAPIService) GetWarehousesExecute(r FbsAPIGetWarehousesRequest) (*GetWarehousesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -19823,14 +19913,14 @@ func (a *FbsAPIService) GetWarehousesExecute(r FbsGetWarehousesRequest) (*GetWar
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -19936,21 +20026,21 @@ func (a *FbsAPIService) GetWarehousesExecute(r FbsGetWarehousesRequest) (*GetWar
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsProvideOrderItemIdentifiersRequest struct {
+type FbsAPIProvideOrderItemIdentifiersRequest struct {
 	ctx                                context.Context
-	FbsService                         *FbsAPIService
+	ApiService                         *FbsAPIService
 	campaignId                         int64
 	orderId                            int64
 	provideOrderItemIdentifiersRequest *ProvideOrderItemIdentifiersRequest
 }
 
-func (r FbsProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) FbsProvideOrderItemIdentifiersRequest {
+func (r FbsAPIProvideOrderItemIdentifiersRequest) ProvideOrderItemIdentifiersRequest(provideOrderItemIdentifiersRequest ProvideOrderItemIdentifiersRequest) FbsAPIProvideOrderItemIdentifiersRequest {
 	r.provideOrderItemIdentifiersRequest = &provideOrderItemIdentifiersRequest
 	return r
 }
 
-func (r FbsProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
-	return r.FbsService.ProvideOrderItemIdentifiersExecute(r)
+func (r FbsAPIProvideOrderItemIdentifiersRequest) Execute() (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+	return r.ApiService.ProvideOrderItemIdentifiersExecute(r)
 }
 
 /*
@@ -19985,14 +20075,15 @@ ProvideOrderItemIdentifiers Передача кодов маркировки е�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsProvideOrderItemIdentifiersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIProvideOrderItemIdentifiersRequest
 */
-func (a *FbsAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) FbsProvideOrderItemIdentifiersRequest {
-	return FbsProvideOrderItemIdentifiersRequest{
-		FbsService: a,
+func (a *FbsAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaignId int64, orderId int64) FbsAPIProvideOrderItemIdentifiersRequest {
+	return FbsAPIProvideOrderItemIdentifiersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -20000,9 +20091,8 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiers(ctx context.Context, campaig
 }
 
 // Execute executes the request
-//
-//	@return ProvideOrderItemIdentifiersResponse
-func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r FbsProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
+//  @return ProvideOrderItemIdentifiersResponse
+func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r FbsAPIProvideOrderItemIdentifiersRequest) (*ProvideOrderItemIdentifiersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -20051,14 +20141,14 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r FbsProvideOrderItem
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -20164,21 +20254,21 @@ func (a *FbsAPIService) ProvideOrderItemIdentifiersExecute(r FbsProvideOrderItem
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsPutBidsForBusinessRequest struct {
+type FbsAPIPutBidsForBusinessRequest struct {
 	ctx               context.Context
-	FbsService        *FbsAPIService
+	ApiService        *FbsAPIService
 	businessId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
 
 // description
-func (r FbsPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) FbsPutBidsForBusinessRequest {
+func (r FbsAPIPutBidsForBusinessRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) FbsAPIPutBidsForBusinessRequest {
 	r.putSkuBidsRequest = &putSkuBidsRequest
 	return r
 }
 
-func (r FbsPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.PutBidsForBusinessExecute(r)
+func (r FbsAPIPutBidsForBusinessRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.PutBidsForBusinessExecute(r)
 }
 
 /*
@@ -20223,22 +20313,22 @@ PutBidsForBusiness Включение буста продаж и установ�
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsPutBidsForBusinessRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIPutBidsForBusinessRequest
 */
-func (a *FbsAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) FbsPutBidsForBusinessRequest {
-	return FbsPutBidsForBusinessRequest{
-		FbsService: a,
+func (a *FbsAPIService) PutBidsForBusiness(ctx context.Context, businessId int64) FbsAPIPutBidsForBusinessRequest {
+	return FbsAPIPutBidsForBusinessRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) PutBidsForBusinessExecute(r FbsPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) PutBidsForBusinessExecute(r FbsAPIPutBidsForBusinessRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -20286,14 +20376,14 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r FbsPutBidsForBusinessRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -20399,21 +20489,21 @@ func (a *FbsAPIService) PutBidsForBusinessExecute(r FbsPutBidsForBusinessRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsPutBidsForCampaignRequest struct {
+type FbsAPIPutBidsForCampaignRequest struct {
 	ctx               context.Context
-	FbsService        *FbsAPIService
+	ApiService        *FbsAPIService
 	campaignId        int64
 	putSkuBidsRequest *PutSkuBidsRequest
 }
 
 // description
-func (r FbsPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) FbsPutBidsForCampaignRequest {
+func (r FbsAPIPutBidsForCampaignRequest) PutSkuBidsRequest(putSkuBidsRequest PutSkuBidsRequest) FbsAPIPutBidsForCampaignRequest {
 	r.putSkuBidsRequest = &putSkuBidsRequest
 	return r
 }
 
-func (r FbsPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.PutBidsForCampaignExecute(r)
+func (r FbsAPIPutBidsForCampaignRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.PutBidsForCampaignExecute(r)
 }
 
 /*
@@ -20452,22 +20542,22 @@ PutBidsForCampaign Включение буста продаж и установ�
 |**⚙️ Лимит:** 1 000 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsPutBidsForCampaignRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIPutBidsForCampaignRequest
 */
-func (a *FbsAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) FbsPutBidsForCampaignRequest {
-	return FbsPutBidsForCampaignRequest{
-		FbsService: a,
+func (a *FbsAPIService) PutBidsForCampaign(ctx context.Context, campaignId int64) FbsAPIPutBidsForCampaignRequest {
+	return FbsAPIPutBidsForCampaignRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) PutBidsForCampaignExecute(r FbsPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) PutBidsForCampaignExecute(r FbsAPIPutBidsForCampaignRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -20515,14 +20605,14 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r FbsPutBidsForCampaignRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -20628,28 +20718,28 @@ func (a *FbsAPIService) PutBidsForCampaignExecute(r FbsPutBidsForCampaignRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSearchRegionChildrenRequest struct {
+type FbsAPISearchRegionChildrenRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	regionId   int64
 	page       *int32
 	pageSize   *int32
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r FbsSearchRegionChildrenRequest) Page(page int32) FbsSearchRegionChildrenRequest {
+func (r FbsAPISearchRegionChildrenRequest) Page(page int32) FbsAPISearchRegionChildrenRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r FbsSearchRegionChildrenRequest) PageSize(pageSize int32) FbsSearchRegionChildrenRequest {
+func (r FbsAPISearchRegionChildrenRequest) PageSize(pageSize int32) FbsAPISearchRegionChildrenRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r FbsSearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
-	return r.FbsService.SearchRegionChildrenExecute(r)
+func (r FbsAPISearchRegionChildrenRequest) Execute() (*GetRegionWithChildrenResponse, *http.Response, error) {
+	return r.ApiService.SearchRegionChildrenExecute(r)
 }
 
 /*
@@ -20666,22 +20756,22 @@ SearchRegionChildren Информация о дочерних регионах
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-	@return FbsSearchRegionChildrenRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+ @return FbsAPISearchRegionChildrenRequest
 */
-func (a *FbsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) FbsSearchRegionChildrenRequest {
-	return FbsSearchRegionChildrenRequest{
-		FbsService: a,
+func (a *FbsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) FbsAPISearchRegionChildrenRequest {
+	return FbsAPISearchRegionChildrenRequest{
+		ApiService: a,
 		ctx:        ctx,
 		regionId:   regionId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRegionWithChildrenResponse
-func (a *FbsAPIService) SearchRegionChildrenExecute(r FbsSearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
+//  @return GetRegionWithChildrenResponse
+func (a *FbsAPIService) SearchRegionChildrenExecute(r FbsAPISearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -20702,13 +20792,13 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r FbsSearchRegionChildrenReq
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20730,14 +20820,14 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r FbsSearchRegionChildrenReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -20843,14 +20933,14 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r FbsSearchRegionChildrenReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSearchRegionsByIdRequest struct {
+type FbsAPISearchRegionsByIdRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	regionId   int64
 }
 
-func (r FbsSearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
-	return r.FbsService.SearchRegionsByIdExecute(r)
+func (r FbsAPISearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+	return r.ApiService.SearchRegionsByIdExecute(r)
 }
 
 /*
@@ -20867,22 +20957,22 @@ SearchRegionsById Информация о регионе
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
-	@return FbsSearchRegionsByIdRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
+ @return FbsAPISearchRegionsByIdRequest
 */
-func (a *FbsAPIService) SearchRegionsById(ctx context.Context, regionId int64) FbsSearchRegionsByIdRequest {
-	return FbsSearchRegionsByIdRequest{
-		FbsService: a,
+func (a *FbsAPIService) SearchRegionsById(ctx context.Context, regionId int64) FbsAPISearchRegionsByIdRequest {
+	return FbsAPISearchRegionsByIdRequest{
+		ApiService: a,
 		ctx:        ctx,
 		regionId:   regionId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRegionsResponse
-func (a *FbsAPIService) SearchRegionsByIdExecute(r FbsSearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
+//  @return GetRegionsResponse
+func (a *FbsAPIService) SearchRegionsByIdExecute(r FbsAPISearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -20922,14 +21012,14 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r FbsSearchRegionsByIdRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -21024,34 +21114,34 @@ func (a *FbsAPIService) SearchRegionsByIdExecute(r FbsSearchRegionsByIdRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSearchRegionsByNameRequest struct {
+type FbsAPISearchRegionsByNameRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	name       *string
 	pageToken  *string
 	limit      *int32
 }
 
 // Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;.
-func (r FbsSearchRegionsByNameRequest) Name(name string) FbsSearchRegionsByNameRequest {
+func (r FbsAPISearchRegionsByNameRequest) Name(name string) FbsAPISearchRegionsByNameRequest {
 	r.name = &name
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsSearchRegionsByNameRequest) PageToken(pageToken string) FbsSearchRegionsByNameRequest {
+func (r FbsAPISearchRegionsByNameRequest) PageToken(pageToken string) FbsAPISearchRegionsByNameRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsSearchRegionsByNameRequest) Limit(limit int32) FbsSearchRegionsByNameRequest {
+func (r FbsAPISearchRegionsByNameRequest) Limit(limit int32) FbsAPISearchRegionsByNameRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsSearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
-	return r.FbsService.SearchRegionsByNameExecute(r)
+func (r FbsAPISearchRegionsByNameRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+	return r.ApiService.SearchRegionsByNameExecute(r)
 }
 
 /*
@@ -21070,20 +21160,20 @@ SearchRegionsByName Поиск регионов по их имени
 |**⚙️ Лимит:** 50 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return FbsSearchRegionsByNameRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return FbsAPISearchRegionsByNameRequest
 */
-func (a *FbsAPIService) SearchRegionsByName(ctx context.Context) FbsSearchRegionsByNameRequest {
-	return FbsSearchRegionsByNameRequest{
-		FbsService: a,
+func (a *FbsAPIService) SearchRegionsByName(ctx context.Context) FbsAPISearchRegionsByNameRequest {
+	return FbsAPISearchRegionsByNameRequest{
+		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetRegionsResponse
-func (a *FbsAPIService) SearchRegionsByNameExecute(r FbsSearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
+//  @return GetRegionsResponse
+func (a *FbsAPIService) SearchRegionsByNameExecute(r FbsAPISearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -21105,12 +21195,12 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r FbsSearchRegionsByNameReque
 		return localVarReturnValue, nil, reportError("name is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -21132,14 +21222,14 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r FbsSearchRegionsByNameReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -21223,34 +21313,34 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r FbsSearchRegionsByNameReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSearchShipmentsRequest struct {
+type FbsAPISearchShipmentsRequest struct {
 	ctx                    context.Context
-	FbsService             *FbsAPIService
+	ApiService             *FbsAPIService
 	campaignId             int64
 	searchShipmentsRequest *SearchShipmentsRequest
 	pageToken              *string
 	limit                  *int32
 }
 
-func (r FbsSearchShipmentsRequest) SearchShipmentsRequest(searchShipmentsRequest SearchShipmentsRequest) FbsSearchShipmentsRequest {
+func (r FbsAPISearchShipmentsRequest) SearchShipmentsRequest(searchShipmentsRequest SearchShipmentsRequest) FbsAPISearchShipmentsRequest {
 	r.searchShipmentsRequest = &searchShipmentsRequest
 	return r
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r FbsSearchShipmentsRequest) PageToken(pageToken string) FbsSearchShipmentsRequest {
+func (r FbsAPISearchShipmentsRequest) PageToken(pageToken string) FbsAPISearchShipmentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r FbsSearchShipmentsRequest) Limit(limit int32) FbsSearchShipmentsRequest {
+func (r FbsAPISearchShipmentsRequest) Limit(limit int32) FbsAPISearchShipmentsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r FbsSearchShipmentsRequest) Execute() (*SearchShipmentsResponse, *http.Response, error) {
-	return r.FbsService.SearchShipmentsExecute(r)
+func (r FbsAPISearchShipmentsRequest) Execute() (*SearchShipmentsResponse, *http.Response, error) {
+	return r.ApiService.SearchShipmentsExecute(r)
 }
 
 /*
@@ -21268,22 +21358,22 @@ SearchShipments Получение информации о нескольких 
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsSearchShipmentsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPISearchShipmentsRequest
 */
-func (a *FbsAPIService) SearchShipments(ctx context.Context, campaignId int64) FbsSearchShipmentsRequest {
-	return FbsSearchShipmentsRequest{
-		FbsService: a,
+func (a *FbsAPIService) SearchShipments(ctx context.Context, campaignId int64) FbsAPISearchShipmentsRequest {
+	return FbsAPISearchShipmentsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return SearchShipmentsResponse
-func (a *FbsAPIService) SearchShipmentsExecute(r FbsSearchShipmentsRequest) (*SearchShipmentsResponse, *http.Response, error) {
+//  @return SearchShipmentsResponse
+func (a *FbsAPIService) SearchShipmentsExecute(r FbsAPISearchShipmentsRequest) (*SearchShipmentsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -21310,10 +21400,10 @@ func (a *FbsAPIService) SearchShipmentsExecute(r FbsSearchShipmentsRequest) (*Se
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -21337,14 +21427,14 @@ func (a *FbsAPIService) SearchShipmentsExecute(r FbsSearchShipmentsRequest) (*Se
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -21450,28 +21540,28 @@ func (a *FbsAPIService) SearchShipmentsExecute(r FbsSearchShipmentsRequest) (*Se
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSendFileToChatRequest struct {
+type FbsAPISendFileToChatRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	businessId int64
 	chatId     *int64
 	file       *os.File
 }
 
 // Идентификатор чата.
-func (r FbsSendFileToChatRequest) ChatId(chatId int64) FbsSendFileToChatRequest {
+func (r FbsAPISendFileToChatRequest) ChatId(chatId int64) FbsAPISendFileToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // Содержимое файла. Максимальный размер файла — 5 Мбайт.
-func (r FbsSendFileToChatRequest) File(file *os.File) FbsSendFileToChatRequest {
+func (r FbsAPISendFileToChatRequest) File(file *os.File) FbsAPISendFileToChatRequest {
 	r.file = file
 	return r
 }
 
-func (r FbsSendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.SendFileToChatExecute(r)
+func (r FbsAPISendFileToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.SendFileToChatExecute(r)
 }
 
 /*
@@ -21484,22 +21574,22 @@ SendFileToChat Отправка файла в чат
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsSendFileToChatRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPISendFileToChatRequest
 */
-func (a *FbsAPIService) SendFileToChat(ctx context.Context, businessId int64) FbsSendFileToChatRequest {
-	return FbsSendFileToChatRequest{
-		FbsService: a,
+func (a *FbsAPIService) SendFileToChat(ctx context.Context, businessId int64) FbsAPISendFileToChatRequest {
+	return FbsAPISendFileToChatRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) SendFileToChatExecute(r FbsSendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) SendFileToChatExecute(r FbsAPISendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -21531,7 +21621,7 @@ func (a *FbsAPIService) SendFileToChatExecute(r FbsSendFileToChatRequest) (*Empt
 		return localVarReturnValue, nil, reportError("file is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
@@ -21567,14 +21657,14 @@ func (a *FbsAPIService) SendFileToChatExecute(r FbsSendFileToChatRequest) (*Empt
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -21680,28 +21770,28 @@ func (a *FbsAPIService) SendFileToChatExecute(r FbsSendFileToChatRequest) (*Empt
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSendMessageToChatRequest struct {
+type FbsAPISendMessageToChatRequest struct {
 	ctx                      context.Context
-	FbsService               *FbsAPIService
+	ApiService               *FbsAPIService
 	businessId               int64
 	chatId                   *int64
 	sendMessageToChatRequest *SendMessageToChatRequest
 }
 
 // Идентификатор чата.
-func (r FbsSendMessageToChatRequest) ChatId(chatId int64) FbsSendMessageToChatRequest {
+func (r FbsAPISendMessageToChatRequest) ChatId(chatId int64) FbsAPISendMessageToChatRequest {
 	r.chatId = &chatId
 	return r
 }
 
 // description
-func (r FbsSendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) FbsSendMessageToChatRequest {
+func (r FbsAPISendMessageToChatRequest) SendMessageToChatRequest(sendMessageToChatRequest SendMessageToChatRequest) FbsAPISendMessageToChatRequest {
 	r.sendMessageToChatRequest = &sendMessageToChatRequest
 	return r
 }
 
-func (r FbsSendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.SendMessageToChatExecute(r)
+func (r FbsAPISendMessageToChatRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.SendMessageToChatExecute(r)
 }
 
 /*
@@ -21714,22 +21804,22 @@ SendMessageToChat Отправка сообщения в чат
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsSendMessageToChatRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPISendMessageToChatRequest
 */
-func (a *FbsAPIService) SendMessageToChat(ctx context.Context, businessId int64) FbsSendMessageToChatRequest {
-	return FbsSendMessageToChatRequest{
-		FbsService: a,
+func (a *FbsAPIService) SendMessageToChat(ctx context.Context, businessId int64) FbsAPISendMessageToChatRequest {
+	return FbsAPISendMessageToChatRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) SendMessageToChatExecute(r FbsSendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) SendMessageToChatExecute(r FbsAPISendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -21761,7 +21851,7 @@ func (a *FbsAPIService) SendMessageToChatExecute(r FbsSendMessageToChatRequest) 
 		return localVarReturnValue, nil, reportError("sendMessageToChatRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -21784,14 +21874,14 @@ func (a *FbsAPIService) SendMessageToChatExecute(r FbsSendMessageToChatRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -21897,21 +21987,21 @@ func (a *FbsAPIService) SendMessageToChatExecute(r FbsSendMessageToChatRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSetOrderBoxLayoutRequest struct {
+type FbsAPISetOrderBoxLayoutRequest struct {
 	ctx                      context.Context
-	FbsService               *FbsAPIService
+	ApiService               *FbsAPIService
 	campaignId               int64
 	orderId                  int64
 	setOrderBoxLayoutRequest *SetOrderBoxLayoutRequest
 }
 
-func (r FbsSetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) FbsSetOrderBoxLayoutRequest {
+func (r FbsAPISetOrderBoxLayoutRequest) SetOrderBoxLayoutRequest(setOrderBoxLayoutRequest SetOrderBoxLayoutRequest) FbsAPISetOrderBoxLayoutRequest {
 	r.setOrderBoxLayoutRequest = &setOrderBoxLayoutRequest
 	return r
 }
 
-func (r FbsSetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
-	return r.FbsService.SetOrderBoxLayoutExecute(r)
+func (r FbsAPISetOrderBoxLayoutRequest) Execute() (*SetOrderBoxLayoutResponse, *http.Response, error) {
+	return r.ApiService.SetOrderBoxLayoutExecute(r)
 }
 
 /*
@@ -22007,39 +22097,38 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если в одной коробке едут:
 
-  - три единицы одного товара, требующего маркировки;
+  * три единицы одного товара, требующего маркировки;
+  * одна единица другого товара, не требущего маркировки.
 
-  - одна единица другого товара, не требущего маркировки.
-
-    ```json translate=no
-    {
-    "boxes": [
-    {
-    "items": [
-    {
-    "id": 123456,
-    "fullCount": 3,
-    "instances": [
-    {
-    "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-    },
-    {
-    "cis": "010304109478gftJ14545762!\u001dhGt264"
-    },
-    {
-    "cis": "010304109478fRs28323ks23!\u001dhet201"
-    }
-    ]
-    },
-    {
-    "id": 654321,
-    "fullCount": 1
-    }
-    ]
-    }
-    ]
-    }
-    ```
+  ```json translate=no
+  {
+      "boxes": [
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "fullCount": 3,
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          },
+                          {
+                              "cis": "010304109478gftJ14545762!\u001dhGt264"
+                          },
+                          {
+                              "cis": "010304109478fRs28323ks23!\u001dhet201"
+                          }
+                      ]
+                  },
+                  {
+                      "id": 654321,
+                      "fullCount": 1
+                  }
+              ]
+          }
+      ]
+  }
+  ```
 
 {% endcut %}
 
@@ -22047,44 +22136,44 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если товар едет в двух коробках:
 
-	```json translate=no
-	{
-	    "boxes": [
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 1,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 2,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        }
-	    ]
-	}
-	```
+  ```json translate=no
+  {
+      "boxes": [
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 1,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 2,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          }
+      ]
+  }
+  ```
 
 {% endcut %}
 
@@ -22092,90 +22181,91 @@ SetOrderBoxLayout Подготовка заказа
 
 Вот как будет выглядеть запрос, если каждый из двух одинаковых товаров едет в двух коробках:
 
-	```json translate=no
-	{
-	    "boxes": [
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 1,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 2,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 1,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        },
-	        {
-	            "items": [
-	                {
-	                    "id": 123456,
-	                    "partialCount": {
-	                        "current": 2,
-	                        "total": 2
-	                    },
-	                    "instances": [
-	                        {
-	                            "cis": "01030410947874432155Qbag!\u001d93Zjqw"
-	                        }
-	                    ]
-	                }
-	            ]
-	        }
-	    ]
-	}
-	```
+  ```json translate=no
+  {
+      "boxes": [
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 1,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 2,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 1,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          },
+          {
+              "items": [
+                  {
+                      "id": 123456,
+                      "partialCount": {
+                          "current": 2,
+                          "total": 2
+                      },
+                      "instances": [
+                          {
+                              "cis": "01030410947874432155Qbag!\u001d93Zjqw"
+                          }
+                      ]
+                  }
+              ]
+          }
+      ]
+  }
+  ```
 
 {% endcut %}
 
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsSetOrderBoxLayoutRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPISetOrderBoxLayoutRequest
 */
-func (a *FbsAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) FbsSetOrderBoxLayoutRequest {
-	return FbsSetOrderBoxLayoutRequest{
-		FbsService: a,
+func (a *FbsAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64, orderId int64) FbsAPISetOrderBoxLayoutRequest {
+	return FbsAPISetOrderBoxLayoutRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -22183,9 +22273,8 @@ func (a *FbsAPIService) SetOrderBoxLayout(ctx context.Context, campaignId int64,
 }
 
 // Execute executes the request
-//
-//	@return SetOrderBoxLayoutResponse
-func (a *FbsAPIService) SetOrderBoxLayoutExecute(r FbsSetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
+//  @return SetOrderBoxLayoutResponse
+func (a *FbsAPIService) SetOrderBoxLayoutExecute(r FbsAPISetOrderBoxLayoutRequest) (*SetOrderBoxLayoutResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -22234,14 +22323,14 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r FbsSetOrderBoxLayoutRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -22347,22 +22436,22 @@ func (a *FbsAPIService) SetOrderBoxLayoutExecute(r FbsSetOrderBoxLayoutRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSetOrderShipmentBoxesRequest struct {
+type FbsAPISetOrderShipmentBoxesRequest struct {
 	ctx                          context.Context
-	FbsService                   *FbsAPIService
+	ApiService                   *FbsAPIService
 	campaignId                   int64
 	orderId                      int64
 	shipmentId                   int64
 	setOrderShipmentBoxesRequest *SetOrderShipmentBoxesRequest
 }
 
-func (r FbsSetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) FbsSetOrderShipmentBoxesRequest {
+func (r FbsAPISetOrderShipmentBoxesRequest) SetOrderShipmentBoxesRequest(setOrderShipmentBoxesRequest SetOrderShipmentBoxesRequest) FbsAPISetOrderShipmentBoxesRequest {
 	r.setOrderShipmentBoxesRequest = &setOrderShipmentBoxesRequest
 	return r
 }
 
-func (r FbsSetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
-	return r.FbsService.SetOrderShipmentBoxesExecute(r)
+func (r FbsAPISetOrderShipmentBoxesRequest) Execute() (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+	return r.ApiService.SetOrderShipmentBoxesExecute(r)
 }
 
 /*
@@ -22389,29 +22478,27 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 Структура тела PUT-запроса:
 
 ```text translate=no
-
-	{
-	  "boxes":
-	  [
-	    {
-	      "fulfilmentId": "{string}",
-	      "weight": {int64},
-	      "width": {int64},
-	      "height": {int64},
-	      "depth": {int64},
-	      "items":
-	      [
-	        {
-	          "id": {int64},
-	          "count": {int32}
-	        },
-	        ...
-	      ]
-	    },
-	    ...
-	  ]
-	}
-
+{
+  "boxes":
+  [
+    {
+      "fulfilmentId": "{string}",
+      "weight": {int64},
+      "width": {int64},
+      "height": {int64},
+      "depth": {int64},
+      "items":
+      [
+        {
+          "id": {int64},
+          "count": {int32}
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+}
 ```
 | **Параметр**  | **Тип**  | **Значение**  |
 | ----------- | ----------- | ----------- |
@@ -22438,15 +22525,16 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
-	@return FbsSetOrderShipmentBoxesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @param shipmentId Параметр больше не используется. Вставьте любое число — просто чтобы получился корректный URL.
+ @return FbsAPISetOrderShipmentBoxesRequest
 */
-func (a *FbsAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) FbsSetOrderShipmentBoxesRequest {
-	return FbsSetOrderShipmentBoxesRequest{
-		FbsService: a,
+func (a *FbsAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId int64, orderId int64, shipmentId int64) FbsAPISetOrderShipmentBoxesRequest {
+	return FbsAPISetOrderShipmentBoxesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -22455,9 +22543,8 @@ func (a *FbsAPIService) SetOrderShipmentBoxes(ctx context.Context, campaignId in
 }
 
 // Execute executes the request
-//
-//	@return SetOrderShipmentBoxesResponse
-func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r FbsSetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
+//  @return SetOrderShipmentBoxesResponse
+func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r FbsAPISetOrderShipmentBoxesRequest) (*SetOrderShipmentBoxesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -22507,14 +22594,14 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r FbsSetOrderShipmentBoxesR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -22620,21 +22707,21 @@ func (a *FbsAPIService) SetOrderShipmentBoxesExecute(r FbsSetOrderShipmentBoxesR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSetShipmentPalletsCountRequest struct {
+type FbsAPISetShipmentPalletsCountRequest struct {
 	ctx                            context.Context
-	FbsService                     *FbsAPIService
+	ApiService                     *FbsAPIService
 	campaignId                     int64
 	shipmentId                     int64
 	setShipmentPalletsCountRequest *SetShipmentPalletsCountRequest
 }
 
-func (r FbsSetShipmentPalletsCountRequest) SetShipmentPalletsCountRequest(setShipmentPalletsCountRequest SetShipmentPalletsCountRequest) FbsSetShipmentPalletsCountRequest {
+func (r FbsAPISetShipmentPalletsCountRequest) SetShipmentPalletsCountRequest(setShipmentPalletsCountRequest SetShipmentPalletsCountRequest) FbsAPISetShipmentPalletsCountRequest {
 	r.setShipmentPalletsCountRequest = &setShipmentPalletsCountRequest
 	return r
 }
 
-func (r FbsSetShipmentPalletsCountRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.SetShipmentPalletsCountExecute(r)
+func (r FbsAPISetShipmentPalletsCountRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.SetShipmentPalletsCountExecute(r)
 }
 
 /*
@@ -22648,14 +22735,15 @@ SetShipmentPalletsCount Передача количества упаковок �
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsSetShipmentPalletsCountRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPISetShipmentPalletsCountRequest
 */
-func (a *FbsAPIService) SetShipmentPalletsCount(ctx context.Context, campaignId int64, shipmentId int64) FbsSetShipmentPalletsCountRequest {
-	return FbsSetShipmentPalletsCountRequest{
-		FbsService: a,
+func (a *FbsAPIService) SetShipmentPalletsCount(ctx context.Context, campaignId int64, shipmentId int64) FbsAPISetShipmentPalletsCountRequest {
+	return FbsAPISetShipmentPalletsCountRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -22663,9 +22751,8 @@ func (a *FbsAPIService) SetShipmentPalletsCount(ctx context.Context, campaignId 
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) SetShipmentPalletsCountExecute(r FbsSetShipmentPalletsCountRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) SetShipmentPalletsCountExecute(r FbsAPISetShipmentPalletsCountRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -22717,14 +22804,14 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r FbsSetShipmentPalletsCo
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -22830,20 +22917,20 @@ func (a *FbsAPIService) SetShipmentPalletsCountExecute(r FbsSetShipmentPalletsCo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSkipGoodsFeedbacksReactionRequest struct {
+type FbsAPISkipGoodsFeedbacksReactionRequest struct {
 	ctx                              context.Context
-	FbsService                       *FbsAPIService
+	ApiService                       *FbsAPIService
 	businessId                       int64
 	skipGoodsFeedbackReactionRequest *SkipGoodsFeedbackReactionRequest
 }
 
-func (r FbsSkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) FbsSkipGoodsFeedbacksReactionRequest {
+func (r FbsAPISkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) FbsAPISkipGoodsFeedbacksReactionRequest {
 	r.skipGoodsFeedbackReactionRequest = &skipGoodsFeedbackReactionRequest
 	return r
 }
 
-func (r FbsSkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.SkipGoodsFeedbacksReactionExecute(r)
+func (r FbsAPISkipGoodsFeedbacksReactionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.SkipGoodsFeedbacksReactionExecute(r)
 }
 
 /*
@@ -22856,22 +22943,22 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsSkipGoodsFeedbacksReactionRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPISkipGoodsFeedbacksReactionRequest
 */
-func (a *FbsAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) FbsSkipGoodsFeedbacksReactionRequest {
-	return FbsSkipGoodsFeedbacksReactionRequest{
-		FbsService: a,
+func (a *FbsAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) FbsAPISkipGoodsFeedbacksReactionRequest {
+	return FbsAPISkipGoodsFeedbacksReactionRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r FbsSkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r FbsAPISkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -22919,14 +23006,14 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r FbsSkipGoodsFeedback
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -23032,9 +23119,9 @@ func (a *FbsAPIService) SkipGoodsFeedbacksReactionExecute(r FbsSkipGoodsFeedback
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsSubmitReturnDecisionRequest struct {
+type FbsAPISubmitReturnDecisionRequest struct {
 	ctx        context.Context
-	FbsService *FbsAPIService
+	ApiService *FbsAPIService
 	campaignId int64
 	orderId    int64
 	returnId   int64
@@ -23042,13 +23129,13 @@ type FbsSubmitReturnDecisionRequest struct {
 }
 
 // description
-func (r FbsSubmitReturnDecisionRequest) Body(body map[string]interface{}) FbsSubmitReturnDecisionRequest {
+func (r FbsAPISubmitReturnDecisionRequest) Body(body map[string]interface{}) FbsAPISubmitReturnDecisionRequest {
 	r.body = &body
 	return r
 }
 
-func (r FbsSubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.SubmitReturnDecisionExecute(r)
+func (r FbsAPISubmitReturnDecisionRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.SubmitReturnDecisionExecute(r)
 }
 
 /*
@@ -23061,15 +23148,16 @@ SubmitReturnDecision Подтверждение решения по возвра
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@param returnId Идентификатор невыкупа или возврата.
-	@return FbsSubmitReturnDecisionRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @param returnId Идентификатор невыкупа или возврата.
+ @return FbsAPISubmitReturnDecisionRequest
 */
-func (a *FbsAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsSubmitReturnDecisionRequest {
-	return FbsSubmitReturnDecisionRequest{
-		FbsService: a,
+func (a *FbsAPIService) SubmitReturnDecision(ctx context.Context, campaignId int64, orderId int64, returnId int64) FbsAPISubmitReturnDecisionRequest {
+	return FbsAPISubmitReturnDecisionRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -23078,9 +23166,8 @@ func (a *FbsAPIService) SubmitReturnDecision(ctx context.Context, campaignId int
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) SubmitReturnDecisionExecute(r FbsSubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) SubmitReturnDecisionExecute(r FbsAPISubmitReturnDecisionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -23127,14 +23214,14 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r FbsSubmitReturnDecisionReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -23240,21 +23327,21 @@ func (a *FbsAPIService) SubmitReturnDecisionExecute(r FbsSubmitReturnDecisionReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsTransferOrdersFromShipmentRequest struct {
+type FbsAPITransferOrdersFromShipmentRequest struct {
 	ctx                               context.Context
-	FbsService                        *FbsAPIService
+	ApiService                        *FbsAPIService
 	campaignId                        int64
 	shipmentId                        int64
 	transferOrdersFromShipmentRequest *TransferOrdersFromShipmentRequest
 }
 
-func (r FbsTransferOrdersFromShipmentRequest) TransferOrdersFromShipmentRequest(transferOrdersFromShipmentRequest TransferOrdersFromShipmentRequest) FbsTransferOrdersFromShipmentRequest {
+func (r FbsAPITransferOrdersFromShipmentRequest) TransferOrdersFromShipmentRequest(transferOrdersFromShipmentRequest TransferOrdersFromShipmentRequest) FbsAPITransferOrdersFromShipmentRequest {
 	r.transferOrdersFromShipmentRequest = &transferOrdersFromShipmentRequest
 	return r
 }
 
-func (r FbsTransferOrdersFromShipmentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.TransferOrdersFromShipmentExecute(r)
+func (r FbsAPITransferOrdersFromShipmentRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.TransferOrdersFromShipmentExecute(r)
 }
 
 /*
@@ -23279,14 +23366,15 @@ TransferOrdersFromShipment Перенос заказов в следующую �
 |**⚙️ Лимит:** 200 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param shipmentId Идентификатор отгрузки.
-	@return FbsTransferOrdersFromShipmentRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param shipmentId Идентификатор отгрузки.
+ @return FbsAPITransferOrdersFromShipmentRequest
 */
-func (a *FbsAPIService) TransferOrdersFromShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsTransferOrdersFromShipmentRequest {
-	return FbsTransferOrdersFromShipmentRequest{
-		FbsService: a,
+func (a *FbsAPIService) TransferOrdersFromShipment(ctx context.Context, campaignId int64, shipmentId int64) FbsAPITransferOrdersFromShipmentRequest {
+	return FbsAPITransferOrdersFromShipmentRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		shipmentId: shipmentId,
@@ -23294,9 +23382,8 @@ func (a *FbsAPIService) TransferOrdersFromShipment(ctx context.Context, campaign
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r FbsTransferOrdersFromShipmentRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r FbsAPITransferOrdersFromShipmentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -23348,14 +23435,14 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r FbsTransferOrdersFro
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -23461,20 +23548,20 @@ func (a *FbsAPIService) TransferOrdersFromShipmentExecute(r FbsTransferOrdersFro
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateBusinessPricesRequest struct {
+type FbsAPIUpdateBusinessPricesRequest struct {
 	ctx                         context.Context
-	FbsService                  *FbsAPIService
+	ApiService                  *FbsAPIService
 	businessId                  int64
 	updateBusinessPricesRequest *UpdateBusinessPricesRequest
 }
 
-func (r FbsUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) FbsUpdateBusinessPricesRequest {
+func (r FbsAPIUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) FbsAPIUpdateBusinessPricesRequest {
 	r.updateBusinessPricesRequest = &updateBusinessPricesRequest
 	return r
 }
 
-func (r FbsUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.UpdateBusinessPricesExecute(r)
+func (r FbsAPIUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.UpdateBusinessPricesExecute(r)
 }
 
 /*
@@ -23495,22 +23582,22 @@ UpdateBusinessPrices Установка цен на товары для всех
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsUpdateBusinessPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIUpdateBusinessPricesRequest
 */
-func (a *FbsAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) FbsUpdateBusinessPricesRequest {
-	return FbsUpdateBusinessPricesRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) FbsAPIUpdateBusinessPricesRequest {
+	return FbsAPIUpdateBusinessPricesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) UpdateBusinessPricesExecute(r FbsUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) UpdateBusinessPricesExecute(r FbsAPIUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -23558,14 +23645,14 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r FbsUpdateBusinessPricesReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -23682,20 +23769,20 @@ func (a *FbsAPIService) UpdateBusinessPricesExecute(r FbsUpdateBusinessPricesReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateCampaignOffersRequest struct {
+type FbsAPIUpdateCampaignOffersRequest struct {
 	ctx                         context.Context
-	FbsService                  *FbsAPIService
+	ApiService                  *FbsAPIService
 	campaignId                  int64
 	updateCampaignOffersRequest *UpdateCampaignOffersRequest
 }
 
-func (r FbsUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) FbsUpdateCampaignOffersRequest {
+func (r FbsAPIUpdateCampaignOffersRequest) UpdateCampaignOffersRequest(updateCampaignOffersRequest UpdateCampaignOffersRequest) FbsAPIUpdateCampaignOffersRequest {
 	r.updateCampaignOffersRequest = &updateCampaignOffersRequest
 	return r
 }
 
-func (r FbsUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.UpdateCampaignOffersExecute(r)
+func (r FbsAPIUpdateCampaignOffersRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.UpdateCampaignOffersExecute(r)
 }
 
 /*
@@ -23708,22 +23795,22 @@ UpdateCampaignOffers Изменение условий продажи товар
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsUpdateCampaignOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIUpdateCampaignOffersRequest
 */
-func (a *FbsAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) FbsUpdateCampaignOffersRequest {
-	return FbsUpdateCampaignOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateCampaignOffers(ctx context.Context, campaignId int64) FbsAPIUpdateCampaignOffersRequest {
+	return FbsAPIUpdateCampaignOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) UpdateCampaignOffersExecute(r FbsUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) UpdateCampaignOffersExecute(r FbsAPIUpdateCampaignOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -23771,14 +23858,14 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r FbsUpdateCampaignOffersReq
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -23895,21 +23982,21 @@ func (a *FbsAPIService) UpdateCampaignOffersExecute(r FbsUpdateCampaignOffersReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateExternalOrderIdRequest struct {
+type FbsAPIUpdateExternalOrderIdRequest struct {
 	ctx                          context.Context
-	FbsService                   *FbsAPIService
+	ApiService                   *FbsAPIService
 	campaignId                   int64
 	orderId                      int64
 	updateExternalOrderIdRequest *UpdateExternalOrderIdRequest
 }
 
-func (r FbsUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) FbsUpdateExternalOrderIdRequest {
+func (r FbsAPIUpdateExternalOrderIdRequest) UpdateExternalOrderIdRequest(updateExternalOrderIdRequest UpdateExternalOrderIdRequest) FbsAPIUpdateExternalOrderIdRequest {
 	r.updateExternalOrderIdRequest = &updateExternalOrderIdRequest
 	return r
 }
 
-func (r FbsUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.UpdateExternalOrderIdExecute(r)
+func (r FbsAPIUpdateExternalOrderIdRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.UpdateExternalOrderIdExecute(r)
 }
 
 /*
@@ -23924,14 +24011,15 @@ UpdateExternalOrderId Передача или изменение дополни�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsUpdateExternalOrderIdRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIUpdateExternalOrderIdRequest
 */
-func (a *FbsAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) FbsUpdateExternalOrderIdRequest {
-	return FbsUpdateExternalOrderIdRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateExternalOrderId(ctx context.Context, campaignId int64, orderId int64) FbsAPIUpdateExternalOrderIdRequest {
+	return FbsAPIUpdateExternalOrderIdRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -23939,9 +24027,8 @@ func (a *FbsAPIService) UpdateExternalOrderId(ctx context.Context, campaignId in
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) UpdateExternalOrderIdExecute(r FbsUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) UpdateExternalOrderIdExecute(r FbsAPIUpdateExternalOrderIdRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -23990,14 +24077,14 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r FbsUpdateExternalOrderIdR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -24103,20 +24190,20 @@ func (a *FbsAPIService) UpdateExternalOrderIdExecute(r FbsUpdateExternalOrderIdR
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateGoodsFeedbackCommentRequest struct {
+type FbsAPIUpdateGoodsFeedbackCommentRequest struct {
 	ctx                               context.Context
-	FbsService                        *FbsAPIService
+	ApiService                        *FbsAPIService
 	businessId                        int64
 	updateGoodsFeedbackCommentRequest *UpdateGoodsFeedbackCommentRequest
 }
 
-func (r FbsUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) FbsUpdateGoodsFeedbackCommentRequest {
+func (r FbsAPIUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) FbsAPIUpdateGoodsFeedbackCommentRequest {
 	r.updateGoodsFeedbackCommentRequest = &updateGoodsFeedbackCommentRequest
 	return r
 }
 
-func (r FbsUpdateGoodsFeedbackCommentRequest) Execute() (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
-	return r.FbsService.UpdateGoodsFeedbackCommentExecute(r)
+func (r FbsAPIUpdateGoodsFeedbackCommentRequest) Execute() (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
+	return r.ApiService.UpdateGoodsFeedbackCommentExecute(r)
 }
 
 /*
@@ -24143,22 +24230,22 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsUpdateGoodsFeedbackCommentRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIUpdateGoodsFeedbackCommentRequest
 */
-func (a *FbsAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) FbsUpdateGoodsFeedbackCommentRequest {
-	return FbsUpdateGoodsFeedbackCommentRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) FbsAPIUpdateGoodsFeedbackCommentRequest {
+	return FbsAPIUpdateGoodsFeedbackCommentRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateGoodsFeedbackCommentResponse
-func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r FbsUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
+//  @return UpdateGoodsFeedbackCommentResponse
+func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r FbsAPIUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -24206,14 +24293,14 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r FbsUpdateGoodsFeedba
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -24319,20 +24406,20 @@ func (a *FbsAPIService) UpdateGoodsFeedbackCommentExecute(r FbsUpdateGoodsFeedba
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateOfferContentRequest struct {
+type FbsAPIUpdateOfferContentRequest struct {
 	ctx                       context.Context
-	FbsService                *FbsAPIService
+	ApiService                *FbsAPIService
 	businessId                int64
 	updateOfferContentRequest *UpdateOfferContentRequest
 }
 
-func (r FbsUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) FbsUpdateOfferContentRequest {
+func (r FbsAPIUpdateOfferContentRequest) UpdateOfferContentRequest(updateOfferContentRequest UpdateOfferContentRequest) FbsAPIUpdateOfferContentRequest {
 	r.updateOfferContentRequest = &updateOfferContentRequest
 	return r
 }
 
-func (r FbsUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
-	return r.FbsService.UpdateOfferContentExecute(r)
+func (r FbsAPIUpdateOfferContentRequest) Execute() (*UpdateOfferContentResponse, *http.Response, error) {
+	return r.ApiService.UpdateOfferContentExecute(r)
 }
 
 /*
@@ -24359,22 +24446,22 @@ UpdateOfferContent Редактирование категорийных хар�
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsUpdateOfferContentRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIUpdateOfferContentRequest
 */
-func (a *FbsAPIService) UpdateOfferContent(ctx context.Context, businessId int64) FbsUpdateOfferContentRequest {
-	return FbsUpdateOfferContentRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateOfferContent(ctx context.Context, businessId int64) FbsAPIUpdateOfferContentRequest {
+	return FbsAPIUpdateOfferContentRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateOfferContentResponse
-func (a *FbsAPIService) UpdateOfferContentExecute(r FbsUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
+//  @return UpdateOfferContentResponse
+func (a *FbsAPIService) UpdateOfferContentExecute(r FbsAPIUpdateOfferContentRequest) (*UpdateOfferContentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -24422,14 +24509,14 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r FbsUpdateOfferContentRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -24546,20 +24633,20 @@ func (a *FbsAPIService) UpdateOfferContentExecute(r FbsUpdateOfferContentRequest
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateOfferMappingEntriesRequest struct {
+type FbsAPIUpdateOfferMappingEntriesRequest struct {
 	ctx                            context.Context
-	FbsService                     *FbsAPIService
+	ApiService                     *FbsAPIService
 	campaignId                     int64
 	updateOfferMappingEntryRequest *UpdateOfferMappingEntryRequest
 }
 
-func (r FbsUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(updateOfferMappingEntryRequest UpdateOfferMappingEntryRequest) FbsUpdateOfferMappingEntriesRequest {
+func (r FbsAPIUpdateOfferMappingEntriesRequest) UpdateOfferMappingEntryRequest(updateOfferMappingEntryRequest UpdateOfferMappingEntryRequest) FbsAPIUpdateOfferMappingEntriesRequest {
 	r.updateOfferMappingEntryRequest = &updateOfferMappingEntryRequest
 	return r
 }
 
-func (r FbsUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.UpdateOfferMappingEntriesExecute(r)
+func (r FbsAPIUpdateOfferMappingEntriesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.UpdateOfferMappingEntriesExecute(r)
 }
 
 /*
@@ -24599,26 +24686,25 @@ UpdateOfferMappingEntries Добавление и редактирование �
 |**⚙️ Лимит:** 5 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsUpdateOfferMappingEntriesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIUpdateOfferMappingEntriesRequest
 
 Deprecated
 */
-func (a *FbsAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) FbsUpdateOfferMappingEntriesRequest {
-	return FbsUpdateOfferMappingEntriesRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateOfferMappingEntries(ctx context.Context, campaignId int64) FbsAPIUpdateOfferMappingEntriesRequest {
+	return FbsAPIUpdateOfferMappingEntriesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-//
+//  @return EmptyApiResponse
 // Deprecated
-func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r FbsUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
+func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r FbsAPIUpdateOfferMappingEntriesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -24666,14 +24752,14 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r FbsUpdateOfferMapping
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -24790,27 +24876,27 @@ func (a *FbsAPIService) UpdateOfferMappingEntriesExecute(r FbsUpdateOfferMapping
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateOfferMappingsRequest struct {
+type FbsAPIUpdateOfferMappingsRequest struct {
 	ctx                        context.Context
-	FbsService                 *FbsAPIService
+	ApiService                 *FbsAPIService
 	businessId                 int64
 	updateOfferMappingsRequest *UpdateOfferMappingsRequest
 	language                   *CatalogLanguageType
 }
 
-func (r FbsUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) FbsUpdateOfferMappingsRequest {
+func (r FbsAPIUpdateOfferMappingsRequest) UpdateOfferMappingsRequest(updateOfferMappingsRequest UpdateOfferMappingsRequest) FbsAPIUpdateOfferMappingsRequest {
 	r.updateOfferMappingsRequest = &updateOfferMappingsRequest
 	return r
 }
 
 // Язык, на котором принимаются и возвращаются значения в параметрах &#x60;name&#x60; и &#x60;description&#x60;.  Значение по умолчанию: &#x60;RU&#x60;.
-func (r FbsUpdateOfferMappingsRequest) Language(language CatalogLanguageType) FbsUpdateOfferMappingsRequest {
+func (r FbsAPIUpdateOfferMappingsRequest) Language(language CatalogLanguageType) FbsAPIUpdateOfferMappingsRequest {
 	r.language = &language
 	return r
 }
 
-func (r FbsUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
-	return r.FbsService.UpdateOfferMappingsExecute(r)
+func (r FbsAPIUpdateOfferMappingsRequest) Execute() (*UpdateOfferMappingsResponse, *http.Response, error) {
+	return r.ApiService.UpdateOfferMappingsExecute(r)
 }
 
 /*
@@ -24842,11 +24928,10 @@ UpdateOfferMappings Добавление товаров в каталог и и�
 
 Когда вы добавляете товары в каталог, указывайте значения параметров `name` и `description` на русском языке. Чтобы на витрине они отображались и на другом языке, еще раз выполните запрос `POST businesses/{businessId}/offer-mappings/update`, где укажите:
 
-  - язык в параметре `language`;
+  * язык в параметре `language`;
+  * значения параметров `name` и `description` на указанном языке.
 
-  - значения параметров `name` и `description` на указанном языке.
-
-    Повторно передавать остальные характеристики товара не нужно.
+  Повторно передавать остальные характеристики товара не нужно.
 
 {% endcut %}
 
@@ -24887,22 +24972,22 @@ SKU товара можно изменить в кабинете продавц�
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 100 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsUpdateOfferMappingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIUpdateOfferMappingsRequest
 */
-func (a *FbsAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) FbsUpdateOfferMappingsRequest {
-	return FbsUpdateOfferMappingsRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateOfferMappings(ctx context.Context, businessId int64) FbsAPIUpdateOfferMappingsRequest {
+	return FbsAPIUpdateOfferMappingsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateOfferMappingsResponse
-func (a *FbsAPIService) UpdateOfferMappingsExecute(r FbsUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
+//  @return UpdateOfferMappingsResponse
+func (a *FbsAPIService) UpdateOfferMappingsExecute(r FbsAPIUpdateOfferMappingsRequest) (*UpdateOfferMappingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -24929,7 +25014,7 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r FbsUpdateOfferMappingsReque
 	}
 
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -24953,14 +25038,14 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r FbsUpdateOfferMappingsReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -25077,21 +25162,21 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r FbsUpdateOfferMappingsReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateOrderItemsRequest struct {
+type FbsAPIUpdateOrderItemsRequest struct {
 	ctx                    context.Context
-	FbsService             *FbsAPIService
+	ApiService             *FbsAPIService
 	campaignId             int64
 	orderId                int64
 	updateOrderItemRequest *UpdateOrderItemRequest
 }
 
-func (r FbsUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) FbsUpdateOrderItemsRequest {
+func (r FbsAPIUpdateOrderItemsRequest) UpdateOrderItemRequest(updateOrderItemRequest UpdateOrderItemRequest) FbsAPIUpdateOrderItemsRequest {
 	r.updateOrderItemRequest = &updateOrderItemRequest
 	return r
 }
 
-func (r FbsUpdateOrderItemsRequest) Execute() (*http.Response, error) {
-	return r.FbsService.UpdateOrderItemsExecute(r)
+func (r FbsAPIUpdateOrderItemsRequest) Execute() (*http.Response, error) {
+	return r.ApiService.UpdateOrderItemsExecute(r)
 }
 
 /*
@@ -25144,14 +25229,15 @@ UpdateOrderItems Удаление товара из заказа или умен
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsUpdateOrderItemsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIUpdateOrderItemsRequest
 */
-func (a *FbsAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) FbsUpdateOrderItemsRequest {
-	return FbsUpdateOrderItemsRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, orderId int64) FbsAPIUpdateOrderItemsRequest {
+	return FbsAPIUpdateOrderItemsRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -25159,7 +25245,7 @@ func (a *FbsAPIService) UpdateOrderItems(ctx context.Context, campaignId int64, 
 }
 
 // Execute executes the request
-func (a *FbsAPIService) UpdateOrderItemsExecute(r FbsUpdateOrderItemsRequest) (*http.Response, error) {
+func (a *FbsAPIService) UpdateOrderItemsExecute(r FbsAPIUpdateOrderItemsRequest) (*http.Response, error) {
 	var (
 		localVarHTTPMethod = http.MethodPut
 		localVarPostBody   interface{}
@@ -25207,14 +25293,14 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r FbsUpdateOrderItemsRequest) (*
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -25311,21 +25397,21 @@ func (a *FbsAPIService) UpdateOrderItemsExecute(r FbsUpdateOrderItemsRequest) (*
 	return localVarHTTPResponse, nil
 }
 
-type FbsUpdateOrderStatusRequest struct {
+type FbsAPIUpdateOrderStatusRequest struct {
 	ctx                      context.Context
-	FbsService               *FbsAPIService
+	ApiService               *FbsAPIService
 	campaignId               int64
 	orderId                  int64
 	updateOrderStatusRequest *UpdateOrderStatusRequest
 }
 
-func (r FbsUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) FbsUpdateOrderStatusRequest {
+func (r FbsAPIUpdateOrderStatusRequest) UpdateOrderStatusRequest(updateOrderStatusRequest UpdateOrderStatusRequest) FbsAPIUpdateOrderStatusRequest {
 	r.updateOrderStatusRequest = &updateOrderStatusRequest
 	return r
 }
 
-func (r FbsUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
-	return r.FbsService.UpdateOrderStatusExecute(r)
+func (r FbsAPIUpdateOrderStatusRequest) Execute() (*UpdateOrderStatusResponse, *http.Response, error) {
+	return r.ApiService.UpdateOrderStatusExecute(r)
 }
 
 /*
@@ -25342,14 +25428,15 @@ UpdateOrderStatus Изменение статуса одного заказа
 |**⚙️ Лимит:** 100 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@param orderId Идентификатор заказа.
-	@return FbsUpdateOrderStatusRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @param orderId Идентификатор заказа.
+ @return FbsAPIUpdateOrderStatusRequest
 */
-func (a *FbsAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) FbsUpdateOrderStatusRequest {
-	return FbsUpdateOrderStatusRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64, orderId int64) FbsAPIUpdateOrderStatusRequest {
+	return FbsAPIUpdateOrderStatusRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 		orderId:    orderId,
@@ -25357,9 +25444,8 @@ func (a *FbsAPIService) UpdateOrderStatus(ctx context.Context, campaignId int64,
 }
 
 // Execute executes the request
-//
-//	@return UpdateOrderStatusResponse
-func (a *FbsAPIService) UpdateOrderStatusExecute(r FbsUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
+//  @return UpdateOrderStatusResponse
+func (a *FbsAPIService) UpdateOrderStatusExecute(r FbsAPIUpdateOrderStatusRequest) (*UpdateOrderStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -25408,14 +25494,14 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r FbsUpdateOrderStatusRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -25521,20 +25607,20 @@ func (a *FbsAPIService) UpdateOrderStatusExecute(r FbsUpdateOrderStatusRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateOrderStatusesRequest struct {
+type FbsAPIUpdateOrderStatusesRequest struct {
 	ctx                        context.Context
-	FbsService                 *FbsAPIService
+	ApiService                 *FbsAPIService
 	campaignId                 int64
 	updateOrderStatusesRequest *UpdateOrderStatusesRequest
 }
 
-func (r FbsUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) FbsUpdateOrderStatusesRequest {
+func (r FbsAPIUpdateOrderStatusesRequest) UpdateOrderStatusesRequest(updateOrderStatusesRequest UpdateOrderStatusesRequest) FbsAPIUpdateOrderStatusesRequest {
 	r.updateOrderStatusesRequest = &updateOrderStatusesRequest
 	return r
 }
 
-func (r FbsUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
-	return r.FbsService.UpdateOrderStatusesExecute(r)
+func (r FbsAPIUpdateOrderStatusesRequest) Execute() (*UpdateOrderStatusesResponse, *http.Response, error) {
+	return r.ApiService.UpdateOrderStatusesExecute(r)
 }
 
 /*
@@ -25553,22 +25639,22 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 |**⚙️ Лимит:** 100 000 заказов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsUpdateOrderStatusesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIUpdateOrderStatusesRequest
 */
-func (a *FbsAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) FbsUpdateOrderStatusesRequest {
-	return FbsUpdateOrderStatusesRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateOrderStatuses(ctx context.Context, campaignId int64) FbsAPIUpdateOrderStatusesRequest {
+	return FbsAPIUpdateOrderStatusesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateOrderStatusesResponse
-func (a *FbsAPIService) UpdateOrderStatusesExecute(r FbsUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
+//  @return UpdateOrderStatusesResponse
+func (a *FbsAPIService) UpdateOrderStatusesExecute(r FbsAPIUpdateOrderStatusesRequest) (*UpdateOrderStatusesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -25616,14 +25702,14 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r FbsUpdateOrderStatusesReque
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -25729,20 +25815,20 @@ func (a *FbsAPIService) UpdateOrderStatusesExecute(r FbsUpdateOrderStatusesReque
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdatePricesRequest struct {
+type FbsAPIUpdatePricesRequest struct {
 	ctx                 context.Context
-	FbsService          *FbsAPIService
+	ApiService          *FbsAPIService
 	campaignId          int64
 	updatePricesRequest *UpdatePricesRequest
 }
 
-func (r FbsUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) FbsUpdatePricesRequest {
+func (r FbsAPIUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) FbsAPIUpdatePricesRequest {
 	r.updatePricesRequest = &updatePricesRequest
 	return r
 }
 
-func (r FbsUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.UpdatePricesExecute(r)
+func (r FbsAPIUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.UpdatePricesExecute(r)
 }
 
 /*
@@ -25769,22 +25855,22 @@ UpdatePrices Установка цен на товары в конкретном
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsUpdatePricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIUpdatePricesRequest
 */
-func (a *FbsAPIService) UpdatePrices(ctx context.Context, campaignId int64) FbsUpdatePricesRequest {
-	return FbsUpdatePricesRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdatePrices(ctx context.Context, campaignId int64) FbsAPIUpdatePricesRequest {
+	return FbsAPIUpdatePricesRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) UpdatePricesExecute(r FbsUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) UpdatePricesExecute(r FbsAPIUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -25832,14 +25918,14 @@ func (a *FbsAPIService) UpdatePricesExecute(r FbsUpdatePricesRequest) (*EmptyApi
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -25956,20 +26042,20 @@ func (a *FbsAPIService) UpdatePricesExecute(r FbsUpdatePricesRequest) (*EmptyApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdatePromoOffersRequest struct {
+type FbsAPIUpdatePromoOffersRequest struct {
 	ctx                      context.Context
-	FbsService               *FbsAPIService
+	ApiService               *FbsAPIService
 	businessId               int64
 	updatePromoOffersRequest *UpdatePromoOffersRequest
 }
 
-func (r FbsUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) FbsUpdatePromoOffersRequest {
+func (r FbsAPIUpdatePromoOffersRequest) UpdatePromoOffersRequest(updatePromoOffersRequest UpdatePromoOffersRequest) FbsAPIUpdatePromoOffersRequest {
 	r.updatePromoOffersRequest = &updatePromoOffersRequest
 	return r
 }
 
-func (r FbsUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
-	return r.FbsService.UpdatePromoOffersExecute(r)
+func (r FbsAPIUpdatePromoOffersRequest) Execute() (*UpdatePromoOffersResponse, *http.Response, error) {
+	return r.ApiService.UpdatePromoOffersExecute(r)
 }
 
 /*
@@ -25984,22 +26070,22 @@ UpdatePromoOffers Добавление товаров в акцию или из�
 |**⚙️ Лимит:** 10 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return FbsUpdatePromoOffersRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return FbsAPIUpdatePromoOffersRequest
 */
-func (a *FbsAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) FbsUpdatePromoOffersRequest {
-	return FbsUpdatePromoOffersRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdatePromoOffers(ctx context.Context, businessId int64) FbsAPIUpdatePromoOffersRequest {
+	return FbsAPIUpdatePromoOffersRequest{
+		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdatePromoOffersResponse
-func (a *FbsAPIService) UpdatePromoOffersExecute(r FbsUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
+//  @return UpdatePromoOffersResponse
+func (a *FbsAPIService) UpdatePromoOffersExecute(r FbsAPIUpdatePromoOffersRequest) (*UpdatePromoOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -26047,14 +26133,14 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r FbsUpdatePromoOffersRequest) 
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -26160,20 +26246,20 @@ func (a *FbsAPIService) UpdatePromoOffersExecute(r FbsUpdatePromoOffersRequest) 
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateStocksRequest struct {
+type FbsAPIUpdateStocksRequest struct {
 	ctx                 context.Context
-	FbsService          *FbsAPIService
+	ApiService          *FbsAPIService
 	campaignId          int64
 	updateStocksRequest *UpdateStocksRequest
 }
 
-func (r FbsUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) FbsUpdateStocksRequest {
+func (r FbsAPIUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) FbsAPIUpdateStocksRequest {
 	r.updateStocksRequest = &updateStocksRequest
 	return r
 }
 
-func (r FbsUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
-	return r.FbsService.UpdateStocksExecute(r)
+func (r FbsAPIUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.UpdateStocksExecute(r)
 }
 
 /*
@@ -26196,22 +26282,22 @@ UpdateStocks Передача информации об остатках
 |**⚙️ Лимит:** 100 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsUpdateStocksRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIUpdateStocksRequest
 */
-func (a *FbsAPIService) UpdateStocks(ctx context.Context, campaignId int64) FbsUpdateStocksRequest {
-	return FbsUpdateStocksRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateStocks(ctx context.Context, campaignId int64) FbsAPIUpdateStocksRequest {
+	return FbsAPIUpdateStocksRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *FbsAPIService) UpdateStocksExecute(r FbsUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *FbsAPIService) UpdateStocksExecute(r FbsAPIUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}
@@ -26259,14 +26345,14 @@ func (a *FbsAPIService) UpdateStocksExecute(r FbsUpdateStocksRequest) (*EmptyApi
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}
@@ -26372,20 +26458,20 @@ func (a *FbsAPIService) UpdateStocksExecute(r FbsUpdateStocksRequest) (*EmptyApi
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type FbsUpdateWarehouseStatusRequest struct {
+type FbsAPIUpdateWarehouseStatusRequest struct {
 	ctx                          context.Context
-	FbsService                   *FbsAPIService
+	ApiService                   *FbsAPIService
 	campaignId                   int64
 	updateWarehouseStatusRequest *UpdateWarehouseStatusRequest
 }
 
-func (r FbsUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) FbsUpdateWarehouseStatusRequest {
+func (r FbsAPIUpdateWarehouseStatusRequest) UpdateWarehouseStatusRequest(updateWarehouseStatusRequest UpdateWarehouseStatusRequest) FbsAPIUpdateWarehouseStatusRequest {
 	r.updateWarehouseStatusRequest = &updateWarehouseStatusRequest
 	return r
 }
 
-func (r FbsUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
-	return r.FbsService.UpdateWarehouseStatusExecute(r)
+func (r FbsAPIUpdateWarehouseStatusRequest) Execute() (*UpdateWarehouseStatusResponse, *http.Response, error) {
+	return r.ApiService.UpdateWarehouseStatusExecute(r)
 }
 
 /*
@@ -26400,22 +26486,22 @@ UpdateWarehouseStatus Изменение статуса склада
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return FbsUpdateWarehouseStatusRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return FbsAPIUpdateWarehouseStatusRequest
 */
-func (a *FbsAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) FbsUpdateWarehouseStatusRequest {
-	return FbsUpdateWarehouseStatusRequest{
-		FbsService: a,
+func (a *FbsAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) FbsAPIUpdateWarehouseStatusRequest {
+	return FbsAPIUpdateWarehouseStatusRequest{
+		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
 	}
 }
 
 // Execute executes the request
-//
-//	@return UpdateWarehouseStatusResponse
-func (a *FbsAPIService) UpdateWarehouseStatusExecute(r FbsUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
+//  @return UpdateWarehouseStatusResponse
+func (a *FbsAPIService) UpdateWarehouseStatusExecute(r FbsAPIUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -26463,14 +26549,14 @@ func (a *FbsAPIService) UpdateWarehouseStatusExecute(r FbsUpdateWarehouseStatusR
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["FbsKey"]; ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
 				var key string
 				if apiKey.Prefix != "" {
 					key = apiKey.Prefix + " " + apiKey.Key
 				} else {
 					key = apiKey.Key
 				}
-				localVarHeaderParams["Fbs-Key"] = key
+				localVarHeaderParams["Api-Key"] = key
 			}
 		}
 	}

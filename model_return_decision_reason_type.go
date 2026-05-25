@@ -20,14 +20,14 @@ type ReturnDecisionReasonType string
 
 // List of ReturnDecisionReasonType
 const (
-	ReturnDecisionReasonType_BAD_QUALITY     ReturnDecisionReasonType = "BAD_QUALITY"
-	ReturnDecisionReasonType_DOES_NOT_FIT    ReturnDecisionReasonType = "DOES_NOT_FIT"
-	ReturnDecisionReasonType_WRONG_ITEM      ReturnDecisionReasonType = "WRONG_ITEM"
-	ReturnDecisionReasonType_DAMAGE_DELIVERY ReturnDecisionReasonType = "DAMAGE_DELIVERY"
-	ReturnDecisionReasonType_LOYALTY_FAIL    ReturnDecisionReasonType = "LOYALTY_FAIL"
-	ReturnDecisionReasonType_CONTENT_FAIL    ReturnDecisionReasonType = "CONTENT_FAIL"
-	ReturnDecisionReasonType_DELIVERY_FAIL   ReturnDecisionReasonType = "DELIVERY_FAIL"
-	ReturnDecisionReasonType_UNKNOWN         ReturnDecisionReasonType = "UNKNOWN"
+	RETURNDECISIONREASONTYPE_BAD_QUALITY     ReturnDecisionReasonType = "BAD_QUALITY"
+	RETURNDECISIONREASONTYPE_DOES_NOT_FIT    ReturnDecisionReasonType = "DOES_NOT_FIT"
+	RETURNDECISIONREASONTYPE_WRONG_ITEM      ReturnDecisionReasonType = "WRONG_ITEM"
+	RETURNDECISIONREASONTYPE_DAMAGE_DELIVERY ReturnDecisionReasonType = "DAMAGE_DELIVERY"
+	RETURNDECISIONREASONTYPE_LOYALTY_FAIL    ReturnDecisionReasonType = "LOYALTY_FAIL"
+	RETURNDECISIONREASONTYPE_CONTENT_FAIL    ReturnDecisionReasonType = "CONTENT_FAIL"
+	RETURNDECISIONREASONTYPE_DELIVERY_FAIL   ReturnDecisionReasonType = "DELIVERY_FAIL"
+	RETURNDECISIONREASONTYPE_UNKNOWN         ReturnDecisionReasonType = "UNKNOWN"
 )
 
 // All allowed values of ReturnDecisionReasonType enum

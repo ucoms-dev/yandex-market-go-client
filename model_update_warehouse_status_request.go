@@ -108,6 +108,7 @@ func (o *UpdateWarehouseStatusRequest) UnmarshalJSON(data []byte) (err error) {
 	varUpdateWarehouseStatusRequest := _UpdateWarehouseStatusRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateWarehouseStatusRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableUpdateWarehouseStatusRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateWarehouseStatusRequest) Unset() {
-	v.value = nil
+	var zero *UpdateWarehouseStatusRequest
+	v.value = zero
 	v.isSet = false
 }
 

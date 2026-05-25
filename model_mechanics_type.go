@@ -20,9 +20,9 @@ type MechanicsType string
 
 // List of MechanicsType
 const (
-	MechanicsType_DIRECT_DISCOUNT  MechanicsType = "DIRECT_DISCOUNT"
-	MechanicsType_BLUE_FLASH       MechanicsType = "BLUE_FLASH"
-	MechanicsType_MARKET_PROMOCODE MechanicsType = "MARKET_PROMOCODE"
+	MECHANICSTYPE_DIRECT_DISCOUNT  MechanicsType = "DIRECT_DISCOUNT"
+	MECHANICSTYPE_BLUE_FLASH       MechanicsType = "BLUE_FLASH"
+	MECHANICSTYPE_MARKET_PROMOCODE MechanicsType = "MARKET_PROMOCODE"
 )
 
 // All allowed values of MechanicsType enum

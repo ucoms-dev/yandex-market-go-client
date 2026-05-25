@@ -108,6 +108,7 @@ func (o *OutletLicensesResponseDTO) UnmarshalJSON(data []byte) (err error) {
 	varOutletLicensesResponseDTO := _OutletLicensesResponseDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOutletLicensesResponseDTO)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableOutletLicensesResponseDTO) IsSet() bool {
 }
 
 func (v *NullableOutletLicensesResponseDTO) Unset() {
-	v.value = nil
+	var zero *OutletLicensesResponseDTO
+	v.value = zero
 	v.isSet = false
 }
 

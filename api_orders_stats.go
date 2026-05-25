@@ -22,7 +22,7 @@ import (
 // OrdersStatsAPIService OrdersStatsAPI service
 type OrdersStatsAPIService service
 
-type ApiGetOrdersStatsRequest struct {
+type OrdersStatsAPIGetOrdersStatsRequest struct {
 	ctx                   context.Context
 	ApiService            *OrdersStatsAPIService
 	campaignId            int64
@@ -32,23 +32,23 @@ type ApiGetOrdersStatsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetOrdersStatsRequest) PageToken(pageToken string) ApiGetOrdersStatsRequest {
+func (r OrdersStatsAPIGetOrdersStatsRequest) PageToken(pageToken string) OrdersStatsAPIGetOrdersStatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetOrdersStatsRequest) Limit(limit int32) ApiGetOrdersStatsRequest {
+func (r OrdersStatsAPIGetOrdersStatsRequest) Limit(limit int32) OrdersStatsAPIGetOrdersStatsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) ApiGetOrdersStatsRequest {
+func (r OrdersStatsAPIGetOrdersStatsRequest) GetOrdersStatsRequest(getOrdersStatsRequest GetOrdersStatsRequest) OrdersStatsAPIGetOrdersStatsRequest {
 	r.getOrdersStatsRequest = &getOrdersStatsRequest
 	return r
 }
 
-func (r ApiGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
+func (r OrdersStatsAPIGetOrdersStatsRequest) Execute() (*GetOrdersStatsResponse, *http.Response, error) {
 	return r.ApiService.GetOrdersStatsExecute(r)
 }
 
@@ -72,12 +72,13 @@ GetOrdersStats Детальная информация по заказам
 |**⚙️ Лимит:** 1 000 000 заказов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetOrdersStatsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return OrdersStatsAPIGetOrdersStatsRequest
 */
-func (a *OrdersStatsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) ApiGetOrdersStatsRequest {
-	return ApiGetOrdersStatsRequest{
+func (a *OrdersStatsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) OrdersStatsAPIGetOrdersStatsRequest {
+	return OrdersStatsAPIGetOrdersStatsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -85,9 +86,8 @@ func (a *OrdersStatsAPIService) GetOrdersStats(ctx context.Context, campaignId i
 }
 
 // Execute executes the request
-//
-//	@return GetOrdersStatsResponse
-func (a *OrdersStatsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
+//  @return GetOrdersStatsResponse
+func (a *OrdersStatsAPIService) GetOrdersStatsExecute(r OrdersStatsAPIGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -111,10 +111,10 @@ func (a *OrdersStatsAPIService) GetOrdersStatsExecute(r ApiGetOrdersStatsRequest
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

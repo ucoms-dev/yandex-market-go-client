@@ -166,6 +166,7 @@ func (o *ChatMessagePayloadDTO) UnmarshalJSON(data []byte) (err error) {
 	varChatMessagePayloadDTO := _ChatMessagePayloadDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varChatMessagePayloadDTO)
 
 	if err != nil {
@@ -196,7 +197,8 @@ func (v NullableChatMessagePayloadDTO) IsSet() bool {
 }
 
 func (v *NullableChatMessagePayloadDTO) Unset() {
-	v.value = nil
+	var zero *ChatMessagePayloadDTO
+	v.value = zero
 	v.isSet = false
 }
 

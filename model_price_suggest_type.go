@@ -20,9 +20,9 @@ type PriceSuggestType string
 
 // List of PriceSuggestType
 const (
-	PriceSuggestType_BUYBOX           PriceSuggestType = "BUYBOX"
-	PriceSuggestType_DEFAULT_OFFER    PriceSuggestType = "DEFAULT_OFFER"
-	PriceSuggestType_MIN_PRICE_MARKET PriceSuggestType = "MIN_PRICE_MARKET"
+	PRICESUGGESTTYPE_BUYBOX           PriceSuggestType = "BUYBOX"
+	PRICESUGGESTTYPE_DEFAULT_OFFER    PriceSuggestType = "DEFAULT_OFFER"
+	PRICESUGGESTTYPE_MIN_PRICE_MARKET PriceSuggestType = "MIN_PRICE_MARKET"
 )
 
 // All allowed values of PriceSuggestType enum

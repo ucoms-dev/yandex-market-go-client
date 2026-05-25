@@ -137,6 +137,7 @@ func (o *ValueRestrictionDTO) UnmarshalJSON(data []byte) (err error) {
 	varValueRestrictionDTO := _ValueRestrictionDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varValueRestrictionDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableValueRestrictionDTO) IsSet() bool {
 }
 
 func (v *NullableValueRestrictionDTO) Unset() {
-	v.value = nil
+	var zero *ValueRestrictionDTO
+	v.value = zero
 	v.isSet = false
 }
 

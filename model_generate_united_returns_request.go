@@ -278,6 +278,7 @@ func (o *GenerateUnitedReturnsRequest) UnmarshalJSON(data []byte) (err error) {
 	varGenerateUnitedReturnsRequest := _GenerateUnitedReturnsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateUnitedReturnsRequest)
 
 	if err != nil {
@@ -308,7 +309,8 @@ func (v NullableGenerateUnitedReturnsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateUnitedReturnsRequest) Unset() {
-	v.value = nil
+	var zero *GenerateUnitedReturnsRequest
+	v.value = zero
 	v.isSet = false
 }
 

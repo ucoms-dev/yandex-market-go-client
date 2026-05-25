@@ -137,6 +137,7 @@ func (o *WarehouseOffersDTO) UnmarshalJSON(data []byte) (err error) {
 	varWarehouseOffersDTO := _WarehouseOffersDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varWarehouseOffersDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableWarehouseOffersDTO) IsSet() bool {
 }
 
 func (v *NullableWarehouseOffersDTO) Unset() {
-	v.value = nil
+	var zero *WarehouseOffersDTO
+	v.value = zero
 	v.isSet = false
 }
 

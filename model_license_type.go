@@ -20,8 +20,8 @@ type LicenseType string
 
 // List of LicenseType
 const (
-	LicenseType_ALCOHOL LicenseType = "ALCOHOL"
-	LicenseType_UNKNOWN LicenseType = "UNKNOWN"
+	LICENSETYPE_ALCOHOL LicenseType = "ALCOHOL"
+	LICENSETYPE_UNKNOWN LicenseType = "UNKNOWN"
 )
 
 // All allowed values of LicenseType enum

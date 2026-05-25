@@ -166,6 +166,7 @@ func (o *GenerateBannersStatisticsRequest) UnmarshalJSON(data []byte) (err error
 	varGenerateBannersStatisticsRequest := _GenerateBannersStatisticsRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateBannersStatisticsRequest)
 
 	if err != nil {
@@ -196,7 +197,8 @@ func (v NullableGenerateBannersStatisticsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateBannersStatisticsRequest) Unset() {
-	v.value = nil
+	var zero *GenerateBannersStatisticsRequest
+	v.value = zero
 	v.isSet = false
 }
 

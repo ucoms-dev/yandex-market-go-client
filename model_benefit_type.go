@@ -20,13 +20,13 @@ type BenefitType string
 
 // List of BenefitType
 const (
-	BenefitType_BESTS              BenefitType = "BESTS"
-	BenefitType_SPLIT_0_0_4        BenefitType = "SPLIT_0_0_4"
-	BenefitType_SPLIT_0_0_6        BenefitType = "SPLIT_0_0_6"
-	BenefitType_SPLIT_0_0_12       BenefitType = "SPLIT_0_0_12"
-	BenefitType_MARKET_SUBSIDY_1_4 BenefitType = "MARKET_SUBSIDY_1_4"
-	BenefitType_MARKET_SUBSIDY_5_9 BenefitType = "MARKET_SUBSIDY_5_9"
-	BenefitType_MARKET_SUBSIDY_10  BenefitType = "MARKET_SUBSIDY_10"
+	BENEFITTYPE_BESTS              BenefitType = "BESTS"
+	BENEFITTYPE_SPLIT_0_0_4        BenefitType = "SPLIT_0_0_4"
+	BENEFITTYPE_SPLIT_0_0_6        BenefitType = "SPLIT_0_0_6"
+	BENEFITTYPE_SPLIT_0_0_12       BenefitType = "SPLIT_0_0_12"
+	BENEFITTYPE_MARKET_SUBSIDY_1_4 BenefitType = "MARKET_SUBSIDY_1_4"
+	BENEFITTYPE_MARKET_SUBSIDY_5_9 BenefitType = "MARKET_SUBSIDY_5_9"
+	BENEFITTYPE_MARKET_SUBSIDY_10  BenefitType = "MARKET_SUBSIDY_10"
 )
 
 // All allowed values of BenefitType enum

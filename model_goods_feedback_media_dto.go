@@ -146,7 +146,8 @@ func (v NullableGoodsFeedbackMediaDTO) IsSet() bool {
 }
 
 func (v *NullableGoodsFeedbackMediaDTO) Unset() {
-	v.value = nil
+	var zero *GoodsFeedbackMediaDTO
+	v.value = zero
 	v.isSet = false
 }
 

@@ -149,6 +149,7 @@ func (o *SetOrderBoxLayoutRequest) UnmarshalJSON(data []byte) (err error) {
 	varSetOrderBoxLayoutRequest := _SetOrderBoxLayoutRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSetOrderBoxLayoutRequest)
 
 	if err != nil {
@@ -179,7 +180,8 @@ func (v NullableSetOrderBoxLayoutRequest) IsSet() bool {
 }
 
 func (v *NullableSetOrderBoxLayoutRequest) Unset() {
-	v.value = nil
+	var zero *SetOrderBoxLayoutRequest
+	v.value = zero
 	v.isSet = false
 }
 

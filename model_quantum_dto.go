@@ -144,7 +144,8 @@ func (v NullableQuantumDTO) IsSet() bool {
 }
 
 func (v *NullableQuantumDTO) Unset() {
-	v.value = nil
+	var zero *QuantumDTO
+	v.value = zero
 	v.isSet = false
 }
 

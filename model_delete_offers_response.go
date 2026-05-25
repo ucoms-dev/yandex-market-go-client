@@ -142,7 +142,8 @@ func (v NullableDeleteOffersResponse) IsSet() bool {
 }
 
 func (v *NullableDeleteOffersResponse) Unset() {
-	v.value = nil
+	var zero *DeleteOffersResponse
+	v.value = zero
 	v.isSet = false
 }
 

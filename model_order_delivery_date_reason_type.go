@@ -20,8 +20,8 @@ type OrderDeliveryDateReasonType string
 
 // List of OrderDeliveryDateReasonType
 const (
-	OrderDeliveryDateReasonType_USER_MOVED_DELIVERY_DATES    OrderDeliveryDateReasonType = "USER_MOVED_DELIVERY_DATES"
-	OrderDeliveryDateReasonType_PARTNER_MOVED_DELIVERY_DATES OrderDeliveryDateReasonType = "PARTNER_MOVED_DELIVERY_DATES"
+	ORDERDELIVERYDATEREASONTYPE_USER_MOVED_DELIVERY_DATES    OrderDeliveryDateReasonType = "USER_MOVED_DELIVERY_DATES"
+	ORDERDELIVERYDATEREASONTYPE_PARTNER_MOVED_DELIVERY_DATES OrderDeliveryDateReasonType = "PARTNER_MOVED_DELIVERY_DATES"
 )
 
 // All allowed values of OrderDeliveryDateReasonType enum

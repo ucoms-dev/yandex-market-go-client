@@ -145,6 +145,7 @@ func (o *GenerateGoodsTurnoverRequest) UnmarshalJSON(data []byte) (err error) {
 	varGenerateGoodsTurnoverRequest := _GenerateGoodsTurnoverRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varGenerateGoodsTurnoverRequest)
 
 	if err != nil {
@@ -175,7 +176,8 @@ func (v NullableGenerateGoodsTurnoverRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateGoodsTurnoverRequest) Unset() {
-	v.value = nil
+	var zero *GenerateGoodsTurnoverRequest
+	v.value = zero
 	v.isSet = false
 }
 

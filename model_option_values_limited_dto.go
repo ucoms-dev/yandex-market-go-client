@@ -137,6 +137,7 @@ func (o *OptionValuesLimitedDTO) UnmarshalJSON(data []byte) (err error) {
 	varOptionValuesLimitedDTO := _OptionValuesLimitedDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOptionValuesLimitedDTO)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableOptionValuesLimitedDTO) IsSet() bool {
 }
 
 func (v *NullableOptionValuesLimitedDTO) Unset() {
-	v.value = nil
+	var zero *OptionValuesLimitedDTO
+	v.value = zero
 	v.isSet = false
 }
 

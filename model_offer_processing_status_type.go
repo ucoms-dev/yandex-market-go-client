@@ -20,18 +20,18 @@ type OfferProcessingStatusType string
 
 // List of OfferProcessingStatusType
 const (
-	OfferProcessingStatusType_UNKNOWN            OfferProcessingStatusType = "UNKNOWN"
-	OfferProcessingStatusType_READY              OfferProcessingStatusType = "READY"
-	OfferProcessingStatusType_IN_WORK            OfferProcessingStatusType = "IN_WORK"
-	OfferProcessingStatusType_NEED_INFO          OfferProcessingStatusType = "NEED_INFO"
-	OfferProcessingStatusType_NEED_MAPPING       OfferProcessingStatusType = "NEED_MAPPING"
-	OfferProcessingStatusType_NEED_CONTENT       OfferProcessingStatusType = "NEED_CONTENT"
-	OfferProcessingStatusType_CONTENT_PROCESSING OfferProcessingStatusType = "CONTENT_PROCESSING"
-	OfferProcessingStatusType_SUSPENDED          OfferProcessingStatusType = "SUSPENDED"
-	OfferProcessingStatusType_REJECTED           OfferProcessingStatusType = "REJECTED"
-	OfferProcessingStatusType_REVIEW             OfferProcessingStatusType = "REVIEW"
-	OfferProcessingStatusType_CREATE_ERROR       OfferProcessingStatusType = "CREATE_ERROR"
-	OfferProcessingStatusType_UPDATE_ERROR       OfferProcessingStatusType = "UPDATE_ERROR"
+	OFFERPROCESSINGSTATUSTYPE_UNKNOWN            OfferProcessingStatusType = "UNKNOWN"
+	OFFERPROCESSINGSTATUSTYPE_READY              OfferProcessingStatusType = "READY"
+	OFFERPROCESSINGSTATUSTYPE_IN_WORK            OfferProcessingStatusType = "IN_WORK"
+	OFFERPROCESSINGSTATUSTYPE_NEED_INFO          OfferProcessingStatusType = "NEED_INFO"
+	OFFERPROCESSINGSTATUSTYPE_NEED_MAPPING       OfferProcessingStatusType = "NEED_MAPPING"
+	OFFERPROCESSINGSTATUSTYPE_NEED_CONTENT       OfferProcessingStatusType = "NEED_CONTENT"
+	OFFERPROCESSINGSTATUSTYPE_CONTENT_PROCESSING OfferProcessingStatusType = "CONTENT_PROCESSING"
+	OFFERPROCESSINGSTATUSTYPE_SUSPENDED          OfferProcessingStatusType = "SUSPENDED"
+	OFFERPROCESSINGSTATUSTYPE_REJECTED           OfferProcessingStatusType = "REJECTED"
+	OFFERPROCESSINGSTATUSTYPE_REVIEW             OfferProcessingStatusType = "REVIEW"
+	OFFERPROCESSINGSTATUSTYPE_CREATE_ERROR       OfferProcessingStatusType = "CREATE_ERROR"
+	OFFERPROCESSINGSTATUSTYPE_UPDATE_ERROR       OfferProcessingStatusType = "UPDATE_ERROR"
 )
 
 // All allowed values of OfferProcessingStatusType enum

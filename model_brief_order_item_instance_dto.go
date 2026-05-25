@@ -255,7 +255,8 @@ func (v NullableBriefOrderItemInstanceDTO) IsSet() bool {
 }
 
 func (v *NullableBriefOrderItemInstanceDTO) Unset() {
-	v.value = nil
+	var zero *BriefOrderItemInstanceDTO
+	v.value = zero
 	v.isSet = false
 }
 

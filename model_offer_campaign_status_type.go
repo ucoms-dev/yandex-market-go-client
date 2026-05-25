@@ -20,15 +20,15 @@ type OfferCampaignStatusType string
 
 // List of OfferCampaignStatusType
 const (
-	OfferCampaignStatusType_PUBLISHED              OfferCampaignStatusType = "PUBLISHED"
-	OfferCampaignStatusType_CHECKING               OfferCampaignStatusType = "CHECKING"
-	OfferCampaignStatusType_DISABLED_BY_PARTNER    OfferCampaignStatusType = "DISABLED_BY_PARTNER"
-	OfferCampaignStatusType_DISABLED_AUTOMATICALLY OfferCampaignStatusType = "DISABLED_AUTOMATICALLY"
-	OfferCampaignStatusType_REJECTED_BY_MARKET     OfferCampaignStatusType = "REJECTED_BY_MARKET"
-	OfferCampaignStatusType_CREATING_CARD          OfferCampaignStatusType = "CREATING_CARD"
-	OfferCampaignStatusType_NO_CARD                OfferCampaignStatusType = "NO_CARD"
-	OfferCampaignStatusType_NO_STOCKS              OfferCampaignStatusType = "NO_STOCKS"
-	OfferCampaignStatusType_ARCHIVED               OfferCampaignStatusType = "ARCHIVED"
+	OFFERCAMPAIGNSTATUSTYPE_PUBLISHED              OfferCampaignStatusType = "PUBLISHED"
+	OFFERCAMPAIGNSTATUSTYPE_CHECKING               OfferCampaignStatusType = "CHECKING"
+	OFFERCAMPAIGNSTATUSTYPE_DISABLED_BY_PARTNER    OfferCampaignStatusType = "DISABLED_BY_PARTNER"
+	OFFERCAMPAIGNSTATUSTYPE_DISABLED_AUTOMATICALLY OfferCampaignStatusType = "DISABLED_AUTOMATICALLY"
+	OFFERCAMPAIGNSTATUSTYPE_REJECTED_BY_MARKET     OfferCampaignStatusType = "REJECTED_BY_MARKET"
+	OFFERCAMPAIGNSTATUSTYPE_CREATING_CARD          OfferCampaignStatusType = "CREATING_CARD"
+	OFFERCAMPAIGNSTATUSTYPE_NO_CARD                OfferCampaignStatusType = "NO_CARD"
+	OFFERCAMPAIGNSTATUSTYPE_NO_STOCKS              OfferCampaignStatusType = "NO_STOCKS"
+	OFFERCAMPAIGNSTATUSTYPE_ARCHIVED               OfferCampaignStatusType = "ARCHIVED"
 )
 
 // All allowed values of OfferCampaignStatusType enum

@@ -288,6 +288,7 @@ func (o *ReturnItemDTO) UnmarshalJSON(data []byte) (err error) {
 	varReturnItemDTO := _ReturnItemDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varReturnItemDTO)
 
 	if err != nil {
@@ -318,7 +319,8 @@ func (v NullableReturnItemDTO) IsSet() bool {
 }
 
 func (v *NullableReturnItemDTO) Unset() {
-	v.value = nil
+	var zero *ReturnItemDTO
+	v.value = zero
 	v.isSet = false
 }
 

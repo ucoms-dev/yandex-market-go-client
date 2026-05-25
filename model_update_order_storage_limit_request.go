@@ -108,6 +108,7 @@ func (o *UpdateOrderStorageLimitRequest) UnmarshalJSON(data []byte) (err error) 
 	varUpdateOrderStorageLimitRequest := _UpdateOrderStorageLimitRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varUpdateOrderStorageLimitRequest)
 
 	if err != nil {
@@ -138,7 +139,8 @@ func (v NullableUpdateOrderStorageLimitRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateOrderStorageLimitRequest) Unset() {
-	v.value = nil
+	var zero *UpdateOrderStorageLimitRequest
+	v.value = zero
 	v.isSet = false
 }
 

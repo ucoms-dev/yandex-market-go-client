@@ -22,7 +22,7 @@ import (
 // PricesAPIService PricesAPI service
 type PricesAPIService service
 
-type ApiGetPricesRequest struct {
+type PricesAPIGetPricesRequest struct {
 	ctx        context.Context
 	ApiService *PricesAPIService
 	campaignId int64
@@ -32,24 +32,24 @@ type ApiGetPricesRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetPricesRequest) PageToken(pageToken string) ApiGetPricesRequest {
+func (r PricesAPIGetPricesRequest) PageToken(pageToken string) PricesAPIGetPricesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetPricesRequest) Limit(limit int32) ApiGetPricesRequest {
+func (r PricesAPIGetPricesRequest) Limit(limit int32) PricesAPIGetPricesRequest {
 	r.limit = &limit
 	return r
 }
 
 // Фильтр по нахождению в архиве.
-func (r ApiGetPricesRequest) Archived(archived bool) ApiGetPricesRequest {
+func (r PricesAPIGetPricesRequest) Archived(archived bool) PricesAPIGetPricesRequest {
 	r.archived = &archived
 	return r
 }
 
-func (r ApiGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
+func (r PricesAPIGetPricesRequest) Execute() (*GetPricesResponse, *http.Response, error) {
 	return r.ApiService.GetPricesExecute(r)
 }
 
@@ -77,14 +77,15 @@ GetPrices Список цен
 |**⚙️ Лимит:** ```(количество товаров партнера на витрине) * 25``` товаров в сутки|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return PricesAPIGetPricesRequest
 
 Deprecated
 */
-func (a *PricesAPIService) GetPrices(ctx context.Context, campaignId int64) ApiGetPricesRequest {
-	return ApiGetPricesRequest{
+func (a *PricesAPIService) GetPrices(ctx context.Context, campaignId int64) PricesAPIGetPricesRequest {
+	return PricesAPIGetPricesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -92,11 +93,9 @@ func (a *PricesAPIService) GetPrices(ctx context.Context, campaignId int64) ApiG
 }
 
 // Execute executes the request
-//
-//	@return GetPricesResponse
-//
+//  @return GetPricesResponse
 // Deprecated
-func (a *PricesAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
+func (a *PricesAPIService) GetPricesExecute(r PricesAPIGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -120,13 +119,13 @@ func (a *PricesAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRe
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	if r.archived != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "form", "")
 	} else {
 		var defaultValue bool = false
 		r.archived = &defaultValue
@@ -264,7 +263,7 @@ func (a *PricesAPIService) GetPricesExecute(r ApiGetPricesRequest) (*GetPricesRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetPricesByOfferIdsRequest struct {
+type PricesAPIGetPricesByOfferIdsRequest struct {
 	ctx                        context.Context
 	ApiService                 *PricesAPIService
 	campaignId                 int64
@@ -274,23 +273,23 @@ type ApiGetPricesByOfferIdsRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetPricesByOfferIdsRequest) PageToken(pageToken string) ApiGetPricesByOfferIdsRequest {
+func (r PricesAPIGetPricesByOfferIdsRequest) PageToken(pageToken string) PricesAPIGetPricesByOfferIdsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetPricesByOfferIdsRequest) Limit(limit int32) ApiGetPricesByOfferIdsRequest {
+func (r PricesAPIGetPricesByOfferIdsRequest) Limit(limit int32) PricesAPIGetPricesByOfferIdsRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) ApiGetPricesByOfferIdsRequest {
+func (r PricesAPIGetPricesByOfferIdsRequest) GetPricesByOfferIdsRequest(getPricesByOfferIdsRequest GetPricesByOfferIdsRequest) PricesAPIGetPricesByOfferIdsRequest {
 	r.getPricesByOfferIdsRequest = &getPricesByOfferIdsRequest
 	return r
 }
 
-func (r ApiGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
+func (r PricesAPIGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResponse, *http.Response, error) {
 	return r.ApiService.GetPricesByOfferIdsExecute(r)
 }
 
@@ -314,12 +313,13 @@ GetPricesByOfferIds Просмотр цен на указанные товары
 
 [//]: <> (rule: суточный лимит товаров — количество товаров на витрине * 25)
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetPricesByOfferIdsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return PricesAPIGetPricesByOfferIdsRequest
 */
-func (a *PricesAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) ApiGetPricesByOfferIdsRequest {
-	return ApiGetPricesByOfferIdsRequest{
+func (a *PricesAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) PricesAPIGetPricesByOfferIdsRequest {
+	return PricesAPIGetPricesByOfferIdsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -327,9 +327,8 @@ func (a *PricesAPIService) GetPricesByOfferIds(ctx context.Context, campaignId i
 }
 
 // Execute executes the request
-//
-//	@return GetPricesByOfferIdsResponse
-func (a *PricesAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
+//  @return GetPricesByOfferIdsResponse
+func (a *PricesAPIService) GetPricesByOfferIdsExecute(r PricesAPIGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -353,10 +352,10 @@ func (a *PricesAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsRe
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -493,19 +492,19 @@ func (a *PricesAPIService) GetPricesByOfferIdsExecute(r ApiGetPricesByOfferIdsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSuggestedPricesRequest struct {
+type PricesAPIGetSuggestedPricesRequest struct {
 	ctx                  context.Context
 	ApiService           *PricesAPIService
 	campaignId           int64
 	suggestPricesRequest *SuggestPricesRequest
 }
 
-func (r ApiGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) ApiGetSuggestedPricesRequest {
+func (r PricesAPIGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) PricesAPIGetSuggestedPricesRequest {
 	r.suggestPricesRequest = &suggestPricesRequest
 	return r
 }
 
-func (r ApiGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
+func (r PricesAPIGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
 	return r.ApiService.GetSuggestedPricesExecute(r)
 }
 
@@ -515,6 +514,8 @@ GetSuggestedPrices Цены для продвижения товаров
 {% include notitle [access](../../_auto/method_scopes/getSuggestedPrices.md) %}
 
 {% note warning "Не используйте его, это может привести к ошибкам. Информацию о ценах вы можете получить в помощью [отчета «Цены на рынке»](../../reference/reports/generatePricesReport.md)." %}
+
+
 
 {% endnote %}
 
@@ -539,14 +540,15 @@ GetSuggestedPrices Цены для продвижения товаров
 |**⚙️ Лимит:** 100 000 товаров в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetSuggestedPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return PricesAPIGetSuggestedPricesRequest
 
 Deprecated
 */
-func (a *PricesAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) ApiGetSuggestedPricesRequest {
-	return ApiGetSuggestedPricesRequest{
+func (a *PricesAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) PricesAPIGetSuggestedPricesRequest {
+	return PricesAPIGetSuggestedPricesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -554,11 +556,9 @@ func (a *PricesAPIService) GetSuggestedPrices(ctx context.Context, campaignId in
 }
 
 // Execute executes the request
-//
-//	@return SuggestPricesResponse
-//
+//  @return SuggestPricesResponse
 // Deprecated
-func (a *PricesAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
+func (a *PricesAPIService) GetSuggestedPricesExecute(r PricesAPIGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -719,19 +719,19 @@ func (a *PricesAPIService) GetSuggestedPricesExecute(r ApiGetSuggestedPricesRequ
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateBusinessPricesRequest struct {
+type PricesAPIUpdateBusinessPricesRequest struct {
 	ctx                         context.Context
 	ApiService                  *PricesAPIService
 	businessId                  int64
 	updateBusinessPricesRequest *UpdateBusinessPricesRequest
 }
 
-func (r ApiUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) ApiUpdateBusinessPricesRequest {
+func (r PricesAPIUpdateBusinessPricesRequest) UpdateBusinessPricesRequest(updateBusinessPricesRequest UpdateBusinessPricesRequest) PricesAPIUpdateBusinessPricesRequest {
 	r.updateBusinessPricesRequest = &updateBusinessPricesRequest
 	return r
 }
 
-func (r ApiUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r PricesAPIUpdateBusinessPricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.UpdateBusinessPricesExecute(r)
 }
 
@@ -753,12 +753,13 @@ UpdateBusinessPrices Установка цен на товары для всех
 |**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
-	@return ApiUpdateBusinessPricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+ @return PricesAPIUpdateBusinessPricesRequest
 */
-func (a *PricesAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) ApiUpdateBusinessPricesRequest {
-	return ApiUpdateBusinessPricesRequest{
+func (a *PricesAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) PricesAPIUpdateBusinessPricesRequest {
+	return PricesAPIUpdateBusinessPricesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		businessId: businessId,
@@ -766,9 +767,8 @@ func (a *PricesAPIService) UpdateBusinessPrices(ctx context.Context, businessId 
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *PricesAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *PricesAPIService) UpdateBusinessPricesExecute(r PricesAPIUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -940,19 +940,19 @@ func (a *PricesAPIService) UpdateBusinessPricesExecute(r ApiUpdateBusinessPrices
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdatePricesRequest struct {
+type PricesAPIUpdatePricesRequest struct {
 	ctx                 context.Context
 	ApiService          *PricesAPIService
 	campaignId          int64
 	updatePricesRequest *UpdatePricesRequest
 }
 
-func (r ApiUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) ApiUpdatePricesRequest {
+func (r PricesAPIUpdatePricesRequest) UpdatePricesRequest(updatePricesRequest UpdatePricesRequest) PricesAPIUpdatePricesRequest {
 	r.updatePricesRequest = &updatePricesRequest
 	return r
 }
 
-func (r ApiUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r PricesAPIUpdatePricesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.UpdatePricesExecute(r)
 }
 
@@ -980,12 +980,13 @@ UpdatePrices Установка цен на товары в конкретном
 |**⚙️ Лимит:** 10 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdatePricesRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return PricesAPIUpdatePricesRequest
 */
-func (a *PricesAPIService) UpdatePrices(ctx context.Context, campaignId int64) ApiUpdatePricesRequest {
-	return ApiUpdatePricesRequest{
+func (a *PricesAPIService) UpdatePrices(ctx context.Context, campaignId int64) PricesAPIUpdatePricesRequest {
+	return PricesAPIUpdatePricesRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -993,9 +994,8 @@ func (a *PricesAPIService) UpdatePrices(ctx context.Context, campaignId int64) A
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *PricesAPIService) UpdatePricesExecute(r ApiUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *PricesAPIService) UpdatePricesExecute(r PricesAPIUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}

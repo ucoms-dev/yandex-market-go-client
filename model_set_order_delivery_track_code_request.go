@@ -137,6 +137,7 @@ func (o *SetOrderDeliveryTrackCodeRequest) UnmarshalJSON(data []byte) (err error
 	varSetOrderDeliveryTrackCodeRequest := _SetOrderDeliveryTrackCodeRequest{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varSetOrderDeliveryTrackCodeRequest)
 
 	if err != nil {
@@ -167,7 +168,8 @@ func (v NullableSetOrderDeliveryTrackCodeRequest) IsSet() bool {
 }
 
 func (v *NullableSetOrderDeliveryTrackCodeRequest) Unset() {
-	v.value = nil
+	var zero *SetOrderDeliveryTrackCodeRequest
+	v.value = zero
 	v.isSet = false
 }
 

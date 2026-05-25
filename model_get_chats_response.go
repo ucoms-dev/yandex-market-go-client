@@ -142,7 +142,8 @@ func (v NullableGetChatsResponse) IsSet() bool {
 }
 
 func (v *NullableGetChatsResponse) Unset() {
-	v.value = nil
+	var zero *GetChatsResponse
+	v.value = zero
 	v.isSet = false
 }
 

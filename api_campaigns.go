@@ -22,13 +22,13 @@ import (
 // CampaignsAPIService CampaignsAPI service
 type CampaignsAPIService service
 
-type ApiGetCampaignRequest struct {
+type CampaignsAPIGetCampaignRequest struct {
 	ctx        context.Context
 	ApiService *CampaignsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
+func (r CampaignsAPIGetCampaignRequest) Execute() (*GetCampaignResponse, *http.Response, error) {
 	return r.ApiService.GetCampaignExecute(r)
 }
 
@@ -41,12 +41,13 @@ GetCampaign Информация о магазине
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return CampaignsAPIGetCampaignRequest
 */
-func (a *CampaignsAPIService) GetCampaign(ctx context.Context, campaignId int64) ApiGetCampaignRequest {
-	return ApiGetCampaignRequest{
+func (a *CampaignsAPIService) GetCampaign(ctx context.Context, campaignId int64) CampaignsAPIGetCampaignRequest {
+	return CampaignsAPIGetCampaignRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -54,9 +55,8 @@ func (a *CampaignsAPIService) GetCampaign(ctx context.Context, campaignId int64)
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignResponse
-func (a *CampaignsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
+//  @return GetCampaignResponse
+func (a *CampaignsAPIService) GetCampaignExecute(r CampaignsAPIGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -212,13 +212,13 @@ func (a *CampaignsAPIService) GetCampaignExecute(r ApiGetCampaignRequest) (*GetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignRegionRequest struct {
+type CampaignsAPIGetCampaignRegionRequest struct {
 	ctx        context.Context
 	ApiService *CampaignsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
+func (r CampaignsAPIGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
 	return r.ApiService.GetCampaignRegionExecute(r)
 }
 
@@ -237,14 +237,15 @@ GetCampaignRegion Регион магазина
 |**⚙️ Лимит:** 5 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignRegionRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return CampaignsAPIGetCampaignRegionRequest
 
 Deprecated
 */
-func (a *CampaignsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) ApiGetCampaignRegionRequest {
-	return ApiGetCampaignRegionRequest{
+func (a *CampaignsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) CampaignsAPIGetCampaignRegionRequest {
+	return CampaignsAPIGetCampaignRegionRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -252,11 +253,9 @@ func (a *CampaignsAPIService) GetCampaignRegion(ctx context.Context, campaignId 
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignRegionResponse
-//
+//  @return GetCampaignRegionResponse
 // Deprecated
-func (a *CampaignsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
+func (a *CampaignsAPIService) GetCampaignRegionExecute(r CampaignsAPIGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -412,13 +411,13 @@ func (a *CampaignsAPIService) GetCampaignRegionExecute(r ApiGetCampaignRegionReq
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignSettingsRequest struct {
+type CampaignsAPIGetCampaignSettingsRequest struct {
 	ctx        context.Context
 	ApiService *CampaignsAPIService
 	campaignId int64
 }
 
-func (r ApiGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
+func (r CampaignsAPIGetCampaignSettingsRequest) Execute() (*GetCampaignSettingsResponse, *http.Response, error) {
 	return r.ApiService.GetCampaignSettingsExecute(r)
 }
 
@@ -431,12 +430,13 @@ GetCampaignSettings Настройки магазина
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetCampaignSettingsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return CampaignsAPIGetCampaignSettingsRequest
 */
-func (a *CampaignsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) ApiGetCampaignSettingsRequest {
-	return ApiGetCampaignSettingsRequest{
+func (a *CampaignsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) CampaignsAPIGetCampaignSettingsRequest {
+	return CampaignsAPIGetCampaignSettingsRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -444,9 +444,8 @@ func (a *CampaignsAPIService) GetCampaignSettings(ctx context.Context, campaignI
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignSettingsResponse
-func (a *CampaignsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
+//  @return GetCampaignSettingsResponse
+func (a *CampaignsAPIService) GetCampaignSettingsExecute(r CampaignsAPIGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -602,7 +601,7 @@ func (a *CampaignsAPIService) GetCampaignSettingsExecute(r ApiGetCampaignSetting
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetCampaignsRequest struct {
+type CampaignsAPIGetCampaignsRequest struct {
 	ctx        context.Context
 	ApiService *CampaignsAPIService
 	page       *int32
@@ -610,18 +609,18 @@ type ApiGetCampaignsRequest struct {
 }
 
 // {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetCampaignsRequest) Page(page int32) ApiGetCampaignsRequest {
+func (r CampaignsAPIGetCampaignsRequest) Page(page int32) CampaignsAPIGetCampaignsRequest {
 	r.page = &page
 	return r
 }
 
 // Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
-func (r ApiGetCampaignsRequest) PageSize(pageSize int32) ApiGetCampaignsRequest {
+func (r CampaignsAPIGetCampaignsRequest) PageSize(pageSize int32) CampaignsAPIGetCampaignsRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-func (r ApiGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
+func (r CampaignsAPIGetCampaignsRequest) Execute() (*GetCampaignsResponse, *http.Response, error) {
 	return r.ApiService.GetCampaignsExecute(r)
 }
 
@@ -637,20 +636,20 @@ GetCampaigns Список магазинов пользователя
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGetCampaignsRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return CampaignsAPIGetCampaignsRequest
 */
-func (a *CampaignsAPIService) GetCampaigns(ctx context.Context) ApiGetCampaignsRequest {
-	return ApiGetCampaignsRequest{
+func (a *CampaignsAPIService) GetCampaigns(ctx context.Context) CampaignsAPIGetCampaignsRequest {
+	return CampaignsAPIGetCampaignsRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GetCampaignsResponse
-func (a *CampaignsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
+//  @return GetCampaignsResponse
+func (a *CampaignsAPIService) GetCampaignsExecute(r CampaignsAPIGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
@@ -670,13 +669,13 @@ func (a *CampaignsAPIService) GetCampaignsExecute(r ApiGetCampaignsRequest) (*Ge
 	localVarFormParams := url.Values{}
 
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

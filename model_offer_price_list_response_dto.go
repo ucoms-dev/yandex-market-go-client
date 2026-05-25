@@ -181,6 +181,7 @@ func (o *OfferPriceListResponseDTO) UnmarshalJSON(data []byte) (err error) {
 	varOfferPriceListResponseDTO := _OfferPriceListResponseDTO{}
 
 	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
 	err = decoder.Decode(&varOfferPriceListResponseDTO)
 
 	if err != nil {
@@ -211,7 +212,8 @@ func (v NullableOfferPriceListResponseDTO) IsSet() bool {
 }
 
 func (v *NullableOfferPriceListResponseDTO) Unset() {
-	v.value = nil
+	var zero *OfferPriceListResponseDTO
+	v.value = zero
 	v.isSet = false
 }
 

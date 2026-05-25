@@ -106,7 +106,8 @@ func (v NullableEmptyApiResponse) IsSet() bool {
 }
 
 func (v *NullableEmptyApiResponse) Unset() {
-	v.value = nil
+	var zero *EmptyApiResponse
+	v.value = zero
 	v.isSet = false
 }
 

@@ -20,10 +20,10 @@ type SupplyRequestReferenceType string
 
 // List of SupplyRequestReferenceType
 const (
-	SupplyRequestReferenceType_VIRTUAL_DISTRIBUTION SupplyRequestReferenceType = "VIRTUAL_DISTRIBUTION"
-	SupplyRequestReferenceType_WITHDRAW             SupplyRequestReferenceType = "WITHDRAW"
-	SupplyRequestReferenceType_UTILIZATION          SupplyRequestReferenceType = "UTILIZATION"
-	SupplyRequestReferenceType_ADDITIONAL_SUPPLY    SupplyRequestReferenceType = "ADDITIONAL_SUPPLY"
+	SUPPLYREQUESTREFERENCETYPE_VIRTUAL_DISTRIBUTION SupplyRequestReferenceType = "VIRTUAL_DISTRIBUTION"
+	SUPPLYREQUESTREFERENCETYPE_WITHDRAW             SupplyRequestReferenceType = "WITHDRAW"
+	SUPPLYREQUESTREFERENCETYPE_UTILIZATION          SupplyRequestReferenceType = "UTILIZATION"
+	SUPPLYREQUESTREFERENCETYPE_ADDITIONAL_SUPPLY    SupplyRequestReferenceType = "ADDITIONAL_SUPPLY"
 )
 
 // All allowed values of SupplyRequestReferenceType enum

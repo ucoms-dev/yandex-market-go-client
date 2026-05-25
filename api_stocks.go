@@ -22,7 +22,7 @@ import (
 // StocksAPIService StocksAPI service
 type StocksAPIService service
 
-type ApiGetStocksRequest struct {
+type StocksAPIGetStocksRequest struct {
 	ctx                       context.Context
 	ApiService                *StocksAPIService
 	campaignId                int64
@@ -32,23 +32,23 @@ type ApiGetStocksRequest struct {
 }
 
 // Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
-func (r ApiGetStocksRequest) PageToken(pageToken string) ApiGetStocksRequest {
+func (r StocksAPIGetStocksRequest) PageToken(pageToken string) StocksAPIGetStocksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
 // Количество значений на одной странице.
-func (r ApiGetStocksRequest) Limit(limit int32) ApiGetStocksRequest {
+func (r StocksAPIGetStocksRequest) Limit(limit int32) StocksAPIGetStocksRequest {
 	r.limit = &limit
 	return r
 }
 
-func (r ApiGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) ApiGetStocksRequest {
+func (r StocksAPIGetStocksRequest) GetWarehouseStocksRequest(getWarehouseStocksRequest GetWarehouseStocksRequest) StocksAPIGetStocksRequest {
 	r.getWarehouseStocksRequest = &getWarehouseStocksRequest
 	return r
 }
 
-func (r ApiGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
+func (r StocksAPIGetStocksRequest) Execute() (*GetWarehouseStocksResponse, *http.Response, error) {
 	return r.ApiService.GetStocksExecute(r)
 }
 
@@ -72,12 +72,13 @@ GetStocks Информация об остатках и оборачиваемо
 
 [//]: <> (turnover: Среднее количество дней, за которое товар продается. Подробно об оборачиваемости рассказано в Справке Маркета для продавцов https://yandex.ru/support/marketplace/analytics/turnover.html.)
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiGetStocksRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return StocksAPIGetStocksRequest
 */
-func (a *StocksAPIService) GetStocks(ctx context.Context, campaignId int64) ApiGetStocksRequest {
-	return ApiGetStocksRequest{
+func (a *StocksAPIService) GetStocks(ctx context.Context, campaignId int64) StocksAPIGetStocksRequest {
+	return StocksAPIGetStocksRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -85,9 +86,8 @@ func (a *StocksAPIService) GetStocks(ctx context.Context, campaignId int64) ApiG
 }
 
 // Execute executes the request
-//
-//	@return GetWarehouseStocksResponse
-func (a *StocksAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
+//  @return GetWarehouseStocksResponse
+func (a *StocksAPIService) GetStocksExecute(r StocksAPIGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -111,10 +111,10 @@ func (a *StocksAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehous
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -240,19 +240,19 @@ func (a *StocksAPIService) GetStocksExecute(r ApiGetStocksRequest) (*GetWarehous
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateStocksRequest struct {
+type StocksAPIUpdateStocksRequest struct {
 	ctx                 context.Context
 	ApiService          *StocksAPIService
 	campaignId          int64
 	updateStocksRequest *UpdateStocksRequest
 }
 
-func (r ApiUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) ApiUpdateStocksRequest {
+func (r StocksAPIUpdateStocksRequest) UpdateStocksRequest(updateStocksRequest UpdateStocksRequest) StocksAPIUpdateStocksRequest {
 	r.updateStocksRequest = &updateStocksRequest
 	return r
 }
 
-func (r ApiUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+func (r StocksAPIUpdateStocksRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
 	return r.ApiService.UpdateStocksExecute(r)
 }
 
@@ -276,12 +276,13 @@ UpdateStocks Передача информации об остатках
 |**⚙️ Лимит:** 100 000 товаров в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	@return ApiUpdateStocksRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+ @return StocksAPIUpdateStocksRequest
 */
-func (a *StocksAPIService) UpdateStocks(ctx context.Context, campaignId int64) ApiUpdateStocksRequest {
-	return ApiUpdateStocksRequest{
+func (a *StocksAPIService) UpdateStocks(ctx context.Context, campaignId int64) StocksAPIUpdateStocksRequest {
+	return StocksAPIUpdateStocksRequest{
 		ApiService: a,
 		ctx:        ctx,
 		campaignId: campaignId,
@@ -289,9 +290,8 @@ func (a *StocksAPIService) UpdateStocks(ctx context.Context, campaignId int64) A
 }
 
 // Execute executes the request
-//
-//	@return EmptyApiResponse
-func (a *StocksAPIService) UpdateStocksExecute(r ApiUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
+//  @return EmptyApiResponse
+func (a *StocksAPIService) UpdateStocksExecute(r StocksAPIUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
 		localVarPostBody    interface{}

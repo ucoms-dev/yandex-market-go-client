@@ -217,7 +217,8 @@ func (v NullablePriceDTO) IsSet() bool {
 }
 
 func (v *NullablePriceDTO) Unset() {
-	v.value = nil
+	var zero *PriceDTO
+	v.value = zero
 	v.isSet = false
 }
 

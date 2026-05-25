@@ -255,7 +255,8 @@ func (v NullablePickupAddressDTO) IsSet() bool {
 }
 
 func (v *NullablePickupAddressDTO) Unset() {
-	v.value = nil
+	var zero *PickupAddressDTO
+	v.value = zero
 	v.isSet = false
 }
 

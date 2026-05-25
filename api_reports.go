@@ -22,25 +22,25 @@ import (
 // ReportsAPIService ReportsAPI service
 type ReportsAPIService service
 
-type ApiGenerateBannersStatisticsReportRequest struct {
+type ReportsAPIGenerateBannersStatisticsReportRequest struct {
 	ctx                              context.Context
 	ApiService                       *ReportsAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
 	format                           *ReportFormatType
 }
 
-func (r ApiGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) ApiGenerateBannersStatisticsReportRequest {
+func (r ReportsAPIGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) ReportsAPIGenerateBannersStatisticsReportRequest {
 	r.generateBannersStatisticsRequest = &generateBannersStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) ApiGenerateBannersStatisticsReportRequest {
+func (r ReportsAPIGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) ReportsAPIGenerateBannersStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateBannersStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateBannersStatisticsReportExecute(r)
 }
 
@@ -58,20 +58,20 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateBannersStatisticsReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateBannersStatisticsReportRequest
 */
-func (a *ReportsAPIService) GenerateBannersStatisticsReport(ctx context.Context) ApiGenerateBannersStatisticsReportRequest {
-	return ApiGenerateBannersStatisticsReportRequest{
+func (a *ReportsAPIService) GenerateBannersStatisticsReport(ctx context.Context) ReportsAPIGenerateBannersStatisticsReportRequest {
+	return ReportsAPIGenerateBannersStatisticsReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ReportsAPIGenerateBannersStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -94,7 +94,7 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -223,25 +223,25 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ApiGenerate
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateBoostConsolidatedReportRequest struct {
+type ReportsAPIGenerateBoostConsolidatedReportRequest struct {
 	ctx                              context.Context
 	ApiService                       *ReportsAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
 	format                           *ReportFormatType
 }
 
-func (r ApiGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) ApiGenerateBoostConsolidatedReportRequest {
+func (r ReportsAPIGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) ReportsAPIGenerateBoostConsolidatedReportRequest {
 	r.generateBoostConsolidatedRequest = &generateBoostConsolidatedRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) ApiGenerateBoostConsolidatedReportRequest {
+func (r ReportsAPIGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) ReportsAPIGenerateBoostConsolidatedReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateBoostConsolidatedReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateBoostConsolidatedReportExecute(r)
 }
 
@@ -261,20 +261,20 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateBoostConsolidatedReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateBoostConsolidatedReportRequest
 */
-func (a *ReportsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) ApiGenerateBoostConsolidatedReportRequest {
-	return ApiGenerateBoostConsolidatedReportRequest{
+func (a *ReportsAPIService) GenerateBoostConsolidatedReport(ctx context.Context) ReportsAPIGenerateBoostConsolidatedReportRequest {
+	return ReportsAPIGenerateBoostConsolidatedReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ReportsAPIGenerateBoostConsolidatedReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -297,7 +297,7 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -426,25 +426,25 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ApiGenerate
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateCompetitorsPositionReportRequest struct {
+type ReportsAPIGenerateCompetitorsPositionReportRequest struct {
 	ctx                                      context.Context
 	ApiService                               *ReportsAPIService
 	generateCompetitorsPositionReportRequest *GenerateCompetitorsPositionReportRequest
 	format                                   *ReportFormatType
 }
 
-func (r ApiGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) ApiGenerateCompetitorsPositionReportRequest {
+func (r ReportsAPIGenerateCompetitorsPositionReportRequest) GenerateCompetitorsPositionReportRequest(generateCompetitorsPositionReportRequest GenerateCompetitorsPositionReportRequest) ReportsAPIGenerateCompetitorsPositionReportRequest {
 	r.generateCompetitorsPositionReportRequest = &generateCompetitorsPositionReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) ApiGenerateCompetitorsPositionReportRequest {
+func (r ReportsAPIGenerateCompetitorsPositionReportRequest) Format(format ReportFormatType) ReportsAPIGenerateCompetitorsPositionReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateCompetitorsPositionReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateCompetitorsPositionReportExecute(r)
 }
 
@@ -468,20 +468,20 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateCompetitorsPositionReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateCompetitorsPositionReportRequest
 */
-func (a *ReportsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) ApiGenerateCompetitorsPositionReportRequest {
-	return ApiGenerateCompetitorsPositionReportRequest{
+func (a *ReportsAPIService) GenerateCompetitorsPositionReport(ctx context.Context) ReportsAPIGenerateCompetitorsPositionReportRequest {
+	return ReportsAPIGenerateCompetitorsPositionReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ReportsAPIGenerateCompetitorsPositionReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -504,7 +504,7 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -633,25 +633,25 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ApiGenera
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsFeedbackReportRequest struct {
+type ReportsAPIGenerateGoodsFeedbackReportRequest struct {
 	ctx                          context.Context
 	ApiService                   *ReportsAPIService
 	generateGoodsFeedbackRequest *GenerateGoodsFeedbackRequest
 	format                       *ReportFormatType
 }
 
-func (r ApiGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) ApiGenerateGoodsFeedbackReportRequest {
+func (r ReportsAPIGenerateGoodsFeedbackReportRequest) GenerateGoodsFeedbackRequest(generateGoodsFeedbackRequest GenerateGoodsFeedbackRequest) ReportsAPIGenerateGoodsFeedbackReportRequest {
 	r.generateGoodsFeedbackRequest = &generateGoodsFeedbackRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) ApiGenerateGoodsFeedbackReportRequest {
+func (r ReportsAPIGenerateGoodsFeedbackReportRequest) Format(format ReportFormatType) ReportsAPIGenerateGoodsFeedbackReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateGoodsFeedbackReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateGoodsFeedbackReportExecute(r)
 }
 
@@ -669,20 +669,20 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateGoodsFeedbackReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateGoodsFeedbackReportRequest
 */
-func (a *ReportsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ApiGenerateGoodsFeedbackReportRequest {
-	return ApiGenerateGoodsFeedbackReportRequest{
+func (a *ReportsAPIService) GenerateGoodsFeedbackReport(ctx context.Context) ReportsAPIGenerateGoodsFeedbackReportRequest {
+	return ReportsAPIGenerateGoodsFeedbackReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ReportsAPIGenerateGoodsFeedbackReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -705,7 +705,7 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -834,25 +834,25 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ApiGenerateGood
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsMovementReportRequest struct {
+type ReportsAPIGenerateGoodsMovementReportRequest struct {
 	ctx                                context.Context
 	ApiService                         *ReportsAPIService
 	generateGoodsMovementReportRequest *GenerateGoodsMovementReportRequest
 	format                             *ReportFormatType
 }
 
-func (r ApiGenerateGoodsMovementReportRequest) GenerateGoodsMovementReportRequest(generateGoodsMovementReportRequest GenerateGoodsMovementReportRequest) ApiGenerateGoodsMovementReportRequest {
+func (r ReportsAPIGenerateGoodsMovementReportRequest) GenerateGoodsMovementReportRequest(generateGoodsMovementReportRequest GenerateGoodsMovementReportRequest) ReportsAPIGenerateGoodsMovementReportRequest {
 	r.generateGoodsMovementReportRequest = &generateGoodsMovementReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsMovementReportRequest) Format(format ReportFormatType) ApiGenerateGoodsMovementReportRequest {
+func (r ReportsAPIGenerateGoodsMovementReportRequest) Format(format ReportFormatType) ReportsAPIGenerateGoodsMovementReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsMovementReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateGoodsMovementReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateGoodsMovementReportExecute(r)
 }
 
@@ -870,20 +870,20 @@ GenerateGoodsMovementReport Отчет по движению товаров
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateGoodsMovementReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateGoodsMovementReportRequest
 */
-func (a *ReportsAPIService) GenerateGoodsMovementReport(ctx context.Context) ApiGenerateGoodsMovementReportRequest {
-	return ApiGenerateGoodsMovementReportRequest{
+func (a *ReportsAPIService) GenerateGoodsMovementReport(ctx context.Context) ReportsAPIGenerateGoodsMovementReportRequest {
+	return ReportsAPIGenerateGoodsMovementReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGoodsMovementReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ReportsAPIGenerateGoodsMovementReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -906,7 +906,7 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGood
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -1035,25 +1035,25 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ApiGenerateGood
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsRealizationReportRequest struct {
+type ReportsAPIGenerateGoodsRealizationReportRequest struct {
 	ctx                                   context.Context
 	ApiService                            *ReportsAPIService
 	generateGoodsRealizationReportRequest *GenerateGoodsRealizationReportRequest
 	format                                *ReportFormatType
 }
 
-func (r ApiGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) ApiGenerateGoodsRealizationReportRequest {
+func (r ReportsAPIGenerateGoodsRealizationReportRequest) GenerateGoodsRealizationReportRequest(generateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest) ReportsAPIGenerateGoodsRealizationReportRequest {
 	r.generateGoodsRealizationReportRequest = &generateGoodsRealizationReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) ApiGenerateGoodsRealizationReportRequest {
+func (r ReportsAPIGenerateGoodsRealizationReportRequest) Format(format ReportFormatType) ReportsAPIGenerateGoodsRealizationReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateGoodsRealizationReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateGoodsRealizationReportExecute(r)
 }
 
@@ -1070,31 +1070,31 @@ GenerateGoodsRealizationReport Отчет по реализации
 
 - FBY, FBS, Экспресс
 
-	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
+  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2.md) %}
 
 - DBS
 
-	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
+  {% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
 
 {% endlist %}
 
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateGoodsRealizationReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateGoodsRealizationReportRequest
 */
-func (a *ReportsAPIService) GenerateGoodsRealizationReport(ctx context.Context) ApiGenerateGoodsRealizationReportRequest {
-	return ApiGenerateGoodsRealizationReportRequest{
+func (a *ReportsAPIService) GenerateGoodsRealizationReport(ctx context.Context) ReportsAPIGenerateGoodsRealizationReportRequest {
+	return ReportsAPIGenerateGoodsRealizationReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ReportsAPIGenerateGoodsRealizationReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1117,7 +1117,7 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -1246,25 +1246,25 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ApiGenerateG
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateGoodsTurnoverReportRequest struct {
+type ReportsAPIGenerateGoodsTurnoverReportRequest struct {
 	ctx                          context.Context
 	ApiService                   *ReportsAPIService
 	generateGoodsTurnoverRequest *GenerateGoodsTurnoverRequest
 	format                       *ReportFormatType
 }
 
-func (r ApiGenerateGoodsTurnoverReportRequest) GenerateGoodsTurnoverRequest(generateGoodsTurnoverRequest GenerateGoodsTurnoverRequest) ApiGenerateGoodsTurnoverReportRequest {
+func (r ReportsAPIGenerateGoodsTurnoverReportRequest) GenerateGoodsTurnoverRequest(generateGoodsTurnoverRequest GenerateGoodsTurnoverRequest) ReportsAPIGenerateGoodsTurnoverReportRequest {
 	r.generateGoodsTurnoverRequest = &generateGoodsTurnoverRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateGoodsTurnoverReportRequest) Format(format ReportFormatType) ApiGenerateGoodsTurnoverReportRequest {
+func (r ReportsAPIGenerateGoodsTurnoverReportRequest) Format(format ReportFormatType) ReportsAPIGenerateGoodsTurnoverReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateGoodsTurnoverReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateGoodsTurnoverReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateGoodsTurnoverReportExecute(r)
 }
 
@@ -1282,20 +1282,20 @@ GenerateGoodsTurnoverReport Отчет по оборачиваемости
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateGoodsTurnoverReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateGoodsTurnoverReportRequest
 */
-func (a *ReportsAPIService) GenerateGoodsTurnoverReport(ctx context.Context) ApiGenerateGoodsTurnoverReportRequest {
-	return ApiGenerateGoodsTurnoverReportRequest{
+func (a *ReportsAPIService) GenerateGoodsTurnoverReport(ctx context.Context) ReportsAPIGenerateGoodsTurnoverReportRequest {
+	return ReportsAPIGenerateGoodsTurnoverReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGoodsTurnoverReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ReportsAPIGenerateGoodsTurnoverReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1318,7 +1318,7 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGood
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -1447,25 +1447,25 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ApiGenerateGood
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateJewelryFiscalReportRequest struct {
+type ReportsAPIGenerateJewelryFiscalReportRequest struct {
 	ctx                                context.Context
 	ApiService                         *ReportsAPIService
 	generateJewelryFiscalReportRequest *GenerateJewelryFiscalReportRequest
 	format                             *ReportFormatType
 }
 
-func (r ApiGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) ApiGenerateJewelryFiscalReportRequest {
+func (r ReportsAPIGenerateJewelryFiscalReportRequest) GenerateJewelryFiscalReportRequest(generateJewelryFiscalReportRequest GenerateJewelryFiscalReportRequest) ReportsAPIGenerateJewelryFiscalReportRequest {
 	r.generateJewelryFiscalReportRequest = &generateJewelryFiscalReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) ApiGenerateJewelryFiscalReportRequest {
+func (r ReportsAPIGenerateJewelryFiscalReportRequest) Format(format ReportFormatType) ReportsAPIGenerateJewelryFiscalReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateJewelryFiscalReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateJewelryFiscalReportExecute(r)
 }
 
@@ -1483,20 +1483,20 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateJewelryFiscalReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateJewelryFiscalReportRequest
 */
-func (a *ReportsAPIService) GenerateJewelryFiscalReport(ctx context.Context) ApiGenerateJewelryFiscalReportRequest {
-	return ApiGenerateJewelryFiscalReportRequest{
+func (a *ReportsAPIService) GenerateJewelryFiscalReport(ctx context.Context) ReportsAPIGenerateJewelryFiscalReportRequest {
+	return ReportsAPIGenerateJewelryFiscalReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ReportsAPIGenerateJewelryFiscalReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1519,7 +1519,7 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -1648,25 +1648,25 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ApiGenerateJewe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateMassOrderLabelsReportRequest struct {
+type ReportsAPIGenerateMassOrderLabelsReportRequest struct {
 	ctx                            context.Context
 	ApiService                     *ReportsAPIService
 	generateMassOrderLabelsRequest *GenerateMassOrderLabelsRequest
 	format                         *PageFormatType
 }
 
-func (r ApiGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) ApiGenerateMassOrderLabelsReportRequest {
+func (r ReportsAPIGenerateMassOrderLabelsReportRequest) GenerateMassOrderLabelsRequest(generateMassOrderLabelsRequest GenerateMassOrderLabelsRequest) ReportsAPIGenerateMassOrderLabelsReportRequest {
 	r.generateMassOrderLabelsRequest = &generateMassOrderLabelsRequest
 	return r
 }
 
 // Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7.
-func (r ApiGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) ApiGenerateMassOrderLabelsReportRequest {
+func (r ReportsAPIGenerateMassOrderLabelsReportRequest) Format(format PageFormatType) ReportsAPIGenerateMassOrderLabelsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateMassOrderLabelsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateMassOrderLabelsReportExecute(r)
 }
 
@@ -1682,20 +1682,20 @@ GenerateMassOrderLabelsReport Готовые ярлыки‑наклейки н�
 |**⚙️ Лимит:** 1 000 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateMassOrderLabelsReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateMassOrderLabelsReportRequest
 */
-func (a *ReportsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ApiGenerateMassOrderLabelsReportRequest {
-	return ApiGenerateMassOrderLabelsReportRequest{
+func (a *ReportsAPIService) GenerateMassOrderLabelsReport(ctx context.Context) ReportsAPIGenerateMassOrderLabelsReportRequest {
+	return ReportsAPIGenerateMassOrderLabelsReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ReportsAPIGenerateMassOrderLabelsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1718,7 +1718,7 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1844,25 +1844,25 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ApiGenerateMa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGeneratePricesReportRequest struct {
+type ReportsAPIGeneratePricesReportRequest struct {
 	ctx                         context.Context
 	ApiService                  *ReportsAPIService
 	generatePricesReportRequest *GeneratePricesReportRequest
 	format                      *ReportFormatType
 }
 
-func (r ApiGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) ApiGeneratePricesReportRequest {
+func (r ReportsAPIGeneratePricesReportRequest) GeneratePricesReportRequest(generatePricesReportRequest GeneratePricesReportRequest) ReportsAPIGeneratePricesReportRequest {
 	r.generatePricesReportRequest = &generatePricesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGeneratePricesReportRequest) Format(format ReportFormatType) ApiGeneratePricesReportRequest {
+func (r ReportsAPIGeneratePricesReportRequest) Format(format ReportFormatType) ReportsAPIGeneratePricesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGeneratePricesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GeneratePricesReportExecute(r)
 }
 
@@ -1888,20 +1888,20 @@ GeneratePricesReport Отчет «Цены на рынке»
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGeneratePricesReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGeneratePricesReportRequest
 */
-func (a *ReportsAPIService) GeneratePricesReport(ctx context.Context) ApiGeneratePricesReportRequest {
-	return ApiGeneratePricesReportRequest{
+func (a *ReportsAPIService) GeneratePricesReport(ctx context.Context) ReportsAPIGeneratePricesReportRequest {
+	return ReportsAPIGeneratePricesReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GeneratePricesReportExecute(r ReportsAPIGeneratePricesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -1924,7 +1924,7 @@ func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -2053,25 +2053,25 @@ func (a *ReportsAPIService) GeneratePricesReportExecute(r ApiGeneratePricesRepor
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateSalesGeographyReportRequest struct {
+type ReportsAPIGenerateSalesGeographyReportRequest struct {
 	ctx                           context.Context
 	ApiService                    *ReportsAPIService
 	generateSalesGeographyRequest *GenerateSalesGeographyRequest
 	format                        *ReportFormatType
 }
 
-func (r ApiGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) ApiGenerateSalesGeographyReportRequest {
+func (r ReportsAPIGenerateSalesGeographyReportRequest) GenerateSalesGeographyRequest(generateSalesGeographyRequest GenerateSalesGeographyRequest) ReportsAPIGenerateSalesGeographyReportRequest {
 	r.generateSalesGeographyRequest = &generateSalesGeographyRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateSalesGeographyReportRequest) Format(format ReportFormatType) ApiGenerateSalesGeographyReportRequest {
+func (r ReportsAPIGenerateSalesGeographyReportRequest) Format(format ReportFormatType) ReportsAPIGenerateSalesGeographyReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateSalesGeographyReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateSalesGeographyReportExecute(r)
 }
 
@@ -2089,20 +2089,20 @@ GenerateSalesGeographyReport Отчет по географии продаж
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateSalesGeographyReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateSalesGeographyReportRequest
 */
-func (a *ReportsAPIService) GenerateSalesGeographyReport(ctx context.Context) ApiGenerateSalesGeographyReportRequest {
-	return ApiGenerateSalesGeographyReportRequest{
+func (a *ReportsAPIService) GenerateSalesGeographyReport(ctx context.Context) ReportsAPIGenerateSalesGeographyReportRequest {
+	return ReportsAPIGenerateSalesGeographyReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ReportsAPIGenerateSalesGeographyReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2125,7 +2125,7 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -2254,25 +2254,25 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ApiGenerateSal
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShelfsStatisticsReportRequest struct {
+type ReportsAPIGenerateShelfsStatisticsReportRequest struct {
 	ctx                             context.Context
 	ApiService                      *ReportsAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
 	format                          *ReportFormatType
 }
 
-func (r ApiGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) ApiGenerateShelfsStatisticsReportRequest {
+func (r ReportsAPIGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) ReportsAPIGenerateShelfsStatisticsReportRequest {
 	r.generateShelfsStatisticsRequest = &generateShelfsStatisticsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) ApiGenerateShelfsStatisticsReportRequest {
+func (r ReportsAPIGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) ReportsAPIGenerateShelfsStatisticsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateShelfsStatisticsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateShelfsStatisticsReportExecute(r)
 }
 
@@ -2290,20 +2290,20 @@ GenerateShelfsStatisticsReport Отчет по полкам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateShelfsStatisticsReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateShelfsStatisticsReportRequest
 */
-func (a *ReportsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ApiGenerateShelfsStatisticsReportRequest {
-	return ApiGenerateShelfsStatisticsReportRequest{
+func (a *ReportsAPIService) GenerateShelfsStatisticsReport(ctx context.Context) ReportsAPIGenerateShelfsStatisticsReportRequest {
+	return ReportsAPIGenerateShelfsStatisticsReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ReportsAPIGenerateShelfsStatisticsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2326,7 +2326,7 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -2455,18 +2455,18 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ApiGenerateS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShipmentListDocumentReportRequest struct {
+type ReportsAPIGenerateShipmentListDocumentReportRequest struct {
 	ctx                                       context.Context
 	ApiService                                *ReportsAPIService
 	generateShipmentListDocumentReportRequest *GenerateShipmentListDocumentReportRequest
 }
 
-func (r ApiGenerateShipmentListDocumentReportRequest) GenerateShipmentListDocumentReportRequest(generateShipmentListDocumentReportRequest GenerateShipmentListDocumentReportRequest) ApiGenerateShipmentListDocumentReportRequest {
+func (r ReportsAPIGenerateShipmentListDocumentReportRequest) GenerateShipmentListDocumentReportRequest(generateShipmentListDocumentReportRequest GenerateShipmentListDocumentReportRequest) ReportsAPIGenerateShipmentListDocumentReportRequest {
 	r.generateShipmentListDocumentReportRequest = &generateShipmentListDocumentReportRequest
 	return r
 }
 
-func (r ApiGenerateShipmentListDocumentReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateShipmentListDocumentReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateShipmentListDocumentReportExecute(r)
 }
 
@@ -2482,20 +2482,20 @@ GenerateShipmentListDocumentReport Получение листа сборки
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateShipmentListDocumentReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateShipmentListDocumentReportRequest
 */
-func (a *ReportsAPIService) GenerateShipmentListDocumentReport(ctx context.Context) ApiGenerateShipmentListDocumentReportRequest {
-	return ApiGenerateShipmentListDocumentReportRequest{
+func (a *ReportsAPIService) GenerateShipmentListDocumentReport(ctx context.Context) ReportsAPIGenerateShipmentListDocumentReportRequest {
+	return ReportsAPIGenerateShipmentListDocumentReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGenerateShipmentListDocumentReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ReportsAPIGenerateShipmentListDocumentReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2641,25 +2641,25 @@ func (a *ReportsAPIService) GenerateShipmentListDocumentReportExecute(r ApiGener
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShowsBoostReportRequest struct {
+type ReportsAPIGenerateShowsBoostReportRequest struct {
 	ctx                       context.Context
 	ApiService                *ReportsAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
 	format                    *ReportFormatType
 }
 
-func (r ApiGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) ApiGenerateShowsBoostReportRequest {
+func (r ReportsAPIGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) ReportsAPIGenerateShowsBoostReportRequest {
 	r.generateShowsBoostRequest = &generateShowsBoostRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShowsBoostReportRequest) Format(format ReportFormatType) ApiGenerateShowsBoostReportRequest {
+func (r ReportsAPIGenerateShowsBoostReportRequest) Format(format ReportFormatType) ReportsAPIGenerateShowsBoostReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateShowsBoostReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateShowsBoostReportExecute(r)
 }
 
@@ -2677,20 +2677,20 @@ GenerateShowsBoostReport Отчет по бусту показов
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateShowsBoostReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateShowsBoostReportRequest
 */
-func (a *ReportsAPIService) GenerateShowsBoostReport(ctx context.Context) ApiGenerateShowsBoostReportRequest {
-	return ApiGenerateShowsBoostReportRequest{
+func (a *ReportsAPIService) GenerateShowsBoostReport(ctx context.Context) ReportsAPIGenerateShowsBoostReportRequest {
+	return ReportsAPIGenerateShowsBoostReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ReportsAPIGenerateShowsBoostReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2713,7 +2713,7 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -2842,25 +2842,25 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ApiGenerateShowsBo
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateShowsSalesReportRequest struct {
+type ReportsAPIGenerateShowsSalesReportRequest struct {
 	ctx                             context.Context
 	ApiService                      *ReportsAPIService
 	generateShowsSalesReportRequest *GenerateShowsSalesReportRequest
 	format                          *ReportFormatType
 }
 
-func (r ApiGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) ApiGenerateShowsSalesReportRequest {
+func (r ReportsAPIGenerateShowsSalesReportRequest) GenerateShowsSalesReportRequest(generateShowsSalesReportRequest GenerateShowsSalesReportRequest) ReportsAPIGenerateShowsSalesReportRequest {
 	r.generateShowsSalesReportRequest = &generateShowsSalesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateShowsSalesReportRequest) Format(format ReportFormatType) ApiGenerateShowsSalesReportRequest {
+func (r ReportsAPIGenerateShowsSalesReportRequest) Format(format ReportFormatType) ReportsAPIGenerateShowsSalesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateShowsSalesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateShowsSalesReportExecute(r)
 }
 
@@ -2878,20 +2878,20 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 |**⚙️ Лимит:** 10 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateShowsSalesReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateShowsSalesReportRequest
 */
-func (a *ReportsAPIService) GenerateShowsSalesReport(ctx context.Context) ApiGenerateShowsSalesReportRequest {
-	return ApiGenerateShowsSalesReportRequest{
+func (a *ReportsAPIService) GenerateShowsSalesReport(ctx context.Context) ReportsAPIGenerateShowsSalesReportRequest {
+	return ReportsAPIGenerateShowsSalesReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ReportsAPIGenerateShowsSalesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -2914,7 +2914,7 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -3043,25 +3043,25 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ApiGenerateShowsSa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateStocksOnWarehousesReportRequest struct {
+type ReportsAPIGenerateStocksOnWarehousesReportRequest struct {
 	ctx                                     context.Context
 	ApiService                              *ReportsAPIService
 	generateStocksOnWarehousesReportRequest *GenerateStocksOnWarehousesReportRequest
 	format                                  *ReportFormatType
 }
 
-func (r ApiGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) ApiGenerateStocksOnWarehousesReportRequest {
+func (r ReportsAPIGenerateStocksOnWarehousesReportRequest) GenerateStocksOnWarehousesReportRequest(generateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest) ReportsAPIGenerateStocksOnWarehousesReportRequest {
 	r.generateStocksOnWarehousesReportRequest = &generateStocksOnWarehousesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) ApiGenerateStocksOnWarehousesReportRequest {
+func (r ReportsAPIGenerateStocksOnWarehousesReportRequest) Format(format ReportFormatType) ReportsAPIGenerateStocksOnWarehousesReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateStocksOnWarehousesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateStocksOnWarehousesReportExecute(r)
 }
 
@@ -3084,20 +3084,20 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateStocksOnWarehousesReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateStocksOnWarehousesReportRequest
 */
-func (a *ReportsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) ApiGenerateStocksOnWarehousesReportRequest {
-	return ApiGenerateStocksOnWarehousesReportRequest{
+func (a *ReportsAPIService) GenerateStocksOnWarehousesReport(ctx context.Context) ReportsAPIGenerateStocksOnWarehousesReportRequest {
+	return ReportsAPIGenerateStocksOnWarehousesReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ReportsAPIGenerateStocksOnWarehousesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3120,7 +3120,7 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -3249,7 +3249,7 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ApiGenerat
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedMarketplaceServicesReportRequest struct {
+type ReportsAPIGenerateUnitedMarketplaceServicesReportRequest struct {
 	ctx                                            context.Context
 	ApiService                                     *ReportsAPIService
 	generateUnitedMarketplaceServicesReportRequest *GenerateUnitedMarketplaceServicesReportRequest
@@ -3257,24 +3257,24 @@ type ApiGenerateUnitedMarketplaceServicesReportRequest struct {
 	language                                       *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r ReportsAPIGenerateUnitedMarketplaceServicesReportRequest) GenerateUnitedMarketplaceServicesReportRequest(generateUnitedMarketplaceServicesReportRequest GenerateUnitedMarketplaceServicesReportRequest) ReportsAPIGenerateUnitedMarketplaceServicesReportRequest {
 	r.generateUnitedMarketplaceServicesReportRequest = &generateUnitedMarketplaceServicesReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r ReportsAPIGenerateUnitedMarketplaceServicesReportRequest) Format(format ReportFormatType) ReportsAPIGenerateUnitedMarketplaceServicesReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedMarketplaceServicesReportRequest {
+func (r ReportsAPIGenerateUnitedMarketplaceServicesReportRequest) Language(language ReportLanguageType) ReportsAPIGenerateUnitedMarketplaceServicesReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateUnitedMarketplaceServicesReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateUnitedMarketplaceServicesReportExecute(r)
 }
 
@@ -3301,20 +3301,20 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateUnitedMarketplaceServicesReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateUnitedMarketplaceServicesReportRequest
 */
-func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) ApiGenerateUnitedMarketplaceServicesReportRequest {
-	return ApiGenerateUnitedMarketplaceServicesReportRequest{
+func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReport(ctx context.Context) ReportsAPIGenerateUnitedMarketplaceServicesReportRequest {
+	return ReportsAPIGenerateUnitedMarketplaceServicesReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ApiGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r ReportsAPIGenerateUnitedMarketplaceServicesReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3337,13 +3337,13 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -3469,7 +3469,7 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Api
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedNettingReportRequest struct {
+type ReportsAPIGenerateUnitedNettingReportRequest struct {
 	ctx                                context.Context
 	ApiService                         *ReportsAPIService
 	generateUnitedNettingReportRequest *GenerateUnitedNettingReportRequest
@@ -3477,24 +3477,24 @@ type ApiGenerateUnitedNettingReportRequest struct {
 	language                           *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) ApiGenerateUnitedNettingReportRequest {
+func (r ReportsAPIGenerateUnitedNettingReportRequest) GenerateUnitedNettingReportRequest(generateUnitedNettingReportRequest GenerateUnitedNettingReportRequest) ReportsAPIGenerateUnitedNettingReportRequest {
 	r.generateUnitedNettingReportRequest = &generateUnitedNettingReportRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedNettingReportRequest) Format(format ReportFormatType) ApiGenerateUnitedNettingReportRequest {
+func (r ReportsAPIGenerateUnitedNettingReportRequest) Format(format ReportFormatType) ReportsAPIGenerateUnitedNettingReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedNettingReportRequest {
+func (r ReportsAPIGenerateUnitedNettingReportRequest) Language(language ReportLanguageType) ReportsAPIGenerateUnitedNettingReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateUnitedNettingReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateUnitedNettingReportExecute(r)
 }
 
@@ -3523,20 +3523,20 @@ GenerateUnitedNettingReport Отчет по платежам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateUnitedNettingReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateUnitedNettingReportRequest
 */
-func (a *ReportsAPIService) GenerateUnitedNettingReport(ctx context.Context) ApiGenerateUnitedNettingReportRequest {
-	return ApiGenerateUnitedNettingReportRequest{
+func (a *ReportsAPIService) GenerateUnitedNettingReport(ctx context.Context) ReportsAPIGenerateUnitedNettingReportRequest {
+	return ReportsAPIGenerateUnitedNettingReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ReportsAPIGenerateUnitedNettingReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3559,13 +3559,13 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -3691,7 +3691,7 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ApiGenerateUnit
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedOrdersReportRequest struct {
+type ReportsAPIGenerateUnitedOrdersReportRequest struct {
 	ctx                         context.Context
 	ApiService                  *ReportsAPIService
 	generateUnitedOrdersRequest *GenerateUnitedOrdersRequest
@@ -3699,24 +3699,24 @@ type ApiGenerateUnitedOrdersReportRequest struct {
 	language                    *ReportLanguageType
 }
 
-func (r ApiGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) ApiGenerateUnitedOrdersReportRequest {
+func (r ReportsAPIGenerateUnitedOrdersReportRequest) GenerateUnitedOrdersRequest(generateUnitedOrdersRequest GenerateUnitedOrdersRequest) ReportsAPIGenerateUnitedOrdersReportRequest {
 	r.generateUnitedOrdersRequest = &generateUnitedOrdersRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) ApiGenerateUnitedOrdersReportRequest {
+func (r ReportsAPIGenerateUnitedOrdersReportRequest) Format(format ReportFormatType) ReportsAPIGenerateUnitedOrdersReportRequest {
 	r.format = &format
 	return r
 }
 
 // Язык отчета.
-func (r ApiGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) ApiGenerateUnitedOrdersReportRequest {
+func (r ReportsAPIGenerateUnitedOrdersReportRequest) Language(language ReportLanguageType) ReportsAPIGenerateUnitedOrdersReportRequest {
 	r.language = &language
 	return r
 }
 
-func (r ApiGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateUnitedOrdersReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateUnitedOrdersReportExecute(r)
 }
 
@@ -3734,20 +3734,20 @@ GenerateUnitedOrdersReport Отчет по заказам
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateUnitedOrdersReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateUnitedOrdersReportRequest
 */
-func (a *ReportsAPIService) GenerateUnitedOrdersReport(ctx context.Context) ApiGenerateUnitedOrdersReportRequest {
-	return ApiGenerateUnitedOrdersReportRequest{
+func (a *ReportsAPIService) GenerateUnitedOrdersReport(ctx context.Context) ReportsAPIGenerateUnitedOrdersReportRequest {
+	return ReportsAPIGenerateUnitedOrdersReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ReportsAPIGenerateUnitedOrdersReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3770,13 +3770,13 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -3902,25 +3902,25 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ApiGenerateUnite
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGenerateUnitedReturnsReportRequest struct {
+type ReportsAPIGenerateUnitedReturnsReportRequest struct {
 	ctx                          context.Context
 	ApiService                   *ReportsAPIService
 	generateUnitedReturnsRequest *GenerateUnitedReturnsRequest
 	format                       *ReportFormatType
 }
 
-func (r ApiGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) ApiGenerateUnitedReturnsReportRequest {
+func (r ReportsAPIGenerateUnitedReturnsReportRequest) GenerateUnitedReturnsRequest(generateUnitedReturnsRequest GenerateUnitedReturnsRequest) ReportsAPIGenerateUnitedReturnsReportRequest {
 	r.generateUnitedReturnsRequest = &generateUnitedReturnsRequest
 	return r
 }
 
 // Формат отчета.
-func (r ApiGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) ApiGenerateUnitedReturnsReportRequest {
+func (r ReportsAPIGenerateUnitedReturnsReportRequest) Format(format ReportFormatType) ReportsAPIGenerateUnitedReturnsReportRequest {
 	r.format = &format
 	return r
 }
 
-func (r ApiGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+func (r ReportsAPIGenerateUnitedReturnsReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
 	return r.ApiService.GenerateUnitedReturnsReportExecute(r)
 }
 
@@ -3940,20 +3940,20 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 |**⚙️ Лимит:** 100 запросов в час|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@return ApiGenerateUnitedReturnsReportRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @return ReportsAPIGenerateUnitedReturnsReportRequest
 */
-func (a *ReportsAPIService) GenerateUnitedReturnsReport(ctx context.Context) ApiGenerateUnitedReturnsReportRequest {
-	return ApiGenerateUnitedReturnsReportRequest{
+func (a *ReportsAPIService) GenerateUnitedReturnsReport(ctx context.Context) ReportsAPIGenerateUnitedReturnsReportRequest {
+	return ReportsAPIGenerateUnitedReturnsReportRequest{
 		ApiService: a,
 		ctx:        ctx,
 	}
 }
 
 // Execute executes the request
-//
-//	@return GenerateReportResponse
-func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
+//  @return GenerateReportResponse
+func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ReportsAPIGenerateUnitedReturnsReportRequest) (*GenerateReportResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
 		localVarPostBody    interface{}
@@ -3976,7 +3976,7 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
 		r.format = &defaultValue
@@ -4105,13 +4105,13 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ApiGenerateUnit
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetReportInfoRequest struct {
+type ReportsAPIGetReportInfoRequest struct {
 	ctx        context.Context
 	ApiService *ReportsAPIService
 	reportId   string
 }
 
-func (r ApiGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
+func (r ReportsAPIGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
 	return r.ApiService.GetReportInfoExecute(r)
 }
 
@@ -4127,12 +4127,13 @@ GetReportInfo Получение заданного отчета
 |**⚙️ Лимит:** 100 запросов в минуту|
 |-|
 
-	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param reportId Идентификатор отчета, который вы получили после запуска генерации.
-	@return ApiGetReportInfoRequest
+
+ @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param reportId Идентификатор отчета, который вы получили после запуска генерации.
+ @return ReportsAPIGetReportInfoRequest
 */
-func (a *ReportsAPIService) GetReportInfo(ctx context.Context, reportId string) ApiGetReportInfoRequest {
-	return ApiGetReportInfoRequest{
+func (a *ReportsAPIService) GetReportInfo(ctx context.Context, reportId string) ReportsAPIGetReportInfoRequest {
+	return ReportsAPIGetReportInfoRequest{
 		ApiService: a,
 		ctx:        ctx,
 		reportId:   reportId,
@@ -4140,9 +4141,8 @@ func (a *ReportsAPIService) GetReportInfo(ctx context.Context, reportId string) 
 }
 
 // Execute executes the request
-//
-//	@return GetReportInfoResponse
-func (a *ReportsAPIService) GetReportInfoExecute(r ApiGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
+//  @return GetReportInfoResponse
+func (a *ReportsAPIService) GetReportInfoExecute(r ReportsAPIGetReportInfoRequest) (*GetReportInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
