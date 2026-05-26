@@ -1,0 +1,148 @@
+put:
+  tags:
+    - stocks
+    - fbs
+    - dbs
+    - express
+  x-auth-scopes:
+    - all-methods
+    - offers-and-cards-management
+  x-restrictions:
+    - urbanads
+  x-resource-limit-config:
+    path: req.skus
+    amount: 100000
+    period: minutes
+    tariff-resource-limits:
+      none:
+        amount: 100000
+        period: minutes
+        period-duration: 1
+      medium:
+        amount: 100000
+        period: minutes
+        period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: updateStocks
+  summary: Передача информации об остатках
+  description: >
+    {% include notitle [access](../../_auto/method_scopes/updateStocks.md) %}
+
+
+    Передает данные об остатках товаров на витрине.
+
+
+    Для группы складов передавайте остатки только для **одного любого склада**.
+    Информация для остальных складов в этой группе обновится автоматически.
+
+
+    Обязательно указывайте SKU **в точности** так, как он указан в каталоге.
+    Например, _557722_ и _0557722_ — это два разных SKU.
+
+
+    {% note info "Данные в каталоге обновляются не мгновенно" %}
+
+
+    Это занимает до нескольких минут.
+
+
+    {% endnote %}
+
+
+    {% include notitle [limit](../../_auto/method_limits/updateStocks.md) %}
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/UpdateStocksRequest.yaml
+  responses:
+    '200':
+      description: Пустой ответ.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/EmptyApiResponse.yaml
+    '400':
+      description: >
+        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
+        остатками](../../concepts/error-codes#stocks)
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '404':
+      $ref: ../components/responses/404.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml
+post:
+  tags:
+    - stocks
+    - fby
+    - fbs
+    - dbs
+    - express
+    - laas
+  x-auth-scopes:
+    - all-methods
+    - all-methods:read-only
+    - offers-and-cards-management
+    - offers-and-cards-management:read-only
+  x-restrictions:
+    - urbanads
+  x-resource-limit-config:
+    path: resp.result.warehouses.offers.offerId
+    amount: 100000
+    period: minutes
+    tariff-resource-limits:
+      none:
+        amount: 100000
+        period: minutes
+        period-duration: 1
+      medium:
+        amount: 100000
+        period: minutes
+        period-duration: 1
+  x-apphost:
+    domain: LOGISTICS
+    enabled: false
+  operationId: getStocks
+  summary: Информация об остатках и оборачиваемости
+  description: "{% include notitle [access](../../_auto/method_scopes/getStocks.md) %}\n\nВозвращает данные об остатках товаров (для всех моделей) и об [оборачиваемости](*turnover) товаров (для модели FBY).\n\n{% note info \"По умолчанию данные по оборачивамости не возращаются\" %}\n\nЧтобы они были в ответе, передавайте `true` в поле `withTurnover`.\n\n{% endnote %}\n\n**Для моделей FBY и LaaS:** информация об остатках может возвращаться с нескольких складов Маркета, у которых будут разные `warehouseId`. Получить список складов Маркета можно с помощью метода [GET\_v2/warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).\n\n**Для модели FBS:** в ответе может вернуться не только партнерский склад, но и склад возвратов Маркета. Это возможно, если возврат поступил в указанную продавцом точку возвратов и долго не был забран.\n\n{% include notitle [limit](../../_auto/method_limits/getStocks.md) %}\n\n[//]: <> (turnover: Среднее количество дней, за которое товар продается. Подробно об оборачиваемости рассказано в Справке Маркета для продавцов https://yandex.ru/support/marketplace/analytics/turnover.html.)\n"
+  parameters:
+    - $ref: ../components/parameters/CampaignId.yaml
+    - $ref: ../components/parameters/AliasedPageToken.yaml
+    - $ref: ../components/parameters/PageLimit200.yaml
+  requestBody:
+    required: false
+    content:
+      application/json:
+        schema:
+          $ref: ../components/schemas/GetWarehouseStocksRequest.yaml
+  responses:
+    '200':
+      description: Остатки товаров на складах.
+      content:
+        application/json:
+          schema:
+            $ref: ../components/schemas/GetWarehouseStocksResponse.yaml
+    '400':
+      $ref: ../components/responses/400.yaml
+    '401':
+      $ref: ../components/responses/401.yaml
+    '403':
+      $ref: ../components/responses/403.yaml
+    '420':
+      $ref: ../components/responses/420.yaml
+    '500':
+      $ref: ../components/responses/500.yaml
