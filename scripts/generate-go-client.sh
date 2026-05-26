@@ -12,6 +12,8 @@ out_dir_rel="$(read_config_value output_dir)"
 package_name="$(read_config_value package_name)"
 package_version_default="$(read_config_value package_version)"
 template_dir="$(read_optional_config_value template_dir)"
+go_version="$(read_optional_config_value go_version)"
+with_go_mod="$(read_optional_config_value with_go_mod)"
 struct_prefix="$(read_config_value struct_prefix)"
 enum_class_prefix="$(read_config_value enum_class_prefix)"
 skip_validate_spec_default="$(read_config_value skip_validate_spec)"
@@ -79,7 +81,7 @@ cleanup_generated_files() {
       [[ -z "${rel_path}" ]] && continue
 
       case "${rel_path}" in
-        "${spec_rel}"|"${local_spec_dir_rel}"/*|".openapi-generator/FILES"|".openapi-generator/VERSION"|".openapi-generator-ignore")
+        "${spec_rel}"|"${local_spec_dir_rel}"/*|"go.mod"|"go.sum"|".openapi-generator/FILES"|".openapi-generator/VERSION"|".openapi-generator-ignore")
           continue
           ;;
       esac
@@ -95,7 +97,7 @@ cleanup_generated_files() {
   echo "No .openapi-generator/FILES found, using fallback cleanup"
   rm -f "${ROOT_DIR}"/api_*.go "${ROOT_DIR}"/model_*.go
   rm -f "${ROOT_DIR}"/client.go "${ROOT_DIR}"/configuration.go "${ROOT_DIR}"/response.go "${ROOT_DIR}"/utils.go
-  rm -f "${ROOT_DIR}"/README.md "${ROOT_DIR}"/go.mod "${ROOT_DIR}"/go.sum "${ROOT_DIR}"/git_push.sh "${ROOT_DIR}"/.travis.yml
+  rm -f "${ROOT_DIR}"/README.md "${ROOT_DIR}"/git_push.sh "${ROOT_DIR}"/.travis.yml
 
   if [[ -d "${ROOT_DIR}/docs" ]]; then
     find "${ROOT_DIR}/docs" -maxdepth 1 -type f -name '*.md' ! -name 'CONTRIBUTING.md' -delete
@@ -116,6 +118,11 @@ cleanup_generated_files
 
 echo "Generating ${language} client from ${spec_rel}"
 
+additional_properties="packageName=${package_name},packageVersion=${package_version},structPrefix=${struct_prefix},enumClassPrefix=${enum_class_prefix}"
+if [[ -n "${with_go_mod}" ]]; then
+  additional_properties="${additional_properties},withGoMod=${with_go_mod}"
+fi
+
 cmd=(
   "${generator_cmd[@]}"
   generate
@@ -125,7 +132,7 @@ cmd=(
   --git-user-id "${git_user_id}"
   --git-repo-id "${git_repo_id}"
   --global-property "${global_properties}"
-  --additional-properties "packageName=${package_name},packageVersion=${package_version},structPrefix=${struct_prefix},enumClassPrefix=${enum_class_prefix}"
+  --additional-properties "${additional_properties}"
 )
 
 if [[ -n "${template_dir}" ]]; then
@@ -141,6 +148,10 @@ if [[ "${skip_validate_spec}" == "true" ]]; then
 fi
 
 "${cmd[@]}"
+
+if [[ -n "${go_version}" ]]; then
+  go mod edit -go="${go_version}"
+fi
 
 go mod tidy >/dev/null
 go fmt ./... >/dev/null

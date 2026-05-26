@@ -10,6 +10,8 @@ spec:
 generator:
   generator_version: 7.22.0
   language: go
+  go_version: 1.25.0
+  with_go_mod: false
   output_dir: .
   package_name: openapi
   package_version: 1.0.0
