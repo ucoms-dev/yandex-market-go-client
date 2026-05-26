@@ -4,13 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | [optional] 
+**Status** | [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | 
 
 ## Methods
 
 ### NewApiResponse
 
-`func NewApiResponse() *ApiResponse`
+`func NewApiResponse(status ApiResponseStatusType, ) *ApiResponse`
 
 NewApiResponse instantiates a new ApiResponse object
 This constructor will assign default values to properties that have it defined,
@@ -44,11 +44,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *ApiResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

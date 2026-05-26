@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &GetOfferMappingsResultDTO{}
 
 // GetOfferMappingsResultDTO Информация о товарах.
 type GetOfferMappingsResultDTO struct {
-	Paging *ScrollingPagerDTO `json:"paging,omitempty"`
+	Paging *PackagingForwardScrollingPagerDTO `json:"paging,omitempty"`
 	// Информация о товарах.
 	OfferMappings []GetOfferMappingDTO `json:"offerMappings"`
 }
@@ -47,9 +47,9 @@ func NewGetOfferMappingsResultDTOWithDefaults() *GetOfferMappingsResultDTO {
 }
 
 // GetPaging returns the Paging field value if set, zero value otherwise.
-func (o *GetOfferMappingsResultDTO) GetPaging() ScrollingPagerDTO {
+func (o *GetOfferMappingsResultDTO) GetPaging() PackagingForwardScrollingPagerDTO {
 	if o == nil || IsNil(o.Paging) {
-		var ret ScrollingPagerDTO
+		var ret PackagingForwardScrollingPagerDTO
 		return ret
 	}
 	return *o.Paging
@@ -57,7 +57,7 @@ func (o *GetOfferMappingsResultDTO) GetPaging() ScrollingPagerDTO {
 
 // GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetOfferMappingsResultDTO) GetPagingOk() (*ScrollingPagerDTO, bool) {
+func (o *GetOfferMappingsResultDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool) {
 	if o == nil || IsNil(o.Paging) {
 		return nil, false
 	}
@@ -73,8 +73,8 @@ func (o *GetOfferMappingsResultDTO) HasPaging() bool {
 	return false
 }
 
-// SetPaging gets a reference to the given ScrollingPagerDTO and assigns it to the Paging field.
-func (o *GetOfferMappingsResultDTO) SetPaging(v ScrollingPagerDTO) {
+// SetPaging gets a reference to the given PackagingForwardScrollingPagerDTO and assigns it to the Paging field.
+func (o *GetOfferMappingsResultDTO) SetPaging(v PackagingForwardScrollingPagerDTO) {
 	o.Paging = &v
 }
 

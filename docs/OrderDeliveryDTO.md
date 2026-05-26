@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Идентификатор доставки, присвоенный магазином.  Указывается, только если магазин передал данный идентификатор в ответе на запрос методом &#x60;POST cart&#x60;.  | [optional] 
 **Type** | [**OrderDeliveryType**](OrderDeliveryType.md) |  | 
-**ServiceName** | **string** | Наименование службы доставки. | 
+**ServiceName** | **string** | Название службы доставки. | 
 **Price** | Pointer to **float32** | {% note warning \&quot;Стоимость доставки смотрите в параметре &#x60;deliveryTotal&#x60;.\&quot; %}     {% endnote %}  Стоимость доставки в валюте заказа.  | [optional] 
 **DeliveryPartnerType** | [**OrderDeliveryPartnerType**](OrderDeliveryPartnerType.md) |  | 
 **Courier** | Pointer to [**OrderCourierDTO**](OrderCourierDTO.md) |  | [optional] 
@@ -17,14 +17,15 @@ Name | Type | Description | Notes
 **DeliveryServiceId** | **int64** | Идентификатор службы доставки. | 
 **LiftType** | Pointer to [**OrderLiftType**](OrderLiftType.md) |  | [optional] 
 **LiftPrice** | Pointer to **float32** | Стоимость подъема на этаж. | [optional] 
-**OutletCode** | Pointer to **string** | Идентификатор пункта самовывоза, присвоенный магазином. | [optional] 
+**OutletCode** | Pointer to **string** | Идентификатор пункта выдачи, присвоенный магазином. | [optional] 
 **OutletStorageLimitDate** | Pointer to **string** | Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  | [optional] 
 **DispatchType** | Pointer to [**OrderDeliveryDispatchType**](OrderDeliveryDispatchType.md) |  | [optional] 
-**Tracks** | Pointer to [**[]OrderTrackDTO**](OrderTrackDTO.md) | Информация для отслеживания перемещений посылки. | [optional] 
+**Tracks** | Pointer to [**[]OrderTrackDTO**](OrderTrackDTO.md) | Информация для отслеживания посылки. | [optional] 
 **Shipments** | Pointer to [**[]OrderShipmentDTO**](OrderShipmentDTO.md) | Информация о посылках. | [optional] 
 **Estimated** | Pointer to **bool** | Приблизительная ли дата доставки. | [optional] 
 **EacType** | Pointer to [**OrderDeliveryEacType**](OrderDeliveryEacType.md) |  | [optional] 
 **EacCode** | Pointer to **string** | Код подтверждения ЭАПП (для типа &#x60;MERCHANT_TO_COURIER&#x60;).  | [optional] 
+**ReceiveCode** | Pointer to **string** | **Только для модели LaaS**  Код получения заказа на ПВЗ.  | [optional] 
 
 ## Methods
 
@@ -564,6 +565,31 @@ SetEacCode sets EacCode field to given value.
 `func (o *OrderDeliveryDTO) HasEacCode() bool`
 
 HasEacCode returns a boolean if a field has been set.
+
+### GetReceiveCode
+
+`func (o *OrderDeliveryDTO) GetReceiveCode() string`
+
+GetReceiveCode returns the ReceiveCode field if non-nil, zero value otherwise.
+
+### GetReceiveCodeOk
+
+`func (o *OrderDeliveryDTO) GetReceiveCodeOk() (*string, bool)`
+
+GetReceiveCodeOk returns a tuple with the ReceiveCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReceiveCode
+
+`func (o *OrderDeliveryDTO) SetReceiveCode(v string)`
+
+SetReceiveCode sets ReceiveCode field to given value.
+
+### HasReceiveCode
+
+`func (o *OrderDeliveryDTO) HasReceiveCode() bool`
+
+HasReceiveCode returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

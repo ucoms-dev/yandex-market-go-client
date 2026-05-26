@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,21 +15,19 @@ import (
 	"fmt"
 )
 
-// OrderItemTagType Признак товара:  * `ULTIMA` — премиум-товар. * `SAFE_TAG` — товар с [защитной меткой](*safe-tag). * `TURBO` — товар, который быстро раскупают.
+// OrderItemTagType Признак товара:  * `ULTIMA` — премиум-товар. * `SAFE_TAG` — товар с [защитной меткой](*safe-tag).
 type OrderItemTagType string
 
 // List of OrderItemTagType
 const (
 	ORDERITEMTAGTYPE_ULTIMA   OrderItemTagType = "ULTIMA"
 	ORDERITEMTAGTYPE_SAFE_TAG OrderItemTagType = "SAFE_TAG"
-	ORDERITEMTAGTYPE_TURBO    OrderItemTagType = "TURBO"
 )
 
 // All allowed values of OrderItemTagType enum
 var AllowedOrderItemTagTypeEnumValues = []OrderItemTagType{
 	"ULTIMA",
 	"SAFE_TAG",
-	"TURBO",
 }
 
 func (v *OrderItemTagType) UnmarshalJSON(src []byte) error {

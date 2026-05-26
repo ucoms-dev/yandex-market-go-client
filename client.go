@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -42,7 +42,7 @@ var (
 	queryDescape    = strings.NewReplacer("%5B", "[", "%5D", "]")
 )
 
-// APIClient manages communication with the Партнерский API Маркета API vLATEST
+// APIClient manages communication with the API Яндекс Маркета для продавцов API vLATEST
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -68,6 +68,8 @@ type APIClient struct {
 
 	DbsAPI *DbsAPIService
 
+	DeliveryOptionsAPI *DeliveryOptionsAPIService
+
 	DeliveryServicesAPI *DeliveryServicesAPIService
 
 	ExpressAPI *ExpressAPIService
@@ -78,15 +80,19 @@ type APIClient struct {
 
 	GoodsFeedbackAPI *GoodsFeedbackAPIService
 
+	GoodsQuestionsAPI *GoodsQuestionsAPIService
+
 	GoodsStatsAPI *GoodsStatsAPIService
 
 	HiddenOffersAPI *HiddenOffersAPIService
 
-	ModelsAPI *ModelsAPIService
+	LaasAPI *LaasAPIService
 
-	OfferMappingsAPI *OfferMappingsAPIService
+	LogisticPointsAPI *LogisticPointsAPIService
 
 	OffersAPI *OffersAPIService
+
+	OperationsAPI *OperationsAPIService
 
 	OrderBusinessInformationAPI *OrderBusinessInformationAPIService
 
@@ -152,16 +158,19 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.ChatsAPI = (*ChatsAPIService)(&c.common)
 	c.ContentAPI = (*ContentAPIService)(&c.common)
 	c.DbsAPI = (*DbsAPIService)(&c.common)
+	c.DeliveryOptionsAPI = (*DeliveryOptionsAPIService)(&c.common)
 	c.DeliveryServicesAPI = (*DeliveryServicesAPIService)(&c.common)
 	c.ExpressAPI = (*ExpressAPIService)(&c.common)
 	c.FbsAPI = (*FbsAPIService)(&c.common)
 	c.FbyAPI = (*FbyAPIService)(&c.common)
 	c.GoodsFeedbackAPI = (*GoodsFeedbackAPIService)(&c.common)
+	c.GoodsQuestionsAPI = (*GoodsQuestionsAPIService)(&c.common)
 	c.GoodsStatsAPI = (*GoodsStatsAPIService)(&c.common)
 	c.HiddenOffersAPI = (*HiddenOffersAPIService)(&c.common)
-	c.ModelsAPI = (*ModelsAPIService)(&c.common)
-	c.OfferMappingsAPI = (*OfferMappingsAPIService)(&c.common)
+	c.LaasAPI = (*LaasAPIService)(&c.common)
+	c.LogisticPointsAPI = (*LogisticPointsAPIService)(&c.common)
 	c.OffersAPI = (*OffersAPIService)(&c.common)
+	c.OperationsAPI = (*OperationsAPIService)(&c.common)
 	c.OrderBusinessInformationAPI = (*OrderBusinessInformationAPIService)(&c.common)
 	c.OrderDeliveryAPI = (*OrderDeliveryAPIService)(&c.common)
 	c.OrderLabelsAPI = (*OrderLabelsAPIService)(&c.common)

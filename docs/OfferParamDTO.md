@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Name** | **string** | Название характеристики.  Должно совпадать с названием характеристики на Маркете. Узнать его можно из Excel-шаблона категории или через запрос [POST category/{categoryId}/parameters](../../reference/content/getCategoryContentParameters.md).  | 
+**Name** | **string** | Название характеристики.  Должно совпадать с названием характеристики на Маркете. Узнать его можно из Excel-шаблона категории или через запрос [POST v2/category/{categoryId}/parameters](../../reference/content/getCategoryContentParameters.md).  | 
 **Value** | **string** | Значение.  | 
 
 ## Methods

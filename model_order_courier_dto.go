@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,15 +19,15 @@ var _ MappedNullable = &OrderCourierDTO{}
 
 // OrderCourierDTO Информация о курьере.
 type OrderCourierDTO struct {
-	// Полное имя курьера.
+	// Полное имя.
 	FullName *string `json:"fullName,omitempty"`
-	// Номер телефона курьера.
+	// Номер телефона.
 	Phone *string `json:"phone,omitempty"`
 	// Добавочный номер телефона.
 	PhoneExtension *string `json:"phoneExtension,omitempty"`
 	// Номер транспортного средства.
 	VehicleNumber *string `json:"vehicleNumber,omitempty"`
-	// Описание машины. Например, модель и цвет.
+	// Описание транспортного средства. Например, модель и цвет.
 	VehicleDescription *string `json:"vehicleDescription,omitempty"`
 }
 

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -45,15 +45,18 @@ CreateChat Создание нового чата с покупателем
 
 {% include notitle [access](../../_auto/method_scopes/createChat.md) %}
 
-Создает новый чат с покупателем.
+Создает новый чат с покупателем и возвращает информацию о нем или созданном ранее.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+Типы чатов, которые может начать продавец:
 
+* по заказам;
+* по возвратам (доступны только для FBY-, FBS- и Экспресс-магазинов).
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return ChatsAPICreateChatRequest
+{% include notitle [limit](../../_auto/method_limits/createChat.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ChatsAPICreateChatRequest
 */
 func (a *ChatsAPIService) CreateChat(ctx context.Context, businessId int64) ChatsAPICreateChatRequest {
 	return ChatsAPICreateChatRequest{
@@ -64,7 +67,8 @@ func (a *ChatsAPIService) CreateChat(ctx context.Context, businessId int64) Chat
 }
 
 // Execute executes the request
-//  @return CreateChatResponse
+//
+//	@return CreateChatResponse
 func (a *ChatsAPIService) CreateChatExecute(r ChatsAPICreateChatRequest) (*CreateChatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -78,7 +82,7 @@ func (a *ChatsAPIService) CreateChatExecute(r ChatsAPICreateChatRequest) (*Creat
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/chats/new"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/chats/new"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -252,19 +256,17 @@ GetChat Получение чата по идентификатору
 
 {% note tip "Подключите API-уведомления" %}
 
-Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.
+Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.
 
 [{#T}](../../push-notifications/index.md)
 
 {% endnote %}
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getChat.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return ChatsAPIGetChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ChatsAPIGetChatRequest
 */
 func (a *ChatsAPIService) GetChat(ctx context.Context, businessId int64) ChatsAPIGetChatRequest {
 	return ChatsAPIGetChatRequest{
@@ -275,7 +277,8 @@ func (a *ChatsAPIService) GetChat(ctx context.Context, businessId int64) ChatsAP
 }
 
 // Execute executes the request
-//  @return GetChatResponse
+//
+//	@return GetChatResponse
 func (a *ChatsAPIService) GetChatExecute(r ChatsAPIGetChatRequest) (*GetChatResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -289,7 +292,7 @@ func (a *ChatsAPIService) GetChatExecute(r ChatsAPIGetChatRequest) (*GetChatResp
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/chat"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/chat"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -305,7 +308,7 @@ func (a *ChatsAPIService) GetChatExecute(r ChatsAPIGetChatRequest) (*GetChatResp
 		return localVarReturnValue, nil, reportError("chatId must be greater than 1")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -461,13 +464,13 @@ func (r ChatsAPIGetChatHistoryRequest) GetChatHistoryRequest(getChatHistoryReque
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r ChatsAPIGetChatHistoryRequest) PageToken(pageToken string) ChatsAPIGetChatHistoryRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r ChatsAPIGetChatHistoryRequest) Limit(limit int32) ChatsAPIGetChatHistoryRequest {
 	r.limit = &limit
 	return r
@@ -484,13 +487,11 @@ GetChatHistory Получение истории сообщений в чате
 
 Возвращает историю сообщений в чате с покупателем.
 
-|**⚙️ Лимит:** 10 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getChatHistory.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return ChatsAPIGetChatHistoryRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ChatsAPIGetChatHistoryRequest
 */
 func (a *ChatsAPIService) GetChatHistory(ctx context.Context, businessId int64) ChatsAPIGetChatHistoryRequest {
 	return ChatsAPIGetChatHistoryRequest{
@@ -501,7 +502,8 @@ func (a *ChatsAPIService) GetChatHistory(ctx context.Context, businessId int64) 
 }
 
 // Execute executes the request
-//  @return GetChatHistoryResponse
+//
+//	@return GetChatHistoryResponse
 func (a *ChatsAPIService) GetChatHistoryExecute(r ChatsAPIGetChatHistoryRequest) (*GetChatHistoryResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -515,7 +517,7 @@ func (a *ChatsAPIService) GetChatHistoryExecute(r ChatsAPIGetChatHistoryRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/chats/history"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/chats/history"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -534,12 +536,15 @@ func (a *ChatsAPIService) GetChatHistoryExecute(r ChatsAPIGetChatHistoryRequest)
 		return localVarReturnValue, nil, reportError("getChatHistoryRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 50
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -709,19 +714,17 @@ GetChatMessage Получение сообщения в чате
 
 {% note tip "Подключите API-уведомления" %}
 
-Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.
+Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.
 
 [{#T}](../../push-notifications/index.md)
 
 {% endnote %}
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getChatMessage.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return ChatsAPIGetChatMessageRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ChatsAPIGetChatMessageRequest
 */
 func (a *ChatsAPIService) GetChatMessage(ctx context.Context, businessId int64) ChatsAPIGetChatMessageRequest {
 	return ChatsAPIGetChatMessageRequest{
@@ -732,7 +735,8 @@ func (a *ChatsAPIService) GetChatMessage(ctx context.Context, businessId int64) 
 }
 
 // Execute executes the request
-//  @return GetChatMessageResponse
+//
+//	@return GetChatMessageResponse
 func (a *ChatsAPIService) GetChatMessageExecute(r ChatsAPIGetChatMessageRequest) (*GetChatMessageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -746,7 +750,7 @@ func (a *ChatsAPIService) GetChatMessageExecute(r ChatsAPIGetChatMessageRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/chats/message"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/chats/message"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -768,8 +772,8 @@ func (a *ChatsAPIService) GetChatMessageExecute(r ChatsAPIGetChatMessageRequest)
 		return localVarReturnValue, nil, reportError("messageId must be greater than 1")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "messageId", r.messageId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "messageId", r.messageId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -918,13 +922,13 @@ func (r ChatsAPIGetChatsRequest) GetChatsRequest(getChatsRequest GetChatsRequest
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r ChatsAPIGetChatsRequest) PageToken(pageToken string) ChatsAPIGetChatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r ChatsAPIGetChatsRequest) Limit(limit int32) ChatsAPIGetChatsRequest {
 	r.limit = &limit
 	return r
@@ -943,19 +947,17 @@ GetChats Получение доступных чатов
 
 {% note tip "Подключите API-уведомления" %}
 
-Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.
+Маркет отправит вам запрос [POST notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.
 
 [{#T}](../../push-notifications/index.md)
 
 {% endnote %}
 
-|**⚙️ Лимит:** 10 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getChats.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return ChatsAPIGetChatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ChatsAPIGetChatsRequest
 */
 func (a *ChatsAPIService) GetChats(ctx context.Context, businessId int64) ChatsAPIGetChatsRequest {
 	return ChatsAPIGetChatsRequest{
@@ -966,7 +968,8 @@ func (a *ChatsAPIService) GetChats(ctx context.Context, businessId int64) ChatsA
 }
 
 // Execute executes the request
-//  @return GetChatsResponse
+//
+//	@return GetChatsResponse
 func (a *ChatsAPIService) GetChatsExecute(r ChatsAPIGetChatsRequest) (*GetChatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -980,7 +983,7 @@ func (a *ChatsAPIService) GetChatsExecute(r ChatsAPIGetChatsRequest) (*GetChatsR
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/chats"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/chats"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -994,10 +997,13 @@ func (a *ChatsAPIService) GetChatsExecute(r ChatsAPIGetChatsRequest) (*GetChatsR
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 10
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1165,13 +1171,11 @@ SendFileToChat Отправка файла в чат
 
 Отправляет файл в чат с покупателем.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/sendFileToChat.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return ChatsAPISendFileToChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ChatsAPISendFileToChatRequest
 */
 func (a *ChatsAPIService) SendFileToChat(ctx context.Context, businessId int64) ChatsAPISendFileToChatRequest {
 	return ChatsAPISendFileToChatRequest{
@@ -1182,7 +1186,8 @@ func (a *ChatsAPIService) SendFileToChat(ctx context.Context, businessId int64) 
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *ChatsAPIService) SendFileToChatExecute(r ChatsAPISendFileToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1196,7 +1201,7 @@ func (a *ChatsAPIService) SendFileToChatExecute(r ChatsAPISendFileToChatRequest)
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/chats/file/send"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/chats/file/send"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1215,7 +1220,7 @@ func (a *ChatsAPIService) SendFileToChatExecute(r ChatsAPISendFileToChatRequest)
 		return localVarReturnValue, nil, reportError("file is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
@@ -1395,13 +1400,11 @@ SendMessageToChat Отправка сообщения в чат
 
 Отправляет сообщение в чат с покупателем.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/sendMessageToChat.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return ChatsAPISendMessageToChatRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return ChatsAPISendMessageToChatRequest
 */
 func (a *ChatsAPIService) SendMessageToChat(ctx context.Context, businessId int64) ChatsAPISendMessageToChatRequest {
 	return ChatsAPISendMessageToChatRequest{
@@ -1412,7 +1415,8 @@ func (a *ChatsAPIService) SendMessageToChat(ctx context.Context, businessId int6
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *ChatsAPIService) SendMessageToChatExecute(r ChatsAPISendMessageToChatRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1426,7 +1430,7 @@ func (a *ChatsAPIService) SendMessageToChatExecute(r ChatsAPISendMessageToChatRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/chats/message"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/chats/message"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -1445,7 +1449,7 @@ func (a *ChatsAPIService) SendMessageToChatExecute(r ChatsAPISendMessageToChatRe
 		return localVarReturnValue, nil, reportError("sendMessageToChatRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

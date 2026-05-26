@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,26 +21,26 @@ var _ MappedNullable = &GetOfferDTO{}
 
 // GetOfferDTO Параметры товара.
 type GetOfferDTO struct {
-	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	OfferId string `json:"offerId" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
 	// Составляйте название по схеме: тип + бренд или производитель + модель + особенности, если есть (например, цвет, размер или вес) и количество в упаковке.  Не включайте в название условия продажи (например, «скидка», «бесплатная доставка» и т. д.), эмоциональные характеристики («хит», «супер» и т. д.). Не пишите слова большими буквами — кроме устоявшихся названий брендов и моделей.  Оптимальная длина — 50–60 символов.  [Рекомендации и правила](https://yandex.ru/support/marketplace/assortment/fields/title.html)
 	Name *string `json:"name,omitempty"`
-	// Идентификатор категории на Маркете, к которой вы относите свой товар.  При изменении категории убедитесь, что характеристики товара и их значения в параметре `parameterValues` вы передаете для новой категории.  Список категорий Маркета можно получить с помощью запроса  [POST categories/tree](../../reference/categories/getCategoriesTree.md).
+	// Идентификатор категории на Маркете, к которой вы относите свой товар.  {% note warning \"Всегда указывайте, когда передаете `parameterValues`\" %}  Если при изменении характеристик передать `parameterValues` и не указать `marketCategoryId`, характеристики обновятся, но в ответе придет предупреждение (параметр `warnings`).  Если не передать их оба, будет использована информация из устаревших параметров `params` и `category`, а `marketCategoryId` будет определен автоматически.  {% endnote %}  При изменении категории убедитесь, что характеристики товара и их значения в параметре `parameterValues` вы передаете для новой категории.  Список категорий Маркета можно получить с помощью запроса  [POST v2/categories/tree](../../reference/categories/getCategoriesTree.md).
 	MarketCategoryId *int64 `json:"marketCategoryId,omitempty"`
 	// {% note warning \"Вместо него используйте `marketCategoryId`.\" %}     {% endnote %}  Категория товара в вашем магазине.
 	// Deprecated
 	Category *string `json:"category,omitempty"`
 	// Ссылки на изображения товара. Изображение по первой ссылке считается основным, остальные дополнительными.  **Требования к ссылкам**  * Ссылок может быть до 30. * Указывайте ссылку целиком, включая протокол http или https. * Максимальная длина — 512 символов. * Русские буквы в URL можно. * Можно использовать прямые ссылки на изображения и на Яндекс Диск. Ссылки на Яндекс Диске нужно копировать с помощью функции **Поделиться**. Относительные ссылки и ссылки на другие облачные хранилища — не работают.  ✅ `https://example-shop.ru/images/sku12345.jpg`  ✅ `https://yadi.sk/i/NaBoRsimVOLov`  ❌ `/images/sku12345.jpg`  ❌ `https://www.dropbox.com/s/818f/tovar.jpg`  Ссылки на изображение должны быть постоянными. Нельзя использовать динамические ссылки, меняющиеся от выгрузки к выгрузке.  Если нужно заменить изображение, выложите новое изображение по новой ссылке, а ссылку на старое удалите. Если просто заменить изображение по старой ссылке, оно не обновится.  [Требования к изображениям](https://yandex.ru/support/marketplace/assortment/fields/images.html)
 	Pictures []string `json:"pictures,omitempty"`
-	// Ссылки (URL) на видео товара.  Максимальное количество ссылок — 6.  **Требования к ссылке**  * Указывайте ссылку целиком, включая протокол http или https. * Максимальная длина — 512 символов. * Русские буквы в URL можно. * Можно использовать прямые ссылки на видео и на Яндекс Диск. Ссылки на Яндекс Диске нужно копировать с помощью функции **Поделиться**. Относительные ссылки и ссылки на другие облачные хранилища — не работают.  ✅ `https://example-shop.ru/video/sku12345.avi`  ✅ `https://yadi.sk/i/NaBoRsimVOLov`  ❌ `/video/sku12345.avi`  ❌ `https://www.dropbox.com/s/818f/super-tovar.avi`  Ссылки на видео должны быть постоянными. Нельзя использовать динамические ссылки, меняющиеся от выгрузки к выгрузке.  Если нужно заменить видео, выложите новое видео по новой ссылке, а ссылку на старое удалите. Если просто заменить видео по старой ссылке, оно не обновится.  [Требования к видео](https://yandex.ru/support/marketplace/assortment/fields/video.html)
+	// Ссылки (URL) на видео товара.  **Требования к ссылке**  * Указывайте ссылку целиком, включая протокол http или https. * Максимальная длина — 512 символов. * Русские буквы в URL можно. * Можно использовать прямые ссылки на видео и на Яндекс Диск. Ссылки на Яндекс Диске нужно копировать с помощью функции **Поделиться**. Относительные ссылки и ссылки на другие облачные хранилища — не работают.  ✅ `https://example-shop.ru/video/sku12345.avi`  ✅ `https://yadi.sk/i/NaBoRsimVOLov`  ❌ `/video/sku12345.avi`  ❌ `https://www.dropbox.com/s/818f/super-tovar.avi`  Ссылки на видео должны быть постоянными. Нельзя использовать динамические ссылки, меняющиеся от выгрузки к выгрузке.  Если нужно заменить видео, выложите новое видео по новой ссылке, а ссылку на старое удалите. Если просто заменить видео по старой ссылке, оно не обновится.  [Требования к видео](https://yandex.ru/support/marketplace/assortment/fields/video.html)
 	Videos []string `json:"videos,omitempty"`
-	// Список инструкций по использованию товара.  Максимальное количество инструкций — 6.
+	// Список инструкций по использованию товара.
 	Manuals []OfferManualDTO `json:"manuals,omitempty"`
 	// Название бренда или производителя. Должно быть записано так, как его пишет сам бренд.
 	Vendor *string `json:"vendor,omitempty"`
-	// Указывайте в виде последовательности цифр. Подойдут коды EAN-13, EAN-8, UPC-A, UPC-E или Code 128.  Для книг указывайте ISBN.  Для товаров [определенных категорий и торговых марок](https://yastatic.net/s3/doc-binary/src/support/market/ru/yandex-market-list-for-gtin.xlsx) штрихкод должен быть действительным кодом GTIN. Обратите внимание: внутренние штрихкоды, начинающиеся на 2 или 02, и коды формата Code 128 не являются GTIN.  [Что такое GTIN](*gtin)
+	// Штрихкод.  Указывайте в виде последовательности цифр. Подойдут коды :no-translate[EAN-13, EAN-8, UPC-A, UPC-E] или :no-translate[Code 128]. Для книг — :no-translate[ISBN].  Для товаров [определенных категорий и торговых марок](https://yastatic.net/s3/doc-binary/src/support/market/ru/yandex-market-list-for-gtin.xlsx) штрихкод должен быть действительным кодом :no-translate[GTIN]. Обратите внимание: внутренние штрихкоды, начинающиеся на 2 или 02, и коды формата :no-translate[Code 128] не являются :no-translate[GTIN].  [Что такое :no-translate[GTIN]](*gtin)
 	Barcodes []string `json:"barcodes,omitempty"`
-	// Подробное описание товара: например, его преимущества и особенности.  Не давайте в описании инструкций по установке и сборке. Не используйте слова «скидка», «распродажа», «дешевый», «подарок» (кроме подарочных категорий), «бесплатно», «акция», «специальная цена», «новинка», «new», «аналог», «заказ», «хит». Не указывайте никакой контактной информации и не давайте ссылок.  Можно использовать теги:  * \\<h>, \\<h1>, \\<h2> и так далее — для заголовков; * \\<br> и \\<p> — для переноса строки; * \\<ol> — для нумерованного списка; * \\<ul> — для маркированного списка; * \\<li> — для создания элементов списка (должен находиться внутри \\<ol> или \\<ul>); * \\<div> — поддерживается, но не влияет на отображение текста.  Оптимальная длина — 400–600 символов.  [Рекомендации и правила](https://yandex.ru/support/marketplace/assortment/fields/description.html)
+	// Подробное описание товара: например, его преимущества и особенности.  Не давайте в описании инструкций по установке и сборке. Не используйте слова «скидка», «распродажа», «дешевый», «подарок» (кроме подарочных категорий), «бесплатно», «акция», «специальная цена», «новинка», «new», «аналог», «заказ», «хит». Не указывайте никакой контактной информации и не давайте ссылок.  Для форматирования текста можно использовать теги HTML:  * \\<h>, \\<h1>, \\<h2> и так далее — для заголовков; * \\<br> и \\<p> — для переноса строки; * \\<ol> — для нумерованного списка; * \\<ul> — для маркированного списка; * \\<li> — для создания элементов списка (должен находиться внутри \\<ol> или \\<ul>); * \\<div> — поддерживается, но не влияет на отображение текста.  Оптимальная длина — 400–600 символов.  [Рекомендации и правила](https://yandex.ru/support/marketplace/assortment/fields/description.html)
 	Description *string `json:"description,omitempty"`
 	// Страна, где был произведен товар.  Записывайте названия стран так, как они записаны в [списке](https://yastatic.net/s3/doc-binary/src/support/market/ru/countries.xlsx).
 	ManufacturerCountries []string                  `json:"manufacturerCountries,omitempty"`
@@ -74,7 +74,6 @@ type GetOfferDTO struct {
 	BasicPrice         *GetPriceWithDiscountDTO `json:"basicPrice,omitempty"`
 	PurchasePrice      *GetPriceDTO             `json:"purchasePrice,omitempty"`
 	AdditionalExpenses *GetPriceDTO             `json:"additionalExpenses,omitempty"`
-	CofinancePrice     *GetPriceDTO             `json:"cofinancePrice,omitempty"`
 	CardStatus         *OfferCardStatusType     `json:"cardStatus,omitempty"`
 	// Список магазинов, в которых размещен товар.
 	Campaigns []OfferCampaignStatusDTO `json:"campaigns,omitempty"`
@@ -83,6 +82,8 @@ type GetOfferDTO struct {
 	MediaFiles      *OfferMediaFilesDTO      `json:"mediaFiles,omitempty"`
 	// Товар помещен в архив.
 	Archived *bool `json:"archived,omitempty"`
+	// Идентификатор группы товаров.  У товаров, которые объединены в одну группу, будет одинаковый идентификатор.  [Как объединить товары на карточке](../../step-by-step/assortment-add-goods.md#combine-variants)
+	GroupId *string `json:"groupId,omitempty"`
 }
 
 type _GetOfferDTO GetOfferDTO
@@ -1075,38 +1076,6 @@ func (o *GetOfferDTO) SetAdditionalExpenses(v GetPriceDTO) {
 	o.AdditionalExpenses = &v
 }
 
-// GetCofinancePrice returns the CofinancePrice field value if set, zero value otherwise.
-func (o *GetOfferDTO) GetCofinancePrice() GetPriceDTO {
-	if o == nil || IsNil(o.CofinancePrice) {
-		var ret GetPriceDTO
-		return ret
-	}
-	return *o.CofinancePrice
-}
-
-// GetCofinancePriceOk returns a tuple with the CofinancePrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetOfferDTO) GetCofinancePriceOk() (*GetPriceDTO, bool) {
-	if o == nil || IsNil(o.CofinancePrice) {
-		return nil, false
-	}
-	return o.CofinancePrice, true
-}
-
-// HasCofinancePrice returns a boolean if a field has been set.
-func (o *GetOfferDTO) HasCofinancePrice() bool {
-	if o != nil && !IsNil(o.CofinancePrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetCofinancePrice gets a reference to the given GetPriceDTO and assigns it to the CofinancePrice field.
-func (o *GetOfferDTO) SetCofinancePrice(v GetPriceDTO) {
-	o.CofinancePrice = &v
-}
-
 // GetCardStatus returns the CardStatus field value if set, zero value otherwise.
 func (o *GetOfferDTO) GetCardStatus() OfferCardStatusType {
 	if o == nil || IsNil(o.CardStatus) {
@@ -1269,6 +1238,38 @@ func (o *GetOfferDTO) SetArchived(v bool) {
 	o.Archived = &v
 }
 
+// GetGroupId returns the GroupId field value if set, zero value otherwise.
+func (o *GetOfferDTO) GetGroupId() string {
+	if o == nil || IsNil(o.GroupId) {
+		var ret string
+		return ret
+	}
+	return *o.GroupId
+}
+
+// GetGroupIdOk returns a tuple with the GroupId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetOfferDTO) GetGroupIdOk() (*string, bool) {
+	if o == nil || IsNil(o.GroupId) {
+		return nil, false
+	}
+	return o.GroupId, true
+}
+
+// HasGroupId returns a boolean if a field has been set.
+func (o *GetOfferDTO) HasGroupId() bool {
+	if o != nil && !IsNil(o.GroupId) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupId gets a reference to the given string and assigns it to the GroupId field.
+func (o *GetOfferDTO) SetGroupId(v string) {
+	o.GroupId = &v
+}
+
 func (o GetOfferDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -1367,9 +1368,6 @@ func (o GetOfferDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.AdditionalExpenses) {
 		toSerialize["additionalExpenses"] = o.AdditionalExpenses
 	}
-	if !IsNil(o.CofinancePrice) {
-		toSerialize["cofinancePrice"] = o.CofinancePrice
-	}
 	if !IsNil(o.CardStatus) {
 		toSerialize["cardStatus"] = o.CardStatus
 	}
@@ -1384,6 +1382,9 @@ func (o GetOfferDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Archived) {
 		toSerialize["archived"] = o.Archived
+	}
+	if !IsNil(o.GroupId) {
+		toSerialize["groupId"] = o.GroupId
 	}
 	return toSerialize, nil
 }

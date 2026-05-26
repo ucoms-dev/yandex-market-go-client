@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,10 +19,9 @@ var _ MappedNullable = &OfferForRecommendationDTO{}
 
 // OfferForRecommendationDTO Информация о состоянии цены на товар.
 type OfferForRecommendationDTO struct {
-	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	OfferId         *string                   `json:"offerId,omitempty" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
 	Price           *BasePriceDTO             `json:"price,omitempty"`
-	CofinancePrice  *GetPriceDTO              `json:"cofinancePrice,omitempty"`
 	Competitiveness *PriceCompetitivenessType `json:"competitiveness,omitempty"`
 	// Количество показов карточки товара за последние 7 дней.
 	Shows *int64 `json:"shows,omitempty"`
@@ -109,38 +108,6 @@ func (o *OfferForRecommendationDTO) SetPrice(v BasePriceDTO) {
 	o.Price = &v
 }
 
-// GetCofinancePrice returns the CofinancePrice field value if set, zero value otherwise.
-func (o *OfferForRecommendationDTO) GetCofinancePrice() GetPriceDTO {
-	if o == nil || IsNil(o.CofinancePrice) {
-		var ret GetPriceDTO
-		return ret
-	}
-	return *o.CofinancePrice
-}
-
-// GetCofinancePriceOk returns a tuple with the CofinancePrice field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *OfferForRecommendationDTO) GetCofinancePriceOk() (*GetPriceDTO, bool) {
-	if o == nil || IsNil(o.CofinancePrice) {
-		return nil, false
-	}
-	return o.CofinancePrice, true
-}
-
-// HasCofinancePrice returns a boolean if a field has been set.
-func (o *OfferForRecommendationDTO) HasCofinancePrice() bool {
-	if o != nil && !IsNil(o.CofinancePrice) {
-		return true
-	}
-
-	return false
-}
-
-// SetCofinancePrice gets a reference to the given GetPriceDTO and assigns it to the CofinancePrice field.
-func (o *OfferForRecommendationDTO) SetCofinancePrice(v GetPriceDTO) {
-	o.CofinancePrice = &v
-}
-
 // GetCompetitiveness returns the Competitiveness field value if set, zero value otherwise.
 func (o *OfferForRecommendationDTO) GetCompetitiveness() PriceCompetitivenessType {
 	if o == nil || IsNil(o.Competitiveness) {
@@ -220,9 +187,6 @@ func (o OfferForRecommendationDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Price) {
 		toSerialize["price"] = o.Price
-	}
-	if !IsNil(o.CofinancePrice) {
-		toSerialize["cofinancePrice"] = o.CofinancePrice
 	}
 	if !IsNil(o.Competitiveness) {
 		toSerialize["competitiveness"] = o.Competitiveness

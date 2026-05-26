@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,8 +22,8 @@ var _ MappedNullable = &OfferPriceByOfferIdsListResponseDTO{}
 // OfferPriceByOfferIdsListResponseDTO Список цен.
 type OfferPriceByOfferIdsListResponseDTO struct {
 	// Страница списка цен.
-	Offers []OfferPriceByOfferIdsResponseDTO `json:"offers"`
-	Paging *ForwardScrollingPagerDTO         `json:"paging,omitempty"`
+	Offers []OfferPriceByOfferIdsResponseDTO  `json:"offers"`
+	Paging *PackagingForwardScrollingPagerDTO `json:"paging,omitempty"`
 }
 
 type _OfferPriceByOfferIdsListResponseDTO OfferPriceByOfferIdsListResponseDTO
@@ -71,9 +71,9 @@ func (o *OfferPriceByOfferIdsListResponseDTO) SetOffers(v []OfferPriceByOfferIds
 }
 
 // GetPaging returns the Paging field value if set, zero value otherwise.
-func (o *OfferPriceByOfferIdsListResponseDTO) GetPaging() ForwardScrollingPagerDTO {
+func (o *OfferPriceByOfferIdsListResponseDTO) GetPaging() PackagingForwardScrollingPagerDTO {
 	if o == nil || IsNil(o.Paging) {
-		var ret ForwardScrollingPagerDTO
+		var ret PackagingForwardScrollingPagerDTO
 		return ret
 	}
 	return *o.Paging
@@ -81,7 +81,7 @@ func (o *OfferPriceByOfferIdsListResponseDTO) GetPaging() ForwardScrollingPagerD
 
 // GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *OfferPriceByOfferIdsListResponseDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool) {
+func (o *OfferPriceByOfferIdsListResponseDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool) {
 	if o == nil || IsNil(o.Paging) {
 		return nil, false
 	}
@@ -97,8 +97,8 @@ func (o *OfferPriceByOfferIdsListResponseDTO) HasPaging() bool {
 	return false
 }
 
-// SetPaging gets a reference to the given ForwardScrollingPagerDTO and assigns it to the Paging field.
-func (o *OfferPriceByOfferIdsListResponseDTO) SetPaging(v ForwardScrollingPagerDTO) {
+// SetPaging gets a reference to the given PackagingForwardScrollingPagerDTO and assigns it to the Paging field.
+func (o *OfferPriceByOfferIdsListResponseDTO) SetPaging(v PackagingForwardScrollingPagerDTO) {
 	o.Paging = &v
 }
 

@@ -4,7 +4,7 @@ All URIs are relative to *https://api.partner.market.yandex.ru*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetAuthTokenInfo**](AuthAPI.md#GetAuthTokenInfo) | **Post** /auth/token | Получение информации об авторизационном токене
+[**GetAuthTokenInfo**](AuthAPI.md#GetAuthTokenInfo) | **Post** /v2/auth/token | Получение информации о токене авторизации
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > GetTokenInfoResponse GetAuthTokenInfo(ctx).Execute()
 
-Получение информации об авторизационном токене
+Получение информации о токене авторизации
 
 
 

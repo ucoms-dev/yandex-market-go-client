@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -25,7 +25,8 @@ type UpdateOrderStatusDTO struct {
 	Substatus    *OrderSubstatusType    `json:"substatus,omitempty"`
 	UpdateStatus *OrderUpdateStatusType `json:"updateStatus,omitempty"`
 	// Ошибка при изменении статуса заказа. Содержит описание ошибки и идентификатор заказа.  Возвращается, если параметр `updateStatus` принимает значение `ERROR`.
-	ErrorDetails *string `json:"errorDetails,omitempty"`
+	ErrorDetails *string       `json:"errorDetails,omitempty"`
+	Operation    *OperationDTO `json:"operation,omitempty"`
 }
 
 // NewUpdateOrderStatusDTO instantiates a new UpdateOrderStatusDTO object
@@ -205,6 +206,38 @@ func (o *UpdateOrderStatusDTO) SetErrorDetails(v string) {
 	o.ErrorDetails = &v
 }
 
+// GetOperation returns the Operation field value if set, zero value otherwise.
+func (o *UpdateOrderStatusDTO) GetOperation() OperationDTO {
+	if o == nil || IsNil(o.Operation) {
+		var ret OperationDTO
+		return ret
+	}
+	return *o.Operation
+}
+
+// GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateOrderStatusDTO) GetOperationOk() (*OperationDTO, bool) {
+	if o == nil || IsNil(o.Operation) {
+		return nil, false
+	}
+	return o.Operation, true
+}
+
+// HasOperation returns a boolean if a field has been set.
+func (o *UpdateOrderStatusDTO) HasOperation() bool {
+	if o != nil && !IsNil(o.Operation) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperation gets a reference to the given OperationDTO and assigns it to the Operation field.
+func (o *UpdateOrderStatusDTO) SetOperation(v OperationDTO) {
+	o.Operation = &v
+}
+
 func (o UpdateOrderStatusDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -229,6 +262,9 @@ func (o UpdateOrderStatusDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ErrorDetails) {
 		toSerialize["errorDetails"] = o.ErrorDetails
+	}
+	if !IsNil(o.Operation) {
+		toSerialize["operation"] = o.Operation
 	}
 	return toSerialize, nil
 }

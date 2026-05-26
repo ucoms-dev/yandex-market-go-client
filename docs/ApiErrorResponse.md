@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | [optional] 
+**Status** | [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | 
 **Errors** | Pointer to [**[]ApiErrorDTO**](ApiErrorDTO.md) | Список ошибок. | [optional] 
 
 ## Methods
 
 ### NewApiErrorResponse
 
-`func NewApiErrorResponse() *ApiErrorResponse`
+`func NewApiErrorResponse(status ApiResponseStatusType, ) *ApiErrorResponse`
 
 NewApiErrorResponse instantiates a new ApiErrorResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *ApiErrorResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetErrors
 

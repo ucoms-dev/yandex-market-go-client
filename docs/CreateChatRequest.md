@@ -4,13 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderId** | **int64** | Идентификатор заказа на Маркете. | 
+**OrderId** | Pointer to **int64** | Идентификатор заказа на Маркете. | [optional] 
+**Context** | Pointer to [**ChatContextDTO**](ChatContextDTO.md) |  | [optional] 
 
 ## Methods
 
 ### NewCreateChatRequest
 
-`func NewCreateChatRequest(orderId int64, ) *CreateChatRequest`
+`func NewCreateChatRequest() *CreateChatRequest`
 
 NewCreateChatRequest instantiates a new CreateChatRequest object
 This constructor will assign default values to properties that have it defined,
@@ -44,6 +45,36 @@ and a boolean to check if the value has been set.
 
 SetOrderId sets OrderId field to given value.
 
+### HasOrderId
+
+`func (o *CreateChatRequest) HasOrderId() bool`
+
+HasOrderId returns a boolean if a field has been set.
+
+### GetContext
+
+`func (o *CreateChatRequest) GetContext() ChatContextDTO`
+
+GetContext returns the Context field if non-nil, zero value otherwise.
+
+### GetContextOk
+
+`func (o *CreateChatRequest) GetContextOk() (*ChatContextDTO, bool)`
+
+GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContext
+
+`func (o *CreateChatRequest) SetContext(v ChatContextDTO)`
+
+SetContext sets Context field to given value.
+
+### HasContext
+
+`func (o *CreateChatRequest) HasContext() bool`
+
+HasContext returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

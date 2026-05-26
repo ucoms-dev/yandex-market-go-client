@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OfferIds** | Pointer to **[]string** | Идентификаторы товаров, информация о которых нужна. ⚠️ Не используйте это поле одновременно с остальными фильтрами. Если вы хотите воспользоваться фильтрами, оставьте поле пустым. | [optional] 
-**CofinancePriceFilter** | Pointer to [**FieldStateType**](FieldStateType.md) |  | [optional] 
 **CompetitivenessFilter** | Pointer to [**PriceCompetitivenessType**](PriceCompetitivenessType.md) |  | [optional] 
 
 ## Methods
@@ -62,31 +61,6 @@ HasOfferIds returns a boolean if a field has been set.
 `func (o *GetOfferRecommendationsRequest) UnsetOfferIds()`
 
 UnsetOfferIds ensures that no value is present for OfferIds, not even an explicit nil
-### GetCofinancePriceFilter
-
-`func (o *GetOfferRecommendationsRequest) GetCofinancePriceFilter() FieldStateType`
-
-GetCofinancePriceFilter returns the CofinancePriceFilter field if non-nil, zero value otherwise.
-
-### GetCofinancePriceFilterOk
-
-`func (o *GetOfferRecommendationsRequest) GetCofinancePriceFilterOk() (*FieldStateType, bool)`
-
-GetCofinancePriceFilterOk returns a tuple with the CofinancePriceFilter field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCofinancePriceFilter
-
-`func (o *GetOfferRecommendationsRequest) SetCofinancePriceFilter(v FieldStateType)`
-
-SetCofinancePriceFilter sets CofinancePriceFilter field to given value.
-
-### HasCofinancePriceFilter
-
-`func (o *GetOfferRecommendationsRequest) HasCofinancePriceFilter() bool`
-
-HasCofinancePriceFilter returns a boolean if a field has been set.
-
 ### GetCompetitivenessFilter
 
 `func (o *GetOfferRecommendationsRequest) GetCompetitivenessFilter() PriceCompetitivenessType`

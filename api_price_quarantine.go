@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -47,15 +47,13 @@ ConfirmBusinessPrices Удаление товара из карантина по
 
 Товар попадает в карантин, если его цена меняется слишком резко. [Как настроить карантин](https://yandex.ru/support/marketplace/assortment/operations/prices.html#quarantine)
 
-Чтобы увидеть список товаров, которые попали в карантин, используйте запрос [POST businesses/{businessId}/price-quarantine](getBusinessQuarantineOffers.md).
+Чтобы увидеть список товаров, которые попали в карантин, используйте запрос [POST v2/businesses/{businessId}/price-quarantine](getBusinessQuarantineOffers.md).
 
-|**⚙️ Лимит:** 10 000 товаров в минуту, не более 200 товаров в одном запросе|
-|-|
+{% include notitle [limit](../../_auto/method_limits/confirmBusinessPrices.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return PriceQuarantineAPIConfirmBusinessPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return PriceQuarantineAPIConfirmBusinessPricesRequest
 */
 func (a *PriceQuarantineAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) PriceQuarantineAPIConfirmBusinessPricesRequest {
 	return PriceQuarantineAPIConfirmBusinessPricesRequest{
@@ -66,7 +64,8 @@ func (a *PriceQuarantineAPIService) ConfirmBusinessPrices(ctx context.Context, b
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *PriceQuarantineAPIService) ConfirmBusinessPricesExecute(r PriceQuarantineAPIConfirmBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -80,7 +79,7 @@ func (a *PriceQuarantineAPIService) ConfirmBusinessPricesExecute(r PriceQuaranti
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/price-quarantine/confirm"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/price-quarantine/confirm"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -264,15 +263,13 @@ ConfirmCampaignPrices Удаление товара из карантина по
 
 Товар попадает в карантин, если его цена меняется слишком резко. [Как настроить карантин](https://yandex.ru/support/marketplace/assortment/operations/prices.html#quarantine)
 
-Чтобы увидеть список товаров, которые попали в карантин, используйте запрос [POST campaigns/{campaignId}/price-quarantine](getCampaignQuarantineOffers.md).
+Чтобы увидеть список товаров, которые попали в карантин, используйте запрос [POST v2/campaigns/{campaignId}/price-quarantine](getCampaignQuarantineOffers.md).
 
-|**⚙️ Лимит:** 10 000 товаров в минуту|
-|-|
+{% include notitle [limit](../../_auto/method_limits/confirmCampaignPrices.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return PriceQuarantineAPIConfirmCampaignPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return PriceQuarantineAPIConfirmCampaignPricesRequest
 */
 func (a *PriceQuarantineAPIService) ConfirmCampaignPrices(ctx context.Context, campaignId int64) PriceQuarantineAPIConfirmCampaignPricesRequest {
 	return PriceQuarantineAPIConfirmCampaignPricesRequest{
@@ -283,7 +280,8 @@ func (a *PriceQuarantineAPIService) ConfirmCampaignPrices(ctx context.Context, c
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *PriceQuarantineAPIService) ConfirmCampaignPricesExecute(r PriceQuarantineAPIConfirmCampaignPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -297,7 +295,7 @@ func (a *PriceQuarantineAPIService) ConfirmCampaignPricesExecute(r PriceQuaranti
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/price-quarantine/confirm"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/price-quarantine/confirm"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -470,13 +468,13 @@ func (r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) GetQuarantineOffer
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) PageToken(pageToken string) PriceQuarantineAPIGetBusinessQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) Limit(limit int32) PriceQuarantineAPIGetBusinessQuarantineOffersRequest {
 	r.limit = &limit
 	return r
@@ -493,7 +491,7 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 
 Возвращает список товаров, которые находятся в карантине по цене, установленной для всех магазинов кабинета.
 
-Проверьте цену каждого из товаров, который попал в карантин. Если ошибки нет и цена правильная, подтвердите ее с помощью запроса [POST businesses/{businessId}/price-quarantine/confirm](../../reference/business-assortment/confirmBusinessPrices.md). Если цена в самом деле ошибочная, установите верную с помощью запроса [POST businesses/{businessId}/offer-prices/updates](../../reference/business-assortment/updateBusinessPrices.md).
+Проверьте цену каждого из товаров, который попал в карантин. Если ошибки нет и цена правильная, подтвердите ее с помощью запроса [POST v2/businesses/{businessId}/price-quarantine/confirm](../../reference/business-assortment/confirmBusinessPrices.md). Если цена в самом деле ошибочная, установите верную с помощью запроса [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/business-assortment/updateBusinessPrices.md).
 
 {% note info "Что такое карантин?" %}
 
@@ -505,13 +503,11 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 
 Результаты возвращаются постранично.
 
-|**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getBusinessQuarantineOffers.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return PriceQuarantineAPIGetBusinessQuarantineOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return PriceQuarantineAPIGetBusinessQuarantineOffersRequest
 */
 func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) PriceQuarantineAPIGetBusinessQuarantineOffersRequest {
 	return PriceQuarantineAPIGetBusinessQuarantineOffersRequest{
@@ -522,7 +518,8 @@ func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffers(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return GetQuarantineOffersResponse
+//
+//	@return GetQuarantineOffersResponse
 func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffersExecute(r PriceQuarantineAPIGetBusinessQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -536,7 +533,7 @@ func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffersExecute(r PriceQu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/price-quarantine"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/price-quarantine"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -550,10 +547,13 @@ func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffersExecute(r PriceQu
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 100
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -704,13 +704,13 @@ func (r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) GetQuarantineOffer
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) PageToken(pageToken string) PriceQuarantineAPIGetCampaignQuarantineOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) Limit(limit int32) PriceQuarantineAPIGetCampaignQuarantineOffersRequest {
 	r.limit = &limit
 	return r
@@ -727,7 +727,7 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 
 Возвращает список товаров, которые находятся в карантине по цене, установленной в заданном магазине.
 
-Проверьте цену каждого из товаров, который попал в карантин. Если ошибки нет и цена правильная, подтвердите ее с помощью запроса [POST campaigns/{campaignId}/price-quarantine/confirm](../../reference/assortment/confirmCampaignPrices.md). Если цена в самом деле ошибочная, установите верную с помощью запроса [POST campaigns/{campaignId}/offer-prices/updates](../../reference/assortment/updatePrices.md).
+Проверьте цену каждого из товаров, который попал в карантин. Если ошибки нет и цена правильная, подтвердите ее с помощью запроса [POST v2/campaigns/{campaignId}/price-quarantine/confirm](../../reference/assortment/confirmCampaignPrices.md). Если цена в самом деле ошибочная, установите верную с помощью запроса [POST v2/campaigns/{campaignId}/offer-prices/updates](../../reference/assortment/updatePrices.md).
 
 {% note info "Что такое карантин?" %}
 
@@ -739,13 +739,11 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 
 Результаты возвращаются постранично.
 
-|**⚙️ Лимит:** 10 000 товаров в минуту|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getCampaignQuarantineOffers.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return PriceQuarantineAPIGetCampaignQuarantineOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return PriceQuarantineAPIGetCampaignQuarantineOffersRequest
 */
 func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffers(ctx context.Context, campaignId int64) PriceQuarantineAPIGetCampaignQuarantineOffersRequest {
 	return PriceQuarantineAPIGetCampaignQuarantineOffersRequest{
@@ -756,7 +754,8 @@ func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffers(ctx context.Cont
 }
 
 // Execute executes the request
-//  @return GetQuarantineOffersResponse
+//
+//	@return GetQuarantineOffersResponse
 func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffersExecute(r PriceQuarantineAPIGetCampaignQuarantineOffersRequest) (*GetQuarantineOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -770,7 +769,7 @@ func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffersExecute(r PriceQu
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/price-quarantine"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/price-quarantine"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -784,10 +783,13 @@ func (a *PriceQuarantineAPIService) GetCampaignQuarantineOffersExecute(r PriceQu
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 100
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,8 +22,9 @@ var _ MappedNullable = &GetCampaignsResponse{}
 // GetCampaignsResponse Результаты поиска магазинов.
 type GetCampaignsResponse struct {
 	// Список с информацией по каждому магазину.
-	Campaigns []CampaignDTO     `json:"campaigns"`
-	Pager     *FlippingPagerDTO `json:"pager,omitempty"`
+	Campaigns []CampaignDTO                      `json:"campaigns"`
+	Pager     *FlippingPagerDTO                  `json:"pager,omitempty"`
+	Paging    *PackagingForwardScrollingPagerDTO `json:"paging,omitempty"`
 }
 
 type _GetCampaignsResponse GetCampaignsResponse
@@ -102,6 +103,38 @@ func (o *GetCampaignsResponse) SetPager(v FlippingPagerDTO) {
 	o.Pager = &v
 }
 
+// GetPaging returns the Paging field value if set, zero value otherwise.
+func (o *GetCampaignsResponse) GetPaging() PackagingForwardScrollingPagerDTO {
+	if o == nil || IsNil(o.Paging) {
+		var ret PackagingForwardScrollingPagerDTO
+		return ret
+	}
+	return *o.Paging
+}
+
+// GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetCampaignsResponse) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool) {
+	if o == nil || IsNil(o.Paging) {
+		return nil, false
+	}
+	return o.Paging, true
+}
+
+// HasPaging returns a boolean if a field has been set.
+func (o *GetCampaignsResponse) HasPaging() bool {
+	if o != nil && !IsNil(o.Paging) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaging gets a reference to the given PackagingForwardScrollingPagerDTO and assigns it to the Paging field.
+func (o *GetCampaignsResponse) SetPaging(v PackagingForwardScrollingPagerDTO) {
+	o.Paging = &v
+}
+
 func (o GetCampaignsResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -115,6 +148,9 @@ func (o GetCampaignsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["campaigns"] = o.Campaigns
 	if !IsNil(o.Pager) {
 		toSerialize["pager"] = o.Pager
+	}
+	if !IsNil(o.Paging) {
+		toSerialize["paging"] = o.Paging
 	}
 	return toSerialize, nil
 }

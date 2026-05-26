@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,8 +22,8 @@ var _ MappedNullable = &GetSupplyRequestItemsDTO{}
 // GetSupplyRequestItemsDTO Информация о товарах в заявке.
 type GetSupplyRequestItemsDTO struct {
 	// Список товаров.
-	Items  []SupplyRequestItemDTO    `json:"items"`
-	Paging *ForwardScrollingPagerDTO `json:"paging,omitempty"`
+	Items  []SupplyRequestItemDTO             `json:"items"`
+	Paging *PackagingForwardScrollingPagerDTO `json:"paging,omitempty"`
 }
 
 type _GetSupplyRequestItemsDTO GetSupplyRequestItemsDTO
@@ -71,9 +71,9 @@ func (o *GetSupplyRequestItemsDTO) SetItems(v []SupplyRequestItemDTO) {
 }
 
 // GetPaging returns the Paging field value if set, zero value otherwise.
-func (o *GetSupplyRequestItemsDTO) GetPaging() ForwardScrollingPagerDTO {
+func (o *GetSupplyRequestItemsDTO) GetPaging() PackagingForwardScrollingPagerDTO {
 	if o == nil || IsNil(o.Paging) {
-		var ret ForwardScrollingPagerDTO
+		var ret PackagingForwardScrollingPagerDTO
 		return ret
 	}
 	return *o.Paging
@@ -81,7 +81,7 @@ func (o *GetSupplyRequestItemsDTO) GetPaging() ForwardScrollingPagerDTO {
 
 // GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetSupplyRequestItemsDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool) {
+func (o *GetSupplyRequestItemsDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool) {
 	if o == nil || IsNil(o.Paging) {
 		return nil, false
 	}
@@ -97,8 +97,8 @@ func (o *GetSupplyRequestItemsDTO) HasPaging() bool {
 	return false
 }
 
-// SetPaging gets a reference to the given ForwardScrollingPagerDTO and assigns it to the Paging field.
-func (o *GetSupplyRequestItemsDTO) SetPaging(v ForwardScrollingPagerDTO) {
+// SetPaging gets a reference to the given PackagingForwardScrollingPagerDTO and assigns it to the Paging field.
+func (o *GetSupplyRequestItemsDTO) SetPaging(v PackagingForwardScrollingPagerDTO) {
 	o.Paging = &v
 }
 

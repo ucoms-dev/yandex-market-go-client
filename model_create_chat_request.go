@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -11,9 +11,7 @@ API version: LATEST
 package openapi
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the CreateChatRequest type satisfies the MappedNullable interface at compile time
@@ -22,18 +20,17 @@ var _ MappedNullable = &CreateChatRequest{}
 // CreateChatRequest Заказ, для которого нужно создать чат.
 type CreateChatRequest struct {
 	// Идентификатор заказа на Маркете.
-	OrderId int64 `json:"orderId"`
+	// Deprecated
+	OrderId *int64          `json:"orderId,omitempty"`
+	Context *ChatContextDTO `json:"context,omitempty"`
 }
-
-type _CreateChatRequest CreateChatRequest
 
 // NewCreateChatRequest instantiates a new CreateChatRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCreateChatRequest(orderId int64) *CreateChatRequest {
+func NewCreateChatRequest() *CreateChatRequest {
 	this := CreateChatRequest{}
-	this.OrderId = orderId
 	return &this
 }
 
@@ -45,28 +42,71 @@ func NewCreateChatRequestWithDefaults() *CreateChatRequest {
 	return &this
 }
 
-// GetOrderId returns the OrderId field value
+// GetOrderId returns the OrderId field value if set, zero value otherwise.
+// Deprecated
 func (o *CreateChatRequest) GetOrderId() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.OrderId) {
 		var ret int64
 		return ret
 	}
-
-	return o.OrderId
+	return *o.OrderId
 }
 
-// GetOrderIdOk returns a tuple with the OrderId field value
+// GetOrderIdOk returns a tuple with the OrderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CreateChatRequest) GetOrderIdOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.OrderId) {
 		return nil, false
 	}
-	return &o.OrderId, true
+	return o.OrderId, true
 }
 
-// SetOrderId sets field value
+// HasOrderId returns a boolean if a field has been set.
+func (o *CreateChatRequest) HasOrderId() bool {
+	if o != nil && !IsNil(o.OrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderId gets a reference to the given int64 and assigns it to the OrderId field.
+// Deprecated
 func (o *CreateChatRequest) SetOrderId(v int64) {
-	o.OrderId = v
+	o.OrderId = &v
+}
+
+// GetContext returns the Context field value if set, zero value otherwise.
+func (o *CreateChatRequest) GetContext() ChatContextDTO {
+	if o == nil || IsNil(o.Context) {
+		var ret ChatContextDTO
+		return ret
+	}
+	return *o.Context
+}
+
+// GetContextOk returns a tuple with the Context field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateChatRequest) GetContextOk() (*ChatContextDTO, bool) {
+	if o == nil || IsNil(o.Context) {
+		return nil, false
+	}
+	return o.Context, true
+}
+
+// HasContext returns a boolean if a field has been set.
+func (o *CreateChatRequest) HasContext() bool {
+	if o != nil && !IsNil(o.Context) {
+		return true
+	}
+
+	return false
+}
+
+// SetContext gets a reference to the given ChatContextDTO and assigns it to the Context field.
+func (o *CreateChatRequest) SetContext(v ChatContextDTO) {
+	o.Context = &v
 }
 
 func (o CreateChatRequest) MarshalJSON() ([]byte, error) {
@@ -79,45 +119,13 @@ func (o CreateChatRequest) MarshalJSON() ([]byte, error) {
 
 func (o CreateChatRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["orderId"] = o.OrderId
+	if !IsNil(o.OrderId) {
+		toSerialize["orderId"] = o.OrderId
+	}
+	if !IsNil(o.Context) {
+		toSerialize["context"] = o.Context
+	}
 	return toSerialize, nil
-}
-
-func (o *CreateChatRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"orderId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err
-	}
-
-	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varCreateChatRequest := _CreateChatRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varCreateChatRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = CreateChatRequest(varCreateChatRequest)
-
-	return err
 }
 
 type NullableCreateChatRequest struct {

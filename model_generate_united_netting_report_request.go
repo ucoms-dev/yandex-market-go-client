@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,7 +22,7 @@ var _ MappedNullable = &GenerateUnitedNettingReportRequest{}
 
 // GenerateUnitedNettingReportRequest Данные, необходимые для генерации отчета: идентификатор кампании, период, за который нужен отчет, а также фильтры.
 type GenerateUnitedNettingReportRequest struct {
-	// Идентификатор кабинета.
+	// Идентификатор кабинета. {% if audience == \"partner\" %}Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) {% endif %}
 	BusinessId int64 `json:"businessId"`
 	// Начало периода, включительно.
 	// Deprecated
@@ -30,9 +30,9 @@ type GenerateUnitedNettingReportRequest struct {
 	// Конец периода, включительно. Максимальный период — 3 месяца.
 	// Deprecated
 	DateTimeTo *time.Time `json:"dateTimeTo,omitempty"`
-	// Начало периода, включительно.
+	// Начало периода, включительно.  Формат даты: `ГГГГ-ММ-ДД`.
 	DateFrom *string `json:"dateFrom,omitempty"`
-	// Конец периода, включительно. Максимальный период — 3 месяца.
+	// Конец периода, включительно. Максимальный период — 3 месяца.  Формат даты: `ГГГГ-ММ-ДД`.
 	DateTo *string `json:"dateTo,omitempty"`
 	// Номер платежного поручения.
 	BankOrderId *int64 `json:"bankOrderId,omitempty"`
@@ -43,7 +43,7 @@ type GenerateUnitedNettingReportRequest struct {
 	PlacementPrograms []PlacementType `json:"placementPrograms,omitempty"`
 	// Список ИНН, которые нужны в отчете.
 	Inns []string `json:"inns,omitempty"`
-	// Список идентификаторов кампании тех магазинов, которые нужны в отчете.  Их можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не используйте вместо них идентификаторы магазинов, которые указаны в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	// Список идентификаторов кампании тех магазинов, которые нужны в отчете.
 	CampaignIds []int64 `json:"campaignIds,omitempty"`
 }
 

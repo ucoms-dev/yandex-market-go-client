@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Offers** | [**[]OfferPriceResponseDTO**](OfferPriceResponseDTO.md) | Страница списка. | 
-**Paging** | Pointer to [**ForwardScrollingPagerDTO**](ForwardScrollingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 **Total** | Pointer to **int32** | Количество всех цен магазина, измененных через API. | [optional] 
 
 ## Methods
@@ -49,20 +49,20 @@ SetOffers sets Offers field to given value.
 
 ### GetPaging
 
-`func (o *OfferPriceListResponseDTO) GetPaging() ForwardScrollingPagerDTO`
+`func (o *OfferPriceListResponseDTO) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *OfferPriceListResponseDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool)`
+`func (o *OfferPriceListResponseDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *OfferPriceListResponseDTO) SetPaging(v ForwardScrollingPagerDTO)`
+`func (o *OfferPriceListResponseDTO) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

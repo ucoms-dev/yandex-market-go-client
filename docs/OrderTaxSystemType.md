@@ -17,6 +17,10 @@
 
 * `NPD` (value: `"NPD"`)
 
+* `AUSN` (value: `"AUSN"`)
+
+* `AUSN_MINUS_COST` (value: `"AUSN_MINUS_COST"`)
+
 * `UNKNOWN_VALUE` (value: `"UNKNOWN_VALUE"`)
 
 

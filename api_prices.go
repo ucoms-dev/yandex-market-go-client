@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,6 +22,229 @@ import (
 // PricesAPIService PricesAPI service
 type PricesAPIService service
 
+type PricesAPIGetDefaultPricesRequest struct {
+	ctx                     context.Context
+	ApiService              *PricesAPIService
+	businessId              int64
+	pageToken               *string
+	limit                   *int32
+	getDefaultPricesRequest *GetDefaultPricesRequest
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r PricesAPIGetDefaultPricesRequest) PageToken(pageToken string) PricesAPIGetDefaultPricesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-truncate-param-description }}
+func (r PricesAPIGetDefaultPricesRequest) Limit(limit int32) PricesAPIGetDefaultPricesRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r PricesAPIGetDefaultPricesRequest) GetDefaultPricesRequest(getDefaultPricesRequest GetDefaultPricesRequest) PricesAPIGetDefaultPricesRequest {
+	r.getDefaultPricesRequest = &getDefaultPricesRequest
+	return r
+}
+
+func (r PricesAPIGetDefaultPricesRequest) Execute() (*GetDefaultPricesResponse, *http.Response, error) {
+	return r.ApiService.GetDefaultPricesExecute(r)
+}
+
+/*
+GetDefaultPrices Просмотр цен на указанные товары во всех магазинах
+
+{% include notitle [access](../../_auto/method_scopes/getDefaultPrices.md) %}
+
+Возвращает список цен, которые вы установили для всех магазинов любым способом. Например, через API или с помощью Excel-шаблона.
+
+О способах установки цен читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/assortment/operations/prices.html).
+
+{% include notitle [limit](../../_auto/method_limits/getDefaultPrices.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return PricesAPIGetDefaultPricesRequest
+*/
+func (a *PricesAPIService) GetDefaultPrices(ctx context.Context, businessId int64) PricesAPIGetDefaultPricesRequest {
+	return PricesAPIGetDefaultPricesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetDefaultPricesResponse
+func (a *PricesAPIService) GetDefaultPricesExecute(r PricesAPIGetDefaultPricesRequest) (*GetDefaultPricesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDefaultPricesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PricesAPIService.GetDefaultPrices")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/offer-prices"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 250
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getDefaultPricesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type PricesAPIGetPricesRequest struct {
 	ctx        context.Context
 	ApiService *PricesAPIService
@@ -31,13 +254,13 @@ type PricesAPIGetPricesRequest struct {
 	archived   *bool
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r PricesAPIGetPricesRequest) PageToken(pageToken string) PricesAPIGetPricesRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-truncate-param-description }}
 func (r PricesAPIGetPricesRequest) Limit(limit int32) PricesAPIGetPricesRequest {
 	r.limit = &limit
 	return r
@@ -58,29 +281,15 @@ GetPrices Список цен
 
 {% include notitle [access](../../_auto/method_scopes/getPrices.md) %}
 
-{% note warning "Какой метод использовать вместо устаревшего" %}
-
-[POST campaigns/{campaignId}/offer-prices](../../reference/assortment/getPricesByOfferIds.md)
-
-{% endnote %}
-
-Возвращает список цен, установленных вами на товары любым способом: например, через партнерский API или в файле с каталогом.
-
-{% note info "Как считается общее количество товаров" %}
-
-По данным за последние семь дней (не включая сегодня) и не может быть выше 2 миллионов.
-
-{% endnote %}
+Возвращает список цен, установленных вами на товары любым способом: например, через API или в файле с каталогом.
 
 Способы установки цен описаны [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/assortment/operations/prices.html).
 
-|**⚙️ Лимит:** ```(количество товаров партнера на витрине) * 25``` товаров в сутки|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getPrices.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return PricesAPIGetPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return PricesAPIGetPricesRequest
 
 Deprecated
 */
@@ -93,7 +302,9 @@ func (a *PricesAPIService) GetPrices(ctx context.Context, campaignId int64) Pric
 }
 
 // Execute executes the request
-//  @return GetPricesResponse
+//
+//	@return GetPricesResponse
+//
 // Deprecated
 func (a *PricesAPIService) GetPricesExecute(r PricesAPIGetPricesRequest) (*GetPricesResponse, *http.Response, error) {
 	var (
@@ -108,7 +319,7 @@ func (a *PricesAPIService) GetPricesExecute(r PricesAPIGetPricesRequest) (*GetPr
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/offer-prices"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/offer-prices"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -119,13 +330,16 @@ func (a *PricesAPIService) GetPricesExecute(r PricesAPIGetPricesRequest) (*GetPr
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 250
+		r.limit = &defaultValue
 	}
 	if r.archived != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "", "")
 	} else {
 		var defaultValue bool = false
 		r.archived = &defaultValue
@@ -272,13 +486,13 @@ type PricesAPIGetPricesByOfferIdsRequest struct {
 	getPricesByOfferIdsRequest *GetPricesByOfferIdsRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r PricesAPIGetPricesByOfferIdsRequest) PageToken(pageToken string) PricesAPIGetPricesByOfferIdsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-truncate-param-description }}
 func (r PricesAPIGetPricesByOfferIdsRequest) Limit(limit int32) PricesAPIGetPricesByOfferIdsRequest {
 	r.limit = &limit
 	return r
@@ -294,7 +508,7 @@ func (r PricesAPIGetPricesByOfferIdsRequest) Execute() (*GetPricesByOfferIdsResp
 }
 
 /*
-GetPricesByOfferIds Просмотр цен на указанные товары в магазине
+GetPricesByOfferIds Просмотр цен на указанные товары в конкретном магазине
 
 {% include notitle [access](../../_auto/method_scopes/getPricesByOfferIds.md) %}
 
@@ -304,19 +518,15 @@ GetPricesByOfferIds Просмотр цен на указанные товары
 
 Используйте этот метод, только если в кабинете установлены уникальные цены в отдельных магазинах.
 
-Для просмотра цен, которые действуют во всех магазинах, используйте [POST businesses/{businessId}/offer-mappings](../../reference/business-assortment/getOfferMappings.md).
+Для просмотра цен, которые действуют во всех магазинах, используйте [POST v2/businesses/{businessId}/offer-mappings](../../reference/business-assortment/getOfferMappings.md).
 
 {% endnote %}
 
-|**⚙️ Лимит:** рассчитывается по [формуле](*rule)|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getPricesByOfferIds.md) %}
 
-[//]: <> (rule: суточный лимит товаров — количество товаров на витрине * 25)
-
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return PricesAPIGetPricesByOfferIdsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return PricesAPIGetPricesByOfferIdsRequest
 */
 func (a *PricesAPIService) GetPricesByOfferIds(ctx context.Context, campaignId int64) PricesAPIGetPricesByOfferIdsRequest {
 	return PricesAPIGetPricesByOfferIdsRequest{
@@ -327,7 +537,8 @@ func (a *PricesAPIService) GetPricesByOfferIds(ctx context.Context, campaignId i
 }
 
 // Execute executes the request
-//  @return GetPricesByOfferIdsResponse
+//
+//	@return GetPricesByOfferIdsResponse
 func (a *PricesAPIService) GetPricesByOfferIdsExecute(r PricesAPIGetPricesByOfferIdsRequest) (*GetPricesByOfferIdsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -341,7 +552,7 @@ func (a *PricesAPIService) GetPricesByOfferIdsExecute(r PricesAPIGetPricesByOffe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/offer-prices"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/offer-prices"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -352,10 +563,13 @@ func (a *PricesAPIService) GetPricesByOfferIdsExecute(r PricesAPIGetPricesByOffe
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 250
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -376,233 +590,6 @@ func (a *PricesAPIService) GetPricesByOfferIdsExecute(r PricesAPIGetPricesByOffe
 	}
 	// body params
 	localVarPostBody = r.getPricesByOfferIdsRequest
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Api-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiClientDataErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiUnauthorizedErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiForbiddenErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiNotFoundErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 420 {
-			var v ApiLimitErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ApiServerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type PricesAPIGetSuggestedPricesRequest struct {
-	ctx                  context.Context
-	ApiService           *PricesAPIService
-	campaignId           int64
-	suggestPricesRequest *SuggestPricesRequest
-}
-
-func (r PricesAPIGetSuggestedPricesRequest) SuggestPricesRequest(suggestPricesRequest SuggestPricesRequest) PricesAPIGetSuggestedPricesRequest {
-	r.suggestPricesRequest = &suggestPricesRequest
-	return r
-}
-
-func (r PricesAPIGetSuggestedPricesRequest) Execute() (*SuggestPricesResponse, *http.Response, error) {
-	return r.ApiService.GetSuggestedPricesExecute(r)
-}
-
-/*
-GetSuggestedPrices Цены для продвижения товаров
-
-{% include notitle [access](../../_auto/method_scopes/getSuggestedPrices.md) %}
-
-{% note warning "Не используйте его, это может привести к ошибкам. Информацию о ценах вы можете получить в помощью [отчета «Цены на рынке»](../../reference/reports/generatePricesReport.md)." %}
-
-
-
-{% endnote %}
-
-{% note warning "Метод только для некоторых магазинов" %}
-
-Этот метод подходит только тем магазинам, которые устанавливают цены на товары в рублях.
-
-{% endnote %}
-
-Возвращает цены для продвижения товаров, которые вы размещаете на Маркете.
-
-Товары, для которых нужно получить цены, передаются в теле POST-запроса.
-
-Цены для продвижения зависят от цен, установленных на товары другими партнерами. Если один товар поставляют несколько партнеров, на Маркете сначала продается товар с более низкой ценой. Когда закончится товар по низкой цене, начнет продаваться товар по более высокой цене.
-
-Выходные данные содержат для каждого товара несколько цен, соответствующих разным типам продвижения.
-
-Установить цены на товары можно с помощью запроса [POST campaigns/{campaignId}/offer-prices/updates](../../reference/assortment/updatePrices.md) или другими способами: например, указать их в файле с каталогом. Также вы можете использовать стратегии для автоматической установки рекомендованных цен или минимальных цен на Маркете.
-
-Подробно об автоматическом управлении ценами рассказано [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/marketing/prices.html).
-
-|**⚙️ Лимит:** 100 000 товаров в час|
-|-|
-
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return PricesAPIGetSuggestedPricesRequest
-
-Deprecated
-*/
-func (a *PricesAPIService) GetSuggestedPrices(ctx context.Context, campaignId int64) PricesAPIGetSuggestedPricesRequest {
-	return PricesAPIGetSuggestedPricesRequest{
-		ApiService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-	}
-}
-
-// Execute executes the request
-//  @return SuggestPricesResponse
-// Deprecated
-func (a *PricesAPIService) GetSuggestedPricesExecute(r PricesAPIGetSuggestedPricesRequest) (*SuggestPricesResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodPost
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *SuggestPricesResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PricesAPIService.GetSuggestedPrices")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/campaigns/{campaignId}/offer-prices/suggestions"
-	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.campaignId < 1 {
-		return localVarReturnValue, nil, reportError("campaignId must be greater than 1")
-	}
-	if r.suggestPricesRequest == nil {
-		return localVarReturnValue, nil, reportError("suggestPricesRequest is required and must be specified")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.suggestPricesRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -740,9 +727,9 @@ UpdateBusinessPrices Установка цен на товары для всех
 
 {% include notitle [access](../../_auto/method_scopes/updateBusinessPrices.md) %}
 
-Устанавливает цены, которые действуют во всех магазинах. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST businesses/{businessId}/offers/recommendations](../../reference/business-assortment/getOfferRecommendations.md).
+Устанавливает цены, которые действуют во всех магазинах. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST v2/businesses/{businessId}/offers/recommendations](../../reference/business-assortment/getOfferRecommendations.md).
 
-При необходимости передавайте НДС с помощью параметра `vat` в запросе [POST campaigns/{campaignId}/offers/update](../../reference/assortment/updateCampaignOffers.md).
+При необходимости передавайте НДС с помощью параметра `vat` в запросе [POST v2/campaigns/{campaignId}/offers/update](../../reference/assortment/updateCampaignOffers.md).
 
 {% note info "Данные в каталоге обновляются не мгновенно" %}
 
@@ -750,13 +737,11 @@ UpdateBusinessPrices Установка цен на товары для всех
 
 {% endnote %}
 
-|**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
-|-|
+{% include notitle [limit](../../_auto/method_limits/updateBusinessPrices.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return PricesAPIUpdateBusinessPricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return PricesAPIUpdateBusinessPricesRequest
 */
 func (a *PricesAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) PricesAPIUpdateBusinessPricesRequest {
 	return PricesAPIUpdateBusinessPricesRequest{
@@ -767,7 +752,8 @@ func (a *PricesAPIService) UpdateBusinessPrices(ctx context.Context, businessId 
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *PricesAPIService) UpdateBusinessPricesExecute(r PricesAPIUpdateBusinessPricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -781,7 +767,7 @@ func (a *PricesAPIService) UpdateBusinessPricesExecute(r PricesAPIUpdateBusiness
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/offer-prices/updates"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/offer-prices/updates"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -961,13 +947,13 @@ UpdatePrices Установка цен на товары в конкретном
 
 {% include notitle [access](../../_auto/method_scopes/updatePrices.md) %}
 
-Устанавливает цены на товары в магазине. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST businesses/{businessId}/offers/recommendations](../../reference/business-assortment/getOfferRecommendations.md).
+Устанавливает цены на товары в магазине. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST v2/businesses/{businessId}/offers/recommendations](../../reference/business-assortment/getOfferRecommendations.md).
 
 {% note warning "Метод только для отдельных магазинов" %}
 
-Вам доступен этот метод, если в кабинете продавца на Маркете есть возможность установить уникальные цены в отдельных магазинах. Как это проверить — в методе [POST businesses/{businessId}/settings](../../reference/businesses/getBusinessSettings.md) в параметре `onlyDefaultPrice` возвращается значение `false`.
+Вам доступен этот метод, если в кабинете продавца на Маркете есть возможность установить уникальные цены в отдельных магазинах. Как это проверить — в методе [POST v2/businesses/{businessId}/settings](../../reference/businesses/getBusinessSettings.md) в параметре `onlyDefaultPrice` возвращается значение `false`.
 
-В ином случае используйте метод управления ценами, которые действуют во всех магазинах, — [POST businesses/{businessId}/offer-prices/updates](../../reference/business-assortment/updateBusinessPrices.md).
+В ином случае используйте метод управления ценами, которые действуют во всех магазинах, — [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/business-assortment/updateBusinessPrices.md).
 
 {% endnote %}
 
@@ -977,13 +963,11 @@ UpdatePrices Установка цен на товары в конкретном
 
 {% endnote %}
 
-|**⚙️ Лимит:** 10 000 товаров в минуту|
-|-|
+{% include notitle [limit](../../_auto/method_limits/updatePrices.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return PricesAPIUpdatePricesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return PricesAPIUpdatePricesRequest
 */
 func (a *PricesAPIService) UpdatePrices(ctx context.Context, campaignId int64) PricesAPIUpdatePricesRequest {
 	return PricesAPIUpdatePricesRequest{
@@ -994,7 +978,8 @@ func (a *PricesAPIService) UpdatePrices(ctx context.Context, campaignId int64) P
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *PricesAPIService) UpdatePricesExecute(r PricesAPIUpdatePricesRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -1008,7 +993,7 @@ func (a *PricesAPIService) UpdatePricesExecute(r PricesAPIUpdatePricesRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/offer-prices/updates"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/offer-prices/updates"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

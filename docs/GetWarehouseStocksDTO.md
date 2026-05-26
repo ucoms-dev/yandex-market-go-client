@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Paging** | Pointer to [**ScrollingPagerDTO**](ScrollingPagerDTO.md) |  | [optional] 
-**Warehouses** | [**[]WarehouseOffersDTO**](WarehouseOffersDTO.md) | Страница списка складов. | 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
+**Warehouses** | [**[]WarehouseOffersDTO**](WarehouseOffersDTO.md) | Страница списка складов.  **Для моделей FBY и LaaS:** может содержать несколько складов Маркета.  **Для модели FBS:** может содержать как партнерский склад, так и склад возвратов Маркета.  | 
 
 ## Methods
 
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPaging
 
-`func (o *GetWarehouseStocksDTO) GetPaging() ScrollingPagerDTO`
+`func (o *GetWarehouseStocksDTO) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *GetWarehouseStocksDTO) GetPagingOk() (*ScrollingPagerDTO, bool)`
+`func (o *GetWarehouseStocksDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *GetWarehouseStocksDTO) SetPaging(v ScrollingPagerDTO)`
+`func (o *GetWarehouseStocksDTO) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

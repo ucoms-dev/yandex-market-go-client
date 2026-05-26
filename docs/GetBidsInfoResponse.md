@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | [optional] 
+**Status** | [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | 
 **Result** | Pointer to [**GetBidsInfoResponseDTO**](GetBidsInfoResponseDTO.md) |  | [optional] 
 
 ## Methods
 
 ### NewGetBidsInfoResponse
 
-`func NewGetBidsInfoResponse() *GetBidsInfoResponse`
+`func NewGetBidsInfoResponse(status ApiResponseStatusType, ) *GetBidsInfoResponse`
 
 NewGetBidsInfoResponse instantiates a new GetBidsInfoResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *GetBidsInfoResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetResult
 

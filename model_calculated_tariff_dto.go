@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -23,7 +23,8 @@ var _ MappedNullable = &CalculatedTariffDTO{}
 type CalculatedTariffDTO struct {
 	Type CalculatedTariffType `json:"type"`
 	// Стоимость услуги в рублях.
-	Amount *float32 `json:"amount,omitempty"`
+	Amount   *float32      `json:"amount,omitempty"`
+	Currency *CurrencyType `json:"currency,omitempty"`
 	// Параметры расчета тарифа.
 	Parameters []TariffParameterDTO `json:"parameters"`
 }
@@ -105,6 +106,38 @@ func (o *CalculatedTariffDTO) SetAmount(v float32) {
 	o.Amount = &v
 }
 
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *CalculatedTariffDTO) GetCurrency() CurrencyType {
+	if o == nil || IsNil(o.Currency) {
+		var ret CurrencyType
+		return ret
+	}
+	return *o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CalculatedTariffDTO) GetCurrencyOk() (*CurrencyType, bool) {
+	if o == nil || IsNil(o.Currency) {
+		return nil, false
+	}
+	return o.Currency, true
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *CalculatedTariffDTO) HasCurrency() bool {
+	if o != nil && !IsNil(o.Currency) {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given CurrencyType and assigns it to the Currency field.
+func (o *CalculatedTariffDTO) SetCurrency(v CurrencyType) {
+	o.Currency = &v
+}
+
 // GetParameters returns the Parameters field value
 func (o *CalculatedTariffDTO) GetParameters() []TariffParameterDTO {
 	if o == nil {
@@ -142,6 +175,9 @@ func (o CalculatedTariffDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	if !IsNil(o.Amount) {
 		toSerialize["amount"] = o.Amount
+	}
+	if !IsNil(o.Currency) {
+		toSerialize["currency"] = o.Currency
 	}
 	toSerialize["parameters"] = o.Parameters
 	return toSerialize, nil

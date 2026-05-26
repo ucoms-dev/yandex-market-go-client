@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,9 +21,9 @@ var _ MappedNullable = &OrdersStatsItemDTO{}
 type OrdersStatsItemDTO struct {
 	// Название товара.
 	OfferName *string `json:"offerName,omitempty"`
-	// SKU на Маркете.
+	// Идентификатор карточки товара на Маркете.
 	MarketSku *int64 `json:"marketSku,omitempty"`
-	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	ShopSku *string `json:"shopSku,omitempty" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
 	// Количество единиц товара с учетом удаленных единиц.  Если из заказа удалены все единицы товара, он попадет только в список `initialItems`.
 	Count *int32 `json:"count,omitempty"`
@@ -32,7 +32,7 @@ type OrdersStatsItemDTO struct {
 	Warehouse *OrdersStatsWarehouseDTO `json:"warehouse,omitempty"`
 	// Информация об удалении товара из заказа.
 	Details []OrdersStatsDetailsDTO `json:"details,omitempty"`
-	// Список кодов идентификации товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go).
+	// Список кодов идентификации товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов :no-translate[Market Yandex Go]).
 	CisList []string `json:"cisList,omitempty"`
 	// Первоначальное количество единиц товара.
 	InitialCount *int32 `json:"initialCount,omitempty"`

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,9 +21,8 @@ var _ MappedNullable = &GoodsFeedbackIdentifiersDTO{}
 type GoodsFeedbackIdentifiersDTO struct {
 	// Идентификатор заказа на Маркете.
 	OrderId *int64 `json:"orderId,omitempty"`
-	// Идентификатор модели товара.
-	// Deprecated
-	ModelId *int64 `json:"modelId,omitempty"`
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
+	OfferId *string `json:"offerId,omitempty" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
 }
 
 // NewGoodsFeedbackIdentifiersDTO instantiates a new GoodsFeedbackIdentifiersDTO object
@@ -75,39 +74,36 @@ func (o *GoodsFeedbackIdentifiersDTO) SetOrderId(v int64) {
 	o.OrderId = &v
 }
 
-// GetModelId returns the ModelId field value if set, zero value otherwise.
-// Deprecated
-func (o *GoodsFeedbackIdentifiersDTO) GetModelId() int64 {
-	if o == nil || IsNil(o.ModelId) {
-		var ret int64
+// GetOfferId returns the OfferId field value if set, zero value otherwise.
+func (o *GoodsFeedbackIdentifiersDTO) GetOfferId() string {
+	if o == nil || IsNil(o.OfferId) {
+		var ret string
 		return ret
 	}
-	return *o.ModelId
+	return *o.OfferId
 }
 
-// GetModelIdOk returns a tuple with the ModelId field value if set, nil otherwise
+// GetOfferIdOk returns a tuple with the OfferId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
-func (o *GoodsFeedbackIdentifiersDTO) GetModelIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.ModelId) {
+func (o *GoodsFeedbackIdentifiersDTO) GetOfferIdOk() (*string, bool) {
+	if o == nil || IsNil(o.OfferId) {
 		return nil, false
 	}
-	return o.ModelId, true
+	return o.OfferId, true
 }
 
-// HasModelId returns a boolean if a field has been set.
-func (o *GoodsFeedbackIdentifiersDTO) HasModelId() bool {
-	if o != nil && !IsNil(o.ModelId) {
+// HasOfferId returns a boolean if a field has been set.
+func (o *GoodsFeedbackIdentifiersDTO) HasOfferId() bool {
+	if o != nil && !IsNil(o.OfferId) {
 		return true
 	}
 
 	return false
 }
 
-// SetModelId gets a reference to the given int64 and assigns it to the ModelId field.
-// Deprecated
-func (o *GoodsFeedbackIdentifiersDTO) SetModelId(v int64) {
-	o.ModelId = &v
+// SetOfferId gets a reference to the given string and assigns it to the OfferId field.
+func (o *GoodsFeedbackIdentifiersDTO) SetOfferId(v string) {
+	o.OfferId = &v
 }
 
 func (o GoodsFeedbackIdentifiersDTO) MarshalJSON() ([]byte, error) {
@@ -123,8 +119,8 @@ func (o GoodsFeedbackIdentifiersDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.OrderId) {
 		toSerialize["orderId"] = o.OrderId
 	}
-	if !IsNil(o.ModelId) {
-		toSerialize["modelId"] = o.ModelId
+	if !IsNil(o.OfferId) {
+		toSerialize["offerId"] = o.OfferId
 	}
 	return toSerialize, nil
 }

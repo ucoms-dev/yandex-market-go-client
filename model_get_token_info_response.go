@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,10 +19,10 @@ import (
 // checks if the GetTokenInfoResponse type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetTokenInfoResponse{}
 
-// GetTokenInfoResponse Ответ на запрос получения информации об авторизационном токене.
+// GetTokenInfoResponse Ответ на запрос получения информации о токене авторизации.
 type GetTokenInfoResponse struct {
-	Status *ApiResponseStatusType `json:"status,omitempty"`
-	Result TokenDTO               `json:"result"`
+	Status ApiResponseStatusType `json:"status"`
+	Result TokenDTO              `json:"result"`
 }
 
 type _GetTokenInfoResponse GetTokenInfoResponse
@@ -31,8 +31,9 @@ type _GetTokenInfoResponse GetTokenInfoResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetTokenInfoResponse(result TokenDTO) *GetTokenInfoResponse {
+func NewGetTokenInfoResponse(status ApiResponseStatusType, result TokenDTO) *GetTokenInfoResponse {
 	this := GetTokenInfoResponse{}
+	this.Status = status
 	this.Result = result
 	return &this
 }
@@ -45,36 +46,28 @@ func NewGetTokenInfoResponseWithDefaults() *GetTokenInfoResponse {
 	return &this
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
+// GetStatus returns the Status field value
 func (o *GetTokenInfoResponse) GetStatus() ApiResponseStatusType {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		var ret ApiResponseStatusType
 		return ret
 	}
-	return *o.Status
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *GetTokenInfoResponse) GetStatusOk() (*ApiResponseStatusType, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Status, true
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *GetTokenInfoResponse) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given ApiResponseStatusType and assigns it to the Status field.
+// SetStatus sets field value
 func (o *GetTokenInfoResponse) SetStatus(v ApiResponseStatusType) {
-	o.Status = &v
+	o.Status = v
 }
 
 // GetResult returns the Result field value
@@ -111,9 +104,7 @@ func (o GetTokenInfoResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetTokenInfoResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
+	toSerialize["status"] = o.Status
 	toSerialize["result"] = o.Result
 	return toSerialize, nil
 }
@@ -123,6 +114,7 @@ func (o *GetTokenInfoResponse) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"status",
 		"result",
 	}
 

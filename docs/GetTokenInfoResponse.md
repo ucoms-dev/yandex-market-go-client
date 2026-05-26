@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | [optional] 
+**Status** | [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | 
 **Result** | [**TokenDTO**](TokenDTO.md) |  | 
 
 ## Methods
 
 ### NewGetTokenInfoResponse
 
-`func NewGetTokenInfoResponse(result TokenDTO, ) *GetTokenInfoResponse`
+`func NewGetTokenInfoResponse(status ApiResponseStatusType, result TokenDTO, ) *GetTokenInfoResponse`
 
 NewGetTokenInfoResponse instantiates a new GetTokenInfoResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *GetTokenInfoResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetResult
 

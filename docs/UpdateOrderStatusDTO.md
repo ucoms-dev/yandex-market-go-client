@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **Substatus** | Pointer to [**OrderSubstatusType**](OrderSubstatusType.md) |  | [optional] 
 **UpdateStatus** | Pointer to [**OrderUpdateStatusType**](OrderUpdateStatusType.md) |  | [optional] 
 **ErrorDetails** | Pointer to **string** | Ошибка при изменении статуса заказа. Содержит описание ошибки и идентификатор заказа.  Возвращается, если параметр &#x60;updateStatus&#x60; принимает значение &#x60;ERROR&#x60;.  | [optional] 
+**Operation** | Pointer to [**OperationDTO**](OperationDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetErrorDetails sets ErrorDetails field to given value.
 `func (o *UpdateOrderStatusDTO) HasErrorDetails() bool`
 
 HasErrorDetails returns a boolean if a field has been set.
+
+### GetOperation
+
+`func (o *UpdateOrderStatusDTO) GetOperation() OperationDTO`
+
+GetOperation returns the Operation field if non-nil, zero value otherwise.
+
+### GetOperationOk
+
+`func (o *UpdateOrderStatusDTO) GetOperationOk() (*OperationDTO, bool)`
+
+GetOperationOk returns a tuple with the Operation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOperation
+
+`func (o *UpdateOrderStatusDTO) SetOperation(v OperationDTO)`
+
+SetOperation sets Operation field to given value.
+
+### HasOperation
+
+`func (o *UpdateOrderStatusDTO) HasOperation() bool`
+
+HasOperation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

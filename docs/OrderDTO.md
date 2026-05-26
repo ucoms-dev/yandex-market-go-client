@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int64** | Идентификатор заказа. | 
+**ExternalOrderId** | Pointer to **string** | Внешний идентификатор заказа, который вы передали в [POST v2/campaigns/{campaignId}/orders/{orderId}/external-id](../../reference/orders/updateExternalOrderId.md). | [optional] 
 **Status** | [**OrderStatusType**](OrderStatusType.md) |  | 
 **Substatus** | [**OrderSubstatusType**](OrderSubstatusType.md) |  | 
 **CreationDate** | **string** |  | 
@@ -18,7 +19,7 @@ Name | Type | Description | Notes
 **BuyerTotalBeforeDiscount** | Pointer to **float32** | Стоимость всех товаров в заказе в валюте покупателя до применения скидок и с учетом стоимости доставки (&#x60;buyerItemsTotalBeforeDiscount&#x60; + стоимость доставки). | [optional] 
 **PaymentType** | [**OrderPaymentType**](OrderPaymentType.md) |  | 
 **PaymentMethod** | [**OrderPaymentMethodType**](OrderPaymentMethodType.md) |  | 
-**Fake** | **bool** | Тип заказа:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета.  | 
+**Fake** | **bool** | Тип заказа:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый заказ](../../concepts/sandbox.md) Маркета.  | 
 **Items** | [**[]OrderItemDTO**](OrderItemDTO.md) | Список товаров в заказе. | 
 **Subsidies** | Pointer to [**[]OrderSubsidyDTO**](OrderSubsidyDTO.md) | Список субсидий по типам. | [optional] 
 **Delivery** | [**OrderDeliveryDTO**](OrderDeliveryDTO.md) |  | 
@@ -66,6 +67,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetExternalOrderId
+
+`func (o *OrderDTO) GetExternalOrderId() string`
+
+GetExternalOrderId returns the ExternalOrderId field if non-nil, zero value otherwise.
+
+### GetExternalOrderIdOk
+
+`func (o *OrderDTO) GetExternalOrderIdOk() (*string, bool)`
+
+GetExternalOrderIdOk returns a tuple with the ExternalOrderId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalOrderId
+
+`func (o *OrderDTO) SetExternalOrderId(v string)`
+
+SetExternalOrderId sets ExternalOrderId field to given value.
+
+### HasExternalOrderId
+
+`func (o *OrderDTO) HasExternalOrderId() bool`
+
+HasExternalOrderId returns a boolean if a field has been set.
 
 ### GetStatus
 

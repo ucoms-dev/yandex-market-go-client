@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -20,12 +20,13 @@ var _ MappedNullable = &OrderShipmentDTO{}
 // OrderShipmentDTO Список посылок.  В параметре может указываться несколько посылок.
 type OrderShipmentDTO struct {
 	// Идентификатор посылки, присвоенный Маркетом.
+	// Deprecated
 	Id *int64 `json:"id,omitempty"`
 	// Формат даты: `ДД-ММ-ГГГГ`.
 	ShipmentDate *string `json:"shipmentDate,omitempty"`
 	// **Только для модели Экспресс**  Время, к которому магазин должен упаковать заказ и перевести его в статус `READY_TO_SHIP`. После смены статуса за заказом приедет курьер.  Поле может появиться не сразу. Запрашивайте информацию о заказе в течении 5–10 минут, пока оно не вернется.  Формат времени: 24-часовой, `ЧЧ:ММ`.  Если заказ сделан организацией, параметр не возвращается до согласования даты доставки.
 	ShipmentTime *string `json:"shipmentTime,omitempty"`
-	// **Только для модели DBS**  Информация для отслеживания перемещений посылки.
+	// **Только для модели DBS**  Информация для отслеживания посылки.
 	Tracks []OrderTrackDTO `json:"tracks,omitempty"`
 	// Список грузовых мест.
 	Boxes []OrderParcelBoxDTO `json:"boxes,omitempty"`
@@ -49,6 +50,7 @@ func NewOrderShipmentDTOWithDefaults() *OrderShipmentDTO {
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
+// Deprecated
 func (o *OrderShipmentDTO) GetId() int64 {
 	if o == nil || IsNil(o.Id) {
 		var ret int64
@@ -59,6 +61,7 @@ func (o *OrderShipmentDTO) GetId() int64 {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *OrderShipmentDTO) GetIdOk() (*int64, bool) {
 	if o == nil || IsNil(o.Id) {
 		return nil, false
@@ -76,6 +79,7 @@ func (o *OrderShipmentDTO) HasId() bool {
 }
 
 // SetId gets a reference to the given int64 and assigns it to the Id field.
+// Deprecated
 func (o *OrderShipmentDTO) SetId(v int64) {
 	o.Id = &v
 }

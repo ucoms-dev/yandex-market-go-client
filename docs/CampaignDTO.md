@@ -4,11 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Domain** | Pointer to **string** | URL магазина. | [optional] 
-**Id** | Pointer to **int64** | Идентификатор кампании.  Его также можно найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.  | [optional] 
+**Domain** | Pointer to **string** | Название магазина. | [optional] 
+**Id** | Pointer to **int64** | Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.  | [optional] 
 **ClientId** | Pointer to **int64** | Идентификатор плательщика в Яндекс Балансе. | [optional] 
 **Business** | Pointer to [**BusinessDTO**](BusinessDTO.md) |  | [optional] 
 **PlacementType** | Pointer to [**PlacementType**](PlacementType.md) |  | [optional] 
+**ApiAvailability** | Pointer to [**ApiAvailabilityStatusType**](ApiAvailabilityStatusType.md) |  | [optional] 
 
 ## Methods
 
@@ -153,6 +154,31 @@ SetPlacementType sets PlacementType field to given value.
 `func (o *CampaignDTO) HasPlacementType() bool`
 
 HasPlacementType returns a boolean if a field has been set.
+
+### GetApiAvailability
+
+`func (o *CampaignDTO) GetApiAvailability() ApiAvailabilityStatusType`
+
+GetApiAvailability returns the ApiAvailability field if non-nil, zero value otherwise.
+
+### GetApiAvailabilityOk
+
+`func (o *CampaignDTO) GetApiAvailabilityOk() (*ApiAvailabilityStatusType, bool)`
+
+GetApiAvailabilityOk returns a tuple with the ApiAvailability field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApiAvailability
+
+`func (o *CampaignDTO) SetApiAvailability(v ApiAvailabilityStatusType)`
+
+SetApiAvailability sets ApiAvailability field to given value.
+
+### HasApiAvailability
+
+`func (o *CampaignDTO) HasApiAvailability() bool`
+
+HasApiAvailability returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

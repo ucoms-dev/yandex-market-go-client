@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,14 +21,14 @@ var _ MappedNullable = &GenerateSalesGeographyRequest{}
 
 // GenerateSalesGeographyRequest Данные, необходимые для генерации отчета.
 type GenerateSalesGeographyRequest struct {
-	// Идентификатор кабинета.
+	// Идентификатор кабинета. {% if audience == \"partner\" %}Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) {% endif %}
 	BusinessId int64 `json:"businessId"`
-	// Начало периода, включительно.
+	// Начало периода, включительно.  Формат даты: `ГГГГ-ММ-ДД`.
 	DateFrom string `json:"dateFrom"`
-	// Конец периода, включительно.
+	// Конец периода, включительно.  Формат даты: `ГГГГ-ММ-ДД`.
 	DateTo string `json:"dateTo"`
 	// Идентификаторы категорий.
-	CategoryIds []int64 `json:"categoryIds,omitempty"`
+	CategoryIds []int32 `json:"categoryIds,omitempty"`
 	// Идентификаторы товаров.
 	OfferIds []string `json:"offerIds,omitempty"`
 }
@@ -128,9 +128,9 @@ func (o *GenerateSalesGeographyRequest) SetDateTo(v string) {
 }
 
 // GetCategoryIds returns the CategoryIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GenerateSalesGeographyRequest) GetCategoryIds() []int64 {
+func (o *GenerateSalesGeographyRequest) GetCategoryIds() []int32 {
 	if o == nil {
-		var ret []int64
+		var ret []int32
 		return ret
 	}
 	return o.CategoryIds
@@ -139,7 +139,7 @@ func (o *GenerateSalesGeographyRequest) GetCategoryIds() []int64 {
 // GetCategoryIdsOk returns a tuple with the CategoryIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GenerateSalesGeographyRequest) GetCategoryIdsOk() ([]int64, bool) {
+func (o *GenerateSalesGeographyRequest) GetCategoryIdsOk() ([]int32, bool) {
 	if o == nil || IsNil(o.CategoryIds) {
 		return nil, false
 	}
@@ -155,8 +155,8 @@ func (o *GenerateSalesGeographyRequest) HasCategoryIds() bool {
 	return false
 }
 
-// SetCategoryIds gets a reference to the given []int64 and assigns it to the CategoryIds field.
-func (o *GenerateSalesGeographyRequest) SetCategoryIds(v []int64) {
+// SetCategoryIds gets a reference to the given []int32 and assigns it to the CategoryIds field.
+func (o *GenerateSalesGeographyRequest) SetCategoryIds(v []int32) {
 	o.CategoryIds = v
 }
 

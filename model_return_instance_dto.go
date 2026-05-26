@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &ReturnInstanceDTO{}
 type ReturnInstanceDTO struct {
 	StockType *ReturnInstanceStockType  `json:"stockType,omitempty"`
 	Status    *ReturnInstanceStatusType `json:"status,omitempty"`
-	// Код идентификации единицы товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go).
+	// Код идентификации единицы товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов :no-translate[Market Yandex Go]).
 	Cis *string `json:"cis,omitempty"`
 	// Международный идентификатор мобильного оборудования.
 	Imei *string `json:"imei,omitempty"`

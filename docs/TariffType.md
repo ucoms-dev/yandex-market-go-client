@@ -53,6 +53,16 @@
 
 * `LATE_ORDER_EXECUTION_FEE_QI` (value: `"LATE_ORDER_EXECUTION_FEE_QI"`)
 
+* `VOLUME_STORAGE` (value: `"VOLUME_STORAGE"`)
+
+* `GOODS_ACCEPTANCE` (value: `"GOODS_ACCEPTANCE"`)
+
+* `CARGO_ACCEPTANCE` (value: `"CARGO_ACCEPTANCE"`)
+
+* `ORDER_PROCESSING` (value: `"ORDER_PROCESSING"`)
+
+* `WITHDRAW_EXTERNAL` (value: `"WITHDRAW_EXTERNAL"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

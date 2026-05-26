@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **OfferIds** | Pointer to **[]string** | Идентификаторы товаров, информация о которых нужна. &lt;br&gt;&lt;br&gt; ⚠️ Не используйте это поле одновременно с фильтрами по статусам карточек, категориям, брендам или тегам. Если вы хотите воспользоваться фильтрами, оставьте поле пустым.  | [optional] 
 **CardStatuses** | Pointer to [**[]OfferCardStatusType**](OfferCardStatusType.md) | Фильтр по статусам карточек.  [Что такое карточка товара](https://yandex.ru/support/marketplace/assortment/content/index.html)  | [optional] 
 **CategoryIds** | Pointer to **[]int32** | Фильтр по категориям на Маркете. | [optional] 
+**WithRecommendations** | Pointer to **bool** | Возвращать ли список рекомендаций к заполнению карточки и средний рейтинг карточки у товаров той категории, которая указана в &#x60;marketCategoryId&#x60;.  Значение по умолчанию: &#x60;false&#x60;. Если информация нужна, передайте значение &#x60;true&#x60;.  | [optional] [default to false]
 
 ## Methods
 
@@ -132,6 +133,31 @@ HasCategoryIds returns a boolean if a field has been set.
 `func (o *GetOfferCardsContentStatusRequest) UnsetCategoryIds()`
 
 UnsetCategoryIds ensures that no value is present for CategoryIds, not even an explicit nil
+### GetWithRecommendations
+
+`func (o *GetOfferCardsContentStatusRequest) GetWithRecommendations() bool`
+
+GetWithRecommendations returns the WithRecommendations field if non-nil, zero value otherwise.
+
+### GetWithRecommendationsOk
+
+`func (o *GetOfferCardsContentStatusRequest) GetWithRecommendationsOk() (*bool, bool)`
+
+GetWithRecommendationsOk returns a tuple with the WithRecommendations field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWithRecommendations
+
+`func (o *GetOfferCardsContentStatusRequest) SetWithRecommendations(v bool)`
+
+SetWithRecommendations sets WithRecommendations field to given value.
+
+### HasWithRecommendations
+
+`func (o *GetOfferCardsContentStatusRequest) HasWithRecommendations() bool`
+
+HasWithRecommendations returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

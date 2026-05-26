@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**RegionId** | **int64** | Идентификатор региона.  Идентификатор можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).  {% note alert \&quot;Типы регионов при создании и редактировании точек продаж\&quot; %}  Указывайте только регионы типов &#x60;TOWN&#x60; (город), &#x60;CITY&#x60; (крупный город) и &#x60;REPUBLIC_AREA&#x60; (район субъекта федерации). Тип региона указан в выходных параметрах &#x60;type&#x60; запросов [GET regions](../../reference/regions/searchRegionsByName.md) и [GET regions/{regionId}](../../reference/regions/searchRegionsById.md).  {% endnote %}  | 
+**RegionId** | **int64** | Идентификатор региона.  Идентификатор можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md).  {% note alert \&quot;Типы регионов при создании и редактировании точек продаж\&quot; %}  Указывайте только регионы типов &#x60;TOWN&#x60; (город), &#x60;CITY&#x60; (крупный город) и &#x60;REPUBLIC_AREA&#x60; (район субъекта федерации). Тип региона указан в выходных параметрах &#x60;type&#x60; запросов [GET v2/regions](../../reference/regions/searchRegionsByName.md) и [GET v2/regions/{regionId}](../../reference/regions/searchRegionsById.md).  {% endnote %}  | 
 **Street** | Pointer to **string** | Улица. | [optional] 
 **Number** | Pointer to **string** | Номер дома. | [optional] 
 **Building** | Pointer to **string** | Номер строения. | [optional] 

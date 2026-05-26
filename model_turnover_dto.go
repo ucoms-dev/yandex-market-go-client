@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,10 +19,10 @@ import (
 // checks if the TurnoverDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &TurnoverDTO{}
 
-// TurnoverDTO Информация об оборачиваемости товара.
+// TurnoverDTO Информация об оборачиваемости товара.  Подробнее о хранении и оборачиваемости товаров читайте в [Справке Маркета для продавцов](https://yandex.ru/support/marketplace/ru/storage/logistics#turnover).
 type TurnoverDTO struct {
 	Turnover TurnoverType `json:"turnover"`
-	// Значение в днях. [Что это за число?](https://yandex.ru/support/marketplace/analytics/turnover.html)
+	// Значение в днях.
 	TurnoverDays *float64 `json:"turnoverDays,omitempty"`
 }
 

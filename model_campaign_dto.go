@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,14 +19,16 @@ var _ MappedNullable = &CampaignDTO{}
 
 // CampaignDTO Информация о магазине.
 type CampaignDTO struct {
-	// URL магазина.
+	// Название магазина.
 	Domain *string `json:"domain,omitempty"`
-	// Идентификатор кампании.  Его также можно найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
+	// Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
 	Id *int64 `json:"id,omitempty"`
 	// Идентификатор плательщика в Яндекс Балансе.
-	ClientId      *int64         `json:"clientId,omitempty"`
-	Business      *BusinessDTO   `json:"business,omitempty"`
-	PlacementType *PlacementType `json:"placementType,omitempty"`
+	// Deprecated
+	ClientId        *int64                     `json:"clientId,omitempty"`
+	Business        *BusinessDTO               `json:"business,omitempty"`
+	PlacementType   *PlacementType             `json:"placementType,omitempty"`
+	ApiAvailability *ApiAvailabilityStatusType `json:"apiAvailability,omitempty"`
 }
 
 // NewCampaignDTO instantiates a new CampaignDTO object
@@ -111,6 +113,7 @@ func (o *CampaignDTO) SetId(v int64) {
 }
 
 // GetClientId returns the ClientId field value if set, zero value otherwise.
+// Deprecated
 func (o *CampaignDTO) GetClientId() int64 {
 	if o == nil || IsNil(o.ClientId) {
 		var ret int64
@@ -121,6 +124,7 @@ func (o *CampaignDTO) GetClientId() int64 {
 
 // GetClientIdOk returns a tuple with the ClientId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CampaignDTO) GetClientIdOk() (*int64, bool) {
 	if o == nil || IsNil(o.ClientId) {
 		return nil, false
@@ -138,6 +142,7 @@ func (o *CampaignDTO) HasClientId() bool {
 }
 
 // SetClientId gets a reference to the given int64 and assigns it to the ClientId field.
+// Deprecated
 func (o *CampaignDTO) SetClientId(v int64) {
 	o.ClientId = &v
 }
@@ -206,6 +211,38 @@ func (o *CampaignDTO) SetPlacementType(v PlacementType) {
 	o.PlacementType = &v
 }
 
+// GetApiAvailability returns the ApiAvailability field value if set, zero value otherwise.
+func (o *CampaignDTO) GetApiAvailability() ApiAvailabilityStatusType {
+	if o == nil || IsNil(o.ApiAvailability) {
+		var ret ApiAvailabilityStatusType
+		return ret
+	}
+	return *o.ApiAvailability
+}
+
+// GetApiAvailabilityOk returns a tuple with the ApiAvailability field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CampaignDTO) GetApiAvailabilityOk() (*ApiAvailabilityStatusType, bool) {
+	if o == nil || IsNil(o.ApiAvailability) {
+		return nil, false
+	}
+	return o.ApiAvailability, true
+}
+
+// HasApiAvailability returns a boolean if a field has been set.
+func (o *CampaignDTO) HasApiAvailability() bool {
+	if o != nil && !IsNil(o.ApiAvailability) {
+		return true
+	}
+
+	return false
+}
+
+// SetApiAvailability gets a reference to the given ApiAvailabilityStatusType and assigns it to the ApiAvailability field.
+func (o *CampaignDTO) SetApiAvailability(v ApiAvailabilityStatusType) {
+	o.ApiAvailability = &v
+}
+
 func (o CampaignDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -230,6 +267,9 @@ func (o CampaignDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.PlacementType) {
 		toSerialize["placementType"] = o.PlacementType
+	}
+	if !IsNil(o.ApiAvailability) {
+		toSerialize["apiAvailability"] = o.ApiAvailability
 	}
 	return toSerialize, nil
 }

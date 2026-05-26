@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **FeedbackIds** | Pointer to **[]int64** | Идентификаторы отзывов.  ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.  | [optional] 
-**DateTimeFrom** | Pointer to **time.Time** | Начало периода. Не включительно.  Если параметр не указан, возвращается информация за 6 месяцев до указанной в &#x60;dateTimeTo&#x60; даты.  | [optional] 
-**DateTimeTo** | Pointer to **time.Time** | Конец периода. Не включительно.  Если параметр не указан, используется текущая дата.  | [optional] 
+**DateTimeFrom** | Pointer to **time.Time** | Начало периода. Не включительно.  Если параметр не указан, возвращается информация за 6 месяцев до указанной в &#x60;dateTimeTo&#x60; даты.  Максимальный интервал 6 месяцев.  | [optional] 
+**DateTimeTo** | Pointer to **time.Time** | Конец периода. Не включительно.  Если параметр не указан, используется текущая дата.  Максимальный интервал 6 месяцев.  | [optional] 
 **ReactionStatus** | Pointer to [**FeedbackReactionStatusType**](FeedbackReactionStatusType.md) |  | [optional] 
 **RatingValues** | Pointer to **[]int32** | Оценка товара. | [optional] 
-**ModelIds** | Pointer to **[]int64** | Фильтр по идентификатору модели товара.  Получить идентификатор модели можно с помощью одного из запросов:  * [POST businesses/{businessId}/offer-mappings](../../reference/business-assortment/getOfferMappings.md);  * [POST businesses/{businessId}/offer-cards](../../reference/content/getOfferCardsContentStatus.md).  | [optional] 
+**OfferIds** | Pointer to **[]string** | Фильтр по идентификатору товара.  | [optional] 
 **Paid** | Pointer to **bool** | Фильтр отзывов за баллы Плюса. | [optional] 
 
 ## Methods
@@ -176,41 +176,41 @@ HasRatingValues returns a boolean if a field has been set.
 `func (o *GetGoodsFeedbackRequest) UnsetRatingValues()`
 
 UnsetRatingValues ensures that no value is present for RatingValues, not even an explicit nil
-### GetModelIds
+### GetOfferIds
 
-`func (o *GetGoodsFeedbackRequest) GetModelIds() []int64`
+`func (o *GetGoodsFeedbackRequest) GetOfferIds() []string`
 
-GetModelIds returns the ModelIds field if non-nil, zero value otherwise.
+GetOfferIds returns the OfferIds field if non-nil, zero value otherwise.
 
-### GetModelIdsOk
+### GetOfferIdsOk
 
-`func (o *GetGoodsFeedbackRequest) GetModelIdsOk() (*[]int64, bool)`
+`func (o *GetGoodsFeedbackRequest) GetOfferIdsOk() (*[]string, bool)`
 
-GetModelIdsOk returns a tuple with the ModelIds field if it's non-nil, zero value otherwise
+GetOfferIdsOk returns a tuple with the OfferIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetModelIds
+### SetOfferIds
 
-`func (o *GetGoodsFeedbackRequest) SetModelIds(v []int64)`
+`func (o *GetGoodsFeedbackRequest) SetOfferIds(v []string)`
 
-SetModelIds sets ModelIds field to given value.
+SetOfferIds sets OfferIds field to given value.
 
-### HasModelIds
+### HasOfferIds
 
-`func (o *GetGoodsFeedbackRequest) HasModelIds() bool`
+`func (o *GetGoodsFeedbackRequest) HasOfferIds() bool`
 
-HasModelIds returns a boolean if a field has been set.
+HasOfferIds returns a boolean if a field has been set.
 
-### SetModelIdsNil
+### SetOfferIdsNil
 
-`func (o *GetGoodsFeedbackRequest) SetModelIdsNil(b bool)`
+`func (o *GetGoodsFeedbackRequest) SetOfferIdsNil(b bool)`
 
- SetModelIdsNil sets the value for ModelIds to be an explicit nil
+ SetOfferIdsNil sets the value for OfferIds to be an explicit nil
 
-### UnsetModelIds
-`func (o *GetGoodsFeedbackRequest) UnsetModelIds()`
+### UnsetOfferIds
+`func (o *GetGoodsFeedbackRequest) UnsetOfferIds()`
 
-UnsetModelIds ensures that no value is present for ModelIds, not even an explicit nil
+UnsetOfferIds ensures that no value is present for OfferIds, not even an explicit nil
 ### GetPaid
 
 `func (o *GetGoodsFeedbackRequest) GetPaid() bool`

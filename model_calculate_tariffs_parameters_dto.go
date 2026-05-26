@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -17,12 +17,15 @@ import (
 // checks if the CalculateTariffsParametersDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &CalculateTariffsParametersDTO{}
 
-// CalculateTariffsParametersDTO Параметры для расчета стоимости услуг.
+// CalculateTariffsParametersDTO Параметры для расчета стоимости услуг. Обязательно необходимо указать параметр `campaignId` либо `sellingProgram`. Совместное использование параметров приведет к ошибке.
 type CalculateTariffsParametersDTO struct {
-	// Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.  У пользователя, который выполняет запрос, должен быть доступ к этой кампании.  Используйте параметр `campaignId`, если уже завершили подключение магазина на Маркете. Иначе вернется пустой список.  Обязательный параметр, если не указан параметр `sellingProgram`. Совместное использование параметров приведет к ошибке.
+	// Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
 	CampaignId     *int64                `json:"campaignId,omitempty"`
 	SellingProgram *SellingProgramType   `json:"sellingProgram,omitempty"`
 	Frequency      *PaymentFrequencyType `json:"frequency,omitempty"`
+	// Отсрочка выплат при еженедельном графике — сколько недель назад были доставлены заказы, за которые приходит выплата.  Допустимые значения: 0, 1, 2 или 4.  Значения параметра `paymentDelayWeeks`, отличные от 0, допускаются только вместе с параметром `frequency` равным 'WEEKLY'. Использование других значений параметра `frequency` совместно с `paymentDelayWeeks` приведет к ошибке.
+	PaymentDelayWeeks *int32        `json:"paymentDelayWeeks,omitempty"`
+	Currency          *CurrencyType `json:"currency,omitempty"`
 }
 
 // NewCalculateTariffsParametersDTO instantiates a new CalculateTariffsParametersDTO object
@@ -138,6 +141,70 @@ func (o *CalculateTariffsParametersDTO) SetFrequency(v PaymentFrequencyType) {
 	o.Frequency = &v
 }
 
+// GetPaymentDelayWeeks returns the PaymentDelayWeeks field value if set, zero value otherwise.
+func (o *CalculateTariffsParametersDTO) GetPaymentDelayWeeks() int32 {
+	if o == nil || IsNil(o.PaymentDelayWeeks) {
+		var ret int32
+		return ret
+	}
+	return *o.PaymentDelayWeeks
+}
+
+// GetPaymentDelayWeeksOk returns a tuple with the PaymentDelayWeeks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CalculateTariffsParametersDTO) GetPaymentDelayWeeksOk() (*int32, bool) {
+	if o == nil || IsNil(o.PaymentDelayWeeks) {
+		return nil, false
+	}
+	return o.PaymentDelayWeeks, true
+}
+
+// HasPaymentDelayWeeks returns a boolean if a field has been set.
+func (o *CalculateTariffsParametersDTO) HasPaymentDelayWeeks() bool {
+	if o != nil && !IsNil(o.PaymentDelayWeeks) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentDelayWeeks gets a reference to the given int32 and assigns it to the PaymentDelayWeeks field.
+func (o *CalculateTariffsParametersDTO) SetPaymentDelayWeeks(v int32) {
+	o.PaymentDelayWeeks = &v
+}
+
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *CalculateTariffsParametersDTO) GetCurrency() CurrencyType {
+	if o == nil || IsNil(o.Currency) {
+		var ret CurrencyType
+		return ret
+	}
+	return *o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CalculateTariffsParametersDTO) GetCurrencyOk() (*CurrencyType, bool) {
+	if o == nil || IsNil(o.Currency) {
+		return nil, false
+	}
+	return o.Currency, true
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *CalculateTariffsParametersDTO) HasCurrency() bool {
+	if o != nil && !IsNil(o.Currency) {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given CurrencyType and assigns it to the Currency field.
+func (o *CalculateTariffsParametersDTO) SetCurrency(v CurrencyType) {
+	o.Currency = &v
+}
+
 func (o CalculateTariffsParametersDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -156,6 +223,12 @@ func (o CalculateTariffsParametersDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Frequency) {
 		toSerialize["frequency"] = o.Frequency
+	}
+	if !IsNil(o.PaymentDelayWeeks) {
+		toSerialize["paymentDelayWeeks"] = o.PaymentDelayWeeks
+	}
+	if !IsNil(o.Currency) {
+		toSerialize["currency"] = o.Currency
 	}
 	return toSerialize, nil
 }

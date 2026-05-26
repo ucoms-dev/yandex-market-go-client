@@ -4,10 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**StocksWarehouseId** | Pointer to **int64** | Идентификатор склада.  Если параметр указан, возвращаются только товары в наличии на переданном складе.  **Для модели FBY:** получить список складов Маркета можно с помощью метода [GET warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).  | [optional] 
-**WithTurnover** | Pointer to **bool** | **Только для модели FBY**  Возвращать ли информацию по оборачиваемости.  Значение по умолчанию: &#x60;false&#x60;. Если информация нужна, передайте значение &#x60;true&#x60;.  | [optional] [default to false]
+**StocksWarehouseId** | Pointer to **int64** | Идентификатор склада.  Если параметр указан, возвращаются только товары на переданном складе.  **Для моделей FBY и LaaS:** получить список складов Маркета можно с помощью метода [GET v2/warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).  | [optional] 
+**HasStocks** | Pointer to **bool** | **Только для моделей FBY и LaaS**  Фильтр по наличию товаров. Используйте только вместе со &#x60;stocksWarehouseId&#x60;.  Передайте &#x60;false&#x60;, чтобы получить информацию о товарах, которых нет в наличие. При значении &#x60;true&#x60; возвращаются данные о товарах, которые есть на указанном складе.  | [optional] 
+**WithTurnover** | Pointer to **bool** | **Только для моделей FBY и LaaS**  Возвращать ли информацию по оборачиваемости.  Значение по умолчанию: &#x60;false&#x60;. Если информация нужна, передайте значение &#x60;true&#x60;.  | [optional] [default to false]
 **Archived** | Pointer to **bool** | Фильтр по нахождению в архиве.  Передайте &#x60;true&#x60;, чтобы получить информацию об остатках товаров, которые находятся в архиве. Если фильтр не заполнен или передано &#x60;false&#x60;, в ответе возвращается информация о товарах, которые не находятся в архиве.  | [optional] 
-**OfferIds** | Pointer to **[]string** | Фильтр по вашим SKU товаров.  Возвращается информация об остатках всех переданных SKU, включая товары в архиве.  {% note warning \&quot;Такой список возвращается только целиком\&quot; %}  Если вы запрашиваете информацию по конкретным SKU, не заполняйте:  * &#x60;page_token&#x60; * &#x60;limit&#x60; * &#x60;archived&#x60; * &#x60;stocksOnWarehouse&#x60;  {% endnote %}     | [optional] 
+**OfferIds** | Pointer to **[]string** | Фильтр по вашим SKU товаров.  Возвращается информация об остатках всех переданных SKU, включая товары в архиве.  {% note warning \&quot;Такой список возвращается только целиком\&quot; %}  Если вы запрашиваете информацию по конкретным SKU, не заполняйте:  * &#x60;pageToken&#x60; * &#x60;limit&#x60; * &#x60;archived&#x60; * &#x60;stocksOnWarehouse&#x60;  {% endnote %}     | [optional] 
 
 ## Methods
 
@@ -52,6 +53,31 @@ SetStocksWarehouseId sets StocksWarehouseId field to given value.
 `func (o *GetWarehouseStocksRequest) HasStocksWarehouseId() bool`
 
 HasStocksWarehouseId returns a boolean if a field has been set.
+
+### GetHasStocks
+
+`func (o *GetWarehouseStocksRequest) GetHasStocks() bool`
+
+GetHasStocks returns the HasStocks field if non-nil, zero value otherwise.
+
+### GetHasStocksOk
+
+`func (o *GetWarehouseStocksRequest) GetHasStocksOk() (*bool, bool)`
+
+GetHasStocksOk returns a tuple with the HasStocks field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasStocks
+
+`func (o *GetWarehouseStocksRequest) SetHasStocks(v bool)`
+
+SetHasStocks sets HasStocks field to given value.
+
+### HasHasStocks
+
+`func (o *GetWarehouseStocksRequest) HasHasStocks() bool`
+
+HasHasStocks returns a boolean if a field has been set.
 
 ### GetWithTurnover
 

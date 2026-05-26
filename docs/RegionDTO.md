@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Name** | **string** | Название региона. | 
 **Type** | [**RegionType**](RegionType.md) |  | 
 **Parent** | Pointer to [**RegionDTO**](RegionDTO.md) |  | [optional] 
-**Children** | Pointer to [**[]RegionDTO**](RegionDTO.md) | Дочерние регионы. | [optional] 
 
 ## Methods
 
@@ -114,41 +113,6 @@ SetParent sets Parent field to given value.
 
 HasParent returns a boolean if a field has been set.
 
-### GetChildren
-
-`func (o *RegionDTO) GetChildren() []RegionDTO`
-
-GetChildren returns the Children field if non-nil, zero value otherwise.
-
-### GetChildrenOk
-
-`func (o *RegionDTO) GetChildrenOk() (*[]RegionDTO, bool)`
-
-GetChildrenOk returns a tuple with the Children field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetChildren
-
-`func (o *RegionDTO) SetChildren(v []RegionDTO)`
-
-SetChildren sets Children field to given value.
-
-### HasChildren
-
-`func (o *RegionDTO) HasChildren() bool`
-
-HasChildren returns a boolean if a field has been set.
-
-### SetChildrenNil
-
-`func (o *RegionDTO) SetChildrenNil(b bool)`
-
- SetChildrenNil sets the value for Children to be an explicit nil
-
-### UnsetChildren
-`func (o *RegionDTO) UnsetChildren()`
-
-UnsetChildren ensures that no value is present for Children, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

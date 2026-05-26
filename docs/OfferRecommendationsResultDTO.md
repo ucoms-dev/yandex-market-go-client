@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Paging** | Pointer to [**ScrollingPagerDTO**](ScrollingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 **OfferRecommendations** | [**[]OfferRecommendationDTO**](OfferRecommendationDTO.md) | Страница списка товаров. | 
 
 ## Methods
@@ -28,20 +28,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPaging
 
-`func (o *OfferRecommendationsResultDTO) GetPaging() ScrollingPagerDTO`
+`func (o *OfferRecommendationsResultDTO) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *OfferRecommendationsResultDTO) GetPagingOk() (*ScrollingPagerDTO, bool)`
+`func (o *OfferRecommendationsResultDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *OfferRecommendationsResultDTO) SetPaging(v ScrollingPagerDTO)`
+`func (o *OfferRecommendationsResultDTO) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

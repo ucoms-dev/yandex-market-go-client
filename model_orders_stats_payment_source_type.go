@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,15 +15,16 @@ import (
 	"fmt"
 )
 
-// OrdersStatsPaymentSourceType Способ денежного перевода: - `BUYER` — оплата или возврат деньгами.  Устаревшие способы: - `CASHBACK`. - `MARKETPLACE`. - `SPLIT`.
+// OrdersStatsPaymentSourceType Способ денежного перевода: - `BUYER` — оплата или возврат деньгами. - `MARKET_CESSION` — уступка задолженности покупателя.  Устаревшие способы: - `CASHBACK`. - `MARKETPLACE`. - `SPLIT`.
 type OrdersStatsPaymentSourceType string
 
 // List of OrdersStatsPaymentSourceType
 const (
-	ORDERSSTATSPAYMENTSOURCETYPE_BUYER       OrdersStatsPaymentSourceType = "BUYER"
-	ORDERSSTATSPAYMENTSOURCETYPE_CASHBACK    OrdersStatsPaymentSourceType = "CASHBACK"
-	ORDERSSTATSPAYMENTSOURCETYPE_MARKETPLACE OrdersStatsPaymentSourceType = "MARKETPLACE"
-	ORDERSSTATSPAYMENTSOURCETYPE_SPLIT       OrdersStatsPaymentSourceType = "SPLIT"
+	ORDERSSTATSPAYMENTSOURCETYPE_BUYER          OrdersStatsPaymentSourceType = "BUYER"
+	ORDERSSTATSPAYMENTSOURCETYPE_CASHBACK       OrdersStatsPaymentSourceType = "CASHBACK"
+	ORDERSSTATSPAYMENTSOURCETYPE_MARKETPLACE    OrdersStatsPaymentSourceType = "MARKETPLACE"
+	ORDERSSTATSPAYMENTSOURCETYPE_MARKET_CESSION OrdersStatsPaymentSourceType = "MARKET_CESSION"
+	ORDERSSTATSPAYMENTSOURCETYPE_SPLIT          OrdersStatsPaymentSourceType = "SPLIT"
 )
 
 // All allowed values of OrdersStatsPaymentSourceType enum
@@ -31,6 +32,7 @@ var AllowedOrdersStatsPaymentSourceTypeEnumValues = []OrdersStatsPaymentSourceTy
 	"BUYER",
 	"CASHBACK",
 	"MARKETPLACE",
+	"MARKET_CESSION",
 	"SPLIT",
 }
 

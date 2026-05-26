@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,16 +22,15 @@ var _ MappedNullable = &GetGoodsFeedbackRequest{}
 type GetGoodsFeedbackRequest struct {
 	// Идентификаторы отзывов.  ⚠️ Не используйте это поле одновременно с другими фильтрами. Если вы хотите воспользоваться ими, оставьте поле пустым.
 	FeedbackIds []int64 `json:"feedbackIds,omitempty"`
-	// Начало периода. Не включительно.  Если параметр не указан, возвращается информация за 6 месяцев до указанной в `dateTimeTo` даты.
+	// Начало периода. Не включительно.  Если параметр не указан, возвращается информация за 6 месяцев до указанной в `dateTimeTo` даты.  Максимальный интервал 6 месяцев.
 	DateTimeFrom *time.Time `json:"dateTimeFrom,omitempty"`
-	// Конец периода. Не включительно.  Если параметр не указан, используется текущая дата.
+	// Конец периода. Не включительно.  Если параметр не указан, используется текущая дата.  Максимальный интервал 6 месяцев.
 	DateTimeTo     *time.Time                  `json:"dateTimeTo,omitempty"`
 	ReactionStatus *FeedbackReactionStatusType `json:"reactionStatus,omitempty"`
 	// Оценка товара.
 	RatingValues []int32 `json:"ratingValues,omitempty"`
-	// Фильтр по идентификатору модели товара.  Получить идентификатор модели можно с помощью одного из запросов:  * [POST businesses/{businessId}/offer-mappings](../../reference/business-assortment/getOfferMappings.md);  * [POST businesses/{businessId}/offer-cards](../../reference/content/getOfferCardsContentStatus.md).
-	// Deprecated
-	ModelIds []int64 `json:"modelIds,omitempty"`
+	// Фильтр по идентификатору товара.
+	OfferIds []string `json:"offerIds,omitempty"`
 	// Фильтр отзывов за баллы Плюса.
 	Paid *bool `json:"paid,omitempty"`
 }
@@ -215,40 +214,37 @@ func (o *GetGoodsFeedbackRequest) SetRatingValues(v []int32) {
 	o.RatingValues = v
 }
 
-// GetModelIds returns the ModelIds field value if set, zero value otherwise (both if not set or set to explicit null).
-// Deprecated
-func (o *GetGoodsFeedbackRequest) GetModelIds() []int64 {
+// GetOfferIds returns the OfferIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetGoodsFeedbackRequest) GetOfferIds() []string {
 	if o == nil {
-		var ret []int64
+		var ret []string
 		return ret
 	}
-	return o.ModelIds
+	return o.OfferIds
 }
 
-// GetModelIdsOk returns a tuple with the ModelIds field value if set, nil otherwise
+// GetOfferIdsOk returns a tuple with the OfferIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-// Deprecated
-func (o *GetGoodsFeedbackRequest) GetModelIdsOk() ([]int64, bool) {
-	if o == nil || IsNil(o.ModelIds) {
+func (o *GetGoodsFeedbackRequest) GetOfferIdsOk() ([]string, bool) {
+	if o == nil || IsNil(o.OfferIds) {
 		return nil, false
 	}
-	return o.ModelIds, true
+	return o.OfferIds, true
 }
 
-// HasModelIds returns a boolean if a field has been set.
-func (o *GetGoodsFeedbackRequest) HasModelIds() bool {
-	if o != nil && !IsNil(o.ModelIds) {
+// HasOfferIds returns a boolean if a field has been set.
+func (o *GetGoodsFeedbackRequest) HasOfferIds() bool {
+	if o != nil && !IsNil(o.OfferIds) {
 		return true
 	}
 
 	return false
 }
 
-// SetModelIds gets a reference to the given []int64 and assigns it to the ModelIds field.
-// Deprecated
-func (o *GetGoodsFeedbackRequest) SetModelIds(v []int64) {
-	o.ModelIds = v
+// SetOfferIds gets a reference to the given []string and assigns it to the OfferIds field.
+func (o *GetGoodsFeedbackRequest) SetOfferIds(v []string) {
+	o.OfferIds = v
 }
 
 // GetPaid returns the Paid field value if set, zero value otherwise.
@@ -308,8 +304,8 @@ func (o GetGoodsFeedbackRequest) ToMap() (map[string]interface{}, error) {
 	if o.RatingValues != nil {
 		toSerialize["ratingValues"] = o.RatingValues
 	}
-	if o.ModelIds != nil {
-		toSerialize["modelIds"] = o.ModelIds
+	if o.OfferIds != nil {
+		toSerialize["offerIds"] = o.OfferIds
 	}
 	if !IsNil(o.Paid) {
 		toSerialize["paid"] = o.Paid

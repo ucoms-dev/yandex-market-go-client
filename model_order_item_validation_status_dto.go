@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,12 +19,14 @@ import (
 // checks if the OrderItemValidationStatusDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderItemValidationStatusDTO{}
 
-// OrderItemValidationStatusDTO Идентификатор товара и статус проверки его УИНа.
+// OrderItemValidationStatusDTO Идентификаторы товаров и информация по проверке их кодов.
 type OrderItemValidationStatusDTO struct {
 	// Идентификатор товара в заказе.
 	Id int64 `json:"id"`
-	// Статусы проверки УИНов.
-	Uin []UinDTO `json:"uin"`
+	// Информация по проверке :no-translate[УИНов].
+	Uin []UinDTO `json:"uin,omitempty"`
+	// Информация по проверке кодов маркировки в системе :no-translate[«Честный ЗНАК»].
+	Cis []CisDTO `json:"cis,omitempty"`
 }
 
 type _OrderItemValidationStatusDTO OrderItemValidationStatusDTO
@@ -33,10 +35,9 @@ type _OrderItemValidationStatusDTO OrderItemValidationStatusDTO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderItemValidationStatusDTO(id int64, uin []UinDTO) *OrderItemValidationStatusDTO {
+func NewOrderItemValidationStatusDTO(id int64) *OrderItemValidationStatusDTO {
 	this := OrderItemValidationStatusDTO{}
 	this.Id = id
-	this.Uin = uin
 	return &this
 }
 
@@ -72,28 +73,70 @@ func (o *OrderItemValidationStatusDTO) SetId(v int64) {
 	o.Id = v
 }
 
-// GetUin returns the Uin field value
+// GetUin returns the Uin field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OrderItemValidationStatusDTO) GetUin() []UinDTO {
 	if o == nil {
 		var ret []UinDTO
 		return ret
 	}
-
 	return o.Uin
 }
 
-// GetUinOk returns a tuple with the Uin field value
+// GetUinOk returns a tuple with the Uin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *OrderItemValidationStatusDTO) GetUinOk() ([]UinDTO, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Uin) {
 		return nil, false
 	}
 	return o.Uin, true
 }
 
-// SetUin sets field value
+// HasUin returns a boolean if a field has been set.
+func (o *OrderItemValidationStatusDTO) HasUin() bool {
+	if o != nil && !IsNil(o.Uin) {
+		return true
+	}
+
+	return false
+}
+
+// SetUin gets a reference to the given []UinDTO and assigns it to the Uin field.
 func (o *OrderItemValidationStatusDTO) SetUin(v []UinDTO) {
 	o.Uin = v
+}
+
+// GetCis returns the Cis field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *OrderItemValidationStatusDTO) GetCis() []CisDTO {
+	if o == nil {
+		var ret []CisDTO
+		return ret
+	}
+	return o.Cis
+}
+
+// GetCisOk returns a tuple with the Cis field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *OrderItemValidationStatusDTO) GetCisOk() ([]CisDTO, bool) {
+	if o == nil || IsNil(o.Cis) {
+		return nil, false
+	}
+	return o.Cis, true
+}
+
+// HasCis returns a boolean if a field has been set.
+func (o *OrderItemValidationStatusDTO) HasCis() bool {
+	if o != nil && !IsNil(o.Cis) {
+		return true
+	}
+
+	return false
+}
+
+// SetCis gets a reference to the given []CisDTO and assigns it to the Cis field.
+func (o *OrderItemValidationStatusDTO) SetCis(v []CisDTO) {
+	o.Cis = v
 }
 
 func (o OrderItemValidationStatusDTO) MarshalJSON() ([]byte, error) {
@@ -107,7 +150,12 @@ func (o OrderItemValidationStatusDTO) MarshalJSON() ([]byte, error) {
 func (o OrderItemValidationStatusDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	toSerialize["uin"] = o.Uin
+	if o.Uin != nil {
+		toSerialize["uin"] = o.Uin
+	}
+	if o.Cis != nil {
+		toSerialize["cis"] = o.Cis
+	}
 	return toSerialize, nil
 }
 
@@ -117,7 +165,6 @@ func (o *OrderItemValidationStatusDTO) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"id",
-		"uin",
 	}
 
 	allProperties := make(map[string]interface{})

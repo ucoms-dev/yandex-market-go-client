@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | [optional] 
+**Status** | [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | 
 **Errors** | Pointer to [**[]ApiErrorDTO**](ApiErrorDTO.md) | Список ошибок. | [optional] 
 
 ## Methods
 
 ### NewApiLockedErrorResponse
 
-`func NewApiLockedErrorResponse() *ApiLockedErrorResponse`
+`func NewApiLockedErrorResponse(status ApiResponseStatusType, ) *ApiLockedErrorResponse`
 
 NewApiLockedErrorResponse instantiates a new ApiLockedErrorResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *ApiLockedErrorResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetErrors
 

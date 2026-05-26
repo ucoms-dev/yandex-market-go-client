@@ -10,11 +10,11 @@ Name | Type | Description | Notes
 **Status** | Pointer to [**OrderStatsStatusType**](OrderStatsStatusType.md) |  | [optional] 
 **PartnerOrderId** | Pointer to **string** | Идентификатор заказа в информационной системе магазина. | [optional] 
 **PaymentType** | Pointer to [**OrdersStatsOrderPaymentType**](OrdersStatsOrderPaymentType.md) |  | [optional] 
-**Fake** | Pointer to **bool** | Тип заказа:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый](../../concepts/sandbox.md) заказ Маркета.  | [optional] 
+**Fake** | Pointer to **bool** | Тип заказа:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый заказ](../../concepts/sandbox.md) Маркета.  | [optional] 
 **DeliveryRegion** | Pointer to [**OrdersStatsDeliveryRegionDTO**](OrdersStatsDeliveryRegionDTO.md) |  | [optional] 
 **Items** | [**[]OrdersStatsItemDTO**](OrdersStatsItemDTO.md) | Список товаров в заказе после возможных изменений.  Информация о доставке заказа добавляется отдельным элементом в массиве &#x60;items&#x60;— параметр &#x60;offerName&#x60; со значением &#x60;Доставка&#x60;.  | 
-**InitialItems** | Pointer to [**[]OrdersStatsItemDTO**](OrdersStatsItemDTO.md) | Список товаров в заказе до изменений. | [optional] 
-**Payments** | [**[]OrdersStatsPaymentDTO**](OrdersStatsPaymentDTO.md) | Информация о денежных переводах по заказу.  Может вернуться пустым, если нет данных о переводах. Например, заказ отменен или выбрана оплата при получении (для модели DBS).  | 
+**InitialItems** | Pointer to [**[]OrdersStatsItemDTO**](OrdersStatsItemDTO.md) | Список товаров в заказе.  Возвращается, только если было изменение количества товаров.  | [optional] 
+**Payments** | [**[]OrdersStatsPaymentDTO**](OrdersStatsPaymentDTO.md) | Информация о расчетах по заказу.  Возвращается пустым, если заказ:   * только начали обрабатывать (даже если он оплачен);   * отменили до момента передачи в доставку.  Окончательная информация о расчетах по заказу вернется после его финальной обработки (например, после перехода в статус &#x60;DELIVERED&#x60;).  | 
 **Commissions** | [**[]OrdersStatsCommissionDTO**](OrdersStatsCommissionDTO.md) | Информация о стоимости услуг. | 
 **Subsidies** | Pointer to [**[]OrdersStatsSubsidyDTO**](OrdersStatsSubsidyDTO.md) | Начисление баллов, которые используются для уменьшения стоимости размещения, и их списание в случае невыкупа или возврата. | [optional] 
 **Currency** | [**CurrencyType**](CurrencyType.md) |  | 

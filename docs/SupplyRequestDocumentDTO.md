@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | [**SupplyRequestDocumentType**](SupplyRequestDocumentType.md) |  | 
-**Url** | **string** | Ссылка на документ. | 
+**Url** | **string** |  | 
 **CreatedAt** | **time.Time** | Дата и время создания документа. | 
 
 ## Methods

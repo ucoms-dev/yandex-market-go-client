@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,6 @@ var _ MappedNullable = &ParcelBoxLabelDTO{}
 
 // ParcelBoxLabelDTO Информация о ярлыке для коробки.
 type ParcelBoxLabelDTO struct {
-	// Соответствует URL, по которому выполняется запрос [GET campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes/{boxId}/label](../../reference/orders/generateOrderLabel.md).
 	Url string `json:"url"`
 	// Юридическое название магазина.
 	SupplierName string `json:"supplierName"`
@@ -39,10 +38,10 @@ type ParcelBoxLabelDTO struct {
 	FulfilmentId string `json:"fulfilmentId"`
 	// Номер коробки в заказе. Возвращается в формате: `номер места/общее количество мест`.
 	Place string `json:"place"`
-	// Общая масса всех товаров в заказе.  Возвращается в формате: `weight кг`.
+	// Общая масса всех товаров в заказе.  Возвращается в формате `weight кг`.
 	// Deprecated
 	Weight string `json:"weight"`
-	// Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md).
+	// Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md).
 	DeliveryServiceId string `json:"deliveryServiceId"`
 	// Адрес получателя.
 	DeliveryAddress *string `json:"deliveryAddress,omitempty"`

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &CategoryContentParametersDTO{}
 
 // CategoryContentParametersDTO Информация о параметрах категории.
 type CategoryContentParametersDTO struct {
-	// Идентификатор категории на Маркете.  При изменении категории убедитесь, что характеристики товара и их значения в параметре `parameterValues` вы передаете для новой категории.  Список категорий Маркета можно получить с помощью запроса  [POST categories/tree](../../reference/categories/getCategoriesTree.md).
+	// Идентификатор категории на Маркете.  При изменении категории убедитесь, что характеристики товара и их значения в параметре `parameterValues` вы передаете для новой категории.  Список категорий Маркета можно получить с помощью запроса  [POST v2/categories/tree](../../reference/categories/getCategoriesTree.md).
 	CategoryId int32 `json:"categoryId"`
 	// Список характеристик.
 	Parameters []CategoryParameterDTO `json:"parameters,omitempty"`

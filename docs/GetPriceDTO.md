@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | **float32** | Значение. | 
+**Value** | **float32** | Цена товара. | 
 **CurrencyId** | [**CurrencyType**](CurrencyType.md) |  | 
 **UpdatedAt** | **time.Time** | Время последнего обновления. | 
 

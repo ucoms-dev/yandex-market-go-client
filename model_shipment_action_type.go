@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,16 +15,17 @@ import (
 	"fmt"
 )
 
-// ShipmentActionType Действия с отгрузкой:  * `CONFIRM` — подтвердить отгрузку. * `DOWNLOAD_ACT` — скачать акт приема-передачи отгрузки. * `DOWNLOAD_INBOUND_ACT` — скачать список принятых заказов. * `DOWNLOAD_DISCREPANCY_ACT` — скачать акт расхождений. * `CHANGE_PALLETS_COUNT` — указать количество палет.
+// ShipmentActionType Действия с отгрузкой:  * `CONFIRM` — подтвердить отгрузку. * `DOWNLOAD_ACT` — скачать акт приема-передачи отгрузки. * `DOWNLOAD_INBOUND_ACT` — скачать список принятых заказов. * `DOWNLOAD_DISCREPANCY_ACT` — скачать акт расхождений. * `DOWNLOAD_TRANSPORTATION_WAYBILL` — скачать транспортную накладную. * `CHANGE_PALLETS_COUNT` — указать количество палет.
 type ShipmentActionType string
 
 // List of ShipmentActionType
 const (
-	SHIPMENTACTIONTYPE_CONFIRM                  ShipmentActionType = "CONFIRM"
-	SHIPMENTACTIONTYPE_DOWNLOAD_ACT             ShipmentActionType = "DOWNLOAD_ACT"
-	SHIPMENTACTIONTYPE_DOWNLOAD_INBOUND_ACT     ShipmentActionType = "DOWNLOAD_INBOUND_ACT"
-	SHIPMENTACTIONTYPE_DOWNLOAD_DISCREPANCY_ACT ShipmentActionType = "DOWNLOAD_DISCREPANCY_ACT"
-	SHIPMENTACTIONTYPE_CHANGE_PALLETS_COUNT     ShipmentActionType = "CHANGE_PALLETS_COUNT"
+	SHIPMENTACTIONTYPE_CONFIRM                         ShipmentActionType = "CONFIRM"
+	SHIPMENTACTIONTYPE_DOWNLOAD_ACT                    ShipmentActionType = "DOWNLOAD_ACT"
+	SHIPMENTACTIONTYPE_DOWNLOAD_INBOUND_ACT            ShipmentActionType = "DOWNLOAD_INBOUND_ACT"
+	SHIPMENTACTIONTYPE_DOWNLOAD_DISCREPANCY_ACT        ShipmentActionType = "DOWNLOAD_DISCREPANCY_ACT"
+	SHIPMENTACTIONTYPE_DOWNLOAD_TRANSPORTATION_WAYBILL ShipmentActionType = "DOWNLOAD_TRANSPORTATION_WAYBILL"
+	SHIPMENTACTIONTYPE_CHANGE_PALLETS_COUNT            ShipmentActionType = "CHANGE_PALLETS_COUNT"
 )
 
 // All allowed values of ShipmentActionType enum
@@ -33,6 +34,7 @@ var AllowedShipmentActionTypeEnumValues = []ShipmentActionType{
 	"DOWNLOAD_ACT",
 	"DOWNLOAD_INBOUND_ACT",
 	"DOWNLOAD_DISCREPANCY_ACT",
+	"DOWNLOAD_TRANSPORTATION_WAYBILL",
 	"CHANGE_PALLETS_COUNT",
 }
 

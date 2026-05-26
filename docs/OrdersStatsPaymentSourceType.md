@@ -9,6 +9,8 @@
 
 * `MARKETPLACE` (value: `"MARKETPLACE"`)
 
+* `MARKET_CESSION` (value: `"MARKET_CESSION"`)
+
 * `SPLIT` (value: `"SPLIT"`)
 
 

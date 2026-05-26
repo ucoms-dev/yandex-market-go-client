@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Идентификатор покупателя. | [optional] 
-**LastName** | Pointer to **string** | Фамилия покупателя. | [optional] 
-**FirstName** | Pointer to **string** | Имя покупателя. | [optional] 
-**MiddleName** | Pointer to **string** | Отчество покупателя. | [optional] 
+**LastName** | Pointer to **string** | Фамилия. | [optional] 
+**FirstName** | Pointer to **string** | Имя. | [optional] 
+**MiddleName** | Pointer to **string** | Отчество. | [optional] 
 **Type** | [**OrderBuyerType**](OrderBuyerType.md) |  | 
 
 ## Methods

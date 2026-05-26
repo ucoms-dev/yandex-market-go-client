@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Url** | **string** | Соответствует URL, по которому выполняется запрос [GET campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes/{boxId}/label](../../reference/orders/generateOrderLabel.md).  | 
+**Url** | **string** |  | 
 **SupplierName** | **string** | Юридическое название магазина. | 
 **DeliveryServiceName** | **string** | Юридическое название службы доставки. | 
 **OrderId** | **int64** | Идентификатор заказа в системе Маркета. | 
@@ -13,8 +13,8 @@ Name | Type | Description | Notes
 **BoxId** | **int64** | Идентификатор коробки. | 
 **FulfilmentId** | **string** | Идентификатор коробки в информационной системе магазина.  Возвращается в формате: &#x60;номер заказа на Маркете-номер коробки&#x60;. Например, &#x60;7206821‑1&#x60;, &#x60;7206821‑2&#x60; и т. д.  | 
 **Place** | **string** | Номер коробки в заказе. Возвращается в формате: &#x60;номер места/общее количество мест&#x60;.  | 
-**Weight** | **string** | Общая масса всех товаров в заказе.  Возвращается в формате: &#x60;weight кг&#x60;.  | 
-**DeliveryServiceId** | **string** | Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md). | 
+**Weight** | **string** | Общая масса всех товаров в заказе.  Возвращается в формате &#x60;weight кг&#x60;.  | 
+**DeliveryServiceId** | **string** | Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md). | 
 **DeliveryAddress** | Pointer to **string** | Адрес получателя. | [optional] 
 **ShipmentDate** | Pointer to **string** | Дата отгрузки в формате &#x60;dd.MM.yyyy&#x60;. | [optional] 
 

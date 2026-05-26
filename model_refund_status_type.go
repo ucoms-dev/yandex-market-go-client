@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// RefundStatusType Статус возврата денег:  * `STARTED_BY_USER` — создан клиентом из личного кабинета.  * `REFUND_IN_PROGRESS` — ждет решение о возврате денег.  * `REFUNDED` — по возврату проведены все возвратные денежные транзакции.  * `FAILED` — невозможно провести возврат покупателю.  * `WAITING_FOR_DECISION` — ожидает решения.  * `DECISION_MADE` — по возврату принято решение.  * `REFUNDED_WITH_BONUSES` — возврат осуществлен баллами Плюса или промокодом.  * `REFUNDED_BY_SHOP` — магазин сделал самостоятельно возврат денег.  * `COMPLETE_WITHOUT_REFUND` — возврат денег не требуется.  * `CANCELLED` — возврат отменен.  * `PREMODERATION_DISPUTE` — по возврату открыт спор.  * `PREMODERATION_DECISION_WAITING` — ожидает решения.  * `PREMODERATION_DECISION_MADE` — по возврату принято решение.  * `UNKNOWN` — неизвестный статус.
+// RefundStatusType Статус возврата денег:  * `STARTED_BY_USER` — создан покупателем из личного кабинета.  * `REFUND_IN_PROGRESS` — ждет решение о возврате денег (на рассмотрении).  * `REFUNDED` — деньги возвращены.  * `FAILED` — невозможно провести возврат покупателю.  * `WAITING_FOR_DECISION` — ожидает решения (DBS).  * `DECISION_MADE` — по возврату принято решение (DBS).  * `REFUNDED_WITH_BONUSES` — возврат осуществлен баллами Плюса или промокодом.  * `REFUNDED_BY_SHOP` — магазин сделал самостоятельно возврат денег.  * `COMPLETE_WITHOUT_REFUND` — возврат денег не требуется.  * `CANCELLED` — возврат отменен.  * `REJECTED` — возврат отклонен модерацией или в ПВЗ.  * `PREMODERATION_DISPUTE` — по возврату открыт спор (FBY, FBS и Экспресс).  * `PREMODERATION_DECISION_WAITING` — ожидает решения (FBY, FBS и Экспресс).  * `PREMODERATION_DECISION_MADE` — по возврату принято решение (FBY, FBS и Экспресс).  * `PREMODERATION_SELECT_DELIVERY` — пользователь выбирает способ доставки (FBY, FBS и Экспресс).  * `UNKNOWN` — неизвестный статус, обратитесь в поддержку.
 type RefundStatusType string
 
 // List of RefundStatusType
@@ -29,10 +29,12 @@ const (
 	REFUNDSTATUSTYPE_REFUNDED_WITH_BONUSES          RefundStatusType = "REFUNDED_WITH_BONUSES"
 	REFUNDSTATUSTYPE_REFUNDED_BY_SHOP               RefundStatusType = "REFUNDED_BY_SHOP"
 	REFUNDSTATUSTYPE_CANCELLED                      RefundStatusType = "CANCELLED"
+	REFUNDSTATUSTYPE_REJECTED                       RefundStatusType = "REJECTED"
 	REFUNDSTATUSTYPE_COMPLETE_WITHOUT_REFUND        RefundStatusType = "COMPLETE_WITHOUT_REFUND"
 	REFUNDSTATUSTYPE_PREMODERATION_DISPUTE          RefundStatusType = "PREMODERATION_DISPUTE"
 	REFUNDSTATUSTYPE_PREMODERATION_DECISION_WAITING RefundStatusType = "PREMODERATION_DECISION_WAITING"
 	REFUNDSTATUSTYPE_PREMODERATION_DECISION_MADE    RefundStatusType = "PREMODERATION_DECISION_MADE"
+	REFUNDSTATUSTYPE_PREMODERATION_SELECT_DELIVERY  RefundStatusType = "PREMODERATION_SELECT_DELIVERY"
 	REFUNDSTATUSTYPE_UNKNOWN                        RefundStatusType = "UNKNOWN"
 )
 
@@ -47,10 +49,12 @@ var AllowedRefundStatusTypeEnumValues = []RefundStatusType{
 	"REFUNDED_WITH_BONUSES",
 	"REFUNDED_BY_SHOP",
 	"CANCELLED",
+	"REJECTED",
 	"COMPLETE_WITHOUT_REFUND",
 	"PREMODERATION_DISPUTE",
 	"PREMODERATION_DECISION_WAITING",
 	"PREMODERATION_DECISION_MADE",
+	"PREMODERATION_SELECT_DELIVERY",
 	"UNKNOWN",
 }
 

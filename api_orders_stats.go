@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -31,13 +31,13 @@ type OrdersStatsAPIGetOrdersStatsRequest struct {
 	getOrdersStatsRequest *GetOrdersStatsRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r OrdersStatsAPIGetOrdersStatsRequest) PageToken(pageToken string) OrdersStatsAPIGetOrdersStatsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r OrdersStatsAPIGetOrdersStatsRequest) Limit(limit int32) OrdersStatsAPIGetOrdersStatsRequest {
 	r.limit = &limit
 	return r
@@ -63,19 +63,17 @@ GetOrdersStats Детальная информация по заказам
 
 {% note tip "Информация по созданным или обновленным заказам может появиться с задержкой до 40 минут" %}
 
-Чтобы получить данные без задержки, используйте [метод получения информации о заказах](../../reference/orders/getOrders.md).
+Чтобы получить данные без задержки, используйте метод [POST v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md).
 
 {% endnote %}
 
 В одном запросе можно получить информацию не более чем по 200 заказам.
 
-|**⚙️ Лимит:** 1 000 000 заказов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getOrdersStats.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return OrdersStatsAPIGetOrdersStatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return OrdersStatsAPIGetOrdersStatsRequest
 */
 func (a *OrdersStatsAPIService) GetOrdersStats(ctx context.Context, campaignId int64) OrdersStatsAPIGetOrdersStatsRequest {
 	return OrdersStatsAPIGetOrdersStatsRequest{
@@ -86,7 +84,8 @@ func (a *OrdersStatsAPIService) GetOrdersStats(ctx context.Context, campaignId i
 }
 
 // Execute executes the request
-//  @return GetOrdersStatsResponse
+//
+//	@return GetOrdersStatsResponse
 func (a *OrdersStatsAPIService) GetOrdersStatsExecute(r OrdersStatsAPIGetOrdersStatsRequest) (*GetOrdersStatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -100,7 +99,7 @@ func (a *OrdersStatsAPIService) GetOrdersStatsExecute(r OrdersStatsAPIGetOrdersS
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/stats/orders"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/stats/orders"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -111,10 +110,13 @@ func (a *OrdersStatsAPIService) GetOrdersStatsExecute(r OrdersStatsAPIGetOrdersS
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 100
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

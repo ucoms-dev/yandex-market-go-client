@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,14 +15,15 @@ import (
 	"fmt"
 )
 
-// PlacementType Модель, по которой работает магазин:  * `FBS` — FBS или Экспресс. * `FBY` — FBY. * `DBS` — DBS.
+// PlacementType Модель, по которой работает магазин:  * `FBS` — FBS или Экспресс. * `FBY` — FBY. * `DBS` — DBS. * `LAAS` — LaaS.
 type PlacementType string
 
 // List of PlacementType
 const (
-	PLACEMENTTYPE_FBS PlacementType = "FBS"
-	PLACEMENTTYPE_FBY PlacementType = "FBY"
-	PLACEMENTTYPE_DBS PlacementType = "DBS"
+	PLACEMENTTYPE_FBS  PlacementType = "FBS"
+	PLACEMENTTYPE_FBY  PlacementType = "FBY"
+	PLACEMENTTYPE_DBS  PlacementType = "DBS"
+	PLACEMENTTYPE_LAAS PlacementType = "LAAS"
 )
 
 // All allowed values of PlacementType enum
@@ -30,6 +31,7 @@ var AllowedPlacementTypeEnumValues = []PlacementType{
 	"FBS",
 	"FBY",
 	"DBS",
+	"LAAS",
 }
 
 func (v *PlacementType) UnmarshalJSON(src []byte) error {

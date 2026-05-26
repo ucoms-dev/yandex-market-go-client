@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Turnover** | [**TurnoverType**](TurnoverType.md) |  | 
-**TurnoverDays** | Pointer to **float64** | Значение в днях. [Что это за число?](https://yandex.ru/support/marketplace/analytics/turnover.html) | [optional] 
+**TurnoverDays** | Pointer to **float64** | Значение в днях. | [optional] 
 
 ## Methods
 

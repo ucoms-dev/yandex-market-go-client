@@ -1,28 +1,45 @@
 # ChannelType
 
-## Properties
+## Enum
 
-Name | Type | Description | Notes
------------- | ------------- | ------------- | -------------
 
-## Methods
+* `PUSH` (value: `"PUSH"`)
 
-### NewChannelType
+* `STRETCH_MAIN` (value: `"STRETCH_MAIN"`)
 
-`func NewChannelType() *ChannelType`
+* `MAIN_PAGE_CAROUSEL` (value: `"MAIN_PAGE_CAROUSEL"`)
 
-NewChannelType instantiates a new ChannelType object
-This constructor will assign default values to properties that have it defined,
-and makes sure properties required by API are set, but the set of arguments
-will change when the set of required properties is changed
+* `PRODUCT_RETAIL_PAGE` (value: `"PRODUCT_RETAIL_PAGE"`)
 
-### NewChannelTypeWithDefaults
+* `MAIN_PAGE_CAROUSEL_WEB` (value: `"MAIN_PAGE_CAROUSEL_WEB"`)
 
-`func NewChannelTypeWithDefaults() *ChannelType`
+* `PRODUCT_SEPARATE_LANDING` (value: `"PRODUCT_SEPARATE_LANDING"`)
 
-NewChannelTypeWithDefaults instantiates a new ChannelType object
-This constructor will only assign default values to properties that have it defined,
-but it doesn't guarantee that properties required by API are set
+* `SUPER_SHELF_CATEGORY` (value: `"SUPER_SHELF_CATEGORY"`)
+
+* `CAROUSEL_RETAIL_PAGE` (value: `"CAROUSEL_RETAIL_PAGE"`)
+
+* `POPUP_APPLICATION` (value: `"POPUP_APPLICATION"`)
+
+* `POST_TELEGRAM` (value: `"POST_TELEGRAM"`)
+
+* `CPA` (value: `"CPA"`)
+
+* `WEB_PERFORMANCE_DIRECT` (value: `"WEB_PERFORMANCE_DIRECT"`)
+
+* `APP_PERFORMANCE` (value: `"APP_PERFORMANCE"`)
+
+* `BANNER_PICKUP_POINT` (value: `"BANNER_PICKUP_POINT"`)
+
+* `BLOGGER_PERFORMANCE` (value: `"BLOGGER_PERFORMANCE"`)
+
+* `DIGITAL_CHANNEL_BANNER` (value: `"DIGITAL_CHANNEL_BANNER"`)
+
+* `YANDEX_ECOSYSTEM_CHANNELS` (value: `"YANDEX_ECOSYSTEM_CHANNELS"`)
+
+* `PARTNERS_MAIN_BANNER` (value: `"PARTNERS_MAIN_BANNER"`)
+
+* `OTHER` (value: `"OTHER"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

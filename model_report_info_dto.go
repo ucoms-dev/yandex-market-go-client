@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -20,7 +20,7 @@ import (
 // checks if the ReportInfoDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &ReportInfoDTO{}
 
-// ReportInfoDTO Статус генерации и ссылка на готовый отчет.
+// ReportInfoDTO Статус генерации и ссылка на готовый отчет или документ.
 type ReportInfoDTO struct {
 	Status    ReportStatusType     `json:"status"`
 	SubStatus *ReportSubStatusType `json:"subStatus,omitempty"`
@@ -28,7 +28,7 @@ type ReportInfoDTO struct {
 	GenerationRequestedAt time.Time `json:"generationRequestedAt"`
 	// Дата и время завершения генерации.
 	GenerationFinishedAt *time.Time `json:"generationFinishedAt,omitempty"`
-	// Ссылка на готовый отчет.
+	// Ссылка на готовый отчет или документ.  {% note warning \"Срок действия ссылки\" %}  Ссылка актуальна **60 минут** с момента получения ответа. При каждом запросе `GET /v2/reports/info/{reportId}` генерируется новая ссылка, срок действия которой ограничен.  **Рекомендация для интеграций:** сразу после получения ссылки скачайте отчет и сохраните его у себя. Не сохраняйте ссылку для последующего использования — она станет недействительной через после истечения срока действия.  {% endnote %}
 	File *string `json:"file,omitempty"`
 	// Ожидаемая продолжительность генерации в миллисекундах.
 	EstimatedGenerationTime *int64 `json:"estimatedGenerationTime,omitempty"`

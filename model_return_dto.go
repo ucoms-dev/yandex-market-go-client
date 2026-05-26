@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -26,12 +26,14 @@ type ReturnDTO struct {
 	Id int64 `json:"id"`
 	// Номер заказа.
 	OrderId int64 `json:"orderId"`
-	// Дата создания невыкупа или возврата клиентом.  Формат даты: ISO 8601 со смещением относительно UTC.
+	// Дата создания невыкупа или возврата.  Формат даты: ISO 8601 со смещением относительно UTC.
 	CreationDate *time.Time `json:"creationDate,omitempty"`
 	// Дата обновления невыкупа или возврата.  Формат даты: ISO 8601 со смещением относительно UTC.
-	UpdateDate            *time.Time                `json:"updateDate,omitempty"`
-	RefundStatus          *RefundStatusType         `json:"refundStatus,omitempty"`
-	LogisticPickupPoint   *LogisticPickupPointDTO   `json:"logisticPickupPoint,omitempty"`
+	UpdateDate          *time.Time              `json:"updateDate,omitempty"`
+	RefundStatus        *RefundStatusType       `json:"refundStatus,omitempty"`
+	LogisticPickupPoint *LogisticPickupPointDTO `json:"logisticPickupPoint,omitempty"`
+	// Дата, до которой можно забрать товар.  Только для невыкупов и возвратов в логистическом статусе `READY_FOR_PICKUP`.  Формат даты: ISO 8601 со смещением относительно UTC.
+	PickupTillDate        *time.Time                `json:"pickupTillDate,omitempty"`
 	ShipmentRecipientType *RecipientType            `json:"shipmentRecipientType,omitempty"`
 	ShipmentStatus        *ReturnShipmentStatusType `json:"shipmentStatus,omitempty"`
 	// {% note warning \"Вместо него используйте `amount`.\" %}     {% endnote %}  Сумма возврата в копейках.
@@ -242,6 +244,38 @@ func (o *ReturnDTO) HasLogisticPickupPoint() bool {
 // SetLogisticPickupPoint gets a reference to the given LogisticPickupPointDTO and assigns it to the LogisticPickupPoint field.
 func (o *ReturnDTO) SetLogisticPickupPoint(v LogisticPickupPointDTO) {
 	o.LogisticPickupPoint = &v
+}
+
+// GetPickupTillDate returns the PickupTillDate field value if set, zero value otherwise.
+func (o *ReturnDTO) GetPickupTillDate() time.Time {
+	if o == nil || IsNil(o.PickupTillDate) {
+		var ret time.Time
+		return ret
+	}
+	return *o.PickupTillDate
+}
+
+// GetPickupTillDateOk returns a tuple with the PickupTillDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ReturnDTO) GetPickupTillDateOk() (*time.Time, bool) {
+	if o == nil || IsNil(o.PickupTillDate) {
+		return nil, false
+	}
+	return o.PickupTillDate, true
+}
+
+// HasPickupTillDate returns a boolean if a field has been set.
+func (o *ReturnDTO) HasPickupTillDate() bool {
+	if o != nil && !IsNil(o.PickupTillDate) {
+		return true
+	}
+
+	return false
+}
+
+// SetPickupTillDate gets a reference to the given time.Time and assigns it to the PickupTillDate field.
+func (o *ReturnDTO) SetPickupTillDate(v time.Time) {
+	o.PickupTillDate = &v
 }
 
 // GetShipmentRecipientType returns the ShipmentRecipientType field value if set, zero value otherwise.
@@ -478,6 +512,9 @@ func (o ReturnDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.LogisticPickupPoint) {
 		toSerialize["logisticPickupPoint"] = o.LogisticPickupPoint
+	}
+	if !IsNil(o.PickupTillDate) {
+		toSerialize["pickupTillDate"] = o.PickupTillDate
 	}
 	if !IsNil(o.ShipmentRecipientType) {
 		toSerialize["shipmentRecipientType"] = o.ShipmentRecipientType

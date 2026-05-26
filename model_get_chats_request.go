@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -20,7 +20,12 @@ var _ MappedNullable = &GetChatsRequest{}
 // GetChatsRequest Фильтры по чатам, которые нужно вернуть.
 type GetChatsRequest struct {
 	// Фильтр по идентификаторам заказов на Маркете.
+	// Deprecated
 	OrderIds []int64 `json:"orderIds,omitempty"`
+	// Фильтр по контексту чата.
+	Contexts []ChatContextDTO `json:"contexts,omitempty"`
+	// Фильтр по типу контекста чата.
+	ContextTypes []ChatContextType `json:"contextTypes,omitempty"`
 	// Фильтр по типам чатов.
 	Types []ChatType `json:"types,omitempty"`
 	// Фильтр по статусам чатов.
@@ -45,6 +50,7 @@ func NewGetChatsRequestWithDefaults() *GetChatsRequest {
 }
 
 // GetOrderIds returns the OrderIds field value if set, zero value otherwise (both if not set or set to explicit null).
+// Deprecated
 func (o *GetChatsRequest) GetOrderIds() []int64 {
 	if o == nil {
 		var ret []int64
@@ -56,6 +62,7 @@ func (o *GetChatsRequest) GetOrderIds() []int64 {
 // GetOrderIdsOk returns a tuple with the OrderIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
+// Deprecated
 func (o *GetChatsRequest) GetOrderIdsOk() ([]int64, bool) {
 	if o == nil || IsNil(o.OrderIds) {
 		return nil, false
@@ -73,8 +80,75 @@ func (o *GetChatsRequest) HasOrderIds() bool {
 }
 
 // SetOrderIds gets a reference to the given []int64 and assigns it to the OrderIds field.
+// Deprecated
 func (o *GetChatsRequest) SetOrderIds(v []int64) {
 	o.OrderIds = v
+}
+
+// GetContexts returns the Contexts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetChatsRequest) GetContexts() []ChatContextDTO {
+	if o == nil {
+		var ret []ChatContextDTO
+		return ret
+	}
+	return o.Contexts
+}
+
+// GetContextsOk returns a tuple with the Contexts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetChatsRequest) GetContextsOk() ([]ChatContextDTO, bool) {
+	if o == nil || IsNil(o.Contexts) {
+		return nil, false
+	}
+	return o.Contexts, true
+}
+
+// HasContexts returns a boolean if a field has been set.
+func (o *GetChatsRequest) HasContexts() bool {
+	if o != nil && !IsNil(o.Contexts) {
+		return true
+	}
+
+	return false
+}
+
+// SetContexts gets a reference to the given []ChatContextDTO and assigns it to the Contexts field.
+func (o *GetChatsRequest) SetContexts(v []ChatContextDTO) {
+	o.Contexts = v
+}
+
+// GetContextTypes returns the ContextTypes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetChatsRequest) GetContextTypes() []ChatContextType {
+	if o == nil {
+		var ret []ChatContextType
+		return ret
+	}
+	return o.ContextTypes
+}
+
+// GetContextTypesOk returns a tuple with the ContextTypes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetChatsRequest) GetContextTypesOk() ([]ChatContextType, bool) {
+	if o == nil || IsNil(o.ContextTypes) {
+		return nil, false
+	}
+	return o.ContextTypes, true
+}
+
+// HasContextTypes returns a boolean if a field has been set.
+func (o *GetChatsRequest) HasContextTypes() bool {
+	if o != nil && !IsNil(o.ContextTypes) {
+		return true
+	}
+
+	return false
+}
+
+// SetContextTypes gets a reference to the given []ChatContextType and assigns it to the ContextTypes field.
+func (o *GetChatsRequest) SetContextTypes(v []ChatContextType) {
+	o.ContextTypes = v
 }
 
 // GetTypes returns the Types field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -155,6 +229,12 @@ func (o GetChatsRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if o.OrderIds != nil {
 		toSerialize["orderIds"] = o.OrderIds
+	}
+	if o.Contexts != nil {
+		toSerialize["contexts"] = o.Contexts
+	}
+	if o.ContextTypes != nil {
+		toSerialize["contextTypes"] = o.ContextTypes
 	}
 	if o.Types != nil {
 		toSerialize["types"] = o.Types

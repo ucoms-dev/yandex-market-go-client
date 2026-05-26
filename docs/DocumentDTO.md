@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Status** | Pointer to [**OrderDocumentStatusType**](OrderDocumentStatusType.md) |  | [optional] 
 **Number** | Pointer to **string** | Номер документа. | [optional] 
-**Date** | Pointer to **string** | Дата создания документа. | [optional] 
+**Date** | Pointer to **string** | Дата создания документа.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | [optional] 
 
 ## Methods
 

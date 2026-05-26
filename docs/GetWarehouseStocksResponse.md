@@ -4,14 +4,14 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Status** | Pointer to [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | [optional] 
+**Status** | [**ApiResponseStatusType**](ApiResponseStatusType.md) |  | 
 **Result** | Pointer to [**GetWarehouseStocksDTO**](GetWarehouseStocksDTO.md) |  | [optional] 
 
 ## Methods
 
 ### NewGetWarehouseStocksResponse
 
-`func NewGetWarehouseStocksResponse() *GetWarehouseStocksResponse`
+`func NewGetWarehouseStocksResponse(status ApiResponseStatusType, ) *GetWarehouseStocksResponse`
 
 NewGetWarehouseStocksResponse instantiates a new GetWarehouseStocksResponse object
 This constructor will assign default values to properties that have it defined,
@@ -45,11 +45,6 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
-### HasStatus
-
-`func (o *GetWarehouseStocksResponse) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
 
 ### GetResult
 

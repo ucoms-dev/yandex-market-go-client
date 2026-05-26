@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Offer** | Pointer to [**GetOfferDTO**](GetOfferDTO.md) |  | [optional] 
 **Mapping** | Pointer to [**GetMappingDTO**](GetMappingDTO.md) |  | [optional] 
+**ShowcaseUrls** | Pointer to [**[]ShowcaseUrlDTO**](ShowcaseUrlDTO.md) | Ссылки на один и тот же товар на разных витринах Маркета. | [optional] 
 
 ## Methods
 
@@ -76,6 +77,41 @@ SetMapping sets Mapping field to given value.
 
 HasMapping returns a boolean if a field has been set.
 
+### GetShowcaseUrls
+
+`func (o *GetOfferMappingDTO) GetShowcaseUrls() []ShowcaseUrlDTO`
+
+GetShowcaseUrls returns the ShowcaseUrls field if non-nil, zero value otherwise.
+
+### GetShowcaseUrlsOk
+
+`func (o *GetOfferMappingDTO) GetShowcaseUrlsOk() (*[]ShowcaseUrlDTO, bool)`
+
+GetShowcaseUrlsOk returns a tuple with the ShowcaseUrls field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShowcaseUrls
+
+`func (o *GetOfferMappingDTO) SetShowcaseUrls(v []ShowcaseUrlDTO)`
+
+SetShowcaseUrls sets ShowcaseUrls field to given value.
+
+### HasShowcaseUrls
+
+`func (o *GetOfferMappingDTO) HasShowcaseUrls() bool`
+
+HasShowcaseUrls returns a boolean if a field has been set.
+
+### SetShowcaseUrlsNil
+
+`func (o *GetOfferMappingDTO) SetShowcaseUrlsNil(b bool)`
+
+ SetShowcaseUrlsNil sets the value for ShowcaseUrls to be an explicit nil
+
+### UnsetShowcaseUrls
+`func (o *GetOfferMappingDTO) UnsetShowcaseUrls()`
+
+UnsetShowcaseUrls ensures that no value is present for ShowcaseUrls, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

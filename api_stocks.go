@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -31,13 +31,13 @@ type StocksAPIGetStocksRequest struct {
 	getWarehouseStocksRequest *GetWarehouseStocksRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r StocksAPIGetStocksRequest) PageToken(pageToken string) StocksAPIGetStocksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r StocksAPIGetStocksRequest) Limit(limit int32) StocksAPIGetStocksRequest {
 	r.limit = &limit
 	return r
@@ -59,23 +59,23 @@ GetStocks Информация об остатках и оборачиваемо
 
 Возвращает данные об остатках товаров (для всех моделей) и об [оборачиваемости](*turnover) товаров (для модели FBY).
 
-**Для модели FBY:** информация об остатках может возвращаться с нескольких складов Маркета, у которых будут разные `warehouseId`. Получить список складов Маркета можно с помощью метода [GET warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).
-
 {% note info "По умолчанию данные по оборачивамости не возращаются" %}
 
 Чтобы они были в ответе, передавайте `true` в поле `withTurnover`.
 
 {% endnote %}
 
-|**⚙️ Лимит:** 100 000 товаров в минуту|
-|-|
+**Для моделей FBY и LaaS:** информация об остатках может возвращаться с нескольких складов Маркета, у которых будут разные `warehouseId`. Получить список складов Маркета можно с помощью метода [GET v2/warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).
+
+**Для модели FBS:** в ответе может вернуться не только партнерский склад, но и склад возвратов Маркета. Это возможно, если возврат поступил в указанную продавцом точку возвратов и долго не был забран.
+
+{% include notitle [limit](../../_auto/method_limits/getStocks.md) %}
 
 [//]: <> (turnover: Среднее количество дней, за которое товар продается. Подробно об оборачиваемости рассказано в Справке Маркета для продавцов https://yandex.ru/support/marketplace/analytics/turnover.html.)
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return StocksAPIGetStocksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return StocksAPIGetStocksRequest
 */
 func (a *StocksAPIService) GetStocks(ctx context.Context, campaignId int64) StocksAPIGetStocksRequest {
 	return StocksAPIGetStocksRequest{
@@ -86,7 +86,8 @@ func (a *StocksAPIService) GetStocks(ctx context.Context, campaignId int64) Stoc
 }
 
 // Execute executes the request
-//  @return GetWarehouseStocksResponse
+//
+//	@return GetWarehouseStocksResponse
 func (a *StocksAPIService) GetStocksExecute(r StocksAPIGetStocksRequest) (*GetWarehouseStocksResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -100,7 +101,7 @@ func (a *StocksAPIService) GetStocksExecute(r StocksAPIGetStocksRequest) (*GetWa
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/offers/stocks"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/offers/stocks"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -111,10 +112,13 @@ func (a *StocksAPIService) GetStocksExecute(r StocksAPIGetStocksRequest) (*GetWa
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 100
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -273,13 +277,11 @@ UpdateStocks Передача информации об остатках
 
 {% endnote %}
 
-|**⚙️ Лимит:** 100 000 товаров в минуту|
-|-|
+{% include notitle [limit](../../_auto/method_limits/updateStocks.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return StocksAPIUpdateStocksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return StocksAPIUpdateStocksRequest
 */
 func (a *StocksAPIService) UpdateStocks(ctx context.Context, campaignId int64) StocksAPIUpdateStocksRequest {
 	return StocksAPIUpdateStocksRequest{
@@ -290,7 +292,8 @@ func (a *StocksAPIService) UpdateStocks(ctx context.Context, campaignId int64) S
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *StocksAPIService) UpdateStocksExecute(r StocksAPIUpdateStocksRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPut
@@ -304,7 +307,7 @@ func (a *StocksAPIService) UpdateStocksExecute(r StocksAPIUpdateStocksRequest) (
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/offers/stocks"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/offers/stocks"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

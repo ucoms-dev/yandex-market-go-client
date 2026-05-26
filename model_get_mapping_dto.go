@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,13 +19,10 @@ var _ MappedNullable = &GetMappingDTO{}
 
 // GetMappingDTO Информация о товарах в каталоге.
 type GetMappingDTO struct {
-	// SKU на Маркете.
+	// Идентификатор карточки товара на Маркете.
 	MarketSku *int64 `json:"marketSku,omitempty"`
 	// Название карточки товара.  Может отсутствовать в ответе, если товар еще не привязан к карточке.
 	MarketSkuName *string `json:"marketSkuName,omitempty"`
-	// Идентификатор модели на Маркете.  Может отсутствовать в ответе, если товар еще не привязан к карточке.
-	// Deprecated
-	MarketModelId *int64 `json:"marketModelId,omitempty"`
 	// Название модели на Маркете.  Может отсутствовать в ответе, если товар еще не привязан к карточке.
 	// Deprecated
 	MarketModelName *string `json:"marketModelName,omitempty"`
@@ -114,41 +111,6 @@ func (o *GetMappingDTO) HasMarketSkuName() bool {
 // SetMarketSkuName gets a reference to the given string and assigns it to the MarketSkuName field.
 func (o *GetMappingDTO) SetMarketSkuName(v string) {
 	o.MarketSkuName = &v
-}
-
-// GetMarketModelId returns the MarketModelId field value if set, zero value otherwise.
-// Deprecated
-func (o *GetMappingDTO) GetMarketModelId() int64 {
-	if o == nil || IsNil(o.MarketModelId) {
-		var ret int64
-		return ret
-	}
-	return *o.MarketModelId
-}
-
-// GetMarketModelIdOk returns a tuple with the MarketModelId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *GetMappingDTO) GetMarketModelIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.MarketModelId) {
-		return nil, false
-	}
-	return o.MarketModelId, true
-}
-
-// HasMarketModelId returns a boolean if a field has been set.
-func (o *GetMappingDTO) HasMarketModelId() bool {
-	if o != nil && !IsNil(o.MarketModelId) {
-		return true
-	}
-
-	return false
-}
-
-// SetMarketModelId gets a reference to the given int64 and assigns it to the MarketModelId field.
-// Deprecated
-func (o *GetMappingDTO) SetMarketModelId(v int64) {
-	o.MarketModelId = &v
 }
 
 // GetMarketModelName returns the MarketModelName field value if set, zero value otherwise.
@@ -265,9 +227,6 @@ func (o GetMappingDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MarketSkuName) {
 		toSerialize["marketSkuName"] = o.MarketSkuName
-	}
-	if !IsNil(o.MarketModelId) {
-		toSerialize["marketModelId"] = o.MarketModelId
 	}
 	if !IsNil(o.MarketModelName) {
 		toSerialize["marketModelName"] = o.MarketModelName

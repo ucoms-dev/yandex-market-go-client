@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **int64** | Идентификатор посылки, присвоенный Маркетом. | [optional] 
 **ShipmentDate** | Pointer to **string** | Формат даты: &#x60;ДД-ММ-ГГГГ&#x60;.  | [optional] 
 **ShipmentTime** | Pointer to **string** | **Только для модели Экспресс**  Время, к которому магазин должен упаковать заказ и перевести его в статус &#x60;READY_TO_SHIP&#x60;. После смены статуса за заказом приедет курьер.  Поле может появиться не сразу. Запрашивайте информацию о заказе в течении 5–10 минут, пока оно не вернется.  Формат времени: 24-часовой, &#x60;ЧЧ:ММ&#x60;.  Если заказ сделан организацией, параметр не возвращается до согласования даты доставки.  | [optional] 
-**Tracks** | Pointer to [**[]OrderTrackDTO**](OrderTrackDTO.md) | **Только для модели DBS**  Информация для отслеживания перемещений посылки.  | [optional] 
+**Tracks** | Pointer to [**[]OrderTrackDTO**](OrderTrackDTO.md) | **Только для модели DBS**  Информация для отслеживания посылки.  | [optional] 
 **Boxes** | Pointer to [**[]OrderParcelBoxDTO**](OrderParcelBoxDTO.md) | Список грузовых мест. | [optional] 
 
 ## Methods

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -17,9 +17,9 @@ import (
 // checks if the GoodsFeedbackMediaDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GoodsFeedbackMediaDTO{}
 
-// GoodsFeedbackMediaDTO Фото и видео.
+// GoodsFeedbackMediaDTO Фотографии и видео.
 type GoodsFeedbackMediaDTO struct {
-	// Ссылки на фото.
+	// Ссылки на фотографии.
 	Photos []string `json:"photos,omitempty"`
 	// Ссылки на видео.
 	Videos []string `json:"videos,omitempty"`

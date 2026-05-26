@@ -4,7 +4,7 @@ All URIs are relative to *https://api.partner.market.yandex.ru*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CalculateTariffs**](TariffsAPI.md#CalculateTariffs) | **Post** /tariffs/calculate | Калькулятор стоимости услуг
+[**CalculateTariffs**](TariffsAPI.md#CalculateTariffs) | **Post** /v2/tariffs/calculate | Калькулятор стоимости услуг
 
 
 

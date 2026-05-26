@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -12,55 +12,111 @@ package openapi
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
-// checks if the ChannelType type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ChannelType{}
+// ChannelType Каналы продвижения товаров:  * `PUSH` — пуш-уведомление из приложения Яндекс Маркет.  * `STRETCH_MAIN` — верхний баннер-растяжка на главной странице Яндекс Маркета.  * `MAIN_PAGE_CAROUSEL` — карусель акций на главной странице Яндекс Маркета.  * `PRODUCT_RETAIL_PAGE` — товар на странице ритейл-повода.  * `MAIN_PAGE_CAROUSEL_WEB` — карусель акций на главной странице веб версии Яндекс Маркета.  * `PRODUCT_SEPARATE_LANDING` — товар на лендинге акции.  * `SUPER_SHELF_CATEGORY` — полка в категориях.  * `CAROUSEL_RETAIL_PAGE` — карусель на лендинге ритейл-повода.  * `POPUP_APPLICATION` — всплывающее окно в приложении Яндекс Маркет.  * `POST_TELEGRAM` — пост в Телеграм-канале Яндекс Маркета.  * `CPA` — реклама в партнерской сети Яндекс Маркета.  * `WEB_PERFORMANCE_DIRECT` — реклама в Яндекс Директе.  * `APP_PERFORMANCE` — реклама в :no-translate[AppStore] и :no-translate[Google Play].  * `BANNER_PICKUP_POINT` — баннер в ПВЗ Маркета.  * `BLOGGER_PERFORMANCE` — рекламная интеграция у блогеров.  * `DIGITAL_CHANNEL_BANNER` — баннер в digital-каналах и социальных сетях :no-translate[VK], :no-translate[Одноклассники].  * `YANDEX_ECOSYSTEM_CHANNELS` — реклама в других сервисах Яндекса: :no-translate[GO], :no-translate[Delivery], :no-translate[Еда].  * `PARTNERS_MAIN_BANNER` — баннер на главной странице :no-translate[mail.ru], :no-translate[auto.ru], :no-translate[ya.ru].  * `OTHER` — прочее.
+type ChannelType string
 
-// ChannelType Каналы продвижения товаров:  * `PUSH` — пуш-уведомление из приложения Яндекс Маркет.  * `STRETCH_MAIN` — верхний баннер-растяжка на главной странице Яндекс Маркета.  * `MAIN_PAGE_CAROUSEL` — карусель акций на главной странице Яндекс Маркета.  * `PRODUCT_RETAIL_PAGE` — товар на странице ритейл-повода.  * `MAIN_PAGE_CAROUSEL_WEB` — карусель акций на главной странице веб версии Яндекс Маркета.  * `PRODUCT_SEPARATE_LANDING` — товар на лендинге акции.  * `SUPER_SHELF_CATEGORY` — полка в категориях.  * `CAROUSEL_RETAIL_PAGE` — карусель на лендинге ритейл-повода.  * `POPUP_APPLICATION` — всплывающее окно в приложении Яндекс Маркет.  * `POST_TELEGRAM` — пост в Телеграм-канале Яндекс Маркета.  * `CPA` — реклама в партнерской сети Яндекс Маркета.  * `WEB_PERFORMANCE_DIRECT` — реклама в Яндекс Директе.  * `APP_PERFORMANCE` — реклама в AppStore и Google Play.  * `BANNER_PICKUP_POINT` — баннер в ПВЗ Маркета.  * `BLOGGER_PERFORMANCE` — рекламная интеграция у блогеров.  * `DIGITAL_CHANNEL_BANNER` — баннер в digital-каналах и социальных сетях VK, Одноклассники.  * `YANDEX_ECOSYSTEM_CHANNELS` — реклама в других сервисах Яндекса: GO, Delivery, Еда.  * `PARTNERS_MAIN_BANNER` — баннер на главной странице mail.ru, auto.ru, ya.ru.  * `OTHER` — прочее.
-type ChannelType struct {
+// List of ChannelType
+const (
+	CHANNELTYPE_PUSH                      ChannelType = "PUSH"
+	CHANNELTYPE_STRETCH_MAIN              ChannelType = "STRETCH_MAIN"
+	CHANNELTYPE_MAIN_PAGE_CAROUSEL        ChannelType = "MAIN_PAGE_CAROUSEL"
+	CHANNELTYPE_PRODUCT_RETAIL_PAGE       ChannelType = "PRODUCT_RETAIL_PAGE"
+	CHANNELTYPE_MAIN_PAGE_CAROUSEL_WEB    ChannelType = "MAIN_PAGE_CAROUSEL_WEB"
+	CHANNELTYPE_PRODUCT_SEPARATE_LANDING  ChannelType = "PRODUCT_SEPARATE_LANDING"
+	CHANNELTYPE_SUPER_SHELF_CATEGORY      ChannelType = "SUPER_SHELF_CATEGORY"
+	CHANNELTYPE_CAROUSEL_RETAIL_PAGE      ChannelType = "CAROUSEL_RETAIL_PAGE"
+	CHANNELTYPE_POPUP_APPLICATION         ChannelType = "POPUP_APPLICATION"
+	CHANNELTYPE_POST_TELEGRAM             ChannelType = "POST_TELEGRAM"
+	CHANNELTYPE_CPA                       ChannelType = "CPA"
+	CHANNELTYPE_WEB_PERFORMANCE_DIRECT    ChannelType = "WEB_PERFORMANCE_DIRECT"
+	CHANNELTYPE_APP_PERFORMANCE           ChannelType = "APP_PERFORMANCE"
+	CHANNELTYPE_BANNER_PICKUP_POINT       ChannelType = "BANNER_PICKUP_POINT"
+	CHANNELTYPE_BLOGGER_PERFORMANCE       ChannelType = "BLOGGER_PERFORMANCE"
+	CHANNELTYPE_DIGITAL_CHANNEL_BANNER    ChannelType = "DIGITAL_CHANNEL_BANNER"
+	CHANNELTYPE_YANDEX_ECOSYSTEM_CHANNELS ChannelType = "YANDEX_ECOSYSTEM_CHANNELS"
+	CHANNELTYPE_PARTNERS_MAIN_BANNER      ChannelType = "PARTNERS_MAIN_BANNER"
+	CHANNELTYPE_OTHER                     ChannelType = "OTHER"
+)
+
+// All allowed values of ChannelType enum
+var AllowedChannelTypeEnumValues = []ChannelType{
+	"PUSH",
+	"STRETCH_MAIN",
+	"MAIN_PAGE_CAROUSEL",
+	"PRODUCT_RETAIL_PAGE",
+	"MAIN_PAGE_CAROUSEL_WEB",
+	"PRODUCT_SEPARATE_LANDING",
+	"SUPER_SHELF_CATEGORY",
+	"CAROUSEL_RETAIL_PAGE",
+	"POPUP_APPLICATION",
+	"POST_TELEGRAM",
+	"CPA",
+	"WEB_PERFORMANCE_DIRECT",
+	"APP_PERFORMANCE",
+	"BANNER_PICKUP_POINT",
+	"BLOGGER_PERFORMANCE",
+	"DIGITAL_CHANNEL_BANNER",
+	"YANDEX_ECOSYSTEM_CHANNELS",
+	"PARTNERS_MAIN_BANNER",
+	"OTHER",
 }
 
-// NewChannelType instantiates a new ChannelType object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewChannelType() *ChannelType {
-	this := ChannelType{}
-	return &this
-}
-
-// NewChannelTypeWithDefaults instantiates a new ChannelType object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewChannelTypeWithDefaults() *ChannelType {
-	this := ChannelType{}
-	return &this
-}
-
-func (o ChannelType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+func (v *ChannelType) UnmarshalJSON(src []byte) error {
+	var value string
+	err := json.Unmarshal(src, &value)
 	if err != nil {
-		return []byte{}, err
+		return err
 	}
-	return json.Marshal(toSerialize)
+	enumTypeValue := ChannelType(value)
+	for _, existing := range AllowedChannelTypeEnumValues {
+		if existing == enumTypeValue {
+			*v = enumTypeValue
+			return nil
+		}
+	}
+
+	return fmt.Errorf("%+v is not a valid ChannelType", value)
 }
 
-func (o ChannelType) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	return toSerialize, nil
+// NewChannelTypeFromValue returns a pointer to a valid ChannelType
+// for the value passed as argument, or an error if the value passed is not allowed by the enum
+func NewChannelTypeFromValue(v string) (*ChannelType, error) {
+	ev := ChannelType(v)
+	if ev.IsValid() {
+		return &ev, nil
+	} else {
+		return nil, fmt.Errorf("invalid value '%v' for ChannelType: valid values are %v", v, AllowedChannelTypeEnumValues)
+	}
+}
+
+// IsValid return true if the value is valid for the enum, false otherwise
+func (v ChannelType) IsValid() bool {
+	for _, existing := range AllowedChannelTypeEnumValues {
+		if existing == v {
+			return true
+		}
+	}
+	return false
+}
+
+// Ptr returns reference to ChannelType value
+func (v ChannelType) Ptr() *ChannelType {
+	return &v
 }
 
 type NullableChannelType struct {
-	value ChannelType
+	value *ChannelType
 	isSet bool
 }
 
-func (v NullableChannelType) Get() ChannelType {
+func (v NullableChannelType) Get() *ChannelType {
 	return v.value
 }
 
-func (v *NullableChannelType) Set(val ChannelType) {
+func (v *NullableChannelType) Set(val *ChannelType) {
 	v.value = val
 	v.isSet = true
 }
@@ -70,12 +126,11 @@ func (v NullableChannelType) IsSet() bool {
 }
 
 func (v *NullableChannelType) Unset() {
-	var zero ChannelType
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableChannelType(val ChannelType) *NullableChannelType {
+func NewNullableChannelType(val *ChannelType) *NullableChannelType {
 	return &NullableChannelType{value: val, isSet: true}
 }
 

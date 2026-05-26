@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderId** | Pointer to **int64** | Идентификатор заказа на Маркете. | [optional] 
-**ModelId** | Pointer to **int64** | Идентификатор модели товара. | [optional] 
+**OfferId** | Pointer to **string** | Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, &#x60;\&quot;  SKU123  \&quot;&#x60; и &#x60;\&quot;SKU123\&quot;&#x60; будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)  | [optional] 
 
 ## Methods
 
@@ -51,30 +51,30 @@ SetOrderId sets OrderId field to given value.
 
 HasOrderId returns a boolean if a field has been set.
 
-### GetModelId
+### GetOfferId
 
-`func (o *GoodsFeedbackIdentifiersDTO) GetModelId() int64`
+`func (o *GoodsFeedbackIdentifiersDTO) GetOfferId() string`
 
-GetModelId returns the ModelId field if non-nil, zero value otherwise.
+GetOfferId returns the OfferId field if non-nil, zero value otherwise.
 
-### GetModelIdOk
+### GetOfferIdOk
 
-`func (o *GoodsFeedbackIdentifiersDTO) GetModelIdOk() (*int64, bool)`
+`func (o *GoodsFeedbackIdentifiersDTO) GetOfferIdOk() (*string, bool)`
 
-GetModelIdOk returns a tuple with the ModelId field if it's non-nil, zero value otherwise
+GetOfferIdOk returns a tuple with the OfferId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetModelId
+### SetOfferId
 
-`func (o *GoodsFeedbackIdentifiersDTO) SetModelId(v int64)`
+`func (o *GoodsFeedbackIdentifiersDTO) SetOfferId(v string)`
 
-SetModelId sets ModelId field to given value.
+SetOfferId sets OfferId field to given value.
 
-### HasModelId
+### HasOfferId
 
-`func (o *GoodsFeedbackIdentifiersDTO) HasModelId() bool`
+`func (o *GoodsFeedbackIdentifiersDTO) HasOfferId() bool`
 
-HasModelId returns a boolean if a field has been set.
+HasOfferId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,27 +4,31 @@ All URIs are relative to *https://api.partner.market.yandex.ru*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GenerateBannersStatisticsReport**](ReportsAPI.md#GenerateBannersStatisticsReport) | **Post** /reports/banners-statistics/generate | Отчет по охватному продвижению
-[**GenerateBoostConsolidatedReport**](ReportsAPI.md#GenerateBoostConsolidatedReport) | **Post** /reports/boost-consolidated/generate | Отчет по бусту продаж
-[**GenerateCompetitorsPositionReport**](ReportsAPI.md#GenerateCompetitorsPositionReport) | **Post** /reports/competitors-position/generate | Отчет «Конкурентная позиция»
-[**GenerateGoodsFeedbackReport**](ReportsAPI.md#GenerateGoodsFeedbackReport) | **Post** /reports/goods-feedback/generate | Отчет по отзывам о товарах
-[**GenerateGoodsMovementReport**](ReportsAPI.md#GenerateGoodsMovementReport) | **Post** /reports/goods-movement/generate | Отчет по движению товаров
-[**GenerateGoodsRealizationReport**](ReportsAPI.md#GenerateGoodsRealizationReport) | **Post** /reports/goods-realization/generate | Отчет по реализации
-[**GenerateGoodsTurnoverReport**](ReportsAPI.md#GenerateGoodsTurnoverReport) | **Post** /reports/goods-turnover/generate | Отчет по оборачиваемости
-[**GenerateJewelryFiscalReport**](ReportsAPI.md#GenerateJewelryFiscalReport) | **Post** /reports/jewelry-fiscal/generate | Отчет по заказам с ювелирными изделиями
-[**GenerateMassOrderLabelsReport**](ReportsAPI.md#GenerateMassOrderLabelsReport) | **Post** /reports/documents/labels/generate | Готовые ярлыки‑наклейки на все коробки в нескольких заказах
-[**GeneratePricesReport**](ReportsAPI.md#GeneratePricesReport) | **Post** /reports/prices/generate | Отчет «Цены на рынке»
-[**GenerateSalesGeographyReport**](ReportsAPI.md#GenerateSalesGeographyReport) | **Post** /reports/sales-geography/generate | Отчет по географии продаж
-[**GenerateShelfsStatisticsReport**](ReportsAPI.md#GenerateShelfsStatisticsReport) | **Post** /reports/shelf-statistics/generate | Отчет по полкам
-[**GenerateShipmentListDocumentReport**](ReportsAPI.md#GenerateShipmentListDocumentReport) | **Post** /reports/documents/shipment-list/generate | Получение листа сборки
-[**GenerateShowsBoostReport**](ReportsAPI.md#GenerateShowsBoostReport) | **Post** /reports/shows-boost/generate | Отчет по бусту показов
-[**GenerateShowsSalesReport**](ReportsAPI.md#GenerateShowsSalesReport) | **Post** /reports/shows-sales/generate | Отчет «Аналитика продаж»
-[**GenerateStocksOnWarehousesReport**](ReportsAPI.md#GenerateStocksOnWarehousesReport) | **Post** /reports/stocks-on-warehouses/generate | Отчет по остаткам на складах
-[**GenerateUnitedMarketplaceServicesReport**](ReportsAPI.md#GenerateUnitedMarketplaceServicesReport) | **Post** /reports/united-marketplace-services/generate | Отчет по стоимости услуг
-[**GenerateUnitedNettingReport**](ReportsAPI.md#GenerateUnitedNettingReport) | **Post** /reports/united-netting/generate | Отчет по платежам
-[**GenerateUnitedOrdersReport**](ReportsAPI.md#GenerateUnitedOrdersReport) | **Post** /reports/united-orders/generate | Отчет по заказам
-[**GenerateUnitedReturnsReport**](ReportsAPI.md#GenerateUnitedReturnsReport) | **Post** /reports/united-returns/generate | Отчет по невыкупам и возвратам
-[**GetReportInfo**](ReportsAPI.md#GetReportInfo) | **Get** /reports/info/{reportId} | Получение заданного отчета
+[**GenerateBannersStatisticsReport**](ReportsAPI.md#GenerateBannersStatisticsReport) | **Post** /v2/reports/banners-statistics/generate | Отчет по охватному продвижению
+[**GenerateBarcodesReport**](ReportsAPI.md#GenerateBarcodesReport) | **Post** /v1/reports/documents/barcodes/generate | Получение файла со штрихкодами
+[**GenerateBoostConsolidatedReport**](ReportsAPI.md#GenerateBoostConsolidatedReport) | **Post** /v2/reports/boost-consolidated/generate | Отчет по бусту продаж
+[**GenerateClosureDocumentsDetalizationReport**](ReportsAPI.md#GenerateClosureDocumentsDetalizationReport) | **Post** /v2/reports/closure-documents/detalization/generate | Отчет по схождению с закрывающими документами
+[**GenerateClosureDocumentsReport**](ReportsAPI.md#GenerateClosureDocumentsReport) | **Post** /v2/reports/closure-documents/generate | Закрывающие документы
+[**GenerateCompetitorsPositionReport**](ReportsAPI.md#GenerateCompetitorsPositionReport) | **Post** /v2/reports/competitors-position/generate | Отчет «Конкурентная позиция»
+[**GenerateGoodsFeedbackReport**](ReportsAPI.md#GenerateGoodsFeedbackReport) | **Post** /v2/reports/goods-feedback/generate | Отчет по отзывам о товарах
+[**GenerateGoodsMovementReport**](ReportsAPI.md#GenerateGoodsMovementReport) | **Post** /v2/reports/goods-movement/generate | Отчет по движению товаров
+[**GenerateGoodsPricesReport**](ReportsAPI.md#GenerateGoodsPricesReport) | **Post** /v2/reports/goods-prices/generate | Отчет «Цены»
+[**GenerateGoodsRealizationReport**](ReportsAPI.md#GenerateGoodsRealizationReport) | **Post** /v2/reports/goods-realization/generate | Отчет по реализации
+[**GenerateGoodsTurnoverReport**](ReportsAPI.md#GenerateGoodsTurnoverReport) | **Post** /v2/reports/goods-turnover/generate | Отчет по оборачиваемости
+[**GenerateJewelryFiscalReport**](ReportsAPI.md#GenerateJewelryFiscalReport) | **Post** /v2/reports/jewelry-fiscal/generate | Отчет по заказам с ювелирными изделиями
+[**GenerateKeyIndicatorsReport**](ReportsAPI.md#GenerateKeyIndicatorsReport) | **Post** /v2/reports/key-indicators/generate | Отчет по ключевым показателям
+[**GenerateMassOrderLabelsReport**](ReportsAPI.md#GenerateMassOrderLabelsReport) | **Post** /v2/reports/documents/labels/generate | Готовые ярлыки‑наклейки на все коробки в нескольких заказах
+[**GenerateSalesGeographyReport**](ReportsAPI.md#GenerateSalesGeographyReport) | **Post** /v2/reports/sales-geography/generate | Отчет по географии продаж
+[**GenerateShelfsStatisticsReport**](ReportsAPI.md#GenerateShelfsStatisticsReport) | **Post** /v2/reports/shelf-statistics/generate | Отчет по полкам
+[**GenerateShipmentListDocumentReport**](ReportsAPI.md#GenerateShipmentListDocumentReport) | **Post** /v2/reports/documents/shipment-list/generate | Получение листа сборки
+[**GenerateShowsBoostReport**](ReportsAPI.md#GenerateShowsBoostReport) | **Post** /v2/reports/shows-boost/generate | Отчет по бусту показов
+[**GenerateShowsSalesReport**](ReportsAPI.md#GenerateShowsSalesReport) | **Post** /v2/reports/shows-sales/generate | Отчет «Аналитика продаж»
+[**GenerateStocksOnWarehousesReport**](ReportsAPI.md#GenerateStocksOnWarehousesReport) | **Post** /v2/reports/stocks-on-warehouses/generate | Отчет по остаткам на складах
+[**GenerateUnitedMarketplaceServicesReport**](ReportsAPI.md#GenerateUnitedMarketplaceServicesReport) | **Post** /v2/reports/united-marketplace-services/generate | Отчет по стоимости услуг
+[**GenerateUnitedNettingReport**](ReportsAPI.md#GenerateUnitedNettingReport) | **Post** /v2/reports/united-netting/generate | Отчет по платежам
+[**GenerateUnitedOrdersReport**](ReportsAPI.md#GenerateUnitedOrdersReport) | **Post** /v2/reports/united-orders/generate | Отчет по заказам
+[**GenerateUnitedReturnsReport**](ReportsAPI.md#GenerateUnitedReturnsReport) | **Post** /v2/reports/united-returns/generate | Отчет по невыкупам и возвратам
+[**GetReportInfo**](ReportsAPI.md#GetReportInfo) | **Get** /v2/reports/info/{reportId} | Получение заданного отчета или документа
 
 
 
@@ -51,7 +55,7 @@ import (
 
 func main() {
 	generateBannersStatisticsRequest := *openapiclient.NewGenerateBannersStatisticsRequest(int64(123), time.Now(), time.Now()) // GenerateBannersStatisticsRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -77,7 +81,73 @@ Other parameters are passed through a pointer to a apiGenerateBannersStatisticsR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateBannersStatisticsRequest** | [**GenerateBannersStatisticsRequest**](GenerateBannersStatisticsRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+
+### Return type
+
+[**GenerateReportResponse**](GenerateReportResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GenerateBarcodesReport
+
+> GenerateReportResponse GenerateBarcodesReport(ctx).GenerateBarcodesReportRequest(generateBarcodesReportRequest).Execute()
+
+Получение файла со штрихкодами
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	generateBarcodesReportRequest := *openapiclient.NewGenerateBarcodesReportRequest(int64(123), openapiclient.BarcodeFormatType("F_30_20")) // GenerateBarcodesReportRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GenerateBarcodesReport(context.Background()).GenerateBarcodesReportRequest(generateBarcodesReportRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GenerateBarcodesReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GenerateBarcodesReport`: GenerateReportResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GenerateBarcodesReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGenerateBarcodesReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **generateBarcodesReportRequest** | [**GenerateBarcodesReportRequest**](GenerateBarcodesReportRequest.md) |  | 
 
 ### Return type
 
@@ -120,7 +190,7 @@ import (
 
 func main() {
 	generateBoostConsolidatedRequest := *openapiclient.NewGenerateBoostConsolidatedRequest(int64(123), time.Now(), time.Now()) // GenerateBoostConsolidatedRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -146,7 +216,141 @@ Other parameters are passed through a pointer to a apiGenerateBoostConsolidatedR
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateBoostConsolidatedRequest** | [**GenerateBoostConsolidatedRequest**](GenerateBoostConsolidatedRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+
+### Return type
+
+[**GenerateReportResponse**](GenerateReportResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GenerateClosureDocumentsDetalizationReport
+
+> GenerateReportResponse GenerateClosureDocumentsDetalizationReport(ctx).GenerateClosureDocumentsDetalizationRequest(generateClosureDocumentsDetalizationRequest).Format(format).Execute()
+
+Отчет по схождению с закрывающими документами
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	generateClosureDocumentsDetalizationRequest := *openapiclient.NewGenerateClosureDocumentsDetalizationRequest(*openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12)), openapiclient.ClosureDocumentsContractType("INCOME")) // GenerateClosureDocumentsDetalizationRequest | 
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GenerateClosureDocumentsDetalizationReport(context.Background()).GenerateClosureDocumentsDetalizationRequest(generateClosureDocumentsDetalizationRequest).Format(format).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GenerateClosureDocumentsDetalizationReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GenerateClosureDocumentsDetalizationReport`: GenerateReportResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GenerateClosureDocumentsDetalizationReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGenerateClosureDocumentsDetalizationReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **generateClosureDocumentsDetalizationRequest** | [**GenerateClosureDocumentsDetalizationRequest**](GenerateClosureDocumentsDetalizationRequest.md) |  | 
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+
+### Return type
+
+[**GenerateReportResponse**](GenerateReportResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GenerateClosureDocumentsReport
+
+> GenerateReportResponse GenerateClosureDocumentsReport(ctx).GenerateClosureDocumentsRequest(generateClosureDocumentsRequest).Execute()
+
+Закрывающие документы
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	generateClosureDocumentsRequest := *openapiclient.NewGenerateClosureDocumentsRequest(int64(123), *openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12))) // GenerateClosureDocumentsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GenerateClosureDocumentsReport(context.Background()).GenerateClosureDocumentsRequest(generateClosureDocumentsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GenerateClosureDocumentsReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GenerateClosureDocumentsReport`: GenerateReportResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GenerateClosureDocumentsReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGenerateClosureDocumentsReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **generateClosureDocumentsRequest** | [**GenerateClosureDocumentsRequest**](GenerateClosureDocumentsRequest.md) |  | 
 
 ### Return type
 
@@ -189,7 +393,7 @@ import (
 
 func main() {
 	generateCompetitorsPositionReportRequest := *openapiclient.NewGenerateCompetitorsPositionReportRequest(int64(123), int64(123), time.Now(), time.Now()) // GenerateCompetitorsPositionReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -215,7 +419,7 @@ Other parameters are passed through a pointer to a apiGenerateCompetitorsPositio
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateCompetitorsPositionReportRequest** | [**GenerateCompetitorsPositionReportRequest**](GenerateCompetitorsPositionReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -257,7 +461,7 @@ import (
 
 func main() {
 	generateGoodsFeedbackRequest := *openapiclient.NewGenerateGoodsFeedbackRequest(int64(123)) // GenerateGoodsFeedbackRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -283,7 +487,7 @@ Other parameters are passed through a pointer to a apiGenerateGoodsFeedbackRepor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateGoodsFeedbackRequest** | [**GenerateGoodsFeedbackRequest**](GenerateGoodsFeedbackRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -326,7 +530,7 @@ import (
 
 func main() {
 	generateGoodsMovementReportRequest := *openapiclient.NewGenerateGoodsMovementReportRequest(int64(123), time.Now(), time.Now()) // GenerateGoodsMovementReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -352,7 +556,75 @@ Other parameters are passed through a pointer to a apiGenerateGoodsMovementRepor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateGoodsMovementReportRequest** | [**GenerateGoodsMovementReportRequest**](GenerateGoodsMovementReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+
+### Return type
+
+[**GenerateReportResponse**](GenerateReportResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GenerateGoodsPricesReport
+
+> GenerateReportResponse GenerateGoodsPricesReport(ctx).GenerateGoodsPricesReportRequest(generateGoodsPricesReportRequest).Format(format).Execute()
+
+Отчет «Цены»
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	generateGoodsPricesReportRequest := *openapiclient.NewGenerateGoodsPricesReportRequest() // GenerateGoodsPricesReportRequest | 
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GenerateGoodsPricesReport(context.Background()).GenerateGoodsPricesReportRequest(generateGoodsPricesReportRequest).Format(format).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GenerateGoodsPricesReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GenerateGoodsPricesReport`: GenerateReportResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GenerateGoodsPricesReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGenerateGoodsPricesReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **generateGoodsPricesReportRequest** | [**GenerateGoodsPricesReportRequest**](GenerateGoodsPricesReportRequest.md) |  | 
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -394,7 +666,7 @@ import (
 
 func main() {
 	generateGoodsRealizationReportRequest := *openapiclient.NewGenerateGoodsRealizationReportRequest(int64(123), int32(2025), int32(12)) // GenerateGoodsRealizationReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -420,7 +692,7 @@ Other parameters are passed through a pointer to a apiGenerateGoodsRealizationRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateGoodsRealizationReportRequest** | [**GenerateGoodsRealizationReportRequest**](GenerateGoodsRealizationReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -462,7 +734,7 @@ import (
 
 func main() {
 	generateGoodsTurnoverRequest := *openapiclient.NewGenerateGoodsTurnoverRequest(int64(123)) // GenerateGoodsTurnoverRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -488,7 +760,7 @@ Other parameters are passed through a pointer to a apiGenerateGoodsTurnoverRepor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateGoodsTurnoverRequest** | [**GenerateGoodsTurnoverRequest**](GenerateGoodsTurnoverRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -531,7 +803,7 @@ import (
 
 func main() {
 	generateJewelryFiscalReportRequest := *openapiclient.NewGenerateJewelryFiscalReportRequest(int64(123), time.Now(), time.Now()) // GenerateJewelryFiscalReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -557,7 +829,75 @@ Other parameters are passed through a pointer to a apiGenerateJewelryFiscalRepor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateJewelryFiscalReportRequest** | [**GenerateJewelryFiscalReportRequest**](GenerateJewelryFiscalReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+
+### Return type
+
+[**GenerateReportResponse**](GenerateReportResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GenerateKeyIndicatorsReport
+
+> GenerateReportResponse GenerateKeyIndicatorsReport(ctx).GenerateKeyIndicatorsRequest(generateKeyIndicatorsRequest).Format(format).Execute()
+
+Отчет по ключевым показателям
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	generateKeyIndicatorsRequest := *openapiclient.NewGenerateKeyIndicatorsRequest(openapiclient.KeyIndicatorsReportDetalizationLevelType("WEEK")) // GenerateKeyIndicatorsRequest | 
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GenerateKeyIndicatorsReport(context.Background()).GenerateKeyIndicatorsRequest(generateKeyIndicatorsRequest).Format(format).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GenerateKeyIndicatorsReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GenerateKeyIndicatorsReport`: GenerateReportResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GenerateKeyIndicatorsReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGenerateKeyIndicatorsReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **generateKeyIndicatorsRequest** | [**GenerateKeyIndicatorsRequest**](GenerateKeyIndicatorsRequest.md) |  | 
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -599,7 +939,7 @@ import (
 
 func main() {
 	generateMassOrderLabelsRequest := *openapiclient.NewGenerateMassOrderLabelsRequest(int64(123), []int64{int64(123)}) // GenerateMassOrderLabelsRequest | 
-	format := openapiclient.PageFormatType("A9_HORIZONTALLY") // PageFormatType | Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7. (optional)
+	format := openapiclient.PageFormatType("A9_HORIZONTALLY") // PageFormatType | Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата :no-translate[A7]. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -625,75 +965,7 @@ Other parameters are passed through a pointer to a apiGenerateMassOrderLabelsRep
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateMassOrderLabelsRequest** | [**GenerateMassOrderLabelsRequest**](GenerateMassOrderLabelsRequest.md) |  | 
- **format** | [**PageFormatType**](PageFormatType.md) | Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата A7. | 
-
-### Return type
-
-[**GenerateReportResponse**](GenerateReportResponse.md)
-
-### Authorization
-
-[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## GeneratePricesReport
-
-> GenerateReportResponse GeneratePricesReport(ctx).GeneratePricesReportRequest(generatePricesReportRequest).Format(format).Execute()
-
-Отчет «Цены на рынке»
-
-
-
-### Example
-
-```go
-package main
-
-import (
-	"context"
-	"fmt"
-	"os"
-	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
-)
-
-func main() {
-	generatePricesReportRequest := *openapiclient.NewGeneratePricesReportRequest() // GeneratePricesReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
-
-	configuration := openapiclient.NewConfiguration()
-	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ReportsAPI.GeneratePricesReport(context.Background()).GeneratePricesReportRequest(generatePricesReportRequest).Format(format).Execute()
-	if err != nil {
-		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GeneratePricesReport``: %v\n", err)
-		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-	}
-	// response from `GeneratePricesReport`: GenerateReportResponse
-	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GeneratePricesReport`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiGeneratePricesReportRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **generatePricesReportRequest** | [**GeneratePricesReportRequest**](GeneratePricesReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**PageFormatType**](PageFormatType.md) | Настройка размещения ярлыков на странице. Если параметра нет, возвращается PDF с ярлыками формата :no-translate[A7]. | 
 
 ### Return type
 
@@ -736,7 +1008,7 @@ import (
 
 func main() {
 	generateSalesGeographyRequest := *openapiclient.NewGenerateSalesGeographyRequest(int64(123), time.Now(), time.Now()) // GenerateSalesGeographyRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -762,7 +1034,7 @@ Other parameters are passed through a pointer to a apiGenerateSalesGeographyRepo
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateSalesGeographyRequest** | [**GenerateSalesGeographyRequest**](GenerateSalesGeographyRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -805,7 +1077,7 @@ import (
 
 func main() {
 	generateShelfsStatisticsRequest := *openapiclient.NewGenerateShelfsStatisticsRequest(int64(123), time.Now(), time.Now(), openapiclient.StatisticsAttributionType("CLICKS")) // GenerateShelfsStatisticsRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -831,7 +1103,7 @@ Other parameters are passed through a pointer to a apiGenerateShelfsStatisticsRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateShelfsStatisticsRequest** | [**GenerateShelfsStatisticsRequest**](GenerateShelfsStatisticsRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -940,7 +1212,7 @@ import (
 
 func main() {
 	generateShowsBoostRequest := *openapiclient.NewGenerateShowsBoostRequest(int64(123), time.Now(), time.Now(), openapiclient.StatisticsAttributionType("CLICKS")) // GenerateShowsBoostRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -966,7 +1238,7 @@ Other parameters are passed through a pointer to a apiGenerateShowsBoostReportRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateShowsBoostRequest** | [**GenerateShowsBoostRequest**](GenerateShowsBoostRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -1009,7 +1281,7 @@ import (
 
 func main() {
 	generateShowsSalesReportRequest := *openapiclient.NewGenerateShowsSalesReportRequest(time.Now(), time.Now(), openapiclient.ShowsSalesGroupingType("CATEGORIES")) // GenerateShowsSalesReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1035,7 +1307,7 @@ Other parameters are passed through a pointer to a apiGenerateShowsSalesReportRe
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateShowsSalesReportRequest** | [**GenerateShowsSalesReportRequest**](GenerateShowsSalesReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -1076,8 +1348,8 @@ import (
 )
 
 func main() {
-	generateStocksOnWarehousesReportRequest := *openapiclient.NewGenerateStocksOnWarehousesReportRequest(int64(123)) // GenerateStocksOnWarehousesReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	generateStocksOnWarehousesReportRequest := *openapiclient.NewGenerateStocksOnWarehousesReportRequest() // GenerateStocksOnWarehousesReportRequest | 
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1103,7 +1375,7 @@ Other parameters are passed through a pointer to a apiGenerateStocksOnWarehouses
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateStocksOnWarehousesReportRequest** | [**GenerateStocksOnWarehousesReportRequest**](GenerateStocksOnWarehousesReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -1145,8 +1417,8 @@ import (
 
 func main() {
 	generateUnitedMarketplaceServicesReportRequest := *openapiclient.NewGenerateUnitedMarketplaceServicesReportRequest(int64(123)) // GenerateUnitedMarketplaceServicesReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
-	language := *openapiclient.NewReportLanguageType() // ReportLanguageType | Язык отчета. (optional)
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	language := openapiclient.ReportLanguageType("RU") // ReportLanguageType | Язык отчета или документа. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1172,8 +1444,8 @@ Other parameters are passed through a pointer to a apiGenerateUnitedMarketplaceS
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateUnitedMarketplaceServicesReportRequest** | [**GenerateUnitedMarketplaceServicesReportRequest**](GenerateUnitedMarketplaceServicesReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
- **language** | [**ReportLanguageType**](ReportLanguageType.md) | Язык отчета. | 
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **language** | [**ReportLanguageType**](ReportLanguageType.md) | Язык отчета или документа. | 
 
 ### Return type
 
@@ -1215,8 +1487,8 @@ import (
 
 func main() {
 	generateUnitedNettingReportRequest := *openapiclient.NewGenerateUnitedNettingReportRequest(int64(123)) // GenerateUnitedNettingReportRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
-	language := *openapiclient.NewReportLanguageType() // ReportLanguageType | Язык отчета. (optional)
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	language := openapiclient.ReportLanguageType("RU") // ReportLanguageType | Язык отчета или документа. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1242,8 +1514,8 @@ Other parameters are passed through a pointer to a apiGenerateUnitedNettingRepor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateUnitedNettingReportRequest** | [**GenerateUnitedNettingReportRequest**](GenerateUnitedNettingReportRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
- **language** | [**ReportLanguageType**](ReportLanguageType.md) | Язык отчета. | 
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **language** | [**ReportLanguageType**](ReportLanguageType.md) | Язык отчета или документа. | 
 
 ### Return type
 
@@ -1286,8 +1558,8 @@ import (
 
 func main() {
 	generateUnitedOrdersRequest := *openapiclient.NewGenerateUnitedOrdersRequest(int64(123), time.Now(), time.Now()) // GenerateUnitedOrdersRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
-	language := *openapiclient.NewReportLanguageType() // ReportLanguageType | Язык отчета. (optional)
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	language := openapiclient.ReportLanguageType("RU") // ReportLanguageType | Язык отчета или документа. (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1313,8 +1585,8 @@ Other parameters are passed through a pointer to a apiGenerateUnitedOrdersReport
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateUnitedOrdersRequest** | [**GenerateUnitedOrdersRequest**](GenerateUnitedOrdersRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
- **language** | [**ReportLanguageType**](ReportLanguageType.md) | Язык отчета. | 
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **language** | [**ReportLanguageType**](ReportLanguageType.md) | Язык отчета или документа. | 
 
 ### Return type
 
@@ -1357,7 +1629,7 @@ import (
 
 func main() {
 	generateUnitedReturnsRequest := *openapiclient.NewGenerateUnitedReturnsRequest(int64(123), time.Now(), time.Now()) // GenerateUnitedReturnsRequest | 
-	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета. (optional) (default to "FILE")
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1383,7 +1655,7 @@ Other parameters are passed through a pointer to a apiGenerateUnitedReturnsRepor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateUnitedReturnsRequest** | [**GenerateUnitedReturnsRequest**](GenerateUnitedReturnsRequest.md) |  | 
- **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета. | [default to &quot;FILE&quot;]
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
 
@@ -1407,7 +1679,7 @@ Name | Type | Description  | Notes
 
 > GetReportInfoResponse GetReportInfo(ctx, reportId).Execute()
 
-Получение заданного отчета
+Получение заданного отчета или документа
 
 
 
@@ -1424,7 +1696,7 @@ import (
 )
 
 func main() {
-	reportId := "reportId_example" // string | Идентификатор отчета, который вы получили после запуска генерации. 
+	reportId := "reportId_example" // string | Идентификатор отчета или документа, который вы получили после запуска генерации. 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1444,7 +1716,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**reportId** | **string** | Идентификатор отчета, который вы получили после запуска генерации.  | 
+**reportId** | **string** | Идентификатор отчета или документа, который вы получили после запуска генерации.  | 
 
 ### Other Parameters
 

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,29 +15,33 @@ import (
 	"fmt"
 )
 
-// ReturnDecisionType Решение по возврату:  * `REFUND_MONEY` — вернуть деньги покупателю.  * `REFUND_MONEY_INCLUDING_SHIPMENT` — вернуть деньги за товар и пересылку.  * `REPAIR` — отремонтировать товар.  * `REPLACE` — заменить товар.  * `SEND_TO_EXAMINATION` — взять товар на экспертизу.  * `DECLINE_REFUND` — отказать в возврате.  * `OTHER_DECISION` — другое решение.  * `UNKNOWN` — не указано.
+// ReturnDecisionType Решение по возврату:  * `FAST_REFUND_MONEY` — вернуть покупателю деньги без возврата товара.  * `REFUND_MONEY` — вернуть покупателю деньги за товар.  * `REFUND_MONEY_INCLUDING_SHIPMENT` — вернуть покупателю деньги за товар и обратную пересылку.  * `REPAIR` — отремонтировать товар.  * `REPLACE` — заменить товар.  * `SEND_TO_EXAMINATION` — взять товар на экспертизу.  * `DECLINE_REFUND` — отказать в возврате.  * `PARTIAL_MONEY_REFUND` — частичный возврат денег.  * `OTHER_DECISION` — другое решение.  * `UNKNOWN` — не указано.
 type ReturnDecisionType string
 
 // List of ReturnDecisionType
 const (
+	RETURNDECISIONTYPE_FAST_REFUND_MONEY               ReturnDecisionType = "FAST_REFUND_MONEY"
 	RETURNDECISIONTYPE_REFUND_MONEY                    ReturnDecisionType = "REFUND_MONEY"
 	RETURNDECISIONTYPE_REFUND_MONEY_INCLUDING_SHIPMENT ReturnDecisionType = "REFUND_MONEY_INCLUDING_SHIPMENT"
 	RETURNDECISIONTYPE_REPAIR                          ReturnDecisionType = "REPAIR"
 	RETURNDECISIONTYPE_REPLACE                         ReturnDecisionType = "REPLACE"
 	RETURNDECISIONTYPE_SEND_TO_EXAMINATION             ReturnDecisionType = "SEND_TO_EXAMINATION"
 	RETURNDECISIONTYPE_DECLINE_REFUND                  ReturnDecisionType = "DECLINE_REFUND"
+	RETURNDECISIONTYPE_PARTIAL_MONEY_REFUND            ReturnDecisionType = "PARTIAL_MONEY_REFUND"
 	RETURNDECISIONTYPE_OTHER_DECISION                  ReturnDecisionType = "OTHER_DECISION"
 	RETURNDECISIONTYPE_UNKNOWN                         ReturnDecisionType = "UNKNOWN"
 )
 
 // All allowed values of ReturnDecisionType enum
 var AllowedReturnDecisionTypeEnumValues = []ReturnDecisionType{
+	"FAST_REFUND_MONEY",
 	"REFUND_MONEY",
 	"REFUND_MONEY_INCLUDING_SHIPMENT",
 	"REPAIR",
 	"REPLACE",
 	"SEND_TO_EXAMINATION",
 	"DECLINE_REFUND",
+	"PARTIAL_MONEY_REFUND",
 	"OTHER_DECISION",
 	"UNKNOWN",
 }

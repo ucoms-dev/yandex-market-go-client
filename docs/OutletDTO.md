@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **ShopOutletCode** | Pointer to **string** | Идентификатор точки продаж, присвоенный магазином. | [optional] 
 **Visibility** | Pointer to [**OutletVisibilityType**](OutletVisibilityType.md) |  | [optional] 
 **Address** | [**OutletAddressDTO**](OutletAddressDTO.md) |  | 
-**Phones** | **[]string** | Номера телефонов точки продаж. Передавайте в формате: &#x60;+7 (999) 999-99-99&#x60;.  | 
+**Phones** | **[]string** | Номера телефонов точки продаж. Передавайте номер в формате: &#x60;+&lt;код страны&gt;(&lt;код города&gt;)&lt;номер&gt;[#&lt;добавочный&gt;]&#x60;.  Примеры: - &#x60;+7 (999) 999-99-99&#x60; - &#x60;+7 (999) 999-99-99#1234&#x60;  | 
 **WorkingSchedule** | [**OutletWorkingScheduleDTO**](OutletWorkingScheduleDTO.md) |  | 
 **DeliveryRules** | Pointer to [**[]OutletDeliveryRuleDTO**](OutletDeliveryRuleDTO.md) | Информация об условиях доставки для данной точки продаж.  Обязательный параметр, если параметр &#x60;type&#x3D;DEPOT&#x60; или &#x60;type&#x3D;MIXED&#x60;.  | [optional] 
 **StoragePeriod** | Pointer to **int64** | Срок хранения заказа в собственном пункте выдачи заказов. Считается в днях. | [optional] 

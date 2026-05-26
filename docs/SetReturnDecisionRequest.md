@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ReturnItemId** | **int64** | Идентификатор товара в возврате. | 
 **DecisionType** | [**ReturnRequestDecisionType**](ReturnRequestDecisionType.md) |  | 
 **Comment** | Pointer to **string** | Комментарий к решению. Укажите:  * для &#x60;REFUND_MONEY_INCLUDING_SHIPMENT&#x60;— стоимость обратной пересылки.  * для &#x60;REPAIR&#x60; — когда вы устраните недостатки товара.  * для &#x60;DECLINE_REFUND&#x60; — причину отказа.  * для &#x60;OTHER_DECISION&#x60; — какое решение вы предлагаете.  | [optional] 
+**Compensation** | Pointer to [**BasePriceDTO**](BasePriceDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetComment sets Comment field to given value.
 `func (o *SetReturnDecisionRequest) HasComment() bool`
 
 HasComment returns a boolean if a field has been set.
+
+### GetCompensation
+
+`func (o *SetReturnDecisionRequest) GetCompensation() BasePriceDTO`
+
+GetCompensation returns the Compensation field if non-nil, zero value otherwise.
+
+### GetCompensationOk
+
+`func (o *SetReturnDecisionRequest) GetCompensationOk() (*BasePriceDTO, bool)`
+
+GetCompensationOk returns a tuple with the Compensation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCompensation
+
+`func (o *SetReturnDecisionRequest) SetCompensation(v BasePriceDTO)`
+
+SetCompensation sets Compensation field to given value.
+
+### HasCompensation
+
+`func (o *SetReturnDecisionRequest) HasCompensation() bool`
+
+HasCompensation returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

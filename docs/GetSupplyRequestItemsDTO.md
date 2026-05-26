@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Items** | [**[]SupplyRequestItemDTO**](SupplyRequestItemDTO.md) | Список товаров. | 
-**Paging** | Pointer to [**ForwardScrollingPagerDTO**](ForwardScrollingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetItems sets Items field to given value.
 
 ### GetPaging
 
-`func (o *GetSupplyRequestItemsDTO) GetPaging() ForwardScrollingPagerDTO`
+`func (o *GetSupplyRequestItemsDTO) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *GetSupplyRequestItemsDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool)`
+`func (o *GetSupplyRequestItemsDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *GetSupplyRequestItemsDTO) SetPaging(v ForwardScrollingPagerDTO)`
+`func (o *GetSupplyRequestItemsDTO) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

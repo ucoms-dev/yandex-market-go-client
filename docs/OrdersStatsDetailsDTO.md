@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ItemStatus** | Pointer to [**OrdersStatsItemStatusType**](OrdersStatsItemStatusType.md) |  | [optional] 
 **ItemCount** | Pointer to **int64** | Количество товара со статусом, указанном в параметре &#x60;itemStatus&#x60;. | [optional] 
-**UpdateDate** | Pointer to **string** | Дата, когда товар получил статус, указанный в параметре &#x60;itemStatus&#x60;.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | [optional] 
+**UpdateDate** | Pointer to **string** | **Только для модели FBY**  Дата, когда возврат был обработан на складе Маркета.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | [optional] 
 **StockType** | Pointer to [**OrdersStatsStockType**](OrdersStatsStockType.md) |  | [optional] 
 
 ## Methods

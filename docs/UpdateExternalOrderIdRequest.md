@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**ExternalOrderId** | **string** | Дополнительный идентификатор заказа. | 
+**ExternalOrderId** | **string** | Внешний идентификатор заказа. | 
 
 ## Methods
 

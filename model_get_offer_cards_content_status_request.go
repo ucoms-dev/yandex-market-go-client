@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -25,6 +25,8 @@ type GetOfferCardsContentStatusRequest struct {
 	CardStatuses []OfferCardStatusType `json:"cardStatuses,omitempty"`
 	// Фильтр по категориям на Маркете.
 	CategoryIds []int32 `json:"categoryIds,omitempty"`
+	// Возвращать ли список рекомендаций к заполнению карточки и средний рейтинг карточки у товаров той категории, которая указана в `marketCategoryId`.  Значение по умолчанию: `false`. Если информация нужна, передайте значение `true`.
+	WithRecommendations *bool `json:"withRecommendations,omitempty"`
 }
 
 // NewGetOfferCardsContentStatusRequest instantiates a new GetOfferCardsContentStatusRequest object
@@ -33,6 +35,8 @@ type GetOfferCardsContentStatusRequest struct {
 // will change when the set of required properties is changed
 func NewGetOfferCardsContentStatusRequest() *GetOfferCardsContentStatusRequest {
 	this := GetOfferCardsContentStatusRequest{}
+	var withRecommendations bool = false
+	this.WithRecommendations = &withRecommendations
 	return &this
 }
 
@@ -41,6 +45,8 @@ func NewGetOfferCardsContentStatusRequest() *GetOfferCardsContentStatusRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewGetOfferCardsContentStatusRequestWithDefaults() *GetOfferCardsContentStatusRequest {
 	this := GetOfferCardsContentStatusRequest{}
+	var withRecommendations bool = false
+	this.WithRecommendations = &withRecommendations
 	return &this
 }
 
@@ -143,6 +149,38 @@ func (o *GetOfferCardsContentStatusRequest) SetCategoryIds(v []int32) {
 	o.CategoryIds = v
 }
 
+// GetWithRecommendations returns the WithRecommendations field value if set, zero value otherwise.
+func (o *GetOfferCardsContentStatusRequest) GetWithRecommendations() bool {
+	if o == nil || IsNil(o.WithRecommendations) {
+		var ret bool
+		return ret
+	}
+	return *o.WithRecommendations
+}
+
+// GetWithRecommendationsOk returns a tuple with the WithRecommendations field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetOfferCardsContentStatusRequest) GetWithRecommendationsOk() (*bool, bool) {
+	if o == nil || IsNil(o.WithRecommendations) {
+		return nil, false
+	}
+	return o.WithRecommendations, true
+}
+
+// HasWithRecommendations returns a boolean if a field has been set.
+func (o *GetOfferCardsContentStatusRequest) HasWithRecommendations() bool {
+	if o != nil && !IsNil(o.WithRecommendations) {
+		return true
+	}
+
+	return false
+}
+
+// SetWithRecommendations gets a reference to the given bool and assigns it to the WithRecommendations field.
+func (o *GetOfferCardsContentStatusRequest) SetWithRecommendations(v bool) {
+	o.WithRecommendations = &v
+}
+
 func (o GetOfferCardsContentStatusRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -161,6 +199,9 @@ func (o GetOfferCardsContentStatusRequest) ToMap() (map[string]interface{}, erro
 	}
 	if o.CategoryIds != nil {
 		toSerialize["categoryIds"] = o.CategoryIds
+	}
+	if !IsNil(o.WithRecommendations) {
+		toSerialize["withRecommendations"] = o.WithRecommendations
 	}
 	return toSerialize, nil
 }

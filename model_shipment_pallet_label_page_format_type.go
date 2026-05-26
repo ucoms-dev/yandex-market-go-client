@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ShipmentPalletLabelPageFormatType Формат страницы: * `A4` — формат страницы A4. * `A8` — формат страницы A8.
+// ShipmentPalletLabelPageFormatType Формат страницы: * `A4` — формат страницы :no-translate[A4]. * `A8` — формат страницы :no-translate[A8].
 type ShipmentPalletLabelPageFormatType string
 
 // List of ShipmentPalletLabelPageFormatType

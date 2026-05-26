@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Warehouses** | [**[]FulfillmentWarehouseDTO**](FulfillmentWarehouseDTO.md) | Список складов Маркета (FBY). | 
+**Warehouses** | [**[]FulfillmentWarehouseDTO**](FulfillmentWarehouseDTO.md) | Список фулфилмент-складов Маркета. | 
 
 ## Methods
 

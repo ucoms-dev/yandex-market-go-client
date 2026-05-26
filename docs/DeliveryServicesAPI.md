@@ -4,7 +4,7 @@ All URIs are relative to *https://api.partner.market.yandex.ru*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetDeliveryServices**](DeliveryServicesAPI.md#GetDeliveryServices) | **Get** /delivery/services | Справочник служб доставки
+[**GetDeliveryServices**](DeliveryServicesAPI.md#GetDeliveryServices) | **Get** /v2/delivery/services | Справочник служб доставки
 
 
 

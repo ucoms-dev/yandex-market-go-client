@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Comments** | [**[]GoodsFeedbackCommentDTO**](GoodsFeedbackCommentDTO.md) | Список комментариев. | 
-**Paging** | Pointer to [**ForwardScrollingPagerDTO**](ForwardScrollingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetComments sets Comments field to given value.
 
 ### GetPaging
 
-`func (o *GoodsFeedbackCommentListDTO) GetPaging() ForwardScrollingPagerDTO`
+`func (o *GoodsFeedbackCommentListDTO) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *GoodsFeedbackCommentListDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool)`
+`func (o *GoodsFeedbackCommentListDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *GoodsFeedbackCommentListDTO) SetPaging(v ForwardScrollingPagerDTO)`
+`func (o *GoodsFeedbackCommentListDTO) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

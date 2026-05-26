@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,9 +19,9 @@ import (
 // checks if the GetOrderIdentifiersStatusDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetOrderIdentifiersStatusDTO{}
 
-// GetOrderIdentifiersStatusDTO Список идентификаторов товаров и статусы проверки УИНов.
+// GetOrderIdentifiersStatusDTO Информация по проверке кодов маркировки.
 type GetOrderIdentifiersStatusDTO struct {
-	// Список идентификаторов товаров и статусы проверки УИНов.
+	// Список идентификаторов товаров и информация по проверке кодов.
 	Items []OrderItemValidationStatusDTO `json:"items"`
 }
 

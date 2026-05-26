@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,7 +22,7 @@ type OrdersStatsDetailsDTO struct {
 	ItemStatus *OrdersStatsItemStatusType `json:"itemStatus,omitempty"`
 	// Количество товара со статусом, указанном в параметре `itemStatus`.
 	ItemCount *int64 `json:"itemCount,omitempty"`
-	// Дата, когда товар получил статус, указанный в параметре `itemStatus`.  Формат даты: `ГГГГ-ММ-ДД`.
+	// **Только для модели FBY**  Дата, когда возврат был обработан на складе Маркета.  Формат даты: `ГГГГ-ММ-ДД`.
 	UpdateDate *string               `json:"updateDate,omitempty"`
 	StockType  *OrdersStatsStockType `json:"stockType,omitempty"`
 }

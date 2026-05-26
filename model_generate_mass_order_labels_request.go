@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &GenerateMassOrderLabelsRequest{}
 
 // GenerateMassOrderLabelsRequest Данные, необходимые для генерации файла.
 type GenerateMassOrderLabelsRequest struct {
-	// Идентификатор кабинета.
+	// Идентификатор кабинета. {% if audience == \"partner\" %}Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) {% endif %}
 	BusinessId int64 `json:"businessId"`
 	// Список идентификаторов заказов.
 	OrderIds    []int64            `json:"orderIds"`

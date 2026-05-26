@@ -4,10 +4,10 @@ All URIs are relative to *https://api.partner.market.yandex.ru*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetRegionsCodes**](RegionsAPI.md#GetRegionsCodes) | **Post** /regions/countries | Список допустимых кодов стран
-[**SearchRegionChildren**](RegionsAPI.md#SearchRegionChildren) | **Get** /regions/{regionId}/children | Информация о дочерних регионах
-[**SearchRegionsById**](RegionsAPI.md#SearchRegionsById) | **Get** /regions/{regionId} | Информация о регионе
-[**SearchRegionsByName**](RegionsAPI.md#SearchRegionsByName) | **Get** /regions | Поиск регионов по их имени
+[**GetRegionsCodes**](RegionsAPI.md#GetRegionsCodes) | **Post** /v2/regions/countries | Список допустимых кодов стран
+[**SearchRegionChildren**](RegionsAPI.md#SearchRegionChildren) | **Get** /v2/regions/{regionId}/children | Информация о дочерних регионах
+[**SearchRegionsById**](RegionsAPI.md#SearchRegionsById) | **Get** /v2/regions/{regionId} | Информация о регионе
+[**SearchRegionsByName**](RegionsAPI.md#SearchRegionsByName) | **Get** /v2/regions | Поиск регионов по их имени
 
 
 
@@ -74,7 +74,7 @@ Other parameters are passed through a pointer to a apiGetRegionsCodesRequest str
 
 ## SearchRegionChildren
 
-> GetRegionWithChildrenResponse SearchRegionChildren(ctx, regionId).Page(page).PageSize(pageSize).Execute()
+> GetRegionWithChildrenResponse SearchRegionChildren(ctx, regionId).PageToken(pageToken).Limit(limit).Page(page).PageSize(pageSize).Execute()
 
 Информация о дочерних регионах
 
@@ -93,13 +93,15 @@ import (
 )
 
 func main() {
-	regionId := int64(789) // int64 | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
-	page := int32(56) // int32 | {% note warning \"Если в методе есть `page_token`\" %}  Используйте его вместо параметра `page`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром `page_size`.  `page_number` игнорируется, если задан `page_token` или `limit`.  (optional) (default to 1)
-	pageSize := int32(56) // int32 | Размер страницы.  Используется вместе с параметром `page_number`.  `page_size` игнорируется, если задан `page_token` или `limit`.  (optional)
+	regionId := int64(789) // int64 | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md). 
+	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
+	limit := int32(56) // int32 | {{ limit-truncate-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}  (optional)
+	page := int32(56) // int32 | {% note warning \"Устаревший параметр\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром `pageSize`.  (optional) (default to 1)
+	pageSize := int32(56) // int32 | {% note warning \"Устаревший параметр\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром `page`.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.RegionsAPI.SearchRegionChildren(context.Background(), regionId).Page(page).PageSize(pageSize).Execute()
+	resp, r, err := apiClient.RegionsAPI.SearchRegionChildren(context.Background(), regionId).PageToken(pageToken).Limit(limit).Page(page).PageSize(pageSize).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `RegionsAPI.SearchRegionChildren``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -115,7 +117,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**regionId** | **int64** | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).  | 
+**regionId** | **int64** | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md).  | 
 
 ### Other Parameters
 
@@ -125,8 +127,10 @@ Other parameters are passed through a pointer to a apiSearchRegionChildrenReques
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **page** | **int32** | {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.  | [default to 1]
- **pageSize** | **int32** | Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.  | 
+ **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
+ **limit** | **int32** | {{ limit-truncate-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}  | 
+ **page** | **int32** | {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.  | [default to 1]
+ **pageSize** | **int32** | {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.  | 
 
 ### Return type
 
@@ -148,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## SearchRegionsById
 
-> GetRegionsResponse SearchRegionsById(ctx, regionId).Execute()
+> GetRegionByIdResponse SearchRegionsById(ctx, regionId).Execute()
 
 Информация о регионе
 
@@ -167,7 +171,7 @@ import (
 )
 
 func main() {
-	regionId := int64(789) // int64 | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md). 
+	regionId := int64(789) // int64 | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md). 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -176,7 +180,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `RegionsAPI.SearchRegionsById``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `SearchRegionsById`: GetRegionsResponse
+	// response from `SearchRegionsById`: GetRegionByIdResponse
 	fmt.Fprintf(os.Stdout, "Response from `RegionsAPI.SearchRegionsById`: %v\n", resp)
 }
 ```
@@ -187,7 +191,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**regionId** | **int64** | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).  | 
+**regionId** | **int64** | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md).  | 
 
 ### Other Parameters
 
@@ -200,7 +204,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetRegionsResponse**](GetRegionsResponse.md)
+[**GetRegionByIdResponse**](GetRegionByIdResponse.md)
 
 ### Authorization
 
@@ -238,8 +242,8 @@ import (
 
 func main() {
 	name := "name_example" // string | Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, `Москва`. 
-	pageToken := "eyBuZXh0SWQ6IDIzNDIgfQ==" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра `nextPageToken`, полученное при последнем запросе.  Если задан `page_token` и в запросе есть параметры `page_number` и `page_size`, они игнорируются.  (optional)
-	limit := int32(20) // int32 | Количество значений на одной странице.  (optional)
+	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
+	limit := int32(56) // int32 | {{ limit-param-description }}  (optional) (default to 10)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -265,8 +269,8 @@ Other parameters are passed through a pointer to a apiSearchRegionsByNameRequest
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **name** | **string** | Название региона.  Важно учитывать регистр: первая буква должна быть заглавной, остальные — строчными. Например, &#x60;Москва&#x60;.  | 
- **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.  | 
- **limit** | **int32** | Количество значений на одной странице.  | 
+ **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
+ **limit** | **int32** | {{ limit-param-description }}  | [default to 10]
 
 ### Return type
 

@@ -4,17 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CampaignId** | **int64** | Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.  | 
-**WarehouseIds** | Pointer to **[]int64** | Фильтр по идентификаторам складов (только модель FBY). Чтобы узнать идентификатор, воспользуйтесь запросом [GET warehouses](../../reference/warehouses/getFulfillmentWarehouses.md). | [optional] 
-**ReportDate** | Pointer to **string** | Фильтр по дате (для модели FBY). В отчет попадут данные за **предшествующий** дате день. | [optional] 
-**CategoryIds** | Pointer to **[]int64** | Фильтр по категориям на Маркете (кроме модели FBY). | [optional] 
-**HasStocks** | Pointer to **bool** | Фильтр по наличию остатков (кроме модели FBY). | [optional] 
+**CampaignId** | Pointer to **int64** | Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.  | [optional] 
+**BusinessId** | Pointer to **int64** | Идентификатор кабинета. {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) {% endif %}  | [optional] 
+**WarehouseIds** | Pointer to **[]int64** | Фильтр по идентификаторам складов (только модели FBY и LaaS). Чтобы узнать идентификатор, воспользуйтесь запросом [GET v2/warehouses](../../reference/warehouses/getFulfillmentWarehouses.md). | [optional] 
+**ReportDate** | Pointer to **string** | Фильтр по дате (для моделей FBY и LaaS). В отчет попадут данные за **предшествующий** дате день.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | [optional] 
+**CategoryIds** | Pointer to **[]int32** | Фильтр по категориям на Маркете (кроме моделей FBY и LaaS). | [optional] 
+**HasStocks** | Pointer to **bool** | Фильтр по наличию остатков (кроме моделей FBY и LaaS). | [optional] 
+**CampaignIds** | Pointer to **[]int64** | Фильтр по магазинам для отчета по кабинету (кроме моделей FBY и LaaS).  Передавайте вместе с &#x60;businessId&#x60;.  | [optional] 
 
 ## Methods
 
 ### NewGenerateStocksOnWarehousesReportRequest
 
-`func NewGenerateStocksOnWarehousesReportRequest(campaignId int64, ) *GenerateStocksOnWarehousesReportRequest`
+`func NewGenerateStocksOnWarehousesReportRequest() *GenerateStocksOnWarehousesReportRequest`
 
 NewGenerateStocksOnWarehousesReportRequest instantiates a new GenerateStocksOnWarehousesReportRequest object
 This constructor will assign default values to properties that have it defined,
@@ -48,6 +50,36 @@ and a boolean to check if the value has been set.
 
 SetCampaignId sets CampaignId field to given value.
 
+### HasCampaignId
+
+`func (o *GenerateStocksOnWarehousesReportRequest) HasCampaignId() bool`
+
+HasCampaignId returns a boolean if a field has been set.
+
+### GetBusinessId
+
+`func (o *GenerateStocksOnWarehousesReportRequest) GetBusinessId() int64`
+
+GetBusinessId returns the BusinessId field if non-nil, zero value otherwise.
+
+### GetBusinessIdOk
+
+`func (o *GenerateStocksOnWarehousesReportRequest) GetBusinessIdOk() (*int64, bool)`
+
+GetBusinessIdOk returns a tuple with the BusinessId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBusinessId
+
+`func (o *GenerateStocksOnWarehousesReportRequest) SetBusinessId(v int64)`
+
+SetBusinessId sets BusinessId field to given value.
+
+### HasBusinessId
+
+`func (o *GenerateStocksOnWarehousesReportRequest) HasBusinessId() bool`
+
+HasBusinessId returns a boolean if a field has been set.
 
 ### GetWarehouseIds
 
@@ -111,20 +143,20 @@ HasReportDate returns a boolean if a field has been set.
 
 ### GetCategoryIds
 
-`func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIds() []int64`
+`func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIds() []int32`
 
 GetCategoryIds returns the CategoryIds field if non-nil, zero value otherwise.
 
 ### GetCategoryIdsOk
 
-`func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIdsOk() (*[]int64, bool)`
+`func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIdsOk() (*[]int32, bool)`
 
 GetCategoryIdsOk returns a tuple with the CategoryIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCategoryIds
 
-`func (o *GenerateStocksOnWarehousesReportRequest) SetCategoryIds(v []int64)`
+`func (o *GenerateStocksOnWarehousesReportRequest) SetCategoryIds(v []int32)`
 
 SetCategoryIds sets CategoryIds field to given value.
 
@@ -169,6 +201,41 @@ SetHasStocks sets HasStocks field to given value.
 
 HasHasStocks returns a boolean if a field has been set.
 
+### GetCampaignIds
+
+`func (o *GenerateStocksOnWarehousesReportRequest) GetCampaignIds() []int64`
+
+GetCampaignIds returns the CampaignIds field if non-nil, zero value otherwise.
+
+### GetCampaignIdsOk
+
+`func (o *GenerateStocksOnWarehousesReportRequest) GetCampaignIdsOk() (*[]int64, bool)`
+
+GetCampaignIdsOk returns a tuple with the CampaignIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCampaignIds
+
+`func (o *GenerateStocksOnWarehousesReportRequest) SetCampaignIds(v []int64)`
+
+SetCampaignIds sets CampaignIds field to given value.
+
+### HasCampaignIds
+
+`func (o *GenerateStocksOnWarehousesReportRequest) HasCampaignIds() bool`
+
+HasCampaignIds returns a boolean if a field has been set.
+
+### SetCampaignIdsNil
+
+`func (o *GenerateStocksOnWarehousesReportRequest) SetCampaignIdsNil(b bool)`
+
+ SetCampaignIdsNil sets the value for CampaignIds to be an explicit nil
+
+### UnsetCampaignIds
+`func (o *GenerateStocksOnWarehousesReportRequest) UnsetCampaignIds()`
+
+UnsetCampaignIds ensures that no value is present for CampaignIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

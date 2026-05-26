@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Regions** | [**[]RegionDTO**](RegionDTO.md) | Регион доставки. | 
-**Paging** | Pointer to [**ForwardScrollingPagerDTO**](ForwardScrollingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetRegions sets Regions field to given value.
 
 ### GetPaging
 
-`func (o *GetRegionsResponse) GetPaging() ForwardScrollingPagerDTO`
+`func (o *GetRegionsResponse) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *GetRegionsResponse) GetPagingOk() (*ForwardScrollingPagerDTO, bool)`
+`func (o *GetRegionsResponse) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *GetRegionsResponse) SetPaging(v ForwardScrollingPagerDTO)`
+`func (o *GetRegionsResponse) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

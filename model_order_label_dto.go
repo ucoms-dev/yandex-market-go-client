@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -24,10 +24,8 @@ type OrderLabelDTO struct {
 	// Идентификатор заказа.
 	OrderId int64 `json:"orderId"`
 	// Количество коробок в заказе.
-	PlacesNumber int32 `json:"placesNumber"`
-	// URL файла с ярлыками‑наклейками на все коробки в заказе.  Соответствует URL, по которому выполняется запрос [GET campaigns/{campaignId}/orders/{orderId}/delivery/labels](../../reference/orders/generateOrderLabels.md).
-	// Deprecated
-	Url string `json:"url"`
+	PlacesNumber int32  `json:"placesNumber"`
+	Url          string `json:"url"`
 	// Информация на ярлыке.
 	ParcelBoxLabels []ParcelBoxLabelDTO `json:"parcelBoxLabels"`
 }
@@ -104,7 +102,6 @@ func (o *OrderLabelDTO) SetPlacesNumber(v int32) {
 }
 
 // GetUrl returns the Url field value
-// Deprecated
 func (o *OrderLabelDTO) GetUrl() string {
 	if o == nil {
 		var ret string
@@ -116,7 +113,6 @@ func (o *OrderLabelDTO) GetUrl() string {
 
 // GetUrlOk returns a tuple with the Url field value
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *OrderLabelDTO) GetUrlOk() (*string, bool) {
 	if o == nil {
 		return nil, false
@@ -125,7 +121,6 @@ func (o *OrderLabelDTO) GetUrlOk() (*string, bool) {
 }
 
 // SetUrl sets field value
-// Deprecated
 func (o *OrderLabelDTO) SetUrl(v string) {
 	o.Url = v
 }

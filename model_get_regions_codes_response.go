@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &GetRegionsCodesResponse{}
 
 // GetRegionsCodesResponse struct for GetRegionsCodesResponse
 type GetRegionsCodesResponse struct {
-	// Список стран с их кодами в формате ISO 3166-1 alpha-2.
+	// Список стран с их кодами в формате :no-translate[ISO 3166-1 alpha-2].
 	Countries []CountryDTO `json:"countries"`
 }
 

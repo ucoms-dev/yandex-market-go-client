@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -36,16 +36,14 @@ GetRegionsCodes Список допустимых кодов стран
 
 {% include notitle [access](../../_auto/method_scopes/getRegionsCodes.md) %}
 
-Возвращает список стран с их кодами в формате ISO 3166-1 alpha-2.
+Возвращает список стран с их кодами в формате :no-translate[ISO 3166-1 alpha-2].
 
 Страна производства `countryCode` понадобится при продаже товаров из-за рубежа для бизнеса. [Инструкция](../../step-by-step/business-info.md)
 
-|**⚙️ Лимит:** 100 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getRegionsCodes.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return RegionsAPIGetRegionsCodesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return RegionsAPIGetRegionsCodesRequest
 */
 func (a *RegionsAPIService) GetRegionsCodes(ctx context.Context) RegionsAPIGetRegionsCodesRequest {
 	return RegionsAPIGetRegionsCodesRequest{
@@ -55,7 +53,8 @@ func (a *RegionsAPIService) GetRegionsCodes(ctx context.Context) RegionsAPIGetRe
 }
 
 // Execute executes the request
-//  @return GetRegionsCodesResponse
+//
+//	@return GetRegionsCodesResponse
 func (a *RegionsAPIService) GetRegionsCodesExecute(r RegionsAPIGetRegionsCodesRequest) (*GetRegionsCodesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -69,7 +68,7 @@ func (a *RegionsAPIService) GetRegionsCodesExecute(r RegionsAPIGetRegionsCodesRe
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/regions/countries"
+	localVarPath := localBasePath + "/v2/regions/countries"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -201,17 +200,33 @@ type RegionsAPISearchRegionChildrenRequest struct {
 	ctx        context.Context
 	ApiService *RegionsAPIService
 	regionId   int64
+	pageToken  *string
+	limit      *int32
 	page       *int32
 	pageSize   *int32
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r RegionsAPISearchRegionChildrenRequest) PageToken(pageToken string) RegionsAPISearchRegionChildrenRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-truncate-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}
+func (r RegionsAPISearchRegionChildrenRequest) Limit(limit int32) RegionsAPISearchRegionChildrenRequest {
+	r.limit = &limit
+	return r
+}
+
+// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
+// Deprecated
 func (r RegionsAPISearchRegionChildrenRequest) Page(page int32) RegionsAPISearchRegionChildrenRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
+// Deprecated
 func (r RegionsAPISearchRegionChildrenRequest) PageSize(pageSize int32) RegionsAPISearchRegionChildrenRequest {
 	r.pageSize = &pageSize
 	return r
@@ -228,17 +243,11 @@ SearchRegionChildren Информация о дочерних регионах
 
 Возвращает информацию о регионах, являющихся дочерними по отношению к региону, идентификатор которого указан в запросе.
 
-Для методов `GET regions`, `GET regions/{regionId}` и `GET regions/{regionId}/children` действует групповое ресурсное ограничение. Ограничение вводится на суммарное количество регионов, информация о которых запрошена при помощи этих методов (не более 100 000 регионов).
+{% include notitle [limit](../../_auto/method_limits/searchRegionChildren.md) %}
 
-Объем запросов к ресурсу, который возможно выполнить в течение суток, зависит от суммарного количества регионов.
-
-|**⚙️ Лимит:** 50 000 запросов в час|
-|-|
-
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
- @return RegionsAPISearchRegionChildrenRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md).
+	@return RegionsAPISearchRegionChildrenRequest
 */
 func (a *RegionsAPIService) SearchRegionChildren(ctx context.Context, regionId int64) RegionsAPISearchRegionChildrenRequest {
 	return RegionsAPISearchRegionChildrenRequest{
@@ -249,7 +258,8 @@ func (a *RegionsAPIService) SearchRegionChildren(ctx context.Context, regionId i
 }
 
 // Execute executes the request
-//  @return GetRegionWithChildrenResponse
+//
+//	@return GetRegionWithChildrenResponse
 func (a *RegionsAPIService) SearchRegionChildrenExecute(r RegionsAPISearchRegionChildrenRequest) (*GetRegionWithChildrenResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -263,21 +273,27 @@ func (a *RegionsAPIService) SearchRegionChildrenExecute(r RegionsAPISearchRegion
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/regions/{regionId}/children"
+	localVarPath := localBasePath + "/v2/regions/{regionId}/children"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -418,7 +434,7 @@ type RegionsAPISearchRegionsByIdRequest struct {
 	regionId   int64
 }
 
-func (r RegionsAPISearchRegionsByIdRequest) Execute() (*GetRegionsResponse, *http.Response, error) {
+func (r RegionsAPISearchRegionsByIdRequest) Execute() (*GetRegionByIdResponse, *http.Response, error) {
 	return r.ApiService.SearchRegionsByIdExecute(r)
 }
 
@@ -429,17 +445,11 @@ SearchRegionsById Информация о регионе
 
 Возвращает информацию о регионе.
 
-Для методов `GET regions`, `GET regions/{regionId}` и `GET regions/{regionId}/children` действует групповое ресурсное ограничение. Ограничение вводится на суммарное количество регионов, информация о которых запрошена при помощи этих методов (не более 100 000 регионов).
+{% include notitle [limit](../../_auto/method_limits/searchRegionsById.md) %}
 
-Объем запросов к ресурсу, который возможно выполнить в течение суток, зависит от суммарного количества регионов.
-
-|**⚙️ Лимит:** 50 000 запросов в час|
-|-|
-
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET regions](../../reference/regions/searchRegionsByName.md).
- @return RegionsAPISearchRegionsByIdRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param regionId Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md).
+	@return RegionsAPISearchRegionsByIdRequest
 */
 func (a *RegionsAPIService) SearchRegionsById(ctx context.Context, regionId int64) RegionsAPISearchRegionsByIdRequest {
 	return RegionsAPISearchRegionsByIdRequest{
@@ -450,13 +460,14 @@ func (a *RegionsAPIService) SearchRegionsById(ctx context.Context, regionId int6
 }
 
 // Execute executes the request
-//  @return GetRegionsResponse
-func (a *RegionsAPIService) SearchRegionsByIdExecute(r RegionsAPISearchRegionsByIdRequest) (*GetRegionsResponse, *http.Response, error) {
+//
+//	@return GetRegionByIdResponse
+func (a *RegionsAPIService) SearchRegionsByIdExecute(r RegionsAPISearchRegionsByIdRequest) (*GetRegionByIdResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
 		localVarPostBody    interface{}
 		formFiles           []formFile
-		localVarReturnValue *GetRegionsResponse
+		localVarReturnValue *GetRegionByIdResponse
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "RegionsAPIService.SearchRegionsById")
@@ -464,7 +475,7 @@ func (a *RegionsAPIService) SearchRegionsByIdExecute(r RegionsAPISearchRegionsBy
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/regions/{regionId}"
+	localVarPath := localBasePath + "/v2/regions/{regionId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"regionId"+"}", url.PathEscape(parameterValueToString(r.regionId, "regionId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -607,13 +618,13 @@ func (r RegionsAPISearchRegionsByNameRequest) Name(name string) RegionsAPISearch
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r RegionsAPISearchRegionsByNameRequest) PageToken(pageToken string) RegionsAPISearchRegionsByNameRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r RegionsAPISearchRegionsByNameRequest) Limit(limit int32) RegionsAPISearchRegionsByNameRequest {
 	r.limit = &limit
 	return r
@@ -632,16 +643,10 @@ SearchRegionsByName Поиск регионов по их имени
 
 Если найдено несколько регионов, удовлетворяющих условиям поиска, возвращается информация по каждому найденному региону (но не более десяти регионов) для возможности определения нужного региона по родительским регионам.
 
-Для методов `GET regions`, `GET regions/{regionId}` и `GET regions/{regionId}/children` действует групповое ресурсное ограничение. Ограничение вводится на суммарное количество регионов, информация о которых запрошена при помощи этих методов (не более 100 000 регионов).
+{% include notitle [limit](../../_auto/method_limits/searchRegionsByName.md) %}
 
-Объем запросов к ресурсу, который возможно выполнить в течение суток, зависит от суммарного количества регионов.
-
-|**⚙️ Лимит:** 50 000 запросов в час|
-|-|
-
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return RegionsAPISearchRegionsByNameRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return RegionsAPISearchRegionsByNameRequest
 */
 func (a *RegionsAPIService) SearchRegionsByName(ctx context.Context) RegionsAPISearchRegionsByNameRequest {
 	return RegionsAPISearchRegionsByNameRequest{
@@ -651,7 +656,8 @@ func (a *RegionsAPIService) SearchRegionsByName(ctx context.Context) RegionsAPIS
 }
 
 // Execute executes the request
-//  @return GetRegionsResponse
+//
+//	@return GetRegionsResponse
 func (a *RegionsAPIService) SearchRegionsByNameExecute(r RegionsAPISearchRegionsByNameRequest) (*GetRegionsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -665,7 +671,7 @@ func (a *RegionsAPIService) SearchRegionsByNameExecute(r RegionsAPISearchRegions
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/regions"
+	localVarPath := localBasePath + "/v2/regions"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -674,12 +680,15 @@ func (a *RegionsAPIService) SearchRegionsByNameExecute(r RegionsAPISearchRegions
 		return localVarReturnValue, nil, reportError("name is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 10
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// SupplyRequestStatusType Статус заявки на поставку:  * `CREATED` — создан черновик заявки. * `FINISHED` — заявка завершена, товары:   * приняты на складе;   * переданы на другой склад при перемещении;   * переданы продавцу при вывозе;   * утилизированы. * `CANCELLED` — заявка отменена. * `INVALID` — ошибка обработки. * `VALIDATED` — заявка в обработке. * `PUBLISHED` — создана заявка. * `ARRIVED_TO_SERVICE` — поставка прибыла на склад хранения. * `ARRIVED_TO_XDOC_SERVICE` — поставка прибыла на транзитный склад. * `SHIPPED_TO_SERVICE` — поставка отправлена с транзитного склада на склад хранения. * `CANCELLATION_REQUESTED` — запрошена отмена заявки. * `CANCELLATION_REJECTED` — заявка не будет отменена. * `REGISTERED_IN_ELECTRONIC_QUEUE` — поставка зарегистрирована в электронной очереди. * `READY_FOR_UTILIZATION` — товары готовы к утилизации. * `TRANSIT_MOVING` — перемещение товаров на склад вывоза. * `WAREHOUSE_HANDLING` — вторичная приемка товаров или их сборка для вывоза или утилизации. * `ACCEPTED_BY_WAREHOUSE_SYSTEM` — информация о заявке направлена на склад. * `READY_TO_WITHDRAW` — товары готовы к выдаче.
+// SupplyRequestStatusType Статус заявки на поставку:  * `CREATED` — заявка создана. * `FINISHED` — заявка завершена, товары:   * приняты на складе;   * переданы на другой склад при перемещении;   * переданы продавцу при вывозе;   * утилизированы. * `CANCELLED` — заявка отменена. * `INVALID` — ошибка обработки. * `VALIDATED` — заявка в обработке. * `PUBLISHED` — заявка отправлена на утверждение. * `ARRIVED_TO_SERVICE` — поставка отгружена. * `ARRIVED_TO_XDOC_SERVICE` — поставка ждет отправки на конечный склад. * `SHIPPED_TO_SERVICE` — поставка отправлена с транзитного склада на склад хранения. * `CANCELLATION_REQUESTED` — запрошена отмена заявки. * `CANCELLATION_REJECTED` — заявка не будет отменена. * `REGISTERED_IN_ELECTRONIC_QUEUE` — поставка зарегистрирована в электронной очереди. * `READY_FOR_UTILIZATION` — товары готовы к утилизации. * `TRANSIT_MOVING` — перемещение товаров на склад вывоза. * `WAREHOUSE_HANDLING` — вторичная приемка товаров или их сборка для вывоза или утилизации (потоварная приемка). * `ACCEPTED_BY_WAREHOUSE_SYSTEM` — заявка утверждена. * `READY_TO_WITHDRAW` — товары готовы к выдаче. * `NEED_PREPARATION` — ожидается информация от продавца. * `WAREHOUSE_SIGNED_ACT` — ЭАПП подписан складом.
 type SupplyRequestStatusType string
 
 // List of SupplyRequestStatusType
@@ -37,6 +37,8 @@ const (
 	SUPPLYREQUESTSTATUSTYPE_WAREHOUSE_HANDLING             SupplyRequestStatusType = "WAREHOUSE_HANDLING"
 	SUPPLYREQUESTSTATUSTYPE_ACCEPTED_BY_WAREHOUSE_SYSTEM   SupplyRequestStatusType = "ACCEPTED_BY_WAREHOUSE_SYSTEM"
 	SUPPLYREQUESTSTATUSTYPE_READY_TO_WITHDRAW              SupplyRequestStatusType = "READY_TO_WITHDRAW"
+	SUPPLYREQUESTSTATUSTYPE_NEED_PREPARATION               SupplyRequestStatusType = "NEED_PREPARATION"
+	SUPPLYREQUESTSTATUSTYPE_WAREHOUSE_SIGNED_ACT           SupplyRequestStatusType = "WAREHOUSE_SIGNED_ACT"
 )
 
 // All allowed values of SupplyRequestStatusType enum
@@ -58,6 +60,8 @@ var AllowedSupplyRequestStatusTypeEnumValues = []SupplyRequestStatusType{
 	"WAREHOUSE_HANDLING",
 	"ACCEPTED_BY_WAREHOUSE_SYSTEM",
 	"READY_TO_WITHDRAW",
+	"NEED_PREPARATION",
+	"WAREHOUSE_SIGNED_ACT",
 }
 
 func (v *SupplyRequestStatusType) UnmarshalJSON(src []byte) error {

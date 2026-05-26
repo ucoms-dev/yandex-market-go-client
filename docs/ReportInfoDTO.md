@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **SubStatus** | Pointer to [**ReportSubStatusType**](ReportSubStatusType.md) |  | [optional] 
 **GenerationRequestedAt** | **time.Time** | Дата и время запроса на генерацию. | 
 **GenerationFinishedAt** | Pointer to **time.Time** | Дата и время завершения генерации. | [optional] 
-**File** | Pointer to **string** | Ссылка на готовый отчет. | [optional] 
+**File** | Pointer to **string** | Ссылка на готовый отчет или документ.  {% note warning \&quot;Срок действия ссылки\&quot; %}  Ссылка актуальна **60 минут** с момента получения ответа. При каждом запросе &#x60;GET /v2/reports/info/{reportId}&#x60; генерируется новая ссылка, срок действия которой ограничен.  **Рекомендация для интеграций:** сразу после получения ссылки скачайте отчет и сохраните его у себя. Не сохраняйте ссылку для последующего использования — она станет недействительной через после истечения срока действия.  {% endnote %}  | [optional] 
 **EstimatedGenerationTime** | Pointer to **int64** | Ожидаемая продолжительность генерации в миллисекундах. | [optional] 
 
 ## Methods

@@ -39,6 +39,12 @@
 
 * `MAN_UTIL` (value: `"MAN_UTIL"`)
 
+* `WITHDRAW_AUTO_UTILIZATION` (value: `"WITHDRAW_AUTO_UTILIZATION"`)
+
+* `EXTERNAL_WITHDRAW_INT_OZON` (value: `"EXTERNAL_WITHDRAW_INT_OZON"`)
+
+* `EXTERNAL_WITHDRAW_INT_WB` (value: `"EXTERNAL_WITHDRAW_INT_WB"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

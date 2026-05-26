@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -25,9 +25,11 @@ type GetChatInfoDTO struct {
 	// Идентификатор чата.
 	ChatId int64 `json:"chatId"`
 	// Идентификатор заказа.
-	OrderId int64          `json:"orderId"`
-	Type    ChatType       `json:"type"`
-	Status  ChatStatusType `json:"status"`
+	// Deprecated
+	OrderId *int64             `json:"orderId,omitempty"`
+	Context ChatFullContextDTO `json:"context"`
+	Type    ChatType           `json:"type"`
+	Status  ChatStatusType     `json:"status"`
 	// Дата и время создания чата.  Формат даты: ISO 8601 со смещением относительно UTC.
 	CreatedAt time.Time `json:"createdAt"`
 	// Дата и время последнего сообщения в чате.  Формат даты: ISO 8601 со смещением относительно UTC.
@@ -40,10 +42,10 @@ type _GetChatInfoDTO GetChatInfoDTO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetChatInfoDTO(chatId int64, orderId int64, type_ ChatType, status ChatStatusType, createdAt time.Time, updatedAt time.Time) *GetChatInfoDTO {
+func NewGetChatInfoDTO(chatId int64, context ChatFullContextDTO, type_ ChatType, status ChatStatusType, createdAt time.Time, updatedAt time.Time) *GetChatInfoDTO {
 	this := GetChatInfoDTO{}
 	this.ChatId = chatId
-	this.OrderId = orderId
+	this.Context = context
 	this.Type = type_
 	this.Status = status
 	this.CreatedAt = createdAt
@@ -83,28 +85,63 @@ func (o *GetChatInfoDTO) SetChatId(v int64) {
 	o.ChatId = v
 }
 
-// GetOrderId returns the OrderId field value
+// GetOrderId returns the OrderId field value if set, zero value otherwise.
+// Deprecated
 func (o *GetChatInfoDTO) GetOrderId() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.OrderId) {
 		var ret int64
 		return ret
 	}
-
-	return o.OrderId
+	return *o.OrderId
 }
 
-// GetOrderIdOk returns a tuple with the OrderId field value
+// GetOrderIdOk returns a tuple with the OrderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *GetChatInfoDTO) GetOrderIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.OrderId) {
+		return nil, false
+	}
+	return o.OrderId, true
+}
+
+// HasOrderId returns a boolean if a field has been set.
+func (o *GetChatInfoDTO) HasOrderId() bool {
+	if o != nil && !IsNil(o.OrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderId gets a reference to the given int64 and assigns it to the OrderId field.
+// Deprecated
+func (o *GetChatInfoDTO) SetOrderId(v int64) {
+	o.OrderId = &v
+}
+
+// GetContext returns the Context field value
+func (o *GetChatInfoDTO) GetContext() ChatFullContextDTO {
+	if o == nil {
+		var ret ChatFullContextDTO
+		return ret
+	}
+
+	return o.Context
+}
+
+// GetContextOk returns a tuple with the Context field value
+// and a boolean to check if the value has been set.
+func (o *GetChatInfoDTO) GetContextOk() (*ChatFullContextDTO, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OrderId, true
+	return &o.Context, true
 }
 
-// SetOrderId sets field value
-func (o *GetChatInfoDTO) SetOrderId(v int64) {
-	o.OrderId = v
+// SetContext sets field value
+func (o *GetChatInfoDTO) SetContext(v ChatFullContextDTO) {
+	o.Context = v
 }
 
 // GetType returns the Type field value
@@ -214,7 +251,10 @@ func (o GetChatInfoDTO) MarshalJSON() ([]byte, error) {
 func (o GetChatInfoDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["chatId"] = o.ChatId
-	toSerialize["orderId"] = o.OrderId
+	if !IsNil(o.OrderId) {
+		toSerialize["orderId"] = o.OrderId
+	}
+	toSerialize["context"] = o.Context
 	toSerialize["type"] = o.Type
 	toSerialize["status"] = o.Status
 	toSerialize["createdAt"] = o.CreatedAt
@@ -228,7 +268,7 @@ func (o *GetChatInfoDTO) UnmarshalJSON(data []byte) (err error) {
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
 		"chatId",
-		"orderId",
+		"context",
 		"type",
 		"status",
 		"createdAt",

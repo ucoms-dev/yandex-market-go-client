@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,9 +22,8 @@ var _ MappedNullable = &GetOutletsResponse{}
 // GetOutletsResponse Ответ на запрос информации о точках продаж.
 type GetOutletsResponse struct {
 	// Информация о точках продаж.
-	Outlets []FullOutletDTO    `json:"outlets"`
-	Paging  *ScrollingPagerDTO `json:"paging,omitempty"`
-	Pager   *FlippingPagerDTO  `json:"pager,omitempty"`
+	Outlets []FullOutletDTO                    `json:"outlets"`
+	Paging  *PackagingForwardScrollingPagerDTO `json:"paging,omitempty"`
 }
 
 type _GetOutletsResponse GetOutletsResponse
@@ -72,9 +71,9 @@ func (o *GetOutletsResponse) SetOutlets(v []FullOutletDTO) {
 }
 
 // GetPaging returns the Paging field value if set, zero value otherwise.
-func (o *GetOutletsResponse) GetPaging() ScrollingPagerDTO {
+func (o *GetOutletsResponse) GetPaging() PackagingForwardScrollingPagerDTO {
 	if o == nil || IsNil(o.Paging) {
-		var ret ScrollingPagerDTO
+		var ret PackagingForwardScrollingPagerDTO
 		return ret
 	}
 	return *o.Paging
@@ -82,7 +81,7 @@ func (o *GetOutletsResponse) GetPaging() ScrollingPagerDTO {
 
 // GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetOutletsResponse) GetPagingOk() (*ScrollingPagerDTO, bool) {
+func (o *GetOutletsResponse) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool) {
 	if o == nil || IsNil(o.Paging) {
 		return nil, false
 	}
@@ -98,41 +97,9 @@ func (o *GetOutletsResponse) HasPaging() bool {
 	return false
 }
 
-// SetPaging gets a reference to the given ScrollingPagerDTO and assigns it to the Paging field.
-func (o *GetOutletsResponse) SetPaging(v ScrollingPagerDTO) {
+// SetPaging gets a reference to the given PackagingForwardScrollingPagerDTO and assigns it to the Paging field.
+func (o *GetOutletsResponse) SetPaging(v PackagingForwardScrollingPagerDTO) {
 	o.Paging = &v
-}
-
-// GetPager returns the Pager field value if set, zero value otherwise.
-func (o *GetOutletsResponse) GetPager() FlippingPagerDTO {
-	if o == nil || IsNil(o.Pager) {
-		var ret FlippingPagerDTO
-		return ret
-	}
-	return *o.Pager
-}
-
-// GetPagerOk returns a tuple with the Pager field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetOutletsResponse) GetPagerOk() (*FlippingPagerDTO, bool) {
-	if o == nil || IsNil(o.Pager) {
-		return nil, false
-	}
-	return o.Pager, true
-}
-
-// HasPager returns a boolean if a field has been set.
-func (o *GetOutletsResponse) HasPager() bool {
-	if o != nil && !IsNil(o.Pager) {
-		return true
-	}
-
-	return false
-}
-
-// SetPager gets a reference to the given FlippingPagerDTO and assigns it to the Pager field.
-func (o *GetOutletsResponse) SetPager(v FlippingPagerDTO) {
-	o.Pager = &v
 }
 
 func (o GetOutletsResponse) MarshalJSON() ([]byte, error) {
@@ -148,9 +115,6 @@ func (o GetOutletsResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize["outlets"] = o.Outlets
 	if !IsNil(o.Paging) {
 		toSerialize["paging"] = o.Paging
-	}
-	if !IsNil(o.Pager) {
-		toSerialize["pager"] = o.Pager
 	}
 	return toSerialize, nil
 }

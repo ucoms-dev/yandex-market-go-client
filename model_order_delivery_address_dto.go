@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -31,17 +31,21 @@ type OrderDeliveryAddressDTO struct {
 	Subway *string `json:"subway,omitempty"`
 	// Улица.
 	Street *string `json:"street,omitempty"`
-	// Дом или владение.
+	// Номер дома.
 	House *string `json:"house,omitempty"`
-	// Корпус или строение.
+	// Номер владения.
+	Estate *string `json:"estate,omitempty"`
+	// Корпус.
 	Block *string `json:"block,omitempty"`
-	// Подъезд.
+	// Строение.
+	Building *string `json:"building,omitempty"`
+	// Номер подъезда.
 	Entrance *string `json:"entrance,omitempty"`
 	// Код домофона.
 	Entryphone *string `json:"entryphone,omitempty"`
 	// Этаж.
 	Floor *string `json:"floor,omitempty"`
-	// Квартира или офис.
+	// Номер квартиры или офиса.
 	Apartment *string `json:"apartment,omitempty"`
 	// Телефон получателя заказа.
 	Phone *string `json:"phone,omitempty"`
@@ -291,6 +295,38 @@ func (o *OrderDeliveryAddressDTO) SetHouse(v string) {
 	o.House = &v
 }
 
+// GetEstate returns the Estate field value if set, zero value otherwise.
+func (o *OrderDeliveryAddressDTO) GetEstate() string {
+	if o == nil || IsNil(o.Estate) {
+		var ret string
+		return ret
+	}
+	return *o.Estate
+}
+
+// GetEstateOk returns a tuple with the Estate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderDeliveryAddressDTO) GetEstateOk() (*string, bool) {
+	if o == nil || IsNil(o.Estate) {
+		return nil, false
+	}
+	return o.Estate, true
+}
+
+// HasEstate returns a boolean if a field has been set.
+func (o *OrderDeliveryAddressDTO) HasEstate() bool {
+	if o != nil && !IsNil(o.Estate) {
+		return true
+	}
+
+	return false
+}
+
+// SetEstate gets a reference to the given string and assigns it to the Estate field.
+func (o *OrderDeliveryAddressDTO) SetEstate(v string) {
+	o.Estate = &v
+}
+
 // GetBlock returns the Block field value if set, zero value otherwise.
 func (o *OrderDeliveryAddressDTO) GetBlock() string {
 	if o == nil || IsNil(o.Block) {
@@ -321,6 +357,38 @@ func (o *OrderDeliveryAddressDTO) HasBlock() bool {
 // SetBlock gets a reference to the given string and assigns it to the Block field.
 func (o *OrderDeliveryAddressDTO) SetBlock(v string) {
 	o.Block = &v
+}
+
+// GetBuilding returns the Building field value if set, zero value otherwise.
+func (o *OrderDeliveryAddressDTO) GetBuilding() string {
+	if o == nil || IsNil(o.Building) {
+		var ret string
+		return ret
+	}
+	return *o.Building
+}
+
+// GetBuildingOk returns a tuple with the Building field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderDeliveryAddressDTO) GetBuildingOk() (*string, bool) {
+	if o == nil || IsNil(o.Building) {
+		return nil, false
+	}
+	return o.Building, true
+}
+
+// HasBuilding returns a boolean if a field has been set.
+func (o *OrderDeliveryAddressDTO) HasBuilding() bool {
+	if o != nil && !IsNil(o.Building) {
+		return true
+	}
+
+	return false
+}
+
+// SetBuilding gets a reference to the given string and assigns it to the Building field.
+func (o *OrderDeliveryAddressDTO) SetBuilding(v string) {
+	o.Building = &v
 }
 
 // GetEntrance returns the Entrance field value if set, zero value otherwise.
@@ -578,8 +646,14 @@ func (o OrderDeliveryAddressDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.House) {
 		toSerialize["house"] = o.House
 	}
+	if !IsNil(o.Estate) {
+		toSerialize["estate"] = o.Estate
+	}
 	if !IsNil(o.Block) {
 		toSerialize["block"] = o.Block
+	}
+	if !IsNil(o.Building) {
+		toSerialize["building"] = o.Building
 	}
 	if !IsNil(o.Entrance) {
 		toSerialize["entrance"] = o.Entrance

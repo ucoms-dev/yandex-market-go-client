@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OfferMappings** | [**[]UpdateOfferMappingDTO**](UpdateOfferMappingDTO.md) | Перечень товаров, которые нужно добавить или обновить. | 
+**OfferMappings** | [**[]UpdateOfferMappingDTO**](UpdateOfferMappingDTO.md) | Список товаров, которые нужно добавить или обновить.  {% note warning \&quot;Скоро мы уменьшим максимальное количество товаров в запросе\&quot; %}  Уже сейчас не передавайте больше 100.  {% endnote %}     | 
 **OnlyPartnerMediaContent** | Pointer to **bool** | Будут ли использоваться только переданные вами данные о товарах.  Значение по умолчанию: &#x60;false&#x60;. Чтобы удалить данные, которые добавил Маркет, передайте значение &#x60;true&#x60;.  | [optional] 
 
 ## Methods

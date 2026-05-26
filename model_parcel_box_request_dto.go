@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &ParcelBoxRequestDTO{}
 type ParcelBoxRequestDTO struct {
 	// {% note warning \"Не используйте этот параметр.\" %}     {% endnote %}
 	// Deprecated
-	FulfilmentId *string `json:"fulfilmentId,omitempty" validate:"regexp=^[\\\\p{Alnum}- ]*$"`
+	FulfilmentId *string `json:"fulfilmentId,omitempty" validate:"regexp=^[[a-zA-Z0-9]- ]*$"`
 }
 
 // NewParcelBoxRequestDTO instantiates a new ParcelBoxRequestDTO object

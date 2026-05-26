@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Items** | [**[]OrderItemValidationStatusDTO**](OrderItemValidationStatusDTO.md) | Список идентификаторов товаров и статусы проверки УИНов. | 
+**Items** | [**[]OrderItemValidationStatusDTO**](OrderItemValidationStatusDTO.md) | Список идентификаторов товаров и информация по проверке кодов. | 
 
 ## Methods
 

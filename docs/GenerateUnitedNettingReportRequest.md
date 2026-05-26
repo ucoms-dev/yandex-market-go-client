@@ -4,17 +4,17 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BusinessId** | **int64** | Идентификатор кабинета. | 
+**BusinessId** | **int64** | Идентификатор кабинета. {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) {% endif %}  | 
 **DateTimeFrom** | Pointer to **time.Time** | Начало периода, включительно. | [optional] 
 **DateTimeTo** | Pointer to **time.Time** | Конец периода, включительно. Максимальный период — 3 месяца. | [optional] 
-**DateFrom** | Pointer to **string** | Начало периода, включительно. | [optional] 
-**DateTo** | Pointer to **string** | Конец периода, включительно. Максимальный период — 3 месяца. | [optional] 
+**DateFrom** | Pointer to **string** | Начало периода, включительно.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | [optional] 
+**DateTo** | Pointer to **string** | Конец периода, включительно. Максимальный период — 3 месяца.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | [optional] 
 **BankOrderId** | Pointer to **int64** | Номер платежного поручения. | [optional] 
 **BankOrderDateTime** | Pointer to **time.Time** | Дата платежного поручения. | [optional] 
 **MonthOfYear** | Pointer to [**MonthOfYearDTO**](MonthOfYearDTO.md) |  | [optional] 
 **PlacementPrograms** | Pointer to [**[]PlacementType**](PlacementType.md) | Список моделей, которые нужны в отчете.  | [optional] 
 **Inns** | Pointer to **[]string** | Список ИНН, которые нужны в отчете. | [optional] 
-**CampaignIds** | Pointer to **[]int64** | Список идентификаторов кампании тех магазинов, которые нужны в отчете.  Их можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не используйте вместо них идентификаторы магазинов, которые указаны в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.  | [optional] 
+**CampaignIds** | Pointer to **[]int64** | Список идентификаторов кампании тех магазинов, которые нужны в отчете.  | [optional] 
 
 ## Methods
 

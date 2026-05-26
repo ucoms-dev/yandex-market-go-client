@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,14 +21,11 @@ var _ MappedNullable = &OrderDigitalItemDTO{}
 
 // OrderDigitalItemDTO Цифровой товар.
 type OrderDigitalItemDTO struct {
-	// Идентификатор товара в заказе.  Он приходит в ответе на запрос [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md) — параметр `id` в `items`.
+	// Идентификатор товара в заказе.  Он приходит в ответе метода [POST v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md) — параметр `id` в `items`.
 	Id int64 `json:"id"`
-	// {% note warning \"Вместо него используйте `codes`\" %}  Совместное использование обоих параметров приведет к ошибке.  {% endnote %}  Сам ключ.
-	// Deprecated
-	Code *string `json:"code,omitempty"`
-	// Ключи, относящиеся к товару.
+	// Ключи, относящиеся к товару.  Поле обязательно для заполнения.
 	Codes []string `json:"codes,omitempty"`
-	// Инструкция по активации.
+	// Инструкция по активации.  Для форматирования текста можно использовать теги HTML:  * \\<h>, \\<h1>, \\<h2> и так далее — для заголовков; * \\<br> и \\<p> — для переноса строки; * \\<ol> — для нумерованного списка; * \\<ul> — для маркированного списка; * \\<li> — для создания элементов списка (должен находиться внутри \\<ol> или \\<ul>); * \\<div> — поддерживается, но не влияет на отображение текста.
 	Slip string `json:"slip"`
 	// Дата, до которой нужно активировать ключи. Если ключи действуют бессрочно, укажите любую дату в отдаленном будущем.  Формат даты: `ГГГГ-ММ-ДД`.
 	ActivateTill string `json:"activate_till"`
@@ -78,41 +75,6 @@ func (o *OrderDigitalItemDTO) GetIdOk() (*int64, bool) {
 // SetId sets field value
 func (o *OrderDigitalItemDTO) SetId(v int64) {
 	o.Id = v
-}
-
-// GetCode returns the Code field value if set, zero value otherwise.
-// Deprecated
-func (o *OrderDigitalItemDTO) GetCode() string {
-	if o == nil || IsNil(o.Code) {
-		var ret string
-		return ret
-	}
-	return *o.Code
-}
-
-// GetCodeOk returns a tuple with the Code field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *OrderDigitalItemDTO) GetCodeOk() (*string, bool) {
-	if o == nil || IsNil(o.Code) {
-		return nil, false
-	}
-	return o.Code, true
-}
-
-// HasCode returns a boolean if a field has been set.
-func (o *OrderDigitalItemDTO) HasCode() bool {
-	if o != nil && !IsNil(o.Code) {
-		return true
-	}
-
-	return false
-}
-
-// SetCode gets a reference to the given string and assigns it to the Code field.
-// Deprecated
-func (o *OrderDigitalItemDTO) SetCode(v string) {
-	o.Code = &v
 }
 
 // GetCodes returns the Codes field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -207,9 +169,6 @@ func (o OrderDigitalItemDTO) MarshalJSON() ([]byte, error) {
 func (o OrderDigitalItemDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["id"] = o.Id
-	if !IsNil(o.Code) {
-		toSerialize["code"] = o.Code
-	}
 	if o.Codes != nil {
 		toSerialize["codes"] = o.Codes
 	}

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &PagedReturnsDTO{}
 
 // PagedReturnsDTO Невыкупы или возвраты.
 type PagedReturnsDTO struct {
-	Paging *ForwardScrollingPagerDTO `json:"paging,omitempty"`
+	Paging *PackagingForwardScrollingPagerDTO `json:"paging,omitempty"`
 	// Список невыкупов или возвратов.
 	Returns []ReturnDTO `json:"returns"`
 }
@@ -47,9 +47,9 @@ func NewPagedReturnsDTOWithDefaults() *PagedReturnsDTO {
 }
 
 // GetPaging returns the Paging field value if set, zero value otherwise.
-func (o *PagedReturnsDTO) GetPaging() ForwardScrollingPagerDTO {
+func (o *PagedReturnsDTO) GetPaging() PackagingForwardScrollingPagerDTO {
 	if o == nil || IsNil(o.Paging) {
-		var ret ForwardScrollingPagerDTO
+		var ret PackagingForwardScrollingPagerDTO
 		return ret
 	}
 	return *o.Paging
@@ -57,7 +57,7 @@ func (o *PagedReturnsDTO) GetPaging() ForwardScrollingPagerDTO {
 
 // GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PagedReturnsDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool) {
+func (o *PagedReturnsDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool) {
 	if o == nil || IsNil(o.Paging) {
 		return nil, false
 	}
@@ -73,8 +73,8 @@ func (o *PagedReturnsDTO) HasPaging() bool {
 	return false
 }
 
-// SetPaging gets a reference to the given ForwardScrollingPagerDTO and assigns it to the Paging field.
-func (o *PagedReturnsDTO) SetPaging(v ForwardScrollingPagerDTO) {
+// SetPaging gets a reference to the given PackagingForwardScrollingPagerDTO and assigns it to the Paging field.
+func (o *PagedReturnsDTO) SetPaging(v PackagingForwardScrollingPagerDTO) {
 	o.Paging = &v
 }
 

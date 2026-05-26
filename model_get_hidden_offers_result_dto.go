@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &GetHiddenOffersResultDTO{}
 
 // GetHiddenOffersResultDTO Список скрытых вами товаров.
 type GetHiddenOffersResultDTO struct {
-	Paging *ScrollingPagerDTO `json:"paging,omitempty"`
+	Paging *PackagingScrollingPagerDTO `json:"paging,omitempty"`
 	// Список скрытых товаров.
 	HiddenOffers []HiddenOfferDTO `json:"hiddenOffers"`
 }
@@ -47,9 +47,9 @@ func NewGetHiddenOffersResultDTOWithDefaults() *GetHiddenOffersResultDTO {
 }
 
 // GetPaging returns the Paging field value if set, zero value otherwise.
-func (o *GetHiddenOffersResultDTO) GetPaging() ScrollingPagerDTO {
+func (o *GetHiddenOffersResultDTO) GetPaging() PackagingScrollingPagerDTO {
 	if o == nil || IsNil(o.Paging) {
-		var ret ScrollingPagerDTO
+		var ret PackagingScrollingPagerDTO
 		return ret
 	}
 	return *o.Paging
@@ -57,7 +57,7 @@ func (o *GetHiddenOffersResultDTO) GetPaging() ScrollingPagerDTO {
 
 // GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetHiddenOffersResultDTO) GetPagingOk() (*ScrollingPagerDTO, bool) {
+func (o *GetHiddenOffersResultDTO) GetPagingOk() (*PackagingScrollingPagerDTO, bool) {
 	if o == nil || IsNil(o.Paging) {
 		return nil, false
 	}
@@ -73,8 +73,8 @@ func (o *GetHiddenOffersResultDTO) HasPaging() bool {
 	return false
 }
 
-// SetPaging gets a reference to the given ScrollingPagerDTO and assigns it to the Paging field.
-func (o *GetHiddenOffersResultDTO) SetPaging(v ScrollingPagerDTO) {
+// SetPaging gets a reference to the given PackagingScrollingPagerDTO and assigns it to the Paging field.
+func (o *GetHiddenOffersResultDTO) SetPaging(v PackagingScrollingPagerDTO) {
 	o.Paging = &v
 }
 

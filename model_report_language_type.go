@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -12,55 +12,77 @@ package openapi
 
 import (
 	"encoding/json"
+	"fmt"
 )
 
-// checks if the ReportLanguageType type satisfies the MappedNullable interface at compile time
-var _ MappedNullable = &ReportLanguageType{}
-
 // ReportLanguageType Язык отчета:  * `RU` — русский язык. * `EN` — английский язык.
-type ReportLanguageType struct {
+type ReportLanguageType string
+
+// List of ReportLanguageType
+const (
+	REPORTLANGUAGETYPE_RU ReportLanguageType = "RU"
+	REPORTLANGUAGETYPE_EN ReportLanguageType = "EN"
+)
+
+// All allowed values of ReportLanguageType enum
+var AllowedReportLanguageTypeEnumValues = []ReportLanguageType{
+	"RU",
+	"EN",
 }
 
-// NewReportLanguageType instantiates a new ReportLanguageType object
-// This constructor will assign default values to properties that have it defined,
-// and makes sure properties required by API are set, but the set of arguments
-// will change when the set of required properties is changed
-func NewReportLanguageType() *ReportLanguageType {
-	this := ReportLanguageType{}
-	return &this
-}
-
-// NewReportLanguageTypeWithDefaults instantiates a new ReportLanguageType object
-// This constructor will only assign default values to properties that have it defined,
-// but it doesn't guarantee that properties required by API are set
-func NewReportLanguageTypeWithDefaults() *ReportLanguageType {
-	this := ReportLanguageType{}
-	return &this
-}
-
-func (o ReportLanguageType) MarshalJSON() ([]byte, error) {
-	toSerialize, err := o.ToMap()
+func (v *ReportLanguageType) UnmarshalJSON(src []byte) error {
+	var value string
+	err := json.Unmarshal(src, &value)
 	if err != nil {
-		return []byte{}, err
+		return err
 	}
-	return json.Marshal(toSerialize)
+	enumTypeValue := ReportLanguageType(value)
+	for _, existing := range AllowedReportLanguageTypeEnumValues {
+		if existing == enumTypeValue {
+			*v = enumTypeValue
+			return nil
+		}
+	}
+
+	return fmt.Errorf("%+v is not a valid ReportLanguageType", value)
 }
 
-func (o ReportLanguageType) ToMap() (map[string]interface{}, error) {
-	toSerialize := map[string]interface{}{}
-	return toSerialize, nil
+// NewReportLanguageTypeFromValue returns a pointer to a valid ReportLanguageType
+// for the value passed as argument, or an error if the value passed is not allowed by the enum
+func NewReportLanguageTypeFromValue(v string) (*ReportLanguageType, error) {
+	ev := ReportLanguageType(v)
+	if ev.IsValid() {
+		return &ev, nil
+	} else {
+		return nil, fmt.Errorf("invalid value '%v' for ReportLanguageType: valid values are %v", v, AllowedReportLanguageTypeEnumValues)
+	}
+}
+
+// IsValid return true if the value is valid for the enum, false otherwise
+func (v ReportLanguageType) IsValid() bool {
+	for _, existing := range AllowedReportLanguageTypeEnumValues {
+		if existing == v {
+			return true
+		}
+	}
+	return false
+}
+
+// Ptr returns reference to ReportLanguageType value
+func (v ReportLanguageType) Ptr() *ReportLanguageType {
+	return &v
 }
 
 type NullableReportLanguageType struct {
-	value ReportLanguageType
+	value *ReportLanguageType
 	isSet bool
 }
 
-func (v NullableReportLanguageType) Get() ReportLanguageType {
+func (v NullableReportLanguageType) Get() *ReportLanguageType {
 	return v.value
 }
 
-func (v *NullableReportLanguageType) Set(val ReportLanguageType) {
+func (v *NullableReportLanguageType) Set(val *ReportLanguageType) {
 	v.value = val
 	v.isSet = true
 }
@@ -70,12 +92,11 @@ func (v NullableReportLanguageType) IsSet() bool {
 }
 
 func (v *NullableReportLanguageType) Unset() {
-	var zero ReportLanguageType
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableReportLanguageType(val ReportLanguageType) *NullableReportLanguageType {
+func NewNullableReportLanguageType(val *ReportLanguageType) *NullableReportLanguageType {
 	return &NullableReportLanguageType{value: val, isSet: true}
 }
 

@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderId** | **int64** | Идентификатор заказа. | 
 **PlacesNumber** | **int32** | Количество коробок в заказе. | 
-**Url** | **string** | URL файла с ярлыками‑наклейками на все коробки в заказе.  Соответствует URL, по которому выполняется запрос [GET campaigns/{campaignId}/orders/{orderId}/delivery/labels](../../reference/orders/generateOrderLabels.md).  | 
+**Url** | **string** |  | 
 **ParcelBoxLabels** | [**[]ParcelBoxLabelDTO**](ParcelBoxLabelDTO.md) | Информация на ярлыке. | 
 
 ## Methods

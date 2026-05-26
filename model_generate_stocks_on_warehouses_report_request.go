@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -11,37 +11,36 @@ API version: LATEST
 package openapi
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the GenerateStocksOnWarehousesReportRequest type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GenerateStocksOnWarehousesReportRequest{}
 
-// GenerateStocksOnWarehousesReportRequest Данные, необходимые для генерации отчета.
+// GenerateStocksOnWarehousesReportRequest Данные, необходимые для генерации отчета. Передавайте либо `businessId`, либо `campaignId`/`campaignIds`, но не все сразу.
 type GenerateStocksOnWarehousesReportRequest struct {
-	// Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
-	CampaignId int64 `json:"campaignId"`
-	// Фильтр по идентификаторам складов (только модель FBY). Чтобы узнать идентификатор, воспользуйтесь запросом [GET warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).
+	// Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	CampaignId *int64 `json:"campaignId,omitempty"`
+	// Идентификатор кабинета. {% if audience == \"partner\" %}Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) {% endif %}
+	BusinessId *int64 `json:"businessId,omitempty"`
+	// Фильтр по идентификаторам складов (только модели FBY и LaaS). Чтобы узнать идентификатор, воспользуйтесь запросом [GET v2/warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).
 	WarehouseIds []int64 `json:"warehouseIds,omitempty"`
-	// Фильтр по дате (для модели FBY). В отчет попадут данные за **предшествующий** дате день.
+	// Фильтр по дате (для моделей FBY и LaaS). В отчет попадут данные за **предшествующий** дате день.  Формат даты: `ГГГГ-ММ-ДД`.
 	ReportDate *string `json:"reportDate,omitempty"`
-	// Фильтр по категориям на Маркете (кроме модели FBY).
-	CategoryIds []int64 `json:"categoryIds,omitempty"`
-	// Фильтр по наличию остатков (кроме модели FBY).
+	// Фильтр по категориям на Маркете (кроме моделей FBY и LaaS).
+	CategoryIds []int32 `json:"categoryIds,omitempty"`
+	// Фильтр по наличию остатков (кроме моделей FBY и LaaS).
 	HasStocks *bool `json:"hasStocks,omitempty"`
+	// Фильтр по магазинам для отчета по кабинету (кроме моделей FBY и LaaS).  Передавайте вместе с `businessId`.
+	CampaignIds []int64 `json:"campaignIds,omitempty"`
 }
-
-type _GenerateStocksOnWarehousesReportRequest GenerateStocksOnWarehousesReportRequest
 
 // NewGenerateStocksOnWarehousesReportRequest instantiates a new GenerateStocksOnWarehousesReportRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGenerateStocksOnWarehousesReportRequest(campaignId int64) *GenerateStocksOnWarehousesReportRequest {
+func NewGenerateStocksOnWarehousesReportRequest() *GenerateStocksOnWarehousesReportRequest {
 	this := GenerateStocksOnWarehousesReportRequest{}
-	this.CampaignId = campaignId
 	return &this
 }
 
@@ -53,28 +52,68 @@ func NewGenerateStocksOnWarehousesReportRequestWithDefaults() *GenerateStocksOnW
 	return &this
 }
 
-// GetCampaignId returns the CampaignId field value
+// GetCampaignId returns the CampaignId field value if set, zero value otherwise.
 func (o *GenerateStocksOnWarehousesReportRequest) GetCampaignId() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.CampaignId) {
 		var ret int64
 		return ret
 	}
-
-	return o.CampaignId
+	return *o.CampaignId
 }
 
-// GetCampaignIdOk returns a tuple with the CampaignId field value
+// GetCampaignIdOk returns a tuple with the CampaignId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GenerateStocksOnWarehousesReportRequest) GetCampaignIdOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.CampaignId) {
 		return nil, false
 	}
-	return &o.CampaignId, true
+	return o.CampaignId, true
 }
 
-// SetCampaignId sets field value
+// HasCampaignId returns a boolean if a field has been set.
+func (o *GenerateStocksOnWarehousesReportRequest) HasCampaignId() bool {
+	if o != nil && !IsNil(o.CampaignId) {
+		return true
+	}
+
+	return false
+}
+
+// SetCampaignId gets a reference to the given int64 and assigns it to the CampaignId field.
 func (o *GenerateStocksOnWarehousesReportRequest) SetCampaignId(v int64) {
-	o.CampaignId = v
+	o.CampaignId = &v
+}
+
+// GetBusinessId returns the BusinessId field value if set, zero value otherwise.
+func (o *GenerateStocksOnWarehousesReportRequest) GetBusinessId() int64 {
+	if o == nil || IsNil(o.BusinessId) {
+		var ret int64
+		return ret
+	}
+	return *o.BusinessId
+}
+
+// GetBusinessIdOk returns a tuple with the BusinessId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GenerateStocksOnWarehousesReportRequest) GetBusinessIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.BusinessId) {
+		return nil, false
+	}
+	return o.BusinessId, true
+}
+
+// HasBusinessId returns a boolean if a field has been set.
+func (o *GenerateStocksOnWarehousesReportRequest) HasBusinessId() bool {
+	if o != nil && !IsNil(o.BusinessId) {
+		return true
+	}
+
+	return false
+}
+
+// SetBusinessId gets a reference to the given int64 and assigns it to the BusinessId field.
+func (o *GenerateStocksOnWarehousesReportRequest) SetBusinessId(v int64) {
+	o.BusinessId = &v
 }
 
 // GetWarehouseIds returns the WarehouseIds field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -143,9 +182,9 @@ func (o *GenerateStocksOnWarehousesReportRequest) SetReportDate(v string) {
 }
 
 // GetCategoryIds returns the CategoryIds field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIds() []int64 {
+func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIds() []int32 {
 	if o == nil {
-		var ret []int64
+		var ret []int32
 		return ret
 	}
 	return o.CategoryIds
@@ -154,7 +193,7 @@ func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIds() []int64 {
 // GetCategoryIdsOk returns a tuple with the CategoryIds field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIdsOk() ([]int64, bool) {
+func (o *GenerateStocksOnWarehousesReportRequest) GetCategoryIdsOk() ([]int32, bool) {
 	if o == nil || IsNil(o.CategoryIds) {
 		return nil, false
 	}
@@ -170,8 +209,8 @@ func (o *GenerateStocksOnWarehousesReportRequest) HasCategoryIds() bool {
 	return false
 }
 
-// SetCategoryIds gets a reference to the given []int64 and assigns it to the CategoryIds field.
-func (o *GenerateStocksOnWarehousesReportRequest) SetCategoryIds(v []int64) {
+// SetCategoryIds gets a reference to the given []int32 and assigns it to the CategoryIds field.
+func (o *GenerateStocksOnWarehousesReportRequest) SetCategoryIds(v []int32) {
 	o.CategoryIds = v
 }
 
@@ -207,6 +246,39 @@ func (o *GenerateStocksOnWarehousesReportRequest) SetHasStocks(v bool) {
 	o.HasStocks = &v
 }
 
+// GetCampaignIds returns the CampaignIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GenerateStocksOnWarehousesReportRequest) GetCampaignIds() []int64 {
+	if o == nil {
+		var ret []int64
+		return ret
+	}
+	return o.CampaignIds
+}
+
+// GetCampaignIdsOk returns a tuple with the CampaignIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GenerateStocksOnWarehousesReportRequest) GetCampaignIdsOk() ([]int64, bool) {
+	if o == nil || IsNil(o.CampaignIds) {
+		return nil, false
+	}
+	return o.CampaignIds, true
+}
+
+// HasCampaignIds returns a boolean if a field has been set.
+func (o *GenerateStocksOnWarehousesReportRequest) HasCampaignIds() bool {
+	if o != nil && !IsNil(o.CampaignIds) {
+		return true
+	}
+
+	return false
+}
+
+// SetCampaignIds gets a reference to the given []int64 and assigns it to the CampaignIds field.
+func (o *GenerateStocksOnWarehousesReportRequest) SetCampaignIds(v []int64) {
+	o.CampaignIds = v
+}
+
 func (o GenerateStocksOnWarehousesReportRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -217,7 +289,12 @@ func (o GenerateStocksOnWarehousesReportRequest) MarshalJSON() ([]byte, error) {
 
 func (o GenerateStocksOnWarehousesReportRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["campaignId"] = o.CampaignId
+	if !IsNil(o.CampaignId) {
+		toSerialize["campaignId"] = o.CampaignId
+	}
+	if !IsNil(o.BusinessId) {
+		toSerialize["businessId"] = o.BusinessId
+	}
 	if o.WarehouseIds != nil {
 		toSerialize["warehouseIds"] = o.WarehouseIds
 	}
@@ -230,44 +307,10 @@ func (o GenerateStocksOnWarehousesReportRequest) ToMap() (map[string]interface{}
 	if !IsNil(o.HasStocks) {
 		toSerialize["hasStocks"] = o.HasStocks
 	}
+	if o.CampaignIds != nil {
+		toSerialize["campaignIds"] = o.CampaignIds
+	}
 	return toSerialize, nil
-}
-
-func (o *GenerateStocksOnWarehousesReportRequest) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"campaignId",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err
-	}
-
-	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varGenerateStocksOnWarehousesReportRequest := _GenerateStocksOnWarehousesReportRequest{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varGenerateStocksOnWarehousesReportRequest)
-
-	if err != nil {
-		return err
-	}
-
-	*o = GenerateStocksOnWarehousesReportRequest(varGenerateStocksOnWarehousesReportRequest)
-
-	return err
 }
 
 type NullableGenerateStocksOnWarehousesReportRequest struct {

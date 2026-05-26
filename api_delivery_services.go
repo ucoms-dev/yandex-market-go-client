@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -36,12 +36,11 @@ GetDeliveryServices Справочник служб доставки
 {% include notitle [access](../../_auto/method_scopes/getDeliveryServices.md) %}
 
 Возвращает справочник служб доставки: идентификаторы и наименования.
-|**⚙️ Лимит:** 5 000 запросов в час|
-|-|
 
+{% include notitle [limit](../../_auto/method_limits/getDeliveryServices.md) %}
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return DeliveryServicesAPIGetDeliveryServicesRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return DeliveryServicesAPIGetDeliveryServicesRequest
 */
 func (a *DeliveryServicesAPIService) GetDeliveryServices(ctx context.Context) DeliveryServicesAPIGetDeliveryServicesRequest {
 	return DeliveryServicesAPIGetDeliveryServicesRequest{
@@ -51,7 +50,8 @@ func (a *DeliveryServicesAPIService) GetDeliveryServices(ctx context.Context) De
 }
 
 // Execute executes the request
-//  @return GetDeliveryServicesResponse
+//
+//	@return GetDeliveryServicesResponse
 func (a *DeliveryServicesAPIService) GetDeliveryServicesExecute(r DeliveryServicesAPIGetDeliveryServicesRequest) (*GetDeliveryServicesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -65,7 +65,7 @@ func (a *DeliveryServicesAPIService) GetDeliveryServicesExecute(r DeliveryServic
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/delivery/services"
+	localVarPath := localBasePath + "/v2/delivery/services"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

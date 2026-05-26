@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -23,7 +23,7 @@ var _ MappedNullable = &SetOrderDeliveryTrackCodeRequest{}
 type SetOrderDeliveryTrackCodeRequest struct {
 	// Трек‑номер посылки.
 	TrackCode string `json:"trackCode"`
-	// Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md).
+	// Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md).
 	DeliveryServiceId int64 `json:"deliveryServiceId"`
 }
 

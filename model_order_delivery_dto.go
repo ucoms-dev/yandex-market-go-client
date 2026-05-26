@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -25,7 +25,7 @@ type OrderDeliveryDTO struct {
 	// Deprecated
 	Id   *string           `json:"id,omitempty"`
 	Type OrderDeliveryType `json:"type"`
-	// Наименование службы доставки.
+	// Название службы доставки.
 	ServiceName string `json:"serviceName"`
 	// {% note warning \"Стоимость доставки смотрите в параметре `deliveryTotal`.\" %}     {% endnote %}  Стоимость доставки в валюте заказа.
 	// Deprecated
@@ -41,12 +41,12 @@ type OrderDeliveryDTO struct {
 	LiftType          *OrderLiftType `json:"liftType,omitempty"`
 	// Стоимость подъема на этаж.
 	LiftPrice *float32 `json:"liftPrice,omitempty"`
-	// Идентификатор пункта самовывоза, присвоенный магазином.
+	// Идентификатор пункта выдачи, присвоенный магазином.
 	OutletCode *string `json:"outletCode,omitempty"`
 	// Формат даты: `ДД-ММ-ГГГГ`.
 	OutletStorageLimitDate *string                    `json:"outletStorageLimitDate,omitempty"`
 	DispatchType           *OrderDeliveryDispatchType `json:"dispatchType,omitempty"`
-	// Информация для отслеживания перемещений посылки.
+	// Информация для отслеживания посылки.
 	Tracks []OrderTrackDTO `json:"tracks,omitempty"`
 	// Информация о посылках.
 	Shipments []OrderShipmentDTO `json:"shipments,omitempty"`
@@ -55,6 +55,8 @@ type OrderDeliveryDTO struct {
 	EacType   *OrderDeliveryEacType `json:"eacType,omitempty"`
 	// Код подтверждения ЭАПП (для типа `MERCHANT_TO_COURIER`).
 	EacCode *string `json:"eacCode,omitempty"`
+	// **Только для модели LaaS**  Код получения заказа на ПВЗ.
+	ReceiveCode *string `json:"receiveCode,omitempty"`
 }
 
 type _OrderDeliveryDTO OrderDeliveryDTO
@@ -721,6 +723,38 @@ func (o *OrderDeliveryDTO) SetEacCode(v string) {
 	o.EacCode = &v
 }
 
+// GetReceiveCode returns the ReceiveCode field value if set, zero value otherwise.
+func (o *OrderDeliveryDTO) GetReceiveCode() string {
+	if o == nil || IsNil(o.ReceiveCode) {
+		var ret string
+		return ret
+	}
+	return *o.ReceiveCode
+}
+
+// GetReceiveCodeOk returns a tuple with the ReceiveCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrderDeliveryDTO) GetReceiveCodeOk() (*string, bool) {
+	if o == nil || IsNil(o.ReceiveCode) {
+		return nil, false
+	}
+	return o.ReceiveCode, true
+}
+
+// HasReceiveCode returns a boolean if a field has been set.
+func (o *OrderDeliveryDTO) HasReceiveCode() bool {
+	if o != nil && !IsNil(o.ReceiveCode) {
+		return true
+	}
+
+	return false
+}
+
+// SetReceiveCode gets a reference to the given string and assigns it to the ReceiveCode field.
+func (o *OrderDeliveryDTO) SetReceiveCode(v string) {
+	o.ReceiveCode = &v
+}
+
 func (o OrderDeliveryDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -783,6 +817,9 @@ func (o OrderDeliveryDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.EacCode) {
 		toSerialize["eacCode"] = o.EacCode
+	}
+	if !IsNil(o.ReceiveCode) {
+		toSerialize["receiveCode"] = o.ReceiveCode
 	}
 	return toSerialize, nil
 }

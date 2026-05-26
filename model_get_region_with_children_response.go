@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,8 +19,9 @@ var _ MappedNullable = &GetRegionWithChildrenResponse{}
 
 // GetRegionWithChildrenResponse struct for GetRegionWithChildrenResponse
 type GetRegionWithChildrenResponse struct {
-	Pager   *FlippingPagerDTO `json:"pager,omitempty"`
-	Regions *RegionDTO        `json:"regions,omitempty"`
+	Pager   *FlippingPagerDTO                  `json:"pager,omitempty"`
+	Paging  *PackagingForwardScrollingPagerDTO `json:"paging,omitempty"`
+	Regions *RegionWithChildrenDTO             `json:"regions,omitempty"`
 }
 
 // NewGetRegionWithChildrenResponse instantiates a new GetRegionWithChildrenResponse object
@@ -72,10 +73,42 @@ func (o *GetRegionWithChildrenResponse) SetPager(v FlippingPagerDTO) {
 	o.Pager = &v
 }
 
+// GetPaging returns the Paging field value if set, zero value otherwise.
+func (o *GetRegionWithChildrenResponse) GetPaging() PackagingForwardScrollingPagerDTO {
+	if o == nil || IsNil(o.Paging) {
+		var ret PackagingForwardScrollingPagerDTO
+		return ret
+	}
+	return *o.Paging
+}
+
+// GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetRegionWithChildrenResponse) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool) {
+	if o == nil || IsNil(o.Paging) {
+		return nil, false
+	}
+	return o.Paging, true
+}
+
+// HasPaging returns a boolean if a field has been set.
+func (o *GetRegionWithChildrenResponse) HasPaging() bool {
+	if o != nil && !IsNil(o.Paging) {
+		return true
+	}
+
+	return false
+}
+
+// SetPaging gets a reference to the given PackagingForwardScrollingPagerDTO and assigns it to the Paging field.
+func (o *GetRegionWithChildrenResponse) SetPaging(v PackagingForwardScrollingPagerDTO) {
+	o.Paging = &v
+}
+
 // GetRegions returns the Regions field value if set, zero value otherwise.
-func (o *GetRegionWithChildrenResponse) GetRegions() RegionDTO {
+func (o *GetRegionWithChildrenResponse) GetRegions() RegionWithChildrenDTO {
 	if o == nil || IsNil(o.Regions) {
-		var ret RegionDTO
+		var ret RegionWithChildrenDTO
 		return ret
 	}
 	return *o.Regions
@@ -83,7 +116,7 @@ func (o *GetRegionWithChildrenResponse) GetRegions() RegionDTO {
 
 // GetRegionsOk returns a tuple with the Regions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GetRegionWithChildrenResponse) GetRegionsOk() (*RegionDTO, bool) {
+func (o *GetRegionWithChildrenResponse) GetRegionsOk() (*RegionWithChildrenDTO, bool) {
 	if o == nil || IsNil(o.Regions) {
 		return nil, false
 	}
@@ -99,8 +132,8 @@ func (o *GetRegionWithChildrenResponse) HasRegions() bool {
 	return false
 }
 
-// SetRegions gets a reference to the given RegionDTO and assigns it to the Regions field.
-func (o *GetRegionWithChildrenResponse) SetRegions(v RegionDTO) {
+// SetRegions gets a reference to the given RegionWithChildrenDTO and assigns it to the Regions field.
+func (o *GetRegionWithChildrenResponse) SetRegions(v RegionWithChildrenDTO) {
 	o.Regions = &v
 }
 
@@ -116,6 +149,9 @@ func (o GetRegionWithChildrenResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Pager) {
 		toSerialize["pager"] = o.Pager
+	}
+	if !IsNil(o.Paging) {
+		toSerialize["paging"] = o.Paging
 	}
 	if !IsNil(o.Regions) {
 		toSerialize["regions"] = o.Regions

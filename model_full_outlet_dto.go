@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -32,7 +32,7 @@ type FullOutletDTO struct {
 	ShopOutletCode *string               `json:"shopOutletCode,omitempty"`
 	Visibility     *OutletVisibilityType `json:"visibility,omitempty"`
 	Address        OutletAddressDTO      `json:"address"`
-	// Номера телефонов точки продаж. Передавайте в формате: `+7 (999) 999-99-99`.
+	// Номера телефонов точки продаж. Передавайте номер в формате: `+<код страны>(<код города>)<номер>[#<добавочный>]`.  Примеры: - `+7 (999) 999-99-99` - `+7 (999) 999-99-99#1234`
 	Phones          []string                 `json:"phones"`
 	WorkingSchedule OutletWorkingScheduleDTO `json:"workingSchedule"`
 	// Информация об условиях доставки для данной точки продаж.  Обязательный параметр, если параметр `type=DEPOT` или `type=MIXED`.
@@ -43,9 +43,11 @@ type FullOutletDTO struct {
 	Id     int64             `json:"id"`
 	Status *OutletStatusType `json:"status,omitempty"`
 	Region *RegionDTO        `json:"region,omitempty"`
-	// Идентификатор точки продаж, заданный магазином.
+	// {% note warning \"Вместо него используйте `shopOutletCode`.\" %}     {% endnote %}  Идентификатор точки продаж, заданный магазином.
+	// Deprecated
 	ShopOutletId *string `json:"shopOutletId,omitempty"`
-	// Рабочее время.
+	// {% note warning \"Вместо него используйте `workingSchedule`.\" %}     {% endnote %}  Рабочее время.
+	// Deprecated
 	WorkingTime *string `json:"workingTime,omitempty"`
 	// Статус модерации.
 	ModerationReason *string `json:"moderationReason,omitempty"`
@@ -478,6 +480,7 @@ func (o *FullOutletDTO) SetRegion(v RegionDTO) {
 }
 
 // GetShopOutletId returns the ShopOutletId field value if set, zero value otherwise.
+// Deprecated
 func (o *FullOutletDTO) GetShopOutletId() string {
 	if o == nil || IsNil(o.ShopOutletId) {
 		var ret string
@@ -488,6 +491,7 @@ func (o *FullOutletDTO) GetShopOutletId() string {
 
 // GetShopOutletIdOk returns a tuple with the ShopOutletId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *FullOutletDTO) GetShopOutletIdOk() (*string, bool) {
 	if o == nil || IsNil(o.ShopOutletId) {
 		return nil, false
@@ -505,11 +509,13 @@ func (o *FullOutletDTO) HasShopOutletId() bool {
 }
 
 // SetShopOutletId gets a reference to the given string and assigns it to the ShopOutletId field.
+// Deprecated
 func (o *FullOutletDTO) SetShopOutletId(v string) {
 	o.ShopOutletId = &v
 }
 
 // GetWorkingTime returns the WorkingTime field value if set, zero value otherwise.
+// Deprecated
 func (o *FullOutletDTO) GetWorkingTime() string {
 	if o == nil || IsNil(o.WorkingTime) {
 		var ret string
@@ -520,6 +526,7 @@ func (o *FullOutletDTO) GetWorkingTime() string {
 
 // GetWorkingTimeOk returns a tuple with the WorkingTime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *FullOutletDTO) GetWorkingTimeOk() (*string, bool) {
 	if o == nil || IsNil(o.WorkingTime) {
 		return nil, false
@@ -537,6 +544,7 @@ func (o *FullOutletDTO) HasWorkingTime() bool {
 }
 
 // SetWorkingTime gets a reference to the given string and assigns it to the WorkingTime field.
+// Deprecated
 func (o *FullOutletDTO) SetWorkingTime(v string) {
 	o.WorkingTime = &v
 }

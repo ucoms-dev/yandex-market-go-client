@@ -4,10 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | **int64** | Идентификатор товара в заказе.  Он приходит в ответе на запрос [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md) — параметр &#x60;id&#x60; в &#x60;items&#x60;.  | 
-**Code** | Pointer to **string** | {% note warning \&quot;Вместо него используйте &#x60;codes&#x60;\&quot; %}  Совместное использование обоих параметров приведет к ошибке.  {% endnote %}  Сам ключ.  | [optional] 
-**Codes** | Pointer to **[]string** | Ключи, относящиеся к товару. | [optional] 
-**Slip** | **string** | Инструкция по активации. | 
+**Id** | **int64** | Идентификатор товара в заказе.  Он приходит в ответе метода [POST v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md) — параметр &#x60;id&#x60; в &#x60;items&#x60;.  | 
+**Codes** | Pointer to **[]string** | Ключи, относящиеся к товару.  Поле обязательно для заполнения.  | [optional] 
+**Slip** | **string** | Инструкция по активации.  Для форматирования текста можно использовать теги HTML:  * \\&lt;h&gt;, \\&lt;h1&gt;, \\&lt;h2&gt; и так далее — для заголовков; * \\&lt;br&gt; и \\&lt;p&gt; — для переноса строки; * \\&lt;ol&gt; — для нумерованного списка; * \\&lt;ul&gt; — для маркированного списка; * \\&lt;li&gt; — для создания элементов списка (должен находиться внутри \\&lt;ol&gt; или \\&lt;ul&gt;); * \\&lt;div&gt; — поддерживается, но не влияет на отображение текста.  | 
 **ActivateTill** | **string** | Дата, до которой нужно активировать ключи. Если ключи действуют бессрочно, укажите любую дату в отдаленном будущем.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | 
 
 ## Methods
@@ -48,31 +47,6 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
-
-### GetCode
-
-`func (o *OrderDigitalItemDTO) GetCode() string`
-
-GetCode returns the Code field if non-nil, zero value otherwise.
-
-### GetCodeOk
-
-`func (o *OrderDigitalItemDTO) GetCodeOk() (*string, bool)`
-
-GetCodeOk returns a tuple with the Code field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCode
-
-`func (o *OrderDigitalItemDTO) SetCode(v string)`
-
-SetCode sets Code field to given value.
-
-### HasCode
-
-`func (o *OrderDigitalItemDTO) HasCode() bool`
-
-HasCode returns a boolean if a field has been set.
 
 ### GetCodes
 

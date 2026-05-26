@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,8 +19,7 @@ var _ MappedNullable = &PromoOfferParamsDTO{}
 
 // PromoOfferParamsDTO Параметры товара в акции.  Возвращается параметр, который соответствует типу акции.
 type PromoOfferParamsDTO struct {
-	DiscountParams  *PromoOfferDiscountParamsDTO  `json:"discountParams,omitempty"`
-	PromocodeParams *PromoOfferPromocodeParamsDTO `json:"promocodeParams,omitempty"`
+	DiscountParams *PromoOfferDiscountParamsDTO `json:"discountParams,omitempty"`
 }
 
 // NewPromoOfferParamsDTO instantiates a new PromoOfferParamsDTO object
@@ -72,38 +71,6 @@ func (o *PromoOfferParamsDTO) SetDiscountParams(v PromoOfferDiscountParamsDTO) {
 	o.DiscountParams = &v
 }
 
-// GetPromocodeParams returns the PromocodeParams field value if set, zero value otherwise.
-func (o *PromoOfferParamsDTO) GetPromocodeParams() PromoOfferPromocodeParamsDTO {
-	if o == nil || IsNil(o.PromocodeParams) {
-		var ret PromoOfferPromocodeParamsDTO
-		return ret
-	}
-	return *o.PromocodeParams
-}
-
-// GetPromocodeParamsOk returns a tuple with the PromocodeParams field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PromoOfferParamsDTO) GetPromocodeParamsOk() (*PromoOfferPromocodeParamsDTO, bool) {
-	if o == nil || IsNil(o.PromocodeParams) {
-		return nil, false
-	}
-	return o.PromocodeParams, true
-}
-
-// HasPromocodeParams returns a boolean if a field has been set.
-func (o *PromoOfferParamsDTO) HasPromocodeParams() bool {
-	if o != nil && !IsNil(o.PromocodeParams) {
-		return true
-	}
-
-	return false
-}
-
-// SetPromocodeParams gets a reference to the given PromoOfferPromocodeParamsDTO and assigns it to the PromocodeParams field.
-func (o *PromoOfferParamsDTO) SetPromocodeParams(v PromoOfferPromocodeParamsDTO) {
-	o.PromocodeParams = &v
-}
-
 func (o PromoOfferParamsDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -116,9 +83,6 @@ func (o PromoOfferParamsDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.DiscountParams) {
 		toSerialize["discountParams"] = o.DiscountParams
-	}
-	if !IsNil(o.PromocodeParams) {
-		toSerialize["promocodeParams"] = o.PromocodeParams
 	}
 	return toSerialize, nil
 }

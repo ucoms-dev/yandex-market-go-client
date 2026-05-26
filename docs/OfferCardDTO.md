@@ -4,14 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OfferId** | **string** | Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)  | 
+**OfferId** | **string** | Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, &#x60;\&quot;  SKU123  \&quot;&#x60; и &#x60;\&quot;SKU123\&quot;&#x60; будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)  | 
 **Mapping** | Pointer to [**GetMappingDTO**](GetMappingDTO.md) |  | [optional] 
 **ParameterValues** | Pointer to [**[]ParameterValueDTO**](ParameterValueDTO.md) | Список характеристик с их значениями.  | [optional] 
 **CardStatus** | Pointer to [**OfferCardStatusType**](OfferCardStatusType.md) |  | [optional] 
 **ContentRating** | Pointer to **int32** | Рейтинг карточки. | [optional] 
-**AverageContentRating** | Pointer to **int32** | Средний рейтинг карточки у товаров той категории, которая указана в &#x60;marketCategoryId&#x60;. | [optional] 
+**AverageContentRating** | Pointer to **int32** | Средний рейтинг карточки у товаров той категории, которая указана в &#x60;marketCategoryId&#x60;.  Возвращается, только если параметр &#x60;withRecommendations&#x60; имеет значение &#x60;true&#x60;.  | [optional] 
 **ContentRatingStatus** | Pointer to [**OfferCardContentStatusType**](OfferCardContentStatusType.md) |  | [optional] 
-**Recommendations** | Pointer to [**[]OfferCardRecommendationDTO**](OfferCardRecommendationDTO.md) | Список рекомендаций к заполнению карточки.  Рекомендации Маркета помогают заполнять карточку так, чтобы покупателям было проще найти ваш товар и решиться на покупку.  | [optional] 
+**Recommendations** | Pointer to [**[]OfferCardRecommendationDTO**](OfferCardRecommendationDTO.md) | Список рекомендаций к заполнению карточки.  Возвращается, только если параметр &#x60;withRecommendations&#x60; имеет значение &#x60;true&#x60;.  Рекомендации Маркета помогают заполнять карточку так, чтобы покупателям было проще найти ваш товар и решиться на покупку.  | [optional] 
+**GroupId** | Pointer to **string** | Идентификатор группы товаров.  У товаров, которые объединены в одну группу, будет одинаковый идентификатор.  [Как объединить товары на карточке](../../step-by-step/assortment-add-goods.md#combine-variants)  | [optional] 
 **Errors** | Pointer to [**[]OfferErrorDTO**](OfferErrorDTO.md) | Ошибки в контенте, препятствующие размещению товара на витрине. | [optional] 
 **Warnings** | Pointer to [**[]OfferErrorDTO**](OfferErrorDTO.md) | Связанные с контентом предупреждения, не препятствующие размещению товара на витрине. | [optional] 
 
@@ -249,6 +250,31 @@ HasRecommendations returns a boolean if a field has been set.
 `func (o *OfferCardDTO) UnsetRecommendations()`
 
 UnsetRecommendations ensures that no value is present for Recommendations, not even an explicit nil
+### GetGroupId
+
+`func (o *OfferCardDTO) GetGroupId() string`
+
+GetGroupId returns the GroupId field if non-nil, zero value otherwise.
+
+### GetGroupIdOk
+
+`func (o *OfferCardDTO) GetGroupIdOk() (*string, bool)`
+
+GetGroupIdOk returns a tuple with the GroupId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGroupId
+
+`func (o *OfferCardDTO) SetGroupId(v string)`
+
+SetGroupId sets GroupId field to given value.
+
+### HasGroupId
+
+`func (o *OfferCardDTO) HasGroupId() bool`
+
+HasGroupId returns a boolean if a field has been set.
+
 ### GetErrors
 
 `func (o *OfferCardDTO) GetErrors() []OfferErrorDTO`

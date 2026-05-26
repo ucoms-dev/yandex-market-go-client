@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,11 +21,13 @@ var _ MappedNullable = &UpdateBusinessPricesDTO{}
 
 // UpdateBusinessPricesDTO Цены.
 type UpdateBusinessPricesDTO struct {
-	// Значение.
+	// Цена товара.
 	Value      float32      `json:"value"`
 	CurrencyId CurrencyType `json:"currencyId"`
 	// Зачеркнутая цена.  Число должно быть целым. Вы можете указать цену со скидкой от 5 до 99%.  Передавайте этот параметр при каждом обновлении цены, если предоставляете скидку на товар.
 	DiscountBase *float32 `json:"discountBase,omitempty"`
+	// Минимальная цена товара для попадания в акцию «Бестселлеры Маркета». Подробнее об этом способе участия читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/ru/marketing/promos/market/bestsellers#minimum).  При передаче цены ориентируйтесь на значение параметра `maxPromoPrice` (максимально возможная цена для участия в акции) в методе [POST v2/businesses/{businessId}/promos/offers](../../reference/promos/getPromoOffers.md).  Товар не попадет в акцию с помощью этого способа, если:  * Не передать этот параметр. Удалится значение, которое вы указали ранее. * В методе [POST v2/businesses/{businessId}/offer-prices](../../reference/prices/getDefaultPrices.md) для этого товара возвращается параметр `excludedFromBestsellers` со значением `true`.    Но товар по-прежнему сможет попасть в акцию через [автоматическое участие](*auto) или [ручное добавление](*updatePromoOffers).
+	MinimumForBestseller *float32 `json:"minimumForBestseller,omitempty"`
 }
 
 type _UpdateBusinessPricesDTO UpdateBusinessPricesDTO
@@ -129,6 +131,38 @@ func (o *UpdateBusinessPricesDTO) SetDiscountBase(v float32) {
 	o.DiscountBase = &v
 }
 
+// GetMinimumForBestseller returns the MinimumForBestseller field value if set, zero value otherwise.
+func (o *UpdateBusinessPricesDTO) GetMinimumForBestseller() float32 {
+	if o == nil || IsNil(o.MinimumForBestseller) {
+		var ret float32
+		return ret
+	}
+	return *o.MinimumForBestseller
+}
+
+// GetMinimumForBestsellerOk returns a tuple with the MinimumForBestseller field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateBusinessPricesDTO) GetMinimumForBestsellerOk() (*float32, bool) {
+	if o == nil || IsNil(o.MinimumForBestseller) {
+		return nil, false
+	}
+	return o.MinimumForBestseller, true
+}
+
+// HasMinimumForBestseller returns a boolean if a field has been set.
+func (o *UpdateBusinessPricesDTO) HasMinimumForBestseller() bool {
+	if o != nil && !IsNil(o.MinimumForBestseller) {
+		return true
+	}
+
+	return false
+}
+
+// SetMinimumForBestseller gets a reference to the given float32 and assigns it to the MinimumForBestseller field.
+func (o *UpdateBusinessPricesDTO) SetMinimumForBestseller(v float32) {
+	o.MinimumForBestseller = &v
+}
+
 func (o UpdateBusinessPricesDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -143,6 +177,9 @@ func (o UpdateBusinessPricesDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize["currencyId"] = o.CurrencyId
 	if !IsNil(o.DiscountBase) {
 		toSerialize["discountBase"] = o.DiscountBase
+	}
+	if !IsNil(o.MinimumForBestseller) {
+		toSerialize["minimumForBestseller"] = o.MinimumForBestseller
 	}
 	return toSerialize, nil
 }

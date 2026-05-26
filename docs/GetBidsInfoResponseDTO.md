@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Bids** | [**[]SkuBidItemDTO**](SkuBidItemDTO.md) | Страница списка товаров. | 
-**Paging** | Pointer to [**ForwardScrollingPagerDTO**](ForwardScrollingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetBids sets Bids field to given value.
 
 ### GetPaging
 
-`func (o *GetBidsInfoResponseDTO) GetPaging() ForwardScrollingPagerDTO`
+`func (o *GetBidsInfoResponseDTO) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *GetBidsInfoResponseDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool)`
+`func (o *GetBidsInfoResponseDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *GetBidsInfoResponseDTO) SetPaging(v ForwardScrollingPagerDTO)`
+`func (o *GetBidsInfoResponseDTO) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

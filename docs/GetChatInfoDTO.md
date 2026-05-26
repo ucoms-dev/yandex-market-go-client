@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ChatId** | **int64** | Идентификатор чата. | 
-**OrderId** | **int64** | Идентификатор заказа. | 
+**OrderId** | Pointer to **int64** | Идентификатор заказа. | [optional] 
+**Context** | [**ChatFullContextDTO**](ChatFullContextDTO.md) |  | 
 **Type** | [**ChatType**](ChatType.md) |  | 
 **Status** | [**ChatStatusType**](ChatStatusType.md) |  | 
 **CreatedAt** | **time.Time** | Дата и время создания чата.  Формат даты: ISO 8601 со смещением относительно UTC.  | 
@@ -15,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewGetChatInfoDTO
 
-`func NewGetChatInfoDTO(chatId int64, orderId int64, type_ ChatType, status ChatStatusType, createdAt time.Time, updatedAt time.Time, ) *GetChatInfoDTO`
+`func NewGetChatInfoDTO(chatId int64, context ChatFullContextDTO, type_ ChatType, status ChatStatusType, createdAt time.Time, updatedAt time.Time, ) *GetChatInfoDTO`
 
 NewGetChatInfoDTO instantiates a new GetChatInfoDTO object
 This constructor will assign default values to properties that have it defined,
@@ -68,6 +69,31 @@ and a boolean to check if the value has been set.
 `func (o *GetChatInfoDTO) SetOrderId(v int64)`
 
 SetOrderId sets OrderId field to given value.
+
+### HasOrderId
+
+`func (o *GetChatInfoDTO) HasOrderId() bool`
+
+HasOrderId returns a boolean if a field has been set.
+
+### GetContext
+
+`func (o *GetChatInfoDTO) GetContext() ChatFullContextDTO`
+
+GetContext returns the Context field if non-nil, zero value otherwise.
+
+### GetContextOk
+
+`func (o *GetChatInfoDTO) GetContextOk() (*ChatFullContextDTO, bool)`
+
+GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContext
+
+`func (o *GetChatInfoDTO) SetContext(v ChatFullContextDTO)`
+
+SetContext sets Context field to given value.
 
 
 ### GetType

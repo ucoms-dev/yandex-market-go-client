@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Chats** | [**[]GetChatInfoDTO**](GetChatInfoDTO.md) | Информация о чатах. | 
-**Paging** | Pointer to [**ForwardScrollingPagerDTO**](ForwardScrollingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetChats sets Chats field to given value.
 
 ### GetPaging
 
-`func (o *GetChatsInfoDTO) GetPaging() ForwardScrollingPagerDTO`
+`func (o *GetChatsInfoDTO) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *GetChatsInfoDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool)`
+`func (o *GetChatsInfoDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *GetChatsInfoDTO) SetPaging(v ForwardScrollingPagerDTO)`
+`func (o *GetChatsInfoDTO) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

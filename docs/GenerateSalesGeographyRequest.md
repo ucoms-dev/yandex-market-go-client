@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BusinessId** | **int64** | Идентификатор кабинета. | 
-**DateFrom** | **string** | Начало периода, включительно. | 
-**DateTo** | **string** | Конец периода, включительно. | 
-**CategoryIds** | Pointer to **[]int64** | Идентификаторы категорий. | [optional] 
+**BusinessId** | **int64** | Идентификатор кабинета. {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) {% endif %}  | 
+**DateFrom** | **string** | Начало периода, включительно.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | 
+**DateTo** | **string** | Конец периода, включительно.  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | 
+**CategoryIds** | Pointer to **[]int32** | Идентификаторы категорий. | [optional] 
 **OfferIds** | Pointer to **[]string** | Идентификаторы товаров. | [optional] 
 
 ## Methods
@@ -91,20 +91,20 @@ SetDateTo sets DateTo field to given value.
 
 ### GetCategoryIds
 
-`func (o *GenerateSalesGeographyRequest) GetCategoryIds() []int64`
+`func (o *GenerateSalesGeographyRequest) GetCategoryIds() []int32`
 
 GetCategoryIds returns the CategoryIds field if non-nil, zero value otherwise.
 
 ### GetCategoryIdsOk
 
-`func (o *GenerateSalesGeographyRequest) GetCategoryIdsOk() (*[]int64, bool)`
+`func (o *GenerateSalesGeographyRequest) GetCategoryIdsOk() (*[]int32, bool)`
 
 GetCategoryIdsOk returns a tuple with the CategoryIds field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCategoryIds
 
-`func (o *GenerateSalesGeographyRequest) SetCategoryIds(v []int64)`
+`func (o *GenerateSalesGeographyRequest) SetCategoryIds(v []int32)`
 
 SetCategoryIds sets CategoryIds field to given value.
 

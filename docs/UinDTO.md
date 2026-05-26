@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Value** | **string** | УИН товара. | 
 **Status** | [**UinStatusType**](UinStatusType.md) |  | 
+**Substatus** | Pointer to [**UinSubstatusType**](UinSubstatusType.md) |  | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetStatus sets Status field to given value.
 
+
+### GetSubstatus
+
+`func (o *UinDTO) GetSubstatus() UinSubstatusType`
+
+GetSubstatus returns the Substatus field if non-nil, zero value otherwise.
+
+### GetSubstatusOk
+
+`func (o *UinDTO) GetSubstatusOk() (*UinSubstatusType, bool)`
+
+GetSubstatusOk returns a tuple with the Substatus field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSubstatus
+
+`func (o *UinDTO) SetSubstatus(v UinSubstatusType)`
+
+SetSubstatus sets Substatus field to given value.
+
+### HasSubstatus
+
+`func (o *UinDTO) HasSubstatus() bool`
+
+HasSubstatus returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

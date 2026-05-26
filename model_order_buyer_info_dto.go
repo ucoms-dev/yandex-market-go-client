@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -23,11 +23,11 @@ var _ MappedNullable = &OrderBuyerInfoDTO{}
 type OrderBuyerInfoDTO struct {
 	// Идентификатор покупателя.
 	Id *string `json:"id,omitempty"`
-	// Фамилия покупателя.
+	// Фамилия.
 	LastName *string `json:"lastName,omitempty"`
-	// Имя покупателя.
+	// Имя.
 	FirstName *string `json:"firstName,omitempty"`
-	// Отчество покупателя.
+	// Отчество.
 	MiddleName *string        `json:"middleName,omitempty"`
 	Type       OrderBuyerType `json:"type"`
 	// Подменный номер телефона покупателя. Подробнее о таких номерах читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/orders/dbs/call#fake-number).  Формат номера: `+<код_страны><код_региона><номер_телефона>`.

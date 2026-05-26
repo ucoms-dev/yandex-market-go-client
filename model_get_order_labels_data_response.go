@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -11,7 +11,9 @@ API version: LATEST
 package openapi
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the GetOrderLabelsDataResponse type satisfies the MappedNullable interface at compile time
@@ -19,16 +21,19 @@ var _ MappedNullable = &GetOrderLabelsDataResponse{}
 
 // GetOrderLabelsDataResponse Ответ с информацией для печати ярлыков.
 type GetOrderLabelsDataResponse struct {
-	Status *ApiResponseStatusType `json:"status,omitempty"`
-	Result *OrderLabelDTO         `json:"result,omitempty"`
+	Status ApiResponseStatusType `json:"status"`
+	Result *OrderLabelDTO        `json:"result,omitempty"`
 }
+
+type _GetOrderLabelsDataResponse GetOrderLabelsDataResponse
 
 // NewGetOrderLabelsDataResponse instantiates a new GetOrderLabelsDataResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetOrderLabelsDataResponse() *GetOrderLabelsDataResponse {
+func NewGetOrderLabelsDataResponse(status ApiResponseStatusType) *GetOrderLabelsDataResponse {
 	this := GetOrderLabelsDataResponse{}
+	this.Status = status
 	return &this
 }
 
@@ -40,36 +45,28 @@ func NewGetOrderLabelsDataResponseWithDefaults() *GetOrderLabelsDataResponse {
 	return &this
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
+// GetStatus returns the Status field value
 func (o *GetOrderLabelsDataResponse) GetStatus() ApiResponseStatusType {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		var ret ApiResponseStatusType
 		return ret
 	}
-	return *o.Status
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *GetOrderLabelsDataResponse) GetStatusOk() (*ApiResponseStatusType, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Status, true
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *GetOrderLabelsDataResponse) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given ApiResponseStatusType and assigns it to the Status field.
+// SetStatus sets field value
 func (o *GetOrderLabelsDataResponse) SetStatus(v ApiResponseStatusType) {
-	o.Status = &v
+	o.Status = v
 }
 
 // GetResult returns the Result field value if set, zero value otherwise.
@@ -114,13 +111,48 @@ func (o GetOrderLabelsDataResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetOrderLabelsDataResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
+	toSerialize["status"] = o.Status
 	if !IsNil(o.Result) {
 		toSerialize["result"] = o.Result
 	}
 	return toSerialize, nil
+}
+
+func (o *GetOrderLabelsDataResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"status",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varGetOrderLabelsDataResponse := _GetOrderLabelsDataResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varGetOrderLabelsDataResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = GetOrderLabelsDataResponse(varGetOrderLabelsDataResponse)
+
+	return err
 }
 
 type NullableGetOrderLabelsDataResponse struct {

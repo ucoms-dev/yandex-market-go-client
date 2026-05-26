@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ApiKeyScopeType Доступы к методам:  * `ALL_METHODS` — полное управление кабинетом. * `ALL_METHODS_READ_ONLY` — просмотр всей информации в кабинете. * `INVENTORY_AND_ORDER_PROCESSING` — обработка заказов и учет товаров. * `INVENTORY_AND_ORDER_PROCESSING_READ_ONLY` — просмотр информации о заказах. * `PRICING` — управление ценами. * `PRICING_READ_ONLY` — просмотр цен. * `OFFERS_AND_CARDS_MANAGEMENT` — управление товарами и карточками. * `OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY` — просмотр товаров и карточек. * `PROMOTION` — продвижение товаров. * `PROMOTION_READ_ONLY` — просмотр информации о продвижении товаров. * `FINANCE_AND_ACCOUNTING` — просмотр финансовой информации и отчётности. * `COMMUNICATION` — общение с покупателями. * `SETTINGS_MANAGEMENT` — настройка магазинов. * `SUPPLIES_MANAGEMENT_READ_ONLY` — получение информации по FBY-заявкам.
+// ApiKeyScopeType Доступы к методам:  * `ALL_METHODS` — полное управление кабинетом. * `ALL_METHODS_READ_ONLY` — просмотр всей информации в кабинете. * `INVENTORY_AND_ORDER_PROCESSING` — обработка заказов и учет товаров. * `INVENTORY_AND_ORDER_PROCESSING_READ_ONLY` — просмотр информации о заказах. * `PRICING` — управление ценами. * `PRICING_READ_ONLY` — просмотр цен. * `OFFERS_AND_CARDS_MANAGEMENT` — управление товарами и карточками. * `OFFERS_AND_CARDS_MANAGEMENT_READ_ONLY` — просмотр товаров и карточек. * `PROMOTION` — продвижение товаров. * `PROMOTION_READ_ONLY` — просмотр информации о продвижении товаров. * `FINANCE_AND_ACCOUNTING` — просмотр финансовой информации и отчётности. * `COMMUNICATION` — общение с покупателями. * `SETTINGS_MANAGEMENT` — настройка магазинов. * `SUPPLIES_MANAGEMENT_READ_ONLY` — получение информации по заявкам на поставку, вывоз и утилизацию (FBY, LaaS).
 type ApiKeyScopeType string
 
 // List of ApiKeyScopeType

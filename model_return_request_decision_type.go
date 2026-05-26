@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,28 +15,32 @@ import (
 	"fmt"
 )
 
-// ReturnRequestDecisionType Решение по товару в возврате:  * `REFUND_MONEY` — вернуть деньги за товар. * `REFUND_MONEY_INCLUDING_SHIPMENT` — вернуть деньги за товар и обратную пересылку. * `REPAIR` — магазин устранит недостатки товара. * `REPLACE` — магазин заменит товар. * `SEND_TO_EXAMINATION` — магазин отправит товар на экспертизу. * `DECLINE_REFUND` — не возвращать деньги. * `OTHER_DECISION` — другое решение.
+// ReturnRequestDecisionType Решение по возврату:  * `FAST_REFUND_MONEY` — вернуть покупателю деньги без возврата товара.  * `REFUND_MONEY` — вернуть покупателю деньги за товар.  * `REFUND_MONEY_INCLUDING_SHIPMENT` — вернуть покупателю деньги за товар и обратную пересылку.  * `REPAIR` — отремонтировать товар.  * `REPLACE` — заменить товар.  * `SEND_TO_EXAMINATION` — взять товар на экспертизу.  * `DECLINE_REFUND` — отказать в возврате.  * `PARTIAL_MONEY_REFUND` — частичный возврат денег.  * `OTHER_DECISION` — другое решение.
 type ReturnRequestDecisionType string
 
 // List of ReturnRequestDecisionType
 const (
+	RETURNREQUESTDECISIONTYPE_FAST_REFUND_MONEY               ReturnRequestDecisionType = "FAST_REFUND_MONEY"
 	RETURNREQUESTDECISIONTYPE_REFUND_MONEY                    ReturnRequestDecisionType = "REFUND_MONEY"
 	RETURNREQUESTDECISIONTYPE_REFUND_MONEY_INCLUDING_SHIPMENT ReturnRequestDecisionType = "REFUND_MONEY_INCLUDING_SHIPMENT"
 	RETURNREQUESTDECISIONTYPE_REPAIR                          ReturnRequestDecisionType = "REPAIR"
 	RETURNREQUESTDECISIONTYPE_REPLACE                         ReturnRequestDecisionType = "REPLACE"
 	RETURNREQUESTDECISIONTYPE_SEND_TO_EXAMINATION             ReturnRequestDecisionType = "SEND_TO_EXAMINATION"
 	RETURNREQUESTDECISIONTYPE_DECLINE_REFUND                  ReturnRequestDecisionType = "DECLINE_REFUND"
+	RETURNREQUESTDECISIONTYPE_PARTIAL_MONEY_REFUND            ReturnRequestDecisionType = "PARTIAL_MONEY_REFUND"
 	RETURNREQUESTDECISIONTYPE_OTHER_DECISION                  ReturnRequestDecisionType = "OTHER_DECISION"
 )
 
 // All allowed values of ReturnRequestDecisionType enum
 var AllowedReturnRequestDecisionTypeEnumValues = []ReturnRequestDecisionType{
+	"FAST_REFUND_MONEY",
 	"REFUND_MONEY",
 	"REFUND_MONEY_INCLUDING_SHIPMENT",
 	"REPAIR",
 	"REPLACE",
 	"SEND_TO_EXAMINATION",
 	"DECLINE_REFUND",
+	"PARTIAL_MONEY_REFUND",
 	"OTHER_DECISION",
 }
 

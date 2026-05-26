@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -46,14 +46,14 @@ CalculateTariffs Калькулятор стоимости услуг
 
 Обратите внимание: калькулятор осуществляет примерные расчеты. Финальная стоимость для каждого заказа зависит от предоставленных услуг.
 
+Если у вас оформлена подписка, сниженный тариф применится в расчетах. Подробнее о подписке для продавцов читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/ru/marketing/subscription).
+
 В запросе можно указать либо параметр `campaignId`, либо `sellingProgram`. Совместное использование параметров приведет к ошибке.
 
-|**⚙️ Лимит:** 100 запросов в минуту|
-|-|
+{% include notitle [limit](../../_auto/method_limits/calculateTariffs.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return TariffsAPICalculateTariffsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return TariffsAPICalculateTariffsRequest
 */
 func (a *TariffsAPIService) CalculateTariffs(ctx context.Context) TariffsAPICalculateTariffsRequest {
 	return TariffsAPICalculateTariffsRequest{
@@ -63,7 +63,8 @@ func (a *TariffsAPIService) CalculateTariffs(ctx context.Context) TariffsAPICalc
 }
 
 // Execute executes the request
-//  @return CalculateTariffsResponse
+//
+//	@return CalculateTariffsResponse
 func (a *TariffsAPIService) CalculateTariffsExecute(r TariffsAPICalculateTariffsRequest) (*CalculateTariffsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -77,7 +78,7 @@ func (a *TariffsAPIService) CalculateTariffsExecute(r TariffsAPICalculateTariffs
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/tariffs/calculate"
+	localVarPath := localBasePath + "/v2/tariffs/calculate"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

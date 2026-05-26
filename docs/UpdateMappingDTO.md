@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MarketSku** | Pointer to **int64** | SKU на Маркете. | [optional] 
+**MarketSku** | Pointer to **int64** | Идентификатор карточки товара на Маркете. | [optional] 
 
 ## Methods
 

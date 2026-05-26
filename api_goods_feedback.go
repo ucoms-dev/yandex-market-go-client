@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -45,13 +45,11 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 
 Удаляет комментарий магазина.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/deleteGoodsFeedbackComment.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest
 */
 func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest {
 	return GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest{
@@ -62,7 +60,8 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackComment(ctx context.Context
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -76,7 +75,7 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r GoodsFeedb
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/goods-feedback/comments/delete"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/goods-feedback/comments/delete"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -238,13 +237,13 @@ func (r GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackComment
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest) PageToken(pageToken string) GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest) Limit(limit int32) GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest {
 	r.limit = &limit
 	return r
@@ -261,8 +260,10 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 Возвращает комментарии к отзыву, кроме:
 
-  * тех, которые удалили пользователи или Маркет;
-  * комментариев к удаленным отзывам.
+  - тех, которые удалили пользователи или Маркет;
+  - комментариев к удаленным отзывам.
+
+Идентификатор родительского комментария `parentId` возвращается только для ответов на другие комментарии, но не для ответов на отзывы.
 
 {% note tip "Вы также можете настроить API-уведомления" %}
 
@@ -272,17 +273,15 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 {% endnote %}
 
-Результаты возвращаются постранично, одна страница содержит не более 50 комментариев.
+Результаты возвращаются постранично.
 
-Комментарии расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `page_token`, если вы получали его ранее.
+Комментарии расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `pageToken`, если вы получали его ранее.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getGoodsFeedbackComments.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest
 */
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest {
 	return GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest{
@@ -293,7 +292,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackComments(ctx context.Context, 
 }
 
 // Execute executes the request
-//  @return GetGoodsFeedbackCommentsResponse
+//
+//	@return GetGoodsFeedbackCommentsResponse
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest) (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -307,7 +307,7 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r GoodsFeedbac
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/goods-feedback/comments"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/goods-feedback/comments"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -321,10 +321,13 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r GoodsFeedbac
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 25
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -470,13 +473,13 @@ type GoodsFeedbackAPIGetGoodsFeedbacksRequest struct {
 	getGoodsFeedbackRequest *GetGoodsFeedbackRequest
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r GoodsFeedbackAPIGetGoodsFeedbacksRequest) PageToken(pageToken string) GoodsFeedbackAPIGetGoodsFeedbacksRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r GoodsFeedbackAPIGetGoodsFeedbacksRequest) Limit(limit int32) GoodsFeedbackAPIGetGoodsFeedbacksRequest {
 	r.limit = &limit
 	return r
@@ -506,17 +509,15 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 
 {% endnote %}
 
-Результаты возвращаются постранично, одна страница содержит не более 50 отзывов.
+Результаты возвращаются постранично.
 
-Отзывы расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `page_token`, если вы получали его ранее.
+Отзывы расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `pageToken`, если вы получали его ранее.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getGoodsFeedbacks.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return GoodsFeedbackAPIGetGoodsFeedbacksRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return GoodsFeedbackAPIGetGoodsFeedbacksRequest
 */
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) GoodsFeedbackAPIGetGoodsFeedbacksRequest {
 	return GoodsFeedbackAPIGetGoodsFeedbacksRequest{
@@ -527,7 +528,8 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacks(ctx context.Context, busines
 }
 
 // Execute executes the request
-//  @return GetGoodsFeedbackResponse
+//
+//	@return GetGoodsFeedbackResponse
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r GoodsFeedbackAPIGetGoodsFeedbacksRequest) (*GetGoodsFeedbackResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -541,7 +543,7 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r GoodsFeedbackAPIGet
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/goods-feedback"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/goods-feedback"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -552,10 +554,13 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r GoodsFeedbackAPIGet
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 25
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -713,15 +718,13 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 
 {% include notitle [access](../../_auto/method_scopes/skipGoodsFeedbacksReaction.md) %}
 
-Пропускает реакцию на отзыв — параметр `needReaction` принимает значение `false` в методе получения всех отзывов [POST businesses/{businessId}/goods-feedback](../../reference/goods-feedback/getGoodsFeedbacks.md).
+Пропускает реакцию на отзыв — параметр `needReaction` принимает значение `false` в методе получения всех отзывов [POST v2/businesses/{businessId}/goods-feedback](../../reference/goods-feedback/getGoodsFeedbacks.md).
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/skipGoodsFeedbacksReaction.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest
 */
 func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest {
 	return GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest{
@@ -732,7 +735,8 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReaction(ctx context.Context
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -746,7 +750,7 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r GoodsFeedb
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/goods-feedback/skip-reaction"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/goods-feedback/skip-reaction"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -931,13 +935,11 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 
 Если передать одновременно `comment.parentId` и `comment.id`, будет изменен существующий комментарий.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/updateGoodsFeedbackComment.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest
 */
 func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest {
 	return GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest{
@@ -948,7 +950,8 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackComment(ctx context.Context
 }
 
 // Execute executes the request
-//  @return UpdateGoodsFeedbackCommentResponse
+//
+//	@return UpdateGoodsFeedbackCommentResponse
 func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest) (*UpdateGoodsFeedbackCommentResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -962,7 +965,7 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r GoodsFeedb
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/goods-feedback/comments/update"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/goods-feedback/comments/update"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

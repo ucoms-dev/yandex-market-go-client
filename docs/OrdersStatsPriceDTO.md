@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to [**OrdersStatsPriceType**](OrdersStatsPriceType.md) |  | [optional] 
-**CostPerItem** | Pointer to **float32** | Цена или скидка на единицу товара в заказе.  Точность — два знака после запятой.  | [optional] 
-**Total** | Pointer to **float32** | Суммарная цена или скидка на все единицы товара в заказе.  Точность — два знака после запятой.  | [optional] 
+**CostPerItem** | Pointer to **float32** | Цена или скидка на единицу товара в заказе.  Точность — два знака после запятой.  Включает НДС.  | [optional] 
+**Total** | Pointer to **float32** | Суммарная цена или скидка на все единицы товара в заказе.  Точность — два знака после запятой.  Включает НДС.  | [optional] 
 
 ## Methods
 

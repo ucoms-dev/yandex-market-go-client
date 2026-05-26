@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Offers** | [**[]UpdateBusinessOfferPriceDTO**](UpdateBusinessOfferPriceDTO.md) | Список товаров с ценами. | 
+**Offers** | [**[]UpdateBusinessOfferPriceDTO**](UpdateBusinessOfferPriceDTO.md) | Список товаров с ценами.  В рамках одного запроса все значения &#x60;offerId&#x60; должны быть уникальными. Не допускается передача двух объектов с одинаковым &#x60;offerId&#x60;.  | 
 
 ## Methods
 

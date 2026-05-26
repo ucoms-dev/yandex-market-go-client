@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,37 +21,36 @@ var _ MappedNullable = &OrderItemDTO{}
 
 // OrderItemDTO Список товаров в заказе.
 type OrderItemDTO struct {
-	// Идентификатор товара в заказе.  Позволяет идентифицировать товар в рамках данного заказа.
+	// Идентификатор товара в заказе.  Позволяет идентифицировать товар в рамках заказа.
 	Id int64 `json:"id"`
-	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	OfferId string `json:"offerId" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
 	// Название товара.
 	OfferName string `json:"offerName"`
-	// Цена на товар в валюте заказа без учета вознаграждения партнеру за скидки по промокодам, купонам и акциям (параметр `subsidies`).
+	// Цена товара в валюте заказа без учета вознаграждения продавцу за скидки по промокодам, купонам и акциям (параметр `subsidies`).  Включает НДС.
 	Price float32 `json:"price"`
-	// Цена на товар в валюте покупателя. В цене уже учтены скидки по:  * акциям; * купонам; * промокодам.
+	// Цена товара в валюте покупателя. В цене уже учтены скидки по:  * акциям; * купонам; * промокодам.
 	BuyerPrice float32 `json:"buyerPrice"`
-	// Стоимость товара в валюте покупателя до применения скидок по:  * акциям; * купонам; * промокодам.
+	// Стоимость товара в валюте покупателя до применения скидок по:  * акциям; * купонам; * промокодам.  Это зачеркнутая цена, которая отображается покупателю на карточке товара до применения скидок.
 	BuyerPriceBeforeDiscount float32 `json:"buyerPriceBeforeDiscount"`
 	// Стоимость товара в валюте магазина до применения скидок.
 	// Deprecated
 	PriceBeforeDiscount *float32 `json:"priceBeforeDiscount,omitempty"`
 	// Количество единиц товара.
-	Count int32        `json:"count"`
-	Vat   OrderVatType `json:"vat"`
-	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
+	Count int32         `json:"count"`
+	Vat   *OrderVatType `json:"vat,omitempty"`
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	ShopSku *string `json:"shopSku,omitempty" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
-	// {% note warning \"Вместо него используйте `subsidies`.\" %}     {% endnote %}  Общее вознаграждение партнеру за DBS-доставку и все скидки на товар:  * по промокодам; * по купонам; * по баллам Плюса; * по акциям.
+	// {% note warning \"Вместо него используйте `subsidies`.\" %}     {% endnote %}  Общее вознаграждение продавцу за DBS-доставку и все скидки на товар:  * по промокодам; * по купонам; * по баллам Плюса; * по акциям.
 	// Deprecated
 	Subsidy *float32 `json:"subsidy,omitempty"`
-	// Идентификатор склада в системе партнера, на который сформирован заказ.
-	// Deprecated
+	// **Только для моделей FBY и LaaS**  Идентификатор склада, на который сформирован заказ.
 	PartnerWarehouseId *string `json:"partnerWarehouseId,omitempty"`
-	// Информация о вознаграждениях партнеру за скидки на товар по промокодам, купонам и акциям.
+	// Информация о вознаграждении продавцу за скидки на товар по промокодам, купонам и акциям.
 	Promos []OrderItemPromoDTO `json:"promos,omitempty"`
-	// Информация о маркировке единиц товара.  Возвращаются данные для маркировки, переданные в запросе [PUT campaigns/{campaignId}/orders/{orderId}/identifiers](../../reference/orders/provideOrderItemIdentifiers.md).  Если магазин еще не передавал коды для этого заказа, `instances` отсутствует.
+	// Информация о маркировке единиц товара.  Возвращаются данные для маркировки, переданные в запросе:  * Для DBS — [PUT v2/campaigns/{campaignId}/orders/{orderId}/identifiers](../../reference/orders/provideOrderItemIdentifiers.md) или [PUT v2/campaigns/{campaignId}/orders/{orderId}/boxes](../../reference/orders/setOrderBoxLayout.md). * Для FBS и EXPRESS — [PUT v2/campaigns/{campaignId}/orders/{orderId}/boxes](../../reference/orders/setOrderBoxLayout.md).  Для FBY возвращаются коды маркировки, переданные во время поставки.  Если магазин еще не передавал коды для этого заказа, `instances` отсутствует.
 	Instances []OrderItemInstanceDTO `json:"instances,omitempty"`
-	// {% note warning \"Для получения информации о невыкупах и возвратах используйте [GET campaigns/{campaignId}/returns](../../reference/orders/getReturns.md).\" %}     {% endnote %}  Информация о невыкупленных или возвращенных товарах в заказе.
+	// {% note warning \"Для получения информации о невыкупах и возвратах используйте [GET v2/campaigns/{campaignId}/returns](../../reference/orders/getReturns.md).\" %}     {% endnote %}  Информация о невыкупленных или возвращенных товарах в заказе.
 	// Deprecated
 	Details []OrderItemDetailDTO `json:"details,omitempty"`
 	// Список субсидий по типам.
@@ -68,7 +67,7 @@ type _OrderItemDTO OrderItemDTO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewOrderItemDTO(id int64, offerId string, offerName string, price float32, buyerPrice float32, buyerPriceBeforeDiscount float32, count int32, vat OrderVatType) *OrderItemDTO {
+func NewOrderItemDTO(id int64, offerId string, offerName string, price float32, buyerPrice float32, buyerPriceBeforeDiscount float32, count int32) *OrderItemDTO {
 	this := OrderItemDTO{}
 	this.Id = id
 	this.OfferId = offerId
@@ -77,7 +76,6 @@ func NewOrderItemDTO(id int64, offerId string, offerName string, price float32, 
 	this.BuyerPrice = buyerPrice
 	this.BuyerPriceBeforeDiscount = buyerPriceBeforeDiscount
 	this.Count = count
-	this.Vat = vat
 	return &this
 }
 
@@ -292,28 +290,36 @@ func (o *OrderItemDTO) SetCount(v int32) {
 	o.Count = v
 }
 
-// GetVat returns the Vat field value
+// GetVat returns the Vat field value if set, zero value otherwise.
 func (o *OrderItemDTO) GetVat() OrderVatType {
-	if o == nil {
+	if o == nil || IsNil(o.Vat) {
 		var ret OrderVatType
 		return ret
 	}
-
-	return o.Vat
+	return *o.Vat
 }
 
-// GetVatOk returns a tuple with the Vat field value
+// GetVatOk returns a tuple with the Vat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *OrderItemDTO) GetVatOk() (*OrderVatType, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Vat) {
 		return nil, false
 	}
-	return &o.Vat, true
+	return o.Vat, true
 }
 
-// SetVat sets field value
+// HasVat returns a boolean if a field has been set.
+func (o *OrderItemDTO) HasVat() bool {
+	if o != nil && !IsNil(o.Vat) {
+		return true
+	}
+
+	return false
+}
+
+// SetVat gets a reference to the given OrderVatType and assigns it to the Vat field.
 func (o *OrderItemDTO) SetVat(v OrderVatType) {
-	o.Vat = v
+	o.Vat = &v
 }
 
 // GetShopSku returns the ShopSku field value if set, zero value otherwise.
@@ -384,7 +390,6 @@ func (o *OrderItemDTO) SetSubsidy(v float32) {
 }
 
 // GetPartnerWarehouseId returns the PartnerWarehouseId field value if set, zero value otherwise.
-// Deprecated
 func (o *OrderItemDTO) GetPartnerWarehouseId() string {
 	if o == nil || IsNil(o.PartnerWarehouseId) {
 		var ret string
@@ -395,7 +400,6 @@ func (o *OrderItemDTO) GetPartnerWarehouseId() string {
 
 // GetPartnerWarehouseIdOk returns a tuple with the PartnerWarehouseId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// Deprecated
 func (o *OrderItemDTO) GetPartnerWarehouseIdOk() (*string, bool) {
 	if o == nil || IsNil(o.PartnerWarehouseId) {
 		return nil, false
@@ -413,7 +417,6 @@ func (o *OrderItemDTO) HasPartnerWarehouseId() bool {
 }
 
 // SetPartnerWarehouseId gets a reference to the given string and assigns it to the PartnerWarehouseId field.
-// Deprecated
 func (o *OrderItemDTO) SetPartnerWarehouseId(v string) {
 	o.PartnerWarehouseId = &v
 }
@@ -639,7 +642,9 @@ func (o OrderItemDTO) ToMap() (map[string]interface{}, error) {
 		toSerialize["priceBeforeDiscount"] = o.PriceBeforeDiscount
 	}
 	toSerialize["count"] = o.Count
-	toSerialize["vat"] = o.Vat
+	if !IsNil(o.Vat) {
+		toSerialize["vat"] = o.Vat
+	}
 	if !IsNil(o.ShopSku) {
 		toSerialize["shopSku"] = o.ShopSku
 	}
@@ -682,7 +687,6 @@ func (o *OrderItemDTO) UnmarshalJSON(data []byte) (err error) {
 		"buyerPrice",
 		"buyerPriceBeforeDiscount",
 		"count",
-		"vat",
 	}
 
 	allProperties := make(map[string]interface{})

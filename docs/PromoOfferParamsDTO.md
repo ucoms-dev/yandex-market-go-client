@@ -5,7 +5,6 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DiscountParams** | Pointer to [**PromoOfferDiscountParamsDTO**](PromoOfferDiscountParamsDTO.md) |  | [optional] 
-**PromocodeParams** | Pointer to [**PromoOfferPromocodeParamsDTO**](PromoOfferPromocodeParamsDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -50,31 +49,6 @@ SetDiscountParams sets DiscountParams field to given value.
 `func (o *PromoOfferParamsDTO) HasDiscountParams() bool`
 
 HasDiscountParams returns a boolean if a field has been set.
-
-### GetPromocodeParams
-
-`func (o *PromoOfferParamsDTO) GetPromocodeParams() PromoOfferPromocodeParamsDTO`
-
-GetPromocodeParams returns the PromocodeParams field if non-nil, zero value otherwise.
-
-### GetPromocodeParamsOk
-
-`func (o *PromoOfferParamsDTO) GetPromocodeParamsOk() (*PromoOfferPromocodeParamsDTO, bool)`
-
-GetPromocodeParamsOk returns a tuple with the PromocodeParams field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPromocodeParams
-
-`func (o *PromoOfferParamsDTO) SetPromocodeParams(v PromoOfferPromocodeParamsDTO)`
-
-SetPromocodeParams sets PromocodeParams field to given value.
-
-### HasPromocodeParams
-
-`func (o *PromoOfferParamsDTO) HasPromocodeParams() bool`
-
-HasPromocodeParams returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

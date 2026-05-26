@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -23,13 +23,13 @@ var _ MappedNullable = &GoodsFeedbackCommentDTO{}
 type GoodsFeedbackCommentDTO struct {
 	// Идентификатор комментария к отзыву.
 	Id int64 `json:"id"`
-	// Текст комментария.
+	// Текст комментария.  Не должен содержать контакты магазина и ссылки на сайты, кроме Маркета.
 	Text string `json:"text"`
 	// Может ли продавец изменять комментарий или удалять его.
 	CanModify *bool `json:"canModify,omitempty"`
-	// Идентификатор комментария к отзыву.
+	// Идентификатор родительского комментария.
 	ParentId *int64                         `json:"parentId,omitempty"`
-	Author   GoodsFeedbackCommentAuthorDTO  `json:"author"`
+	Author   *GoodsFeedbackCommentAuthorDTO `json:"author,omitempty"`
 	Status   GoodsFeedbackCommentStatusType `json:"status"`
 	// Идентификатор отзыва.
 	FeedbackId int64 `json:"feedbackId"`
@@ -41,11 +41,10 @@ type _GoodsFeedbackCommentDTO GoodsFeedbackCommentDTO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGoodsFeedbackCommentDTO(id int64, text string, author GoodsFeedbackCommentAuthorDTO, status GoodsFeedbackCommentStatusType, feedbackId int64) *GoodsFeedbackCommentDTO {
+func NewGoodsFeedbackCommentDTO(id int64, text string, status GoodsFeedbackCommentStatusType, feedbackId int64) *GoodsFeedbackCommentDTO {
 	this := GoodsFeedbackCommentDTO{}
 	this.Id = id
 	this.Text = text
-	this.Author = author
 	this.Status = status
 	this.FeedbackId = feedbackId
 	return &this
@@ -171,28 +170,36 @@ func (o *GoodsFeedbackCommentDTO) SetParentId(v int64) {
 	o.ParentId = &v
 }
 
-// GetAuthor returns the Author field value
+// GetAuthor returns the Author field value if set, zero value otherwise.
 func (o *GoodsFeedbackCommentDTO) GetAuthor() GoodsFeedbackCommentAuthorDTO {
-	if o == nil {
+	if o == nil || IsNil(o.Author) {
 		var ret GoodsFeedbackCommentAuthorDTO
 		return ret
 	}
-
-	return o.Author
+	return *o.Author
 }
 
-// GetAuthorOk returns a tuple with the Author field value
+// GetAuthorOk returns a tuple with the Author field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *GoodsFeedbackCommentDTO) GetAuthorOk() (*GoodsFeedbackCommentAuthorDTO, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.Author) {
 		return nil, false
 	}
-	return &o.Author, true
+	return o.Author, true
 }
 
-// SetAuthor sets field value
+// HasAuthor returns a boolean if a field has been set.
+func (o *GoodsFeedbackCommentDTO) HasAuthor() bool {
+	if o != nil && !IsNil(o.Author) {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthor gets a reference to the given GoodsFeedbackCommentAuthorDTO and assigns it to the Author field.
 func (o *GoodsFeedbackCommentDTO) SetAuthor(v GoodsFeedbackCommentAuthorDTO) {
-	o.Author = v
+	o.Author = &v
 }
 
 // GetStatus returns the Status field value
@@ -261,7 +268,9 @@ func (o GoodsFeedbackCommentDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.ParentId) {
 		toSerialize["parentId"] = o.ParentId
 	}
-	toSerialize["author"] = o.Author
+	if !IsNil(o.Author) {
+		toSerialize["author"] = o.Author
+	}
 	toSerialize["status"] = o.Status
 	toSerialize["feedbackId"] = o.FeedbackId
 	return toSerialize, nil
@@ -274,7 +283,6 @@ func (o *GoodsFeedbackCommentDTO) UnmarshalJSON(data []byte) (err error) {
 	requiredProperties := []string{
 		"id",
 		"text",
-		"author",
 		"status",
 		"feedbackId",
 	}

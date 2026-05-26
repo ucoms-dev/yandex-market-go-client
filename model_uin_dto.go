@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,11 +19,12 @@ import (
 // checks if the UinDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &UinDTO{}
 
-// UinDTO Статус проверки УИНа.
+// UinDTO Статус проверки и :no-translate[УИН].
 type UinDTO struct {
 	// УИН товара.
-	Value  string        `json:"value"`
-	Status UinStatusType `json:"status"`
+	Value     string            `json:"value"`
+	Status    UinStatusType     `json:"status"`
+	Substatus *UinSubstatusType `json:"substatus,omitempty"`
 }
 
 type _UinDTO UinDTO
@@ -95,6 +96,38 @@ func (o *UinDTO) SetStatus(v UinStatusType) {
 	o.Status = v
 }
 
+// GetSubstatus returns the Substatus field value if set, zero value otherwise.
+func (o *UinDTO) GetSubstatus() UinSubstatusType {
+	if o == nil || IsNil(o.Substatus) {
+		var ret UinSubstatusType
+		return ret
+	}
+	return *o.Substatus
+}
+
+// GetSubstatusOk returns a tuple with the Substatus field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UinDTO) GetSubstatusOk() (*UinSubstatusType, bool) {
+	if o == nil || IsNil(o.Substatus) {
+		return nil, false
+	}
+	return o.Substatus, true
+}
+
+// HasSubstatus returns a boolean if a field has been set.
+func (o *UinDTO) HasSubstatus() bool {
+	if o != nil && !IsNil(o.Substatus) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubstatus gets a reference to the given UinSubstatusType and assigns it to the Substatus field.
+func (o *UinDTO) SetSubstatus(v UinSubstatusType) {
+	o.Substatus = &v
+}
+
 func (o UinDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -107,6 +140,9 @@ func (o UinDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["value"] = o.Value
 	toSerialize["status"] = o.Status
+	if !IsNil(o.Substatus) {
+		toSerialize["substatus"] = o.Substatus
+	}
 	return toSerialize, nil
 }
 

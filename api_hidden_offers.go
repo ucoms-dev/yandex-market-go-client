@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -16,7 +16,6 @@ import (
 	"io"
 	"net/http"
 	"net/url"
-	"reflect"
 	"strings"
 )
 
@@ -53,13 +52,11 @@ AddHiddenOffers Скрытие товаров и настройки скрыти
 
 {% endnote %}
 
-|**⚙️ Лимит:** 10 000 товаров в минуту|
-|-|
+{% include notitle [limit](../../_auto/method_limits/addHiddenOffers.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return HiddenOffersAPIAddHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return HiddenOffersAPIAddHiddenOffersRequest
 */
 func (a *HiddenOffersAPIService) AddHiddenOffers(ctx context.Context, campaignId int64) HiddenOffersAPIAddHiddenOffersRequest {
 	return HiddenOffersAPIAddHiddenOffersRequest{
@@ -70,7 +67,8 @@ func (a *HiddenOffersAPIService) AddHiddenOffers(ctx context.Context, campaignId
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *HiddenOffersAPIService) AddHiddenOffersExecute(r HiddenOffersAPIAddHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -84,7 +82,7 @@ func (a *HiddenOffersAPIService) AddHiddenOffersExecute(r HiddenOffersAPIAddHidd
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/hidden-offers"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/hidden-offers"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -262,13 +260,11 @@ DeleteHiddenOffers Возобновление показа товаров
 
 {% endnote %}
 
-|**⚙️ Лимит:** 10 000 товаров в минуту|
-|-|
+{% include notitle [limit](../../_auto/method_limits/deleteHiddenOffers.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return HiddenOffersAPIDeleteHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return HiddenOffersAPIDeleteHiddenOffersRequest
 */
 func (a *HiddenOffersAPIService) DeleteHiddenOffers(ctx context.Context, campaignId int64) HiddenOffersAPIDeleteHiddenOffersRequest {
 	return HiddenOffersAPIDeleteHiddenOffersRequest{
@@ -279,7 +275,8 @@ func (a *HiddenOffersAPIService) DeleteHiddenOffers(ctx context.Context, campaig
 }
 
 // Execute executes the request
-//  @return EmptyApiResponse
+//
+//	@return EmptyApiResponse
 func (a *HiddenOffersAPIService) DeleteHiddenOffersExecute(r HiddenOffersAPIDeleteHiddenOffersRequest) (*EmptyApiResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -293,7 +290,7 @@ func (a *HiddenOffersAPIService) DeleteHiddenOffersExecute(r HiddenOffersAPIDele
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/hidden-offers/delete"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/hidden-offers/delete"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -467,13 +464,13 @@ func (r HiddenOffersAPIGetHiddenOffersRequest) OfferId(offerId []string) HiddenO
 	return r
 }
 
-// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Рекомендуем передавать значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  Если задан &#x60;page_token&#x60; и в запросе есть параметры &#x60;page_number&#x60; и &#x60;page_size&#x60;, они игнорируются.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
 func (r HiddenOffersAPIGetHiddenOffersRequest) PageToken(pageToken string) HiddenOffersAPIGetHiddenOffersRequest {
 	r.pageToken = &pageToken
 	return r
 }
 
-// Количество значений на одной странице.
+// {{ limit-param-description }}
 func (r HiddenOffersAPIGetHiddenOffersRequest) Limit(limit int32) HiddenOffersAPIGetHiddenOffersRequest {
 	r.limit = &limit
 	return r
@@ -492,13 +489,11 @@ GetHiddenOffers Информация о скрытых вами товарах
 
 В списке будут товары, скрытые любым способом — через API, с помощью YML-фида, в кабинете и так далее.
 
-|**⚙️ Лимит:** 10 000 товаров в минуту, не более 500 товаров в одном запросе|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getHiddenOffers.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return HiddenOffersAPIGetHiddenOffersRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return HiddenOffersAPIGetHiddenOffersRequest
 */
 func (a *HiddenOffersAPIService) GetHiddenOffers(ctx context.Context, campaignId int64) HiddenOffersAPIGetHiddenOffersRequest {
 	return HiddenOffersAPIGetHiddenOffersRequest{
@@ -509,7 +504,8 @@ func (a *HiddenOffersAPIService) GetHiddenOffers(ctx context.Context, campaignId
 }
 
 // Execute executes the request
-//  @return GetHiddenOffersResponse
+//
+//	@return GetHiddenOffersResponse
 func (a *HiddenOffersAPIService) GetHiddenOffersExecute(r HiddenOffersAPIGetHiddenOffersRequest) (*GetHiddenOffersResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -523,7 +519,7 @@ func (a *HiddenOffersAPIService) GetHiddenOffersExecute(r HiddenOffersAPIGetHidd
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/hidden-offers"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/hidden-offers"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -534,21 +530,16 @@ func (a *HiddenOffersAPIService) GetHiddenOffersExecute(r HiddenOffersAPIGetHidd
 	}
 
 	if r.offerId != nil {
-		t := *r.offerId
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", r.offerId, "", "csv")
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page_token", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 250
+		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

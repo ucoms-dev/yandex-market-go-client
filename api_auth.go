@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -31,24 +31,20 @@ func (r AuthAPIGetAuthTokenInfoRequest) Execute() (*GetTokenInfoResponse, *http.
 }
 
 /*
-GetAuthTokenInfo Получение информации об авторизационном токене
+GetAuthTokenInfo Получение информации о токене авторизации
 
 {% include notitle [access](../../_auto/method_scopes/getAuthTokenInfo.md) %}
 
 {% note info "Метод доступен только для Api-Key-токена." %}
 
-
-
 {% endnote %}
 
-Возвращает информацию о переданном авторизационном токене.
+Возвращает информацию о переданном токене авторизации.
 
-|**⚙️ Лимит:** 100 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getAuthTokenInfo.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return AuthAPIGetAuthTokenInfoRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return AuthAPIGetAuthTokenInfoRequest
 */
 func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) AuthAPIGetAuthTokenInfoRequest {
 	return AuthAPIGetAuthTokenInfoRequest{
@@ -58,7 +54,8 @@ func (a *AuthAPIService) GetAuthTokenInfo(ctx context.Context) AuthAPIGetAuthTok
 }
 
 // Execute executes the request
-//  @return GetTokenInfoResponse
+//
+//	@return GetTokenInfoResponse
 func (a *AuthAPIService) GetAuthTokenInfoExecute(r AuthAPIGetAuthTokenInfoRequest) (*GetTokenInfoResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -72,7 +69,7 @@ func (a *AuthAPIService) GetAuthTokenInfoExecute(r AuthAPIGetAuthTokenInfoReques
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/auth/token"
+	localVarPath := localBasePath + "/v2/auth/token"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

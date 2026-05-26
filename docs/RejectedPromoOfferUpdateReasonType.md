@@ -23,6 +23,10 @@
 
 * `PROMO_PRICE_SMALLER_THAN_MIN` (value: `"PROMO_PRICE_SMALLER_THAN_MIN"`)
 
+* `PRICE_TOO_BIG` (value: `"PRICE_TOO_BIG"`)
+
+* `OLD_PRICE_TOO_BIG` (value: `"OLD_PRICE_TOO_BIG"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

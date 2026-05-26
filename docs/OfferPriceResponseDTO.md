@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **string** | Идентификатор предложения из прайс-листа. | [optional] 
 **Price** | Pointer to [**PriceDTO**](PriceDTO.md) |  | [optional] 
-**MarketSku** | Pointer to **int64** | SKU на Маркете. | [optional] 
+**MarketSku** | Pointer to **int64** | Идентификатор карточки товара на Маркете. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Дата и время последнего обновления цены на товар. | [optional] 
 
 ## Methods

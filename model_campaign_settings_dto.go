@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -24,10 +24,13 @@ type CampaignSettingsDTO struct {
 	// Наименование магазина на Яндекс Маркете. Если наименование отсутствует, значение параметра выводится — `null`.
 	ShopName *string `json:"shopName,omitempty"`
 	// Признак размещения магазина на сайтах партнеров Яндекс Дистрибуции. Возможные значения: * `false` — магазин не размещен на сайтах партнеров Яндекс Дистрибуции. * `true` — магазин размещен на сайтах партнеров Яндекс Дистрибуции.
+	// Deprecated
 	ShowInContext *bool `json:"showInContext,omitempty"`
 	// Признак показа предложений магазина в блоке над результатами поиска (cпецразмещение). Возможные значения: * `false` — предложения не показываются в блоке cпецразмещения. * `true` — предложения показываются в блоке cпецразмещения.
+	// Deprecated
 	ShowInPremium *bool `json:"showInPremium,omitempty"`
 	// Признак использования внешней интернет-статистики. Возможные значения: * `false` — внешняя интернет-статистика не используется. * `true` — внешняя интернет-статистика используется.
+	// Deprecated
 	UseOpenStat *bool                           `json:"useOpenStat,omitempty"`
 	LocalRegion *CampaignSettingsLocalRegionDTO `json:"localRegion,omitempty"`
 }
@@ -114,6 +117,7 @@ func (o *CampaignSettingsDTO) SetShopName(v string) {
 }
 
 // GetShowInContext returns the ShowInContext field value if set, zero value otherwise.
+// Deprecated
 func (o *CampaignSettingsDTO) GetShowInContext() bool {
 	if o == nil || IsNil(o.ShowInContext) {
 		var ret bool
@@ -124,6 +128,7 @@ func (o *CampaignSettingsDTO) GetShowInContext() bool {
 
 // GetShowInContextOk returns a tuple with the ShowInContext field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CampaignSettingsDTO) GetShowInContextOk() (*bool, bool) {
 	if o == nil || IsNil(o.ShowInContext) {
 		return nil, false
@@ -141,11 +146,13 @@ func (o *CampaignSettingsDTO) HasShowInContext() bool {
 }
 
 // SetShowInContext gets a reference to the given bool and assigns it to the ShowInContext field.
+// Deprecated
 func (o *CampaignSettingsDTO) SetShowInContext(v bool) {
 	o.ShowInContext = &v
 }
 
 // GetShowInPremium returns the ShowInPremium field value if set, zero value otherwise.
+// Deprecated
 func (o *CampaignSettingsDTO) GetShowInPremium() bool {
 	if o == nil || IsNil(o.ShowInPremium) {
 		var ret bool
@@ -156,6 +163,7 @@ func (o *CampaignSettingsDTO) GetShowInPremium() bool {
 
 // GetShowInPremiumOk returns a tuple with the ShowInPremium field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CampaignSettingsDTO) GetShowInPremiumOk() (*bool, bool) {
 	if o == nil || IsNil(o.ShowInPremium) {
 		return nil, false
@@ -173,11 +181,13 @@ func (o *CampaignSettingsDTO) HasShowInPremium() bool {
 }
 
 // SetShowInPremium gets a reference to the given bool and assigns it to the ShowInPremium field.
+// Deprecated
 func (o *CampaignSettingsDTO) SetShowInPremium(v bool) {
 	o.ShowInPremium = &v
 }
 
 // GetUseOpenStat returns the UseOpenStat field value if set, zero value otherwise.
+// Deprecated
 func (o *CampaignSettingsDTO) GetUseOpenStat() bool {
 	if o == nil || IsNil(o.UseOpenStat) {
 		var ret bool
@@ -188,6 +198,7 @@ func (o *CampaignSettingsDTO) GetUseOpenStat() bool {
 
 // GetUseOpenStatOk returns a tuple with the UseOpenStat field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *CampaignSettingsDTO) GetUseOpenStatOk() (*bool, bool) {
 	if o == nil || IsNil(o.UseOpenStat) {
 		return nil, false
@@ -205,6 +216,7 @@ func (o *CampaignSettingsDTO) HasUseOpenStat() bool {
 }
 
 // SetUseOpenStat gets a reference to the given bool and assigns it to the UseOpenStat field.
+// Deprecated
 func (o *CampaignSettingsDTO) SetUseOpenStat(v bool) {
 	o.UseOpenStat = &v
 }

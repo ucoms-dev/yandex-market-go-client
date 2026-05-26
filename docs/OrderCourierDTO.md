@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FullName** | Pointer to **string** | Полное имя курьера. | [optional] 
-**Phone** | Pointer to **string** | Номер телефона курьера. | [optional] 
+**FullName** | Pointer to **string** | Полное имя. | [optional] 
+**Phone** | Pointer to **string** | Номер телефона. | [optional] 
 **PhoneExtension** | Pointer to **string** | Добавочный номер телефона. | [optional] 
 **VehicleNumber** | Pointer to **string** | Номер транспортного средства. | [optional] 
-**VehicleDescription** | Pointer to **string** | Описание машины. Например, модель и цвет. | [optional] 
+**VehicleDescription** | Pointer to **string** | Описание транспортного средства. Например, модель и цвет. | [optional] 
 
 ## Methods
 

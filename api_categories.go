@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -47,12 +47,12 @@ GetCategoriesMaxSaleQuantum Лимит на установку кванта пр
 
 Подробнее о том, как продавать товары по несколько штук, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/fields/quantum).
 
-|**⚙️ Лимит:** 5 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getCategoriesMaxSaleQuantum.md) %}
 
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return CategoriesAPIGetCategoriesMaxSaleQuantumRequest
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CategoriesAPIGetCategoriesMaxSaleQuantumRequest
+Deprecated
 */
 func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) CategoriesAPIGetCategoriesMaxSaleQuantumRequest {
 	return CategoriesAPIGetCategoriesMaxSaleQuantumRequest{
@@ -62,7 +62,10 @@ func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantum(ctx context.Context) 
 }
 
 // Execute executes the request
-//  @return GetCategoriesMaxSaleQuantumResponse
+//
+//	@return GetCategoriesMaxSaleQuantumResponse
+//
+// Deprecated
 func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantumExecute(r CategoriesAPIGetCategoriesMaxSaleQuantumRequest) (*GetCategoriesMaxSaleQuantumResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -76,7 +79,7 @@ func (a *CategoriesAPIService) GetCategoriesMaxSaleQuantumExecute(r CategoriesAP
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/categories/max-sale-quantum"
+	localVarPath := localBasePath + "/v2/categories/max-sale-quantum"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
@@ -242,12 +245,10 @@ GetCategoriesTree Дерево категорий
 
 Возвращает дерево категорий Маркета.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getCategoriesTree.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CategoriesAPIGetCategoriesTreeRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return CategoriesAPIGetCategoriesTreeRequest
 */
 func (a *CategoriesAPIService) GetCategoriesTree(ctx context.Context) CategoriesAPIGetCategoriesTreeRequest {
 	return CategoriesAPIGetCategoriesTreeRequest{
@@ -257,7 +258,8 @@ func (a *CategoriesAPIService) GetCategoriesTree(ctx context.Context) Categories
 }
 
 // Execute executes the request
-//  @return GetCategoriesResponse
+//
+//	@return GetCategoriesResponse
 func (a *CategoriesAPIService) GetCategoriesTreeExecute(r CategoriesAPIGetCategoriesTreeRequest) (*GetCategoriesResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -271,7 +273,7 @@ func (a *CategoriesAPIService) GetCategoriesTreeExecute(r CategoriesAPIGetCatego
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/categories/tree"
+	localVarPath := localBasePath + "/v2/categories/tree"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}

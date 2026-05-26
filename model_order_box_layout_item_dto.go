@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,12 +21,12 @@ var _ MappedNullable = &OrderBoxLayoutItemDTO{}
 
 // OrderBoxLayoutItemDTO Информация о товаре в коробке.
 type OrderBoxLayoutItemDTO struct {
-	// Идентификатор товара в заказе.  Он приходит в ответе на запрос [GET campaigns/{campaignId}/orders/{orderId}](../../reference/orders/getOrder.md) — параметр `id` в `items`.
+	// Идентификатор товара в заказе.  Он приходит в ответе метода [POST v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md) — параметр `id` в `items`.
 	Id int64 `json:"id"`
 	// Количество единиц товара в коробке.  Используйте это поле, если в коробке поедут целые товары, не разделенные на части. Не используйте это поле одновременно с `partialCount`.
 	FullCount    *int32                         `json:"fullCount,omitempty"`
 	PartialCount *OrderBoxLayoutPartialCountDTO `json:"partialCount,omitempty"`
-	// Переданные вами коды маркировки.
+	// Переданные коды маркировки.
 	Instances []BriefOrderItemInstanceDTO `json:"instances,omitempty"`
 }
 

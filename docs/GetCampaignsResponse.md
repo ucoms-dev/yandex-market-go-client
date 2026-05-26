@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Campaigns** | [**[]CampaignDTO**](CampaignDTO.md) | Список с информацией по каждому магазину. | 
 **Pager** | Pointer to [**FlippingPagerDTO**](FlippingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -70,6 +71,31 @@ SetPager sets Pager field to given value.
 `func (o *GetCampaignsResponse) HasPager() bool`
 
 HasPager returns a boolean if a field has been set.
+
+### GetPaging
+
+`func (o *GetCampaignsResponse) GetPaging() PackagingForwardScrollingPagerDTO`
+
+GetPaging returns the Paging field if non-nil, zero value otherwise.
+
+### GetPagingOk
+
+`func (o *GetCampaignsResponse) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
+
+GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaging
+
+`func (o *GetCampaignsResponse) SetPaging(v PackagingForwardScrollingPagerDTO)`
+
+SetPaging sets Paging field to given value.
+
+### HasPaging
+
+`func (o *GetCampaignsResponse) HasPaging() bool`
+
+HasPaging returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

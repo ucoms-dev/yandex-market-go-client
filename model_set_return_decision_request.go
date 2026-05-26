@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -25,7 +25,8 @@ type SetReturnDecisionRequest struct {
 	ReturnItemId int64                     `json:"returnItemId"`
 	DecisionType ReturnRequestDecisionType `json:"decisionType"`
 	// Комментарий к решению. Укажите:  * для `REFUND_MONEY_INCLUDING_SHIPMENT`— стоимость обратной пересылки.  * для `REPAIR` — когда вы устраните недостатки товара.  * для `DECLINE_REFUND` — причину отказа.  * для `OTHER_DECISION` — какое решение вы предлагаете.
-	Comment *string `json:"comment,omitempty"`
+	Comment      *string       `json:"comment,omitempty"`
+	Compensation *BasePriceDTO `json:"compensation,omitempty"`
 }
 
 type _SetReturnDecisionRequest SetReturnDecisionRequest
@@ -129,6 +130,38 @@ func (o *SetReturnDecisionRequest) SetComment(v string) {
 	o.Comment = &v
 }
 
+// GetCompensation returns the Compensation field value if set, zero value otherwise.
+func (o *SetReturnDecisionRequest) GetCompensation() BasePriceDTO {
+	if o == nil || IsNil(o.Compensation) {
+		var ret BasePriceDTO
+		return ret
+	}
+	return *o.Compensation
+}
+
+// GetCompensationOk returns a tuple with the Compensation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SetReturnDecisionRequest) GetCompensationOk() (*BasePriceDTO, bool) {
+	if o == nil || IsNil(o.Compensation) {
+		return nil, false
+	}
+	return o.Compensation, true
+}
+
+// HasCompensation returns a boolean if a field has been set.
+func (o *SetReturnDecisionRequest) HasCompensation() bool {
+	if o != nil && !IsNil(o.Compensation) {
+		return true
+	}
+
+	return false
+}
+
+// SetCompensation gets a reference to the given BasePriceDTO and assigns it to the Compensation field.
+func (o *SetReturnDecisionRequest) SetCompensation(v BasePriceDTO) {
+	o.Compensation = &v
+}
+
 func (o SetReturnDecisionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -143,6 +176,9 @@ func (o SetReturnDecisionRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize["decisionType"] = o.DecisionType
 	if !IsNil(o.Comment) {
 		toSerialize["comment"] = o.Comment
+	}
+	if !IsNil(o.Compensation) {
+		toSerialize["compensation"] = o.Compensation
 	}
 	return toSerialize, nil
 }

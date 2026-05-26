@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Countries** | [**[]CountryDTO**](CountryDTO.md) | Список стран с их кодами в формате ISO 3166-1 alpha-2. | 
+**Countries** | [**[]CountryDTO**](CountryDTO.md) | Список стран с их кодами в формате :no-translate[ISO 3166-1 alpha-2]. | 
 
 ## Methods
 

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -20,9 +20,9 @@ import (
 // checks if the GetPriceWithDiscountDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &GetPriceWithDiscountDTO{}
 
-// GetPriceWithDiscountDTO Цена с указанием скидки и времени последнего обновления.
+// GetPriceWithDiscountDTO Цена с указанием валюты, скидки и времени последнего обновления.
 type GetPriceWithDiscountDTO struct {
-	// Значение.
+	// Цена товара.
 	Value      float32      `json:"value"`
 	CurrencyId CurrencyType `json:"currencyId"`
 	// Зачеркнутая цена.  Число должно быть целым. Вы можете указать цену со скидкой от 5 до 99%.  Передавайте этот параметр при каждом обновлении цены, если предоставляете скидку на товар.

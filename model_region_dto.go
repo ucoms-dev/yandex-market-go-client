@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -27,8 +27,6 @@ type RegionDTO struct {
 	Name   string     `json:"name"`
 	Type   RegionType `json:"type"`
 	Parent *RegionDTO `json:"parent,omitempty"`
-	// Дочерние регионы.
-	Children []RegionDTO `json:"children,omitempty"`
 }
 
 type _RegionDTO RegionDTO
@@ -157,39 +155,6 @@ func (o *RegionDTO) SetParent(v RegionDTO) {
 	o.Parent = &v
 }
 
-// GetChildren returns the Children field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *RegionDTO) GetChildren() []RegionDTO {
-	if o == nil {
-		var ret []RegionDTO
-		return ret
-	}
-	return o.Children
-}
-
-// GetChildrenOk returns a tuple with the Children field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *RegionDTO) GetChildrenOk() ([]RegionDTO, bool) {
-	if o == nil || IsNil(o.Children) {
-		return nil, false
-	}
-	return o.Children, true
-}
-
-// HasChildren returns a boolean if a field has been set.
-func (o *RegionDTO) HasChildren() bool {
-	if o != nil && !IsNil(o.Children) {
-		return true
-	}
-
-	return false
-}
-
-// SetChildren gets a reference to the given []RegionDTO and assigns it to the Children field.
-func (o *RegionDTO) SetChildren(v []RegionDTO) {
-	o.Children = v
-}
-
 func (o RegionDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -205,9 +170,6 @@ func (o RegionDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize["type"] = o.Type
 	if !IsNil(o.Parent) {
 		toSerialize["parent"] = o.Parent
-	}
-	if o.Children != nil {
-		toSerialize["children"] = o.Children
 	}
 	return toSerialize, nil
 }

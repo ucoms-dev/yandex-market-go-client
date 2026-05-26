@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | Pointer to **int64** | Идентификатор службы доставки. | [optional] 
-**Name** | Pointer to **string** | Наименование службы доставки. | [optional] 
+**Name** | Pointer to **string** | Название службы доставки. | [optional] 
 
 ## Methods
 

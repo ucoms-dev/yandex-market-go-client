@@ -5,10 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int64** | Идентификатор комментария к отзыву.  | 
-**Text** | **string** | Текст комментария. | 
+**Text** | **string** | Текст комментария.  Не должен содержать контакты магазина и ссылки на сайты, кроме Маркета.  | 
 **CanModify** | Pointer to **bool** | Может ли продавец изменять комментарий или удалять его. | [optional] 
-**ParentId** | Pointer to **int64** | Идентификатор комментария к отзыву.  | [optional] 
-**Author** | [**GoodsFeedbackCommentAuthorDTO**](GoodsFeedbackCommentAuthorDTO.md) |  | 
+**ParentId** | Pointer to **int64** | Идентификатор родительского комментария. | [optional] 
+**Author** | Pointer to [**GoodsFeedbackCommentAuthorDTO**](GoodsFeedbackCommentAuthorDTO.md) |  | [optional] 
 **Status** | [**GoodsFeedbackCommentStatusType**](GoodsFeedbackCommentStatusType.md) |  | 
 **FeedbackId** | **int64** | Идентификатор отзыва.  | 
 
@@ -16,7 +16,7 @@ Name | Type | Description | Notes
 
 ### NewGoodsFeedbackCommentDTO
 
-`func NewGoodsFeedbackCommentDTO(id int64, text string, author GoodsFeedbackCommentAuthorDTO, status GoodsFeedbackCommentStatusType, feedbackId int64, ) *GoodsFeedbackCommentDTO`
+`func NewGoodsFeedbackCommentDTO(id int64, text string, status GoodsFeedbackCommentStatusType, feedbackId int64, ) *GoodsFeedbackCommentDTO`
 
 NewGoodsFeedbackCommentDTO instantiates a new GoodsFeedbackCommentDTO object
 This constructor will assign default values to properties that have it defined,
@@ -140,6 +140,11 @@ and a boolean to check if the value has been set.
 
 SetAuthor sets Author field to given value.
 
+### HasAuthor
+
+`func (o *GoodsFeedbackCommentDTO) HasAuthor() bool`
+
+HasAuthor returns a boolean if a field has been set.
 
 ### GetStatus
 

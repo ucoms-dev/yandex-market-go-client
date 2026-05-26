@@ -4,9 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Value** | **float32** | Значение. | 
+**Value** | **float32** | Цена товара. | 
 **CurrencyId** | [**CurrencyType**](CurrencyType.md) |  | 
 **DiscountBase** | Pointer to **float32** | Зачеркнутая цена.  Число должно быть целым. Вы можете указать цену со скидкой от 5 до 99%.  Передавайте этот параметр при каждом обновлении цены, если предоставляете скидку на товар.  | [optional] 
+**MinimumForBestseller** | Pointer to **float32** | Минимальная цена товара для попадания в акцию «Бестселлеры Маркета». Подробнее об этом способе участия читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/ru/marketing/promos/market/bestsellers#minimum).  При передаче цены ориентируйтесь на значение параметра &#x60;maxPromoPrice&#x60; (максимально возможная цена для участия в акции) в методе [POST v2/businesses/{businessId}/promos/offers](../../reference/promos/getPromoOffers.md).  Товар не попадет в акцию с помощью этого способа, если:  * Не передать этот параметр. Удалится значение, которое вы указали ранее. * В методе [POST v2/businesses/{businessId}/offer-prices](../../reference/prices/getDefaultPrices.md) для этого товара возвращается параметр &#x60;excludedFromBestsellers&#x60; со значением &#x60;true&#x60;.    Но товар по-прежнему сможет попасть в акцию через [автоматическое участие](*auto) или [ручное добавление](*updatePromoOffers).  | [optional] 
 
 ## Methods
 
@@ -91,6 +92,31 @@ SetDiscountBase sets DiscountBase field to given value.
 `func (o *UpdateBusinessPricesDTO) HasDiscountBase() bool`
 
 HasDiscountBase returns a boolean if a field has been set.
+
+### GetMinimumForBestseller
+
+`func (o *UpdateBusinessPricesDTO) GetMinimumForBestseller() float32`
+
+GetMinimumForBestseller returns the MinimumForBestseller field if non-nil, zero value otherwise.
+
+### GetMinimumForBestsellerOk
+
+`func (o *UpdateBusinessPricesDTO) GetMinimumForBestsellerOk() (*float32, bool)`
+
+GetMinimumForBestsellerOk returns a tuple with the MinimumForBestseller field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMinimumForBestseller
+
+`func (o *UpdateBusinessPricesDTO) SetMinimumForBestseller(v float32)`
+
+SetMinimumForBestseller sets MinimumForBestseller field to given value.
+
+### HasMinimumForBestseller
+
+`func (o *UpdateBusinessPricesDTO) HasMinimumForBestseller() bool`
+
+HasMinimumForBestseller returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

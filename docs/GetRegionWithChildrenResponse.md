@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Pager** | Pointer to [**FlippingPagerDTO**](FlippingPagerDTO.md) |  | [optional] 
-**Regions** | Pointer to [**RegionDTO**](RegionDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
+**Regions** | Pointer to [**RegionWithChildrenDTO**](RegionWithChildrenDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -51,22 +52,47 @@ SetPager sets Pager field to given value.
 
 HasPager returns a boolean if a field has been set.
 
+### GetPaging
+
+`func (o *GetRegionWithChildrenResponse) GetPaging() PackagingForwardScrollingPagerDTO`
+
+GetPaging returns the Paging field if non-nil, zero value otherwise.
+
+### GetPagingOk
+
+`func (o *GetRegionWithChildrenResponse) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
+
+GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaging
+
+`func (o *GetRegionWithChildrenResponse) SetPaging(v PackagingForwardScrollingPagerDTO)`
+
+SetPaging sets Paging field to given value.
+
+### HasPaging
+
+`func (o *GetRegionWithChildrenResponse) HasPaging() bool`
+
+HasPaging returns a boolean if a field has been set.
+
 ### GetRegions
 
-`func (o *GetRegionWithChildrenResponse) GetRegions() RegionDTO`
+`func (o *GetRegionWithChildrenResponse) GetRegions() RegionWithChildrenDTO`
 
 GetRegions returns the Regions field if non-nil, zero value otherwise.
 
 ### GetRegionsOk
 
-`func (o *GetRegionWithChildrenResponse) GetRegionsOk() (*RegionDTO, bool)`
+`func (o *GetRegionWithChildrenResponse) GetRegionsOk() (*RegionWithChildrenDTO, bool)`
 
 GetRegionsOk returns a tuple with the Regions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRegions
 
-`func (o *GetRegionWithChildrenResponse) SetRegions(v RegionDTO)`
+`func (o *GetRegionWithChildrenResponse) SetRegions(v RegionWithChildrenDTO)`
 
 SetRegions sets Regions field to given value.
 

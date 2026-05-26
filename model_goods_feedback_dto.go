@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -26,7 +26,7 @@ type GoodsFeedbackDTO struct {
 	FeedbackId int64 `json:"feedbackId"`
 	// Дата и время создания отзыва.
 	CreatedAt time.Time `json:"createdAt"`
-	// Прочитан ли отзыв.  Принимает значение `false`, если магазин:  * Прочитал отзыв в кабинете продавца на Маркете. * Отметил отзыв прочитанным — метод [POST businesses/{businessId}/goods-feedback/skip-reaction](../../reference/goods-feedback/skipGoodsFeedbacksReaction.md). * Оставил комментарий к отзыву — метод [POST businesses/{businessId}/goods-feedback/comments/update](../../reference/goods-feedback/updateGoodsFeedbackComment.md).
+	// Прочитан ли отзыв.  Принимает значение `false`, если магазин:  * Прочитал отзыв в кабинете продавца на Маркете. * Отметил отзыв прочитанным — метод [POST v2/businesses/{businessId}/goods-feedback/skip-reaction](../../reference/goods-feedback/skipGoodsFeedbacksReaction.md). * Оставил комментарий к отзыву — метод [POST v2/businesses/{businessId}/goods-feedback/comments/update](../../reference/goods-feedback/updateGoodsFeedbackComment.md).
 	NeedReaction bool                        `json:"needReaction"`
 	Identifiers  GoodsFeedbackIdentifiersDTO `json:"identifiers"`
 	// Имя автора отзыва.

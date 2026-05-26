@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Photos** | Pointer to **[]string** | Ссылки на фото. | [optional] 
+**Photos** | Pointer to **[]string** | Ссылки на фотографии. | [optional] 
 **Videos** | Pointer to **[]string** | Ссылки на видео. | [optional] 
 
 ## Methods

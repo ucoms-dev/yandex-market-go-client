@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Warehouses** | [**[]WarehouseDetailsDTO**](WarehouseDetailsDTO.md) | Список складов. | 
-**Paging** | Pointer to [**ForwardScrollingPagerDTO**](ForwardScrollingPagerDTO.md) |  | [optional] 
+**Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -48,20 +48,20 @@ SetWarehouses sets Warehouses field to given value.
 
 ### GetPaging
 
-`func (o *PagedWarehousesDTO) GetPaging() ForwardScrollingPagerDTO`
+`func (o *PagedWarehousesDTO) GetPaging() PackagingForwardScrollingPagerDTO`
 
 GetPaging returns the Paging field if non-nil, zero value otherwise.
 
 ### GetPagingOk
 
-`func (o *PagedWarehousesDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool)`
+`func (o *PagedWarehousesDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool)`
 
 GetPagingOk returns a tuple with the Paging field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaging
 
-`func (o *PagedWarehousesDTO) SetPaging(v ForwardScrollingPagerDTO)`
+`func (o *PagedWarehousesDTO) SetPaging(v PackagingForwardScrollingPagerDTO)`
 
 SetPaging sets Paging field to given value.
 

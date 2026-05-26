@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -11,9 +11,7 @@ API version: LATEST
 package openapi
 
 import (
-	"bytes"
 	"encoding/json"
-	"fmt"
 )
 
 // checks if the PromoOfferDiscountParamsDTO type satisfies the MappedNullable interface at compile time
@@ -25,19 +23,16 @@ type PromoOfferDiscountParamsDTO struct {
 	Price *int64 `json:"price,omitempty"`
 	// Цена по акции — та, по которой вы хотите продавать товар.  Указывается в рублях.  Возвращается, только если товар участвует в акции.
 	PromoPrice *int64 `json:"promoPrice,omitempty"`
-	// Максимально возможная цена для участия в акции.  Указывается в рублях.  Возвращается для всех товаров.
-	MaxPromoPrice int64 `json:"maxPromoPrice"`
+	// Максимально возможная цена для участия в акции. Если значение не заполнено, ограничение отсутствует.  Указывается в рублях.
+	MaxPromoPrice *int64 `json:"maxPromoPrice,omitempty"`
 }
-
-type _PromoOfferDiscountParamsDTO PromoOfferDiscountParamsDTO
 
 // NewPromoOfferDiscountParamsDTO instantiates a new PromoOfferDiscountParamsDTO object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPromoOfferDiscountParamsDTO(maxPromoPrice int64) *PromoOfferDiscountParamsDTO {
+func NewPromoOfferDiscountParamsDTO() *PromoOfferDiscountParamsDTO {
 	this := PromoOfferDiscountParamsDTO{}
-	this.MaxPromoPrice = maxPromoPrice
 	return &this
 }
 
@@ -113,28 +108,36 @@ func (o *PromoOfferDiscountParamsDTO) SetPromoPrice(v int64) {
 	o.PromoPrice = &v
 }
 
-// GetMaxPromoPrice returns the MaxPromoPrice field value
+// GetMaxPromoPrice returns the MaxPromoPrice field value if set, zero value otherwise.
 func (o *PromoOfferDiscountParamsDTO) GetMaxPromoPrice() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.MaxPromoPrice) {
 		var ret int64
 		return ret
 	}
-
-	return o.MaxPromoPrice
+	return *o.MaxPromoPrice
 }
 
-// GetMaxPromoPriceOk returns a tuple with the MaxPromoPrice field value
+// GetMaxPromoPriceOk returns a tuple with the MaxPromoPrice field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *PromoOfferDiscountParamsDTO) GetMaxPromoPriceOk() (*int64, bool) {
-	if o == nil {
+	if o == nil || IsNil(o.MaxPromoPrice) {
 		return nil, false
 	}
-	return &o.MaxPromoPrice, true
+	return o.MaxPromoPrice, true
 }
 
-// SetMaxPromoPrice sets field value
+// HasMaxPromoPrice returns a boolean if a field has been set.
+func (o *PromoOfferDiscountParamsDTO) HasMaxPromoPrice() bool {
+	if o != nil && !IsNil(o.MaxPromoPrice) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxPromoPrice gets a reference to the given int64 and assigns it to the MaxPromoPrice field.
 func (o *PromoOfferDiscountParamsDTO) SetMaxPromoPrice(v int64) {
-	o.MaxPromoPrice = v
+	o.MaxPromoPrice = &v
 }
 
 func (o PromoOfferDiscountParamsDTO) MarshalJSON() ([]byte, error) {
@@ -153,45 +156,10 @@ func (o PromoOfferDiscountParamsDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.PromoPrice) {
 		toSerialize["promoPrice"] = o.PromoPrice
 	}
-	toSerialize["maxPromoPrice"] = o.MaxPromoPrice
+	if !IsNil(o.MaxPromoPrice) {
+		toSerialize["maxPromoPrice"] = o.MaxPromoPrice
+	}
 	return toSerialize, nil
-}
-
-func (o *PromoOfferDiscountParamsDTO) UnmarshalJSON(data []byte) (err error) {
-	// This validates that all required properties are included in the JSON object
-	// by unmarshalling the object into a generic map with string keys and checking
-	// that every required field exists as a key in the generic map.
-	requiredProperties := []string{
-		"maxPromoPrice",
-	}
-
-	allProperties := make(map[string]interface{})
-
-	err = json.Unmarshal(data, &allProperties)
-
-	if err != nil {
-		return err
-	}
-
-	for _, requiredProperty := range requiredProperties {
-		if _, exists := allProperties[requiredProperty]; !exists {
-			return fmt.Errorf("no value given for required property %v", requiredProperty)
-		}
-	}
-
-	varPromoOfferDiscountParamsDTO := _PromoOfferDiscountParamsDTO{}
-
-	decoder := json.NewDecoder(bytes.NewReader(data))
-	decoder.DisallowUnknownFields()
-	err = decoder.Decode(&varPromoOfferDiscountParamsDTO)
-
-	if err != nil {
-		return err
-	}
-
-	*o = PromoOfferDiscountParamsDTO(varPromoOfferDiscountParamsDTO)
-
-	return err
 }
 
 type NullablePromoOfferDiscountParamsDTO struct {

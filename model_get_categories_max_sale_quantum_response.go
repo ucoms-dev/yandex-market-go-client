@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &GetCategoriesMaxSaleQuantumResponse{}
 
 // GetCategoriesMaxSaleQuantumResponse struct for GetCategoriesMaxSaleQuantumResponse
 type GetCategoriesMaxSaleQuantumResponse struct {
-	Status *ApiResponseStatusType `json:"status,omitempty"`
+	Status ApiResponseStatusType `json:"status"`
 	// Категории и лимит на установку кванта и минимального количества товаров.
 	Results []MaxSaleQuantumDTO `json:"results"`
 	// Ошибки, которые появились из-за переданных категорий.
@@ -34,8 +34,9 @@ type _GetCategoriesMaxSaleQuantumResponse GetCategoriesMaxSaleQuantumResponse
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGetCategoriesMaxSaleQuantumResponse(results []MaxSaleQuantumDTO) *GetCategoriesMaxSaleQuantumResponse {
+func NewGetCategoriesMaxSaleQuantumResponse(status ApiResponseStatusType, results []MaxSaleQuantumDTO) *GetCategoriesMaxSaleQuantumResponse {
 	this := GetCategoriesMaxSaleQuantumResponse{}
+	this.Status = status
 	this.Results = results
 	return &this
 }
@@ -48,36 +49,28 @@ func NewGetCategoriesMaxSaleQuantumResponseWithDefaults() *GetCategoriesMaxSaleQ
 	return &this
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
+// GetStatus returns the Status field value
 func (o *GetCategoriesMaxSaleQuantumResponse) GetStatus() ApiResponseStatusType {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		var ret ApiResponseStatusType
 		return ret
 	}
-	return *o.Status
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *GetCategoriesMaxSaleQuantumResponse) GetStatusOk() (*ApiResponseStatusType, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Status, true
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *GetCategoriesMaxSaleQuantumResponse) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given ApiResponseStatusType and assigns it to the Status field.
+// SetStatus sets field value
 func (o *GetCategoriesMaxSaleQuantumResponse) SetStatus(v ApiResponseStatusType) {
-	o.Status = &v
+	o.Status = v
 }
 
 // GetResults returns the Results field value
@@ -147,9 +140,7 @@ func (o GetCategoriesMaxSaleQuantumResponse) MarshalJSON() ([]byte, error) {
 
 func (o GetCategoriesMaxSaleQuantumResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
+	toSerialize["status"] = o.Status
 	toSerialize["results"] = o.Results
 	if o.Errors != nil {
 		toSerialize["errors"] = o.Errors
@@ -162,6 +153,7 @@ func (o *GetCategoriesMaxSaleQuantumResponse) UnmarshalJSON(data []byte) (err er
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"status",
 		"results",
 	}
 

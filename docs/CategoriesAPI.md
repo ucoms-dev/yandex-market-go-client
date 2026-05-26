@@ -4,8 +4,8 @@ All URIs are relative to *https://api.partner.market.yandex.ru*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**GetCategoriesMaxSaleQuantum**](CategoriesAPI.md#GetCategoriesMaxSaleQuantum) | **Post** /categories/max-sale-quantum | Лимит на установку кванта продажи и минимального количества товаров в заказе
-[**GetCategoriesTree**](CategoriesAPI.md#GetCategoriesTree) | **Post** /categories/tree | Дерево категорий
+[**GetCategoriesMaxSaleQuantum**](CategoriesAPI.md#GetCategoriesMaxSaleQuantum) | **Post** /v2/categories/max-sale-quantum | Лимит на установку кванта продажи и минимального количества товаров в заказе
+[**GetCategoriesTree**](CategoriesAPI.md#GetCategoriesTree) | **Post** /v2/categories/tree | Дерево категорий
 
 
 

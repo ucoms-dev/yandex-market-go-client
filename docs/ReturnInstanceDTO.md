@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StockType** | Pointer to [**ReturnInstanceStockType**](ReturnInstanceStockType.md) |  | [optional] 
 **Status** | Pointer to [**ReturnInstanceStatusType**](ReturnInstanceStatusType.md) |  | [optional] 
-**Cis** | Pointer to **string** | Код идентификации единицы товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов Market Yandex Go). | [optional] 
+**Cis** | Pointer to **string** | Код идентификации единицы товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов :no-translate[Market Yandex Go]). | [optional] 
 **Imei** | Pointer to **string** | Международный идентификатор мобильного оборудования. | [optional] 
 
 ## Methods

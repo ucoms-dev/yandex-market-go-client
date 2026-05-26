@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// OrderPaymentMethodType Способ оплаты заказа:  * Значения, если выбрана оплата при оформлении заказа (`\"paymentType\": \"PREPAID\"`):    * `YANDEX` — банковской картой.    * `APPLE_PAY` — Apple Pay.    * `GOOGLE_PAY` — Google Pay.    * `CREDIT` — в кредит.    * `TINKOFF_CREDIT` — в кредит в Тинькофф Банке.    * `TINKOFF_INSTALLMENTS` — рассрочка в Тинькофф Банке.    * `EXTERNAL_CERTIFICATE` — подарочным сертификатом (например, из приложения «Сбербанк Онлайн»).    * `SBP` — через систему быстрых платежей.    * `B2B_ACCOUNT_PREPAYMENT` — заказ оплачивает организация.   * Значения, если выбрана оплата при получении заказа (`\"paymentType\": \"POSTPAID\"`):    * `CARD_ON_DELIVERY` — банковской картой.    * `BOUND_CARD_ON_DELIVERY` — привязанной картой при получении.    * `BNPL_BANK_ON_DELIVERY` — супер Сплитом.    * `BNPL_ON_DELIVERY` — Сплитом.    * `CASH_ON_DELIVERY` — наличными.    * `B2B_ACCOUNT_POSTPAYMENT` — заказ оплачивает организация после доставки.  * `UNKNOWN` — неизвестный тип.  Значение по умолчанию: `CASH_ON_DELIVERY`.
+// OrderPaymentMethodType Способ оплаты заказа:  * Значения, если выбрана оплата при оформлении заказа (`\"paymentType\": \"PREPAID\"`):    * `YANDEX` — банковской картой.    * `APPLE_PAY` — Apple Pay (не используется).    * `GOOGLE_PAY` — Google Pay (не используется).    * `CREDIT` — в кредит.    * `TINKOFF_CREDIT` — в кредит в Тинькофф Банке.    * `TINKOFF_INSTALLMENTS` — рассрочка в Тинькофф Банке.    * `EXTERNAL_CERTIFICATE` — подарочным сертификатом (например, из приложения «Сбербанк Онлайн»).    * `SBP` — через систему быстрых платежей.    * `B2B_ACCOUNT_PREPAYMENT` — заказ оплачивает организация.    * `MICROCREDIT` - Сплит на основе МКК (Микрокредитной компании).    * `BNPL_TBYB` - Оплата после доставки на основе Сплита.   * Значения, если выбрана оплата при получении заказа (`\"paymentType\": \"POSTPAID\"`):    * `CARD_ON_DELIVERY` — банковской картой.    * `BOUND_CARD_ON_DELIVERY` — привязанной картой при получении.    * `BNPL_BANK_ON_DELIVERY` — супер Сплитом.    * `BNPL_ON_DELIVERY` — Сплитом.    * `CASH_ON_DELIVERY` — наличными.    * `B2B_ACCOUNT_POSTPAYMENT` — заказ оплачивает организация после доставки.  * `UNKNOWN` — неизвестный тип.  Значение по умолчанию: `CASH_ON_DELIVERY`.
 type OrderPaymentMethodType string
 
 // List of OrderPaymentMethodType
@@ -35,6 +35,8 @@ const (
 	ORDERPAYMENTMETHODTYPE_TINKOFF_INSTALLMENTS     OrderPaymentMethodType = "TINKOFF_INSTALLMENTS"
 	ORDERPAYMENTMETHODTYPE_B2_B_ACCOUNT_PREPAYMENT  OrderPaymentMethodType = "B2B_ACCOUNT_PREPAYMENT"
 	ORDERPAYMENTMETHODTYPE_B2_B_ACCOUNT_POSTPAYMENT OrderPaymentMethodType = "B2B_ACCOUNT_POSTPAYMENT"
+	ORDERPAYMENTMETHODTYPE_MICROCREDIT              OrderPaymentMethodType = "MICROCREDIT"
+	ORDERPAYMENTMETHODTYPE_BNPL_TBYB                OrderPaymentMethodType = "BNPL_TBYB"
 	ORDERPAYMENTMETHODTYPE_UNKNOWN                  OrderPaymentMethodType = "UNKNOWN"
 )
 
@@ -55,6 +57,8 @@ var AllowedOrderPaymentMethodTypeEnumValues = []OrderPaymentMethodType{
 	"TINKOFF_INSTALLMENTS",
 	"B2B_ACCOUNT_PREPAYMENT",
 	"B2B_ACCOUNT_POSTPAYMENT",
+	"MICROCREDIT",
+	"BNPL_TBYB",
 	"UNKNOWN",
 }
 

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,7 +19,7 @@ import (
 // checks if the OrderItemSubsidyDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrderItemSubsidyDTO{}
 
-// OrderItemSubsidyDTO Общее вознаграждение партнеру за все скидки на товар:  * по промокодам, купонам и акциям; * по баллам Плюса.
+// OrderItemSubsidyDTO Общее вознаграждение продавцу за все скидки на товар:  * по промокодам, купонам и акциям; * по баллам Плюса.  Включает НДС.
 type OrderItemSubsidyDTO struct {
 	Type OrderItemSubsidyType `json:"type"`
 	// Сумма субсидии.

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,7 +19,7 @@ import (
 // checks if the FulfillmentWarehouseDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &FulfillmentWarehouseDTO{}
 
-// FulfillmentWarehouseDTO Склад Маркета (FBY).
+// FulfillmentWarehouseDTO Фулфилмент-склад Маркета.
 type FulfillmentWarehouseDTO struct {
 	// Идентификатор склада.
 	Id int64 `json:"id"`

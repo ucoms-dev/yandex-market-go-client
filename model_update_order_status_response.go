@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,7 +19,8 @@ var _ MappedNullable = &UpdateOrderStatusResponse{}
 
 // UpdateOrderStatusResponse Информация об изменении статуса заказа.
 type UpdateOrderStatusResponse struct {
-	Order *OrderDTO `json:"order,omitempty"`
+	Order     *OrderDTO     `json:"order,omitempty"`
+	Operation *OperationDTO `json:"operation,omitempty"`
 }
 
 // NewUpdateOrderStatusResponse instantiates a new UpdateOrderStatusResponse object
@@ -71,6 +72,38 @@ func (o *UpdateOrderStatusResponse) SetOrder(v OrderDTO) {
 	o.Order = &v
 }
 
+// GetOperation returns the Operation field value if set, zero value otherwise.
+func (o *UpdateOrderStatusResponse) GetOperation() OperationDTO {
+	if o == nil || IsNil(o.Operation) {
+		var ret OperationDTO
+		return ret
+	}
+	return *o.Operation
+}
+
+// GetOperationOk returns a tuple with the Operation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateOrderStatusResponse) GetOperationOk() (*OperationDTO, bool) {
+	if o == nil || IsNil(o.Operation) {
+		return nil, false
+	}
+	return o.Operation, true
+}
+
+// HasOperation returns a boolean if a field has been set.
+func (o *UpdateOrderStatusResponse) HasOperation() bool {
+	if o != nil && !IsNil(o.Operation) {
+		return true
+	}
+
+	return false
+}
+
+// SetOperation gets a reference to the given OperationDTO and assigns it to the Operation field.
+func (o *UpdateOrderStatusResponse) SetOperation(v OperationDTO) {
+	o.Operation = &v
+}
+
 func (o UpdateOrderStatusResponse) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -83,6 +116,9 @@ func (o UpdateOrderStatusResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.Order) {
 		toSerialize["order"] = o.Order
+	}
+	if !IsNil(o.Operation) {
+		toSerialize["operation"] = o.Operation
 	}
 	return toSerialize, nil
 }

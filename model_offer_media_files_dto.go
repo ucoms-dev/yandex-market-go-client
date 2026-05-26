@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -20,6 +20,7 @@ var _ MappedNullable = &OfferMediaFilesDTO{}
 // OfferMediaFilesDTO Информация о медиафайлах товара.
 type OfferMediaFilesDTO struct {
 	// Использовать первое видео в карточке как видеообложку.  Передайте `true`, чтобы первое видео использовалось как видеообложка, или `false`, чтобы видеообложка не отображалась в карточке товара.
+	// Deprecated
 	FirstVideoAsCover *bool `json:"firstVideoAsCover,omitempty"`
 	// Видеофайлы товара.
 	Videos []OfferMediaFileDTO `json:"videos,omitempty"`
@@ -47,6 +48,7 @@ func NewOfferMediaFilesDTOWithDefaults() *OfferMediaFilesDTO {
 }
 
 // GetFirstVideoAsCover returns the FirstVideoAsCover field value if set, zero value otherwise.
+// Deprecated
 func (o *OfferMediaFilesDTO) GetFirstVideoAsCover() bool {
 	if o == nil || IsNil(o.FirstVideoAsCover) {
 		var ret bool
@@ -57,6 +59,7 @@ func (o *OfferMediaFilesDTO) GetFirstVideoAsCover() bool {
 
 // GetFirstVideoAsCoverOk returns a tuple with the FirstVideoAsCover field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *OfferMediaFilesDTO) GetFirstVideoAsCoverOk() (*bool, bool) {
 	if o == nil || IsNil(o.FirstVideoAsCover) {
 		return nil, false
@@ -74,6 +77,7 @@ func (o *OfferMediaFilesDTO) HasFirstVideoAsCover() bool {
 }
 
 // SetFirstVideoAsCover gets a reference to the given bool and assigns it to the FirstVideoAsCover field.
+// Deprecated
 func (o *OfferMediaFilesDTO) SetFirstVideoAsCover(v bool) {
 	o.FirstVideoAsCover = &v
 }

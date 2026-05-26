@@ -4,9 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MarketSku** | Pointer to **int64** | SKU на Маркете. | [optional] 
+**MarketSku** | Pointer to **int64** | Идентификатор карточки товара на Маркете. | [optional] 
 **MarketSkuName** | Pointer to **string** | Название карточки товара.  Может отсутствовать в ответе, если товар еще не привязан к карточке.  | [optional] 
-**MarketModelId** | Pointer to **int64** | Идентификатор модели на Маркете.  Может отсутствовать в ответе, если товар еще не привязан к карточке.  | [optional] 
 **MarketModelName** | Pointer to **string** | Название модели на Маркете.  Может отсутствовать в ответе, если товар еще не привязан к карточке.  | [optional] 
 **MarketCategoryId** | Pointer to **int64** | Идентификатор категории на Маркете, в которую попал товар.  Может отсутствовать в ответе, если Маркет еще не определил категорию товара.  | [optional] 
 **MarketCategoryName** | Pointer to **string** | Название категории карточки на Маркете.  Может отсутствовать в ответе, если Маркет еще не определил категорию товара.  | [optional] 
@@ -79,31 +78,6 @@ SetMarketSkuName sets MarketSkuName field to given value.
 `func (o *GetMappingDTO) HasMarketSkuName() bool`
 
 HasMarketSkuName returns a boolean if a field has been set.
-
-### GetMarketModelId
-
-`func (o *GetMappingDTO) GetMarketModelId() int64`
-
-GetMarketModelId returns the MarketModelId field if non-nil, zero value otherwise.
-
-### GetMarketModelIdOk
-
-`func (o *GetMappingDTO) GetMarketModelIdOk() (*int64, bool)`
-
-GetMarketModelIdOk returns a tuple with the MarketModelId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMarketModelId
-
-`func (o *GetMappingDTO) SetMarketModelId(v int64)`
-
-SetMarketModelId sets MarketModelId field to given value.
-
-### HasMarketModelId
-
-`func (o *GetMappingDTO) HasMarketModelId() bool`
-
-HasMarketModelId returns a boolean if a field has been set.
 
 ### GetMarketModelName
 

@@ -33,6 +33,10 @@
 
 * `B2_B_ACCOUNT_POSTPAYMENT` (value: `"B2B_ACCOUNT_POSTPAYMENT"`)
 
+* `MICROCREDIT` (value: `"MICROCREDIT"`)
+
+* `BNPL_TBYB` (value: `"BNPL_TBYB"`)
+
 * `UNKNOWN` (value: `"UNKNOWN"`)
 
 

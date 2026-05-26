@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -23,8 +23,7 @@ var _ MappedNullable = &SupplyRequestDocumentDTO{}
 // SupplyRequestDocumentDTO Документ по заявке.
 type SupplyRequestDocumentDTO struct {
 	Type SupplyRequestDocumentType `json:"type"`
-	// Ссылка на документ.
-	Url string `json:"url"`
+	Url  string                    `json:"url"`
 	// Дата и время создания документа.
 	CreatedAt time.Time `json:"createdAt"`
 }

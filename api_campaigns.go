@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -38,13 +38,12 @@ GetCampaign Информация о магазине
 {% include notitle [access](../../_auto/method_scopes/getCampaign.md) %}
 
 Возвращает информацию о магазине.
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
 
+{% include notitle [limit](../../_auto/method_limits/getCampaign.md) %}
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return CampaignsAPIGetCampaignRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return CampaignsAPIGetCampaignRequest
 */
 func (a *CampaignsAPIService) GetCampaign(ctx context.Context, campaignId int64) CampaignsAPIGetCampaignRequest {
 	return CampaignsAPIGetCampaignRequest{
@@ -55,7 +54,8 @@ func (a *CampaignsAPIService) GetCampaign(ctx context.Context, campaignId int64)
 }
 
 // Execute executes the request
-//  @return GetCampaignResponse
+//
+//	@return GetCampaignResponse
 func (a *CampaignsAPIService) GetCampaignExecute(r CampaignsAPIGetCampaignRequest) (*GetCampaignResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -69,206 +69,7 @@ func (a *CampaignsAPIService) GetCampaignExecute(r CampaignsAPIGetCampaignReques
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}"
-	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := url.Values{}
-	localVarFormParams := url.Values{}
-	if r.campaignId < 1 {
-		return localVarReturnValue, nil, reportError("campaignId must be greater than 1")
-	}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.ctx != nil {
-		// API Key Authentication
-		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
-			if apiKey, ok := auth["ApiKey"]; ok {
-				var key string
-				if apiKey.Prefix != "" {
-					key = apiKey.Prefix + " " + apiKey.Key
-				} else {
-					key = apiKey.Key
-				}
-				localVarHeaderParams["Api-Key"] = key
-			}
-		}
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiClientDataErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiUnauthorizedErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiForbiddenErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiNotFoundErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 420 {
-			var v ApiLimitErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 500 {
-			var v ApiServerErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := &GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type CampaignsAPIGetCampaignRegionRequest struct {
-	ctx        context.Context
-	ApiService *CampaignsAPIService
-	campaignId int64
-}
-
-func (r CampaignsAPIGetCampaignRegionRequest) Execute() (*GetCampaignRegionResponse, *http.Response, error) {
-	return r.ApiService.GetCampaignRegionExecute(r)
-}
-
-/*
-GetCampaignRegion Регион магазина
-
-{% include notitle [access](../../_auto/method_scopes/getCampaignRegion.md) %}
-
-{% note warning "Какой метод использовать вместо устаревшего" %}
-
-[GET campaigns/{campaignId}/settings](../../reference/campaigns/getCampaignSettings.md)
-
-{% endnote %}
-
-Возвращает регион, в котором находится магазин.
-|**⚙️ Лимит:** 5 000 запросов в час|
-|-|
-
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return CampaignsAPIGetCampaignRegionRequest
-
-Deprecated
-*/
-func (a *CampaignsAPIService) GetCampaignRegion(ctx context.Context, campaignId int64) CampaignsAPIGetCampaignRegionRequest {
-	return CampaignsAPIGetCampaignRegionRequest{
-		ApiService: a,
-		ctx:        ctx,
-		campaignId: campaignId,
-	}
-}
-
-// Execute executes the request
-//  @return GetCampaignRegionResponse
-// Deprecated
-func (a *CampaignsAPIService) GetCampaignRegionExecute(r CampaignsAPIGetCampaignRegionRequest) (*GetCampaignRegionResponse, *http.Response, error) {
-	var (
-		localVarHTTPMethod  = http.MethodGet
-		localVarPostBody    interface{}
-		formFiles           []formFile
-		localVarReturnValue *GetCampaignRegionResponse
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CampaignsAPIService.GetCampaignRegion")
-	if err != nil {
-		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/campaigns/{campaignId}/region"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -427,13 +228,12 @@ GetCampaignSettings Настройки магазина
 {% include notitle [access](../../_auto/method_scopes/getCampaignSettings.md) %}
 
 Возвращает информацию о настройках магазина, идентификатор которого указан в запросе.
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
 
+{% include notitle [limit](../../_auto/method_limits/getCampaignSettings.md) %}
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return CampaignsAPIGetCampaignSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return CampaignsAPIGetCampaignSettingsRequest
 */
 func (a *CampaignsAPIService) GetCampaignSettings(ctx context.Context, campaignId int64) CampaignsAPIGetCampaignSettingsRequest {
 	return CampaignsAPIGetCampaignSettingsRequest{
@@ -444,7 +244,8 @@ func (a *CampaignsAPIService) GetCampaignSettings(ctx context.Context, campaignI
 }
 
 // Execute executes the request
-//  @return GetCampaignSettingsResponse
+//
+//	@return GetCampaignSettingsResponse
 func (a *CampaignsAPIService) GetCampaignSettingsExecute(r CampaignsAPIGetCampaignSettingsRequest) (*GetCampaignSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -458,7 +259,7 @@ func (a *CampaignsAPIService) GetCampaignSettingsExecute(r CampaignsAPIGetCampai
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/settings"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/settings"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)
@@ -604,17 +405,33 @@ func (a *CampaignsAPIService) GetCampaignSettingsExecute(r CampaignsAPIGetCampai
 type CampaignsAPIGetCampaignsRequest struct {
 	ctx        context.Context
 	ApiService *CampaignsAPIService
+	pageToken  *string
+	limit      *int32
 	page       *int32
 	pageSize   *int32
 }
 
-// {% note warning \&quot;Если в методе есть &#x60;page_token&#x60;\&quot; %}  Используйте его вместо параметра &#x60;page&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;page_size&#x60;.  &#x60;page_number&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r CampaignsAPIGetCampaignsRequest) PageToken(pageToken string) CampaignsAPIGetCampaignsRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}
+func (r CampaignsAPIGetCampaignsRequest) Limit(limit int32) CampaignsAPIGetCampaignsRequest {
+	r.limit = &limit
+	return r
+}
+
+// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
+// Deprecated
 func (r CampaignsAPIGetCampaignsRequest) Page(page int32) CampaignsAPIGetCampaignsRequest {
 	r.page = &page
 	return r
 }
 
-// Размер страницы.  Используется вместе с параметром &#x60;page_number&#x60;.  &#x60;page_size&#x60; игнорируется, если задан &#x60;page_token&#x60; или &#x60;limit&#x60;.
+// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
+// Deprecated
 func (r CampaignsAPIGetCampaignsRequest) PageSize(pageSize int32) CampaignsAPIGetCampaignsRequest {
 	r.pageSize = &pageSize
 	return r
@@ -631,14 +448,18 @@ GetCampaigns Список магазинов пользователя
 
 **Для Api-Key-токена:** возвращает список магазинов в кабинете, для которого выдан токен. Нельзя получить список только подагентских магазинов.
 
-**Для OAuth-токена:** возвращает список магазинов, к которым имеет доступ пользователь — владелец авторизационного токена, использованного в запросе. Для агентских пользователей список состоит из подагентских магазинов.
+**Для OAuth-токена:** возвращает список магазинов, к которым имеет доступ пользователь — владелец токена авторизации, использованного в запросе. Для агентских пользователей список состоит из подагентских магазинов.
 
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
+{% note warning "Ограничение для параметра `pageSize`" %}
 
+Не передавайте значение больше 100.
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return CampaignsAPIGetCampaignsRequest
+{% endnote %}
+
+{% include notitle [limit](../../_auto/method_limits/getCampaigns.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@return CampaignsAPIGetCampaignsRequest
 */
 func (a *CampaignsAPIService) GetCampaigns(ctx context.Context) CampaignsAPIGetCampaignsRequest {
 	return CampaignsAPIGetCampaignsRequest{
@@ -648,7 +469,8 @@ func (a *CampaignsAPIService) GetCampaigns(ctx context.Context) CampaignsAPIGetC
 }
 
 // Execute executes the request
-//  @return GetCampaignsResponse
+//
+//	@return GetCampaignsResponse
 func (a *CampaignsAPIService) GetCampaignsExecute(r CampaignsAPIGetCampaignsRequest) (*GetCampaignsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodGet
@@ -662,20 +484,26 @@ func (a *CampaignsAPIService) GetCampaignsExecute(r CampaignsAPIGetCampaignsRequ
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns"
+	localVarPath := localBasePath + "/v2/campaigns"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
 
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	} else {
 		var defaultValue int32 = 1
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

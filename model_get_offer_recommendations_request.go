@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,6 @@ var _ MappedNullable = &GetOfferRecommendationsRequest{}
 type GetOfferRecommendationsRequest struct {
 	// Идентификаторы товаров, информация о которых нужна. ⚠️ Не используйте это поле одновременно с остальными фильтрами. Если вы хотите воспользоваться фильтрами, оставьте поле пустым.
 	OfferIds              []string                  `json:"offerIds,omitempty"`
-	CofinancePriceFilter  *FieldStateType           `json:"cofinancePriceFilter,omitempty"`
 	CompetitivenessFilter *PriceCompetitivenessType `json:"competitivenessFilter,omitempty"`
 }
 
@@ -75,38 +74,6 @@ func (o *GetOfferRecommendationsRequest) SetOfferIds(v []string) {
 	o.OfferIds = v
 }
 
-// GetCofinancePriceFilter returns the CofinancePriceFilter field value if set, zero value otherwise.
-func (o *GetOfferRecommendationsRequest) GetCofinancePriceFilter() FieldStateType {
-	if o == nil || IsNil(o.CofinancePriceFilter) {
-		var ret FieldStateType
-		return ret
-	}
-	return *o.CofinancePriceFilter
-}
-
-// GetCofinancePriceFilterOk returns a tuple with the CofinancePriceFilter field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *GetOfferRecommendationsRequest) GetCofinancePriceFilterOk() (*FieldStateType, bool) {
-	if o == nil || IsNil(o.CofinancePriceFilter) {
-		return nil, false
-	}
-	return o.CofinancePriceFilter, true
-}
-
-// HasCofinancePriceFilter returns a boolean if a field has been set.
-func (o *GetOfferRecommendationsRequest) HasCofinancePriceFilter() bool {
-	if o != nil && !IsNil(o.CofinancePriceFilter) {
-		return true
-	}
-
-	return false
-}
-
-// SetCofinancePriceFilter gets a reference to the given FieldStateType and assigns it to the CofinancePriceFilter field.
-func (o *GetOfferRecommendationsRequest) SetCofinancePriceFilter(v FieldStateType) {
-	o.CofinancePriceFilter = &v
-}
-
 // GetCompetitivenessFilter returns the CompetitivenessFilter field value if set, zero value otherwise.
 func (o *GetOfferRecommendationsRequest) GetCompetitivenessFilter() PriceCompetitivenessType {
 	if o == nil || IsNil(o.CompetitivenessFilter) {
@@ -151,9 +118,6 @@ func (o GetOfferRecommendationsRequest) ToMap() (map[string]interface{}, error) 
 	toSerialize := map[string]interface{}{}
 	if o.OfferIds != nil {
 		toSerialize["offerIds"] = o.OfferIds
-	}
-	if !IsNil(o.CofinancePriceFilter) {
-		toSerialize["cofinancePriceFilter"] = o.CofinancePriceFilter
 	}
 	if !IsNil(o.CompetitivenessFilter) {
 		toSerialize["competitivenessFilter"] = o.CompetitivenessFilter

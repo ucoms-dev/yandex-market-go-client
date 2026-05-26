@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,13 +19,15 @@ var _ MappedNullable = &GetWarehouseStocksRequest{}
 
 // GetWarehouseStocksRequest Фильтры для запроса остатков.
 type GetWarehouseStocksRequest struct {
-	// Идентификатор склада.  Если параметр указан, возвращаются только товары в наличии на переданном складе.  **Для модели FBY:** получить список складов Маркета можно с помощью метода [GET warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).
+	// Идентификатор склада.  Если параметр указан, возвращаются только товары на переданном складе.  **Для моделей FBY и LaaS:** получить список складов Маркета можно с помощью метода [GET v2/warehouses](../../reference/warehouses/getFulfillmentWarehouses.md).
 	StocksWarehouseId *int64 `json:"stocksWarehouseId,omitempty"`
-	// **Только для модели FBY**  Возвращать ли информацию по оборачиваемости.  Значение по умолчанию: `false`. Если информация нужна, передайте значение `true`.
+	// **Только для моделей FBY и LaaS**  Фильтр по наличию товаров. Используйте только вместе со `stocksWarehouseId`.  Передайте `false`, чтобы получить информацию о товарах, которых нет в наличие. При значении `true` возвращаются данные о товарах, которые есть на указанном складе.
+	HasStocks *bool `json:"hasStocks,omitempty"`
+	// **Только для моделей FBY и LaaS**  Возвращать ли информацию по оборачиваемости.  Значение по умолчанию: `false`. Если информация нужна, передайте значение `true`.
 	WithTurnover *bool `json:"withTurnover,omitempty"`
 	// Фильтр по нахождению в архиве.  Передайте `true`, чтобы получить информацию об остатках товаров, которые находятся в архиве. Если фильтр не заполнен или передано `false`, в ответе возвращается информация о товарах, которые не находятся в архиве.
 	Archived *bool `json:"archived,omitempty"`
-	// Фильтр по вашим SKU товаров.  Возвращается информация об остатках всех переданных SKU, включая товары в архиве.  {% note warning \"Такой список возвращается только целиком\" %}  Если вы запрашиваете информацию по конкретным SKU, не заполняйте:  * `page_token` * `limit` * `archived` * `stocksOnWarehouse`  {% endnote %}
+	// Фильтр по вашим SKU товаров.  Возвращается информация об остатках всех переданных SKU, включая товары в архиве.  {% note warning \"Такой список возвращается только целиком\" %}  Если вы запрашиваете информацию по конкретным SKU, не заполняйте:  * `pageToken` * `limit` * `archived` * `stocksOnWarehouse`  {% endnote %}
 	OfferIds []string `json:"offerIds,omitempty"`
 }
 
@@ -80,6 +82,38 @@ func (o *GetWarehouseStocksRequest) HasStocksWarehouseId() bool {
 // SetStocksWarehouseId gets a reference to the given int64 and assigns it to the StocksWarehouseId field.
 func (o *GetWarehouseStocksRequest) SetStocksWarehouseId(v int64) {
 	o.StocksWarehouseId = &v
+}
+
+// GetHasStocks returns the HasStocks field value if set, zero value otherwise.
+func (o *GetWarehouseStocksRequest) GetHasStocks() bool {
+	if o == nil || IsNil(o.HasStocks) {
+		var ret bool
+		return ret
+	}
+	return *o.HasStocks
+}
+
+// GetHasStocksOk returns a tuple with the HasStocks field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetWarehouseStocksRequest) GetHasStocksOk() (*bool, bool) {
+	if o == nil || IsNil(o.HasStocks) {
+		return nil, false
+	}
+	return o.HasStocks, true
+}
+
+// HasHasStocks returns a boolean if a field has been set.
+func (o *GetWarehouseStocksRequest) HasHasStocks() bool {
+	if o != nil && !IsNil(o.HasStocks) {
+		return true
+	}
+
+	return false
+}
+
+// SetHasStocks gets a reference to the given bool and assigns it to the HasStocks field.
+func (o *GetWarehouseStocksRequest) SetHasStocks(v bool) {
+	o.HasStocks = &v
 }
 
 // GetWithTurnover returns the WithTurnover field value if set, zero value otherwise.
@@ -191,6 +225,9 @@ func (o GetWarehouseStocksRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.StocksWarehouseId) {
 		toSerialize["stocksWarehouseId"] = o.StocksWarehouseId
+	}
+	if !IsNil(o.HasStocks) {
+		toSerialize["hasStocks"] = o.HasStocks
 	}
 	if !IsNil(o.WithTurnover) {
 		toSerialize["withTurnover"] = o.WithTurnover

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -38,13 +38,12 @@ GetBusinessSettings Настройки кабинета
 {% include notitle [access](../../_auto/method_scopes/getBusinessSettings.md) %}
 
 Возвращает информацию о настройках кабинета, идентификатор которого указан в запросе.
-|**⚙️ Лимит:** 1 000 запросов в час|
-|-|
 
+{% include notitle [limit](../../_auto/method_limits/getBusinessSettings.md) %}
 
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
- @return BusinessesAPIGetBusinessSettingsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@return BusinessesAPIGetBusinessSettingsRequest
 */
 func (a *BusinessesAPIService) GetBusinessSettings(ctx context.Context, businessId int64) BusinessesAPIGetBusinessSettingsRequest {
 	return BusinessesAPIGetBusinessSettingsRequest{
@@ -55,7 +54,8 @@ func (a *BusinessesAPIService) GetBusinessSettings(ctx context.Context, business
 }
 
 // Execute executes the request
-//  @return GetBusinessSettingsResponse
+//
+//	@return GetBusinessSettingsResponse
 func (a *BusinessesAPIService) GetBusinessSettingsExecute(r BusinessesAPIGetBusinessSettingsRequest) (*GetBusinessSettingsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -69,7 +69,7 @@ func (a *BusinessesAPIService) GetBusinessSettingsExecute(r BusinessesAPIGetBusi
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/businesses/{businessId}/settings"
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/settings"
 	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

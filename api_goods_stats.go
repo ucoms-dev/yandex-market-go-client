@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -45,13 +45,11 @@ GetGoodsStats Отчет по товарам
 
 Возвращает подробный отчет по товарам, которые вы разместили на Маркете. С помощью отчета вы можете узнать, например, об остатках на складе, об условиях хранения ваших товаров и т. д.
 
-|**⚙️ Лимит:** 5 000 товаров в минуту|
-|-|
+{% include notitle [limit](../../_auto/method_limits/getGoodsStats.md) %}
 
-
- @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param campaignId Идентификатор кампании.  Его можно узнать с помощью запроса [GET campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете — нажмите на название своего бизнеса и перейдите на страницу:    * **Модули и API** → блок **Передача данных Маркету**.   * **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не передавайте вместо него идентификатор магазина, который указан в кабинете продавца на Маркете рядом с названием магазина и в некоторых отчетах.
- @return GoodsStatsAPIGetGoodsStatsRequest
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
+	@return GoodsStatsAPIGetGoodsStatsRequest
 */
 func (a *GoodsStatsAPIService) GetGoodsStats(ctx context.Context, campaignId int64) GoodsStatsAPIGetGoodsStatsRequest {
 	return GoodsStatsAPIGetGoodsStatsRequest{
@@ -62,7 +60,8 @@ func (a *GoodsStatsAPIService) GetGoodsStats(ctx context.Context, campaignId int
 }
 
 // Execute executes the request
-//  @return GetGoodsStatsResponse
+//
+//	@return GetGoodsStatsResponse
 func (a *GoodsStatsAPIService) GetGoodsStatsExecute(r GoodsStatsAPIGetGoodsStatsRequest) (*GetGoodsStatsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost
@@ -76,7 +75,7 @@ func (a *GoodsStatsAPIService) GetGoodsStatsExecute(r GoodsStatsAPIGetGoodsStats
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/campaigns/{campaignId}/stats/skus"
+	localVarPath := localBasePath + "/v2/campaigns/{campaignId}/stats/skus"
 	localVarPath = strings.Replace(localVarPath, "{"+"campaignId"+"}", url.PathEscape(parameterValueToString(r.campaignId, "campaignId")), -1)
 
 	localVarHeaderParams := make(map[string]string)

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// SupplyRequestSubType Подтип заявки:  * `DEFAULT` — поставка товаров на склад хранения или вывоз с него. * `XDOC` — поставка товаров через транзитный склад или вывоз с него. * `INVENTORYING_SUPPLY` — инвентаризация на складе по запросу магазина. * `INVENTORYING_SUPPLY_WAREHOUSE_BASED_PER_SUPPLIER` — инвентаризация на складе по запросу склада. * `MOVEMENT_SUPPLY` — входящее перемещение между складами.      При перемещении между складами создаются 2 заявки — `MOVEMENT_SUPPLY` и `MOVEMENT_WITHDRAW`. * `ADDITIONAL_SUPPLY` — дополнительная поставка непринятых товаров. * `VIRTUAL_DISTRIBUTION_CENTER` — родительская заявка при [мультипоставке](*multisupply). * `VIRTUAL_DISTRIBUTION_CENTER_CHILD` — дочерняя заявка при [мультипоставке](*multisupply). * `FORCE_PLAN` — автоматическая утилизация по запросу склада. * `FORCE_PLAN_ANOMALY_PER_SUPPLY` — утилизация непринятых товаров. * `PLAN_BY_SUPPLIER` — утилизация по запросу магазина. * `ANOMALY_WITHDRAW` — вывоз непринятых товаров. * `FIX_LOST_INVENTORYING` — товары, которые не нашли после второй инвентаризации. * `OPER_LOST_INVENTORYING` — товары, которые не нашли после первой инвентаризации. * `MOVEMENT_WITHDRAW` — исходящее перемещение между складами.      При перемещении между складами создаются 2 заявки — `MOVEMENT_SUPPLY` и `MOVEMENT_WITHDRAW`. * `MISGRADING_SUPPLY` — пересортица в большую сторону. * `MISGRADING_WITHDRAW` — пересортица в меньшую сторону. * `MAN_UTIL` — ручная утилизация по запросу склада.
+// SupplyRequestSubType Подтип заявки:  * `DEFAULT` — поставка товаров на склад хранения или вывоз с него. * `XDOC` — поставка товаров через транзитный склад или вывоз с него. * `INVENTORYING_SUPPLY` — инвентаризация на складе по запросу магазина. * `INVENTORYING_SUPPLY_WAREHOUSE_BASED_PER_SUPPLIER` — инвентаризация на складе по запросу склада. * `MOVEMENT_SUPPLY` — входящее перемещение между складами.      При перемещении между складами создаются 2 заявки — `MOVEMENT_SUPPLY` и `MOVEMENT_WITHDRAW`. * `ADDITIONAL_SUPPLY` — дополнительная поставка непринятых товаров. * `VIRTUAL_DISTRIBUTION_CENTER` — родительская заявка при поставке товаров на склад хранения или [мультипоставке](*multisupply). * `VIRTUAL_DISTRIBUTION_CENTER_CHILD` — дочерняя заявка при поставке товаров на склад хранения или [мультипоставке](*multisupply).      Для нее не возвращается `transitLocation`. * `FORCE_PLAN` — автоматическая утилизация по запросу склада. * `FORCE_PLAN_ANOMALY_PER_SUPPLY` — утилизация непринятых товаров. * `PLAN_BY_SUPPLIER` — утилизация по запросу магазина. * `ANOMALY_WITHDRAW` — вывоз непринятых товаров. * `FIX_LOST_INVENTORYING` — товары, которые не нашли после второй инвентаризации. * `OPER_LOST_INVENTORYING` — товары, которые не нашли после первой инвентаризации. * `MOVEMENT_WITHDRAW` — исходящее перемещение между складами.      При перемещении между складами создаются 2 заявки — `MOVEMENT_SUPPLY` и `MOVEMENT_WITHDRAW`. * `MISGRADING_SUPPLY` — пересортица в большую сторону. * `MISGRADING_WITHDRAW` — пересортица в меньшую сторону. * `MAN_UTIL` — ручная утилизация по запросу склада. * `WITHDRAW_AUTO_UTILIZATION` — автоматическая утилизация товаров в заявке на вывоз, когда истек срок их хранения. * `EXTERNAL_WITHDRAW_INT_OZON` — вывоз товаров на маркетплейс Ozon. Заявка на поставку оформлена в Личном кабинете Ozon. * `EXTERNAL_WITHDRAW_INT_WB` — вывоз товаров на маркетплейс Wildberries. Заявка на поставку оформлена в Личном кабинете Wildberries.
 type SupplyRequestSubType string
 
 // List of SupplyRequestSubType
@@ -38,6 +38,9 @@ const (
 	SUPPLYREQUESTSUBTYPE_MISGRADING_SUPPLY                                SupplyRequestSubType = "MISGRADING_SUPPLY"
 	SUPPLYREQUESTSUBTYPE_MISGRADING_WITHDRAW                              SupplyRequestSubType = "MISGRADING_WITHDRAW"
 	SUPPLYREQUESTSUBTYPE_MAN_UTIL                                         SupplyRequestSubType = "MAN_UTIL"
+	SUPPLYREQUESTSUBTYPE_WITHDRAW_AUTO_UTILIZATION                        SupplyRequestSubType = "WITHDRAW_AUTO_UTILIZATION"
+	SUPPLYREQUESTSUBTYPE_EXTERNAL_WITHDRAW_INT_OZON                       SupplyRequestSubType = "EXTERNAL_WITHDRAW_INT_OZON"
+	SUPPLYREQUESTSUBTYPE_EXTERNAL_WITHDRAW_INT_WB                         SupplyRequestSubType = "EXTERNAL_WITHDRAW_INT_WB"
 )
 
 // All allowed values of SupplyRequestSubType enum
@@ -60,6 +63,9 @@ var AllowedSupplyRequestSubTypeEnumValues = []SupplyRequestSubType{
 	"MISGRADING_SUPPLY",
 	"MISGRADING_WITHDRAW",
 	"MAN_UTIL",
+	"WITHDRAW_AUTO_UTILIZATION",
+	"EXTERNAL_WITHDRAW_INT_OZON",
+	"EXTERNAL_WITHDRAW_INT_WB",
 }
 
 func (v *SupplyRequestSubType) UnmarshalJSON(src []byte) error {

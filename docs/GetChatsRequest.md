@@ -5,6 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OrderIds** | Pointer to **[]int64** | Фильтр по идентификаторам заказов на Маркете. | [optional] 
+**Contexts** | Pointer to [**[]ChatContextDTO**](ChatContextDTO.md) | Фильтр по контексту чата. | [optional] 
+**ContextTypes** | Pointer to [**[]ChatContextType**](ChatContextType.md) | Фильтр по типу контекста чата. | [optional] 
 **Types** | Pointer to [**[]ChatType**](ChatType.md) | Фильтр по типам чатов. | [optional] 
 **Statuses** | Pointer to [**[]ChatStatusType**](ChatStatusType.md) | Фильтр по статусам чатов. | [optional] 
 
@@ -62,6 +64,76 @@ HasOrderIds returns a boolean if a field has been set.
 `func (o *GetChatsRequest) UnsetOrderIds()`
 
 UnsetOrderIds ensures that no value is present for OrderIds, not even an explicit nil
+### GetContexts
+
+`func (o *GetChatsRequest) GetContexts() []ChatContextDTO`
+
+GetContexts returns the Contexts field if non-nil, zero value otherwise.
+
+### GetContextsOk
+
+`func (o *GetChatsRequest) GetContextsOk() (*[]ChatContextDTO, bool)`
+
+GetContextsOk returns a tuple with the Contexts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContexts
+
+`func (o *GetChatsRequest) SetContexts(v []ChatContextDTO)`
+
+SetContexts sets Contexts field to given value.
+
+### HasContexts
+
+`func (o *GetChatsRequest) HasContexts() bool`
+
+HasContexts returns a boolean if a field has been set.
+
+### SetContextsNil
+
+`func (o *GetChatsRequest) SetContextsNil(b bool)`
+
+ SetContextsNil sets the value for Contexts to be an explicit nil
+
+### UnsetContexts
+`func (o *GetChatsRequest) UnsetContexts()`
+
+UnsetContexts ensures that no value is present for Contexts, not even an explicit nil
+### GetContextTypes
+
+`func (o *GetChatsRequest) GetContextTypes() []ChatContextType`
+
+GetContextTypes returns the ContextTypes field if non-nil, zero value otherwise.
+
+### GetContextTypesOk
+
+`func (o *GetChatsRequest) GetContextTypesOk() (*[]ChatContextType, bool)`
+
+GetContextTypesOk returns a tuple with the ContextTypes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContextTypes
+
+`func (o *GetChatsRequest) SetContextTypes(v []ChatContextType)`
+
+SetContextTypes sets ContextTypes field to given value.
+
+### HasContextTypes
+
+`func (o *GetChatsRequest) HasContextTypes() bool`
+
+HasContextTypes returns a boolean if a field has been set.
+
+### SetContextTypesNil
+
+`func (o *GetChatsRequest) SetContextTypesNil(b bool)`
+
+ SetContextTypesNil sets the value for ContextTypes to be an explicit nil
+
+### UnsetContextTypes
+`func (o *GetChatsRequest) UnsetContextTypes()`
+
+UnsetContextTypes ensures that no value is present for ContextTypes, not even an explicit nil
 ### GetTypes
 
 `func (o *GetChatsRequest) GetTypes() []ChatType`

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// DeleteOfferParameterType Значения параметров, которые хотите удалить, и соответствующие параметры в `UpdateOfferDTO`, в которых вы передали эти значения ранее:  * `ADDITIONAL_EXPENSES` — дополнительные расходы на товар (параметр `additionalExpenses`). * `ADULT` — пометка 18+ (параметр `adult`) * `AGE` — возрастное ограничение для детей (параметр `age`). * `BARCODES` — штрихкод (параметр `barcodes`). * `BOX_COUNT` — количество грузовых мест (параметр `boxCount`). * `CERTIFICATES` — номера документов на товар (параметр `certificates`). * `COFINANCE_PRICE` — цена для скидок с Маркетом (параметр `cofinancePrice`). * `COMMODITY_CODES` — товарные коды (параметр `commodityCodes`). * `CONDITION` — состояние уцененного товара (параметр `condition`). * `CUSTOMS_COMMODITY_CODE` — код товара в ТН ВЭД (параметр `customsCommodityCode`). * `DESCRIPTION` — описание товара (параметр `description`). * `DOWNLOADABLE` — признак цифрового товара (параметр `downloadable`). * `FIRST_VIDEO_AS_COVER` — использование первого видео в карточке как видеообложки (параметр `firstVideoAsCover`). * `GUARANTEE_PERIOD` — гарантийный срок (параметр `guaranteePeriod`). * `LIFE_TIME` — срок службы (параметр `lifeTime`). * `MANUALS` — список инструкций по использованию товара (параметр `manuals`). * `MANUFACTURER_COUNTRIES` — страна производства (параметр `manufacturerCountries`). * `PARAMETERS` — характеристики товара (параметры `params`, `parameterValues`). * `PICTURES` — ссылки на изображения товара (параметр `pictures`). * `PURCHASE_PRICE` — себестоимость (параметр `purchasePrice`). * `SHELF_LIFE` — срок годности (параметр `shelfLife`). * `TAGS` — метки товара, которые использует магазин (параметр `tags`). * `TYPE` — особый тип товара (параметр `type`). * `VENDOR_CODE` — название бренда или производителя (параметр `vendorCode`). * `VIDEOS` — ссылки на видео товара (параметр `videos`).
+// DeleteOfferParameterType Значения параметров, которые хотите удалить, и соответствующие параметры в `UpdateOfferDTO`, в которых вы передали эти значения ранее:  * `ADDITIONAL_EXPENSES` — дополнительные расходы на товар (параметр `additionalExpenses`). * `ADULT` — пометка 18+ (параметр `adult`) * `AGE` — возрастное ограничение для детей (параметр `age`). * `BARCODES` — штрихкод (параметр `barcodes`). * `BOX_COUNT` — количество грузовых мест (параметр `boxCount`). * `CERTIFICATES` — номера документов на товар (параметр `certificates`). * `COMMODITY_CODES` — товарные коды (параметр `commodityCodes`). * `CONDITION` — состояние уцененного товара (параметр `condition`). * `CUSTOMS_COMMODITY_CODE` — код товара в ТН ВЭД (параметр `customsCommodityCode`). * `DESCRIPTION` — описание товара (параметр `description`). * `DOWNLOADABLE` — признак цифрового товара (параметр `downloadable`). * `GUARANTEE_PERIOD` — гарантийный срок (параметр `guaranteePeriod`). * `LIFE_TIME` — срок службы (параметр `lifeTime`). * `MANUALS` — список инструкций по использованию товара (параметр `manuals`). * `MANUFACTURER_COUNTRIES` — страна производства (параметр `manufacturerCountries`). * `PARAMETERS` — характеристики товара (параметры `params`, `parameterValues`). * `PICTURES` — ссылки на изображения товара (параметр `pictures`). * `PURCHASE_PRICE` — себестоимость (параметр `purchasePrice`). * `SHELF_LIFE` — срок годности (параметр `shelfLife`). * `TAGS` — метки товара, которые использует магазин (параметр `tags`). * `TYPE` — особый тип товара (параметр `type`). * `VENDOR_CODE` — название бренда или производителя (параметр `vendorCode`). * `VIDEOS` — ссылки на видео товара (параметр `videos`).
 type DeleteOfferParameterType string
 
 // List of DeleteOfferParameterType
@@ -26,13 +26,11 @@ const (
 	DELETEOFFERPARAMETERTYPE_BARCODES               DeleteOfferParameterType = "BARCODES"
 	DELETEOFFERPARAMETERTYPE_BOX_COUNT              DeleteOfferParameterType = "BOX_COUNT"
 	DELETEOFFERPARAMETERTYPE_CERTIFICATES           DeleteOfferParameterType = "CERTIFICATES"
-	DELETEOFFERPARAMETERTYPE_COFINANCE_PRICE        DeleteOfferParameterType = "COFINANCE_PRICE"
 	DELETEOFFERPARAMETERTYPE_COMMODITY_CODES        DeleteOfferParameterType = "COMMODITY_CODES"
 	DELETEOFFERPARAMETERTYPE_CONDITION              DeleteOfferParameterType = "CONDITION"
 	DELETEOFFERPARAMETERTYPE_CUSTOMS_COMMODITY_CODE DeleteOfferParameterType = "CUSTOMS_COMMODITY_CODE"
 	DELETEOFFERPARAMETERTYPE_DESCRIPTION            DeleteOfferParameterType = "DESCRIPTION"
 	DELETEOFFERPARAMETERTYPE_DOWNLOADABLE           DeleteOfferParameterType = "DOWNLOADABLE"
-	DELETEOFFERPARAMETERTYPE_FIRST_VIDEO_AS_COVER   DeleteOfferParameterType = "FIRST_VIDEO_AS_COVER"
 	DELETEOFFERPARAMETERTYPE_GUARANTEE_PERIOD       DeleteOfferParameterType = "GUARANTEE_PERIOD"
 	DELETEOFFERPARAMETERTYPE_LIFE_TIME              DeleteOfferParameterType = "LIFE_TIME"
 	DELETEOFFERPARAMETERTYPE_MANUALS                DeleteOfferParameterType = "MANUALS"
@@ -55,13 +53,11 @@ var AllowedDeleteOfferParameterTypeEnumValues = []DeleteOfferParameterType{
 	"BARCODES",
 	"BOX_COUNT",
 	"CERTIFICATES",
-	"COFINANCE_PRICE",
 	"COMMODITY_CODES",
 	"CONDITION",
 	"CUSTOMS_COMMODITY_CODE",
 	"DESCRIPTION",
 	"DOWNLOADABLE",
-	"FIRST_VIDEO_AS_COVER",
 	"GUARANTEE_PERIOD",
 	"LIFE_TIME",
 	"MANUALS",

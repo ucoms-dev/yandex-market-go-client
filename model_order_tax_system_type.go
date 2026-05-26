@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -15,19 +15,21 @@ import (
 	"fmt"
 )
 
-// OrderTaxSystemType Система налогообложения (СНО) магазина на момент оформления заказа:  * `ECHN` — единый сельскохозяйственный налог (ЕСХН).  * `ENVD` — единый налог на вмененный доход (ЕНВД).  * `OSN` — общая система налогообложения (ОСН).  * `PSN` — патентная система налогообложения (ПСН).  * `USN` — упрощенная система налогообложения (УСН).  * `USN_MINUS_COST` — упрощенная система налогообложения, доходы, уменьшенные на величину расходов (УСН «Доходы минус расходы»).  * `NPD` — налог на профессиональный доход (НПД).  * `UNKNOWN_VALUE` — неизвестное значение. Используется только совместно с параметром `payment-method=YANDEX`.
+// OrderTaxSystemType Система налогообложения (СНО) магазина на момент оформления заказа:  * `ECHN` — единый сельскохозяйственный налог (ЕСХН).  * `ENVD` — единый налог на вмененный доход (ЕНВД).  * `OSN` — общая система налогообложения (ОСН).  * `PSN` — патентная система налогообложения (ПСН).  * `USN` — упрощенная система налогообложения (УСН).  * `USN_MINUS_COST` — упрощенная система налогообложения, доходы, уменьшенные на величину расходов (УСН «Доходы минус расходы»).  * `NPD` — налог на профессиональный доход (НПД).  * `AUSN` — автоматизированная упрощенная система налогообложения (АУСН).  * `AUSN_MINUS_COST` — автоматизированная упрощенная система налогообложения, доходы, уменьшенные на величину расходов (АУСН «Доходы минус расходы»).  * `UNKNOWN_VALUE` — неизвестное значение.
 type OrderTaxSystemType string
 
 // List of OrderTaxSystemType
 const (
-	ORDERTAXSYSTEMTYPE_OSN            OrderTaxSystemType = "OSN"
-	ORDERTAXSYSTEMTYPE_USN            OrderTaxSystemType = "USN"
-	ORDERTAXSYSTEMTYPE_USN_MINUS_COST OrderTaxSystemType = "USN_MINUS_COST"
-	ORDERTAXSYSTEMTYPE_ENVD           OrderTaxSystemType = "ENVD"
-	ORDERTAXSYSTEMTYPE_ECHN           OrderTaxSystemType = "ECHN"
-	ORDERTAXSYSTEMTYPE_PSN            OrderTaxSystemType = "PSN"
-	ORDERTAXSYSTEMTYPE_NPD            OrderTaxSystemType = "NPD"
-	ORDERTAXSYSTEMTYPE_UNKNOWN_VALUE  OrderTaxSystemType = "UNKNOWN_VALUE"
+	ORDERTAXSYSTEMTYPE_OSN             OrderTaxSystemType = "OSN"
+	ORDERTAXSYSTEMTYPE_USN             OrderTaxSystemType = "USN"
+	ORDERTAXSYSTEMTYPE_USN_MINUS_COST  OrderTaxSystemType = "USN_MINUS_COST"
+	ORDERTAXSYSTEMTYPE_ENVD            OrderTaxSystemType = "ENVD"
+	ORDERTAXSYSTEMTYPE_ECHN            OrderTaxSystemType = "ECHN"
+	ORDERTAXSYSTEMTYPE_PSN             OrderTaxSystemType = "PSN"
+	ORDERTAXSYSTEMTYPE_NPD             OrderTaxSystemType = "NPD"
+	ORDERTAXSYSTEMTYPE_AUSN            OrderTaxSystemType = "AUSN"
+	ORDERTAXSYSTEMTYPE_AUSN_MINUS_COST OrderTaxSystemType = "AUSN_MINUS_COST"
+	ORDERTAXSYSTEMTYPE_UNKNOWN_VALUE   OrderTaxSystemType = "UNKNOWN_VALUE"
 )
 
 // All allowed values of OrderTaxSystemType enum
@@ -39,6 +41,8 @@ var AllowedOrderTaxSystemTypeEnumValues = []OrderTaxSystemType{
 	"ECHN",
 	"PSN",
 	"NPD",
+	"AUSN",
+	"AUSN_MINUS_COST",
 	"UNKNOWN_VALUE",
 }
 

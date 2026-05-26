@@ -25,6 +25,8 @@
 
 * `VAT_07` (value: `"VAT_07"`)
 
+* `VAT_22` (value: `"VAT_22"`)
+
 * `UNKNOWN_VALUE` (value: `"UNKNOWN_VALUE"`)
 
 

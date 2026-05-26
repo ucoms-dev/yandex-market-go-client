@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Url** | Pointer to **string** | Ссылка на медиафайл.  | [optional] 
+**Url** | Pointer to **string** |  | [optional] 
 **Title** | Pointer to **string** | Название медиафайла.  | [optional] 
 **UploadState** | Pointer to [**MediaFileUploadStateType**](MediaFileUploadStateType.md) |  | [optional] 
 

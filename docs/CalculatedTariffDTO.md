@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | [**CalculatedTariffType**](CalculatedTariffType.md) |  | 
 **Amount** | Pointer to **float32** | Стоимость услуги в рублях. | [optional] 
+**Currency** | Pointer to [**CurrencyType**](CurrencyType.md) |  | [optional] 
 **Parameters** | [**[]TariffParameterDTO**](TariffParameterDTO.md) | Параметры расчета тарифа. | 
 
 ## Methods
@@ -71,6 +72,31 @@ SetAmount sets Amount field to given value.
 `func (o *CalculatedTariffDTO) HasAmount() bool`
 
 HasAmount returns a boolean if a field has been set.
+
+### GetCurrency
+
+`func (o *CalculatedTariffDTO) GetCurrency() CurrencyType`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *CalculatedTariffDTO) GetCurrencyOk() (*CurrencyType, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *CalculatedTariffDTO) SetCurrency(v CurrencyType)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *CalculatedTariffDTO) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
 
 ### GetParameters
 

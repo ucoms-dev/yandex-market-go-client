@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -22,10 +22,12 @@ var _ MappedNullable = &ChatMessagesResultDTO{}
 // ChatMessagesResultDTO Информация о сообщениях.
 type ChatMessagesResultDTO struct {
 	// Идентификатор заказа.
-	OrderId int64 `json:"orderId"`
+	// Deprecated
+	OrderId *int64             `json:"orderId,omitempty"`
+	Context ChatFullContextDTO `json:"context"`
 	// Информация о сообщениях.
-	Messages []ChatMessageDTO          `json:"messages"`
-	Paging   *ForwardScrollingPagerDTO `json:"paging,omitempty"`
+	Messages []ChatMessageDTO                   `json:"messages"`
+	Paging   *PackagingForwardScrollingPagerDTO `json:"paging,omitempty"`
 }
 
 type _ChatMessagesResultDTO ChatMessagesResultDTO
@@ -34,9 +36,9 @@ type _ChatMessagesResultDTO ChatMessagesResultDTO
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewChatMessagesResultDTO(orderId int64, messages []ChatMessageDTO) *ChatMessagesResultDTO {
+func NewChatMessagesResultDTO(context ChatFullContextDTO, messages []ChatMessageDTO) *ChatMessagesResultDTO {
 	this := ChatMessagesResultDTO{}
-	this.OrderId = orderId
+	this.Context = context
 	this.Messages = messages
 	return &this
 }
@@ -49,28 +51,63 @@ func NewChatMessagesResultDTOWithDefaults() *ChatMessagesResultDTO {
 	return &this
 }
 
-// GetOrderId returns the OrderId field value
+// GetOrderId returns the OrderId field value if set, zero value otherwise.
+// Deprecated
 func (o *ChatMessagesResultDTO) GetOrderId() int64 {
-	if o == nil {
+	if o == nil || IsNil(o.OrderId) {
 		var ret int64
 		return ret
 	}
-
-	return o.OrderId
+	return *o.OrderId
 }
 
-// GetOrderIdOk returns a tuple with the OrderId field value
+// GetOrderIdOk returns a tuple with the OrderId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// Deprecated
 func (o *ChatMessagesResultDTO) GetOrderIdOk() (*int64, bool) {
+	if o == nil || IsNil(o.OrderId) {
+		return nil, false
+	}
+	return o.OrderId, true
+}
+
+// HasOrderId returns a boolean if a field has been set.
+func (o *ChatMessagesResultDTO) HasOrderId() bool {
+	if o != nil && !IsNil(o.OrderId) {
+		return true
+	}
+
+	return false
+}
+
+// SetOrderId gets a reference to the given int64 and assigns it to the OrderId field.
+// Deprecated
+func (o *ChatMessagesResultDTO) SetOrderId(v int64) {
+	o.OrderId = &v
+}
+
+// GetContext returns the Context field value
+func (o *ChatMessagesResultDTO) GetContext() ChatFullContextDTO {
+	if o == nil {
+		var ret ChatFullContextDTO
+		return ret
+	}
+
+	return o.Context
+}
+
+// GetContextOk returns a tuple with the Context field value
+// and a boolean to check if the value has been set.
+func (o *ChatMessagesResultDTO) GetContextOk() (*ChatFullContextDTO, bool) {
 	if o == nil {
 		return nil, false
 	}
-	return &o.OrderId, true
+	return &o.Context, true
 }
 
-// SetOrderId sets field value
-func (o *ChatMessagesResultDTO) SetOrderId(v int64) {
-	o.OrderId = v
+// SetContext sets field value
+func (o *ChatMessagesResultDTO) SetContext(v ChatFullContextDTO) {
+	o.Context = v
 }
 
 // GetMessages returns the Messages field value
@@ -98,9 +135,9 @@ func (o *ChatMessagesResultDTO) SetMessages(v []ChatMessageDTO) {
 }
 
 // GetPaging returns the Paging field value if set, zero value otherwise.
-func (o *ChatMessagesResultDTO) GetPaging() ForwardScrollingPagerDTO {
+func (o *ChatMessagesResultDTO) GetPaging() PackagingForwardScrollingPagerDTO {
 	if o == nil || IsNil(o.Paging) {
-		var ret ForwardScrollingPagerDTO
+		var ret PackagingForwardScrollingPagerDTO
 		return ret
 	}
 	return *o.Paging
@@ -108,7 +145,7 @@ func (o *ChatMessagesResultDTO) GetPaging() ForwardScrollingPagerDTO {
 
 // GetPagingOk returns a tuple with the Paging field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ChatMessagesResultDTO) GetPagingOk() (*ForwardScrollingPagerDTO, bool) {
+func (o *ChatMessagesResultDTO) GetPagingOk() (*PackagingForwardScrollingPagerDTO, bool) {
 	if o == nil || IsNil(o.Paging) {
 		return nil, false
 	}
@@ -124,8 +161,8 @@ func (o *ChatMessagesResultDTO) HasPaging() bool {
 	return false
 }
 
-// SetPaging gets a reference to the given ForwardScrollingPagerDTO and assigns it to the Paging field.
-func (o *ChatMessagesResultDTO) SetPaging(v ForwardScrollingPagerDTO) {
+// SetPaging gets a reference to the given PackagingForwardScrollingPagerDTO and assigns it to the Paging field.
+func (o *ChatMessagesResultDTO) SetPaging(v PackagingForwardScrollingPagerDTO) {
 	o.Paging = &v
 }
 
@@ -139,7 +176,10 @@ func (o ChatMessagesResultDTO) MarshalJSON() ([]byte, error) {
 
 func (o ChatMessagesResultDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	toSerialize["orderId"] = o.OrderId
+	if !IsNil(o.OrderId) {
+		toSerialize["orderId"] = o.OrderId
+	}
+	toSerialize["context"] = o.Context
 	toSerialize["messages"] = o.Messages
 	if !IsNil(o.Paging) {
 		toSerialize["paging"] = o.Paging
@@ -152,7 +192,7 @@ func (o *ChatMessagesResultDTO) UnmarshalJSON(data []byte) (err error) {
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
-		"orderId",
+		"context",
 		"messages",
 	}
 

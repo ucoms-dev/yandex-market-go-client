@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -19,8 +19,11 @@ var _ MappedNullable = &GetBusinessSettingsInfoDTO{}
 
 // GetBusinessSettingsInfoDTO Информация о кабинете и его настройках.
 type GetBusinessSettingsInfoDTO struct {
-	Info     *BusinessDTO         `json:"info,omitempty"`
-	Settings *BusinessSettingsDTO `json:"settings,omitempty"`
+	Info              *BusinessDTO                   `json:"info,omitempty"`
+	Settings          *BusinessSettingsDTO           `json:"settings,omitempty"`
+	SubscriptionLevel *BusinessSubscriptionLevelType `json:"subscriptionLevel,omitempty"`
+	// Свойства кабинета.
+	Traits []BusinessTraitType `json:"traits,omitempty"`
 }
 
 // NewGetBusinessSettingsInfoDTO instantiates a new GetBusinessSettingsInfoDTO object
@@ -104,6 +107,71 @@ func (o *GetBusinessSettingsInfoDTO) SetSettings(v BusinessSettingsDTO) {
 	o.Settings = &v
 }
 
+// GetSubscriptionLevel returns the SubscriptionLevel field value if set, zero value otherwise.
+func (o *GetBusinessSettingsInfoDTO) GetSubscriptionLevel() BusinessSubscriptionLevelType {
+	if o == nil || IsNil(o.SubscriptionLevel) {
+		var ret BusinessSubscriptionLevelType
+		return ret
+	}
+	return *o.SubscriptionLevel
+}
+
+// GetSubscriptionLevelOk returns a tuple with the SubscriptionLevel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GetBusinessSettingsInfoDTO) GetSubscriptionLevelOk() (*BusinessSubscriptionLevelType, bool) {
+	if o == nil || IsNil(o.SubscriptionLevel) {
+		return nil, false
+	}
+	return o.SubscriptionLevel, true
+}
+
+// HasSubscriptionLevel returns a boolean if a field has been set.
+func (o *GetBusinessSettingsInfoDTO) HasSubscriptionLevel() bool {
+	if o != nil && !IsNil(o.SubscriptionLevel) {
+		return true
+	}
+
+	return false
+}
+
+// SetSubscriptionLevel gets a reference to the given BusinessSubscriptionLevelType and assigns it to the SubscriptionLevel field.
+func (o *GetBusinessSettingsInfoDTO) SetSubscriptionLevel(v BusinessSubscriptionLevelType) {
+	o.SubscriptionLevel = &v
+}
+
+// GetTraits returns the Traits field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetBusinessSettingsInfoDTO) GetTraits() []BusinessTraitType {
+	if o == nil {
+		var ret []BusinessTraitType
+		return ret
+	}
+	return o.Traits
+}
+
+// GetTraitsOk returns a tuple with the Traits field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetBusinessSettingsInfoDTO) GetTraitsOk() ([]BusinessTraitType, bool) {
+	if o == nil || IsNil(o.Traits) {
+		return nil, false
+	}
+	return o.Traits, true
+}
+
+// HasTraits returns a boolean if a field has been set.
+func (o *GetBusinessSettingsInfoDTO) HasTraits() bool {
+	if o != nil && !IsNil(o.Traits) {
+		return true
+	}
+
+	return false
+}
+
+// SetTraits gets a reference to the given []BusinessTraitType and assigns it to the Traits field.
+func (o *GetBusinessSettingsInfoDTO) SetTraits(v []BusinessTraitType) {
+	o.Traits = v
+}
+
 func (o GetBusinessSettingsInfoDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -119,6 +187,12 @@ func (o GetBusinessSettingsInfoDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Settings) {
 		toSerialize["settings"] = o.Settings
+	}
+	if !IsNil(o.SubscriptionLevel) {
+		toSerialize["subscriptionLevel"] = o.SubscriptionLevel
+	}
+	if o.Traits != nil {
+		toSerialize["traits"] = o.Traits
 	}
 	return toSerialize, nil
 }

@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,6 +21,8 @@ var _ MappedNullable = &GetOfferMappingDTO{}
 type GetOfferMappingDTO struct {
 	Offer   *GetOfferDTO   `json:"offer,omitempty"`
 	Mapping *GetMappingDTO `json:"mapping,omitempty"`
+	// Ссылки на один и тот же товар на разных витринах Маркета.
+	ShowcaseUrls []ShowcaseUrlDTO `json:"showcaseUrls,omitempty"`
 }
 
 // NewGetOfferMappingDTO instantiates a new GetOfferMappingDTO object
@@ -104,6 +106,39 @@ func (o *GetOfferMappingDTO) SetMapping(v GetMappingDTO) {
 	o.Mapping = &v
 }
 
+// GetShowcaseUrls returns the ShowcaseUrls field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GetOfferMappingDTO) GetShowcaseUrls() []ShowcaseUrlDTO {
+	if o == nil {
+		var ret []ShowcaseUrlDTO
+		return ret
+	}
+	return o.ShowcaseUrls
+}
+
+// GetShowcaseUrlsOk returns a tuple with the ShowcaseUrls field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GetOfferMappingDTO) GetShowcaseUrlsOk() ([]ShowcaseUrlDTO, bool) {
+	if o == nil || IsNil(o.ShowcaseUrls) {
+		return nil, false
+	}
+	return o.ShowcaseUrls, true
+}
+
+// HasShowcaseUrls returns a boolean if a field has been set.
+func (o *GetOfferMappingDTO) HasShowcaseUrls() bool {
+	if o != nil && !IsNil(o.ShowcaseUrls) {
+		return true
+	}
+
+	return false
+}
+
+// SetShowcaseUrls gets a reference to the given []ShowcaseUrlDTO and assigns it to the ShowcaseUrls field.
+func (o *GetOfferMappingDTO) SetShowcaseUrls(v []ShowcaseUrlDTO) {
+	o.ShowcaseUrls = v
+}
+
 func (o GetOfferMappingDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -119,6 +154,9 @@ func (o GetOfferMappingDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Mapping) {
 		toSerialize["mapping"] = o.Mapping
+	}
+	if o.ShowcaseUrls != nil {
+		toSerialize["showcaseUrls"] = o.ShowcaseUrls
 	}
 	return toSerialize, nil
 }

@@ -37,6 +37,10 @@
 
 * `READY_TO_WITHDRAW` (value: `"READY_TO_WITHDRAW"`)
 
+* `NEED_PREPARATION` (value: `"NEED_PREPARATION"`)
+
+* `WAREHOUSE_SIGNED_ACT` (value: `"WAREHOUSE_SIGNED_ACT"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

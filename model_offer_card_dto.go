@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -21,7 +21,7 @@ var _ MappedNullable = &OfferCardDTO{}
 
 // OfferCardDTO Информация о состоянии карточки товара.  Если поле `mapping` отсутствует в ответе, Маркет еще не успел обработать информацию о товаре. Чтобы определить категорию такого товара, повторите запрос через несколько минут.
 type OfferCardDTO struct {
-	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
+	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	OfferId string         `json:"offerId" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
 	Mapping *GetMappingDTO `json:"mapping,omitempty"`
 	// Список характеристик с их значениями.
@@ -29,11 +29,13 @@ type OfferCardDTO struct {
 	CardStatus      *OfferCardStatusType `json:"cardStatus,omitempty"`
 	// Рейтинг карточки.
 	ContentRating *int32 `json:"contentRating,omitempty"`
-	// Средний рейтинг карточки у товаров той категории, которая указана в `marketCategoryId`.
+	// Средний рейтинг карточки у товаров той категории, которая указана в `marketCategoryId`.  Возвращается, только если параметр `withRecommendations` имеет значение `true`.
 	AverageContentRating *int32                      `json:"averageContentRating,omitempty"`
 	ContentRatingStatus  *OfferCardContentStatusType `json:"contentRatingStatus,omitempty"`
-	// Список рекомендаций к заполнению карточки.  Рекомендации Маркета помогают заполнять карточку так, чтобы покупателям было проще найти ваш товар и решиться на покупку.
+	// Список рекомендаций к заполнению карточки.  Возвращается, только если параметр `withRecommendations` имеет значение `true`.  Рекомендации Маркета помогают заполнять карточку так, чтобы покупателям было проще найти ваш товар и решиться на покупку.
 	Recommendations []OfferCardRecommendationDTO `json:"recommendations,omitempty"`
+	// Идентификатор группы товаров.  У товаров, которые объединены в одну группу, будет одинаковый идентификатор.  [Как объединить товары на карточке](../../step-by-step/assortment-add-goods.md#combine-variants)
+	GroupId *string `json:"groupId,omitempty"`
 	// Ошибки в контенте, препятствующие размещению товара на витрине.
 	Errors []OfferErrorDTO `json:"errors,omitempty"`
 	// Связанные с контентом предупреждения, не препятствующие размещению товара на витрине.
@@ -310,6 +312,38 @@ func (o *OfferCardDTO) SetRecommendations(v []OfferCardRecommendationDTO) {
 	o.Recommendations = v
 }
 
+// GetGroupId returns the GroupId field value if set, zero value otherwise.
+func (o *OfferCardDTO) GetGroupId() string {
+	if o == nil || IsNil(o.GroupId) {
+		var ret string
+		return ret
+	}
+	return *o.GroupId
+}
+
+// GetGroupIdOk returns a tuple with the GroupId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OfferCardDTO) GetGroupIdOk() (*string, bool) {
+	if o == nil || IsNil(o.GroupId) {
+		return nil, false
+	}
+	return o.GroupId, true
+}
+
+// HasGroupId returns a boolean if a field has been set.
+func (o *OfferCardDTO) HasGroupId() bool {
+	if o != nil && !IsNil(o.GroupId) {
+		return true
+	}
+
+	return false
+}
+
+// SetGroupId gets a reference to the given string and assigns it to the GroupId field.
+func (o *OfferCardDTO) SetGroupId(v string) {
+	o.GroupId = &v
+}
+
 // GetErrors returns the Errors field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *OfferCardDTO) GetErrors() []OfferErrorDTO {
 	if o == nil {
@@ -407,6 +441,9 @@ func (o OfferCardDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if o.Recommendations != nil {
 		toSerialize["recommendations"] = o.Recommendations
+	}
+	if !IsNil(o.GroupId) {
+		toSerialize["groupId"] = o.GroupId
 	}
 	if o.Errors != nil {
 		toSerialize["errors"] = o.Errors

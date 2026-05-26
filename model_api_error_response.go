@@ -1,5 +1,5 @@
 /*
-Партнерский API Маркета
+API Яндекс Маркета для продавцов
 
 API Яндекс Маркета помогает продавцам автоматизировать и упростить работу с маркетплейсом.  В числе возможностей интеграции:  * управление каталогом товаров и витриной,  * обработка заказов,  * изменение настроек магазина,  * получение отчетов.
 
@@ -11,7 +11,9 @@ API version: LATEST
 package openapi
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the ApiErrorResponse type satisfies the MappedNullable interface at compile time
@@ -19,17 +21,20 @@ var _ MappedNullable = &ApiErrorResponse{}
 
 // ApiErrorResponse Стандартная обертка для ошибок сервера.
 type ApiErrorResponse struct {
-	Status *ApiResponseStatusType `json:"status,omitempty"`
+	Status ApiResponseStatusType `json:"status"`
 	// Список ошибок.
 	Errors []ApiErrorDTO `json:"errors,omitempty"`
 }
+
+type _ApiErrorResponse ApiErrorResponse
 
 // NewApiErrorResponse instantiates a new ApiErrorResponse object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewApiErrorResponse() *ApiErrorResponse {
+func NewApiErrorResponse(status ApiResponseStatusType) *ApiErrorResponse {
 	this := ApiErrorResponse{}
+	this.Status = status
 	return &this
 }
 
@@ -41,36 +46,28 @@ func NewApiErrorResponseWithDefaults() *ApiErrorResponse {
 	return &this
 }
 
-// GetStatus returns the Status field value if set, zero value otherwise.
+// GetStatus returns the Status field value
 func (o *ApiErrorResponse) GetStatus() ApiResponseStatusType {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		var ret ApiResponseStatusType
 		return ret
 	}
-	return *o.Status
+
+	return o.Status
 }
 
-// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// GetStatusOk returns a tuple with the Status field value
 // and a boolean to check if the value has been set.
 func (o *ApiErrorResponse) GetStatusOk() (*ApiResponseStatusType, bool) {
-	if o == nil || IsNil(o.Status) {
+	if o == nil {
 		return nil, false
 	}
-	return o.Status, true
+	return &o.Status, true
 }
 
-// HasStatus returns a boolean if a field has been set.
-func (o *ApiErrorResponse) HasStatus() bool {
-	if o != nil && !IsNil(o.Status) {
-		return true
-	}
-
-	return false
-}
-
-// SetStatus gets a reference to the given ApiResponseStatusType and assigns it to the Status field.
+// SetStatus sets field value
 func (o *ApiErrorResponse) SetStatus(v ApiResponseStatusType) {
-	o.Status = &v
+	o.Status = v
 }
 
 // GetErrors returns the Errors field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -116,13 +113,48 @@ func (o ApiErrorResponse) MarshalJSON() ([]byte, error) {
 
 func (o ApiErrorResponse) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.Status) {
-		toSerialize["status"] = o.Status
-	}
+	toSerialize["status"] = o.Status
 	if o.Errors != nil {
 		toSerialize["errors"] = o.Errors
 	}
 	return toSerialize, nil
+}
+
+func (o *ApiErrorResponse) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"status",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varApiErrorResponse := _ApiErrorResponse{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varApiErrorResponse)
+
+	if err != nil {
+		return err
+	}
+
+	*o = ApiErrorResponse(varApiErrorResponse)
+
+	return err
 }
 
 type NullableApiErrorResponse struct {
