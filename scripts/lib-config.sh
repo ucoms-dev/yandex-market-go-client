@@ -26,3 +26,24 @@ read_config_value() {
 
   printf '%s\n' "${value}"
 }
+
+read_optional_config_value() {
+  local key="$1"
+
+  local line
+  if command -v rg >/dev/null 2>&1; then
+    line="$(rg -N "^[[:space:]]*${key}:[[:space:]]*" "${CONFIG_FILE}" | head -n1 || true)"
+  else
+    line="$(grep -E "^[[:space:]]*${key}:[[:space:]]*" "${CONFIG_FILE}" | head -n1 || true)"
+  fi
+  if [[ -z "${line}" ]]; then
+    return 0
+  fi
+
+  local value
+  value="$(printf '%s\n' "${line}" | sed -E 's/^[^:]+:[[:space:]]*//; s/[[:space:]]+$//')"
+  value="${value#\"}"
+  value="${value%\"}"
+
+  printf '%s\n' "${value}"
+}

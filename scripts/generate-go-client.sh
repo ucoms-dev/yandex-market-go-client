@@ -11,7 +11,7 @@ local_spec_dir_rel="$(read_config_value local_dir)"
 out_dir_rel="$(read_config_value output_dir)"
 package_name="$(read_config_value package_name)"
 package_version_default="$(read_config_value package_version)"
-template_dir="$(read_config_value template_dir)"
+template_dir="$(read_optional_config_value template_dir)"
 struct_prefix="$(read_config_value struct_prefix)"
 enum_class_prefix="$(read_config_value enum_class_prefix)"
 skip_validate_spec_default="$(read_config_value skip_validate_spec)"
@@ -104,7 +104,6 @@ cleanup_generated_files() {
 
 spec_for_generator="$(generator_path "${spec_rel}")"
 out_dir_for_generator="$(generator_path "${out_dir_rel}")"
-template_dir_for_generator="$(generator_path "${template_dir}")"
 
 if [[ "${skip_validate_spec}" != "true" ]]; then
   echo "Validating OpenAPI spec ${spec_rel}"
@@ -123,12 +122,15 @@ cmd=(
   -i "${spec_for_generator}"
   -g "${language}"
   -o "${out_dir_for_generator}"
-  -t "${template_dir_for_generator}"
   --git-user-id "${git_user_id}"
   --git-repo-id "${git_repo_id}"
   --global-property "${global_properties}"
   --additional-properties "packageName=${package_name},packageVersion=${package_version},structPrefix=${struct_prefix},enumClassPrefix=${enum_class_prefix}"
 )
+
+if [[ -n "${template_dir}" ]]; then
+  cmd+=(-t "$(generator_path "${template_dir}")")
+fi
 
 if [[ "${minimal_update}" == "true" ]]; then
   cmd+=(--minimal-update)

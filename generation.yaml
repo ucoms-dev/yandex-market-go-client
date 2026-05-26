@@ -8,12 +8,11 @@ spec:
   local_path: api/openapi.yaml
 
 generator:
-  generator_version: 7.13.0
+  generator_version: 7.22.0
   language: go
   output_dir: .
   package_name: openapi
   package_version: 1.0.0
-  template_dir: scripts/templates/go
   struct_prefix: true
   enum_class_prefix: true
   skip_validate_spec: false
