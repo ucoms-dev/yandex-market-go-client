@@ -1,0 +1,11 @@
+description: |
+  Заказ, для которого нужно создать чат.
+type: object
+properties:
+  orderId:
+    description: Идентификатор заказа на Маркете.
+    type: integer
+    format: int64
+    deprecated: true
+  context:
+    $ref: ./ChatContextDTO.yaml
