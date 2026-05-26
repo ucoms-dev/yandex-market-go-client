@@ -143,8 +143,7 @@ func (v NullableEacVerificationResultDTO) IsSet() bool {
 }
 
 func (v *NullableEacVerificationResultDTO) Unset() {
-	var zero *EacVerificationResultDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

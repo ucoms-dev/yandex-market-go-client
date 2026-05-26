@@ -142,8 +142,7 @@ func (v NullableGetPromosRequest) IsSet() bool {
 }
 
 func (v *NullableGetPromosRequest) Unset() {
-	var zero *GetPromosRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

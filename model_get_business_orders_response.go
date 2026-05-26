@@ -175,8 +175,7 @@ func (v NullableGetBusinessOrdersResponse) IsSet() bool {
 }
 
 func (v *NullableGetBusinessOrdersResponse) Unset() {
-	var zero *GetBusinessOrdersResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -711,22 +711,23 @@ func (a *OutletsAPIService) GetOutletsExecute(r OutletsAPIGetOutletsRequest) (*G
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	} else {
 		var defaultValue int32 = 25
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
 		r.limit = &defaultValue
 	}
 	if r.regionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "region_id", r.regionId, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region_id", r.regionId, "form", "")
 	}
 	if r.shopOutletCode != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "shop_outlet_code", r.shopOutletCode, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "shop_outlet_code", r.shopOutletCode, "form", "")
 	}
 	if r.regionId2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId2, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId2, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -174,8 +174,7 @@ func (v NullableUpdateGoodsQuestionTextEntityResponse) IsSet() bool {
 }
 
 func (v *NullableUpdateGoodsQuestionTextEntityResponse) Unset() {
-	var zero *UpdateGoodsQuestionTextEntityResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

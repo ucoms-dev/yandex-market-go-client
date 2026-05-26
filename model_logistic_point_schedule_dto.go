@@ -177,8 +177,7 @@ func (v NullableLogisticPointScheduleDTO) IsSet() bool {
 }
 
 func (v *NullableLogisticPointScheduleDTO) Unset() {
-	var zero *LogisticPointScheduleDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

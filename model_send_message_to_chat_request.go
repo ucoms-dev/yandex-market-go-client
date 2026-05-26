@@ -139,8 +139,7 @@ func (v NullableSendMessageToChatRequest) IsSet() bool {
 }
 
 func (v *NullableSendMessageToChatRequest) Unset() {
-	var zero *SendMessageToChatRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

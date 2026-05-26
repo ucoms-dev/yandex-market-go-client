@@ -175,8 +175,7 @@ func (v NullableGetBidsInfoResponseDTO) IsSet() bool {
 }
 
 func (v *NullableGetBidsInfoResponseDTO) Unset() {
-	var zero *GetBidsInfoResponseDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

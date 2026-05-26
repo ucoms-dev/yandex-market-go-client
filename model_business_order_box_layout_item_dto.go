@@ -250,8 +250,7 @@ func (v NullableBusinessOrderBoxLayoutItemDTO) IsSet() bool {
 }
 
 func (v *NullableBusinessOrderBoxLayoutItemDTO) Unset() {
-	var zero *BusinessOrderBoxLayoutItemDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

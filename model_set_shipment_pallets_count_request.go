@@ -139,8 +139,7 @@ func (v NullableSetShipmentPalletsCountRequest) IsSet() bool {
 }
 
 func (v *NullableSetShipmentPalletsCountRequest) Unset() {
-	var zero *SetShipmentPalletsCountRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

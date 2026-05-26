@@ -180,8 +180,7 @@ func (v NullableGenerateOfferBarcodesRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateOfferBarcodesRequest) Unset() {
-	var zero *GenerateOfferBarcodesRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

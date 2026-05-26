@@ -139,8 +139,7 @@ func (v NullableGenerateOfferBarcodesResultDTO) IsSet() bool {
 }
 
 func (v *NullableGenerateOfferBarcodesResultDTO) Unset() {
-	var zero *GenerateOfferBarcodesResultDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

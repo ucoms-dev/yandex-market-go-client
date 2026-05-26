@@ -139,8 +139,7 @@ func (v NullableDeliveryIntervalsUpdateOptionsDTO) IsSet() bool {
 }
 
 func (v *NullableDeliveryIntervalsUpdateOptionsDTO) Unset() {
-	var zero *DeliveryIntervalsUpdateOptionsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

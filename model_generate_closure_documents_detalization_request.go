@@ -203,8 +203,7 @@ func (v NullableGenerateClosureDocumentsDetalizationRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateClosureDocumentsDetalizationRequest) Unset() {
-	var zero *GenerateClosureDocumentsDetalizationRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

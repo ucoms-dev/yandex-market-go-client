@@ -167,8 +167,7 @@ func (v NullableTypedQuestionsTextEntityIdDTO) IsSet() bool {
 }
 
 func (v *NullableTypedQuestionsTextEntityIdDTO) Unset() {
-	var zero *TypedQuestionsTextEntityIdDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

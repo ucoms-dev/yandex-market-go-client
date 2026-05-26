@@ -401,8 +401,7 @@ func (v NullableCommentDTO) IsSet() bool {
 }
 
 func (v *NullableCommentDTO) Unset() {
-	var zero *CommentDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -195,8 +195,7 @@ func (v NullableOperationResultDTO) IsSet() bool {
 }
 
 func (v *NullableOperationResultDTO) Unset() {
-	var zero *OperationResultDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

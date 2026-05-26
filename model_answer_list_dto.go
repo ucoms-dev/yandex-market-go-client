@@ -175,8 +175,7 @@ func (v NullableAnswerListDTO) IsSet() bool {
 }
 
 func (v *NullableAnswerListDTO) Unset() {
-	var zero *AnswerListDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

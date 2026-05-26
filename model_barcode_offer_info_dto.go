@@ -168,8 +168,7 @@ func (v NullableBarcodeOfferInfoDTO) IsSet() bool {
 }
 
 func (v *NullableBarcodeOfferInfoDTO) Unset() {
-	var zero *BarcodeOfferInfoDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

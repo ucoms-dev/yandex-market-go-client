@@ -139,8 +139,7 @@ func (v NullableUpdateOfferContentRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateOfferContentRequest) Unset() {
-	var zero *UpdateOfferContentRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

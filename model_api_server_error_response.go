@@ -176,8 +176,7 @@ func (v NullableApiServerErrorResponse) IsSet() bool {
 }
 
 func (v *NullableApiServerErrorResponse) Unset() {
-	var zero *ApiServerErrorResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

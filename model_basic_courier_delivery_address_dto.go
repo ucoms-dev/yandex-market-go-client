@@ -139,8 +139,7 @@ func (v NullableBasicCourierDeliveryAddressDTO) IsSet() bool {
 }
 
 func (v *NullableBasicCourierDeliveryAddressDTO) Unset() {
-	var zero *BasicCourierDeliveryAddressDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

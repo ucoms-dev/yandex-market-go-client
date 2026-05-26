@@ -196,8 +196,7 @@ func (v NullableQualityRatingAffectedOrderDTO) IsSet() bool {
 }
 
 func (v *NullableQualityRatingAffectedOrderDTO) Unset() {
-	var zero *QualityRatingAffectedOrderDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

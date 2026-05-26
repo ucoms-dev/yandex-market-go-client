@@ -204,8 +204,7 @@ func (v NullableOfferMappingErrorDTO) IsSet() bool {
 }
 
 func (v *NullableOfferMappingErrorDTO) Unset() {
-	var zero *OfferMappingErrorDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

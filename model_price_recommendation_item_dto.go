@@ -168,8 +168,7 @@ func (v NullablePriceRecommendationItemDTO) IsSet() bool {
 }
 
 func (v *NullablePriceRecommendationItemDTO) Unset() {
-	var zero *PriceRecommendationItemDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

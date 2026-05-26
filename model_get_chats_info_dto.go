@@ -175,8 +175,7 @@ func (v NullableGetChatsInfoDTO) IsSet() bool {
 }
 
 func (v *NullableGetChatsInfoDTO) Unset() {
-	var zero *GetChatsInfoDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

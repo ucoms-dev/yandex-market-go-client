@@ -108,8 +108,7 @@ func (v NullablePromoOfferAutoParticipatingDetailsDTO) IsSet() bool {
 }
 
 func (v *NullablePromoOfferAutoParticipatingDetailsDTO) Unset() {
-	var zero *PromoOfferAutoParticipatingDetailsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

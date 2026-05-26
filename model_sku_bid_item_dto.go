@@ -168,8 +168,7 @@ func (v NullableSkuBidItemDTO) IsSet() bool {
 }
 
 func (v *NullableSkuBidItemDTO) Unset() {
-	var zero *SkuBidItemDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

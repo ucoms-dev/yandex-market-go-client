@@ -169,8 +169,7 @@ func (v NullablePromoPeriodDTO) IsSet() bool {
 }
 
 func (v *NullablePromoPeriodDTO) Unset() {
-	var zero *PromoPeriodDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

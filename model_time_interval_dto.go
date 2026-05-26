@@ -168,8 +168,7 @@ func (v NullableTimeIntervalDTO) IsSet() bool {
 }
 
 func (v *NullableTimeIntervalDTO) Unset() {
-	var zero *TimeIntervalDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

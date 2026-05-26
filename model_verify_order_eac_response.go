@@ -174,8 +174,7 @@ func (v NullableVerifyOrderEacResponse) IsSet() bool {
 }
 
 func (v *NullableVerifyOrderEacResponse) Unset() {
-	var zero *VerifyOrderEacResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

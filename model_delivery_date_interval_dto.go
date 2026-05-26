@@ -168,8 +168,7 @@ func (v NullableDeliveryDateIntervalDTO) IsSet() bool {
 }
 
 func (v *NullableDeliveryDateIntervalDTO) Unset() {
-	var zero *DeliveryDateIntervalDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

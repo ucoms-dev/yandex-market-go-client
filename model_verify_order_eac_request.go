@@ -139,8 +139,7 @@ func (v NullableVerifyOrderEacRequest) IsSet() bool {
 }
 
 func (v *NullableVerifyOrderEacRequest) Unset() {
-	var zero *VerifyOrderEacRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

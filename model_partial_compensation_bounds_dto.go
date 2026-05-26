@@ -195,8 +195,7 @@ func (v NullablePartialCompensationBoundsDTO) IsSet() bool {
 }
 
 func (v *NullablePartialCompensationBoundsDTO) Unset() {
-	var zero *PartialCompensationBoundsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

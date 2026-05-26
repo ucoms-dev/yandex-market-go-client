@@ -196,8 +196,7 @@ func (v NullableChatMessagePayloadDTO) IsSet() bool {
 }
 
 func (v *NullableChatMessagePayloadDTO) Unset() {
-	var zero *ChatMessagePayloadDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -595,8 +595,7 @@ func (v NullableReturnDTO) IsSet() bool {
 }
 
 func (v *NullableReturnDTO) Unset() {
-	var zero *ReturnDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

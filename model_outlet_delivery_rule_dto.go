@@ -292,8 +292,7 @@ func (v NullableOutletDeliveryRuleDTO) IsSet() bool {
 }
 
 func (v *NullableOutletDeliveryRuleDTO) Unset() {
-	var zero *OutletDeliveryRuleDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -197,8 +197,7 @@ func (v NullableGenerateBoostConsolidatedRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateBoostConsolidatedRequest) Unset() {
-	var zero *GenerateBoostConsolidatedRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

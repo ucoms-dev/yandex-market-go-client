@@ -139,8 +139,7 @@ func (v NullableUpdateOrderStorageLimitRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateOrderStorageLimitRequest) Unset() {
-	var zero *UpdateOrderStorageLimitRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

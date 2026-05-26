@@ -174,8 +174,7 @@ func (v NullableGetSupplyRequestItemsResponse) IsSet() bool {
 }
 
 func (v *NullableGetSupplyRequestItemsResponse) Unset() {
-	var zero *GetSupplyRequestItemsResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

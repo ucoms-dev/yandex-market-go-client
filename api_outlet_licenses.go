@@ -16,6 +16,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 )
 
@@ -95,7 +96,17 @@ func (a *OutletLicensesAPIService) DeleteOutletLicensesExecute(r OutletLicensesA
 		return localVarReturnValue, nil, reportError("ids must have less than 500 elements")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "", "csv")
+	{
+		t := *r.ids
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi")
+		}
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -301,10 +312,26 @@ func (a *OutletLicensesAPIService) GetOutletLicensesExecute(r OutletLicensesAPIG
 	}
 
 	if r.outletIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "outletIds", r.outletIds, "", "csv")
+		t := *r.outletIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "outletIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "outletIds", t, "form", "multi")
+		}
 	}
 	if r.ids != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "", "csv")
+		t := *r.ids
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "ids", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "ids", t, "form", "multi")
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

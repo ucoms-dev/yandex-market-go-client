@@ -139,8 +139,7 @@ func (v NullablePutSkuBidsRequest) IsSet() bool {
 }
 
 func (v *NullablePutSkuBidsRequest) Unset() {
-	var zero *PutSkuBidsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

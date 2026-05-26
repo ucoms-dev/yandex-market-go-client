@@ -145,8 +145,7 @@ func (v NullableGetDefaultPricesRequest) IsSet() bool {
 }
 
 func (v *NullableGetDefaultPricesRequest) Unset() {
-	var zero *GetDefaultPricesRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

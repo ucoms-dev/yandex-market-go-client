@@ -285,8 +285,7 @@ func (v NullableChatFullContextDTO) IsSet() bool {
 }
 
 func (v *NullableChatFullContextDTO) Unset() {
-	var zero *ChatFullContextDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

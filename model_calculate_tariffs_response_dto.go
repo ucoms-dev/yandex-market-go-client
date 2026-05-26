@@ -139,8 +139,7 @@ func (v NullableCalculateTariffsResponseDTO) IsSet() bool {
 }
 
 func (v *NullableCalculateTariffsResponseDTO) Unset() {
-	var zero *CalculateTariffsResponseDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -168,8 +168,7 @@ func (v NullableCampaignQualityRatingDTO) IsSet() bool {
 }
 
 func (v *NullableCampaignQualityRatingDTO) Unset() {
-	var zero *CampaignQualityRatingDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -205,8 +205,7 @@ func (v NullableGetDeliveryOptionsItemDTO) IsSet() bool {
 }
 
 func (v *NullableGetDeliveryOptionsItemDTO) Unset() {
-	var zero *GetDeliveryOptionsItemDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -197,8 +197,7 @@ func (v NullableGenerateJewelryFiscalReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateJewelryFiscalReportRequest) Unset() {
-	var zero *GenerateJewelryFiscalReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

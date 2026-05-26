@@ -148,8 +148,7 @@ func (v NullableParcelBoxDTO) IsSet() bool {
 }
 
 func (v *NullableParcelBoxDTO) Unset() {
-	var zero *ParcelBoxDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

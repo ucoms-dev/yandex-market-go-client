@@ -106,8 +106,7 @@ func (v NullableCampaignSettingsDeliveryDTO) IsSet() bool {
 }
 
 func (v *NullableCampaignSettingsDeliveryDTO) Unset() {
-	var zero *CampaignSettingsDeliveryDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

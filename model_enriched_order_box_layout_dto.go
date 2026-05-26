@@ -176,8 +176,7 @@ func (v NullableEnrichedOrderBoxLayoutDTO) IsSet() bool {
 }
 
 func (v *NullableEnrichedOrderBoxLayoutDTO) Unset() {
-	var zero *EnrichedOrderBoxLayoutDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

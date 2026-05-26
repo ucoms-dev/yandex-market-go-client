@@ -139,8 +139,7 @@ func (v NullableDeleteGoodsFeedbackCommentRequest) IsSet() bool {
 }
 
 func (v *NullableDeleteGoodsFeedbackCommentRequest) Unset() {
-	var zero *DeleteGoodsFeedbackCommentRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

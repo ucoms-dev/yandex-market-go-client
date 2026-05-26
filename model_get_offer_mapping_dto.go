@@ -180,8 +180,7 @@ func (v NullableGetOfferMappingDTO) IsSet() bool {
 }
 
 func (v *NullableGetOfferMappingDTO) Unset() {
-	var zero *GetOfferMappingDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

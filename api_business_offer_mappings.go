@@ -959,16 +959,17 @@ func (a *BusinessOfferMappingsAPIService) GetOfferMappingsExecute(r BusinessOffe
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	} else {
 		var defaultValue int32 = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
 		r.limit = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -1243,7 +1244,7 @@ func (a *BusinessOfferMappingsAPIService) UpdateOfferMappingsExecute(r BusinessO
 	}
 
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

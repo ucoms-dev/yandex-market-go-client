@@ -176,8 +176,7 @@ func (v NullableApiClientDataErrorResponse) IsSet() bool {
 }
 
 func (v *NullableApiClientDataErrorResponse) Unset() {
-	var zero *ApiClientDataErrorResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

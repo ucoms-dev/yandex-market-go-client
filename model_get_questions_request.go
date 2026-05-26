@@ -297,8 +297,7 @@ func (v NullableGetQuestionsRequest) IsSet() bool {
 }
 
 func (v *NullableGetQuestionsRequest) Unset() {
-	var zero *GetQuestionsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

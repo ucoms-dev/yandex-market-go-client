@@ -558,8 +558,7 @@ func (v NullableGenerateUnitedMarketplaceServicesReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateUnitedMarketplaceServicesReportRequest) Unset() {
-	var zero *GenerateUnitedMarketplaceServicesReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

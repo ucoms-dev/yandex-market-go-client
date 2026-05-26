@@ -315,8 +315,7 @@ func (v NullableReportInfoDTO) IsSet() bool {
 }
 
 func (v *NullableReportInfoDTO) Unset() {
-	var zero *ReportInfoDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

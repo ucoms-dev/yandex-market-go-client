@@ -174,8 +174,7 @@ func (v NullableGetQuarantineOffersResponse) IsSet() bool {
 }
 
 func (v *NullableGetQuarantineOffersResponse) Unset() {
-	var zero *GetQuarantineOffersResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

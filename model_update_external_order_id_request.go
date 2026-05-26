@@ -139,8 +139,7 @@ func (v NullableUpdateExternalOrderIdRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateExternalOrderIdRequest) Unset() {
-	var zero *UpdateExternalOrderIdRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

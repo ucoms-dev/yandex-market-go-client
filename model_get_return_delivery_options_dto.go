@@ -138,8 +138,7 @@ func (v NullableGetReturnDeliveryOptionsDTO) IsSet() bool {
 }
 
 func (v *NullableGetReturnDeliveryOptionsDTO) Unset() {
-	var zero *GetReturnDeliveryOptionsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

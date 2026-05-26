@@ -197,8 +197,7 @@ func (v NullableQualityRatingDTO) IsSet() bool {
 }
 
 func (v *NullableQualityRatingDTO) Unset() {
-	var zero *QualityRatingDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

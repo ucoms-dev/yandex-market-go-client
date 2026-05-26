@@ -176,8 +176,7 @@ func (v NullableGenerateGoodsTurnoverRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateGoodsTurnoverRequest) Unset() {
-	var zero *GenerateGoodsTurnoverRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

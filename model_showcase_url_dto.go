@@ -167,8 +167,7 @@ func (v NullableShowcaseUrlDTO) IsSet() bool {
 }
 
 func (v *NullableShowcaseUrlDTO) Unset() {
-	var zero *ShowcaseUrlDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

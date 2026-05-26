@@ -139,8 +139,7 @@ func (v NullableParcelRequestDTO) IsSet() bool {
 }
 
 func (v *NullableParcelRequestDTO) Unset() {
-	var zero *ParcelRequestDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

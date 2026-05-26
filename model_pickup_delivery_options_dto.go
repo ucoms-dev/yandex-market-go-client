@@ -139,8 +139,7 @@ func (v NullablePickupDeliveryOptionsDTO) IsSet() bool {
 }
 
 func (v *NullablePickupDeliveryOptionsDTO) Unset() {
-	var zero *PickupDeliveryOptionsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

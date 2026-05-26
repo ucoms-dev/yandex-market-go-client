@@ -826,8 +826,6 @@ docs/WarehousesDTO.md
 docs/WarehousesDeliveryOptionsDTO.md
 docs/WarningPromoOfferUpdateDTO.md
 git_push.sh
-go.mod
-go.sum
 model_accept_order_cancellation_request.go
 model_add_hidden_offers_request.go
 model_add_offers_to_archive_dto.go

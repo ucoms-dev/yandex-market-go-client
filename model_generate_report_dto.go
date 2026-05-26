@@ -168,8 +168,7 @@ func (v NullableGenerateReportDTO) IsSet() bool {
 }
 
 func (v *NullableGenerateReportDTO) Unset() {
-	var zero *GenerateReportDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

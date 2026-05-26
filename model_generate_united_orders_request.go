@@ -272,8 +272,7 @@ func (v NullableGenerateUnitedOrdersRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateUnitedOrdersRequest) Unset() {
-	var zero *GenerateUnitedOrdersRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

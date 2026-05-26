@@ -167,8 +167,7 @@ func (v NullableAddOffersToArchiveErrorDTO) IsSet() bool {
 }
 
 func (v *NullableAddOffersToArchiveErrorDTO) Unset() {
-	var zero *AddOffersToArchiveErrorDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

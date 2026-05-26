@@ -139,8 +139,7 @@ func (v NullableTransferOrdersFromShipmentRequest) IsSet() bool {
 }
 
 func (v *NullableTransferOrdersFromShipmentRequest) Unset() {
-	var zero *TransferOrdersFromShipmentRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -174,8 +174,7 @@ func (v NullableGetCategoryContentParametersResponse) IsSet() bool {
 }
 
 func (v *NullableGetCategoryContentParametersResponse) Unset() {
-	var zero *GetCategoryContentParametersResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

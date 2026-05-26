@@ -474,8 +474,7 @@ func (v NullableOutletDTO) IsSet() bool {
 }
 
 func (v *NullableOutletDTO) Unset() {
-	var zero *OutletDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

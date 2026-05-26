@@ -225,8 +225,7 @@ func (v NullableGenerateShowsBoostRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateShowsBoostRequest) Unset() {
-	var zero *GenerateShowsBoostRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

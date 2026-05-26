@@ -174,8 +174,7 @@ func (v NullableDeleteOffersFromArchiveResponse) IsSet() bool {
 }
 
 func (v *NullableDeleteOffersFromArchiveResponse) Unset() {
-	var zero *DeleteOffersFromArchiveResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

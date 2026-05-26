@@ -175,8 +175,7 @@ func (v NullablePagedWarehousesDTO) IsSet() bool {
 }
 
 func (v *NullablePagedWarehousesDTO) Unset() {
-	var zero *PagedWarehousesDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

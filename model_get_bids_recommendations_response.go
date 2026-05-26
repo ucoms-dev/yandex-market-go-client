@@ -174,8 +174,7 @@ func (v NullableGetBidsRecommendationsResponse) IsSet() bool {
 }
 
 func (v *NullableGetBidsRecommendationsResponse) Unset() {
-	var zero *GetBidsRecommendationsResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

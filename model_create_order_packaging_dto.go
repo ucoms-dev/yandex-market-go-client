@@ -106,8 +106,7 @@ func (v NullableCreateOrderPackagingDTO) IsSet() bool {
 }
 
 func (v *NullableCreateOrderPackagingDTO) Unset() {
-	var zero *CreateOrderPackagingDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -139,8 +139,7 @@ func (v NullableGetOrderIdentifiersStatusDTO) IsSet() bool {
 }
 
 func (v *NullableGetOrderIdentifiersStatusDTO) Unset() {
-	var zero *GetOrderIdentifiersStatusDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

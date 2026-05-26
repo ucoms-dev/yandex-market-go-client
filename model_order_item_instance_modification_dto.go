@@ -168,8 +168,7 @@ func (v NullableOrderItemInstanceModificationDTO) IsSet() bool {
 }
 
 func (v *NullableOrderItemInstanceModificationDTO) Unset() {
-	var zero *OrderItemInstanceModificationDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

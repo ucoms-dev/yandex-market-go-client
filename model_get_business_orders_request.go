@@ -446,8 +446,7 @@ func (v NullableGetBusinessOrdersRequest) IsSet() bool {
 }
 
 func (v *NullableGetBusinessOrdersRequest) Unset() {
-	var zero *GetBusinessOrdersRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

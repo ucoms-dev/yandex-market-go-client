@@ -175,8 +175,7 @@ func (v NullableOfferDefaultPriceResponseDTO) IsSet() bool {
 }
 
 func (v *NullableOfferDefaultPriceResponseDTO) Unset() {
-	var zero *OfferDefaultPriceResponseDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

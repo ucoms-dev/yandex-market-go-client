@@ -204,8 +204,7 @@ func (v NullableFulfillmentWarehouseDTO) IsSet() bool {
 }
 
 func (v *NullableFulfillmentWarehouseDTO) Unset() {
-	var zero *FulfillmentWarehouseDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

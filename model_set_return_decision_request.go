@@ -240,8 +240,7 @@ func (v NullableSetReturnDecisionRequest) IsSet() bool {
 }
 
 func (v *NullableSetReturnDecisionRequest) Unset() {
-	var zero *SetReturnDecisionRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

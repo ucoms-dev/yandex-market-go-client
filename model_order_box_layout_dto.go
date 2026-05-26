@@ -139,8 +139,7 @@ func (v NullableOrderBoxLayoutDTO) IsSet() bool {
 }
 
 func (v *NullableOrderBoxLayoutDTO) Unset() {
-	var zero *OrderBoxLayoutDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

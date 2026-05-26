@@ -176,8 +176,7 @@ func (v NullableUpdateOfferContentResponse) IsSet() bool {
 }
 
 func (v *NullableUpdateOfferContentResponse) Unset() {
-	var zero *UpdateOfferContentResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

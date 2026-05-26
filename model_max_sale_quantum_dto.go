@@ -213,8 +213,7 @@ func (v NullableMaxSaleQuantumDTO) IsSet() bool {
 }
 
 func (v *NullableMaxSaleQuantumDTO) Unset() {
-	var zero *MaxSaleQuantumDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -107,8 +107,7 @@ func (v NullableTrackDTO) IsSet() bool {
 }
 
 func (v *NullableTrackDTO) Unset() {
-	var zero *TrackDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

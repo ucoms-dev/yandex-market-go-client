@@ -168,8 +168,7 @@ func (v NullableClosureDocumentsMonthOfYearDTO) IsSet() bool {
 }
 
 func (v *NullableClosureDocumentsMonthOfYearDTO) Unset() {
-	var zero *ClosureDocumentsMonthOfYearDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -139,8 +139,7 @@ func (v NullableDeleteHiddenOffersRequest) IsSet() bool {
 }
 
 func (v *NullableDeleteHiddenOffersRequest) Unset() {
-	var zero *DeleteHiddenOffersRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

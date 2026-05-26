@@ -174,8 +174,7 @@ func (v NullableCreateOrderResponse) IsSet() bool {
 }
 
 func (v *NullableCreateOrderResponse) Unset() {
-	var zero *CreateOrderResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

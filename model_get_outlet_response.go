@@ -106,8 +106,7 @@ func (v NullableGetOutletResponse) IsSet() bool {
 }
 
 func (v *NullableGetOutletResponse) Unset() {
-	var zero *GetOutletResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

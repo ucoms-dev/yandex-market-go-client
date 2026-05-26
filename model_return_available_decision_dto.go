@@ -212,8 +212,7 @@ func (v NullableReturnAvailableDecisionDTO) IsSet() bool {
 }
 
 func (v *NullableReturnAvailableDecisionDTO) Unset() {
-	var zero *ReturnAvailableDecisionDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

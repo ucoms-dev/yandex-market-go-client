@@ -174,8 +174,7 @@ func (v NullableGetOperationsResponse) IsSet() bool {
 }
 
 func (v *NullableGetOperationsResponse) Unset() {
-	var zero *GetOperationsResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

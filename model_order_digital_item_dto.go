@@ -235,8 +235,7 @@ func (v NullableOrderDigitalItemDTO) IsSet() bool {
 }
 
 func (v *NullableOrderDigitalItemDTO) Unset() {
-	var zero *OrderDigitalItemDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

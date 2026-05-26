@@ -144,8 +144,7 @@ func (v NullableCampaignSettingsTimePeriodDTO) IsSet() bool {
 }
 
 func (v *NullableCampaignSettingsTimePeriodDTO) Unset() {
-	var zero *CampaignSettingsTimePeriodDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

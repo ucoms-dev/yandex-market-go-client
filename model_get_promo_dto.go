@@ -383,8 +383,7 @@ func (v NullableGetPromoDTO) IsSet() bool {
 }
 
 func (v *NullableGetPromoDTO) Unset() {
-	var zero *GetPromoDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

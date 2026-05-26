@@ -139,8 +139,7 @@ func (v NullableCreatedOrderDTO) IsSet() bool {
 }
 
 func (v *NullableCreatedOrderDTO) Unset() {
-	var zero *CreatedOrderDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

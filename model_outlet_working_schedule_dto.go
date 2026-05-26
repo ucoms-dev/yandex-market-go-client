@@ -176,8 +176,7 @@ func (v NullableOutletWorkingScheduleDTO) IsSet() bool {
 }
 
 func (v *NullableOutletWorkingScheduleDTO) Unset() {
-	var zero *OutletWorkingScheduleDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

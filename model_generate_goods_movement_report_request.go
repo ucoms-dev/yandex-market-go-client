@@ -234,8 +234,7 @@ func (v NullableGenerateGoodsMovementReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateGoodsMovementReportRequest) Unset() {
-	var zero *GenerateGoodsMovementReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

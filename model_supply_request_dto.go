@@ -418,8 +418,7 @@ func (v NullableSupplyRequestDTO) IsSet() bool {
 }
 
 func (v *NullableSupplyRequestDTO) Unset() {
-	var zero *SupplyRequestDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

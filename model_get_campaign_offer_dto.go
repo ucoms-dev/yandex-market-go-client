@@ -404,8 +404,7 @@ func (v NullableGetCampaignOfferDTO) IsSet() bool {
 }
 
 func (v *NullableGetCampaignOfferDTO) Unset() {
-	var zero *GetCampaignOfferDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

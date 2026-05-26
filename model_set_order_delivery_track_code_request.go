@@ -168,8 +168,7 @@ func (v NullableSetOrderDeliveryTrackCodeRequest) IsSet() bool {
 }
 
 func (v *NullableSetOrderDeliveryTrackCodeRequest) Unset() {
-	var zero *SetOrderDeliveryTrackCodeRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

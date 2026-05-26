@@ -255,8 +255,7 @@ func (v NullableLogisticPointDimensionRestrictionsDTO) IsSet() bool {
 }
 
 func (v *NullableLogisticPointDimensionRestrictionsDTO) Unset() {
-	var zero *LogisticPointDimensionRestrictionsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

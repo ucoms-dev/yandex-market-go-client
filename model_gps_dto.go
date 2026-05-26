@@ -168,8 +168,7 @@ func (v NullableGpsDTO) IsSet() bool {
 }
 
 func (v *NullableGpsDTO) Unset() {
-	var zero *GpsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -139,8 +139,7 @@ func (v NullableCreateChatResultDTO) IsSet() bool {
 }
 
 func (v *NullableCreateChatResultDTO) Unset() {
-	var zero *CreateChatResultDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

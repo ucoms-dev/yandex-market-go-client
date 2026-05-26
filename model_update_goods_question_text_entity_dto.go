@@ -138,8 +138,7 @@ func (v NullableUpdateGoodsQuestionTextEntityDTO) IsSet() bool {
 }
 
 func (v *NullableUpdateGoodsQuestionTextEntityDTO) Unset() {
-	var zero *UpdateGoodsQuestionTextEntityDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

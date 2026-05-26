@@ -319,8 +319,7 @@ func (v NullableReturnItemDTO) IsSet() bool {
 }
 
 func (v *NullableReturnItemDTO) Unset() {
-	var zero *ReturnItemDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

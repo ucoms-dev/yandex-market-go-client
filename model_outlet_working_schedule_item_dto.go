@@ -224,8 +224,7 @@ func (v NullableOutletWorkingScheduleItemDTO) IsSet() bool {
 }
 
 func (v *NullableOutletWorkingScheduleItemDTO) Unset() {
-	var zero *OutletWorkingScheduleItemDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -168,8 +168,7 @@ func (v NullableTariffParameterDTO) IsSet() bool {
 }
 
 func (v *NullableTariffParameterDTO) Unset() {
-	var zero *TariffParameterDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

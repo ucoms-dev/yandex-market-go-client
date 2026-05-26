@@ -214,8 +214,7 @@ func (v NullableDeletePromoOffersRequest) IsSet() bool {
 }
 
 func (v *NullableDeletePromoOffersRequest) Unset() {
-	var zero *DeletePromoOffersRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

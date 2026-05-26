@@ -139,8 +139,7 @@ func (v NullableGetPromosResultDTO) IsSet() bool {
 }
 
 func (v *NullableGetPromosResultDTO) Unset() {
-	var zero *GetPromosResultDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

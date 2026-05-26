@@ -211,8 +211,7 @@ func (v NullableGetDeliveryOptionsRequest) IsSet() bool {
 }
 
 func (v *NullableGetDeliveryOptionsRequest) Unset() {
-	var zero *GetDeliveryOptionsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

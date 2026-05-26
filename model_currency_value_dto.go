@@ -167,8 +167,7 @@ func (v NullableCurrencyValueDTO) IsSet() bool {
 }
 
 func (v *NullableCurrencyValueDTO) Unset() {
-	var zero *CurrencyValueDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

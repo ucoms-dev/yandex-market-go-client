@@ -175,8 +175,7 @@ func (v NullableGetHiddenOffersResultDTO) IsSet() bool {
 }
 
 func (v *NullableGetHiddenOffersResultDTO) Unset() {
-	var zero *GetHiddenOffersResultDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

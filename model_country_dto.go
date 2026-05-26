@@ -167,8 +167,7 @@ func (v NullableCountryDTO) IsSet() bool {
 }
 
 func (v *NullableCountryDTO) Unset() {
-	var zero *CountryDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

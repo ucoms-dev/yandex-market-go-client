@@ -176,8 +176,7 @@ func (v NullableApiErrorDTO) IsSet() bool {
 }
 
 func (v *NullableApiErrorDTO) Unset() {
-	var zero *ApiErrorDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

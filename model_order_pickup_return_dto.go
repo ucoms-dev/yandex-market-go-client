@@ -139,8 +139,7 @@ func (v NullableOrderPickupReturnDTO) IsSet() bool {
 }
 
 func (v *NullableOrderPickupReturnDTO) Unset() {
-	var zero *OrderPickupReturnDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

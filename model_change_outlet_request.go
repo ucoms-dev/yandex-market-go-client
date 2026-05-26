@@ -474,8 +474,7 @@ func (v NullableChangeOutletRequest) IsSet() bool {
 }
 
 func (v *NullableChangeOutletRequest) Unset() {
-	var zero *ChangeOutletRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

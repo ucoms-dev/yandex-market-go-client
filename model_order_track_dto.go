@@ -176,8 +176,7 @@ func (v NullableOrderTrackDTO) IsSet() bool {
 }
 
 func (v *NullableOrderTrackDTO) Unset() {
-	var zero *OrderTrackDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

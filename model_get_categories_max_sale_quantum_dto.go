@@ -177,8 +177,7 @@ func (v NullableGetCategoriesMaxSaleQuantumDTO) IsSet() bool {
 }
 
 func (v *NullableGetCategoriesMaxSaleQuantumDTO) Unset() {
-	var zero *GetCategoriesMaxSaleQuantumDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -168,8 +168,7 @@ func (v NullableApiKeyDTO) IsSet() bool {
 }
 
 func (v *NullableApiKeyDTO) Unset() {
-	var zero *ApiKeyDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

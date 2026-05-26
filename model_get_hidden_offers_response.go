@@ -174,8 +174,7 @@ func (v NullableGetHiddenOffersResponse) IsSet() bool {
 }
 
 func (v *NullableGetHiddenOffersResponse) Unset() {
-	var zero *GetHiddenOffersResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

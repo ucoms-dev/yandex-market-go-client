@@ -140,8 +140,7 @@ func (v NullableUpdateTimeDTO) IsSet() bool {
 }
 
 func (v *NullableUpdateTimeDTO) Unset() {
-	var zero *UpdateTimeDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

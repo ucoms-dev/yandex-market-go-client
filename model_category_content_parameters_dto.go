@@ -177,8 +177,7 @@ func (v NullableCategoryContentParametersDTO) IsSet() bool {
 }
 
 func (v *NullableCategoryContentParametersDTO) Unset() {
-	var zero *CategoryContentParametersDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

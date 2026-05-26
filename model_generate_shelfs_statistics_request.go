@@ -225,8 +225,7 @@ func (v NullableGenerateShelfsStatisticsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateShelfsStatisticsRequest) Unset() {
-	var zero *GenerateShelfsStatisticsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

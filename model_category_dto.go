@@ -206,8 +206,7 @@ func (v NullableCategoryDTO) IsSet() bool {
 }
 
 func (v *NullableCategoryDTO) Unset() {
-	var zero *CategoryDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

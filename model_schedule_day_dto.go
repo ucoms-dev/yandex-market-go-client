@@ -196,8 +196,7 @@ func (v NullableScheduleDayDTO) IsSet() bool {
 }
 
 func (v *NullableScheduleDayDTO) Unset() {
-	var zero *ScheduleDayDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

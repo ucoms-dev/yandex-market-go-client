@@ -506,8 +506,7 @@ func (v NullableParcelBoxLabelDTO) IsSet() bool {
 }
 
 func (v *NullableParcelBoxLabelDTO) Unset() {
-	var zero *ParcelBoxLabelDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

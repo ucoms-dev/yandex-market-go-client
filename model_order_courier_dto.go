@@ -255,8 +255,7 @@ func (v NullableOrderCourierDTO) IsSet() bool {
 }
 
 func (v *NullableOrderCourierDTO) Unset() {
-	var zero *OrderCourierDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

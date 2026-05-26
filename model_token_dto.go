@@ -138,8 +138,7 @@ func (v NullableTokenDTO) IsSet() bool {
 }
 
 func (v *NullableTokenDTO) Unset() {
-	var zero *TokenDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -205,8 +205,7 @@ func (v NullableQuestionIdentifiersDTO) IsSet() bool {
 }
 
 func (v *NullableQuestionIdentifiersDTO) Unset() {
-	var zero *QuestionIdentifiersDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

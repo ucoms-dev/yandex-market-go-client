@@ -139,8 +139,7 @@ func (v NullableSkipGoodsFeedbackReactionRequest) IsSet() bool {
 }
 
 func (v *NullableSkipGoodsFeedbackReactionRequest) Unset() {
-	var zero *SkipGoodsFeedbackReactionRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

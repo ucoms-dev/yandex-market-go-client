@@ -225,8 +225,7 @@ func (v NullableOrderLabelDTO) IsSet() bool {
 }
 
 func (v *NullableOrderLabelDTO) Unset() {
-	var zero *OrderLabelDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

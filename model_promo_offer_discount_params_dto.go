@@ -181,8 +181,7 @@ func (v NullablePromoOfferDiscountParamsDTO) IsSet() bool {
 }
 
 func (v *NullablePromoOfferDiscountParamsDTO) Unset() {
-	var zero *PromoOfferDiscountParamsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

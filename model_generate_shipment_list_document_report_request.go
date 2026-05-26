@@ -214,8 +214,7 @@ func (v NullableGenerateShipmentListDocumentReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateShipmentListDocumentReportRequest) Unset() {
-	var zero *GenerateShipmentListDocumentReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -144,8 +144,7 @@ func (v NullableConfirmShipmentRequest) IsSet() bool {
 }
 
 func (v *NullableConfirmShipmentRequest) Unset() {
-	var zero *ConfirmShipmentRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -174,8 +174,7 @@ func (v NullableGetOrderLabelsDataResponse) IsSet() bool {
 }
 
 func (v *NullableGetOrderLabelsDataResponse) Unset() {
-	var zero *GetOrderLabelsDataResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

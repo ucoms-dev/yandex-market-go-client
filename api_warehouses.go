@@ -80,7 +80,7 @@ func (a *WarehousesAPIService) GetFulfillmentWarehousesExecute(r WarehousesAPIGe
 	localVarFormParams := url.Values{}
 
 	if r.campaignId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "campaignId", r.campaignId, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "campaignId", r.campaignId, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -293,12 +293,13 @@ func (a *WarehousesAPIService) GetPagedWarehousesExecute(r WarehousesAPIGetPaged
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	} else {
 		var defaultValue int32 = 15
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header

@@ -176,8 +176,7 @@ func (v NullableApiLockedErrorResponse) IsSet() bool {
 }
 
 func (v *NullableApiLockedErrorResponse) Unset() {
-	var zero *ApiLockedErrorResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

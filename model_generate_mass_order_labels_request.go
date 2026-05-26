@@ -204,8 +204,7 @@ func (v NullableGenerateMassOrderLabelsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateMassOrderLabelsRequest) Unset() {
-	var zero *GenerateMassOrderLabelsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

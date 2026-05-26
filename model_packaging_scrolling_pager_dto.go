@@ -148,8 +148,7 @@ func (v NullablePackagingScrollingPagerDTO) IsSet() bool {
 }
 
 func (v *NullablePackagingScrollingPagerDTO) Unset() {
-	var zero *PackagingScrollingPagerDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

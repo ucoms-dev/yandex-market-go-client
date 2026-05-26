@@ -139,8 +139,7 @@ func (v NullableConfirmPricesRequest) IsSet() bool {
 }
 
 func (v *NullableConfirmPricesRequest) Unset() {
-	var zero *ConfirmPricesRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

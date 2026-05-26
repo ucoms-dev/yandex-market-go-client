@@ -176,8 +176,7 @@ func (v NullableApiUnauthorizedErrorResponse) IsSet() bool {
 }
 
 func (v *NullableApiUnauthorizedErrorResponse) Unset() {
-	var zero *ApiUnauthorizedErrorResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

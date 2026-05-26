@@ -180,8 +180,7 @@ func (v NullableGetRegionByIdResponse) IsSet() bool {
 }
 
 func (v *NullableGetRegionByIdResponse) Unset() {
-	var zero *GetRegionByIdResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

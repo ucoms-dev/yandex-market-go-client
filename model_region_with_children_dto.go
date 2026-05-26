@@ -270,8 +270,7 @@ func (v NullableRegionWithChildrenDTO) IsSet() bool {
 }
 
 func (v *NullableRegionWithChildrenDTO) Unset() {
-	var zero *RegionWithChildrenDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

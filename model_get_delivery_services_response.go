@@ -106,8 +106,7 @@ func (v NullableGetDeliveryServicesResponse) IsSet() bool {
 }
 
 func (v *NullableGetDeliveryServicesResponse) Unset() {
-	var zero *GetDeliveryServicesResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

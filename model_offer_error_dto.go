@@ -144,8 +144,7 @@ func (v NullableOfferErrorDTO) IsSet() bool {
 }
 
 func (v *NullableOfferErrorDTO) Unset() {
-	var zero *OfferErrorDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

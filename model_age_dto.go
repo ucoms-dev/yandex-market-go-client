@@ -167,8 +167,7 @@ func (v NullableAgeDTO) IsSet() bool {
 }
 
 func (v *NullableAgeDTO) Unset() {
-	var zero *AgeDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

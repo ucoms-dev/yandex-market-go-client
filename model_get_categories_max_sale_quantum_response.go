@@ -205,8 +205,7 @@ func (v NullableGetCategoriesMaxSaleQuantumResponse) IsSet() bool {
 }
 
 func (v *NullableGetCategoriesMaxSaleQuantumResponse) Unset() {
-	var zero *GetCategoriesMaxSaleQuantumResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

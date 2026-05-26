@@ -166,8 +166,7 @@ func (v NullableSupplyRequestReferenceDTO) IsSet() bool {
 }
 
 func (v *NullableSupplyRequestReferenceDTO) Unset() {
-	var zero *SupplyRequestReferenceDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

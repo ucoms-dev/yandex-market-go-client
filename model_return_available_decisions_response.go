@@ -139,8 +139,7 @@ func (v NullableReturnAvailableDecisionsResponse) IsSet() bool {
 }
 
 func (v *NullableReturnAvailableDecisionsResponse) Unset() {
-	var zero *ReturnAvailableDecisionsResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

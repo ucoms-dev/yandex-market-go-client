@@ -309,8 +309,7 @@ func (v NullableGenerateUnitedReturnsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateUnitedReturnsRequest) Unset() {
-	var zero *GenerateUnitedReturnsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -262,8 +262,7 @@ func (v NullableSupplyRequestLocationDTO) IsSet() bool {
 }
 
 func (v *NullableSupplyRequestLocationDTO) Unset() {
-	var zero *SupplyRequestLocationDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

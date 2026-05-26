@@ -139,8 +139,7 @@ func (v NullableProvideOrderDigitalCodesRequest) IsSet() bool {
 }
 
 func (v *NullableProvideOrderDigitalCodesRequest) Unset() {
-	var zero *ProvideOrderDigitalCodesRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

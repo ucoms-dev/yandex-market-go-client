@@ -226,8 +226,7 @@ func (v NullableOfferWeightDimensionsDTO) IsSet() bool {
 }
 
 func (v *NullableOfferWeightDimensionsDTO) Unset() {
-	var zero *OfferWeightDimensionsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

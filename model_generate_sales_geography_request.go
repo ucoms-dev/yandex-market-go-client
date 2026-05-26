@@ -273,8 +273,7 @@ func (v NullableGenerateSalesGeographyRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateSalesGeographyRequest) Unset() {
-	var zero *GenerateSalesGeographyRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

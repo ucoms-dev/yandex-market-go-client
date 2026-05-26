@@ -205,8 +205,7 @@ func (v NullableParameterValueOptionDTO) IsSet() bool {
 }
 
 func (v *NullableParameterValueOptionDTO) Unset() {
-	var zero *ParameterValueOptionDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

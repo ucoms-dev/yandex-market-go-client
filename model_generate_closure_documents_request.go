@@ -205,8 +205,7 @@ func (v NullableGenerateClosureDocumentsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateClosureDocumentsRequest) Unset() {
-	var zero *GenerateClosureDocumentsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

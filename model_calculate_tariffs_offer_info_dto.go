@@ -167,8 +167,7 @@ func (v NullableCalculateTariffsOfferInfoDTO) IsSet() bool {
 }
 
 func (v *NullableCalculateTariffsOfferInfoDTO) Unset() {
-	var zero *CalculateTariffsOfferInfoDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

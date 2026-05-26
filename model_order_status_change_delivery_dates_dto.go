@@ -107,8 +107,7 @@ func (v NullableOrderStatusChangeDeliveryDatesDTO) IsSet() bool {
 }
 
 func (v *NullableOrderStatusChangeDeliveryDatesDTO) Unset() {
-	var zero *OrderStatusChangeDeliveryDatesDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -106,8 +106,7 @@ func (v NullableGetOrderResponse) IsSet() bool {
 }
 
 func (v *NullableGetOrderResponse) Unset() {
-	var zero *GetOrderResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

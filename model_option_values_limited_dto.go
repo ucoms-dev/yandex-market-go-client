@@ -168,8 +168,7 @@ func (v NullableOptionValuesLimitedDTO) IsSet() bool {
 }
 
 func (v *NullableOptionValuesLimitedDTO) Unset() {
-	var zero *OptionValuesLimitedDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

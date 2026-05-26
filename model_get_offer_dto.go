@@ -1445,8 +1445,7 @@ func (v NullableGetOfferDTO) IsSet() bool {
 }
 
 func (v *NullableGetOfferDTO) Unset() {
-	var zero *GetOfferDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

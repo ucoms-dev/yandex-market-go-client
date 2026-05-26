@@ -174,8 +174,7 @@ func (v NullableGenerateReportResponse) IsSet() bool {
 }
 
 func (v *NullableGenerateReportResponse) Unset() {
-	var zero *GenerateReportResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

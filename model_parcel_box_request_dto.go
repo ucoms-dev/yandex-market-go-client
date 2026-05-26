@@ -111,8 +111,7 @@ func (v NullableParcelBoxRequestDTO) IsSet() bool {
 }
 
 func (v *NullableParcelBoxRequestDTO) Unset() {
-	var zero *ParcelBoxRequestDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

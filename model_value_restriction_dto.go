@@ -168,8 +168,7 @@ func (v NullableValueRestrictionDTO) IsSet() bool {
 }
 
 func (v *NullableValueRestrictionDTO) Unset() {
-	var zero *ValueRestrictionDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

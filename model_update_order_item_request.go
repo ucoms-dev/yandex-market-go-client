@@ -175,8 +175,7 @@ func (v NullableUpdateOrderItemRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateOrderItemRequest) Unset() {
-	var zero *UpdateOrderItemRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

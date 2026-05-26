@@ -181,8 +181,7 @@ func (v NullableParameterValueConstraintsDTO) IsSet() bool {
 }
 
 func (v *NullableParameterValueConstraintsDTO) Unset() {
-	var zero *ParameterValueConstraintsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

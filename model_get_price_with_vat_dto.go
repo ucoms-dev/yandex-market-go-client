@@ -287,8 +287,7 @@ func (v NullableGetPriceWithVatDTO) IsSet() bool {
 }
 
 func (v *NullableGetPriceWithVatDTO) Unset() {
-	var zero *GetPriceWithVatDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

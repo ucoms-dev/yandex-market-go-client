@@ -139,8 +139,7 @@ func (v NullableUpdateOutletLicenseRequest) IsSet() bool {
 }
 
 func (v *NullableUpdateOutletLicenseRequest) Unset() {
-	var zero *UpdateOutletLicenseRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

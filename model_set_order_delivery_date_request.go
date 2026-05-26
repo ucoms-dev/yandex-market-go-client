@@ -166,8 +166,7 @@ func (v NullableSetOrderDeliveryDateRequest) IsSet() bool {
 }
 
 func (v *NullableSetOrderDeliveryDateRequest) Unset() {
-	var zero *SetOrderDeliveryDateRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

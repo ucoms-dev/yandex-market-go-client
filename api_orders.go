@@ -16,6 +16,7 @@ import (
 	"io"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 	"time"
 )
@@ -566,12 +567,13 @@ func (a *OrdersAPIService) GetBusinessOrdersExecute(r OrdersAPIGetBusinessOrders
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	} else {
 		var defaultValue int32 = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1545,76 +1547,105 @@ func (a *OrdersAPIService) GetOrdersExecute(r OrdersAPIGetOrdersRequest) (*GetOr
 	}
 
 	if r.orderIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
+		t := *r.orderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
+		}
 	}
 	if r.status != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "", "csv")
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
+		}
 	}
 	if r.substatus != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", r.substatus, "", "csv")
+		t := *r.substatus
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", t, "form", "multi")
+		}
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
 	}
 	if r.supplierShipmentDateFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "form", "")
 	}
 	if r.supplierShipmentDateTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "form", "")
 	}
 	if r.updatedAtFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "form", "")
 	}
 	if r.updatedAtTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "form", "")
 	}
 	if r.dispatchType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "form", "")
 	}
 	if r.fake != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "form", "")
 	} else {
 		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", defaultValue, "form", "")
 		r.fake = &defaultValue
 	}
 	if r.hasCis != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "form", "")
 	} else {
 		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", defaultValue, "form", "")
 		r.hasCis = &defaultValue
 	}
 	if r.onlyWaitingForCancellationApprove != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "form", "")
 	} else {
 		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", defaultValue, "form", "")
 		r.onlyWaitingForCancellationApprove = &defaultValue
 	}
 	if r.onlyEstimatedDelivery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "form", "")
 	} else {
 		var defaultValue bool = false
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", defaultValue, "form", "")
 		r.onlyEstimatedDelivery = &defaultValue
 	}
 	if r.buyerType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "form", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
 	} else {
 		var defaultValue int32 = 1
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

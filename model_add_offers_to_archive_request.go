@@ -139,8 +139,7 @@ func (v NullableAddOffersToArchiveRequest) IsSet() bool {
 }
 
 func (v *NullableAddOffersToArchiveRequest) Unset() {
-	var zero *AddOffersToArchiveRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

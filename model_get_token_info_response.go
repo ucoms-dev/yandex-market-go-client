@@ -166,8 +166,7 @@ func (v NullableGetTokenInfoResponse) IsSet() bool {
 }
 
 func (v *NullableGetTokenInfoResponse) Unset() {
-	var zero *GetTokenInfoResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

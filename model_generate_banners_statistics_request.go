@@ -197,8 +197,7 @@ func (v NullableGenerateBannersStatisticsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateBannersStatisticsRequest) Unset() {
-	var zero *GenerateBannersStatisticsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

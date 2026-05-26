@@ -278,8 +278,7 @@ func (v NullableOrderItemPromoDTO) IsSet() bool {
 }
 
 func (v *NullableOrderItemPromoDTO) Unset() {
-	var zero *OrderItemPromoDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

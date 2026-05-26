@@ -166,8 +166,7 @@ func (v NullableOfferSellingProgramDTO) IsSet() bool {
 }
 
 func (v *NullableOfferSellingProgramDTO) Unset() {
-	var zero *OfferSellingProgramDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

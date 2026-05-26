@@ -138,8 +138,7 @@ func (v NullableCreateReturnOptionDTO) IsSet() bool {
 }
 
 func (v *NullableCreateReturnOptionDTO) Unset() {
-	var zero *CreateReturnOptionDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

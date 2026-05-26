@@ -168,8 +168,7 @@ func (v NullableCategoryParameterUnitDTO) IsSet() bool {
 }
 
 func (v *NullableCategoryParameterUnitDTO) Unset() {
-	var zero *CategoryParameterUnitDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -175,8 +175,7 @@ func (v NullableTurnoverDTO) IsSet() bool {
 }
 
 func (v *NullableTurnoverDTO) Unset() {
-	var zero *TurnoverDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

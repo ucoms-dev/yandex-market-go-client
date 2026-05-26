@@ -365,8 +365,7 @@ func (v NullableFullOutletLicenseDTO) IsSet() bool {
 }
 
 func (v *NullableFullOutletLicenseDTO) Unset() {
-	var zero *FullOutletLicenseDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

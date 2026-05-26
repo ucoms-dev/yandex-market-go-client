@@ -285,8 +285,7 @@ func (v NullableSearchShipmentsRequest) IsSet() bool {
 }
 
 func (v *NullableSearchShipmentsRequest) Unset() {
-	var zero *SearchShipmentsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

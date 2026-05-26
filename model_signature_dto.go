@@ -139,8 +139,7 @@ func (v NullableSignatureDTO) IsSet() bool {
 }
 
 func (v *NullableSignatureDTO) Unset() {
-	var zero *SignatureDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

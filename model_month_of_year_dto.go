@@ -168,8 +168,7 @@ func (v NullableMonthOfYearDTO) IsSet() bool {
 }
 
 func (v *NullableMonthOfYearDTO) Unset() {
-	var zero *MonthOfYearDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

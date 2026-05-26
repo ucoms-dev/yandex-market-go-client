@@ -144,8 +144,7 @@ func (v NullableOrdersStatsDeliveryRegionDTO) IsSet() bool {
 }
 
 func (v *NullableOrdersStatsDeliveryRegionDTO) Unset() {
-	var zero *OrdersStatsDeliveryRegionDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

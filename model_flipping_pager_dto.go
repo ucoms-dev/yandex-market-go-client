@@ -292,8 +292,7 @@ func (v NullableFlippingPagerDTO) IsSet() bool {
 }
 
 func (v *NullableFlippingPagerDTO) Unset() {
-	var zero *FlippingPagerDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

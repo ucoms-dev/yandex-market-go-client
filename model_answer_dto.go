@@ -386,8 +386,7 @@ func (v NullableAnswerDTO) IsSet() bool {
 }
 
 func (v *NullableAnswerDTO) Unset() {
-	var zero *AnswerDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

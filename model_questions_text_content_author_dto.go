@@ -143,8 +143,7 @@ func (v NullableQuestionsTextContentAuthorDTO) IsSet() bool {
 }
 
 func (v *NullableQuestionsTextContentAuthorDTO) Unset() {
-	var zero *QuestionsTextContentAuthorDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

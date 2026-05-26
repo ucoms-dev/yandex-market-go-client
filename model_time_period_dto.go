@@ -204,8 +204,7 @@ func (v NullableTimePeriodDTO) IsSet() bool {
 }
 
 func (v *NullableTimePeriodDTO) Unset() {
-	var zero *TimePeriodDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

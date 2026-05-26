@@ -167,8 +167,7 @@ func (v NullableUpdateBusinessOfferPriceDTO) IsSet() bool {
 }
 
 func (v *NullableUpdateBusinessOfferPriceDTO) Unset() {
-	var zero *UpdateBusinessOfferPriceDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

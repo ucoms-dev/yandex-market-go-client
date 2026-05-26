@@ -212,8 +212,7 @@ func (v NullableGenerateKeyIndicatorsRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateKeyIndicatorsRequest) Unset() {
-	var zero *GenerateKeyIndicatorsRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

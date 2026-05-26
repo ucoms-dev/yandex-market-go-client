@@ -180,8 +180,7 @@ func (v NullableDocumentDTO) IsSet() bool {
 }
 
 func (v *NullableDocumentDTO) Unset() {
-	var zero *DocumentDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

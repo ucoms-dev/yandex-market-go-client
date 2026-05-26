@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"reflect"
 	"strings"
 )
 
@@ -1382,37 +1383,62 @@ func (a *ReturnsAPIService) GetReturnsExecute(r ReturnsAPIGetReturnsRequest) (*G
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
 	} else {
 		var defaultValue int32 = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
 		r.limit = &defaultValue
 	}
 	if r.orderIds != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
+		t := *r.orderIds
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
+		}
 	}
 	if r.statuses != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", r.statuses, "", "csv")
+		t := *r.statuses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", t, "form", "multi")
+		}
 	}
 	if r.shipmentStatuses != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", r.shipmentStatuses, "", "csv")
+		t := *r.shipmentStatuses
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", s.Index(i).Interface(), "form", "multi")
+			}
+		} else {
+			parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", t, "form", "multi")
+		}
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
 	}
 	if r.fromDate2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from_date", r.fromDate2, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from_date", r.fromDate2, "form", "")
 	}
 	if r.toDate2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to_date", r.toDate2, "", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to_date", r.toDate2, "form", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

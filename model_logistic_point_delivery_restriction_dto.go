@@ -138,8 +138,7 @@ func (v NullableLogisticPointDeliveryRestrictionDTO) IsSet() bool {
 }
 
 func (v *NullableLogisticPointDeliveryRestrictionDTO) Unset() {
-	var zero *LogisticPointDeliveryRestrictionDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

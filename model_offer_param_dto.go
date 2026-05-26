@@ -168,8 +168,7 @@ func (v NullableOfferParamDTO) IsSet() bool {
 }
 
 func (v *NullableOfferParamDTO) Unset() {
-	var zero *OfferParamDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

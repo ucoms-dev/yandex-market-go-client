@@ -180,8 +180,7 @@ func (v NullableSetOrderBoxLayoutRequest) IsSet() bool {
 }
 
 func (v *NullableSetOrderBoxLayoutRequest) Unset() {
-	var zero *SetOrderBoxLayoutRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

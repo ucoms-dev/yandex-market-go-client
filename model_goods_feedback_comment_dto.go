@@ -335,8 +335,7 @@ func (v NullableGoodsFeedbackCommentDTO) IsSet() bool {
 }
 
 func (v *NullableGoodsFeedbackCommentDTO) Unset() {
-	var zero *GoodsFeedbackCommentDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -139,8 +139,7 @@ func (v NullableSubmitReturnDecisionRequest) IsSet() bool {
 }
 
 func (v *NullableSubmitReturnDecisionRequest) Unset() {
-	var zero *SubmitReturnDecisionRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

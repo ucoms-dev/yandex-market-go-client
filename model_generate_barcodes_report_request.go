@@ -242,8 +242,7 @@ func (v NullableGenerateBarcodesReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateBarcodesReportRequest) Unset() {
-	var zero *GenerateBarcodesReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

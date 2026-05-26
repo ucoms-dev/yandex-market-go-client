@@ -168,8 +168,7 @@ func (v NullableBusinessOrderBoxLayoutPartialCountDTO) IsSet() bool {
 }
 
 func (v *NullableBusinessOrderBoxLayoutPartialCountDTO) Unset() {
-	var zero *BusinessOrderBoxLayoutPartialCountDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

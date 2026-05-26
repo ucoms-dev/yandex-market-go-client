@@ -278,8 +278,7 @@ func (v NullableCisDTO) IsSet() bool {
 }
 
 func (v *NullableCisDTO) Unset() {
-	var zero *CisDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -520,8 +520,7 @@ func (v NullableGenerateUnitedNettingReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateUnitedNettingReportRequest) Unset() {
-	var zero *GenerateUnitedNettingReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

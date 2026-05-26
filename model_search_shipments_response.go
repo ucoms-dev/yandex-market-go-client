@@ -174,8 +174,7 @@ func (v NullableSearchShipmentsResponse) IsSet() bool {
 }
 
 func (v *NullableSearchShipmentsResponse) Unset() {
-	var zero *SearchShipmentsResponse
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

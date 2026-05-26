@@ -218,8 +218,7 @@ func (v NullableGoodsStatsWeightDimensionsDTO) IsSet() bool {
 }
 
 func (v *NullableGoodsStatsWeightDimensionsDTO) Unset() {
-	var zero *GoodsStatsWeightDimensionsDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

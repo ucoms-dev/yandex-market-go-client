@@ -175,8 +175,7 @@ func (v NullableOfferManualDTO) IsSet() bool {
 }
 
 func (v *NullableOfferManualDTO) Unset() {
-	var zero *OfferManualDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -197,8 +197,7 @@ func (v NullableGenerateGoodsRealizationReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateGoodsRealizationReportRequest) Unset() {
-	var zero *GenerateGoodsRealizationReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

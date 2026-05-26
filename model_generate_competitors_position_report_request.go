@@ -226,8 +226,7 @@ func (v NullableGenerateCompetitorsPositionReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateCompetitorsPositionReportRequest) Unset() {
-	var zero *GenerateCompetitorsPositionReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

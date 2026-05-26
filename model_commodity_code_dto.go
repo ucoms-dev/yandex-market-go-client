@@ -167,8 +167,7 @@ func (v NullableCommodityCodeDTO) IsSet() bool {
 }
 
 func (v *NullableCommodityCodeDTO) Unset() {
-	var zero *CommodityCodeDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

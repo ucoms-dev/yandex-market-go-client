@@ -270,8 +270,7 @@ func (v NullableGenerateShowsSalesReportRequest) IsSet() bool {
 }
 
 func (v *NullableGenerateShowsSalesReportRequest) Unset() {
-	var zero *GenerateShowsSalesReportRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -203,8 +203,7 @@ func (v NullableUinDTO) IsSet() bool {
 }
 
 func (v *NullableUinDTO) Unset() {
-	var zero *UinDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

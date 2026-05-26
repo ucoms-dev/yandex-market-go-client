@@ -107,8 +107,7 @@ func (v NullableUpdateMappingDTO) IsSet() bool {
 }
 
 func (v *NullableUpdateMappingDTO) Unset() {
-	var zero *UpdateMappingDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

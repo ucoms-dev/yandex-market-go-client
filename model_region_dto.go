@@ -232,8 +232,7 @@ func (v NullableRegionDTO) IsSet() bool {
 }
 
 func (v *NullableRegionDTO) Unset() {
-	var zero *RegionDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

@@ -176,8 +176,7 @@ func (v NullablePromoOfferUpdateWarningDTO) IsSet() bool {
 }
 
 func (v *NullablePromoOfferUpdateWarningDTO) Unset() {
-	var zero *PromoOfferUpdateWarningDTO
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 

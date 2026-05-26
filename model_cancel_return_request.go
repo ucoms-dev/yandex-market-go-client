@@ -139,8 +139,7 @@ func (v NullableCancelReturnRequest) IsSet() bool {
 }
 
 func (v *NullableCancelReturnRequest) Unset() {
-	var zero *CancelReturnRequest
-	v.value = zero
+	v.value = nil
 	v.isSet = false
 }
 
