@@ -9,3 +9,11 @@
 - В удаленном контексте видны удаляемые описания путей, включая `/businesses/{businessId}/settings`, `/campaigns`, `/campaigns/{campaignId}`, `/campaigns/{campaignId}/settings`, `/campaigns/{campaignId}/region`, `/campaigns/{campaignId}/orders/{orderId}` и `/campaigns/{campaignId}/orders`.
 - Детали оставшихся `339` добавлений по предоставленному фрагменту недостаточны: видны только изменения начала файла и большой удаленный блок.
 - Риски: изменения потенциально несовместимы с предыдущей версией SDK, так как из видимого diff удаляются глобальные настройки и множество endpoint-описаний; точный масштаб breaking changes нельзя подтвердить без полного diff.
+### 2026-05-28
+- В `ClosureDocumentsContractType` из описания удалено значение `MARKETING` как договор на маркетинг.
+- В `GenerateClosureDocumentsDetalizationRequest` поле `campaignId` добавлено в список обязательных.
+- В `openapi.yaml` изменено оформление метаданных `info`: добавлены/переставлены `title`, `description` и `version: LATEST`.
+- В `openapi.yaml` секции `servers` и `security` вынесены выше, сразу после `info`.
+- Большие inline-описания путей в `openapi.yaml` заменены на `$ref` к файлам `paths/*.yaml`, например для `v2_businesses_businessId_settings`, `v2_campaigns` и заказов.
+- Изменения затрагивают 4 файла; большая часть diff выглядит как структурная декомпозиция спецификации, но полный список затронутых endpoint'ов по предоставленному фрагменту определить нельзя.
+- Риски: добавление обязательного `campaignId` может быть обратно несовместимым для клиентов генерации документов детализации; остальное по видимому контексту в основном похоже на реорганизацию OpenAPI-файла и правки документации.

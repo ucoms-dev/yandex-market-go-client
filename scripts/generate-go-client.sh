@@ -30,6 +30,31 @@ if [[ ! -f "${spec_path}" ]]; then
   exit 1
 fi
 
+local_spec_dir="${ROOT_DIR}/${local_spec_dir_rel}"
+spec_backup_parent="$(mktemp -d)"
+spec_backup_dir="${spec_backup_parent}/spec"
+restore_spec_tree_on_exit=true
+
+cp -a "${local_spec_dir}" "${spec_backup_dir}"
+
+restore_spec_tree() {
+  rm -rf "${local_spec_dir}"
+  mkdir -p "$(dirname "${local_spec_dir}")"
+  cp -a "${spec_backup_dir}" "${local_spec_dir}"
+}
+
+cleanup() {
+  local status=$?
+
+  if [[ "${restore_spec_tree_on_exit}" == "true" && -d "${spec_backup_dir}" ]]; then
+    restore_spec_tree || true
+  fi
+
+  rm -rf "${spec_backup_parent}"
+  exit "${status}"
+}
+trap cleanup EXIT
+
 module_path="$(awk '/^module[[:space:]]+/ {print $2; exit}' "${ROOT_DIR}/go.mod")"
 git_user_id="ucoms-dev"
 git_repo_id="yandex-market-go-client"
@@ -148,6 +173,9 @@ if [[ "${skip_validate_spec}" == "true" ]]; then
 fi
 
 "${cmd[@]}"
+
+restore_spec_tree
+restore_spec_tree_on_exit=false
 
 if [[ -n "${go_version}" ]]; then
   go mod edit -go="${go_version}"
