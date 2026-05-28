@@ -1135,7 +1135,7 @@ import (
 )
 
 func main() {
-	generateClosureDocumentsDetalizationRequest := *openapiclient.NewGenerateClosureDocumentsDetalizationRequest(*openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12)), openapiclient.ClosureDocumentsContractType("INCOME")) // GenerateClosureDocumentsDetalizationRequest | 
+	generateClosureDocumentsDetalizationRequest := *openapiclient.NewGenerateClosureDocumentsDetalizationRequest(int64(123), *openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12)), openapiclient.ClosureDocumentsContractType("INCOME")) // GenerateClosureDocumentsDetalizationRequest | 
 	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()

@@ -17,7 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"reflect"
 	"strings"
 	"time"
 )
@@ -3486,10 +3485,10 @@ func (a *FbsAPIService) DownloadShipmentPalletLabelsExecute(r FbsAPIDownloadShip
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ShipmentPalletLabelPageFormatType = "A8"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -3758,10 +3757,10 @@ func (a *FbsAPIService) DownloadShipmentReceptionTransferActExecute(r FbsAPIDown
 	}
 
 	if r.warehouseId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "warehouse_id", r.warehouseId, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "warehouse_id", r.warehouseId, "", "")
 	}
 	if r.signatory != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "signatory", r.signatory, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "signatory", r.signatory, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -4172,10 +4171,10 @@ func (a *FbsAPIService) GenerateBannersStatisticsReportExecute(r FbsAPIGenerateB
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -4381,10 +4380,10 @@ func (a *FbsAPIService) GenerateBoostConsolidatedReportExecute(r FbsAPIGenerateB
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -4542,12 +4541,6 @@ GenerateClosureDocumentsDetalizationReport Отчет по схождению с
 
 Узнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
 
-{% if audience == "advertiser" %}
-
-{% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}
-
-{% else %}
-
 {% list tabs %}
 
 - Договор на размещение
@@ -4558,13 +4551,7 @@ GenerateClosureDocumentsDetalizationReport Отчет по схождению с
 
 	{% include notitle [reports](../../_auto/reports/period_closure/period_closure_outcome.md) %}
 
-- Договор на маркетинг
-
-	{% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}
-
 {% endlist %}
-
-{% endif %}
 
 {% include notitle [limit](../../_auto/method_limits/generateClosureDocumentsDetalizationReport.md) %}
 
@@ -4604,10 +4591,10 @@ func (a *FbsAPIService) GenerateClosureDocumentsDetalizationReportExecute(r FbsA
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -5033,10 +5020,10 @@ func (a *FbsAPIService) GenerateCompetitorsPositionReportExecute(r FbsAPIGenerat
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -5236,10 +5223,10 @@ func (a *FbsAPIService) GenerateGoodsFeedbackReportExecute(r FbsAPIGenerateGoods
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -5454,10 +5441,10 @@ func (a *FbsAPIService) GenerateGoodsPricesReportExecute(r FbsAPIGenerateGoodsPr
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -5665,10 +5652,10 @@ func (a *FbsAPIService) GenerateGoodsRealizationReportExecute(r FbsAPIGenerateGo
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -5879,10 +5866,10 @@ func (a *FbsAPIService) GenerateJewelryFiscalReportExecute(r FbsAPIGenerateJewel
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -6082,10 +6069,10 @@ func (a *FbsAPIService) GenerateKeyIndicatorsReportExecute(r FbsAPIGenerateKeyIn
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -6283,7 +6270,7 @@ func (a *FbsAPIService) GenerateMassOrderLabelsReportExecute(r FbsAPIGenerateMas
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -6691,7 +6678,7 @@ func (a *FbsAPIService) GenerateOrderLabelExecute(r FbsAPIGenerateOrderLabelRequ
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -6899,7 +6886,7 @@ func (a *FbsAPIService) GenerateOrderLabelsExecute(r FbsAPIGenerateOrderLabelsRe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -7107,10 +7094,10 @@ func (a *FbsAPIService) GenerateSalesGeographyReportExecute(r FbsAPIGenerateSale
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -7314,10 +7301,10 @@ func (a *FbsAPIService) GenerateShelfsStatisticsReportExecute(r FbsAPIGenerateSh
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -7708,10 +7695,10 @@ func (a *FbsAPIService) GenerateShowsBoostReportExecute(r FbsAPIGenerateShowsBoo
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -7911,10 +7898,10 @@ func (a *FbsAPIService) GenerateShowsSalesReportExecute(r FbsAPIGenerateShowsSal
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -8145,10 +8132,10 @@ func (a *FbsAPIService) GenerateStocksOnWarehousesReportExecute(r FbsAPIGenerate
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -8373,14 +8360,14 @@ func (a *FbsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r FbsAPIG
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -8612,14 +8599,14 @@ func (a *FbsAPIService) GenerateUnitedNettingReportExecute(r FbsAPIGenerateUnite
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -8836,14 +8823,14 @@ func (a *FbsAPIService) GenerateUnitedOrdersReportExecute(r FbsAPIGenerateUnited
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -9055,10 +9042,10 @@ func (a *FbsAPIService) GenerateUnitedReturnsReportExecute(r FbsAPIGenerateUnite
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -9446,13 +9433,13 @@ func (a *FbsAPIService) GetBidsInfoForBusinessExecute(r FbsAPIGetBidsInfoForBusi
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -9918,13 +9905,13 @@ func (a *FbsAPIService) GetBusinessOrdersExecute(r FbsAPIGetBusinessOrdersReques
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -10155,13 +10142,13 @@ func (a *FbsAPIService) GetBusinessQuarantineOffersExecute(r FbsAPIGetBusinessQu
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -10760,13 +10747,13 @@ func (a *FbsAPIService) GetCampaignOffersExecute(r FbsAPIGetCampaignOffersReques
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -10997,13 +10984,13 @@ func (a *FbsAPIService) GetCampaignQuarantineOffersExecute(r FbsAPIGetCampaignQu
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -11420,20 +11407,20 @@ func (a *FbsAPIService) GetCampaignsExecute(r FbsAPIGetCampaignsRequest) (*GetCa
 	localVarFormParams := url.Values{}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	} else {
 		var defaultValue int32 = 1
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "", "")
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12030,7 +12017,7 @@ func (a *FbsAPIService) GetCategoryContentParametersExecute(r FbsAPIGetCategoryC
 	}
 
 	if r.businessId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "businessId", r.businessId, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "businessId", r.businessId, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -12243,7 +12230,7 @@ func (a *FbsAPIService) GetChatExecute(r FbsAPIGetChatRequest) (*GetChatResponse
 		return localVarReturnValue, nil, reportError("chatId must be greater than 1")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12471,15 +12458,15 @@ func (a *FbsAPIService) GetChatHistoryExecute(r FbsAPIGetChatHistoryRequest) (*G
 		return localVarReturnValue, nil, reportError("getChatHistoryRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -12708,8 +12695,8 @@ func (a *FbsAPIService) GetChatMessageExecute(r FbsAPIGetChatMessageRequest) (*G
 		return localVarReturnValue, nil, reportError("messageId must be greater than 1")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "messageId", r.messageId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "messageId", r.messageId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -12933,13 +12920,13 @@ func (a *FbsAPIService) GetChatsExecute(r FbsAPIGetChatsRequest) (*GetChatsRespo
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 10
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -13157,13 +13144,13 @@ func (a *FbsAPIService) GetDefaultPricesExecute(r FbsAPIGetDefaultPricesRequest)
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -13582,13 +13569,13 @@ func (a *FbsAPIService) GetGoodsFeedbackCommentsExecute(r FbsAPIGetGoodsFeedback
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -13816,13 +13803,13 @@ func (a *FbsAPIService) GetGoodsFeedbacksExecute(r FbsAPIGetGoodsFeedbacksReques
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -14051,13 +14038,13 @@ func (a *FbsAPIService) GetGoodsQuestionAnswersExecute(r FbsAPIGetGoodsQuestionA
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -14283,13 +14270,13 @@ func (a *FbsAPIService) GetGoodsQuestionsExecute(r FbsAPIGetGoodsQuestionsReques
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -14709,24 +14696,16 @@ func (a *FbsAPIService) GetHiddenOffersExecute(r FbsAPIGetHiddenOffersRequest) (
 	}
 
 	if r.offerId != nil {
-		t := *r.offerId
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", r.offerId, "", "csv")
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -14937,13 +14916,13 @@ func (a *FbsAPIService) GetOfferCardsContentStatusExecute(r FbsAPIGetOfferCardsC
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -15173,17 +15152,17 @@ func (a *FbsAPIService) GetOfferMappingsExecute(r FbsAPIGetOfferMappingsRequest)
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -15408,13 +15387,13 @@ func (a *FbsAPIService) GetOfferRecommendationsExecute(r FbsAPIGetOfferRecommend
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -16790,105 +16769,81 @@ func (a *FbsAPIService) GetOrdersExecute(r FbsAPIGetOrdersRequest) (*GetOrdersRe
 	}
 
 	if r.orderIds != nil {
-		t := *r.orderIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
 	}
 	if r.status != nil {
-		t := *r.status
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "", "csv")
 	}
 	if r.substatus != nil {
-		t := *r.substatus
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", r.substatus, "", "csv")
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
 	}
 	if r.supplierShipmentDateFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "", "")
 	}
 	if r.supplierShipmentDateTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "", "")
 	}
 	if r.updatedAtFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "", "")
 	}
 	if r.updatedAtTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "", "")
 	}
 	if r.dispatchType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "", "")
 	}
 	if r.fake != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", defaultValue, "", "")
 		r.fake = &defaultValue
 	}
 	if r.hasCis != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", defaultValue, "", "")
 		r.hasCis = &defaultValue
 	}
 	if r.onlyWaitingForCancellationApprove != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", defaultValue, "", "")
 		r.onlyWaitingForCancellationApprove = &defaultValue
 	}
 	if r.onlyEstimatedDelivery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", defaultValue, "", "")
 		r.onlyEstimatedDelivery = &defaultValue
 	}
 	if r.buyerType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	} else {
 		var defaultValue int32 = 1
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "", "")
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -17111,13 +17066,13 @@ func (a *FbsAPIService) GetOrdersStatsExecute(r FbsAPIGetOrdersStatsRequest) (*G
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -17333,13 +17288,13 @@ func (a *FbsAPIService) GetPagedWarehousesExecute(r FbsAPIGetPagedWarehousesRequ
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 15
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -17551,20 +17506,20 @@ func (a *FbsAPIService) GetPricesExecute(r FbsAPIGetPricesRequest) (*GetPricesRe
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.archived != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", defaultValue, "", "")
 		r.archived = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -17786,13 +17741,13 @@ func (a *FbsAPIService) GetPricesByOfferIdsExecute(r FbsAPIGetPricesByOfferIdsRe
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -18019,13 +17974,13 @@ func (a *FbsAPIService) GetPromoOffersExecute(r FbsAPIGetPromoOffersRequest) (*G
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -20090,62 +20045,38 @@ func (a *FbsAPIService) GetReturnsExecute(r FbsAPIGetReturnsRequest) (*GetReturn
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.orderIds != nil {
-		t := *r.orderIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
 	}
 	if r.statuses != nil {
-		t := *r.statuses
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", r.statuses, "", "csv")
 	}
 	if r.shipmentStatuses != nil {
-		t := *r.shipmentStatuses
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", r.shipmentStatuses, "", "csv")
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "", "")
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
 	}
 	if r.fromDate2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from_date", r.fromDate2, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from_date", r.fromDate2, "", "")
 	}
 	if r.toDate2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to_date", r.toDate2, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to_date", r.toDate2, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -20352,10 +20283,10 @@ func (a *FbsAPIService) GetShipmentExecute(r FbsAPIGetShipmentRequest) (*GetShip
 	}
 
 	if r.cancelledOrders != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", r.cancelledOrders, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", r.cancelledOrders, "", "")
 	} else {
 		var defaultValue bool = true
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", defaultValue, "", "")
 		r.cancelledOrders = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -20778,13 +20709,13 @@ func (a *FbsAPIService) GetStocksExecute(r FbsAPIGetStocksRequest) (*GetWarehous
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -21654,20 +21585,20 @@ func (a *FbsAPIService) SearchRegionChildrenExecute(r FbsAPISearchRegionChildren
 	localVarFormParams := url.Values{}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	} else {
 		var defaultValue int32 = 1
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "", "")
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -22054,15 +21985,15 @@ func (a *FbsAPIService) SearchRegionsByNameExecute(r FbsAPISearchRegionsByNameRe
 		return localVarReturnValue, nil, reportError("name is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 10
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -22263,13 +22194,13 @@ func (a *FbsAPIService) SearchShipmentsExecute(r FbsAPISearchShipmentsRequest) (
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 15
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -22487,7 +22418,7 @@ func (a *FbsAPIService) SendFileToChatExecute(r FbsAPISendFileToChatRequest) (*E
 		return localVarReturnValue, nil, reportError("file is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
@@ -22716,7 +22647,7 @@ func (a *FbsAPIService) SendMessageToChatExecute(r FbsAPISendMessageToChatReques
 		return localVarReturnValue, nil, reportError("sendMessageToChatRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -25618,7 +25549,7 @@ func (a *FbsAPIService) UpdateOfferMappingsExecute(r FbsAPIUpdateOfferMappingsRe
 	}
 
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

@@ -657,7 +657,7 @@ import (
 
 func main() {
 	campaignId := int64(789) // int64 | Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями. 
-	changeOutletRequest := *openapiclient.NewChangeOutletRequest("Name_example", openapiclient.OutletType("DEPOT"), *openapiclient.NewOutletAddressDTO(int64(123)), []string{"Phones_example"}, *openapiclient.NewOutletWorkingScheduleDTO([]openapiclient.OutletWorkingScheduleItemDTO{*openapiclient.NewOutletWorkingScheduleItemDTO(openapiclient.DayOfWeekType("MONDAY"), openapiclient.DayOfWeekType("MONDAY"), "09:59", "1439")})) // ChangeOutletRequest | 
+	changeOutletRequest := *openapiclient.NewChangeOutletRequest("Name_example", openapiclient.OutletType("DEPOT"), *openapiclient.NewOutletAddressDTO(int64(123)), []string{"Phones_example"}, *openapiclient.NewOutletWorkingScheduleDTO([]openapiclient.OutletWorkingScheduleItemDTO{*openapiclient.NewOutletWorkingScheduleItemDTO(openapiclient.DayOfWeekType("MONDAY"), openapiclient.DayOfWeekType("MONDAY"), "09:59", "23:59")})) // ChangeOutletRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1443,7 +1443,7 @@ import (
 )
 
 func main() {
-	generateClosureDocumentsDetalizationRequest := *openapiclient.NewGenerateClosureDocumentsDetalizationRequest(*openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12)), openapiclient.ClosureDocumentsContractType("INCOME")) // GenerateClosureDocumentsDetalizationRequest | 
+	generateClosureDocumentsDetalizationRequest := *openapiclient.NewGenerateClosureDocumentsDetalizationRequest(int64(123), *openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12)), openapiclient.ClosureDocumentsContractType("INCOME")) // GenerateClosureDocumentsDetalizationRequest | 
 	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
 
 	configuration := openapiclient.NewConfiguration()
@@ -8994,7 +8994,7 @@ import (
 func main() {
 	campaignId := int64(789) // int64 | Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями. 
 	outletId := int64(789) // int64 | Идентификатор точки продаж.
-	changeOutletRequest := *openapiclient.NewChangeOutletRequest("Name_example", openapiclient.OutletType("DEPOT"), *openapiclient.NewOutletAddressDTO(int64(123)), []string{"Phones_example"}, *openapiclient.NewOutletWorkingScheduleDTO([]openapiclient.OutletWorkingScheduleItemDTO{*openapiclient.NewOutletWorkingScheduleItemDTO(openapiclient.DayOfWeekType("MONDAY"), openapiclient.DayOfWeekType("MONDAY"), "09:59", "1439")})) // ChangeOutletRequest | 
+	changeOutletRequest := *openapiclient.NewChangeOutletRequest("Name_example", openapiclient.OutletType("DEPOT"), *openapiclient.NewOutletAddressDTO(int64(123)), []string{"Phones_example"}, *openapiclient.NewOutletWorkingScheduleDTO([]openapiclient.OutletWorkingScheduleItemDTO{*openapiclient.NewOutletWorkingScheduleItemDTO(openapiclient.DayOfWeekType("MONDAY"), openapiclient.DayOfWeekType("MONDAY"), "09:59", "23:59")})) // ChangeOutletRequest | 
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)

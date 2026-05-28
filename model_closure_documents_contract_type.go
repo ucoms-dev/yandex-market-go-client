@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// ClosureDocumentsContractType Тип договора:  * `INCOME` — договор на размещение.  * `OUTCOME` — договор на продвижение.  * `MARKETING` — договор на маркетинг.
+// ClosureDocumentsContractType Тип договора:  * `INCOME` — договор на размещение.  * `OUTCOME` — договор на продвижение.
 type ClosureDocumentsContractType string
 
 // List of ClosureDocumentsContractType

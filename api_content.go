@@ -91,7 +91,7 @@ func (a *ContentAPIService) GetCategoryContentParametersExecute(r ContentAPIGetC
 	}
 
 	if r.businessId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "businessId", r.businessId, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "businessId", r.businessId, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -312,13 +312,13 @@ func (a *ContentAPIService) GetOfferCardsContentStatusExecute(r ContentAPIGetOff
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header

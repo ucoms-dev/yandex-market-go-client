@@ -102,7 +102,7 @@ func (a *OrderLabelsAPIService) GenerateOrderLabelExecute(r OrderLabelsAPIGenera
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -310,7 +310,7 @@ func (a *OrderLabelsAPIService) GenerateOrderLabelsExecute(r OrderLabelsAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

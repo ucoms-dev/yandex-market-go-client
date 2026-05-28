@@ -711,23 +711,23 @@ func (a *OutletsAPIService) GetOutletsExecute(r OutletsAPIGetOutletsRequest) (*G
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.regionId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "region_id", r.regionId, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "region_id", r.regionId, "", "")
 	}
 	if r.shopOutletCode != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "shop_outlet_code", r.shopOutletCode, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "shop_outlet_code", r.shopOutletCode, "", "")
 	}
 	if r.regionId2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId2, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "regionId", r.regionId2, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

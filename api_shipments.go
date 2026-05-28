@@ -951,10 +951,10 @@ func (a *ShipmentsAPIService) DownloadShipmentPalletLabelsExecute(r ShipmentsAPI
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ShipmentPalletLabelPageFormatType = "A8"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1223,10 +1223,10 @@ func (a *ShipmentsAPIService) DownloadShipmentReceptionTransferActExecute(r Ship
 	}
 
 	if r.warehouseId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "warehouse_id", r.warehouseId, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "warehouse_id", r.warehouseId, "", "")
 	}
 	if r.signatory != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "signatory", r.signatory, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "signatory", r.signatory, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -1632,10 +1632,10 @@ func (a *ShipmentsAPIService) GetShipmentExecute(r ShipmentsAPIGetShipmentReques
 	}
 
 	if r.cancelledOrders != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", r.cancelledOrders, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", r.cancelledOrders, "", "")
 	} else {
 		var defaultValue bool = true
-		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "cancelledOrders", defaultValue, "", "")
 		r.cancelledOrders = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -2055,13 +2055,13 @@ func (a *ShipmentsAPIService) SearchShipmentsExecute(r ShipmentsAPISearchShipmen
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 15
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header

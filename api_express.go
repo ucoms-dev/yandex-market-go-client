@@ -17,7 +17,6 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"reflect"
 	"strings"
 	"time"
 )
@@ -2635,10 +2634,10 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ExpressAPIG
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -2844,10 +2843,10 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ExpressAPIG
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -3005,12 +3004,6 @@ GenerateClosureDocumentsDetalizationReport Отчет по схождению с
 
 Узнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
 
-{% if audience == "advertiser" %}
-
-{% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}
-
-{% else %}
-
 {% list tabs %}
 
 - Договор на размещение
@@ -3021,13 +3014,7 @@ GenerateClosureDocumentsDetalizationReport Отчет по схождению с
 
 	{% include notitle [reports](../../_auto/reports/period_closure/period_closure_outcome.md) %}
 
-- Договор на маркетинг
-
-	{% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}
-
 {% endlist %}
-
-{% endif %}
 
 {% include notitle [limit](../../_auto/method_limits/generateClosureDocumentsDetalizationReport.md) %}
 
@@ -3067,10 +3054,10 @@ func (a *ExpressAPIService) GenerateClosureDocumentsDetalizationReportExecute(r 
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -3496,10 +3483,10 @@ func (a *ExpressAPIService) GenerateCompetitorsPositionReportExecute(r ExpressAP
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -3699,10 +3686,10 @@ func (a *ExpressAPIService) GenerateGoodsFeedbackReportExecute(r ExpressAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -3917,10 +3904,10 @@ func (a *ExpressAPIService) GenerateGoodsPricesReportExecute(r ExpressAPIGenerat
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -4128,10 +4115,10 @@ func (a *ExpressAPIService) GenerateGoodsRealizationReportExecute(r ExpressAPIGe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -4342,10 +4329,10 @@ func (a *ExpressAPIService) GenerateJewelryFiscalReportExecute(r ExpressAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -4545,10 +4532,10 @@ func (a *ExpressAPIService) GenerateKeyIndicatorsReportExecute(r ExpressAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -4746,7 +4733,7 @@ func (a *ExpressAPIService) GenerateMassOrderLabelsReportExecute(r ExpressAPIGen
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -5154,7 +5141,7 @@ func (a *ExpressAPIService) GenerateOrderLabelExecute(r ExpressAPIGenerateOrderL
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5362,7 +5349,7 @@ func (a *ExpressAPIService) GenerateOrderLabelsExecute(r ExpressAPIGenerateOrder
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -5570,10 +5557,10 @@ func (a *ExpressAPIService) GenerateSalesGeographyReportExecute(r ExpressAPIGene
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -5777,10 +5764,10 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ExpressAPIGe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -5984,10 +5971,10 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ExpressAPIGenerate
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -6187,10 +6174,10 @@ func (a *ExpressAPIService) GenerateShowsSalesReportExecute(r ExpressAPIGenerate
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -6421,10 +6408,10 @@ func (a *ExpressAPIService) GenerateStocksOnWarehousesReportExecute(r ExpressAPI
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -6649,14 +6636,14 @@ func (a *ExpressAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Exp
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -6888,14 +6875,14 @@ func (a *ExpressAPIService) GenerateUnitedNettingReportExecute(r ExpressAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -7112,14 +7099,14 @@ func (a *ExpressAPIService) GenerateUnitedOrdersReportExecute(r ExpressAPIGenera
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -7331,10 +7318,10 @@ func (a *ExpressAPIService) GenerateUnitedReturnsReportExecute(r ExpressAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -7722,13 +7709,13 @@ func (a *ExpressAPIService) GetBidsInfoForBusinessExecute(r ExpressAPIGetBidsInf
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -8194,13 +8181,13 @@ func (a *ExpressAPIService) GetBusinessOrdersExecute(r ExpressAPIGetBusinessOrde
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -8431,13 +8418,13 @@ func (a *ExpressAPIService) GetBusinessQuarantineOffersExecute(r ExpressAPIGetBu
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -9036,13 +9023,13 @@ func (a *ExpressAPIService) GetCampaignOffersExecute(r ExpressAPIGetCampaignOffe
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -9273,13 +9260,13 @@ func (a *ExpressAPIService) GetCampaignQuarantineOffersExecute(r ExpressAPIGetCa
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -9696,20 +9683,20 @@ func (a *ExpressAPIService) GetCampaignsExecute(r ExpressAPIGetCampaignsRequest)
 	localVarFormParams := url.Values{}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	} else {
 		var defaultValue int32 = 1
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "", "")
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10306,7 +10293,7 @@ func (a *ExpressAPIService) GetCategoryContentParametersExecute(r ExpressAPIGetC
 	}
 
 	if r.businessId != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "businessId", r.businessId, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "businessId", r.businessId, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -10519,7 +10506,7 @@ func (a *ExpressAPIService) GetChatExecute(r ExpressAPIGetChatRequest) (*GetChat
 		return localVarReturnValue, nil, reportError("chatId must be greater than 1")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -10747,15 +10734,15 @@ func (a *ExpressAPIService) GetChatHistoryExecute(r ExpressAPIGetChatHistoryRequ
 		return localVarReturnValue, nil, reportError("getChatHistoryRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -10984,8 +10971,8 @@ func (a *ExpressAPIService) GetChatMessageExecute(r ExpressAPIGetChatMessageRequ
 		return localVarReturnValue, nil, reportError("messageId must be greater than 1")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
-	parameterAddToHeaderOrQuery(localVarQueryParams, "messageId", r.messageId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "messageId", r.messageId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -11209,13 +11196,13 @@ func (a *ExpressAPIService) GetChatsExecute(r ExpressAPIGetChatsRequest) (*GetCh
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 10
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -11433,13 +11420,13 @@ func (a *ExpressAPIService) GetDefaultPricesExecute(r ExpressAPIGetDefaultPrices
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -11858,13 +11845,13 @@ func (a *ExpressAPIService) GetGoodsFeedbackCommentsExecute(r ExpressAPIGetGoods
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -12092,13 +12079,13 @@ func (a *ExpressAPIService) GetGoodsFeedbacksExecute(r ExpressAPIGetGoodsFeedbac
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -12327,13 +12314,13 @@ func (a *ExpressAPIService) GetGoodsQuestionAnswersExecute(r ExpressAPIGetGoodsQ
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -12559,13 +12546,13 @@ func (a *ExpressAPIService) GetGoodsQuestionsExecute(r ExpressAPIGetGoodsQuestio
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 25
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -12985,24 +12972,16 @@ func (a *ExpressAPIService) GetHiddenOffersExecute(r ExpressAPIGetHiddenOffersRe
 	}
 
 	if r.offerId != nil {
-		t := *r.offerId
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "offer_id", r.offerId, "", "csv")
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -13213,13 +13192,13 @@ func (a *ExpressAPIService) GetOfferCardsContentStatusExecute(r ExpressAPIGetOff
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -13449,17 +13428,17 @@ func (a *ExpressAPIService) GetOfferMappingsExecute(r ExpressAPIGetOfferMappings
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -13684,13 +13663,13 @@ func (a *ExpressAPIService) GetOfferRecommendationsExecute(r ExpressAPIGetOfferR
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -15066,105 +15045,81 @@ func (a *ExpressAPIService) GetOrdersExecute(r ExpressAPIGetOrdersRequest) (*Get
 	}
 
 	if r.orderIds != nil {
-		t := *r.orderIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
 	}
 	if r.status != nil {
-		t := *r.status
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "status", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "status", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "status", r.status, "", "csv")
 	}
 	if r.substatus != nil {
-		t := *r.substatus
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "substatus", r.substatus, "", "csv")
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
 	}
 	if r.supplierShipmentDateFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateFrom", r.supplierShipmentDateFrom, "", "")
 	}
 	if r.supplierShipmentDateTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "supplierShipmentDateTo", r.supplierShipmentDateTo, "", "")
 	}
 	if r.updatedAtFrom != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtFrom", r.updatedAtFrom, "", "")
 	}
 	if r.updatedAtTo != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "updatedAtTo", r.updatedAtTo, "", "")
 	}
 	if r.dispatchType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "dispatchType", r.dispatchType, "", "")
 	}
 	if r.fake != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", r.fake, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fake", defaultValue, "", "")
 		r.fake = &defaultValue
 	}
 	if r.hasCis != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", r.hasCis, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "hasCis", defaultValue, "", "")
 		r.hasCis = &defaultValue
 	}
 	if r.onlyWaitingForCancellationApprove != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", r.onlyWaitingForCancellationApprove, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyWaitingForCancellationApprove", defaultValue, "", "")
 		r.onlyWaitingForCancellationApprove = &defaultValue
 	}
 	if r.onlyEstimatedDelivery != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", r.onlyEstimatedDelivery, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "onlyEstimatedDelivery", defaultValue, "", "")
 		r.onlyEstimatedDelivery = &defaultValue
 	}
 	if r.buyerType != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "buyerType", r.buyerType, "", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	} else {
 		var defaultValue int32 = 1
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "", "")
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
 	}
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -15387,13 +15342,13 @@ func (a *ExpressAPIService) GetOrdersStatsExecute(r ExpressAPIGetOrdersStatsRequ
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -15609,13 +15564,13 @@ func (a *ExpressAPIService) GetPagedWarehousesExecute(r ExpressAPIGetPagedWareho
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 15
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -15827,20 +15782,20 @@ func (a *ExpressAPIService) GetPricesExecute(r ExpressAPIGetPricesRequest) (*Get
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.archived != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", r.archived, "", "")
 	} else {
 		var defaultValue bool = false
-		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "archived", defaultValue, "", "")
 		r.archived = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -16062,13 +16017,13 @@ func (a *ExpressAPIService) GetPricesByOfferIdsExecute(r ExpressAPIGetPricesByOf
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -16295,13 +16250,13 @@ func (a *ExpressAPIService) GetPromoOffersExecute(r ExpressAPIGetPromoOffersRequ
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 250
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -18366,62 +18321,38 @@ func (a *ExpressAPIService) GetReturnsExecute(r ExpressAPIGetReturnsRequest) (*G
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 50
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	if r.orderIds != nil {
-		t := *r.orderIds
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "orderIds", r.orderIds, "", "csv")
 	}
 	if r.statuses != nil {
-		t := *r.statuses
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "statuses", r.statuses, "", "csv")
 	}
 	if r.shipmentStatuses != nil {
-		t := *r.shipmentStatuses
-		if reflect.TypeOf(t).Kind() == reflect.Slice {
-			s := reflect.ValueOf(t)
-			for i := 0; i < s.Len(); i++ {
-				parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", s.Index(i).Interface(), "form", "multi")
-			}
-		} else {
-			parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", t, "form", "multi")
-		}
+		parameterAddToHeaderOrQuery(localVarQueryParams, "shipmentStatuses", r.shipmentStatuses, "", "csv")
 	}
 	if r.type_ != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "type", r.type_, "", "")
 	}
 	if r.fromDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "fromDate", r.fromDate, "", "")
 	}
 	if r.toDate != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "toDate", r.toDate, "", "")
 	}
 	if r.fromDate2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "from_date", r.fromDate2, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "from_date", r.fromDate2, "", "")
 	}
 	if r.toDate2 != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "to_date", r.toDate2, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "to_date", r.toDate2, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -18646,13 +18577,13 @@ func (a *ExpressAPIService) GetStocksExecute(r ExpressAPIGetStocksRequest) (*Get
 	}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 100
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -19522,20 +19453,20 @@ func (a *ExpressAPIService) SearchRegionChildrenExecute(r ExpressAPISearchRegion
 	localVarFormParams := url.Values{}
 
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	}
 	if r.page != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", r.page, "", "")
 	} else {
 		var defaultValue int32 = 1
-		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "page", defaultValue, "", "")
 		r.page = &defaultValue
 	}
 	if r.pageSize != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageSize", r.pageSize, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -19922,15 +19853,15 @@ func (a *ExpressAPIService) SearchRegionsByNameExecute(r ExpressAPISearchRegions
 		return localVarReturnValue, nil, reportError("name is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "name", r.name, "", "")
 	if r.pageToken != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
 	}
 	if r.limit != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
 		var defaultValue int32 = 10
-		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -20124,7 +20055,7 @@ func (a *ExpressAPIService) SendFileToChatExecute(r ExpressAPISendFileToChatRequ
 		return localVarReturnValue, nil, reportError("file is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"multipart/form-data"}
 
@@ -20353,7 +20284,7 @@ func (a *ExpressAPIService) SendMessageToChatExecute(r ExpressAPISendMessageToCh
 		return localVarReturnValue, nil, reportError("sendMessageToChatRequest is required and must be specified")
 	}
 
-	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "form", "")
+	parameterAddToHeaderOrQuery(localVarQueryParams, "chatId", r.chatId, "", "")
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -22817,7 +22748,7 @@ func (a *ExpressAPIService) UpdateOfferMappingsExecute(r ExpressAPIUpdateOfferMa
 	}
 
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}

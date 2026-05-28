@@ -22,7 +22,7 @@ var _ MappedNullable = &GenerateClosureDocumentsDetalizationRequest{}
 // GenerateClosureDocumentsDetalizationRequest Данные, необходимые для генерации отчета.
 type GenerateClosureDocumentsDetalizationRequest struct {
 	// Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
-	CampaignId   *int64                         `json:"campaignId,omitempty"`
+	CampaignId   int64                          `json:"campaignId"`
 	MonthOfYear  ClosureDocumentsMonthOfYearDTO `json:"monthOfYear"`
 	ContractType ClosureDocumentsContractType   `json:"contractType"`
 }
@@ -33,8 +33,9 @@ type _GenerateClosureDocumentsDetalizationRequest GenerateClosureDocumentsDetali
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGenerateClosureDocumentsDetalizationRequest(monthOfYear ClosureDocumentsMonthOfYearDTO, contractType ClosureDocumentsContractType) *GenerateClosureDocumentsDetalizationRequest {
+func NewGenerateClosureDocumentsDetalizationRequest(campaignId int64, monthOfYear ClosureDocumentsMonthOfYearDTO, contractType ClosureDocumentsContractType) *GenerateClosureDocumentsDetalizationRequest {
 	this := GenerateClosureDocumentsDetalizationRequest{}
+	this.CampaignId = campaignId
 	this.MonthOfYear = monthOfYear
 	this.ContractType = contractType
 	return &this
@@ -48,36 +49,28 @@ func NewGenerateClosureDocumentsDetalizationRequestWithDefaults() *GenerateClosu
 	return &this
 }
 
-// GetCampaignId returns the CampaignId field value if set, zero value otherwise.
+// GetCampaignId returns the CampaignId field value
 func (o *GenerateClosureDocumentsDetalizationRequest) GetCampaignId() int64 {
-	if o == nil || IsNil(o.CampaignId) {
+	if o == nil {
 		var ret int64
 		return ret
 	}
-	return *o.CampaignId
+
+	return o.CampaignId
 }
 
-// GetCampaignIdOk returns a tuple with the CampaignId field value if set, nil otherwise
+// GetCampaignIdOk returns a tuple with the CampaignId field value
 // and a boolean to check if the value has been set.
 func (o *GenerateClosureDocumentsDetalizationRequest) GetCampaignIdOk() (*int64, bool) {
-	if o == nil || IsNil(o.CampaignId) {
+	if o == nil {
 		return nil, false
 	}
-	return o.CampaignId, true
+	return &o.CampaignId, true
 }
 
-// HasCampaignId returns a boolean if a field has been set.
-func (o *GenerateClosureDocumentsDetalizationRequest) HasCampaignId() bool {
-	if o != nil && !IsNil(o.CampaignId) {
-		return true
-	}
-
-	return false
-}
-
-// SetCampaignId gets a reference to the given int64 and assigns it to the CampaignId field.
+// SetCampaignId sets field value
 func (o *GenerateClosureDocumentsDetalizationRequest) SetCampaignId(v int64) {
-	o.CampaignId = &v
+	o.CampaignId = v
 }
 
 // GetMonthOfYear returns the MonthOfYear field value
@@ -138,9 +131,7 @@ func (o GenerateClosureDocumentsDetalizationRequest) MarshalJSON() ([]byte, erro
 
 func (o GenerateClosureDocumentsDetalizationRequest) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
-	if !IsNil(o.CampaignId) {
-		toSerialize["campaignId"] = o.CampaignId
-	}
+	toSerialize["campaignId"] = o.CampaignId
 	toSerialize["monthOfYear"] = o.MonthOfYear
 	toSerialize["contractType"] = o.ContractType
 	return toSerialize, nil
@@ -151,6 +142,7 @@ func (o *GenerateClosureDocumentsDetalizationRequest) UnmarshalJSON(data []byte)
 	// by unmarshalling the object into a generic map with string keys and checking
 	// that every required field exists as a key in the generic map.
 	requiredProperties := []string{
+		"campaignId",
 		"monthOfYear",
 		"contractType",
 	}

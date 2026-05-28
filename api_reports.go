@@ -99,10 +99,10 @@ func (a *ReportsAPIService) GenerateBannersStatisticsReportExecute(r ReportsAPIG
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -495,10 +495,10 @@ func (a *ReportsAPIService) GenerateBoostConsolidatedReportExecute(r ReportsAPIG
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -656,12 +656,6 @@ GenerateClosureDocumentsDetalizationReport Отчет по схождению с
 
 Узнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
 
-{% if audience == "advertiser" %}
-
-{% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}
-
-{% else %}
-
 {% list tabs %}
 
 - Договор на размещение
@@ -672,13 +666,7 @@ GenerateClosureDocumentsDetalizationReport Отчет по схождению с
 
 	{% include notitle [reports](../../_auto/reports/period_closure/period_closure_outcome.md) %}
 
-- Договор на маркетинг
-
-	{% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}
-
 {% endlist %}
-
-{% endif %}
 
 {% include notitle [limit](../../_auto/method_limits/generateClosureDocumentsDetalizationReport.md) %}
 
@@ -718,10 +706,10 @@ func (a *ReportsAPIService) GenerateClosureDocumentsDetalizationReportExecute(r 
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1147,10 +1135,10 @@ func (a *ReportsAPIService) GenerateCompetitorsPositionReportExecute(r ReportsAP
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1350,10 +1338,10 @@ func (a *ReportsAPIService) GenerateGoodsFeedbackReportExecute(r ReportsAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1553,10 +1541,10 @@ func (a *ReportsAPIService) GenerateGoodsMovementReportExecute(r ReportsAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1771,10 +1759,10 @@ func (a *ReportsAPIService) GenerateGoodsPricesReportExecute(r ReportsAPIGenerat
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -1982,10 +1970,10 @@ func (a *ReportsAPIService) GenerateGoodsRealizationReportExecute(r ReportsAPIGe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -2196,10 +2184,10 @@ func (a *ReportsAPIService) GenerateGoodsTurnoverReportExecute(r ReportsAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -2399,10 +2387,10 @@ func (a *ReportsAPIService) GenerateJewelryFiscalReportExecute(r ReportsAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -2602,10 +2590,10 @@ func (a *ReportsAPIService) GenerateKeyIndicatorsReportExecute(r ReportsAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -2803,7 +2791,7 @@ func (a *ReportsAPIService) GenerateMassOrderLabelsReportExecute(r ReportsAPIGen
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -3002,10 +2990,10 @@ func (a *ReportsAPIService) GenerateSalesGeographyReportExecute(r ReportsAPIGene
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -3209,10 +3197,10 @@ func (a *ReportsAPIService) GenerateShelfsStatisticsReportExecute(r ReportsAPIGe
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -3603,10 +3591,10 @@ func (a *ReportsAPIService) GenerateShowsBoostReportExecute(r ReportsAPIGenerate
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -3806,10 +3794,10 @@ func (a *ReportsAPIService) GenerateShowsSalesReportExecute(r ReportsAPIGenerate
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -4040,10 +4028,10 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ReportsAPI
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
@@ -4268,14 +4256,14 @@ func (a *ReportsAPIService) GenerateUnitedMarketplaceServicesReportExecute(r Rep
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -4507,14 +4495,14 @@ func (a *ReportsAPIService) GenerateUnitedNettingReportExecute(r ReportsAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -4731,14 +4719,14 @@ func (a *ReportsAPIService) GenerateUnitedOrdersReportExecute(r ReportsAPIGenera
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	if r.language != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "language", r.language, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -4950,10 +4938,10 @@ func (a *ReportsAPIService) GenerateUnitedReturnsReportExecute(r ReportsAPIGener
 	}
 
 	if r.format != nil {
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
 	} else {
 		var defaultValue ReportFormatType = "FILE"
-		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "form", "")
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
 	}
 	// to determine the Content-Type header
