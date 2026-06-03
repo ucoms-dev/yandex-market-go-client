@@ -33,6 +33,8 @@
 
 * `CROSSREGIONAL_DELIVERY` (value: `"CROSSREGIONAL_DELIVERY"`)
 
+* `FULFILLMENT_WITHDRAW` (value: `"FULFILLMENT_WITHDRAW"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

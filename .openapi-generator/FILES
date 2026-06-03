@@ -246,6 +246,7 @@ docs/GenerateGoodsRealizationReportRequest.md
 docs/GenerateGoodsTurnoverRequest.md
 docs/GenerateJewelryFiscalReportRequest.md
 docs/GenerateKeyIndicatorsRequest.md
+docs/GenerateMarketingDetalizationRequest.md
 docs/GenerateMassOrderLabelsRequest.md
 docs/GenerateOfferBarcodesRequest.md
 docs/GenerateOfferBarcodesResponse.md
@@ -1013,6 +1014,7 @@ model_generate_goods_realization_report_request.go
 model_generate_goods_turnover_request.go
 model_generate_jewelry_fiscal_report_request.go
 model_generate_key_indicators_request.go
+model_generate_marketing_detalization_request.go
 model_generate_mass_order_labels_request.go
 model_generate_offer_barcodes_request.go
 model_generate_offer_barcodes_response.go

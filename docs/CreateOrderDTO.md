@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Packaging** | [**CreateOrderPackagingDTO**](CreateOrderPackagingDTO.md) |  | 
 **PaymentType** | [**DeliveryPaymentType**](DeliveryPaymentType.md) |  | 
 **Draft** | Pointer to **bool** | Признак создания черновика заказа.  * &#x60;true&#x60; — Маркет создаст заказ в статусе &#x60;RESERVED&#x60; и будет ждать подтверждения от магазина. * &#x60;false&#x60; — Маркет создаст заказ в статусе &#x60;PROCESSING&#x60; с подстатусом &#x60;STARTED&#x60; и начнёт его обработку, дополнительных подтверждений не требуется.  | [optional] [default to false]
+**Fake** | Pointer to **bool** | Признак тестового заказа.  * &#x60;true&#x60; — позволяет проверить работу магазина и его API на [тестовых заказах](../../concepts/sandbox.md). Такой заказ не будет отгружен и не влияет на остатки. * &#x60;false&#x60; — настоящий заказ.  | [optional] [default to false]
 
 ## Methods
 
@@ -175,6 +176,31 @@ SetDraft sets Draft field to given value.
 `func (o *CreateOrderDTO) HasDraft() bool`
 
 HasDraft returns a boolean if a field has been set.
+
+### GetFake
+
+`func (o *CreateOrderDTO) GetFake() bool`
+
+GetFake returns the Fake field if non-nil, zero value otherwise.
+
+### GetFakeOk
+
+`func (o *CreateOrderDTO) GetFakeOk() (*bool, bool)`
+
+GetFakeOk returns a tuple with the Fake field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFake
+
+`func (o *CreateOrderDTO) SetFake(v bool)`
+
+SetFake sets Fake field to given value.
+
+### HasFake
+
+`func (o *CreateOrderDTO) HasFake() bool`
+
+HasFake returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

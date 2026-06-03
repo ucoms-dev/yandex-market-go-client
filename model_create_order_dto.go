@@ -31,6 +31,8 @@ type CreateOrderDTO struct {
 	PaymentType   DeliveryPaymentType            `json:"paymentType"`
 	// Признак создания черновика заказа.  * `true` — Маркет создаст заказ в статусе `RESERVED` и будет ждать подтверждения от магазина. * `false` — Маркет создаст заказ в статусе `PROCESSING` с подстатусом `STARTED` и начнёт его обработку, дополнительных подтверждений не требуется.
 	Draft *bool `json:"draft,omitempty"`
+	// Признак тестового заказа.  * `true` — позволяет проверить работу магазина и его API на [тестовых заказах](../../concepts/sandbox.md). Такой заказ не будет отгружен и не влияет на остатки. * `false` — настоящий заказ.
+	Fake *bool `json:"fake,omitempty"`
 }
 
 type _CreateOrderDTO CreateOrderDTO
@@ -49,6 +51,8 @@ func NewCreateOrderDTO(externalOrderId string, itemsDelivery []CreateOrderWareho
 	this.PaymentType = paymentType
 	var draft bool = false
 	this.Draft = &draft
+	var fake bool = false
+	this.Fake = &fake
 	return &this
 }
 
@@ -59,6 +63,8 @@ func NewCreateOrderDTOWithDefaults() *CreateOrderDTO {
 	this := CreateOrderDTO{}
 	var draft bool = false
 	this.Draft = &draft
+	var fake bool = false
+	this.Fake = &fake
 	return &this
 }
 
@@ -238,6 +244,38 @@ func (o *CreateOrderDTO) SetDraft(v bool) {
 	o.Draft = &v
 }
 
+// GetFake returns the Fake field value if set, zero value otherwise.
+func (o *CreateOrderDTO) GetFake() bool {
+	if o == nil || IsNil(o.Fake) {
+		var ret bool
+		return ret
+	}
+	return *o.Fake
+}
+
+// GetFakeOk returns a tuple with the Fake field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CreateOrderDTO) GetFakeOk() (*bool, bool) {
+	if o == nil || IsNil(o.Fake) {
+		return nil, false
+	}
+	return o.Fake, true
+}
+
+// HasFake returns a boolean if a field has been set.
+func (o *CreateOrderDTO) HasFake() bool {
+	if o != nil && !IsNil(o.Fake) {
+		return true
+	}
+
+	return false
+}
+
+// SetFake gets a reference to the given bool and assigns it to the Fake field.
+func (o *CreateOrderDTO) SetFake(v bool) {
+	o.Fake = &v
+}
+
 func (o CreateOrderDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -256,6 +294,9 @@ func (o CreateOrderDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize["paymentType"] = o.PaymentType
 	if !IsNil(o.Draft) {
 		toSerialize["draft"] = o.Draft
+	}
+	if !IsNil(o.Fake) {
+		toSerialize["fake"] = o.Fake
 	}
 	return toSerialize, nil
 }

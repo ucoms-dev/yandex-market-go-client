@@ -17,6 +17,7 @@ Method | HTTP request | Description
 [**GenerateGoodsTurnoverReport**](ReportsAPI.md#GenerateGoodsTurnoverReport) | **Post** /v2/reports/goods-turnover/generate | Отчет по оборачиваемости
 [**GenerateJewelryFiscalReport**](ReportsAPI.md#GenerateJewelryFiscalReport) | **Post** /v2/reports/jewelry-fiscal/generate | Отчет по заказам с ювелирными изделиями
 [**GenerateKeyIndicatorsReport**](ReportsAPI.md#GenerateKeyIndicatorsReport) | **Post** /v2/reports/key-indicators/generate | Отчет по ключевым показателям
+[**GenerateMarketingDetalizationReport**](ReportsAPI.md#GenerateMarketingDetalizationReport) | **Post** /v1/businesses/{businessId}/reports/marketing-detalization/generate | Отчет по счету маркетинга
 [**GenerateMassOrderLabelsReport**](ReportsAPI.md#GenerateMassOrderLabelsReport) | **Post** /v2/reports/documents/labels/generate | Готовые ярлыки‑наклейки на все коробки в нескольких заказах
 [**GenerateSalesGeographyReport**](ReportsAPI.md#GenerateSalesGeographyReport) | **Post** /v2/reports/sales-geography/generate | Отчет по географии продаж
 [**GenerateShelfsStatisticsReport**](ReportsAPI.md#GenerateShelfsStatisticsReport) | **Post** /v2/reports/shelf-statistics/generate | Отчет по полкам
@@ -897,6 +898,80 @@ Other parameters are passed through a pointer to a apiGenerateKeyIndicatorsRepor
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateKeyIndicatorsRequest** | [**GenerateKeyIndicatorsRequest**](GenerateKeyIndicatorsRequest.md) |  | 
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+
+### Return type
+
+[**GenerateReportResponse**](GenerateReportResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GenerateMarketingDetalizationReport
+
+> GenerateReportResponse GenerateMarketingDetalizationReport(ctx, businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).Execute()
+
+Отчет по счету маркетинга
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
+	generateMarketingDetalizationRequest := *openapiclient.NewGenerateMarketingDetalizationRequest(*openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12))) // GenerateMarketingDetalizationRequest | 
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GenerateMarketingDetalizationReport(context.Background(), businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GenerateMarketingDetalizationReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GenerateMarketingDetalizationReport`: GenerateReportResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GenerateMarketingDetalizationReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGenerateMarketingDetalizationReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **generateMarketingDetalizationRequest** | [**GenerateMarketingDetalizationRequest**](GenerateMarketingDetalizationRequest.md) |  | 
  **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
 
 ### Return type
