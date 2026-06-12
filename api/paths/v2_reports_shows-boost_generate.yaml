@@ -1,4 +1,5 @@
 post:
+  x-resource-id: 257
   tags:
     - reports
     - fby
@@ -13,17 +14,14 @@ post:
     - finance-and-accounting
   x-resource-limit-config:
     path: resp
-    amount: 100
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 1
-        period: minutes
-        period-duration: 2
-      medium:
-        amount: 1
-        period: minutes
-        period-duration: 1
+    none:
+      amount: 1
+      period: minutes
+      period-duration: 2
+    medium:
+      amount: 1
+      period: minutes
+      period-duration: 1
   x-restrictions:
     - market-yandex-go
   x-apphost:
@@ -34,6 +32,7 @@ post:
   description: "{% include notitle [access](../../_auto/method_scopes/generateShowsBoostReport.md) %}\n\nЗапускает генерацию сводного отчета по бусту показов за заданный период. {% if audience == \"partner\" %}[Что такое буст показов](https://yandex.ru/support/marketplace/ru/marketing/boost-shows){% endif %}\n\nУзнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET\_v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).\n\n{% include notitle [reports]({{ report-columns-shows-boost }}) %}\n\n{% if audience != \"advertiser\" %}\n\n{% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}\n\n{% endif %}\n\n{% include notitle [limit](../../_auto/method_limits/generateShowsBoostReport.md) %}\n"
   parameters:
     - $ref: ../components/parameters/ReportFormat.yaml
+    - $ref: ../components/parameters/SourceType.yaml
   requestBody:
     required: true
     content:

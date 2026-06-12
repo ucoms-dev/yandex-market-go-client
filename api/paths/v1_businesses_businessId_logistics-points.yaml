@@ -1,4 +1,5 @@
 post:
+  x-resource-id: 277
   tags:
     - logistic-points
     - laas
@@ -19,17 +20,14 @@ post:
     - supplies-management:read-only
   x-resource-limit-config:
     path: resp
-    amount: 10000
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 10000
-        period: hours
-        period-duration: 1
-      medium:
-        amount: 10000
-        period: hours
-        period-duration: 1
+    none:
+      amount: 10000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: hours
+      period-duration: 1
   x-restrictions:
     - market-yandex-go
     - urbanads

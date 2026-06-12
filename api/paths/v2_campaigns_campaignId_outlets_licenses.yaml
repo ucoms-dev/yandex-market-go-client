@@ -1,4 +1,5 @@
 get:
+  x-resource-id: 113
   tags:
     - outlet-licenses
     - dbs
@@ -10,17 +11,14 @@ get:
     - urbanads
   x-resource-limit-config:
     path: resp
-    amount: 100000
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 100000
-        period: hours
-        period-duration: 1
-      medium:
-        amount: 100000
-        period: hours
-        period-duration: 1
+    none:
+      amount: 100000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: hours
+      period-duration: 1
   x-apphost:
     domain: LOGISTICS
     enabled: false
@@ -70,6 +68,7 @@ get:
     '500':
       $ref: ../components/responses/500.yaml
 delete:
+  x-resource-id: 112
   tags:
     - outlet-licenses
     - dbs
@@ -80,17 +79,14 @@ delete:
     - urbanads
   x-resource-limit-config:
     path: resp
-    amount: 100000
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 100000
-        period: hours
-        period-duration: 1
-      medium:
-        amount: 100000
-        period: hours
-        period-duration: 1
+    none:
+      amount: 100000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: hours
+      period-duration: 1
   x-apphost:
     domain: LOGISTICS
     enabled: false
@@ -135,6 +131,7 @@ delete:
     '500':
       $ref: ../components/responses/500.yaml
 post:
+  x-resource-id: 114
   tags:
     - outlet-licenses
     - dbs
@@ -145,17 +142,14 @@ post:
     - urbanads
   x-resource-limit-config:
     path: resp
-    amount: 100000
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 100000
-        period: hours
-        period-duration: 1
-      medium:
-        amount: 100000
-        period: hours
-        period-duration: 1
+    none:
+      amount: 100000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: hours
+      period-duration: 1
   x-apphost:
     domain: LOGISTICS
     enabled: false

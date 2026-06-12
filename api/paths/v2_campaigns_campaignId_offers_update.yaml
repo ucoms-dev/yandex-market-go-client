@@ -1,4 +1,5 @@
 post:
+  x-resource-id: 183
   tags:
     - offers
     - dbs
@@ -13,17 +14,14 @@ post:
     - urbanads
   x-resource-limit-config:
     path: req.offers
-    amount: 10000
-    period: minutes
-    tariff-resource-limits:
-      none:
-        amount: 5000
-        period: minutes
-        period-duration: 1
-      medium:
-        amount: 10000
-        period: minutes
-        period-duration: 1
+    none:
+      amount: 5000
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: minutes
+      period-duration: 1
   x-apphost:
     domain: OFFERS_CATALOG
     enabled: false
