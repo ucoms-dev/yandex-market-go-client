@@ -35,6 +35,8 @@
 
 * `FULFILLMENT_WITHDRAW` (value: `"FULFILLMENT_WITHDRAW"`)
 
+* `ITEM_BOOKING` (value: `"ITEM_BOOKING"`)
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

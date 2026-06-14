@@ -979,7 +979,7 @@ Name | Type | Description  | Notes
 
 ## GenerateBannersStatisticsReport
 
-> GenerateReportResponse GenerateBannersStatisticsReport(ctx).GenerateBannersStatisticsRequest(generateBannersStatisticsRequest).Format(format).Execute()
+> GenerateReportResponse GenerateBannersStatisticsReport(ctx).GenerateBannersStatisticsRequest(generateBannersStatisticsRequest).Format(format).SourceType(sourceType).Execute()
 
 Отчет по охватному продвижению
 
@@ -1001,10 +1001,11 @@ import (
 func main() {
 	generateBannersStatisticsRequest := *openapiclient.NewGenerateBannersStatisticsRequest(int64(123), time.Now(), time.Now()) // GenerateBannersStatisticsRequest | 
 	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	sourceType := openapiclient.SourceType("SELLER") // SourceType | Признак типа кабинета, от имени которого вызывается метод: {% if audience == \"advertiser\" %}  - `ADVERTISER` — рекламодатель.  {% note info \"Обязательно указывайте sourceType=ADVERTISER в каждом запросе.\" %}     {% endnote %}  {% endif %}  {% if audience == \"partner\" %}  - `SELLER` — продавец.  {% endif %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ExpressAPI.GenerateBannersStatisticsReport(context.Background()).GenerateBannersStatisticsRequest(generateBannersStatisticsRequest).Format(format).Execute()
+	resp, r, err := apiClient.ExpressAPI.GenerateBannersStatisticsReport(context.Background()).GenerateBannersStatisticsRequest(generateBannersStatisticsRequest).Format(format).SourceType(sourceType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExpressAPI.GenerateBannersStatisticsReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1027,6 +1028,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateBannersStatisticsRequest** | [**GenerateBannersStatisticsRequest**](GenerateBannersStatisticsRequest.md) |  | 
  **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **sourceType** | [**SourceType**](SourceType.md) | Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  | 
 
 ### Return type
 
@@ -1048,7 +1050,7 @@ Name | Type | Description  | Notes
 
 ## GenerateBoostConsolidatedReport
 
-> GenerateReportResponse GenerateBoostConsolidatedReport(ctx).GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest).Format(format).Execute()
+> GenerateReportResponse GenerateBoostConsolidatedReport(ctx).GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest).Format(format).SourceType(sourceType).Execute()
 
 Отчет по бусту продаж
 
@@ -1070,10 +1072,11 @@ import (
 func main() {
 	generateBoostConsolidatedRequest := *openapiclient.NewGenerateBoostConsolidatedRequest(int64(123), time.Now(), time.Now()) // GenerateBoostConsolidatedRequest | 
 	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	sourceType := openapiclient.SourceType("SELLER") // SourceType | Признак типа кабинета, от имени которого вызывается метод: {% if audience == \"advertiser\" %}  - `ADVERTISER` — рекламодатель.  {% note info \"Обязательно указывайте sourceType=ADVERTISER в каждом запросе.\" %}     {% endnote %}  {% endif %}  {% if audience == \"partner\" %}  - `SELLER` — продавец.  {% endif %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ExpressAPI.GenerateBoostConsolidatedReport(context.Background()).GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest).Format(format).Execute()
+	resp, r, err := apiClient.ExpressAPI.GenerateBoostConsolidatedReport(context.Background()).GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest).Format(format).SourceType(sourceType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExpressAPI.GenerateBoostConsolidatedReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1096,6 +1099,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateBoostConsolidatedRequest** | [**GenerateBoostConsolidatedRequest**](GenerateBoostConsolidatedRequest.md) |  | 
  **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **sourceType** | [**SourceType**](SourceType.md) | Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  | 
 
 ### Return type
 
@@ -1661,7 +1665,7 @@ Name | Type | Description  | Notes
 
 ## GenerateMarketingDetalizationReport
 
-> GenerateReportResponse GenerateMarketingDetalizationReport(ctx, businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).Execute()
+> GenerateReportResponse GenerateMarketingDetalizationReport(ctx, businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).SourceType(sourceType).Execute()
 
 Отчет по счету маркетинга
 
@@ -1683,10 +1687,11 @@ func main() {
 	businessId := int64(789) // int64 | Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
 	generateMarketingDetalizationRequest := *openapiclient.NewGenerateMarketingDetalizationRequest(*openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12))) // GenerateMarketingDetalizationRequest | 
 	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	sourceType := openapiclient.SourceType("SELLER") // SourceType | Признак типа кабинета, от имени которого вызывается метод: {% if audience == \"advertiser\" %}  - `ADVERTISER` — рекламодатель.  {% note info \"Обязательно указывайте sourceType=ADVERTISER в каждом запросе.\" %}     {% endnote %}  {% endif %}  {% if audience == \"partner\" %}  - `SELLER` — продавец.  {% endif %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ExpressAPI.GenerateMarketingDetalizationReport(context.Background(), businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).Execute()
+	resp, r, err := apiClient.ExpressAPI.GenerateMarketingDetalizationReport(context.Background(), businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).SourceType(sourceType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExpressAPI.GenerateMarketingDetalizationReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -1714,6 +1719,7 @@ Name | Type | Description  | Notes
 
  **generateMarketingDetalizationRequest** | [**GenerateMarketingDetalizationRequest**](GenerateMarketingDetalizationRequest.md) |  | 
  **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **sourceType** | [**SourceType**](SourceType.md) | Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  | 
 
 ### Return type
 
@@ -2100,7 +2106,7 @@ Name | Type | Description  | Notes
 
 ## GenerateShelfsStatisticsReport
 
-> GenerateReportResponse GenerateShelfsStatisticsReport(ctx).GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest).Format(format).Execute()
+> GenerateReportResponse GenerateShelfsStatisticsReport(ctx).GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest).Format(format).SourceType(sourceType).Execute()
 
 Отчет по полкам
 
@@ -2122,10 +2128,11 @@ import (
 func main() {
 	generateShelfsStatisticsRequest := *openapiclient.NewGenerateShelfsStatisticsRequest(int64(123), time.Now(), time.Now(), openapiclient.StatisticsAttributionType("CLICKS")) // GenerateShelfsStatisticsRequest | 
 	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	sourceType := openapiclient.SourceType("SELLER") // SourceType | Признак типа кабинета, от имени которого вызывается метод: {% if audience == \"advertiser\" %}  - `ADVERTISER` — рекламодатель.  {% note info \"Обязательно указывайте sourceType=ADVERTISER в каждом запросе.\" %}     {% endnote %}  {% endif %}  {% if audience == \"partner\" %}  - `SELLER` — продавец.  {% endif %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ExpressAPI.GenerateShelfsStatisticsReport(context.Background()).GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest).Format(format).Execute()
+	resp, r, err := apiClient.ExpressAPI.GenerateShelfsStatisticsReport(context.Background()).GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest).Format(format).SourceType(sourceType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExpressAPI.GenerateShelfsStatisticsReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2148,6 +2155,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateShelfsStatisticsRequest** | [**GenerateShelfsStatisticsRequest**](GenerateShelfsStatisticsRequest.md) |  | 
  **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **sourceType** | [**SourceType**](SourceType.md) | Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  | 
 
 ### Return type
 
@@ -2169,7 +2177,7 @@ Name | Type | Description  | Notes
 
 ## GenerateShowsBoostReport
 
-> GenerateReportResponse GenerateShowsBoostReport(ctx).GenerateShowsBoostRequest(generateShowsBoostRequest).Format(format).Execute()
+> GenerateReportResponse GenerateShowsBoostReport(ctx).GenerateShowsBoostRequest(generateShowsBoostRequest).Format(format).SourceType(sourceType).Execute()
 
 Отчет по бусту показов
 
@@ -2191,10 +2199,11 @@ import (
 func main() {
 	generateShowsBoostRequest := *openapiclient.NewGenerateShowsBoostRequest(int64(123), time.Now(), time.Now(), openapiclient.StatisticsAttributionType("CLICKS")) // GenerateShowsBoostRequest | 
 	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	sourceType := openapiclient.SourceType("SELLER") // SourceType | Признак типа кабинета, от имени которого вызывается метод: {% if audience == \"advertiser\" %}  - `ADVERTISER` — рекламодатель.  {% note info \"Обязательно указывайте sourceType=ADVERTISER в каждом запросе.\" %}     {% endnote %}  {% endif %}  {% if audience == \"partner\" %}  - `SELLER` — продавец.  {% endif %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ExpressAPI.GenerateShowsBoostReport(context.Background()).GenerateShowsBoostRequest(generateShowsBoostRequest).Format(format).Execute()
+	resp, r, err := apiClient.ExpressAPI.GenerateShowsBoostReport(context.Background()).GenerateShowsBoostRequest(generateShowsBoostRequest).Format(format).SourceType(sourceType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExpressAPI.GenerateShowsBoostReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2217,6 +2226,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateShowsBoostRequest** | [**GenerateShowsBoostRequest**](GenerateShowsBoostRequest.md) |  | 
  **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **sourceType** | [**SourceType**](SourceType.md) | Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  | 
 
 ### Return type
 
@@ -5902,7 +5912,7 @@ Other parameters are passed through a pointer to a apiGetRegionsCodesRequest str
 
 ## GetReportInfo
 
-> GetReportInfoResponse GetReportInfo(ctx, reportId).Execute()
+> GetReportInfoResponse GetReportInfo(ctx, reportId).SourceType(sourceType).Execute()
 
 Получение заданного отчета или документа
 
@@ -5922,10 +5932,11 @@ import (
 
 func main() {
 	reportId := "reportId_example" // string | Идентификатор отчета или документа, который вы получили после запуска генерации. 
+	sourceType := openapiclient.SourceType("SELLER") // SourceType | Признак типа кабинета, от имени которого вызывается метод: {% if audience == \"advertiser\" %}  - `ADVERTISER` — рекламодатель.  {% note info \"Обязательно указывайте sourceType=ADVERTISER в каждом запросе.\" %}     {% endnote %}  {% endif %}  {% if audience == \"partner\" %}  - `SELLER` — продавец.  {% endif %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.ExpressAPI.GetReportInfo(context.Background(), reportId).Execute()
+	resp, r, err := apiClient.ExpressAPI.GetReportInfo(context.Background(), reportId).SourceType(sourceType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `ExpressAPI.GetReportInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -5951,6 +5962,7 @@ Other parameters are passed through a pointer to a apiGetReportInfoRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **sourceType** | [**SourceType**](SourceType.md) | Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  | 
 
 ### Return type
 

@@ -720,6 +720,7 @@ docs/SkipGoodsFeedbackReactionRequest.md
 docs/SkuBidItemDTO.md
 docs/SkuBidRecommendationItemDTO.md
 docs/SortOrderType.md
+docs/SourceType.md
 docs/StatisticsAttributionType.md
 docs/StocksAPI.md
 docs/SubmitReturnDecisionRequest.md
@@ -1465,6 +1466,7 @@ model_skip_goods_feedback_reaction_request.go
 model_sku_bid_item_dto.go
 model_sku_bid_recommendation_item_dto.go
 model_sort_order_type.go
+model_source_type.go
 model_statistics_attribution_type.go
 model_submit_return_decision_request.go
 model_supply_request_counters_dto.go

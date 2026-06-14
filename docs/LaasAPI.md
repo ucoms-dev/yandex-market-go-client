@@ -694,7 +694,7 @@ Name | Type | Description  | Notes
 
 ## GenerateMarketingDetalizationReport
 
-> GenerateReportResponse GenerateMarketingDetalizationReport(ctx, businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).Execute()
+> GenerateReportResponse GenerateMarketingDetalizationReport(ctx, businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).SourceType(sourceType).Execute()
 
 Отчет по счету маркетинга
 
@@ -716,10 +716,11 @@ func main() {
 	businessId := int64(789) // int64 | Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) 
 	generateMarketingDetalizationRequest := *openapiclient.NewGenerateMarketingDetalizationRequest(*openapiclient.NewClosureDocumentsMonthOfYearDTO(int32(2025), int32(12))) // GenerateMarketingDetalizationRequest | 
 	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	sourceType := openapiclient.SourceType("SELLER") // SourceType | Признак типа кабинета, от имени которого вызывается метод: {% if audience == \"advertiser\" %}  - `ADVERTISER` — рекламодатель.  {% note info \"Обязательно указывайте sourceType=ADVERTISER в каждом запросе.\" %}     {% endnote %}  {% endif %}  {% if audience == \"partner\" %}  - `SELLER` — продавец.  {% endif %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LaasAPI.GenerateMarketingDetalizationReport(context.Background(), businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).Execute()
+	resp, r, err := apiClient.LaasAPI.GenerateMarketingDetalizationReport(context.Background(), businessId).GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest).Format(format).SourceType(sourceType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.GenerateMarketingDetalizationReport``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -747,6 +748,7 @@ Name | Type | Description  | Notes
 
  **generateMarketingDetalizationRequest** | [**GenerateMarketingDetalizationRequest**](GenerateMarketingDetalizationRequest.md) |  | 
  **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **sourceType** | [**SourceType**](SourceType.md) | Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  | 
 
 ### Return type
 
@@ -2658,7 +2660,7 @@ Other parameters are passed through a pointer to a apiGetRegionsCodesRequest str
 
 ## GetReportInfo
 
-> GetReportInfoResponse GetReportInfo(ctx, reportId).Execute()
+> GetReportInfoResponse GetReportInfo(ctx, reportId).SourceType(sourceType).Execute()
 
 Получение заданного отчета или документа
 
@@ -2678,10 +2680,11 @@ import (
 
 func main() {
 	reportId := "reportId_example" // string | Идентификатор отчета или документа, который вы получили после запуска генерации. 
+	sourceType := openapiclient.SourceType("SELLER") // SourceType | Признак типа кабинета, от имени которого вызывается метод: {% if audience == \"advertiser\" %}  - `ADVERTISER` — рекламодатель.  {% note info \"Обязательно указывайте sourceType=ADVERTISER в каждом запросе.\" %}     {% endnote %}  {% endif %}  {% if audience == \"partner\" %}  - `SELLER` — продавец.  {% endif %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
-	resp, r, err := apiClient.LaasAPI.GetReportInfo(context.Background(), reportId).Execute()
+	resp, r, err := apiClient.LaasAPI.GetReportInfo(context.Background(), reportId).SourceType(sourceType).Execute()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.GetReportInfo``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -2707,6 +2710,7 @@ Other parameters are passed through a pointer to a apiGetReportInfoRequest struc
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **sourceType** | [**SourceType**](SourceType.md) | Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  | 
 
 ### Return type
 

@@ -1892,6 +1892,7 @@ type LaasAPIGenerateMarketingDetalizationReportRequest struct {
 	businessId                           int64
 	generateMarketingDetalizationRequest *GenerateMarketingDetalizationRequest
 	format                               *ReportFormatType
+	sourceType                           *SourceType
 }
 
 func (r LaasAPIGenerateMarketingDetalizationReportRequest) GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest GenerateMarketingDetalizationRequest) LaasAPIGenerateMarketingDetalizationReportRequest {
@@ -1902,6 +1903,12 @@ func (r LaasAPIGenerateMarketingDetalizationReportRequest) GenerateMarketingDeta
 // Формат отчета или документа.
 func (r LaasAPIGenerateMarketingDetalizationReportRequest) Format(format ReportFormatType) LaasAPIGenerateMarketingDetalizationReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r LaasAPIGenerateMarketingDetalizationReportRequest) SourceType(sourceType SourceType) LaasAPIGenerateMarketingDetalizationReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -1969,6 +1976,9 @@ func (a *LaasAPIService) GenerateMarketingDetalizationReportExecute(r LaasAPIGen
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -7771,6 +7781,13 @@ type LaasAPIGetReportInfoRequest struct {
 	ctx        context.Context
 	ApiService *LaasAPIService
 	reportId   string
+	sourceType *SourceType
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r LaasAPIGetReportInfoRequest) SourceType(sourceType SourceType) LaasAPIGetReportInfoRequest {
+	r.sourceType = &sourceType
+	return r
 }
 
 func (r LaasAPIGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
@@ -7829,6 +7846,9 @@ func (a *LaasAPIService) GetReportInfoExecute(r LaasAPIGetReportInfoRequest) (*G
 		return localVarReturnValue, nil, reportError("reportId must have less than 255 elements")
 	}
 
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

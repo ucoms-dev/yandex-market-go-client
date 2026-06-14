@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// OfferCampaignStatusType Статус товара:  * `PUBLISHED` — Готов к продаже. * `CHECKING` — На проверке. * `DISABLED_BY_PARTNER` — Скрыт вами. * `REJECTED_BY_MARKET` — Отклонен. * `DISABLED_AUTOMATICALLY` — Исправьте ошибки. * `CREATING_CARD` — Создается карточка. * `NO_CARD` — Нужна карточка. * `NO_STOCKS` — Нет на складе. * `ARCHIVED` — В архиве.  [Что обозначает каждый из статусов](https://yandex.ru/support/marketplace/assortment/add/statuses.html)
+// OfferCampaignStatusType Статус товара:  * `PUBLISHED` — Готов к продаже. * `CHECKING` — На проверке. * `DISABLED_BY_PARTNER` — Скрыт вами. * `REJECTED_BY_MARKET` — Отклонен. * `DISABLED_AUTOMATICALLY` — Исправьте ошибки. * `CREATING_CARD` — Создается карточка. * `NO_CARD` — Нужна карточка. * `NO_STOCKS` — Нет на складе. * `ARCHIVED` — В архиве. * `READY_FOR_PUBLICATION` — Магазин в процессе подключения.  [Что обозначает каждый из статусов](https://yandex.ru/support/marketplace/assortment/add/statuses.html)
 type OfferCampaignStatusType string
 
 // List of OfferCampaignStatusType
@@ -29,6 +29,7 @@ const (
 	OFFERCAMPAIGNSTATUSTYPE_NO_CARD                OfferCampaignStatusType = "NO_CARD"
 	OFFERCAMPAIGNSTATUSTYPE_NO_STOCKS              OfferCampaignStatusType = "NO_STOCKS"
 	OFFERCAMPAIGNSTATUSTYPE_ARCHIVED               OfferCampaignStatusType = "ARCHIVED"
+	OFFERCAMPAIGNSTATUSTYPE_READY_FOR_PUBLICATION  OfferCampaignStatusType = "READY_FOR_PUBLICATION"
 )
 
 // All allowed values of OfferCampaignStatusType enum
@@ -42,6 +43,7 @@ var AllowedOfferCampaignStatusTypeEnumValues = []OfferCampaignStatusType{
 	"NO_CARD",
 	"NO_STOCKS",
 	"ARCHIVED",
+	"READY_FOR_PUBLICATION",
 }
 
 func (v *OfferCampaignStatusType) UnmarshalJSON(src []byte) error {

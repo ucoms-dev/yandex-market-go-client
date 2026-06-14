@@ -2562,6 +2562,7 @@ type ExpressAPIGenerateBannersStatisticsReportRequest struct {
 	ApiService                       *ExpressAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
 	format                           *ReportFormatType
+	sourceType                       *SourceType
 }
 
 func (r ExpressAPIGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) ExpressAPIGenerateBannersStatisticsReportRequest {
@@ -2572,6 +2573,12 @@ func (r ExpressAPIGenerateBannersStatisticsReportRequest) GenerateBannersStatist
 // Формат отчета или документа.
 func (r ExpressAPIGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) ExpressAPIGenerateBannersStatisticsReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r ExpressAPIGenerateBannersStatisticsReportRequest) SourceType(sourceType SourceType) ExpressAPIGenerateBannersStatisticsReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -2639,6 +2646,9 @@ func (a *ExpressAPIService) GenerateBannersStatisticsReportExecute(r ExpressAPIG
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -2769,6 +2779,7 @@ type ExpressAPIGenerateBoostConsolidatedReportRequest struct {
 	ApiService                       *ExpressAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
 	format                           *ReportFormatType
+	sourceType                       *SourceType
 }
 
 func (r ExpressAPIGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) ExpressAPIGenerateBoostConsolidatedReportRequest {
@@ -2779,6 +2790,12 @@ func (r ExpressAPIGenerateBoostConsolidatedReportRequest) GenerateBoostConsolida
 // Формат отчета или документа.
 func (r ExpressAPIGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) ExpressAPIGenerateBoostConsolidatedReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r ExpressAPIGenerateBoostConsolidatedReportRequest) SourceType(sourceType SourceType) ExpressAPIGenerateBoostConsolidatedReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -2848,6 +2865,9 @@ func (a *ExpressAPIService) GenerateBoostConsolidatedReportExecute(r ExpressAPIG
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -4668,6 +4688,7 @@ type ExpressAPIGenerateMarketingDetalizationReportRequest struct {
 	businessId                           int64
 	generateMarketingDetalizationRequest *GenerateMarketingDetalizationRequest
 	format                               *ReportFormatType
+	sourceType                           *SourceType
 }
 
 func (r ExpressAPIGenerateMarketingDetalizationReportRequest) GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest GenerateMarketingDetalizationRequest) ExpressAPIGenerateMarketingDetalizationReportRequest {
@@ -4678,6 +4699,12 @@ func (r ExpressAPIGenerateMarketingDetalizationReportRequest) GenerateMarketingD
 // Формат отчета или документа.
 func (r ExpressAPIGenerateMarketingDetalizationReportRequest) Format(format ReportFormatType) ExpressAPIGenerateMarketingDetalizationReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r ExpressAPIGenerateMarketingDetalizationReportRequest) SourceType(sourceType SourceType) ExpressAPIGenerateMarketingDetalizationReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -4745,6 +4772,9 @@ func (a *ExpressAPIService) GenerateMarketingDetalizationReportExecute(r Express
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -5911,6 +5941,7 @@ type ExpressAPIGenerateShelfsStatisticsReportRequest struct {
 	ApiService                      *ExpressAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
 	format                          *ReportFormatType
+	sourceType                      *SourceType
 }
 
 func (r ExpressAPIGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) ExpressAPIGenerateShelfsStatisticsReportRequest {
@@ -5921,6 +5952,12 @@ func (r ExpressAPIGenerateShelfsStatisticsReportRequest) GenerateShelfsStatistic
 // Формат отчета или документа.
 func (r ExpressAPIGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) ExpressAPIGenerateShelfsStatisticsReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r ExpressAPIGenerateShelfsStatisticsReportRequest) SourceType(sourceType SourceType) ExpressAPIGenerateShelfsStatisticsReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -5988,6 +6025,9 @@ func (a *ExpressAPIService) GenerateShelfsStatisticsReportExecute(r ExpressAPIGe
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -6118,6 +6158,7 @@ type ExpressAPIGenerateShowsBoostReportRequest struct {
 	ApiService                *ExpressAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
 	format                    *ReportFormatType
+	sourceType                *SourceType
 }
 
 func (r ExpressAPIGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) ExpressAPIGenerateShowsBoostReportRequest {
@@ -6128,6 +6169,12 @@ func (r ExpressAPIGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(gen
 // Формат отчета или документа.
 func (r ExpressAPIGenerateShowsBoostReportRequest) Format(format ReportFormatType) ExpressAPIGenerateShowsBoostReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r ExpressAPIGenerateShowsBoostReportRequest) SourceType(sourceType SourceType) ExpressAPIGenerateShowsBoostReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -6195,6 +6242,9 @@ func (a *ExpressAPIService) GenerateShowsBoostReportExecute(r ExpressAPIGenerate
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -17392,6 +17442,13 @@ type ExpressAPIGetReportInfoRequest struct {
 	ctx        context.Context
 	ApiService *ExpressAPIService
 	reportId   string
+	sourceType *SourceType
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r ExpressAPIGetReportInfoRequest) SourceType(sourceType SourceType) ExpressAPIGetReportInfoRequest {
+	r.sourceType = &sourceType
+	return r
 }
 
 func (r ExpressAPIGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
@@ -17450,6 +17507,9 @@ func (a *ExpressAPIService) GetReportInfoExecute(r ExpressAPIGetReportInfoReques
 		return localVarReturnValue, nil, reportError("reportId must have less than 255 elements")
 	}
 
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

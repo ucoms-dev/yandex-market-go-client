@@ -2562,6 +2562,7 @@ type FbyAPIGenerateBannersStatisticsReportRequest struct {
 	ApiService                       *FbyAPIService
 	generateBannersStatisticsRequest *GenerateBannersStatisticsRequest
 	format                           *ReportFormatType
+	sourceType                       *SourceType
 }
 
 func (r FbyAPIGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsRequest(generateBannersStatisticsRequest GenerateBannersStatisticsRequest) FbyAPIGenerateBannersStatisticsReportRequest {
@@ -2572,6 +2573,12 @@ func (r FbyAPIGenerateBannersStatisticsReportRequest) GenerateBannersStatisticsR
 // Формат отчета или документа.
 func (r FbyAPIGenerateBannersStatisticsReportRequest) Format(format ReportFormatType) FbyAPIGenerateBannersStatisticsReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r FbyAPIGenerateBannersStatisticsReportRequest) SourceType(sourceType SourceType) FbyAPIGenerateBannersStatisticsReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -2639,6 +2646,9 @@ func (a *FbyAPIService) GenerateBannersStatisticsReportExecute(r FbyAPIGenerateB
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -2956,6 +2966,7 @@ type FbyAPIGenerateBoostConsolidatedReportRequest struct {
 	ApiService                       *FbyAPIService
 	generateBoostConsolidatedRequest *GenerateBoostConsolidatedRequest
 	format                           *ReportFormatType
+	sourceType                       *SourceType
 }
 
 func (r FbyAPIGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedRequest(generateBoostConsolidatedRequest GenerateBoostConsolidatedRequest) FbyAPIGenerateBoostConsolidatedReportRequest {
@@ -2966,6 +2977,12 @@ func (r FbyAPIGenerateBoostConsolidatedReportRequest) GenerateBoostConsolidatedR
 // Формат отчета или документа.
 func (r FbyAPIGenerateBoostConsolidatedReportRequest) Format(format ReportFormatType) FbyAPIGenerateBoostConsolidatedReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r FbyAPIGenerateBoostConsolidatedReportRequest) SourceType(sourceType SourceType) FbyAPIGenerateBoostConsolidatedReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -3035,6 +3052,9 @@ func (a *FbyAPIService) GenerateBoostConsolidatedReportExecute(r FbyAPIGenerateB
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -5261,6 +5281,7 @@ type FbyAPIGenerateMarketingDetalizationReportRequest struct {
 	businessId                           int64
 	generateMarketingDetalizationRequest *GenerateMarketingDetalizationRequest
 	format                               *ReportFormatType
+	sourceType                           *SourceType
 }
 
 func (r FbyAPIGenerateMarketingDetalizationReportRequest) GenerateMarketingDetalizationRequest(generateMarketingDetalizationRequest GenerateMarketingDetalizationRequest) FbyAPIGenerateMarketingDetalizationReportRequest {
@@ -5271,6 +5292,12 @@ func (r FbyAPIGenerateMarketingDetalizationReportRequest) GenerateMarketingDetal
 // Формат отчета или документа.
 func (r FbyAPIGenerateMarketingDetalizationReportRequest) Format(format ReportFormatType) FbyAPIGenerateMarketingDetalizationReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r FbyAPIGenerateMarketingDetalizationReportRequest) SourceType(sourceType SourceType) FbyAPIGenerateMarketingDetalizationReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -5338,6 +5365,9 @@ func (a *FbyAPIService) GenerateMarketingDetalizationReportExecute(r FbyAPIGener
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -5885,6 +5915,7 @@ type FbyAPIGenerateShelfsStatisticsReportRequest struct {
 	ApiService                      *FbyAPIService
 	generateShelfsStatisticsRequest *GenerateShelfsStatisticsRequest
 	format                          *ReportFormatType
+	sourceType                      *SourceType
 }
 
 func (r FbyAPIGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsRequest(generateShelfsStatisticsRequest GenerateShelfsStatisticsRequest) FbyAPIGenerateShelfsStatisticsReportRequest {
@@ -5895,6 +5926,12 @@ func (r FbyAPIGenerateShelfsStatisticsReportRequest) GenerateShelfsStatisticsReq
 // Формат отчета или документа.
 func (r FbyAPIGenerateShelfsStatisticsReportRequest) Format(format ReportFormatType) FbyAPIGenerateShelfsStatisticsReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r FbyAPIGenerateShelfsStatisticsReportRequest) SourceType(sourceType SourceType) FbyAPIGenerateShelfsStatisticsReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -5962,6 +5999,9 @@ func (a *FbyAPIService) GenerateShelfsStatisticsReportExecute(r FbyAPIGenerateSh
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -6092,6 +6132,7 @@ type FbyAPIGenerateShowsBoostReportRequest struct {
 	ApiService                *FbyAPIService
 	generateShowsBoostRequest *GenerateShowsBoostRequest
 	format                    *ReportFormatType
+	sourceType                *SourceType
 }
 
 func (r FbyAPIGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generateShowsBoostRequest GenerateShowsBoostRequest) FbyAPIGenerateShowsBoostReportRequest {
@@ -6102,6 +6143,12 @@ func (r FbyAPIGenerateShowsBoostReportRequest) GenerateShowsBoostRequest(generat
 // Формат отчета или документа.
 func (r FbyAPIGenerateShowsBoostReportRequest) Format(format ReportFormatType) FbyAPIGenerateShowsBoostReportRequest {
 	r.format = &format
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r FbyAPIGenerateShowsBoostReportRequest) SourceType(sourceType SourceType) FbyAPIGenerateShowsBoostReportRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -6169,6 +6216,9 @@ func (a *FbyAPIService) GenerateShowsBoostReportExecute(r FbyAPIGenerateShowsBoo
 		var defaultValue ReportFormatType = "FILE"
 		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
 		r.format = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -16577,6 +16627,13 @@ type FbyAPIGetReportInfoRequest struct {
 	ctx        context.Context
 	ApiService *FbyAPIService
 	reportId   string
+	sourceType *SourceType
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}
+func (r FbyAPIGetReportInfoRequest) SourceType(sourceType SourceType) FbyAPIGetReportInfoRequest {
+	r.sourceType = &sourceType
+	return r
 }
 
 func (r FbyAPIGetReportInfoRequest) Execute() (*GetReportInfoResponse, *http.Response, error) {
@@ -16635,6 +16692,9 @@ func (a *FbyAPIService) GetReportInfoExecute(r FbyAPIGetReportInfoRequest) (*Get
 		return localVarReturnValue, nil, reportError("reportId must have less than 255 elements")
 	}
 
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 

@@ -15,19 +15,21 @@ import (
 	"fmt"
 )
 
-// GoodsFeedbackCommentAuthorType Тип автора:  * `USER` — пользователь. * `BUSINESS` — кабинет.
+// GoodsFeedbackCommentAuthorType Тип автора:  * `USER` — пользователь. * `BUSINESS` — кабинет. * `BRAND` — бренд.
 type GoodsFeedbackCommentAuthorType string
 
 // List of GoodsFeedbackCommentAuthorType
 const (
 	GOODSFEEDBACKCOMMENTAUTHORTYPE_USER     GoodsFeedbackCommentAuthorType = "USER"
 	GOODSFEEDBACKCOMMENTAUTHORTYPE_BUSINESS GoodsFeedbackCommentAuthorType = "BUSINESS"
+	GOODSFEEDBACKCOMMENTAUTHORTYPE_BRAND    GoodsFeedbackCommentAuthorType = "BRAND"
 )
 
 // All allowed values of GoodsFeedbackCommentAuthorType enum
 var AllowedGoodsFeedbackCommentAuthorTypeEnumValues = []GoodsFeedbackCommentAuthorType{
 	"USER",
 	"BUSINESS",
+	"BRAND",
 }
 
 func (v *GoodsFeedbackCommentAuthorType) UnmarshalJSON(src []byte) error {
