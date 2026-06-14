@@ -1,4 +1,5 @@
 post:
+  x-resource-id: 293
   tags:
     - reports
     - fby
@@ -12,17 +13,14 @@ post:
     - finance-and-accounting
   x-resource-limit-config:
     path: resp
-    amount: 100
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 1
-        period: minutes
-        period-duration: 2
-      medium:
-        amount: 1
-        period: minutes
-        period-duration: 1
+    none:
+      amount: 1
+      period: minutes
+      period-duration: 2
+    medium:
+      amount: 1
+      period: minutes
+      period-duration: 1
   x-apphost:
     domain: FINANCE
     enabled: false
@@ -32,6 +30,7 @@ post:
   parameters:
     - $ref: ../components/parameters/BusinessId.yaml
     - $ref: ../components/parameters/ReportFormat.yaml
+    - $ref: ../components/parameters/SourceType.yaml
   requestBody:
     required: true
     content:

@@ -1,4 +1,5 @@
 post:
+  x-resource-id: 241
   tags:
     - reports
     - fby
@@ -11,17 +12,14 @@ post:
     - communication
   x-resource-limit-config:
     path: resp
-    amount: 10
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 1
-        period: minutes
-        period-duration: 10
-      medium:
-        amount: 1
-        period: minutes
-        period-duration: 6
+    none:
+      amount: 1
+      period: minutes
+      period-duration: 10
+    medium:
+      amount: 1
+      period: minutes
+      period-duration: 6
   x-restrictions:
     - market-yandex-go
     - urbanads

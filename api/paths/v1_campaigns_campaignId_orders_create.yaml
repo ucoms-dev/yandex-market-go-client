@@ -1,4 +1,5 @@
 post:
+  x-resource-id: 269
   tags:
     - orders
     - laas
@@ -7,17 +8,14 @@ post:
     - inventory-and-order-processing
   x-resource-limit-config:
     path: resp
-    amount: 10000
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 10000
-        period: hours
-        period-duration: 1
-      medium:
-        amount: 10000
-        period: hours
-        period-duration: 1
+    none:
+      amount: 10000
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 10000
+      period: hours
+      period-duration: 1
   x-restrictions:
     - market-yandex-go
     - urbanads
@@ -43,13 +41,7 @@ post:
           schema:
             $ref: ../components/schemas/CreateOrderResponse.yaml
     '400':
-      description: >
-        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
-        заказами](../../concepts/error-codes#orders)
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+      $ref: ../components/responses/400Orders.yaml
     '401':
       $ref: ../components/responses/401.yaml
     '403':

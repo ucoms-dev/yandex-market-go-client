@@ -1,4 +1,5 @@
 get:
+  x-resource-id: 194
   tags:
     - warehouses
     - fbs
@@ -13,17 +14,14 @@ get:
     - urbanads
   x-resource-limit-config:
     path: resp
-    amount: 100
-    period: minutes
-    tariff-resource-limits:
-      none:
-        amount: 100
-        period: minutes
-        period-duration: 1
-      medium:
-        amount: 100
-        period: minutes
-        period-duration: 1
+    none:
+      amount: 100
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 100
+      period: minutes
+      period-duration: 1
   x-apphost:
     domain: LOGISTICS
     enabled: false
@@ -70,6 +68,7 @@ get:
     '500':
       $ref: ../components/responses/500.yaml
 post:
+  x-resource-id: 243
   tags:
     - warehouses
     - fbs
@@ -84,17 +83,14 @@ post:
     - urbanads
   x-resource-limit-config:
     path: resp
-    amount: 1000
-    period: hours
-    tariff-resource-limits:
-      none:
-        amount: 100
-        period: hours
-        period-duration: 1
-      medium:
-        amount: 100
-        period: hours
-        period-duration: 1
+    none:
+      amount: 100
+      period: hours
+      period-duration: 1
+    medium:
+      amount: 100
+      period: hours
+      period-duration: 1
   x-apphost:
     domain: LOGISTICS
     enabled: false

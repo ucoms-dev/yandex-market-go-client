@@ -1,4 +1,5 @@
 put:
+  x-resource-id: 141
   tags:
     - stocks
     - fbs
@@ -11,17 +12,14 @@ put:
     - urbanads
   x-resource-limit-config:
     path: req.skus
-    amount: 100000
-    period: minutes
-    tariff-resource-limits:
-      none:
-        amount: 100000
-        period: minutes
-        period-duration: 1
-      medium:
-        amount: 100000
-        period: minutes
-        period-duration: 1
+    none:
+      amount: 100000
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: minutes
+      period-duration: 1
   x-apphost:
     domain: LOGISTICS
     enabled: false
@@ -62,19 +60,9 @@ put:
           $ref: ../components/schemas/UpdateStocksRequest.yaml
   responses:
     '200':
-      description: Пустой ответ.
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/EmptyApiResponse.yaml
+      $ref: ../components/responses/200.yaml
     '400':
-      description: >
-        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
-        остатками](../../concepts/error-codes#stocks)
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+      $ref: ../components/responses/400Stocks.yaml
     '401':
       $ref: ../components/responses/401.yaml
     '403':
@@ -86,6 +74,7 @@ put:
     '500':
       $ref: ../components/responses/500.yaml
 post:
+  x-resource-id: 201
   tags:
     - stocks
     - fby
@@ -102,17 +91,14 @@ post:
     - urbanads
   x-resource-limit-config:
     path: resp.result.warehouses.offers.offerId
-    amount: 100000
-    period: minutes
-    tariff-resource-limits:
-      none:
-        amount: 100000
-        period: minutes
-        period-duration: 1
-      medium:
-        amount: 100000
-        period: minutes
-        period-duration: 1
+    none:
+      amount: 100000
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 100000
+      period: minutes
+      period-duration: 1
   x-apphost:
     domain: LOGISTICS
     enabled: false
@@ -137,7 +123,7 @@ post:
           schema:
             $ref: ../components/schemas/GetWarehouseStocksResponse.yaml
     '400':
-      $ref: ../components/responses/400.yaml
+      $ref: ../components/responses/400Stocks.yaml
     '401':
       $ref: ../components/responses/401.yaml
     '403':

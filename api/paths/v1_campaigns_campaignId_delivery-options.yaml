@@ -1,4 +1,5 @@
 post:
+  x-resource-id: 274
   tags:
     - delivery-options
     - laas
@@ -11,18 +12,15 @@ post:
     - inventory-and-order-processing:read-only
   x-resource-limit-config:
     path: resp
-    amount: 1000
-    period: minutes
     parallel-limit-value: 10
-    tariff-resource-limits:
-      none:
-        amount: 1000
-        period: minutes
-        period-duration: 1
-      medium:
-        amount: 1000
-        period: minutes
-        period-duration: 1
+    none:
+      amount: 1000
+      period: minutes
+      period-duration: 1
+    medium:
+      amount: 1000
+      period: minutes
+      period-duration: 1
   x-restrictions:
     - market-yandex-go
     - urbanads
@@ -62,13 +60,7 @@ post:
           schema:
             $ref: ../components/schemas/GetDeliveryOptionsResponse.yaml
     '400':
-      description: >
-        Запрос содержит неправильные данные. [Подробнее об ошибках при работе с
-        заказами](../../concepts/error-codes#orders)
-      content:
-        application/json:
-          schema:
-            $ref: ../components/schemas/ApiClientDataErrorResponse.yaml
+      $ref: ../components/responses/400Orders.yaml
     '401':
       $ref: ../components/responses/401.yaml
     '403':
