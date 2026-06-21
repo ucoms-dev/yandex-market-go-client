@@ -42,7 +42,7 @@ GetBusinessSettings Настройки кабинета
 {% include notitle [limit](../../_auto/method_limits/getBusinessSettings.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return BusinessesAPIGetBusinessSettingsRequest
 */
 func (a *BusinessesAPIService) GetBusinessSettings(ctx context.Context, businessId int64) BusinessesAPIGetBusinessSettingsRequest {

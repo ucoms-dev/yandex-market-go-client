@@ -72,7 +72,7 @@ GetGoodsQuestionAnswers Получение ответов на вопрос
 {% include notitle [limit](../../_auto/method_limits/getGoodsQuestionAnswers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return GoodsQuestionsAPIGetGoodsQuestionAnswersRequest
 */
 func (a *GoodsQuestionsAPIService) GetGoodsQuestionAnswers(ctx context.Context, businessId int64) GoodsQuestionsAPIGetGoodsQuestionAnswersRequest {
@@ -307,7 +307,7 @@ GetGoodsQuestions Получение вопросов о товарах прод
 {% include notitle [limit](../../_auto/method_limits/getGoodsQuestions.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return GoodsQuestionsAPIGetGoodsQuestionsRequest
 */
 func (a *GoodsQuestionsAPIService) GetGoodsQuestions(ctx context.Context, businessId int64) GoodsQuestionsAPIGetGoodsQuestionsRequest {
@@ -515,7 +515,7 @@ UpdateGoodsQuestionTextEntity Создание, изменение и удале
 {% include notitle [limit](../../_auto/method_limits/updateGoodsQuestionTextEntity.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return GoodsQuestionsAPIUpdateGoodsQuestionTextEntityRequest
 */
 func (a *GoodsQuestionsAPIService) UpdateGoodsQuestionTextEntity(ctx context.Context, businessId int64) GoodsQuestionsAPIUpdateGoodsQuestionTextEntityRequest {

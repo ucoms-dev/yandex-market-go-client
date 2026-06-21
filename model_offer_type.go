@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// OfferType Особый тип товара:  * `DEFAULT` — товары, для которых вы передавали особый тип ранее и хотите убрать его. * `MEDICINE` — лекарства. * `BOOK` — бумажные и электронные книги. * `AUDIOBOOK` — аудиокниги. * `ARTIST_TITLE` — музыкальная и видеопродукция. * `ON_DEMAND` — товары на заказ. * `ALCOHOL` — алкоголь.  {% note info \"Если ваш товар — книга\" %}  Укажите год издания в характеристиках товара. [Подробнее о параметре](../../reference/business-assortment/updateOfferMappings.md#offerparamdto)  {% endnote %}
+// OfferType Особый тип товара:  * `DEFAULT` — товары, для которых вы передавали особый тип ранее и хотите убрать его. * `MEDICINE` — лекарства. * `BOOK` — бумажные и электронные книги. * `AUDIOBOOK` — аудиокниги. * `ARTIST_TITLE` — музыкальная и видеопродукция. * `ON_DEMAND` — товары на заказ. * `ALCOHOL` — алкоголь.  {% note info \"Если ваш товар — книга\" %}  Укажите год издания в характеристиках товара. [Подробнее о параметре](../../reference/business-offer-mappings/updateOfferMappings.md#offerparamdto)  {% endnote %}
 type OfferType string
 
 // List of OfferType

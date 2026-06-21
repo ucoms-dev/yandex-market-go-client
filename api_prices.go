@@ -64,7 +64,7 @@ GetDefaultPrices Просмотр цен на указанные товары в
 {% include notitle [limit](../../_auto/method_limits/getDefaultPrices.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return PricesAPIGetDefaultPricesRequest
 */
 func (a *PricesAPIService) GetDefaultPrices(ctx context.Context, businessId int64) PricesAPIGetDefaultPricesRequest {
@@ -521,7 +521,7 @@ GetPricesByOfferIds Просмотр цен на указанные товары
 
 Используйте этот метод, только если в кабинете установлены уникальные цены в отдельных магазинах.
 
-Для просмотра цен, которые действуют во всех магазинах, используйте [POST v2/businesses/{businessId}/offer-mappings](../../reference/business-assortment/getOfferMappings.md).
+Для просмотра цен, которые действуют во всех магазинах, используйте [POST v2/businesses/{businessId}/offer-mappings](../../reference/business-offer-mappings/getOfferMappings.md).
 
 {% endnote %}
 
@@ -731,9 +731,9 @@ UpdateBusinessPrices Установка цен на товары для всех
 
 {% include notitle [access](../../_auto/method_scopes/updateBusinessPrices.md) %}
 
-Устанавливает цены, которые действуют во всех магазинах. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST v2/businesses/{businessId}/offers/recommendations](../../reference/business-assortment/getOfferRecommendations.md).
+Устанавливает цены, которые действуют во всех магазинах. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST v2/businesses/{businessId}/offers/recommendations](../../reference/offers/getOfferRecommendations.md).
 
-При необходимости передавайте НДС с помощью параметра `vat` в запросе [POST v2/campaigns/{campaignId}/offers/update](../../reference/assortment/updateCampaignOffers.md).
+При необходимости передавайте НДС с помощью параметра `vat` в запросе [POST v2/campaigns/{campaignId}/offers/update](../../reference/offers/updateCampaignOffers.md).
 
 {% note info "Данные в каталоге обновляются не мгновенно" %}
 
@@ -744,7 +744,7 @@ UpdateBusinessPrices Установка цен на товары для всех
 {% include notitle [limit](../../_auto/method_limits/updateBusinessPrices.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return PricesAPIUpdateBusinessPricesRequest
 */
 func (a *PricesAPIService) UpdateBusinessPrices(ctx context.Context, businessId int64) PricesAPIUpdateBusinessPricesRequest {
@@ -951,13 +951,13 @@ UpdatePrices Установка цен на товары в конкретном
 
 {% include notitle [access](../../_auto/method_scopes/updatePrices.md) %}
 
-Устанавливает цены на товары в магазине. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST v2/businesses/{businessId}/offers/recommendations](../../reference/business-assortment/getOfferRecommendations.md).
+Устанавливает цены на товары в магазине. Чтобы получить рекомендации Маркета, касающиеся цен, выполните запрос [POST v2/businesses/{businessId}/offers/recommendations](../../reference/offers/getOfferRecommendations.md).
 
 {% note warning "Метод только для отдельных магазинов" %}
 
 Вам доступен этот метод, если в кабинете продавца на Маркете есть возможность установить уникальные цены в отдельных магазинах. Как это проверить — в методе [POST v2/businesses/{businessId}/settings](../../reference/businesses/getBusinessSettings.md) в параметре `onlyDefaultPrice` возвращается значение `false`.
 
-В ином случае используйте метод управления ценами, которые действуют во всех магазинах, — [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/business-assortment/updateBusinessPrices.md).
+В ином случае используйте метод управления ценами, которые действуют во всех магазинах, — [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/prices/updateBusinessPrices.md).
 
 {% endnote %}
 

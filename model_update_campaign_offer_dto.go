@@ -23,9 +23,7 @@ var _ MappedNullable = &UpdateCampaignOfferDTO{}
 type UpdateCampaignOfferDTO struct {
 	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	OfferId string `json:"offerId" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
-	// Deprecated
-	Quantum *QuantumDTO `json:"quantum,omitempty"`
-	// {% note warning \"Вместо него используйте методы скрытия товаров с витрины\" %}  * [GET v2/campaigns/{campaignId}/hidden-offers](../../reference/assortment/getHiddenOffers.md) — просмотр скрытых товаров; * [POST v2/campaigns/{campaignId}/hidden-offers](../../reference/assortment/addHiddenOffers.md) — скрытие товаров; * [POST v2/campaigns/{campaignId}/hidden-offers/delete](../../reference/assortment/deleteHiddenOffers.md) — возобновление показа.  {% endnote %}  Есть ли товар в продаже.
+	// {% note warning \"Вместо него используйте методы скрытия товаров с витрины\" %}  * [GET v2/campaigns/{campaignId}/hidden-offers](../../reference/hidden-offers/getHiddenOffers.md) — просмотр скрытых товаров; * [POST v2/campaigns/{campaignId}/hidden-offers](../../reference/hidden-offers/addHiddenOffers.md) — скрытие товаров; * [POST v2/campaigns/{campaignId}/hidden-offers/delete](../../reference/hidden-offers/deleteHiddenOffers.md) — возобновление показа.  {% endnote %}  Есть ли товар в продаже.
 	// Deprecated
 	Available *bool `json:"available,omitempty"`
 	// Идентификатор НДС, применяемый для товара:  * `2` — НДС 10%. Например, используется при реализации отдельных продовольственных и медицинских товаров. * `5` — НДС 0%. Например, используется при продаже товаров, вывезенных в таможенной процедуре экспорта, или при оказании услуг по международной перевозке товаров. * `6` — НДС не облагается, используется только для отдельных видов услуг. * `7` — НДС 20%. Основной НДС с 2019 года до 1 января 2026 года. При передаче автоматически заменяется на НДС 22% (14). С 1 июля 2026 года значение будет больше недоступно для передачи. * `10` — НДС 5%. НДС для упрощенной системы налогообложения (УСН). * `11` — НДС 7%. НДС для упрощенной системы налогообложения (УСН). * `14` — НДС 22%. Основной НДС с 1 января 2026 года.  Если параметр не указан, используется НДС, установленный в кабинете.  **Для продавцов :no-translate[Market Yandex Go]** недоступна передача и получение НДС.
@@ -74,41 +72,6 @@ func (o *UpdateCampaignOfferDTO) GetOfferIdOk() (*string, bool) {
 // SetOfferId sets field value
 func (o *UpdateCampaignOfferDTO) SetOfferId(v string) {
 	o.OfferId = v
-}
-
-// GetQuantum returns the Quantum field value if set, zero value otherwise.
-// Deprecated
-func (o *UpdateCampaignOfferDTO) GetQuantum() QuantumDTO {
-	if o == nil || IsNil(o.Quantum) {
-		var ret QuantumDTO
-		return ret
-	}
-	return *o.Quantum
-}
-
-// GetQuantumOk returns a tuple with the Quantum field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *UpdateCampaignOfferDTO) GetQuantumOk() (*QuantumDTO, bool) {
-	if o == nil || IsNil(o.Quantum) {
-		return nil, false
-	}
-	return o.Quantum, true
-}
-
-// HasQuantum returns a boolean if a field has been set.
-func (o *UpdateCampaignOfferDTO) HasQuantum() bool {
-	if o != nil && !IsNil(o.Quantum) {
-		return true
-	}
-
-	return false
-}
-
-// SetQuantum gets a reference to the given QuantumDTO and assigns it to the Quantum field.
-// Deprecated
-func (o *UpdateCampaignOfferDTO) SetQuantum(v QuantumDTO) {
-	o.Quantum = &v
 }
 
 // GetAvailable returns the Available field value if set, zero value otherwise.
@@ -189,9 +152,6 @@ func (o UpdateCampaignOfferDTO) MarshalJSON() ([]byte, error) {
 func (o UpdateCampaignOfferDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	toSerialize["offerId"] = o.OfferId
-	if !IsNil(o.Quantum) {
-		toSerialize["quantum"] = o.Quantum
-	}
 	if !IsNil(o.Available) {
 		toSerialize["available"] = o.Available
 	}

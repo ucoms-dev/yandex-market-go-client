@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Region** | Pointer to [**RegionDTO**](RegionDTO.md) |  | [optional] 
 **LogisticPointId** | Pointer to **int64** | Идентификатор пункта выдачи.  Его можно узнать с помощью метода [POST v1/businesses/{businessId}/logistics-points](../../reference/logistic-points/getLogisticPoints.md).  | [optional] 
 **OutletCode** | Pointer to **string** | Идентификатор пункта самовывоза, присвоенный магазином. | [optional] 
-**OutletStorageLimitDate** | Pointer to **string** | Дата, до которой заказ будет храниться в пункте выдачи. Возвращается, когда заказ переходит в статус &#x60;PICKUP&#x60;.  Один раз дату можно поменять с помощью метода [PUT v2/campaigns/{campaignId}/orders/{orderId}/delivery/storage-limit](../../reference/orders/updateOrderStorageLimit.md).  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | [optional] 
+**OutletStorageLimitDate** | Pointer to **string** | Дата, до которой заказ будет храниться в пункте выдачи. Возвращается, когда заказ переходит в статус &#x60;PICKUP&#x60;.  Один раз дату можно поменять с помощью метода [PUT v2/campaigns/{campaignId}/orders/{orderId}/delivery/storage-limit](../../reference/order-delivery/updateOrderStorageLimit.md).  Формат даты: &#x60;ГГГГ-ММ-ДД&#x60;.  | [optional] 
 
 ## Methods
 

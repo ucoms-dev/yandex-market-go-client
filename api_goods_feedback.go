@@ -27,10 +27,17 @@ type GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest struct {
 	ApiService                        *GoodsFeedbackAPIService
 	businessId                        int64
 	deleteGoodsFeedbackCommentRequest *DeleteGoodsFeedbackCommentRequest
+	sourceType                        *SourceType
 }
 
 func (r GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest) DeleteGoodsFeedbackCommentRequest(deleteGoodsFeedbackCommentRequest DeleteGoodsFeedbackCommentRequest) GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest {
 	r.deleteGoodsFeedbackCommentRequest = &deleteGoodsFeedbackCommentRequest
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}
+func (r GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest) SourceType(sourceType SourceType) GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -48,7 +55,7 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 {% include notitle [limit](../../_auto/method_limits/deleteGoodsFeedbackComment.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest
 */
 func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackComment(ctx context.Context, businessId int64) GoodsFeedbackAPIDeleteGoodsFeedbackCommentRequest {
@@ -88,6 +95,9 @@ func (a *GoodsFeedbackAPIService) DeleteGoodsFeedbackCommentExecute(r GoodsFeedb
 		return localVarReturnValue, nil, reportError("deleteGoodsFeedbackCommentRequest is required and must be specified")
 	}
 
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -230,6 +240,7 @@ type GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest struct {
 	getGoodsFeedbackCommentsRequest *GetGoodsFeedbackCommentsRequest
 	pageToken                       *string
 	limit                           *int32
+	sourceType                      *SourceType
 }
 
 func (r GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest) GetGoodsFeedbackCommentsRequest(getGoodsFeedbackCommentsRequest GetGoodsFeedbackCommentsRequest) GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest {
@@ -249,6 +260,12 @@ func (r GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest) Limit(limit int32) Good
 	return r
 }
 
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}
+func (r GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest) SourceType(sourceType SourceType) GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest {
+	r.sourceType = &sourceType
+	return r
+}
+
 func (r GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest) Execute() (*GetGoodsFeedbackCommentsResponse, *http.Response, error) {
 	return r.ApiService.GetGoodsFeedbackCommentsExecute(r)
 }
@@ -265,6 +282,8 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 Идентификатор родительского комментария `parentId` возвращается только для ответов на другие комментарии, но не для ответов на отзывы.
 
+{% if audience == "partner" %}
+
 {% note tip "Вы также можете настроить API-уведомления" %}
 
 Маркет отправит вам [запрос](../../push-notifications/reference/sendNotification.md), когда появится новый комментарий. А полную информацию о нем можно получить с помощью этого метода.
@@ -273,6 +292,8 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 {% endnote %}
 
+{% endif %}
+
 Результаты возвращаются постранично.
 
 Комментарии расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `pageToken`, если вы получали его ранее.
@@ -280,7 +301,7 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 {% include notitle [limit](../../_auto/method_limits/getGoodsFeedbackComments.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest
 */
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbackComments(ctx context.Context, businessId int64) GoodsFeedbackAPIGetGoodsFeedbackCommentsRequest {
@@ -329,6 +350,9 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbackCommentsExecute(r GoodsFeedbac
 		var defaultValue int32 = 25
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
@@ -517,7 +541,7 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 {% include notitle [limit](../../_auto/method_limits/getGoodsFeedbacks.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return GoodsFeedbackAPIGetGoodsFeedbacksRequest
 */
 func (a *GoodsFeedbackAPIService) GetGoodsFeedbacks(ctx context.Context, businessId int64) GoodsFeedbackAPIGetGoodsFeedbacksRequest {
@@ -699,15 +723,258 @@ func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksExecute(r GoodsFeedbackAPIGet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest struct {
+	ctx                             context.Context
+	ApiService                      *GoodsFeedbackAPIService
+	businessId                      int64
+	pageToken                       *string
+	limit                           *int32
+	sourceType                      *SourceType
+	getGoodsFeedbackUrbanadsRequest *GetGoodsFeedbackUrbanadsRequest
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest) PageToken(pageToken string) GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-param-description }}
+func (r GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest) Limit(limit int32) GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest {
+	r.limit = &limit
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}
+func (r GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest) SourceType(sourceType SourceType) GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest {
+	r.sourceType = &sourceType
+	return r
+}
+
+func (r GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest) GetGoodsFeedbackUrbanadsRequest(getGoodsFeedbackUrbanadsRequest GetGoodsFeedbackUrbanadsRequest) GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest {
+	r.getGoodsFeedbackUrbanadsRequest = &getGoodsFeedbackUrbanadsRequest
+	return r
+}
+
+func (r GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest) Execute() (*GetGoodsFeedbackUrbanadsResponse, *http.Response, error) {
+	return r.ApiService.GetGoodsFeedbacksUrbanadsExecute(r)
+}
+
+/*
+GetGoodsFeedbacksUrbanads Получение отзывов о товарах для рекламодателей
+
+{% include notitle [access](../../_auto/method_scopes/getGoodsFeedbacksUrbanads.md) %}
+
+Возвращает отзывы о товарах бренда по указанным фильтрам. **Исключение:** отзывы, которые удалили покупатели или Маркет.
+
+Результаты возвращаются постранично.
+
+Отзывы расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `pageToken`, если вы получали его ранее.
+
+{% include notitle [limit](../../_auto/method_limits/getGoodsFeedbacksUrbanads.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest
+*/
+func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksUrbanads(ctx context.Context, businessId int64) GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest {
+	return GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetGoodsFeedbackUrbanadsResponse
+func (a *GoodsFeedbackAPIService) GetGoodsFeedbacksUrbanadsExecute(r GoodsFeedbackAPIGetGoodsFeedbacksUrbanadsRequest) (*GetGoodsFeedbackUrbanadsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetGoodsFeedbackUrbanadsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "GoodsFeedbackAPIService.GetGoodsFeedbacksUrbanads")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/businesses/{businessId}/goods-feedback-advertiser"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 25
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getGoodsFeedbackUrbanadsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest struct {
 	ctx                              context.Context
 	ApiService                       *GoodsFeedbackAPIService
 	businessId                       int64
 	skipGoodsFeedbackReactionRequest *SkipGoodsFeedbackReactionRequest
+	sourceType                       *SourceType
 }
 
 func (r GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest) SkipGoodsFeedbackReactionRequest(skipGoodsFeedbackReactionRequest SkipGoodsFeedbackReactionRequest) GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest {
 	r.skipGoodsFeedbackReactionRequest = &skipGoodsFeedbackReactionRequest
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}
+func (r GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest) SourceType(sourceType SourceType) GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -725,7 +992,7 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 {% include notitle [limit](../../_auto/method_limits/skipGoodsFeedbacksReaction.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest
 */
 func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReaction(ctx context.Context, businessId int64) GoodsFeedbackAPISkipGoodsFeedbacksReactionRequest {
@@ -765,6 +1032,9 @@ func (a *GoodsFeedbackAPIService) SkipGoodsFeedbacksReactionExecute(r GoodsFeedb
 		return localVarReturnValue, nil, reportError("skipGoodsFeedbackReactionRequest is required and must be specified")
 	}
 
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 
@@ -905,10 +1175,17 @@ type GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest struct {
 	ApiService                        *GoodsFeedbackAPIService
 	businessId                        int64
 	updateGoodsFeedbackCommentRequest *UpdateGoodsFeedbackCommentRequest
+	sourceType                        *SourceType
 }
 
 func (r GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest) UpdateGoodsFeedbackCommentRequest(updateGoodsFeedbackCommentRequest UpdateGoodsFeedbackCommentRequest) GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest {
 	r.updateGoodsFeedbackCommentRequest = &updateGoodsFeedbackCommentRequest
+	return r
+}
+
+// Признак типа кабинета, от имени которого вызывается метод: {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  - &#x60;SELLER&#x60; — продавец.  {% endif %}  - &#x60;ADVERTISER&#x60; — рекламодатель.  {% if audience &#x3D;&#x3D; \&quot;advertiser\&quot; %}  {% note info \&quot;Обязательно указывайте sourceType&#x3D;ADVERTISER в каждом запросе.\&quot; %}     {% endnote %}  {% endif %}
+func (r GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest) SourceType(sourceType SourceType) GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest {
+	r.sourceType = &sourceType
 	return r
 }
 
@@ -940,7 +1217,7 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 {% include notitle [limit](../../_auto/method_limits/updateGoodsFeedbackComment.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest
 */
 func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackComment(ctx context.Context, businessId int64) GoodsFeedbackAPIUpdateGoodsFeedbackCommentRequest {
@@ -980,6 +1257,9 @@ func (a *GoodsFeedbackAPIService) UpdateGoodsFeedbackCommentExecute(r GoodsFeedb
 		return localVarReturnValue, nil, reportError("updateGoodsFeedbackCommentRequest is required and must be specified")
 	}
 
+	if r.sourceType != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "sourceType", r.sourceType, "", "")
+	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{"application/json"}
 

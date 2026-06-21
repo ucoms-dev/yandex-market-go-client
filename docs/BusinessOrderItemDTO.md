@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **Prices** | Pointer to [**ItemPriceDTO**](ItemPriceDTO.md) |  | [optional] 
 **Instances** | Pointer to [**[]OrderItemInstanceDTO**](OrderItemInstanceDTO.md) | Информация о маркировке единиц товара.  Возвращаются данные для маркировки, переданные в запросе:  * Для DBS — [PUT v2/campaigns/{campaignId}/orders/{orderId}/identifiers](../../reference/orders/provideOrderItemIdentifiers.md) или [PUT v2/campaigns/{campaignId}/orders/{orderId}/boxes](../../reference/orders/setOrderBoxLayout.md). * Для FBS и EXPRESS — [PUT v2/campaigns/{campaignId}/orders/{orderId}/boxes](../../reference/orders/setOrderBoxLayout.md).  Для FBY возвращаются коды маркировки, переданные во время поставки.  Если магазин еще не передавал коды для этого заказа, &#x60;instances&#x60; отсутствует.  | [optional] 
 **RequiredInstanceTypes** | Pointer to [**[]OrderItemInstanceType**](OrderItemInstanceType.md) | Список необходимых маркировок товара. | [optional] 
+**ItemStatuses** | Pointer to [**[]OrderItemUnitStatusDTO**](OrderItemUnitStatusDTO.md) | Информация о статусах отдельных единиц товара в заказе.  Если данных о статусах отдельных единиц товара нет, поле отсутствует.  | [optional] 
 **Tags** | Pointer to [**[]OrderItemTagType**](OrderItemTagType.md) | Признаки товара. | [optional] 
 
 ## Methods
@@ -207,6 +208,41 @@ HasRequiredInstanceTypes returns a boolean if a field has been set.
 `func (o *BusinessOrderItemDTO) UnsetRequiredInstanceTypes()`
 
 UnsetRequiredInstanceTypes ensures that no value is present for RequiredInstanceTypes, not even an explicit nil
+### GetItemStatuses
+
+`func (o *BusinessOrderItemDTO) GetItemStatuses() []OrderItemUnitStatusDTO`
+
+GetItemStatuses returns the ItemStatuses field if non-nil, zero value otherwise.
+
+### GetItemStatusesOk
+
+`func (o *BusinessOrderItemDTO) GetItemStatusesOk() (*[]OrderItemUnitStatusDTO, bool)`
+
+GetItemStatusesOk returns a tuple with the ItemStatuses field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetItemStatuses
+
+`func (o *BusinessOrderItemDTO) SetItemStatuses(v []OrderItemUnitStatusDTO)`
+
+SetItemStatuses sets ItemStatuses field to given value.
+
+### HasItemStatuses
+
+`func (o *BusinessOrderItemDTO) HasItemStatuses() bool`
+
+HasItemStatuses returns a boolean if a field has been set.
+
+### SetItemStatusesNil
+
+`func (o *BusinessOrderItemDTO) SetItemStatusesNil(b bool)`
+
+ SetItemStatusesNil sets the value for ItemStatuses to be an explicit nil
+
+### UnsetItemStatuses
+`func (o *BusinessOrderItemDTO) UnsetItemStatuses()`
+
+UnsetItemStatuses ensures that no value is present for ItemStatuses, not even an explicit nil
 ### GetTags
 
 `func (o *BusinessOrderItemDTO) GetTags() []OrderItemTagType`

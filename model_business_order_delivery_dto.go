@@ -44,7 +44,8 @@ type BusinessOrderDeliveryDTO struct {
 	// **Только для модели LaaS**  Штрихкод получения заказа на ПВЗ.
 	ReceiveBarcode *string `json:"receiveBarcode,omitempty"`
 	// **Только для модели LaaS**  Код получения заказа на ПВЗ.
-	ReceiveCode *string `json:"receiveCode,omitempty"`
+	ReceiveCode  *string                         `json:"receiveCode,omitempty"`
+	DigitalGoods *DigitalGoodsDeliveryDetailsDTO `json:"digitalGoods,omitempty"`
 }
 
 type _BusinessOrderDeliveryDTO BusinessOrderDeliveryDTO
@@ -545,6 +546,38 @@ func (o *BusinessOrderDeliveryDTO) SetReceiveCode(v string) {
 	o.ReceiveCode = &v
 }
 
+// GetDigitalGoods returns the DigitalGoods field value if set, zero value otherwise.
+func (o *BusinessOrderDeliveryDTO) GetDigitalGoods() DigitalGoodsDeliveryDetailsDTO {
+	if o == nil || IsNil(o.DigitalGoods) {
+		var ret DigitalGoodsDeliveryDetailsDTO
+		return ret
+	}
+	return *o.DigitalGoods
+}
+
+// GetDigitalGoodsOk returns a tuple with the DigitalGoods field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BusinessOrderDeliveryDTO) GetDigitalGoodsOk() (*DigitalGoodsDeliveryDetailsDTO, bool) {
+	if o == nil || IsNil(o.DigitalGoods) {
+		return nil, false
+	}
+	return o.DigitalGoods, true
+}
+
+// HasDigitalGoods returns a boolean if a field has been set.
+func (o *BusinessOrderDeliveryDTO) HasDigitalGoods() bool {
+	if o != nil && !IsNil(o.DigitalGoods) {
+		return true
+	}
+
+	return false
+}
+
+// SetDigitalGoods gets a reference to the given DigitalGoodsDeliveryDetailsDTO and assigns it to the DigitalGoods field.
+func (o *BusinessOrderDeliveryDTO) SetDigitalGoods(v DigitalGoodsDeliveryDetailsDTO) {
+	o.DigitalGoods = &v
+}
+
 func (o BusinessOrderDeliveryDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -592,6 +625,9 @@ func (o BusinessOrderDeliveryDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.ReceiveCode) {
 		toSerialize["receiveCode"] = o.ReceiveCode
+	}
+	if !IsNil(o.DigitalGoods) {
+		toSerialize["digitalGoods"] = o.DigitalGoods
 	}
 	return toSerialize, nil
 }

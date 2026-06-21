@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **TrackCode** | Pointer to **string** | Трек‑номер посылки. | [optional] 
-**DeliveryServiceId** | **int64** | Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md). | 
+**DeliveryServiceId** | **int64** | Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/delivery-services/getDeliveryServices.md). | 
 
 ## Methods
 

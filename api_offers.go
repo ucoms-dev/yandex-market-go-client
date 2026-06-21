@@ -514,7 +514,7 @@ GetOfferRecommendations Рекомендации Маркета, касающи�
 {% include notitle [limit](../../_auto/method_limits/getOfferRecommendations.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return OffersAPIGetOfferRecommendationsRequest
 */
 func (a *OffersAPIService) GetOfferRecommendations(ctx context.Context, businessId int64) OffersAPIGetOfferRecommendationsRequest {
@@ -720,7 +720,7 @@ UpdateCampaignOffers Изменение условий продажи товар
 
 {% include notitle [access](../../_auto/method_scopes/updateCampaignOffers.md) %}
 
-Изменяет параметры размещения товаров в конкретном магазине: доступность товара, продажа квантами и применяемый НДС.
+Изменяет параметры размещения товаров в конкретном магазине: доступность товара и применяемый НДС.
 
 {% include notitle [limit](../../_auto/method_limits/updateCampaignOffers.md) %}
 

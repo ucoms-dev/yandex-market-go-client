@@ -20,9 +20,9 @@ var _ MappedNullable = &OfferDefaultPriceDTO{}
 
 // OfferDefaultPriceDTO Цена с указанием валюты, скидки и времени последнего обновления, а также минимальная цена для попадания в акцию «Бестселлеры Маркета».
 type OfferDefaultPriceDTO struct {
-	// Минимальная цена товара для попадания в акцию «Бестселлеры Маркета». Подробнее об этом способе участия читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/ru/marketing/promos/market/bestsellers#minimum).  Передается в методе [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/business-assortment/updateBusinessPrices.md).
+	// Минимальная цена товара для попадания в акцию «Бестселлеры Маркета». Подробнее об этом способе участия читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/ru/marketing/promos/market/bestsellers#minimum).  Передается в методе [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/prices/updateBusinessPrices.md).
 	MinimumForBestseller *float32 `json:"minimumForBestseller,omitempty"`
-	// Признак того, что товар не попадает в акцию «Бестселлеры Маркета». Подробнее об акции читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/bestsellers).  Если значение `true`, в методе [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/business-assortment/updateBusinessPrices.md) параметр `minimumForBestseller` игнорируется.
+	// Признак того, что товар не попадает в акцию «Бестселлеры Маркета». Подробнее об акции читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/marketing/promos/market/bestsellers).  Если значение `true`, в методе [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/prices/updateBusinessPrices.md) параметр `minimumForBestseller` игнорируется.
 	ExcludedFromBestsellers *bool `json:"excludedFromBestsellers,omitempty"`
 	// Цена товара.
 	Value      *float32      `json:"value,omitempty"`

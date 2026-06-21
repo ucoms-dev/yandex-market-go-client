@@ -216,6 +216,8 @@ docs/DeliveryServiceDTO.md
 docs/DeliveryServiceInfoDTO.md
 docs/DeliveryServicesAPI.md
 docs/DeliveryServicesDTO.md
+docs/DigitalGoodsDeliveryDetailsDTO.md
+docs/DigitalGoodsDeliveryType.md
 docs/DocumentDTO.md
 docs/EacVerificationResultDTO.md
 docs/EacVerificationStatusType.md
@@ -310,6 +312,8 @@ docs/GetGoodsFeedbackCommentsRequest.md
 docs/GetGoodsFeedbackCommentsResponse.md
 docs/GetGoodsFeedbackRequest.md
 docs/GetGoodsFeedbackResponse.md
+docs/GetGoodsFeedbackUrbanadsRequest.md
+docs/GetGoodsFeedbackUrbanadsResponse.md
 docs/GetGoodsStatsRequest.md
 docs/GetGoodsStatsResponse.md
 docs/GetHiddenOffersResponse.md
@@ -405,12 +409,15 @@ docs/GoodsFeedbackCommentAuthorType.md
 docs/GoodsFeedbackCommentDTO.md
 docs/GoodsFeedbackCommentListDTO.md
 docs/GoodsFeedbackCommentStatusType.md
+docs/GoodsFeedbackContextUrbanadsDTO.md
 docs/GoodsFeedbackDTO.md
 docs/GoodsFeedbackDescriptionDTO.md
 docs/GoodsFeedbackIdentifiersDTO.md
 docs/GoodsFeedbackListDTO.md
 docs/GoodsFeedbackMediaDTO.md
 docs/GoodsFeedbackStatisticsDTO.md
+docs/GoodsFeedbackUrbanadsDTO.md
+docs/GoodsFeedbackUrbanadsListDTO.md
 docs/GoodsQuestionsAPI.md
 docs/GoodsStatsAPI.md
 docs/GoodsStatsDTO.md
@@ -524,6 +531,8 @@ docs/OrderItemStatusType.md
 docs/OrderItemSubsidyDTO.md
 docs/OrderItemSubsidyType.md
 docs/OrderItemTagType.md
+docs/OrderItemUnitStatusDTO.md
+docs/OrderItemUnitStatusType.md
 docs/OrderItemValidationStatusDTO.md
 docs/OrderItemsModificationRequestReasonType.md
 docs/OrderItemsModificationResultDTO.md
@@ -644,7 +653,6 @@ docs/QualityRatingComponentDTO.md
 docs/QualityRatingComponentType.md
 docs/QualityRatingDTO.md
 docs/QualityRatingDetailsDTO.md
-docs/QuantumDTO.md
 docs/QuarantineOfferDTO.md
 docs/QuestionDTO.md
 docs/QuestionIdentifiersDTO.md
@@ -988,6 +996,8 @@ model_delivery_price_dto.go
 model_delivery_service_dto.go
 model_delivery_service_info_dto.go
 model_delivery_services_dto.go
+model_digital_goods_delivery_details_dto.go
+model_digital_goods_delivery_type.go
 model_document_dto.go
 model_eac_verification_result_dto.go
 model_eac_verification_status_type.go
@@ -1079,6 +1089,8 @@ model_get_goods_feedback_comments_request.go
 model_get_goods_feedback_comments_response.go
 model_get_goods_feedback_request.go
 model_get_goods_feedback_response.go
+model_get_goods_feedback_urbanads_request.go
+model_get_goods_feedback_urbanads_response.go
 model_get_goods_stats_request.go
 model_get_goods_stats_response.go
 model_get_hidden_offers_response.go
@@ -1173,12 +1185,15 @@ model_goods_feedback_comment_author_type.go
 model_goods_feedback_comment_dto.go
 model_goods_feedback_comment_list_dto.go
 model_goods_feedback_comment_status_type.go
+model_goods_feedback_context_urbanads_dto.go
 model_goods_feedback_description_dto.go
 model_goods_feedback_dto.go
 model_goods_feedback_identifiers_dto.go
 model_goods_feedback_list_dto.go
 model_goods_feedback_media_dto.go
 model_goods_feedback_statistics_dto.go
+model_goods_feedback_urbanads_dto.go
+model_goods_feedback_urbanads_list_dto.go
 model_goods_stats_dto.go
 model_goods_stats_goods_dto.go
 model_goods_stats_warehouse_dto.go
@@ -1283,6 +1298,8 @@ model_order_item_status_type.go
 model_order_item_subsidy_dto.go
 model_order_item_subsidy_type.go
 model_order_item_tag_type.go
+model_order_item_unit_status_dto.go
+model_order_item_unit_status_type.go
 model_order_item_validation_status_dto.go
 model_order_items_modification_request_reason_type.go
 model_order_items_modification_result_dto.go
@@ -1395,7 +1412,6 @@ model_quality_rating_component_dto.go
 model_quality_rating_component_type.go
 model_quality_rating_details_dto.go
 model_quality_rating_dto.go
-model_quantum_dto.go
 model_quarantine_offer_dto.go
 model_question_dto.go
 model_question_identifiers_dto.go

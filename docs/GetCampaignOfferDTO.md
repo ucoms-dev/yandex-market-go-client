@@ -5,8 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **OfferId** | **string** | Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, &#x60;\&quot;  SKU123  \&quot;&#x60; и &#x60;\&quot;SKU123\&quot;&#x60; будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)  | 
-**Quantum** | Pointer to [**QuantumDTO**](QuantumDTO.md) |  | [optional] 
-**Available** | Pointer to **bool** | {% note warning \&quot;Вместо него используйте методы скрытия товаров с витрины\&quot; %}  * [GET v2/campaigns/{campaignId}/hidden-offers](../../reference/assortment/getHiddenOffers.md) — просмотр скрытых товаров; * [POST v2/campaigns/{campaignId}/hidden-offers](../../reference/assortment/addHiddenOffers.md) — скрытие товаров; * [POST v2/campaigns/{campaignId}/hidden-offers/delete](../../reference/assortment/deleteHiddenOffers.md) — возобновление показа.  {% endnote %}  Есть ли товар в продаже.  | [optional] 
+**Available** | Pointer to **bool** | {% note warning \&quot;Вместо него используйте методы скрытия товаров с витрины\&quot; %}  * [GET v2/campaigns/{campaignId}/hidden-offers](../../reference/hidden-offers/getHiddenOffers.md) — просмотр скрытых товаров; * [POST v2/campaigns/{campaignId}/hidden-offers](../../reference/hidden-offers/addHiddenOffers.md) — скрытие товаров; * [POST v2/campaigns/{campaignId}/hidden-offers/delete](../../reference/hidden-offers/deleteHiddenOffers.md) — возобновление показа.  {% endnote %}  Есть ли товар в продаже.  | [optional] 
 **BasicPrice** | Pointer to [**GetPriceWithDiscountDTO**](GetPriceWithDiscountDTO.md) |  | [optional] 
 **CampaignPrice** | Pointer to [**GetPriceWithVatDTO**](GetPriceWithVatDTO.md) |  | [optional] 
 **Status** | Pointer to [**OfferCampaignStatusType**](OfferCampaignStatusType.md) |  | [optional] 
@@ -51,31 +50,6 @@ and a boolean to check if the value has been set.
 
 SetOfferId sets OfferId field to given value.
 
-
-### GetQuantum
-
-`func (o *GetCampaignOfferDTO) GetQuantum() QuantumDTO`
-
-GetQuantum returns the Quantum field if non-nil, zero value otherwise.
-
-### GetQuantumOk
-
-`func (o *GetCampaignOfferDTO) GetQuantumOk() (*QuantumDTO, bool)`
-
-GetQuantumOk returns a tuple with the Quantum field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetQuantum
-
-`func (o *GetCampaignOfferDTO) SetQuantum(v QuantumDTO)`
-
-SetQuantum sets Quantum field to given value.
-
-### HasQuantum
-
-`func (o *GetCampaignOfferDTO) HasQuantum() bool`
-
-HasQuantum returns a boolean if a field has been set.
 
 ### GetAvailable
 

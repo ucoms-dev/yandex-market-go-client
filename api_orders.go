@@ -525,12 +525,12 @@ GetBusinessOrders Информация о заказах в кабинете
 
 Результаты возвращаются постранично. Для навигации используйте параметры `pageToken` и `limit`.
 
-Получить более подробную информацию о покупателе и его номере телефона можно с помощью запроса [GET v2/campaigns/{campaignId}/orders/{orderId}/buyer](../../reference/orders/getOrderBuyerInfo.md).
+Получить более подробную информацию о покупателе и его номере телефона можно с помощью запроса [GET v2/campaigns/{campaignId}/orders/{orderId}/buyer](../../reference/order-delivery/getOrderBuyerInfo.md).
 
 {% include notitle [limit](../../_auto/method_limits/getBusinessOrders.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return OrdersAPIGetBusinessOrdersRequest
 */
 func (a *OrdersAPIService) GetBusinessOrders(ctx context.Context, businessId int64) OrdersAPIGetBusinessOrdersRequest {
@@ -741,7 +741,7 @@ GetOrder Информация об одном заказе в магазине
 
 {% endnote %}
 
-Получить более подробную информацию о покупателе и его номере телефона можно с помощью запроса [GET v2/campaigns/{campaignId}/orders/{orderId}/buyer](../../reference/orders/getOrderBuyerInfo.md).
+Получить более подробную информацию о покупателе и его номере телефона можно с помощью запроса [GET v2/campaigns/{campaignId}/orders/{orderId}/buyer](../../reference/order-delivery/getOrderBuyerInfo.md).
 
 {% include notitle [limit](../../_auto/method_limits/getOrder.md) %}
 
@@ -1498,13 +1498,13 @@ GetOrders Информация о заказах в магазине
 Не возвращается информация о заказах, которые доставили или отменили больше 30 дней назад. Как ее получить:
 
 * [POST v1/businesses/{businessId}/orders](../../reference/orders/getBusinessOrders.md);
-* [POST v2/campaigns/{campaignId}/stats/orders](../../reference/stats/getOrdersStats.md).
+* [POST v2/campaigns/{campaignId}/stats/orders](../../reference/orders-stats/getOrdersStats.md).
 
 Максимальный диапазон дат за один запрос — 30 дней (передается в параметрах `fromDate` и `toDate`). Если их не передать, возвращается информация за последние 30 дней.
 
 Результаты возвращаются постранично. Для навигации используйте параметры `pageToken` и `limit`.
 
-Получить более подробную информацию о покупателе и его номере телефона можно с помощью запроса [GET v2/campaigns/{campaignId}/orders/{orderId}/buyer](../../reference/orders/getOrderBuyerInfo.md).
+Получить более подробную информацию о покупателе и его номере телефона можно с помощью запроса [GET v2/campaigns/{campaignId}/orders/{orderId}/buyer](../../reference/order-delivery/getOrderBuyerInfo.md).
 
 {% include notitle [limit](../../_auto/method_limits/getOrders.md) %}
 

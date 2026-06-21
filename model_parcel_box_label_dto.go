@@ -41,7 +41,7 @@ type ParcelBoxLabelDTO struct {
 	// Общая масса всех товаров в заказе.  Возвращается в формате `weight кг`.
 	// Deprecated
 	Weight string `json:"weight"`
-	// Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/orders/getDeliveryServices.md).
+	// Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/delivery-services/getDeliveryServices.md).
 	DeliveryServiceId string `json:"deliveryServiceId"`
 	// Адрес получателя.
 	DeliveryAddress *string `json:"deliveryAddress,omitempty"`

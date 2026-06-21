@@ -34,6 +34,8 @@ type BusinessOrderItemDTO struct {
 	Instances []OrderItemInstanceDTO `json:"instances,omitempty"`
 	// Список необходимых маркировок товара.
 	RequiredInstanceTypes []OrderItemInstanceType `json:"requiredInstanceTypes,omitempty"`
+	// Информация о статусах отдельных единиц товара в заказе.  Если данных о статусах отдельных единиц товара нет, поле отсутствует.
+	ItemStatuses []OrderItemUnitStatusDTO `json:"itemStatuses,omitempty"`
 	// Признаки товара.
 	Tags []OrderItemTagType `json:"tags,omitempty"`
 }
@@ -255,6 +257,39 @@ func (o *BusinessOrderItemDTO) SetRequiredInstanceTypes(v []OrderItemInstanceTyp
 	o.RequiredInstanceTypes = v
 }
 
+// GetItemStatuses returns the ItemStatuses field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BusinessOrderItemDTO) GetItemStatuses() []OrderItemUnitStatusDTO {
+	if o == nil {
+		var ret []OrderItemUnitStatusDTO
+		return ret
+	}
+	return o.ItemStatuses
+}
+
+// GetItemStatusesOk returns a tuple with the ItemStatuses field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BusinessOrderItemDTO) GetItemStatusesOk() ([]OrderItemUnitStatusDTO, bool) {
+	if o == nil || IsNil(o.ItemStatuses) {
+		return nil, false
+	}
+	return o.ItemStatuses, true
+}
+
+// HasItemStatuses returns a boolean if a field has been set.
+func (o *BusinessOrderItemDTO) HasItemStatuses() bool {
+	if o != nil && !IsNil(o.ItemStatuses) {
+		return true
+	}
+
+	return false
+}
+
+// SetItemStatuses gets a reference to the given []OrderItemUnitStatusDTO and assigns it to the ItemStatuses field.
+func (o *BusinessOrderItemDTO) SetItemStatuses(v []OrderItemUnitStatusDTO) {
+	o.ItemStatuses = v
+}
+
 // GetTags returns the Tags field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BusinessOrderItemDTO) GetTags() []OrderItemTagType {
 	if o == nil {
@@ -310,6 +345,9 @@ func (o BusinessOrderItemDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if o.RequiredInstanceTypes != nil {
 		toSerialize["requiredInstanceTypes"] = o.RequiredInstanceTypes
+	}
+	if o.ItemStatuses != nil {
+		toSerialize["itemStatuses"] = o.ItemStatuses
 	}
 	if o.Tags != nil {
 		toSerialize["tags"] = o.Tags

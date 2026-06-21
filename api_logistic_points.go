@@ -58,7 +58,7 @@ GetLogisticPoints Получение точек ПВЗ Маркета
 {% include notitle [limit](../../_auto/method_limits/getLogisticPoints.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return LogisticPointsAPIGetLogisticPointsRequest
 */
 func (a *LogisticPointsAPIService) GetLogisticPoints(ctx context.Context, businessId int64) LogisticPointsAPIGetLogisticPointsRequest {

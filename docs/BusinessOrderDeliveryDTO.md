@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **Estimated** | Pointer to **bool** | Приблизительная ли дата доставки. | [optional] 
 **ReceiveBarcode** | Pointer to **string** | **Только для модели LaaS**  Штрихкод получения заказа на ПВЗ.  | [optional] 
 **ReceiveCode** | Pointer to **string** | **Только для модели LaaS**  Код получения заказа на ПВЗ.  | [optional] 
+**DigitalGoods** | Pointer to [**DigitalGoodsDeliveryDetailsDTO**](DigitalGoodsDeliveryDetailsDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -434,6 +435,31 @@ SetReceiveCode sets ReceiveCode field to given value.
 `func (o *BusinessOrderDeliveryDTO) HasReceiveCode() bool`
 
 HasReceiveCode returns a boolean if a field has been set.
+
+### GetDigitalGoods
+
+`func (o *BusinessOrderDeliveryDTO) GetDigitalGoods() DigitalGoodsDeliveryDetailsDTO`
+
+GetDigitalGoods returns the DigitalGoods field if non-nil, zero value otherwise.
+
+### GetDigitalGoodsOk
+
+`func (o *BusinessOrderDeliveryDTO) GetDigitalGoodsOk() (*DigitalGoodsDeliveryDetailsDTO, bool)`
+
+GetDigitalGoodsOk returns a tuple with the DigitalGoods field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDigitalGoods
+
+`func (o *BusinessOrderDeliveryDTO) SetDigitalGoods(v DigitalGoodsDeliveryDetailsDTO)`
+
+SetDigitalGoods sets DigitalGoods field to given value.
+
+### HasDigitalGoods
+
+`func (o *BusinessOrderDeliveryDTO) HasDigitalGoods() bool`
+
+HasDigitalGoods returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -52,7 +52,7 @@ ConfirmBusinessPrices Удаление товара из карантина по
 {% include notitle [limit](../../_auto/method_limits/confirmBusinessPrices.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return PriceQuarantineAPIConfirmBusinessPricesRequest
 */
 func (a *PriceQuarantineAPIService) ConfirmBusinessPrices(ctx context.Context, businessId int64) PriceQuarantineAPIConfirmBusinessPricesRequest {
@@ -491,7 +491,7 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 
 Возвращает список товаров, которые находятся в карантине по цене, установленной для всех магазинов кабинета.
 
-Проверьте цену каждого из товаров, который попал в карантин. Если ошибки нет и цена правильная, подтвердите ее с помощью запроса [POST v2/businesses/{businessId}/price-quarantine/confirm](../../reference/business-assortment/confirmBusinessPrices.md). Если цена в самом деле ошибочная, установите верную с помощью запроса [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/business-assortment/updateBusinessPrices.md).
+Проверьте цену каждого из товаров, который попал в карантин. Если ошибки нет и цена правильная, подтвердите ее с помощью запроса [POST v2/businesses/{businessId}/price-quarantine/confirm](../../reference/price-quarantine/confirmBusinessPrices.md). Если цена в самом деле ошибочная, установите верную с помощью запроса [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/prices/updateBusinessPrices.md).
 
 {% note info "Что такое карантин?" %}
 
@@ -506,7 +506,7 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 {% include notitle [limit](../../_auto/method_limits/getBusinessQuarantineOffers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
-	@param businessId Идентификатор кабинета. Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
 	@return PriceQuarantineAPIGetBusinessQuarantineOffersRequest
 */
 func (a *PriceQuarantineAPIService) GetBusinessQuarantineOffers(ctx context.Context, businessId int64) PriceQuarantineAPIGetBusinessQuarantineOffersRequest {
@@ -728,7 +728,7 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 
 Возвращает список товаров, которые находятся в карантине по цене, установленной в заданном магазине.
 
-Проверьте цену каждого из товаров, который попал в карантин. Если ошибки нет и цена правильная, подтвердите ее с помощью запроса [POST v2/campaigns/{campaignId}/price-quarantine/confirm](../../reference/assortment/confirmCampaignPrices.md). Если цена в самом деле ошибочная, установите верную с помощью запроса [POST v2/campaigns/{campaignId}/offer-prices/updates](../../reference/assortment/updatePrices.md).
+Проверьте цену каждого из товаров, который попал в карантин. Если ошибки нет и цена правильная, подтвердите ее с помощью запроса [POST v2/campaigns/{campaignId}/price-quarantine/confirm](../../reference/price-quarantine/confirmCampaignPrices.md). Если цена в самом деле ошибочная, установите верную с помощью запроса [POST v2/campaigns/{campaignId}/offer-prices/updates](../../reference/prices/updatePrices.md).
 
 {% note info "Что такое карантин?" %}
 

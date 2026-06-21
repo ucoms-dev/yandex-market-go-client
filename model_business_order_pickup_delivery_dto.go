@@ -25,7 +25,7 @@ type BusinessOrderPickupDeliveryDTO struct {
 	LogisticPointId *int64 `json:"logisticPointId,omitempty"`
 	// Идентификатор пункта самовывоза, присвоенный магазином.
 	OutletCode *string `json:"outletCode,omitempty"`
-	// Дата, до которой заказ будет храниться в пункте выдачи. Возвращается, когда заказ переходит в статус `PICKUP`.  Один раз дату можно поменять с помощью метода [PUT v2/campaigns/{campaignId}/orders/{orderId}/delivery/storage-limit](../../reference/orders/updateOrderStorageLimit.md).  Формат даты: `ГГГГ-ММ-ДД`.
+	// Дата, до которой заказ будет храниться в пункте выдачи. Возвращается, когда заказ переходит в статус `PICKUP`.  Один раз дату можно поменять с помощью метода [PUT v2/campaigns/{campaignId}/orders/{orderId}/delivery/storage-limit](../../reference/order-delivery/updateOrderStorageLimit.md).  Формат даты: `ГГГГ-ММ-ДД`.
 	OutletStorageLimitDate *string `json:"outletStorageLimitDate,omitempty"`
 }
 
