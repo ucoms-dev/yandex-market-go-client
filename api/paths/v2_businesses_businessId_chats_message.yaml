@@ -9,8 +9,9 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -22,7 +23,7 @@ post:
       period: hours
       period-duration: 1
   x-apphost:
-    domain: BASE
+    domain: ONBOARDING
     enabled: false
   operationId: sendMessageToChat
   summary: Отправка сообщения в чат
@@ -77,8 +78,9 @@ get:
     - all-methods
     - all-methods:read-only
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -90,7 +92,7 @@ get:
       period: hours
       period-duration: 1
   x-apphost:
-    domain: BASE
+    domain: ONBOARDING
     enabled: false
   operationId: getChatMessage
   summary: Получение сообщения в чате

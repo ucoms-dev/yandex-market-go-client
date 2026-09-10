@@ -10,8 +10,9 @@ post:
     - all-methods
     - all-methods:read-only
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -23,7 +24,7 @@ post:
       period: hours
       period-duration: 1
   x-apphost:
-    domain: BASE
+    domain: ONBOARDING
     enabled: false
   operationId: getChatHistory
   summary: Получение истории сообщений в чате
