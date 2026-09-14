@@ -6,8 +6,9 @@ post:
   x-auth-scopes:
     - all-methods
     - settings-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -71,8 +72,9 @@ get:
     - all-methods
     - all-methods:read-only
     - settings-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp.outlets
     none:
@@ -111,9 +113,17 @@ get:
       required: false
       schema:
         type: string
-    - description: "{% note warning \"Вместо него используйте `region_id`.\" %}\n\n\_\n\n{% endnote %}\n"
+    - description: |
+        {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+        Вместо него используйте `region_id`.
+
+        {% endnote %}
       name: regionId
       deprecated: true
+      x-deprecation-config:
+        shutdown-date: '2026-10-19'
+        replacement-field: region_id
       in: query
       required: false
       schema:
@@ -132,8 +142,6 @@ get:
       $ref: ../components/responses/401.yaml
     '403':
       $ref: ../components/responses/403.yaml
-    '404':
-      $ref: ../components/responses/404.yaml
     '420':
       $ref: ../components/responses/420.yaml
     '500':
