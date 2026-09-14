@@ -22,8 +22,9 @@ post:
     - promotion:read-only
     - communication
     - supplies-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -63,8 +64,6 @@ post:
       $ref: ../components/responses/401.yaml
     '403':
       $ref: ../components/responses/403.yaml
-    '404':
-      $ref: ../components/responses/404.yaml
     '420':
       $ref: ../components/responses/420.yaml
     '500':

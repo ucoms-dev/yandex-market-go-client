@@ -57,15 +57,27 @@ properties:
     type: number
   buyerItemsTotal:
     deprecated: true
-    description: >-
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+      replacement-field: itemsTotal
+    description: >
+      {% note warning "Параметр устарел и будет отключен 05.10.2026." %}
+
+
+      Вместо него используйте `itemsTotal`.
+
+
+      {% endnote %}
+
+
       Стоимость всех товаров в заказе в валюте покупателя после применения
       скидок и без учета стоимости доставки.
     type: number
   buyerTotal:
     deprecated: true
-    description: >-
-      Стоимость всех товаров в заказе в валюте покупателя после применения
-      скидок и с учетом стоимости доставки.
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nСтоимость всех товаров в заказе в валюте покупателя после применения скидок и с учетом стоимости доставки.\n"
     type: number
   buyerItemsTotalBeforeDiscount:
     description: >
@@ -81,10 +93,9 @@ properties:
     type: number
   buyerTotalBeforeDiscount:
     deprecated: true
-    description: >-
-      Стоимость всех товаров в заказе в валюте покупателя до применения скидок и
-      с учетом стоимости доставки (`buyerItemsTotalBeforeDiscount` + стоимость
-      доставки).
+    x-deprecation-config:
+      shutdown-date: '2026-10-05'
+    description: "{% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}\n\n\_\n\n{% endnote %}\n\nСтоимость всех товаров в заказе в валюте покупателя до применения скидок и с учетом стоимости доставки (`buyerItemsTotalBeforeDiscount` + стоимость доставки).\n"
     type: number
   paymentType:
     $ref: ./OrderPaymentType.yaml
