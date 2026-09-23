@@ -12,8 +12,9 @@ get:
     - all-methods:read-only
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -116,8 +117,22 @@ get:
       schema:
         type: string
         format: date
-    - description: "{% note warning \"Вместо него используйте `fromDate`.\" %}\n\n\_\n\n{% endnote %}\n\nНачальная дата для фильтрации невыкупов или возвратов по дате обновления.\n"
+    - description: >
+        {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+
+        Вместо него используйте `fromDate`.
+
+
+        {% endnote %}
+
+
+        Начальная дата для фильтрации невыкупов или возвратов по дате
+        обновления.
       deprecated: true
+      x-deprecation-config:
+        shutdown-date: '2026-10-12'
+        replacement-field: fromDate
       in: query
       name: from_date
       required: false
@@ -125,8 +140,18 @@ get:
       schema:
         type: string
         format: date
-    - description: "{% note warning \"Вместо него используйте `toDate`.\" %}\n\n\_\n\n{% endnote %}\n\nКонечная дата для фильтрации невыкупов или возвратов по дате обновления.\n"
+    - description: |
+        {% note warning "Параметр устарел и будет отключен 12.10.2026." %}
+
+        Вместо него используйте `toDate`.
+
+        {% endnote %}
+
+        Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
       deprecated: true
+      x-deprecation-config:
+        shutdown-date: '2026-10-12'
+        replacement-field: toDate
       in: query
       name: to_date
       required: false

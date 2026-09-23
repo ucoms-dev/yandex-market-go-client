@@ -5,7 +5,9 @@ post:
     - laas
   x-auth-scopes:
     - all-methods
+    - all-methods:read-only
     - inventory-and-order-processing
+    - inventory-and-order-processing:read-only
   x-resource-limit-config:
     path: resp
     none:
@@ -16,9 +18,8 @@ post:
       amount: 10000
       period: hours
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
+  x-allowed:
+    - seller
   x-apphost:
     domain: ORDERS
     enabled: false

@@ -9,8 +9,9 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -22,8 +23,8 @@ post:
       period: hours
       period-duration: 1
   x-apphost:
-    domain: BASE
-    enabled: false
+    domain: ONBOARDING
+    enabled: true
   operationId: sendFileToChat
   summary: Отправка файла в чат
   description: |
