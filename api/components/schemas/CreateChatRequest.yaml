@@ -3,9 +3,19 @@ description: |
 type: object
 properties:
   orderId:
-    description: Идентификатор заказа на Маркете.
+    description: |
+      {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+      Вместо него используйте `context`.
+
+      {% endnote %}
+
+      Идентификатор заказа на Маркете.
     type: integer
     format: int64
     deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-19'
+      replacement-field: context
   context:
     $ref: ./ChatContextDTO.yaml
