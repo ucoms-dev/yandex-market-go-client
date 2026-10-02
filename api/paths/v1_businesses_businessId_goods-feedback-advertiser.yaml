@@ -1,5 +1,6 @@
 post:
   x-resource-id: 288
+  x-personal-cleanup-enabled: false
   tags:
     - goods-feedback
     - fby
@@ -10,6 +11,8 @@ post:
     - all-methods
     - all-methods:read-only
     - communication
+  x-allowed:
+    - urbanads
   x-resource-limit-config:
     path: resp
     none:

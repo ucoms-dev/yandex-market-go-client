@@ -1,5 +1,6 @@
 post:
   x-resource-id: 293
+  x-personal-cleanup-enabled: false
   tags:
     - reports
     - fby
@@ -11,6 +12,10 @@ post:
     - all-methods
     - all-methods:read-only
     - finance-and-accounting
+  x-allowed:
+    - seller
+    - urbanads
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:

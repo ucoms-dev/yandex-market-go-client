@@ -1,5 +1,6 @@
 post:
   x-resource-id: 210
+  x-personal-cleanup-enabled: false
   tags:
     - chats
     - dbs
@@ -9,8 +10,9 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -22,8 +24,8 @@ post:
       period: hours
       period-duration: 1
   x-apphost:
-    domain: BASE
-    enabled: false
+    domain: ONBOARDING
+    enabled: true
   operationId: sendMessageToChat
   summary: Отправка сообщения в чат
   description: >
@@ -67,6 +69,7 @@ post:
       $ref: ../components/responses/500.yaml
 get:
   x-resource-id: 248
+  x-personal-cleanup-enabled: false
   tags:
     - chats
     - dbs
@@ -77,8 +80,9 @@ get:
     - all-methods
     - all-methods:read-only
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -90,8 +94,8 @@ get:
       period: hours
       period-duration: 1
   x-apphost:
-    domain: BASE
-    enabled: false
+    domain: ONBOARDING
+    enabled: true
   operationId: getChatMessage
   summary: Получение сообщения в чате
   description: "{% include notitle [access](../../_auto/method_scopes/getChatMessage.md) %}\n\nВозвращает сообщение по его идентификатору.\n\n{% note tip \"Подключите API-уведомления\" %}\n\nМаркет отправит вам запрос [POST\_notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.\n\n[{#T}](../../push-notifications/index.md)\n\n{% endnote %}\n\n{% include notitle [limit](../../_auto/method_limits/getChatMessage.md) %}\n"
