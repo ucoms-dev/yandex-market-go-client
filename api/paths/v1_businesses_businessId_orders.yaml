@@ -1,5 +1,6 @@
 post:
   x-resource-id: 283
+  x-personal-cleanup-enabled: true
   tags:
     - orders
     - fbs
@@ -13,8 +14,9 @@ post:
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
     - finance-and-accounting
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     parallel-limit-value: 6

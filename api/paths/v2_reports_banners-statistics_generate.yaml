@@ -1,5 +1,6 @@
 post:
   x-resource-id: 258
+  x-personal-cleanup-enabled: false
   tags:
     - reports
     - fby
@@ -22,8 +23,9 @@ post:
       amount: 1
       period: minutes
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
+  x-allowed:
+    - seller
+    - urbanads
   x-apphost:
     domain: MONETIZATION
     enabled: false

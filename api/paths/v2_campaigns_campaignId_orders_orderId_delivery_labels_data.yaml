@@ -1,5 +1,6 @@
 get:
   x-resource-id: 120
+  x-personal-cleanup-enabled: false
   tags:
     - order-labels
     - fbs
@@ -20,9 +21,8 @@ get:
       amount: 10000
       period: hours
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
+  x-allowed:
+    - seller
   x-apphost:
     domain: LOGISTICS
     enabled: false

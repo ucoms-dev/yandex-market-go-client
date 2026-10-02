@@ -1,5 +1,6 @@
 get:
   x-resource-id: 2
+  x-personal-cleanup-enabled: false
   tags:
     - campaigns
     - dbs
@@ -22,8 +23,9 @@ get:
     - promotion:read-only
     - communication
     - supplies-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -36,7 +38,7 @@ get:
       period-duration: 1
   x-apphost:
     domain: BASE
-    enabled: false
+    enabled: true
   operationId: getCampaign
   summary: Информация о магазине
   description: |

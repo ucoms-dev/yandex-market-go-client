@@ -1,14 +1,14 @@
 post:
   x-resource-id: 136
+  x-personal-cleanup-enabled: false
   tags:
     - order-delivery
     - dbs
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
-    - market-yandex-go
+  x-allowed:
+    - seller
   x-resource-limit-config:
     path: resp
     none:

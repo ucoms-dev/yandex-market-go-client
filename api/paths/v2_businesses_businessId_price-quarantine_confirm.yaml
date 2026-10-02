@@ -1,5 +1,6 @@
 post:
   x-resource-id: 173
+  x-personal-cleanup-enabled: false
   tags:
     - price-quarantine
     - dbs
@@ -9,8 +10,9 @@ post:
   x-auth-scopes:
     - all-methods
     - pricing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.offerIds
     none:

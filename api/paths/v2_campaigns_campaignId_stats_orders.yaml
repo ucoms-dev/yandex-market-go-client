@@ -1,5 +1,6 @@
 post:
   x-resource-id: 124
+  x-personal-cleanup-enabled: false
   tags:
     - orders-stats
     - fby
@@ -11,8 +12,9 @@ post:
     - all-methods:read-only
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:

@@ -1,5 +1,6 @@
 get:
   x-resource-id: 63
+  x-personal-cleanup-enabled: false
   tags:
     - prices
     - fby
@@ -11,8 +12,9 @@ get:
     - all-methods:read-only
     - pricing
     - pricing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp.result.offers
     none:
@@ -78,6 +80,7 @@ get:
       $ref: ../components/responses/500.yaml
 post:
   x-resource-id: 176
+  x-personal-cleanup-enabled: false
   tags:
     - prices
     - fby
@@ -90,8 +93,9 @@ post:
     - all-methods:read-only
     - pricing
     - pricing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp.result.offers
     none:

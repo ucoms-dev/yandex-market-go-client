@@ -1,5 +1,6 @@
 post:
   x-resource-id: 269
+  x-personal-cleanup-enabled: true
   tags:
     - orders
     - laas
@@ -16,9 +17,8 @@ post:
       amount: 10000
       period: hours
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
+  x-allowed:
+    - seller
   x-apphost:
     domain: ORDERS
     enabled: false

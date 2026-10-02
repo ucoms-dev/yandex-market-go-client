@@ -1,5 +1,6 @@
 post:
   x-resource-id: 181
+  x-personal-cleanup-enabled: false
   tags:
     - offers
     - dbs
@@ -12,8 +13,9 @@ post:
     - all-methods:read-only
     - offers-and-cards-management
     - offers-and-cards-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:

@@ -1,5 +1,6 @@
 post:
   x-resource-id: 230
+  x-personal-cleanup-enabled: false
   tags:
     - goods-feedback
     - fby
@@ -10,6 +11,10 @@ post:
     - all-methods
     - all-methods:read-only
     - communication
+  x-allowed:
+    - seller
+    - urbanads
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:

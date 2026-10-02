@@ -1,5 +1,6 @@
 post:
   x-resource-id: 279
+  x-personal-cleanup-enabled: false
   tags:
     - operations
     - laas
@@ -28,9 +29,8 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
+  x-allowed:
+    - seller
   x-apphost:
     domain: API
     enabled: false

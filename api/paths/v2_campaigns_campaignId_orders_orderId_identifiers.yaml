@@ -1,13 +1,15 @@
 put:
   x-resource-id: 179
+  x-personal-cleanup-enabled: false
   tags:
     - orders
     - dbs
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
