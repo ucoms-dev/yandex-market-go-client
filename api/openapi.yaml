@@ -56,8 +56,7 @@ paths:
   /v2/campaigns/{campaignId}/orders/status-update:
     $ref: paths/v2_campaigns_campaignId_orders_status-update.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes:
-    $ref: >-
-      paths/v2_campaigns_campaignId_orders_orderId_delivery_shipments_shipmentId_boxes.yaml
+    $ref: paths/v2_campaigns_campaignId_orders_orderId_delivery_shipments_shipmentId_boxes.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/cancellation/accept:
     $ref: paths/v2_campaigns_campaignId_orders_orderId_cancellation_accept.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/deliverDigitalGoods:
@@ -83,11 +82,9 @@ paths:
   /v2/campaigns/{campaignId}/orders/{orderId}/verifyEac:
     $ref: paths/v2_campaigns_campaignId_orders_orderId_verifyEac.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/delivery/storage-limit:
-    $ref: >-
-      paths/v2_campaigns_campaignId_orders_orderId_delivery_storage-limit.yaml
+    $ref: paths/v2_campaigns_campaignId_orders_orderId_delivery_storage-limit.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/delivery/shipments/{shipmentId}/boxes/{boxId}/label:
-    $ref: >-
-      paths/v2_campaigns_campaignId_orders_orderId_delivery_shipments_shipmentId_boxes_boxId_label.yaml
+    $ref: paths/v2_campaigns_campaignId_orders_orderId_delivery_shipments_shipmentId_boxes_boxId_label.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/delivery/labels:
     $ref: paths/v2_campaigns_campaignId_orders_orderId_delivery_labels.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/delivery/labels/data:
@@ -101,19 +98,15 @@ paths:
   /v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}:
     $ref: paths/v2_campaigns_campaignId_orders_orderId_returns_returnId.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/decision:
-    $ref: >-
-      paths/v2_campaigns_campaignId_orders_orderId_returns_returnId_decision.yaml
+    $ref: paths/v2_campaigns_campaignId_orders_orderId_returns_returnId_decision.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/decision/submit:
-    $ref: >-
-      paths/v2_campaigns_campaignId_orders_orderId_returns_returnId_decision_submit.yaml
+    $ref: paths/v2_campaigns_campaignId_orders_orderId_returns_returnId_decision_submit.yaml
   /v1/businesses/{businessId}/returns/decisions:
     $ref: paths/v1_businesses_businessId_returns_decisions.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/application:
-    $ref: >-
-      paths/v2_campaigns_campaignId_orders_orderId_returns_returnId_application.yaml
+    $ref: paths/v2_campaigns_campaignId_orders_orderId_returns_returnId_application.yaml
   /v2/campaigns/{campaignId}/orders/{orderId}/returns/{returnId}/decision/{itemId}/image/{imageHash}:
-    $ref: >-
-      paths/v2_campaigns_campaignId_orders_orderId_returns_returnId_decision_itemId_image_imageHash.yaml
+    $ref: paths/v2_campaigns_campaignId_orders_orderId_returns_returnId_decision_itemId_image_imageHash.yaml
   /v1/campaigns/{campaignId}/returns/create:
     $ref: paths/v1_campaigns_campaignId_returns_create.yaml
   /v1/campaigns/{campaignId}/returns/cancel:
@@ -131,33 +124,25 @@ paths:
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}:
     $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/orders/info:
-    $ref: >-
-      paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_orders_info.yaml
+    $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_orders_info.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/confirm:
-    $ref: >-
-      paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_confirm.yaml
+    $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_confirm.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/act:
     $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_act.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/inbound-act:
-    $ref: >-
-      paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_inbound-act.yaml
+    $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_inbound-act.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/transportation-waybill:
-    $ref: >-
-      paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_transportation-waybill.yaml
+    $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_transportation-waybill.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/discrepancy-act:
-    $ref: >-
-      paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_discrepancy-act.yaml
+    $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_discrepancy-act.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallets:
-    $ref: >-
-      paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_pallets.yaml
+    $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_pallets.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallet/labels:
-    $ref: >-
-      paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_pallet_labels.yaml
+    $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_pallet_labels.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments:
     $ref: paths/v2_campaigns_campaignId_first-mile_shipments.yaml
   /v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/orders/transfer:
-    $ref: >-
-      paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_orders_transfer.yaml
+    $ref: paths/v2_campaigns_campaignId_first-mile_shipments_shipmentId_orders_transfer.yaml
   /v2/businesses/{businessId}/offer-mappings/delete:
     $ref: paths/v2_businesses_businessId_offer-mappings_delete.yaml
   /v2/businesses/{businessId}/offer-mappings:
@@ -170,6 +155,14 @@ paths:
     $ref: paths/v2_businesses_businessId_offer-mappings_unarchive.yaml
   /v1/businesses/{businessId}/offer-mappings/barcodes/generate:
     $ref: paths/v1_businesses_businessId_offer-mappings_barcodes_generate.yaml
+  /v1/businesses/{businessId}/offers/documents/create:
+    $ref: paths/v1_businesses_businessId_offers_documents_create.yaml
+  /v1/businesses/{businessId}/offers/documents/update:
+    $ref: paths/v1_businesses_businessId_offers_documents_update.yaml
+  /v1/businesses/{businessId}/offers/documents/delete:
+    $ref: paths/v1_businesses_businessId_offers_documents_delete.yaml
+  /v1/businesses/{businessId}/offers/documents:
+    $ref: paths/v1_businesses_businessId_offers_documents.yaml
   /v2/businesses/{businessId}/offer-prices/updates:
     $ref: paths/v2_businesses_businessId_offer-prices_updates.yaml
   /v2/campaigns/{campaignId}/offer-prices/updates:
@@ -192,6 +185,10 @@ paths:
     $ref: paths/v2_campaigns_campaignId_hidden-offers_delete.yaml
   /v2/campaigns/{campaignId}/offers/stocks:
     $ref: paths/v2_campaigns_campaignId_offers_stocks.yaml
+  /v3/businesses/{businessId}/offers/stocks/update:
+    $ref: paths/v3_businesses_businessId_offers_stocks_update.yaml
+  /v3/businesses/{businessId}/offers/stocks:
+    $ref: paths/v3_businesses_businessId_offers_stocks.yaml
   /v2/delivery/services:
     $ref: paths/v2_delivery_services.yaml
   /v1/campaigns/{campaignId}/delivery-options:
@@ -216,6 +213,8 @@ paths:
     $ref: paths/v2_reports_goods-realization_generate.yaml
   /v2/reports/stocks-on-warehouses/generate:
     $ref: paths/v2_reports_stocks-on-warehouses_generate.yaml
+  /v3/businesses/{businessId}/reports/stocks/generate:
+    $ref: paths/v3_businesses_businessId_reports_stocks_generate.yaml
   /v2/reports/goods-movement/generate:
     $ref: paths/v2_reports_goods-movement_generate.yaml
   /v2/reports/shows-sales/generate:
@@ -251,8 +250,7 @@ paths:
   /v2/reports/closure-documents/detalization/generate:
     $ref: paths/v2_reports_closure-documents_detalization_generate.yaml
   /v1/businesses/{businessId}/reports/marketing-detalization/generate:
-    $ref: >-
-      paths/v1_businesses_businessId_reports_marketing-detalization_generate.yaml
+    $ref: paths/v1_businesses_businessId_reports_marketing-detalization_generate.yaml
   /v1/reports/documents/barcodes/generate:
     $ref: paths/v1_reports_documents_barcodes_generate.yaml
   /v2/campaigns/{campaignId}/outlets:
@@ -299,10 +297,14 @@ paths:
     $ref: paths/v2_businesses_businessId_bids_recommendations.yaml
   /v2/businesses/{businessId}/warehouses:
     $ref: paths/v2_businesses_businessId_warehouses.yaml
+  /v3/businesses/{businessId}/warehouses:
+    $ref: paths/v3_businesses_businessId_warehouses.yaml
   /v2/warehouses:
     $ref: paths/v2_warehouses.yaml
   /v2/campaigns/{campaignId}/warehouse/status:
     $ref: paths/v2_campaigns_campaignId_warehouse_status.yaml
+  /v3/businesses/{businessId}/warehouse/models/status:
+    $ref: paths/v3_businesses_businessId_warehouse_models_status.yaml
   /v2/category/{categoryId}/parameters:
     $ref: paths/v2_category_categoryId_parameters.yaml
   /v2/businesses/{businessId}/offer-cards:

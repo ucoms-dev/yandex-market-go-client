@@ -1,5 +1,7 @@
 put:
   x-resource-id: 166
+  x-personal-cleanup-enabled: false
+  x-analytical-group: BIDS
   tags:
     - bids
     - dbs
@@ -20,9 +22,8 @@ put:
       amount: 1000
       period: minutes
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
+  x-allowed:
+    - seller
   x-apphost:
     domain: MONETIZATION
     enabled: true

@@ -1,5 +1,7 @@
 get:
   x-resource-id: 188
+  x-personal-cleanup-enabled: false
+  x-analytical-group: REPORTS
   tags:
     - reports
     - fby
@@ -22,6 +24,10 @@ get:
     - promotion:read-only
     - communication
     - supplies-management:read-only
+  x-allowed:
+    - seller
+    - urbanads
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
