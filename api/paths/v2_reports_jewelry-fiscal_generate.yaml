@@ -1,5 +1,7 @@
 post:
   x-resource-id: 262
+  x-personal-cleanup-enabled: false
+  x-analytical-group: REPORTS
   tags:
     - reports
     - fby
@@ -12,8 +14,9 @@ post:
     - finance-and-accounting
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
