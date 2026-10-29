@@ -5,8 +5,3 @@ properties:
     description: Идентификатор следующей страницы результатов.
     type: string
     x-serialize-transform: token
-  prevPageToken:
-    description: Идентификатор предыдущей страницы результатов.
-    type: string
-    deprecated: true
-    x-serialize-transform: token
