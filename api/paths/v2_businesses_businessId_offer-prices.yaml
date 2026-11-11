@@ -1,5 +1,7 @@
 post:
   x-resource-id: 261
+  x-personal-cleanup-enabled: false
+  x-analytical-group: PRICE
   tags:
     - prices
     - fby
@@ -12,8 +14,9 @@ post:
     - all-methods:read-only
     - pricing
     - pricing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp.result.offers
     none:

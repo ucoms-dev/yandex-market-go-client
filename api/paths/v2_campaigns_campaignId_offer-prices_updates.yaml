@@ -1,5 +1,7 @@
 post:
   x-resource-id: 64
+  x-personal-cleanup-enabled: false
+  x-analytical-group: PRICE
   tags:
     - prices
     - fby
@@ -10,8 +12,9 @@ post:
   x-auth-scopes:
     - all-methods
     - pricing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.offers
     parallel-limit-value: 12

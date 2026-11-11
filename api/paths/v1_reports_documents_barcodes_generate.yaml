@@ -1,5 +1,7 @@
 post:
   x-resource-id: 282
+  x-personal-cleanup-enabled: false
+  x-analytical-group: CATALOG
   tags:
     - reports
     - fby
@@ -9,8 +11,9 @@ post:
     - all-methods:read-only
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
