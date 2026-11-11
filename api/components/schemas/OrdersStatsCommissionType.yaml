@@ -20,6 +20,8 @@ description: >
 
   * `AGENCY` — прием платежа покупателя.
 
+  * `AGENCY_COMMISSION_3PL` — услуги перевозки и ТЭО.
+
   * `PAYMENT_TRANSFER` — перевод платежа покупателя.
 
   * `RETURNED_ORDERS_STORAGE` — хранение невыкупов и возвратов (FBS). Для DBS и
@@ -40,6 +42,11 @@ description: >
 
   * `ITEM_BOOKING` - бронирование товара (только для продавцов Market Yandex
   Go).
+
+  * `SHOP_SERVICE_PLACEMENT` — размещение услуг магазина (DBS). Начисления и
+  корректировки возвращаются отдельными элементами массива `commissions` с этим
+  типом: в одном заказе может быть несколько таких элементов. Корректировки
+  могут быть отрицательными.
 type: string
 enum:
   - FEE
@@ -50,6 +57,7 @@ enum:
   - DELIVERY_TO_CUSTOMER
   - EXPRESS_DELIVERY_TO_CUSTOMER
   - AGENCY
+  - AGENCY_COMMISSION_3PL
   - PAYMENT_TRANSFER
   - RETURNED_ORDERS_STORAGE
   - SORTING
@@ -59,3 +67,4 @@ enum:
   - CROSSREGIONAL_DELIVERY
   - FULFILLMENT_WITHDRAW
   - ITEM_BOOKING
+  - SHOP_SERVICE_PLACEMENT

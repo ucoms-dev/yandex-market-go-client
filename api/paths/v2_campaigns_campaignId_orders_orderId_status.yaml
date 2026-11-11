@@ -1,5 +1,7 @@
 put:
   x-resource-id: 30
+  x-personal-cleanup-enabled: true
+  x-analytical-group: ORDERS
   tags:
     - orders
     - fbs
@@ -9,8 +11,9 @@ put:
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:

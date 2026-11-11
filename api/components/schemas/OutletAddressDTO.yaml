@@ -5,7 +5,7 @@ required:
   - regionId
 properties:
   regionId:
-    description: "Идентификатор региона.\n\nИдентификатор можно получить c помощью запроса [GET\_v2/regions](../../reference/regions/searchRegionsByName.md).\n\n{% note alert \"Типы регионов при создании и редактировании точек продаж\" %}\n\nУказывайте только регионы типов `TOWN` (город), `CITY` (крупный город) и `REPUBLIC_AREA` (район субъекта федерации). Тип региона указан в выходных параметрах `type` запросов [GET\_v2/regions](../../reference/regions/searchRegionsByName.md) и [GET\_v2/regions/{regionId}](../../reference/regions/searchRegionsById.md).\n\n{% endnote %}\n"
+    description: "Идентификатор региона.\n\nИдентификатор можно получить c помощью запроса [GET\_v2/regions](../../reference/regions/searchRegionsByName.md).\n\n{% note alert \"Типы регионов при создании и редактировании точек продаж\" %}\n\nУказывайте только регионы типов `VILLAGE` (город), `CITY` (крупный город) и `REPUBLIC_AREA` (район субъекта федерации). Тип региона указан в выходных параметрах `type` запросов [GET\_v2/regions](../../reference/regions/searchRegionsByName.md) и [GET\_v2/regions/{regionId}](../../reference/regions/searchRegionsById.md).\n\n{% endnote %}\n"
     type: integer
     format: int64
   street:
@@ -38,7 +38,15 @@ properties:
     type: integer
     format: int32
   city:
-    description: "{% note warning \"В ответах города и населенные пункты возвращаются в параметре `regionId`.\" %}\n\n\_\n\n{% endnote %}\n"
+    description: |
+      {% note warning "Параметр устарел и будет отключен 19.10.2026." %}
+
+      В ответах города и населенные пункты возвращаются в параметре `regionId`.
+
+      {% endnote %}
     maxLength: 200
     type: string
     deprecated: true
+    x-deprecation-config:
+      shutdown-date: '2026-10-19'
+      replacement-field: regionId
