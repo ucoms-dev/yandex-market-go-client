@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 210
   tags:
     - chats
     - dbs
@@ -9,8 +8,9 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -21,9 +21,6 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: BASE
-    enabled: false
   operationId: sendMessageToChat
   summary: Отправка сообщения в чат
   description: >
@@ -32,6 +29,12 @@ post:
 
 
     Отправляет сообщение в чат с покупателем.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Чаты с покупателями](../../step-by-step/chats.md)
 
 
     {% include notitle [limit](../../_auto/method_limits/sendMessageToChat.md)
@@ -66,7 +69,6 @@ post:
     '500':
       $ref: ../components/responses/500.yaml
 get:
-  x-resource-id: 248
   tags:
     - chats
     - dbs
@@ -77,8 +79,9 @@ get:
     - all-methods
     - all-methods:read-only
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -89,12 +92,9 @@ get:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: BASE
-    enabled: false
   operationId: getChatMessage
   summary: Получение сообщения в чате
-  description: "{% include notitle [access](../../_auto/method_scopes/getChatMessage.md) %}\n\nВозвращает сообщение по его идентификатору.\n\n{% note tip \"Подключите API-уведомления\" %}\n\nМаркет отправит вам запрос [POST\_notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.\n\n[{#T}](../../push-notifications/index.md)\n\n{% endnote %}\n\n{% include notitle [limit](../../_auto/method_limits/getChatMessage.md) %}\n"
+  description: "{% include notitle [access](../../_auto/method_scopes/getChatMessage.md) %}\n\nВозвращает сообщение по его идентификатору.\n\n{% note tip \"Подключите API-уведомления\" %}\n\nМаркет отправит вам запрос [POST\_notification](../../push-notifications/reference/sendNotification.md), когда появится новый чат или сообщение.\n\n[{#T}](../../push-notifications/index.md)\n\n{% endnote %}\n\n**Пошаговые инструкции**\n\n* [Как проверить, есть ли новые чаты или сообщения](../../step-by-step/chats.md#check)\n\n{% include notitle [limit](../../_auto/method_limits/getChatMessage.md) %}\n"
   parameters:
     - $ref: ../components/parameters/BusinessId.yaml
     - $ref: ../components/parameters/ChatId.yaml

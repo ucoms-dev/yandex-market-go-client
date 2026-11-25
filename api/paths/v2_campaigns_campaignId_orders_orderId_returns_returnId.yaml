@@ -1,5 +1,4 @@
 get:
-  x-resource-id: 159
   tags:
     - returns
     - fbs
@@ -12,8 +11,9 @@ get:
     - all-methods:read-only
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -24,12 +24,9 @@ get:
       amount: 7000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: ORDERS
-    enabled: false
   operationId: getReturn
   summary: Информация о невыкупе или возврате
-  description: "{% include notitle [access](../../_auto/method_scopes/getReturn.md) %}\n\nПолучает информацию по одному невыкупу или возврату.\n\n{% note tip \"Подключите API-уведомления\" %}\n\nМаркет отправит вам запрос [POST\_notification](../../push-notifications/reference/sendNotification.md), когда появится новый невыкуп или возврат.\n\n[{#T}](../../push-notifications/index.md)\n\n{% endnote %}\n\n{% include notitle [limit](../../_auto/method_limits/getReturn.md) %}\n"
+  description: "{% include notitle [access](../../_auto/method_scopes/getReturn.md) %}\n\nПолучает информацию по одному невыкупу или возврату.\n\n{% note tip \"Подключите API-уведомления\" %}\n\nМаркет отправит вам запрос [POST\_notification](../../push-notifications/reference/sendNotification.md), когда появится новый невыкуп или возврат.\n\n[{#T}](../../push-notifications/index.md)\n\n{% endnote %}\n\n**Пошаговые инструкции**\n\n* [Невыкупы и возвраты](../../step-by-step/returns.md)\n\n{% include notitle [limit](../../_auto/method_limits/getReturn.md) %}\n"
   parameters:
     - $ref: ../components/parameters/CampaignId.yaml
     - $ref: ../components/parameters/OrderId.yaml

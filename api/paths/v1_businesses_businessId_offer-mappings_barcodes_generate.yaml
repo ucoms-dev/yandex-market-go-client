@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 281
   tags:
     - business-offer-mappings
     - dbs
@@ -10,8 +9,9 @@ post:
   x-auth-scopes:
     - all-methods
     - offers-and-cards-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.offerIds
     none:
@@ -22,12 +22,9 @@ post:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: generateOfferBarcodes
   summary: Генерация штрихкодов
-  description: "{% include notitle [access](../../_auto/method_scopes/generateOfferBarcodes.md) %}\n\nГенерирует штрихкоды и присваивает их указанным товарам.\n\nЕсли у товара на упаковке уже есть штрихкод производителя, передайте его в параметре `barcodes` в методе [POST\_v2/businesses/{businessId}/offer-mappings/update](../../reference/business-offer-mappings/updateOfferMappings.md). Генерировать новый не нужно.\n\n{% include notitle [limit](../../_auto/method_limits/generateOfferBarcodes.md) %}\n"
+  description: "{% include notitle [access](../../_auto/method_scopes/generateOfferBarcodes.md) %}\n\nГенерирует штрихкоды и присваивает их указанным товарам.\n\nЕсли у товара на упаковке уже есть штрихкод производителя, передайте его в параметре `barcodes` в методе [POST\_v2/businesses/{businessId}/offer-mappings/update](../../reference/business-offer-mappings/updateOfferMappings.md). Генерировать новый не нужно.\n\n**Пошаговые инструкции**\n\n* [Сгенерировать штрихкоды при добавлении товаров](../../step-by-step/assortment-add-goods.md#add)\n\n{% include notitle [limit](../../_auto/method_limits/generateOfferBarcodes.md) %}\n"
   parameters:
     - $ref: ../components/parameters/BusinessId.yaml
   requestBody:

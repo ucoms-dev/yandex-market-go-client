@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 285
   tags:
     - goods-questions
     - fby
@@ -10,8 +9,9 @@ post:
     - all-methods
     - all-methods:read-only
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -22,9 +22,6 @@ post:
       amount: 5000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: UGC
-    enabled: false
   operationId: getGoodsQuestions
   summary: Получение вопросов о товарах продавца
   description: >
@@ -52,6 +49,12 @@ post:
 
     Результаты возвращаются постранично, одна страница содержит не более 50
     вопросов.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Вопросы и ответы о товарах](../../step-by-step/goods-questions.md)
 
 
     {% include notitle [limit](../../_auto/method_limits/getGoodsQuestions.md)

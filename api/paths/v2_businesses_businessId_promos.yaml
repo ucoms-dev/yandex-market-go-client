@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 235
   tags:
     - promos
     - fby
@@ -23,12 +22,8 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
-  x-apphost:
-    domain: PROMO
-    enabled: false
+  x-allowed:
+    - seller
   operationId: getPromos
   summary: Получение списка акций
   description: >
@@ -55,6 +50,12 @@ post:
     * флеш-акция;
 
     * скидка по промокоду.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Управление акциями](../../step-by-step/promos.md)
 
 
     {% include notitle [limit](../../_auto/method_limits/getPromos.md) %}

@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 231
   tags:
     - goods-feedback
     - fby
@@ -9,6 +8,10 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
+  x-allowed:
+    - seller
+    - urbanads
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -19,9 +22,6 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: UGC
-    enabled: false
   operationId: deleteGoodsFeedbackComment
   summary: Удаление комментария к отзыву
   description: >
@@ -30,6 +30,12 @@ post:
 
 
     Удаляет комментарий магазина.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Удалить свой комментарий](../../step-by-step/goods-feedback.md#delete)
 
 
     {% include notitle

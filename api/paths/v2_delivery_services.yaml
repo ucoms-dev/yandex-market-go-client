@@ -1,5 +1,4 @@
 get:
-  x-resource-id: 55
   tags:
     - delivery-services
     - fbs
@@ -20,8 +19,9 @@ get:
     - promotion:read-only
     - communication
     - supplies-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -32,9 +32,6 @@ get:
       amount: 5000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: getDeliveryServices
   summary: Справочник служб доставки
   description: >

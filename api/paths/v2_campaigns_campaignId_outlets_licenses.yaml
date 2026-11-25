@@ -1,5 +1,4 @@
 get:
-  x-resource-id: 113
   tags:
     - outlet-licenses
     - dbs
@@ -7,8 +6,9 @@ get:
     - all-methods
     - all-methods:read-only
     - settings-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -19,9 +19,6 @@ get:
       amount: 100000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: getOutletLicenses
   summary: Информация о лицензиях для точек продаж
   description: >
@@ -68,15 +65,15 @@ get:
     '500':
       $ref: ../components/responses/500.yaml
 delete:
-  x-resource-id: 112
   tags:
     - outlet-licenses
     - dbs
   x-auth-scopes:
     - all-methods
     - settings-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -87,9 +84,6 @@ delete:
       amount: 100000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: deleteOutletLicenses
   summary: Удаление лицензий для точек продаж
   description: >
@@ -131,15 +125,15 @@ delete:
     '500':
       $ref: ../components/responses/500.yaml
 post:
-  x-resource-id: 114
   tags:
     - outlet-licenses
     - dbs
   x-auth-scopes:
     - all-methods
     - settings-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -150,9 +144,6 @@ post:
       amount: 100000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: updateOutletLicenses
   summary: Создание и изменение лицензий для точек продаж
   description: >

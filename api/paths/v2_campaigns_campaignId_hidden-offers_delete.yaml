@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 242
   tags:
     - hidden-offers
     - fby
@@ -9,8 +8,9 @@ post:
   x-auth-scopes:
     - all-methods
     - offers-and-cards-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.hiddenOffers
     none:
@@ -21,9 +21,6 @@ post:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: deleteHiddenOffers
   summary: Возобновление показа товаров
   description: >

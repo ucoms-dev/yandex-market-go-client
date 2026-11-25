@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 222
   tags:
     - categories
     - fby
@@ -22,8 +21,9 @@ post:
     - promotion:read-only
     - communication
     - supplies-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -34,9 +34,6 @@ post:
       amount: 100
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: getCategoriesTree
   summary: Дерево категорий
   description: >

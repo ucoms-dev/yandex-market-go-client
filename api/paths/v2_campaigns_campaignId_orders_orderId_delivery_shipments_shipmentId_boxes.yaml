@@ -1,13 +1,13 @@
 put:
-  x-resource-id: 107
   tags:
     - orders
     - dbs
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -18,9 +18,6 @@ put:
       amount: 10000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   x-deprecation-config:
     degradation-start-date: '2027-01-18'
     shutdown-date: '2027-04-05'
@@ -38,8 +35,6 @@ put:
 
     Количество грузовых мест нужно обязательно передавать Маркету, если оно не
     равно 1. Это делается перед переводом его в статус **Готов к отгрузке**.
-    Подробно о том, что в какой момент нужно передавать, рассказано в [пошаговой
-    инструкции](../../step-by-step/fbs.md).
 
 
     Метод устроен немного нестандартно: количество задается длиной массива
@@ -130,6 +125,13 @@ put:
 
 
     {% endcut %}
+
+
+    **Пошаговые инструкции**
+
+
+    * [Актуальный способ передачи сведений о коробках
+    FBS](../../step-by-step/fbs.md#order-info)
 
 
     {% include notitle

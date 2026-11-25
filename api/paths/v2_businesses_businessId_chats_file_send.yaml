@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 209
   tags:
     - chats
     - dbs
@@ -9,8 +8,9 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -21,15 +21,16 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: BASE
-    enabled: false
   operationId: sendFileToChat
   summary: Отправка файла в чат
   description: |
     {% include notitle [access](../../_auto/method_scopes/sendFileToChat.md) %}
 
     Отправляет файл в чат с покупателем.
+
+    **Пошаговые инструкции**
+
+    * [Чаты с покупателями](../../step-by-step/chats.md)
 
     {% include notitle [limit](../../_auto/method_limits/sendFileToChat.md) %}
   parameters:

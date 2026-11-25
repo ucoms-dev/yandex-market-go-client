@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 282
   tags:
     - reports
     - fby
@@ -9,8 +8,9 @@ post:
     - all-methods:read-only
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -21,12 +21,9 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: generateBarcodesReport
   summary: Получение файла со штрихкодами
-  description: "{% include notitle [access](../../_auto/method_scopes/generateBarcodesReport.md) %}\n\nЗапускает генерацию PDF-файла со штрихкодами переданных товаров или товаров в указанной заявке на поставку.\n\nФайл не получится сгенерировать, если в нем будет более 1\_500 штрихкодов.\n\nУзнать статус генерации и получить ссылку на готовый файл можно с помощью запроса [GET\_v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).\n\n{% include notitle [limit](../../_auto/method_limits/generateBarcodesReport.md) %}\n"
+  description: "{% include notitle [access](../../_auto/method_scopes/generateBarcodesReport.md) %}\n\nЗапускает генерацию PDF-файла со штрихкодами переданных товаров или товаров в указанной заявке на поставку.\n\nФайл не получится сгенерировать, если в нем будет более 1\_500 штрихкодов.\n\nУзнать статус генерации и получить ссылку на готовый файл можно с помощью запроса [GET\_v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).\n\n**Пошаговые инструкции**\n\n* [Получить файл со штрихкодами товаров в заявке](../../step-by-step/supplies.md)\n* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)\n\n{% include notitle [limit](../../_auto/method_limits/generateBarcodesReport.md) %}\n"
   requestBody:
     required: true
     content:

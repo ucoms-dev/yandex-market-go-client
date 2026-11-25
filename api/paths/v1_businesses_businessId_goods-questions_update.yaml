@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 284
   tags:
     - goods-questions
     - fby
@@ -9,8 +8,9 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -21,9 +21,6 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: UGC
-    enabled: false
   operationId: updateGoodsQuestionTextEntity
   summary: Создание, изменение и удаление ответа или комментария
   description: >
@@ -32,6 +29,12 @@ post:
 
 
     Создание, изменение и удаление ответа или комментария.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Вопросы и ответы о товарах](../../step-by-step/goods-questions.md)
 
 
     {% include notitle

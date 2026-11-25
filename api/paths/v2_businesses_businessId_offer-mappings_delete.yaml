@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 171
   tags:
     - business-offer-mappings
     - dbs
@@ -10,8 +9,9 @@ post:
   x-auth-scopes:
     - all-methods
     - offers-and-cards-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.offerIds
     none:
@@ -22,15 +22,21 @@ post:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: deleteOffers
   summary: Удаление товаров из каталога
-  description: |
+  description: >
     {% include notitle [access](../../_auto/method_scopes/deleteOffers.md) %}
 
+
     Удаляет товары из каталога.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Удаление товаров из
+    каталога](../../step-by-step/assortment-add-goods.md#deletion)
+
 
     {% include notitle [limit](../../_auto/method_limits/deleteOffers.md) %}
   parameters:

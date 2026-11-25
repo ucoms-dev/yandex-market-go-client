@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 253
   tags:
     - supply-requests
     - fby
@@ -8,8 +7,9 @@ post:
     - all-methods
     - all-methods:read-only
     - supplies-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -20,9 +20,6 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: getSupplyRequests
   summary: Получение информации о заявках на поставку, вывоз и утилизацию
   description: >
@@ -32,6 +29,13 @@ post:
 
     По указанным фильтрам возвращает заявки на поставку, вывоз и утилизацию, а
     также информацию по ним.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Заявки на поставку товаров на склад, вывоз или
+    утилизацию](../../step-by-step/supplies.md)
 
 
     {% include notitle [limit](../../_auto/method_limits/getSupplyRequests.md)

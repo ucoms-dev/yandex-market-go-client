@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 212
   tags:
     - reports
     - fby
@@ -14,8 +13,9 @@ post:
     - promotion:read-only
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -26,12 +26,9 @@ post:
       amount: 1
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: FINANCE
-    enabled: false
   operationId: generateUnitedOrdersReport
   summary: Отчет по заказам
-  description: "{% include notitle [access](../../_auto/method_scopes/generateUnitedOrdersReport.md) %}\n\nЗапускает генерацию отчета по заказам за заданный период. [Что это за отчет](https://yandex.ru/support/marketplace/ru/accounting/transactions#get-report)\n\nУзнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET\_v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).\n\n{% include notitle [reports](../../_auto/reports/united/orders/generator/united_orders.md) %}\n\n{% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}\n\n{% include notitle [limit](../../_auto/method_limits/generateUnitedOrdersReport.md) %}\n"
+  description: "{% include notitle [access](../../_auto/method_scopes/generateUnitedOrdersReport.md) %}\n\nЗапускает генерацию отчета по заказам за заданный период. [Что это за отчет](https://yandex.ru/support/marketplace/ru/accounting/transactions#get-report)\n\nУзнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET\_v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).\n\n{% include notitle [reports](../../_auto/reports/united/orders/generator/united_orders.md) %}\n\n{% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}\n\n**Пошаговые инструкции**\n\n* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)\n\n{% include notitle [limit](../../_auto/method_limits/generateUnitedOrdersReport.md) %}\n"
   parameters:
     - $ref: ../components/parameters/ReportFormat.yaml
     - $ref: ../components/parameters/ReportLanguage.yaml

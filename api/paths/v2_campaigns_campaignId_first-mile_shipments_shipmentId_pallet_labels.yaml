@@ -1,13 +1,15 @@
 get:
-  x-resource-id: 180
   tags:
     - shipments
     - fbs
   x-auth-scopes:
     - all-methods
+    - all-methods:read-only
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+    - inventory-and-order-processing:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -18,12 +20,9 @@ get:
       amount: 200
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: downloadShipmentPalletLabels
   summary: Ярлыки для доверительной приемки
-  description: "{% include notitle [access](../../_auto/method_scopes/downloadShipmentPalletLabels.md) %}\n\nPDF-файл с ярлыками на каждую упаковку в отгрузке для доверительной приемки. Подробнее о таком виде приемки читайте в [Справке Маркета для продавцов](https://yandex.ru/support/marketplace/orders/fbs/process.html#acceptance).\n\nРаспечатайте по несколько копий каждого ярлыка: на одну упаковку нужно наклеить минимум 2 ярлыка с разных сторон.\n\nКоличество упаковок в отгрузке передается в методе [PUT\_v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallets](../../reference/shipments/setShipmentPalletsCount.md).\n\n{% include notitle [limit](../../_auto/method_limits/downloadShipmentPalletLabels.md) %}\n"
+  description: "{% include notitle [access](../../_auto/method_scopes/downloadShipmentPalletLabels.md) %}\n\nPDF-файл с ярлыками на каждую упаковку в отгрузке для доверительной приемки. Подробнее о таком виде приемки читайте в [Справке Маркета для продавцов](https://yandex.ru/support/marketplace/orders/fbs/process.html#acceptance).\n\nРаспечатайте по несколько копий каждого ярлыка: на одну упаковку нужно наклеить минимум 2 ярлыка с разных сторон.\n\nКоличество упаковок в отгрузке передается в методе [PUT\_v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallets](../../reference/shipments/setShipmentPalletsCount.md).\n\n**Пошаговые инструкции**\n\n* [Работа с отгрузкой](../../step-by-step/fbs.md#shipment)\n\n{% include notitle [limit](../../_auto/method_limits/downloadShipmentPalletLabels.md) %}\n"
   parameters:
     - $ref: ../components/parameters/CampaignId.yaml
     - $ref: ../components/parameters/ShipmentId-3.yaml
