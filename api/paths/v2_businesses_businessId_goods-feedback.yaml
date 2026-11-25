@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 233
   tags:
     - goods-feedback
     - fby
@@ -10,8 +9,9 @@ post:
     - all-methods
     - all-methods:read-only
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -22,9 +22,6 @@ post:
       amount: 10000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: UGC
-    enabled: false
   operationId: getGoodsFeedbacks
   summary: Получение отзывов о товарах продавца
   description: >
@@ -57,6 +54,12 @@ post:
     Отзывы расположены в порядке публикации, поэтому вы можете передавать
     определенный идентификатор страницы в `pageToken`, если вы получали его
     ранее.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Отзывы о товарах](../../step-by-step/goods-feedback.md)
 
 
     {% include notitle [limit](../../_auto/method_limits/getGoodsFeedbacks.md)

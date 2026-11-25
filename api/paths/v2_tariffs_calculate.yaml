@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 216
   tags:
     - tariffs
     - fbs
@@ -12,8 +11,9 @@ post:
     - finance-and-accounting
     - pricing
     - pricing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -24,9 +24,6 @@ post:
       amount: 100
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: FINANCE
-    enabled: false
   operationId: calculateTariffs
   summary: Калькулятор стоимости услуг
   description: >

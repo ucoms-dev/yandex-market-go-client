@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 287
   tags:
     - returns
     - dbs
@@ -11,8 +10,9 @@ post:
     - all-methods:read-only
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -23,9 +23,6 @@ post:
       amount: 5000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: ORDERS
-    enabled: false
   operationId: getReturnAvailableDecisions
   summary: Получение возможных решений по возврату
   description: >
@@ -34,6 +31,13 @@ post:
 
 
     Возвращает список доступных решений по возврату.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Как работать с невыкупами и
+    возвратами](../../step-by-step/returns.md#new-return)
 
 
     {% include notitle

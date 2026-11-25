@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 234
   tags:
     - goods-feedback
     - fby
@@ -9,6 +8,10 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
+  x-allowed:
+    - seller
+    - urbanads
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -19,12 +22,9 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: UGC
-    enabled: false
   operationId: skipGoodsFeedbacksReaction
   summary: Пропуск реакции на отзывы
-  description: "{% include notitle [access](../../_auto/method_scopes/skipGoodsFeedbacksReaction.md) %}\n\nПропускает реакцию на отзыв — параметр `needReaction` принимает значение `false` в методе получения всех отзывов [POST\_v2/businesses/{businessId}/goods-feedback](../../reference/goods-feedback/getGoodsFeedbacks.md).\n\n{% include notitle [limit](../../_auto/method_limits/skipGoodsFeedbacksReaction.md) %}\n"
+  description: "{% include notitle [access](../../_auto/method_scopes/skipGoodsFeedbacksReaction.md) %}\n\nПропускает реакцию на отзыв — параметр `needReaction` принимает значение `false` в методе получения всех отзывов [POST\_v2/businesses/{businessId}/goods-feedback](../../reference/goods-feedback/getGoodsFeedbacks.md).\n\n**Пошаговые инструкции**\n\n* [Отзывы о товарах](../../step-by-step/goods-feedback.md)\n\n{% include notitle [limit](../../_auto/method_limits/skipGoodsFeedbacksReaction.md) %}\n"
   parameters:
     - $ref: ../components/parameters/BusinessId.yaml
     - $ref: ../components/parameters/SourceType.yaml

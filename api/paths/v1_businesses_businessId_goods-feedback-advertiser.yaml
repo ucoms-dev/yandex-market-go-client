@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 288
   tags:
     - goods-feedback
     - fby
@@ -10,6 +9,8 @@ post:
     - all-methods
     - all-methods:read-only
     - communication
+  x-allowed:
+    - urbanads
   x-resource-limit-config:
     path: resp
     none:
@@ -20,9 +21,6 @@ post:
       amount: 10000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: UGC
-    enabled: true
   operationId: getGoodsFeedbacksUrbanads
   summary: Получение отзывов о товарах для рекламодателей
   description: >

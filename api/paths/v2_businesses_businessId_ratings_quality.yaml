@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 239
   tags:
     - ratings
     - fby
@@ -12,8 +11,9 @@ post:
     - settings-management
     - inventory-and-order-processing
     - inventory-and-order-processing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -24,9 +24,6 @@ post:
       amount: 500
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: ORDERS
-    enabled: false
   operationId: getQualityRatings
   summary: Индекс качества магазинов
   description: >
@@ -39,6 +36,12 @@ post:
 
     Подробнее об индексе качества читайте [в Справке Маркета для
     продавцов](https://yandex.ru/support2/marketplace/ru/quality/score/).
+
+
+    **Пошаговые инструкции**
+
+
+    * [Индекс качества](../../step-by-step/ratings.md)
 
 
     {% include notitle [limit](../../_auto/method_limits/getQualityRatings.md)

@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 245
   tags:
     - warehouses
     - fbs
@@ -8,8 +7,9 @@ post:
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -20,9 +20,10 @@ post:
       amount: 100
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
+  x-deprecation-config:
+    degradation-start-date: '2027-01-18'
+    shutdown-date: '2027-04-05'
+    replacement-operation-id: updateWarehouseModelStatus
   operationId: updateWarehouseStatus
   summary: Изменение статуса склада
   description: >
@@ -40,6 +41,7 @@ post:
 
     {% include notitle
     [limit](../../_auto/method_limits/updateWarehouseStatus.md) %}
+  deprecated: true
   parameters:
     - $ref: ../components/parameters/CampaignId.yaml
   requestBody:

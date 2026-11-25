@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 187
   tags:
     - bids
     - dbs
@@ -23,12 +22,8 @@ post:
       amount: 1000
       period: minutes
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
-  x-apphost:
-    domain: MONETIZATION
-    enabled: true
+  x-allowed:
+    - seller
   operationId: getBidsRecommendations
   summary: Рекомендованные ставки для заданных товаров
   description: >
@@ -51,6 +46,13 @@ post:
 
 
     В одном запросе может быть максимум 1500 товаров.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Как получить рекомендованные
+    ставки](../../step-by-step/boost.md#recommendations)
 
 
     {% include notitle

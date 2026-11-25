@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 204
   tags:
     - business-offer-mappings
     - dbs
@@ -9,8 +8,9 @@ post:
   x-auth-scopes:
     - all-methods
     - offers-and-cards-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.offerIds
     none:
@@ -21,9 +21,6 @@ post:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: deleteOffersFromArchive
   summary: Удаление товаров из архива
   description: >
@@ -32,6 +29,12 @@ post:
 
 
     Восстанавливает товары из архива.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Управление товарами в архиве](../../step-by-step/assortment-archive.md)
 
 
     {% include notitle

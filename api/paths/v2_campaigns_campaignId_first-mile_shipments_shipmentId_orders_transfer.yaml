@@ -1,13 +1,13 @@
 post:
-  x-resource-id: 185
   tags:
     - shipments
     - fbs
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -18,9 +18,6 @@ post:
       amount: 200
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: transferOrdersFromShipment
   summary: Перенос заказов в следующую отгрузку
   description: >
@@ -53,6 +50,13 @@ post:
 
 
     Перенос происходит не мгновенно, а занимает несколько минут.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Если товара не хватает: перенос, отмена и сокращение
+    заказа](../../step-by-step/fbs.md#cancel-by-seller)
 
 
     {% include notitle

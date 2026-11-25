@@ -1,13 +1,15 @@
 get:
-  x-resource-id: 150
   tags:
     - shipments
     - fbs
   x-auth-scopes:
     - all-methods
+    - all-methods:read-only
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+    - inventory-and-order-processing:read-only
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -18,9 +20,6 @@ get:
       amount: 200
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: downloadShipmentDiscrepancyAct
   summary: Получение акта расхождений
   description: >

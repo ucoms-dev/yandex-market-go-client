@@ -1,5 +1,4 @@
 put:
-  x-resource-id: 30
   tags:
     - orders
     - fbs
@@ -9,8 +8,9 @@ put:
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -21,9 +21,6 @@ put:
       amount: 10000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: ORDERS
-    enabled: false
   operationId: updateOrderStatus
   summary: Изменение статуса одного заказа
   description: >
@@ -52,10 +49,6 @@ put:
     отмены заказа `"substatus": "SHOP_FAILED"`.
 
 
-    Полная информация о статусной модели DBS-заказов: [Как изменяются статусы
-    заказов](../../concepts/dbs-order-status-model.md).
-
-
     {% cut "**Как подтвердить LaaS-заказ**" %}
 
 
@@ -82,6 +75,23 @@ put:
 
 
     {% endcut %}
+
+
+    **Пошаговые инструкции**
+
+
+    * [Обработка FBS-заказов](../../step-by-step/fbs.md)
+
+    * [Обработка Экспресс-заказов](../../step-by-step/express.md)
+
+    * [Изменить статус DBS-заказа](../../concepts/dbs-order-status-model.md)
+
+    * [Обработка заказов с цифровыми товарами](../../step-by-step/digital.md)
+
+    * [Работа с LaaS-заказом](../../step-by-step/laas-order.md)
+
+    * [Изменить статус
+    LaaS-заказа](../../step-by-step/laas-order-status-model.md)
 
 
     {% include notitle [limit](../../_auto/method_limits/updateOrderStatus.md)

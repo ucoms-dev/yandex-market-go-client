@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 293
   tags:
     - reports
     - fby
@@ -11,6 +10,10 @@ post:
     - all-methods
     - all-methods:read-only
     - finance-and-accounting
+  x-allowed:
+    - seller
+    - urbanads
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -21,12 +24,9 @@ post:
       amount: 1
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: FINANCE
-    enabled: false
   operationId: generateMarketingDetalizationReport
   summary: Отчет по счету маркетинга
-  description: "{% include notitle [access](../../_auto/method_scopes/generateMarketingDetalizationReport.md) %}\n\nЗапускает генерацию отчета по счету маркетинга.\n\nУзнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET\_v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).\n\n{% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}\n\n{% include notitle [limit](../../_auto/method_limits/generateMarketingDetalizationReport.md) %}\n"
+  description: "{% include notitle [access](../../_auto/method_scopes/generateMarketingDetalizationReport.md) %}\n\nЗапускает генерацию отчета по счету маркетинга.\n\nУзнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET\_v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).\n\n{% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}\n\n**Пошаговые инструкции**\n\n* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)\n\n{% include notitle [limit](../../_auto/method_limits/generateMarketingDetalizationReport.md) %}\n"
   parameters:
     - $ref: ../components/parameters/BusinessId.yaml
     - $ref: ../components/parameters/ReportFormat.yaml

@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 207
   tags:
     - chats
     - dbs
@@ -9,8 +8,9 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -21,9 +21,6 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: BASE
-    enabled: false
   operationId: createChat
   summary: Создание нового чата с покупателем
   description: >
@@ -40,6 +37,12 @@ post:
     * по заказам;
 
     * по возвратам (доступны только для FBY-, FBS- и Экспресс-магазинов).
+
+
+    **Пошаговые инструкции**
+
+
+    * [Начать чат с покупателем](../../step-by-step/chats.md#create)
 
 
     {% include notitle [limit](../../_auto/method_limits/createChat.md) %}

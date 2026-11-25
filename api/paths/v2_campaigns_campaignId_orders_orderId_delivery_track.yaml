@@ -1,14 +1,12 @@
 post:
-  x-resource-id: 136
   tags:
     - order-delivery
     - dbs
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
-    - market-yandex-go
+  x-allowed:
+    - seller
   x-resource-limit-config:
     path: resp
     none:
@@ -19,9 +17,6 @@ post:
       amount: 10000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: setOrderDeliveryTrackCode
   summary: Передача трек‑номера посылки
   description: >

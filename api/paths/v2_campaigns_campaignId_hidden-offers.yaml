@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 59
   tags:
     - hidden-offers
     - fby
@@ -9,8 +8,9 @@ post:
   x-auth-scopes:
     - all-methods
     - offers-and-cards-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.hiddenOffers
     none:
@@ -21,9 +21,6 @@ post:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: addHiddenOffers
   summary: Скрытие товаров и настройки скрытия
   description: |
@@ -73,7 +70,6 @@ post:
     '500':
       $ref: ../components/responses/500.yaml
 get:
-  x-resource-id: 61
   tags:
     - hidden-offers
     - fby
@@ -85,8 +81,9 @@ get:
     - all-methods:read-only
     - offers-and-cards-management
     - offers-and-cards-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -97,9 +94,6 @@ get:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: getHiddenOffers
   summary: Информация о скрытых вами товарах
   description: >

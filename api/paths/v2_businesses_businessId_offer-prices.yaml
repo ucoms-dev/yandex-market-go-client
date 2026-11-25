@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 261
   tags:
     - prices
     - fby
@@ -12,8 +11,9 @@ post:
     - all-methods:read-only
     - pricing
     - pricing:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp.result.offers
     none:
@@ -24,9 +24,6 @@ post:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: PROMO
-    enabled: false
   operationId: getDefaultPrices
   summary: Просмотр цен на указанные товары во всех магазинах
   description: >

@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 232
   tags:
     - goods-feedback
     - fby
@@ -9,6 +8,10 @@ post:
   x-auth-scopes:
     - all-methods
     - communication
+  x-allowed:
+    - seller
+    - urbanads
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -19,9 +22,6 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: UGC
-    enabled: false
   operationId: updateGoodsFeedbackComment
   summary: Добавление нового или изменение созданного комментария
   description: >
@@ -55,6 +55,12 @@ post:
 
     Если передать одновременно `comment.parentId` и `comment.id`, будет изменен
     существующий комментарий.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Отзывы о товарах](../../step-by-step/goods-feedback.md)
 
 
     {% include notitle

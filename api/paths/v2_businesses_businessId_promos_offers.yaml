@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 236
   tags:
     - promos
     - fby
@@ -23,12 +22,8 @@ post:
       amount: 5000
       period: hours
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
-  x-apphost:
-    domain: PROMO
-    enabled: false
+  x-allowed:
+    - seller
   operationId: getPromoOffers
   summary: Получение списка товаров, которые участвуют или могут участвовать в акции
   description: |
@@ -38,11 +33,15 @@ post:
 
     {% note warning "Условия участия в акциях могут меняться" %}
 
-    Например, `maxPromoPrice`.
+    Например, `maxPromoPrice` и `bestPriceLevels`.
 
     Установленные цены меняться не будут — `price` и `promoPrice`.
 
     {% endnote %}
+
+    **Пошаговые инструкции**
+
+    * [Управление акциями](../../step-by-step/promos.md)
 
     {% include notitle [limit](../../_auto/method_limits/getPromoOffers.md) %}
   parameters:

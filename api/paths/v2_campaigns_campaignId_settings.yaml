@@ -1,5 +1,4 @@
 get:
-  x-resource-id: 25
   tags:
     - campaigns
     - dbs
@@ -22,8 +21,9 @@ get:
     - promotion:read-only
     - communication
     - supplies-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -34,9 +34,6 @@ get:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: BASE
-    enabled: false
   operationId: getCampaignSettings
   summary: Настройки магазина
   description: >

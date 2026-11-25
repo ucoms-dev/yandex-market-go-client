@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 182
   tags:
     - offers
     - dbs
@@ -10,8 +9,9 @@ post:
   x-auth-scopes:
     - all-methods
     - offers-and-cards-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.offerIds
     none:
@@ -22,9 +22,6 @@ post:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: deleteCampaignOffers
   summary: Удаление товаров из ассортимента магазина
   description: >
@@ -46,6 +43,13 @@ post:
 
 
     Товар не получится удалить, если он хранится на складах Маркета.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Удаление товаров из
+    каталога](../../step-by-step/assortment-add-goods.md#deletion)
 
 
     {% include notitle

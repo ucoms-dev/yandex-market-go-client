@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 183
   tags:
     - offers
     - dbs
@@ -10,8 +9,9 @@ post:
   x-auth-scopes:
     - all-methods
     - offers-and-cards-management
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: req.offers
     none:
@@ -22,9 +22,6 @@ post:
       amount: 10000
       period: minutes
       period-duration: 1
-  x-apphost:
-    domain: OFFERS_CATALOG
-    enabled: false
   operationId: updateCampaignOffers
   summary: Изменение условий продажи товаров в магазине
   description: >
@@ -34,6 +31,13 @@ post:
 
     Изменяет параметры размещения товаров в конкретном магазине: доступность
     товара и применяемый НДС.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Добавить новые товары в
+    каталог](../../step-by-step/assortment-add-goods.md#add)
 
 
     {% include notitle

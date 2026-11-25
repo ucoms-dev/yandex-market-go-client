@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 255
   tags:
     - orders
     - fbs
@@ -8,8 +7,9 @@ post:
   x-auth-scopes:
     - all-methods
     - inventory-and-order-processing
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -20,9 +20,6 @@ post:
       amount: 1000
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: ORDERS
-    enabled: false
   operationId: updateExternalOrderId
   summary: Передача внешнего идентификатора заказа
   description: >
@@ -53,6 +50,16 @@ post:
 
 
     {% endnote %}
+
+
+    **Пошаговые инструкции**
+
+
+    * [Передать внешний идентификатор
+    FBS-заказа](../../step-by-step/fbs.md#fulfillment)
+
+    * [Передать внешний идентификатор
+    Экспресс-заказа](../../step-by-step/express.md#label)
 
 
     {% include notitle

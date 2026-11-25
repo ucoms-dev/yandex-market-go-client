@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 251
   tags:
     - supply-requests
     - fby
@@ -8,8 +7,9 @@ post:
     - all-methods
     - all-methods:read-only
     - supplies-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -29,11 +29,15 @@ post:
     Возвращает документы по заявке.
 
 
+    **Пошаговые инструкции**
+
+
+    * [Заявки на поставку товаров на склад, вывоз или
+    утилизацию](../../step-by-step/supplies.md)
+
+
     {% include notitle
     [limit](../../_auto/method_limits/getSupplyRequestDocuments.md) %}
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
   operationId: getSupplyRequestDocuments
   parameters:
     - $ref: ../components/parameters/CampaignId.yaml

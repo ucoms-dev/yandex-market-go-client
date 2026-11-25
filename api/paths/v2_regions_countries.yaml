@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 254
   tags:
     - regions
     - fby
@@ -22,8 +21,9 @@ post:
     - promotion:read-only
     - communication
     - supplies-management:read-only
-  x-restrictions:
-    - urbanads
+  x-allowed:
+    - seller
+    - market-yandex-go
   x-resource-limit-config:
     path: resp
     none:
@@ -34,9 +34,6 @@ post:
       amount: 100
       period: hours
       period-duration: 1
-  x-apphost:
-    domain: BASE
-    enabled: false
   operationId: getRegionsCodes
   summary: Список допустимых кодов стран
   description: >
@@ -48,7 +45,14 @@ post:
 
 
     Страна производства `countryCode` понадобится при продаже товаров из-за
-    рубежа для бизнеса. [Инструкция](../../step-by-step/business-info.md)
+    рубежа для бизнеса.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Обработка заказов от юридических
+    лиц](../../step-by-step/business-info.md)
 
 
     {% include notitle [limit](../../_auto/method_limits/getRegionsCodes.md) %}
@@ -63,8 +67,6 @@ post:
       $ref: ../components/responses/401.yaml
     '403':
       $ref: ../components/responses/403.yaml
-    '404':
-      $ref: ../components/responses/404.yaml
     '420':
       $ref: ../components/responses/420.yaml
     '500':

@@ -1,5 +1,4 @@
 post:
-  x-resource-id: 277
   tags:
     - logistic-points
     - laas
@@ -28,12 +27,8 @@ post:
       amount: 10000
       period: hours
       period-duration: 1
-  x-restrictions:
-    - market-yandex-go
-    - urbanads
-  x-apphost:
-    domain: LOGISTICS
-    enabled: false
+  x-allowed:
+    - seller
   operationId: getLogisticPoints
   summary: Получение точек ПВЗ Маркета
   description: >
@@ -46,6 +41,14 @@ post:
 
     Регулярно запрашивайте эту информацию, чтобы в системе магазина хранить
     актуальные данные. Например, раз в день.
+
+
+    **Пошаговые инструкции**
+
+
+    * [Создать заказ LaaS](../../step-by-step/laas-order.md#create)
+
+    * [Создать возврат LaaS](../../step-by-step/laas-return.md#create)
 
 
     {% include notitle [limit](../../_auto/method_limits/getLogisticPoints.md)
