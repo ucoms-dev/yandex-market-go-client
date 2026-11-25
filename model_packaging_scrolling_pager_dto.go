@@ -21,9 +21,6 @@ var _ MappedNullable = &PackagingScrollingPagerDTO{}
 type PackagingScrollingPagerDTO struct {
 	// Идентификатор следующей страницы результатов.
 	NextPageToken *string `json:"nextPageToken,omitempty"`
-	// Идентификатор предыдущей страницы результатов.
-	// Deprecated
-	PrevPageToken *string `json:"prevPageToken,omitempty"`
 }
 
 // NewPackagingScrollingPagerDTO instantiates a new PackagingScrollingPagerDTO object
@@ -75,41 +72,6 @@ func (o *PackagingScrollingPagerDTO) SetNextPageToken(v string) {
 	o.NextPageToken = &v
 }
 
-// GetPrevPageToken returns the PrevPageToken field value if set, zero value otherwise.
-// Deprecated
-func (o *PackagingScrollingPagerDTO) GetPrevPageToken() string {
-	if o == nil || IsNil(o.PrevPageToken) {
-		var ret string
-		return ret
-	}
-	return *o.PrevPageToken
-}
-
-// GetPrevPageTokenOk returns a tuple with the PrevPageToken field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// Deprecated
-func (o *PackagingScrollingPagerDTO) GetPrevPageTokenOk() (*string, bool) {
-	if o == nil || IsNil(o.PrevPageToken) {
-		return nil, false
-	}
-	return o.PrevPageToken, true
-}
-
-// HasPrevPageToken returns a boolean if a field has been set.
-func (o *PackagingScrollingPagerDTO) HasPrevPageToken() bool {
-	if o != nil && !IsNil(o.PrevPageToken) {
-		return true
-	}
-
-	return false
-}
-
-// SetPrevPageToken gets a reference to the given string and assigns it to the PrevPageToken field.
-// Deprecated
-func (o *PackagingScrollingPagerDTO) SetPrevPageToken(v string) {
-	o.PrevPageToken = &v
-}
-
 func (o PackagingScrollingPagerDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -122,9 +84,6 @@ func (o PackagingScrollingPagerDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.NextPageToken) {
 		toSerialize["nextPageToken"] = o.NextPageToken
-	}
-	if !IsNil(o.PrevPageToken) {
-		toSerialize["prevPageToken"] = o.PrevPageToken
 	}
 	return toSerialize, nil
 }

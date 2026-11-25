@@ -22,7 +22,7 @@ var _ MappedNullable = &TariffDTO{}
 // TariffDTO Информация о тарифах, по которым нужно заплатить за услуги Маркета.
 type TariffDTO struct {
 	Type TariffType `json:"type"`
-	// Значение тарифа в процентах.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `amount`.  {% endnote %}  Значение тарифа в процентах.
 	// Deprecated
 	Percent *float32 `json:"percent,omitempty"`
 	// Значение тарифа.

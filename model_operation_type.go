@@ -15,21 +15,23 @@ import (
 	"fmt"
 )
 
-// OperationType Тип операции:  * `ORDER_RECIPIENT_UPDATE` — изменение данных получателя.  * `ORDER_DELIVERY_INTERVAL_UPDATE` — изменение интервала дат доставки.  * `ORDER_STATUS_UPDATE` — обновление статуса заказа для его отмены.  * `RETURN_CANCELLATION` — отмена возврата.
+// OperationType Тип операции:  * `ORDER_RECIPIENT_UPDATE` — изменение данных получателя.  * `ORDER_DELIVERY_INTERVAL_UPDATE` — изменение интервала дат доставки.  * `ORDER_STORAGE_LIMIT_DATE_UPDATE` — продление срока хранения заказа.  * `ORDER_STATUS_UPDATE` — обновление статуса заказа для его отмены.  * `RETURN_CANCELLATION` — отмена возврата.
 type OperationType string
 
 // List of OperationType
 const (
-	OPERATIONTYPE_ORDER_RECIPIENT_UPDATE         OperationType = "ORDER_RECIPIENT_UPDATE"
-	OPERATIONTYPE_ORDER_DELIVERY_INTERVAL_UPDATE OperationType = "ORDER_DELIVERY_INTERVAL_UPDATE"
-	OPERATIONTYPE_ORDER_STATUS_UPDATE            OperationType = "ORDER_STATUS_UPDATE"
-	OPERATIONTYPE_RETURN_CANCELLATION            OperationType = "RETURN_CANCELLATION"
+	OPERATIONTYPE_ORDER_RECIPIENT_UPDATE          OperationType = "ORDER_RECIPIENT_UPDATE"
+	OPERATIONTYPE_ORDER_DELIVERY_INTERVAL_UPDATE  OperationType = "ORDER_DELIVERY_INTERVAL_UPDATE"
+	OPERATIONTYPE_ORDER_STORAGE_LIMIT_DATE_UPDATE OperationType = "ORDER_STORAGE_LIMIT_DATE_UPDATE"
+	OPERATIONTYPE_ORDER_STATUS_UPDATE             OperationType = "ORDER_STATUS_UPDATE"
+	OPERATIONTYPE_RETURN_CANCELLATION             OperationType = "RETURN_CANCELLATION"
 )
 
 // All allowed values of OperationType enum
 var AllowedOperationTypeEnumValues = []OperationType{
 	"ORDER_RECIPIENT_UPDATE",
 	"ORDER_DELIVERY_INTERVAL_UPDATE",
+	"ORDER_STORAGE_LIMIT_DATE_UPDATE",
 	"ORDER_STATUS_UPDATE",
 	"RETURN_CANCELLATION",
 }

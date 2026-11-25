@@ -10,9 +10,9 @@ Name | Type | Description | Notes
 **ReasonType** | Pointer to [**ReturnDecisionReasonType**](ReturnDecisionReasonType.md) |  | [optional] 
 **SubreasonType** | Pointer to [**ReturnDecisionSubreasonType**](ReturnDecisionSubreasonType.md) |  | [optional] 
 **DecisionType** | Pointer to [**ReturnDecisionType**](ReturnDecisionType.md) |  | [optional] 
-**RefundAmount** | Pointer to **int64** | {% note warning \&quot;Вместо него используйте &#x60;amount&#x60;.\&quot; %}     {% endnote %}  Сумма возврата в копейках.  | [optional] 
+**RefundAmount** | Pointer to **int64** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;amount&#x60;.  {% endnote %}  Сумма возврата в копейках.  | [optional] 
 **Amount** | Pointer to [**CurrencyValueDTO**](CurrencyValueDTO.md) |  | [optional] 
-**PartnerCompensation** | Pointer to **int64** | {% note warning \&quot;Вместо него используйте &#x60;partnerCompensationAmount&#x60;.\&quot; %}     {% endnote %}  Компенсация за обратную доставку в копейках.  | [optional] 
+**PartnerCompensation** | Pointer to **int64** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;partnerCompensationAmount&#x60;.  {% endnote %}  Компенсация за обратную доставку в копейках.  | [optional] 
 **PartnerCompensationAmount** | Pointer to [**CurrencyValueDTO**](CurrencyValueDTO.md) |  | [optional] 
 **Images** | Pointer to **[]string** | Список хеш-кодов фотографий товара от покупателя. | [optional] 
 

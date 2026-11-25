@@ -741,6 +741,10 @@ UpdateBusinessPrices Установка цен на товары для всех
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
+
 {% include notitle [limit](../../_auto/method_limits/updateBusinessPrices.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -966,6 +970,10 @@ UpdatePrices Установка цен на товары в конкретном
 Это занимает до нескольких минут.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
 
 {% include notitle [limit](../../_auto/method_limits/updatePrices.md) %}
 

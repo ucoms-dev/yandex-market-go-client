@@ -45,6 +45,10 @@ GetSupplyRequestDocuments Получение документов по заяв�
 
 Возвращает документы по заявке.
 
+**Пошаговые инструкции**
+
+* [Заявки на поставку товаров на склад, вывоз или утилизацию](../../step-by-step/supplies.md)
+
 {% include notitle [limit](../../_auto/method_limits/getSupplyRequestDocuments.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -259,6 +263,10 @@ GetSupplyRequestItems Получение товаров в заявке на п�
 {% include notitle [access](../../_auto/method_scopes/getSupplyRequestItems.md) %}
 
 Возвращает список товаров в заявке и информацию по ним.
+
+**Пошаговые инструкции**
+
+* [Заявки на поставку товаров на склад, вывоз или утилизацию](../../step-by-step/supplies.md)
 
 {% include notitle [limit](../../_auto/method_limits/getSupplyRequestItems.md) %}
 
@@ -484,6 +492,10 @@ GetSupplyRequests Получение информации о заявках на
 {% include notitle [access](../../_auto/method_scopes/getSupplyRequests.md) %}
 
 По указанным фильтрам возвращает заявки на поставку, вывоз и утилизацию, а также информацию по ним.
+
+**Пошаговые инструкции**
+
+* [Заявки на поставку товаров на склад, вывоз или утилизацию](../../step-by-step/supplies.md)
 
 {% include notitle [limit](../../_auto/method_limits/getSupplyRequests.md) %}
 

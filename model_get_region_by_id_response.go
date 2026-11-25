@@ -21,7 +21,7 @@ var _ MappedNullable = &GetRegionByIdResponse{}
 
 // GetRegionByIdResponse struct for GetRegionByIdResponse
 type GetRegionByIdResponse struct {
-	// Регион доставки.  {% note warning %}  В массиве всегда возвращается один регион, используйте поле `region` вместо него.  {% endnote %}
+	// Регион доставки.  {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  В массиве всегда возвращается один регион, используйте поле `region` вместо него.  {% endnote %}
 	// Deprecated
 	Regions []RegionDTO `json:"regions,omitempty"`
 	Region  RegionDTO   `json:"region"`

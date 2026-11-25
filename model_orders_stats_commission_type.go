@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// OrdersStatsCommissionType Услуга:  * `FEE` — размещение товара на Маркете. * `FULFILLMENT` — складская обработка. Не возвращается с 1 января 2024 года. * `LOYALTY_PARTICIPATION_FEE` — участие в программе лояльности и отзывы за баллы. * `AUCTION_PROMOTION` — буст продаж с оплатой за продажи. * `INSTALLMENT` — рассрочка. Не возвращается с 24 февраля 2022 года. * `DELIVERY_TO_CUSTOMER` — доставка покупателю (FBY, FBS). Для DBS и Экспресс — если заказ возвращается через логистику Маркета. * `EXPRESS_DELIVERY_TO_CUSTOMER` — экспресс-доставка покупателю (Экспресс). * `AGENCY` — прием платежа покупателя. * `PAYMENT_TRANSFER` — перевод платежа покупателя. * `RETURNED_ORDERS_STORAGE` — хранение невыкупов и возвратов (FBS). Для DBS и Экспресс — если заказ возвращается через логистику Маркета. * `SORTING` — обработка заказа (FBS). * `INTAKE_SORTING` — организация забора заказов со склада продавца (FBS). * `RETURN_PROCESSING` — обработка заказов на складе (FBS). Для DBS и Экспресс — если заказ возвращается через логистику Маркета. * `ILLIQUID_GOODS_SALE` — вознаграждение за продажу невывезенных товаров. * `CROSSREGIONAL_DELIVERY` - доставка средней мили. * `FULFILLMENT_WITHDRAW` - вывоз со склада. * `ITEM_BOOKING` - бронирование товара (только для продавцов Market Yandex Go).
+// OrdersStatsCommissionType Услуга:  * `FEE` — размещение товара на Маркете. * `FULFILLMENT` — складская обработка. Не возвращается с 1 января 2024 года. * `LOYALTY_PARTICIPATION_FEE` — участие в программе лояльности и отзывы за баллы. * `AUCTION_PROMOTION` — буст продаж с оплатой за продажи. * `INSTALLMENT` — рассрочка. Не возвращается с 24 февраля 2022 года. * `DELIVERY_TO_CUSTOMER` — доставка покупателю (FBY, FBS). Для DBS и Экспресс — если заказ возвращается через логистику Маркета. * `EXPRESS_DELIVERY_TO_CUSTOMER` — экспресс-доставка покупателю (Экспресс). * `AGENCY` — прием платежа покупателя. * `AGENCY_COMMISSION_3PL` — услуги перевозки и ТЭО. * `PAYMENT_TRANSFER` — перевод платежа покупателя. * `RETURNED_ORDERS_STORAGE` — хранение невыкупов и возвратов (FBS). Для DBS и Экспресс — если заказ возвращается через логистику Маркета. * `SORTING` — обработка заказа (FBS). * `INTAKE_SORTING` — организация забора заказов со склада продавца (FBS). * `RETURN_PROCESSING` — обработка заказов на складе (FBS). Для DBS и Экспресс — если заказ возвращается через логистику Маркета. * `ILLIQUID_GOODS_SALE` — вознаграждение за продажу невывезенных товаров. * `CROSSREGIONAL_DELIVERY` - доставка средней мили. * `FULFILLMENT_WITHDRAW` - вывоз со склада. * `ITEM_BOOKING` - бронирование товара (только для продавцов Market Yandex Go). * `SHOP_SERVICE_PLACEMENT` — размещение услуг магазина (DBS). Начисления и корректировки возвращаются отдельными элементами массива `commissions` с этим типом: в одном заказе может быть несколько таких элементов. Корректировки могут быть отрицательными.
 type OrdersStatsCommissionType string
 
 // List of OrdersStatsCommissionType
@@ -28,6 +28,7 @@ const (
 	ORDERSSTATSCOMMISSIONTYPE_DELIVERY_TO_CUSTOMER         OrdersStatsCommissionType = "DELIVERY_TO_CUSTOMER"
 	ORDERSSTATSCOMMISSIONTYPE_EXPRESS_DELIVERY_TO_CUSTOMER OrdersStatsCommissionType = "EXPRESS_DELIVERY_TO_CUSTOMER"
 	ORDERSSTATSCOMMISSIONTYPE_AGENCY                       OrdersStatsCommissionType = "AGENCY"
+	ORDERSSTATSCOMMISSIONTYPE_AGENCY_COMMISSION_3_PL       OrdersStatsCommissionType = "AGENCY_COMMISSION_3PL"
 	ORDERSSTATSCOMMISSIONTYPE_PAYMENT_TRANSFER             OrdersStatsCommissionType = "PAYMENT_TRANSFER"
 	ORDERSSTATSCOMMISSIONTYPE_RETURNED_ORDERS_STORAGE      OrdersStatsCommissionType = "RETURNED_ORDERS_STORAGE"
 	ORDERSSTATSCOMMISSIONTYPE_SORTING                      OrdersStatsCommissionType = "SORTING"
@@ -37,6 +38,7 @@ const (
 	ORDERSSTATSCOMMISSIONTYPE_CROSSREGIONAL_DELIVERY       OrdersStatsCommissionType = "CROSSREGIONAL_DELIVERY"
 	ORDERSSTATSCOMMISSIONTYPE_FULFILLMENT_WITHDRAW         OrdersStatsCommissionType = "FULFILLMENT_WITHDRAW"
 	ORDERSSTATSCOMMISSIONTYPE_ITEM_BOOKING                 OrdersStatsCommissionType = "ITEM_BOOKING"
+	ORDERSSTATSCOMMISSIONTYPE_SHOP_SERVICE_PLACEMENT       OrdersStatsCommissionType = "SHOP_SERVICE_PLACEMENT"
 )
 
 // All allowed values of OrdersStatsCommissionType enum
@@ -49,6 +51,7 @@ var AllowedOrdersStatsCommissionTypeEnumValues = []OrdersStatsCommissionType{
 	"DELIVERY_TO_CUSTOMER",
 	"EXPRESS_DELIVERY_TO_CUSTOMER",
 	"AGENCY",
+	"AGENCY_COMMISSION_3PL",
 	"PAYMENT_TRANSFER",
 	"RETURNED_ORDERS_STORAGE",
 	"SORTING",
@@ -58,6 +61,7 @@ var AllowedOrdersStatsCommissionTypeEnumValues = []OrdersStatsCommissionType{
 	"CROSSREGIONAL_DELIVERY",
 	"FULFILLMENT_WITHDRAW",
 	"ITEM_BOOKING",
+	"SHOP_SERVICE_PLACEMENT",
 }
 
 func (v *OrdersStatsCommissionType) UnmarshalJSON(src []byte) error {

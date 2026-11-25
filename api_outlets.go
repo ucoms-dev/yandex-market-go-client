@@ -538,7 +538,7 @@ func (a *OutletsAPIService) GetOutletExecute(r OutletsAPIGetOutletRequest) (*Get
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ApiClientDataErrorResponse
+			var v ApiTypedClientDataErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -549,7 +549,7 @@ func (a *OutletsAPIService) GetOutletExecute(r OutletsAPIGetOutletRequest) (*Get
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
-			var v ApiUnauthorizedErrorResponse
+			var v ApiTypedUnauthorizedErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -560,7 +560,7 @@ func (a *OutletsAPIService) GetOutletExecute(r OutletsAPIGetOutletRequest) (*Get
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
-			var v ApiForbiddenErrorResponse
+			var v ApiTypedForbiddenErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -571,7 +571,7 @@ func (a *OutletsAPIService) GetOutletExecute(r OutletsAPIGetOutletRequest) (*Get
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiNotFoundErrorResponse
+			var v ApiTypedNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -582,7 +582,7 @@ func (a *OutletsAPIService) GetOutletExecute(r OutletsAPIGetOutletRequest) (*Get
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 420 {
-			var v ApiLimitErrorResponse
+			var v ApiTypedLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -593,7 +593,7 @@ func (a *OutletsAPIService) GetOutletExecute(r OutletsAPIGetOutletRequest) (*Get
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 500 {
-			var v ApiServerErrorResponse
+			var v ApiTypedServerErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -652,7 +652,7 @@ func (r OutletsAPIGetOutletsRequest) ShopOutletCode(shopOutletCode string) Outle
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;region_id&#x60;.\&quot; %}     {% endnote %}
+// {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  Вместо него используйте &#x60;region_id&#x60;.  {% endnote %}
 // Deprecated
 func (r OutletsAPIGetOutletsRequest) RegionId2(regionId2 int64) OutletsAPIGetOutletsRequest {
 	r.regionId2 = &regionId2
@@ -806,17 +806,6 @@ func (a *OutletsAPIService) GetOutletsExecute(r OutletsAPIGetOutletsRequest) (*G
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v ApiForbiddenErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

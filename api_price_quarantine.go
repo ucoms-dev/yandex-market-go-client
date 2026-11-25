@@ -49,6 +49,10 @@ ConfirmBusinessPrices Удаление товара из карантина по
 
 Чтобы увидеть список товаров, которые попали в карантин, используйте запрос [POST v2/businesses/{businessId}/price-quarantine](getBusinessQuarantineOffers.md).
 
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
+
 {% include notitle [limit](../../_auto/method_limits/confirmBusinessPrices.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -264,6 +268,10 @@ ConfirmCampaignPrices Удаление товара из карантина по
 Товар попадает в карантин, если его цена меняется слишком резко. [Как настроить карантин](https://yandex.ru/support/marketplace/assortment/operations/prices.html#quarantine)
 
 Чтобы увидеть список товаров, которые попали в карантин, используйте запрос [POST v2/campaigns/{campaignId}/price-quarantine](getCampaignQuarantineOffers.md).
+
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
 
 {% include notitle [limit](../../_auto/method_limits/confirmCampaignPrices.md) %}
 
@@ -503,6 +511,10 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 
 Результаты возвращаются постранично.
 
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
+
 {% include notitle [limit](../../_auto/method_limits/getBusinessQuarantineOffers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -739,6 +751,10 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 В запросе можно использовать фильтры.
 
 Результаты возвращаются постранично.
+
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
 
 {% include notitle [limit](../../_auto/method_limits/getCampaignQuarantineOffers.md) %}
 

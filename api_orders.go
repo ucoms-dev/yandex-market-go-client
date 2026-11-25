@@ -62,6 +62,10 @@ AcceptOrderCancellation Отмена заказа покупателем
 
 Если в течение 48 часов вы не подтвердите или отклоните отмену, заказ будет отменен автоматически.
 
+**Пошаговые инструкции**
+
+* [Подтвердить отмену DBS-заказа](../../concepts/dbs-order-status-model.md)
+
 {% include notitle [limit](../../_auto/method_limits/acceptOrderCancellation.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -283,6 +287,10 @@ CreateOrder Создание заказа
 Получите доступные варианты доставки — [POST v2/campaigns/{campaignId}/delivery-options](../../reference/delivery-options/getDeliveryOptions.md).
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Создать заказ LaaS](../../step-by-step/laas-order.md#create)
 
 {% include notitle [limit](../../_auto/method_limits/createOrder.md) %}
 
@@ -526,6 +534,10 @@ GetBusinessOrders Информация о заказах в кабинете
 Результаты возвращаются постранично. Для навигации используйте параметры `pageToken` и `limit`.
 
 Получить более подробную информацию о покупателе и его номере телефона можно с помощью запроса [GET v2/campaigns/{campaignId}/orders/{orderId}/buyer](../../reference/order-delivery/getOrderBuyerInfo.md).
+
+**Пошаговые инструкции**
+
+* [Получать информацию о заказах](../../step-by-step/orders-receive.md)
 
 {% include notitle [limit](../../_auto/method_limits/getBusinessOrders.md) %}
 
@@ -951,6 +963,11 @@ GetOrderIdentifiersStatus Статусы проверки кодов марки�
 
 2. Все коды маркировки успешно пройдут проверку.
 
+**Пошаговые инструкции**
+
+* [Проверить коды маркировки FBS-заказа](../../step-by-step/fbs.md#order-info)
+* [Проверить коды маркировки Экспресс-заказа](../../step-by-step/express.md#marking-codes)
+
 {% include notitle [limit](../../_auto/method_limits/getOrderIdentifiersStatus.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1149,6 +1166,10 @@ GetOrderUpdateOptions Получение временных интервалов
 {% include notitle [access](../../_auto/method_scopes/getOrderUpdateOptions.md) %}
 
 Возвращает список доступных интервалов для изменения даты и времени курьерской доставки.
+
+**Пошаговые инструкции**
+
+* [Изменить заказ](../../step-by-step/laas-order.md#change)
 
 {% include notitle [limit](../../_auto/method_limits/getOrderUpdateOptions.md) %}
 
@@ -1432,14 +1453,14 @@ func (r OrdersAPIGetOrdersRequest) BuyerType(buyerType OrderBuyerType) OrdersAPI
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
 // Deprecated
 func (r OrdersAPIGetOrdersRequest) Page(page int32) OrdersAPIGetOrdersRequest {
 	r.page = &page
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
 // Deprecated
 func (r OrdersAPIGetOrdersRequest) PageSize(pageSize int32) OrdersAPIGetOrdersRequest {
 	r.pageSize = &pageSize
@@ -1826,6 +1847,10 @@ ProvideOrderDigitalCodes Передача ключей цифровых това
 ```
 {% endcut %}
 
+**Пошаговые инструкции**
+
+* [Обработка заказов с цифровыми товарами](../../step-by-step/digital.md)
+
 {% include notitle [limit](../../_auto/method_limits/provideOrderDigitalCodes.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2048,6 +2073,10 @@ ProvideOrderItemIdentifiers Передача кодов маркировки е�
 * РНПТ и ГТД для импортных прослеживаемых товаров.
 
 Для каждой позиции в заказе, требующей маркировки, нужно передать список кодов — по одному для каждой единицы товара. Например, если в заказе две пары тапочек и одна пара туфель, получится список из двух кодов для первой позиции и список из одного кода для второй.
+
+**Пошаговые инструкции**
+
+* [Передать маркировку для заказа от юридического лица](../../step-by-step/business-info.md)
 
 {% include notitle [limit](../../_auto/method_limits/provideOrderItemIdentifiers.md) %}
 
@@ -2533,6 +2562,12 @@ SetOrderBoxLayout Подготовка заказа
 
 {% endcut %}
 
+**Пошаговые инструкции**
+
+* [Обработка FBS-заказов](../../step-by-step/fbs.md)
+* [Обработка Экспресс-заказов](../../step-by-step/express.md)
+* [Передать маркировку для заказа от юридического лица](../../step-by-step/business-info.md)
+
 {% include notitle [limit](../../_auto/method_limits/setOrderBoxLayout.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2739,7 +2774,7 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 
 Отгружаемый Маркету заказ может не влезть в одну коробку или упаковку — в этом случае получается, что он занимает несколько грузовых мест.
 
-Количество грузовых мест нужно обязательно передавать Маркету, если оно не равно 1. Это делается перед переводом его в статус **Готов к отгрузке**. Подробно о том, что в какой момент нужно передавать, рассказано в [пошаговой инструкции](../../step-by-step/fbs.md).
+Количество грузовых мест нужно обязательно передавать Маркету, если оно не равно 1. Это делается перед переводом его в статус **Готов к отгрузке**.
 
 Метод устроен немного нестандартно: количество задается длиной массива пустых объектов.
 
@@ -2795,6 +2830,10 @@ SetOrderShipmentBoxes Передача количества грузовых м�
 | `count`    | :no-translate[Int32]     | Количество единиц товара в грузовом месте.       |
 
 {% endcut %}
+
+**Пошаговые инструкции**
+
+* [Актуальный способ передачи сведений о коробках FBS](../../step-by-step/fbs.md#order-info)
 
 {% include notitle [limit](../../_auto/method_limits/setOrderShipmentBoxes.md) %}
 
@@ -3021,6 +3060,11 @@ UpdateExternalOrderId Передача внешнего идентификато
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Передать внешний идентификатор FBS-заказа](../../step-by-step/fbs.md#fulfillment)
+* [Передать внешний идентификатор Экспресс-заказа](../../step-by-step/express.md#label)
+
 {% include notitle [limit](../../_auto/method_limits/updateExternalOrderId.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -3226,9 +3270,10 @@ UpdateOrder Изменение заказа
 Изменяет в заказе:
 
 * данные получателя;
-* интервал дат курьерской доставки.
+* интервал дат курьерской доставки;
+* срок хранения заказа в пункте выдачи.
 
-Передавайте только ту информацию, которую хотите изменить. При необходимости вы можете отредактировать и данные получателя, и интервал доставки одновременно.
+Передавайте только ту информацию, которую хотите изменить. При необходимости вы можете передать несколько изменений одновременно.
 
 Заказ можно изменить в любом статусе до вручения покупателю или отмены (`DELIVERED` или `CANCELLED`).
 
@@ -3237,6 +3282,10 @@ UpdateOrder Изменение заказа
 Изменения применяются в течение нескольких минут и только в случае успешного завершения операции. [Как проверить статус операции](../../reference/operations/getOperations.md)
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Изменить заказ](../../step-by-step/laas-order.md#change)
 
 {% include notitle [limit](../../_auto/method_limits/updateOrder.md) %}
 
@@ -3664,8 +3713,6 @@ UpdateOrderStatus Изменение статуса одного заказа
 * Если магазин подтвердил заказ, но не может его выполнить (например, товар числится в базе, но отсутствует на складе или нет нужного цвета), то заказ из статуса `"status": "PROCESSING"` и этапа обработки `"substatus": "STARTED"` нужно перевести в статус `"status": "CANCELLED"` с причиной отмены заказа `"substatus": "SHOP_FAILED"`.
 * Если магазин подготовил заказ к отгрузке, но не может его выполнить (например, последний товар был поврежден или оказался с браком), то заказ из статуса `"status": "PROCESSING"` и этапа обработки `"substatus": "READY_TO_SHIP"` нужно перевести в статус `"status": "CANCELLED"` с причиной отмены заказа `"substatus": "SHOP_FAILED"`.
 
-Полная информация о статусной модели DBS-заказов: [Как изменяются статусы заказов](../../concepts/dbs-order-status-model.md).
-
 {% cut "**Как подтвердить LaaS-заказ**" %}
 
 Для подтверждения черновика заказа передайте статус `"status": "PROCESSING"` с подстатусом `"substatus": "STARTED"`.
@@ -3681,6 +3728,15 @@ UpdateOrderStatus Изменение статуса одного заказа
 При успешном выполнении запроса отмена произойдет через некоторое время. [Как проверить статус операции](../../reference/operations/getOperations.md)
 
 {% endcut %}
+
+**Пошаговые инструкции**
+
+* [Обработка FBS-заказов](../../step-by-step/fbs.md)
+* [Обработка Экспресс-заказов](../../step-by-step/express.md)
+* [Изменить статус DBS-заказа](../../concepts/dbs-order-status-model.md)
+* [Обработка заказов с цифровыми товарами](../../step-by-step/digital.md)
+* [Работа с LaaS-заказом](../../step-by-step/laas-order.md)
+* [Изменить статус LaaS-заказа](../../step-by-step/laas-order-status-model.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateOrderStatus.md) %}
 
@@ -3892,8 +3948,6 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 * Если магазин подтвердил заказ, но не может его выполнить (например, товар числится в базе, но отсутствует на складе или нет нужного цвета), то заказ из статуса `"status": "PROCESSING"` и этапа обработки `"substatus": "STARTED"` нужно перевести в статус `"status": "CANCELLED"` с причиной отмены заказа `"substatus": "SHOP_FAILED"`.
 * Если магазин подготовил заказ к отгрузке, но не может его выполнить (например, последний товар был поврежден или оказался с браком), то заказ из статуса `"status": "PROCESSING"` и этапа обработки `"substatus": "READY_TO_SHIP"` нужно перевести в статус `"status": "CANCELLED"` с причиной отмены заказа `"substatus": "SHOP_FAILED"`.
 
-Полная информация о статусной модели DBS-заказов: [Как изменяются статусы заказов](../../concepts/dbs-order-status-model.md).
-
 {% cut "**Как подтвердить LaaS-заказ**" %}
 
 Для подтверждения черновика заказа передайте статус `"status": "PROCESSING"` с подстатусом `"substatus": "STARTED"`.
@@ -3909,6 +3963,13 @@ UpdateOrderStatuses Изменение статусов нескольких з�
 При успешном выполнении запроса отмена произойдет через некоторое время. [Как проверить статус операции](../../reference/operations/getOperations.md)
 
 {% endcut %}
+
+**Пошаговые инструкции**
+
+* [Печать ярлыков и передача статуса «Готов к отгрузке»](../../step-by-step/fbs.md#fulfillment)
+* [Допустимые переходы между статусами DBS-заказов](../../concepts/dbs-order-status-model.md)
+* [Обработка заказов с цифровыми товарами](../../step-by-step/digital.md)
+* [Отменить заказ LaaS](../../step-by-step/laas-order.md#cancel)
 
 {% include notitle [limit](../../_auto/method_limits/updateOrderStatuses.md) %}
 

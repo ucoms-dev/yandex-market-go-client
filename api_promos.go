@@ -47,6 +47,10 @@ DeletePromoOffers Удаление товаров из акции
 
 Изменения начинают действовать в течение 4–6 часов. Узнать, применились ли они, можно с помощью параметра `processing` в ответе метода [POST v2/businesses/{businessId}/promos](../../reference/promos/getPromos.md).
 
+**Пошаговые инструкции**
+
+* [Удалить товары из акции](../../step-by-step/promos.md#delete-goods)
+
 {% include notitle [limit](../../_auto/method_limits/deletePromoOffers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -264,11 +268,15 @@ GetPromoOffers Получение списка товаров, которые у
 
 {% note warning "Условия участия в акциях могут меняться" %}
 
-Например, `maxPromoPrice`.
+Например, `maxPromoPrice` и `bestPriceLevels`.
 
 Установленные цены меняться не будут — `price` и `promoPrice`.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Управление акциями](../../step-by-step/promos.md)
 
 {% include notitle [limit](../../_auto/method_limits/getPromoOffers.md) %}
 
@@ -491,6 +499,10 @@ GetPromos Получение списка акций
 * флеш-акция;
 * скидка по промокоду.
 
+**Пошаговые инструкции**
+
+* [Управление акциями](../../step-by-step/promos.md)
+
 {% include notitle [limit](../../_auto/method_limits/getPromos.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -690,6 +702,10 @@ UpdatePromoOffers Добавление товаров в акцию или из�
 Добавляет товары в акцию или изменяет цены на товары, которые участвуют в акции.
 
 Изменения начинают действовать в течение 4–6 часов. Узнать, применились ли они, можно с помощью параметра `processing` в ответе метода [POST v2/businesses/{businessId}/promos](../../reference/promos/getPromos.md).
+
+**Пошаговые инструкции**
+
+* [Управление акциями](../../step-by-step/promos.md)
 
 {% include notitle [limit](../../_auto/method_limits/updatePromoOffers.md) %}
 

@@ -48,6 +48,10 @@ GetOrderBusinessBuyerInfo Информация о покупателе — юр�
 
 Получить данные можно, только если заказ находится в статусе `PROCESSING`, `DELIVERY`, `PICKUP` или `DELIVERED`.
 
+**Пошаговые инструкции**
+
+* [Как получить информацию о покупателе](../../step-by-step/business-info.md#buyer-info)
+
 {% include notitle [limit](../../_auto/method_limits/getOrderBusinessBuyerInfo.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -243,6 +247,10 @@ GetOrderBusinessDocumentsInfo Информация о документах
 Возвращает информацию о документах по идентификатору заказа.
 
 Получить данные можно после того, как заказ перейдет в статус `DELIVERED`.
+
+**Пошаговые инструкции**
+
+* [Как получить информацию о документах](../../step-by-step/business-info.md#documents-info)
 
 {% include notitle [limit](../../_auto/method_limits/getOrderBusinessDocumentsInfo.md) %}
 

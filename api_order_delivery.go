@@ -883,6 +883,10 @@ VerifyOrderEac Передача кода подтверждения
 
 	Параметр `eacType` возвращается при статусах заказа `COURIER_FOUND`, `COURIER_ARRIVED_TO_SENDER` и `DELIVERY_SERVICE_UNDELIVERED`. Если заказ в других статусах, параметр может отсутствовать.
 
+**Пошаговые инструкции**
+
+* [Передача кода подтверждения и заказа курьеру](../../step-by-step/express.md#verifyOrderEac)
+
 {% include notitle [limit](../../_auto/method_limits/verifyOrderEac.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

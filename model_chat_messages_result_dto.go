@@ -21,7 +21,7 @@ var _ MappedNullable = &ChatMessagesResultDTO{}
 
 // ChatMessagesResultDTO Информация о сообщениях.
 type ChatMessagesResultDTO struct {
-	// Идентификатор заказа.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `context`.  {% endnote %}  Идентификатор заказа.
 	// Deprecated
 	OrderId *int64             `json:"orderId,omitempty"`
 	Context ChatFullContextDTO `json:"context"`

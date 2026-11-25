@@ -45,6 +45,11 @@ GetOperations Получение статусов операций
 
 Возвращает статусы запущенных операций по их идентификаторам.
 
+**Пошаговые инструкции**
+
+* [Работа с LaaS-заказом](../../step-by-step/laas-order.md)
+* [Проверить завершение операции отмены возврата](../../step-by-step/laas-return.md#cancel)
+
 {% include notitle [limit](../../_auto/method_limits/getOperations.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

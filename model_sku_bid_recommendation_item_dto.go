@@ -27,7 +27,7 @@ type SkuBidRecommendationItemDTO struct {
 	Bid int32 `json:"bid"`
 	// Список рекомендованных ставок с соответствующими долями показов и доступными дополнительными инструментами продвижения.  Чем больше ставка, тем большую долю показов она помогает получить и тем больше дополнительных инструментов продвижения доступно.
 	BidRecommendations []BidRecommendationItemDTO `json:"bidRecommendations,omitempty"`
-	// Рекомендованные цены.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}     {% endnote %}  Рекомендованные цены.
 	// Deprecated
 	PriceRecommendations []PriceRecommendationItemDTO `json:"priceRecommendations,omitempty"`
 }

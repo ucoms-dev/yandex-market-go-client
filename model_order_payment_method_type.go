@@ -15,7 +15,7 @@ import (
 	"fmt"
 )
 
-// OrderPaymentMethodType Способ оплаты заказа:  * Значения, если выбрана оплата при оформлении заказа (`\"paymentType\": \"PREPAID\"`):    * `YANDEX` — банковской картой.    * `APPLE_PAY` — Apple Pay (не используется).    * `GOOGLE_PAY` — Google Pay (не используется).    * `CREDIT` — в кредит.    * `TINKOFF_CREDIT` — в кредит в Тинькофф Банке.    * `TINKOFF_INSTALLMENTS` — рассрочка в Тинькофф Банке.    * `EXTERNAL_CERTIFICATE` — подарочным сертификатом (например, из приложения «Сбербанк Онлайн»).    * `SBP` — через систему быстрых платежей.    * `B2B_ACCOUNT_PREPAYMENT` — заказ оплачивает организация.    * `MICROCREDIT` - Сплит на основе МКК (Микрокредитной компании).   * Значения, если выбрана оплата при получении заказа (`\"paymentType\": \"POSTPAID\"`):    * `CARD_ON_DELIVERY` — банковской картой.    * `BOUND_CARD_ON_DELIVERY` — привязанной картой при получении.    * `BNPL_BANK_ON_DELIVERY` — супер Сплитом.    * `BNPL_ON_DELIVERY` — Сплитом.    * `BNPL_TBYB` - Оплата после доставки на основе Сплита.    * `CASH_ON_DELIVERY` — наличными.    * `B2B_ACCOUNT_POSTPAYMENT` — заказ оплачивает организация после доставки.  * `UNKNOWN` — неизвестный тип.  Значение по умолчанию: `CASH_ON_DELIVERY`.
+// OrderPaymentMethodType Способ оплаты заказа:  * Значения, если выбрана оплата при оформлении заказа (`\"paymentType\": \"PREPAID\"`):    * `YANDEX` — банковской картой.    * `APPLE_PAY` — Apple Pay (не используется).    * `GOOGLE_PAY` — Google Pay (не используется).    * `CREDIT` — в кредит.    * `TINKOFF_CREDIT` — в кредит в Тинькофф Банке.    * `TINKOFF_INSTALLMENTS` — рассрочка в Тинькофф Банке.    * `EXTERNAL_CERTIFICATE` — подарочным сертификатом (например, из приложения «Сбербанк Онлайн»).    * `SBP` — через систему быстрых платежей.    * `B2B_ACCOUNT_PREPAYMENT` — заказ оплачивает организация.    * `MICROCREDIT` - Сплит на основе МКК (Микрокредитной компании).    * `BNPL_TBC` - BNPL через внешний банк TBC.    * `DIGITAL_RUBLE` - Цифровой рубль.   * Значения, если выбрана оплата при получении заказа (`\"paymentType\": \"POSTPAID\"`):    * `CARD_ON_DELIVERY` — банковской картой.    * `BOUND_CARD_ON_DELIVERY` — привязанной картой при получении.    * `BNPL_BANK_ON_DELIVERY` — супер Сплитом.    * `BNPL_ON_DELIVERY` — Сплитом.    * `BNPL_TBYB` - Оплата после доставки на основе Сплита.    * `SBP_ON_DELIVERY` — постоплата через СБП.    * `CASH_ON_DELIVERY` — наличными.    * `B2B_ACCOUNT_POSTPAYMENT` — заказ оплачивает организация после доставки.  * `UNKNOWN` — неизвестный тип.  Значение по умолчанию: `CASH_ON_DELIVERY`.
 type OrderPaymentMethodType string
 
 // List of OrderPaymentMethodType
@@ -32,11 +32,14 @@ const (
 	ORDERPAYMENTMETHODTYPE_GOOGLE_PAY               OrderPaymentMethodType = "GOOGLE_PAY"
 	ORDERPAYMENTMETHODTYPE_TINKOFF_CREDIT           OrderPaymentMethodType = "TINKOFF_CREDIT"
 	ORDERPAYMENTMETHODTYPE_SBP                      OrderPaymentMethodType = "SBP"
+	ORDERPAYMENTMETHODTYPE_SBP_ON_DELIVERY          OrderPaymentMethodType = "SBP_ON_DELIVERY"
 	ORDERPAYMENTMETHODTYPE_TINKOFF_INSTALLMENTS     OrderPaymentMethodType = "TINKOFF_INSTALLMENTS"
 	ORDERPAYMENTMETHODTYPE_B2_B_ACCOUNT_PREPAYMENT  OrderPaymentMethodType = "B2B_ACCOUNT_PREPAYMENT"
 	ORDERPAYMENTMETHODTYPE_B2_B_ACCOUNT_POSTPAYMENT OrderPaymentMethodType = "B2B_ACCOUNT_POSTPAYMENT"
 	ORDERPAYMENTMETHODTYPE_MICROCREDIT              OrderPaymentMethodType = "MICROCREDIT"
 	ORDERPAYMENTMETHODTYPE_BNPL_TBYB                OrderPaymentMethodType = "BNPL_TBYB"
+	ORDERPAYMENTMETHODTYPE_BNPL_TBC                 OrderPaymentMethodType = "BNPL_TBC"
+	ORDERPAYMENTMETHODTYPE_DIGITAL_RUBLE            OrderPaymentMethodType = "DIGITAL_RUBLE"
 	ORDERPAYMENTMETHODTYPE_UNKNOWN                  OrderPaymentMethodType = "UNKNOWN"
 )
 
@@ -54,11 +57,14 @@ var AllowedOrderPaymentMethodTypeEnumValues = []OrderPaymentMethodType{
 	"GOOGLE_PAY",
 	"TINKOFF_CREDIT",
 	"SBP",
+	"SBP_ON_DELIVERY",
 	"TINKOFF_INSTALLMENTS",
 	"B2B_ACCOUNT_PREPAYMENT",
 	"B2B_ACCOUNT_POSTPAYMENT",
 	"MICROCREDIT",
 	"BNPL_TBYB",
+	"BNPL_TBC",
+	"DIGITAL_RUBLE",
 	"UNKNOWN",
 }
 

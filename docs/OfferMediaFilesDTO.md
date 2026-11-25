@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FirstVideoAsCover** | Pointer to **bool** | Использовать первое видео в карточке как видеообложку.  Передайте &#x60;true&#x60;, чтобы первое видео использовалось как видеообложка, или &#x60;false&#x60;, чтобы видеообложка не отображалась в карточке товара.  | [optional] 
+**FirstVideoAsCover** | Pointer to **bool** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}     {% endnote %}  Использовать первое видео в карточке как видеообложку.  Передайте &#x60;true&#x60;, чтобы первое видео использовалось как видеообложка, или &#x60;false&#x60;, чтобы видеообложка не отображалась в карточке товара.  | [optional] 
 **Videos** | Pointer to [**[]OfferMediaFileDTO**](OfferMediaFileDTO.md) | Видеофайлы товара.  | [optional] 
 **Pictures** | Pointer to [**[]OfferMediaFileDTO**](OfferMediaFileDTO.md) | Изображения товара.  | [optional] 
 **Manuals** | Pointer to [**[]OfferMediaFileDTO**](OfferMediaFileDTO.md) | Руководства по использованию товара.  | [optional] 

@@ -21,7 +21,7 @@ var _ MappedNullable = &ParcelBoxDTO{}
 type ParcelBoxDTO struct {
 	// Идентификатор коробки в составе заказа.
 	Id *int64 `json:"id,omitempty"`
-	// {% note warning \"Не используйте этот параметр.\" %}     {% endnote %}
+	// {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  Не используйте этот параметр.  {% endnote %}
 	// Deprecated
 	FulfilmentId *string `json:"fulfilmentId,omitempty" validate:"regexp=^[[a-zA-Z0-9]- ]*$"`
 }

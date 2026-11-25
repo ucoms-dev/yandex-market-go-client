@@ -72,6 +72,8 @@ type APIClient struct {
 
 	DeliveryServicesAPI *DeliveryServicesAPIService
 
+	DocumentsAPI *DocumentsAPIService
+
 	ExpressAPI *ExpressAPIService
 
 	FbsAPI *FbsAPIService
@@ -160,6 +162,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.DbsAPI = (*DbsAPIService)(&c.common)
 	c.DeliveryOptionsAPI = (*DeliveryOptionsAPIService)(&c.common)
 	c.DeliveryServicesAPI = (*DeliveryServicesAPIService)(&c.common)
+	c.DocumentsAPI = (*DocumentsAPIService)(&c.common)
 	c.ExpressAPI = (*ExpressAPIService)(&c.common)
 	c.FbsAPI = (*FbsAPIService)(&c.common)
 	c.FbyAPI = (*FbyAPIService)(&c.common)

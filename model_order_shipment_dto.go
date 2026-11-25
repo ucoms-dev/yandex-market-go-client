@@ -19,7 +19,7 @@ var _ MappedNullable = &OrderShipmentDTO{}
 
 // OrderShipmentDTO Список посылок.  В параметре может указываться несколько посылок.
 type OrderShipmentDTO struct {
-	// Идентификатор посылки, присвоенный Маркетом.
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}     {% endnote %}  Идентификатор посылки, присвоенный Маркетом.
 	// Deprecated
 	Id *int64 `json:"id,omitempty"`
 	// Формат даты: `ДД-ММ-ГГГГ`.

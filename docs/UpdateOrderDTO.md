@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Id** | **int64** | Идентификатор заказа, в котором нужны изменения. | 
 **DeliveryInterval** | Pointer to [**DeliveryIntervalsUpdateOptionDTO**](DeliveryIntervalsUpdateOptionDTO.md) |  | [optional] 
 **Customer** | Pointer to [**CustomerDTO**](CustomerDTO.md) |  | [optional] 
+**ExtendStoragePeriod** | Pointer to **bool** | Продлить срок хранения заказа в пункте выдачи. | [optional] 
 
 ## Methods
 
@@ -96,6 +97,31 @@ SetCustomer sets Customer field to given value.
 `func (o *UpdateOrderDTO) HasCustomer() bool`
 
 HasCustomer returns a boolean if a field has been set.
+
+### GetExtendStoragePeriod
+
+`func (o *UpdateOrderDTO) GetExtendStoragePeriod() bool`
+
+GetExtendStoragePeriod returns the ExtendStoragePeriod field if non-nil, zero value otherwise.
+
+### GetExtendStoragePeriodOk
+
+`func (o *UpdateOrderDTO) GetExtendStoragePeriodOk() (*bool, bool)`
+
+GetExtendStoragePeriodOk returns a tuple with the ExtendStoragePeriod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExtendStoragePeriod
+
+`func (o *UpdateOrderDTO) SetExtendStoragePeriod(v bool)`
+
+SetExtendStoragePeriod sets ExtendStoragePeriod field to given value.
+
+### HasExtendStoragePeriod
+
+`func (o *UpdateOrderDTO) HasExtendStoragePeriod() bool`
+
+HasExtendStoragePeriod returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -51,6 +51,10 @@ AddOffersToArchive Добавление товаров в архив
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Управление товарами в архиве](../../step-by-step/assortment-archive.md)
+
 {% include notitle [limit](../../_auto/method_limits/addOffersToArchive.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -263,6 +267,10 @@ DeleteOffers Удаление товаров из каталога
 
 Удаляет товары из каталога.
 
+**Пошаговые инструкции**
+
+* [Удаление товаров из каталога](../../step-by-step/assortment-add-goods.md#deletion)
+
 {% include notitle [limit](../../_auto/method_limits/deleteOffers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -474,6 +482,10 @@ DeleteOffersFromArchive Удаление товаров из архива
 {% include notitle [access](../../_auto/method_scopes/deleteOffersFromArchive.md) %}
 
 Восстанавливает товары из архива.
+
+**Пошаговые инструкции**
+
+* [Управление товарами в архиве](../../step-by-step/assortment-archive.md)
 
 {% include notitle [limit](../../_auto/method_limits/deleteOffersFromArchive.md) %}
 
@@ -688,6 +700,10 @@ GenerateOfferBarcodes Генерация штрихкодов
 Генерирует штрихкоды и присваивает их указанным товарам.
 
 Если у товара на упаковке уже есть штрихкод производителя, передайте его в параметре `barcodes` в методе [POST v2/businesses/{businessId}/offer-mappings/update](../../reference/business-offer-mappings/updateOfferMappings.md). Генерировать новый не нужно.
+
+**Пошаговые инструкции**
+
+* [Сгенерировать штрихкоды при добавлении товаров](../../step-by-step/assortment-add-goods.md#add)
 
 {% include notitle [limit](../../_auto/method_limits/generateOfferBarcodes.md) %}
 
@@ -917,6 +933,10 @@ GetOfferMappings Информация о товарах в каталоге
 * не передавать тело запроса, чтобы получить список всех товаров в каталоге.
 
 Чтобы получить категорийные характеристики товаров, воспользуйтесь методом [POST v2/businesses/{businessId}/offer-cards](../../reference/content/getOfferCardsContentStatus.md).
+
+**Пошаговые инструкции**
+
+* [Посмотреть товары в архиве](../../step-by-step/assortment-archive.md)
 
 {% include notitle [limit](../../_auto/method_limits/getOfferMappings.md) %}
 
@@ -1199,6 +1219,12 @@ SKU товара можно изменить в кабинете продавц�
 Это занимает до нескольких минут.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Добавление и редактирование товаров](../../step-by-step/assortment-add-goods.md)
+* [Рекомендации Маркета по карточкам](../../step-by-step/recommendations.md)
+* [Передача значений характеристики](../../step-by-step/parameter-values.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateOfferMappings.md) %}
 

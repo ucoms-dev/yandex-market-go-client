@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderId** | Pointer to **int64** | Идентификатор заказа. | [optional] 
+**OrderId** | Pointer to **int64** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;context&#x60;.  {% endnote %}  Идентификатор заказа.  | [optional] 
 **Context** | [**ChatFullContextDTO**](ChatFullContextDTO.md) |  | 
 **Messages** | [**[]ChatMessageDTO**](ChatMessageDTO.md) | Информация о сообщениях. | 
 **Paging** | Pointer to [**PackagingForwardScrollingPagerDTO**](PackagingForwardScrollingPagerDTO.md) |  | [optional] 

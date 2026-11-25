@@ -39,6 +39,10 @@ GetQualityRatingDetails Заказы, которые повлияли на ин�
 
 Возвращает список заказов, которые повлияли на индекс качества магазина. Чтобы узнать значение индекса качества, выполните запрос [POST v2/businesses/{businessId}/ratings/quality](../../reference/ratings/getQualityRatings.md).
 
+**Пошаговые инструкции**
+
+* [Индекс качества](../../step-by-step/ratings.md)
+
 {% include notitle [limit](../../_auto/method_limits/getQualityRatingDetails.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -236,6 +240,10 @@ GetQualityRatings Индекс качества магазинов
 Возвращает значение индекса качества магазинов и его составляющие.
 
 Подробнее об индексе качества читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/quality/score/).
+
+**Пошаговые инструкции**
+
+* [Индекс качества](../../step-by-step/ratings.md)
 
 {% include notitle [limit](../../_auto/method_limits/getQualityRatings.md) %}
 

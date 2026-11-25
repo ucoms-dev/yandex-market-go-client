@@ -252,6 +252,16 @@ GetPagedWarehouses Список складов
 
 Возвращает список складов и информацию о них.
 
+{% note warning "Когда использовать этот метод" %}
+
+Метод актуален для кабинетов с группами складов. Если в кабинете нет групп складов, используйте метод [POST v3/businesses/{businessId}/warehouses](../../reference/warehouses/getPartnerWarehouses.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
+
+**Пошаговые инструкции**
+
+* [Работа со складами](../../step-by-step/warehouses.md)
+
 {% include notitle [limit](../../_auto/method_limits/getPagedWarehouses.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -321,6 +331,229 @@ func (a *WarehousesAPIService) GetPagedWarehousesExecute(r WarehousesAPIGetPaged
 	}
 	// body params
 	localVarPostBody = r.getPagedWarehousesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type WarehousesAPIGetPartnerWarehousesRequest struct {
+	ctx                         context.Context
+	ApiService                  *WarehousesAPIService
+	businessId                  int64
+	pageToken                   *string
+	limit                       *int32
+	getPartnerWarehousesRequest *GetPartnerWarehousesRequest
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r WarehousesAPIGetPartnerWarehousesRequest) PageToken(pageToken string) WarehousesAPIGetPartnerWarehousesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-param-description }}
+func (r WarehousesAPIGetPartnerWarehousesRequest) Limit(limit int32) WarehousesAPIGetPartnerWarehousesRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r WarehousesAPIGetPartnerWarehousesRequest) GetPartnerWarehousesRequest(getPartnerWarehousesRequest GetPartnerWarehousesRequest) WarehousesAPIGetPartnerWarehousesRequest {
+	r.getPartnerWarehousesRequest = &getPartnerWarehousesRequest
+	return r
+}
+
+func (r WarehousesAPIGetPartnerWarehousesRequest) Execute() (*GetPartnerWarehousesResponse, *http.Response, error) {
+	return r.ApiService.GetPartnerWarehousesExecute(r)
+}
+
+/*
+GetPartnerWarehouses Список складов
+
+{% include notitle [access](../../_auto/method_scopes/getPartnerWarehouses.md) %}
+
+Возвращает список складов кабинета и информацию о них.
+
+Для каждого склада возвращается список моделей работы (FBS, DBS, Экспресс) и доступность API для каждой модели.
+
+{% note warning "Метод подходит, только если в кабинете нет групп складов" %}
+
+Метод возвращает только отдельные склады и не возвращает группы складов. Если в кабинете есть группы складов, используйте метод [POST v2/businesses/{businessId}/warehouses](../../reference/warehouses/getPagedWarehouses.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
+
+**Пошаговые инструкции**
+
+* [Работа со складами](../../step-by-step/warehouses.md)
+
+{% include notitle [limit](../../_auto/method_limits/getPartnerWarehouses.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return WarehousesAPIGetPartnerWarehousesRequest
+*/
+func (a *WarehousesAPIService) GetPartnerWarehouses(ctx context.Context, businessId int64) WarehousesAPIGetPartnerWarehousesRequest {
+	return WarehousesAPIGetPartnerWarehousesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetPartnerWarehousesResponse
+func (a *WarehousesAPIService) GetPartnerWarehousesExecute(r WarehousesAPIGetPartnerWarehousesRequest) (*GetPartnerWarehousesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetPartnerWarehousesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesAPIService.GetPartnerWarehouses")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/businesses/{businessId}/warehouses"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 15
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getPartnerWarehousesRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -622,6 +855,213 @@ func (a *WarehousesAPIService) GetWarehousesExecute(r WarehousesAPIGetWarehouses
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type WarehousesAPIUpdateWarehouseModelStatusRequest struct {
+	ctx                               context.Context
+	ApiService                        *WarehousesAPIService
+	businessId                        int64
+	updateWarehouseModelStatusRequest *UpdateWarehouseModelStatusRequest
+}
+
+func (r WarehousesAPIUpdateWarehouseModelStatusRequest) UpdateWarehouseModelStatusRequest(updateWarehouseModelStatusRequest UpdateWarehouseModelStatusRequest) WarehousesAPIUpdateWarehouseModelStatusRequest {
+	r.updateWarehouseModelStatusRequest = &updateWarehouseModelStatusRequest
+	return r
+}
+
+func (r WarehousesAPIUpdateWarehouseModelStatusRequest) Execute() (*UpdateWarehouseModelStatusResponse, *http.Response, error) {
+	return r.ApiService.UpdateWarehouseModelStatusExecute(r)
+}
+
+/*
+UpdateWarehouseModelStatus Включение/выключение модели работы склада
+
+{% include notitle [access](../../_auto/method_scopes/updateWarehouseModelStatus.md) %}
+
+Отключает или включает модель работы (FBS, DBS или Экспресс) для указанного склада.
+
+После отключения модели товары, которые работают по ней на данном складе, скрываются через 15 минут. После включения они возвращаются на витрину через 15 минут, а если модель была выключена 30 дней или дольше — через 4 часа.
+
+**Пошаговые инструкции**
+
+* [Отключить или включить модель работы склада](../../step-by-step/warehouses.md#update-model-status)
+
+{% include notitle [limit](../../_auto/method_limits/updateWarehouseModelStatus.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return WarehousesAPIUpdateWarehouseModelStatusRequest
+*/
+func (a *WarehousesAPIService) UpdateWarehouseModelStatus(ctx context.Context, businessId int64) WarehousesAPIUpdateWarehouseModelStatusRequest {
+	return WarehousesAPIUpdateWarehouseModelStatusRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateWarehouseModelStatusResponse
+func (a *WarehousesAPIService) UpdateWarehouseModelStatusExecute(r WarehousesAPIUpdateWarehouseModelStatusRequest) (*UpdateWarehouseModelStatusResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateWarehouseModelStatusResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "WarehousesAPIService.UpdateWarehouseModelStatus")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/businesses/{businessId}/warehouse/models/status"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.updateWarehouseModelStatusRequest == nil {
+		return localVarReturnValue, nil, reportError("updateWarehouseModelStatusRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateWarehouseModelStatusRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type WarehousesAPIUpdateWarehouseStatusRequest struct {
 	ctx                          context.Context
 	ApiService                   *WarehousesAPIService
@@ -652,6 +1092,8 @@ UpdateWarehouseStatus Изменение статуса склада
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
 	@return WarehousesAPIUpdateWarehouseStatusRequest
+
+Deprecated
 */
 func (a *WarehousesAPIService) UpdateWarehouseStatus(ctx context.Context, campaignId int64) WarehousesAPIUpdateWarehouseStatusRequest {
 	return WarehousesAPIUpdateWarehouseStatusRequest{
@@ -664,6 +1106,8 @@ func (a *WarehousesAPIService) UpdateWarehouseStatus(ctx context.Context, campai
 // Execute executes the request
 //
 //	@return UpdateWarehouseStatusResponse
+//
+// Deprecated
 func (a *WarehousesAPIService) UpdateWarehouseStatusExecute(r WarehousesAPIUpdateWarehouseStatusRequest) (*UpdateWarehouseStatusResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod  = http.MethodPost

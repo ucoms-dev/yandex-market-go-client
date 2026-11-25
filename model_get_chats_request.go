@@ -19,7 +19,7 @@ var _ MappedNullable = &GetChatsRequest{}
 
 // GetChatsRequest Фильтры по чатам, которые нужно вернуть.
 type GetChatsRequest struct {
-	// Фильтр по идентификаторам заказов на Маркете.
+	// {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  Вместо него используйте `contexts`.  {% endnote %}  Фильтр по идентификаторам заказов на Маркете.
 	// Deprecated
 	OrderIds []int64 `json:"orderIds,omitempty"`
 	// Фильтр по контексту чата.

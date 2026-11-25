@@ -4,10 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | Идентификатор доставки, присвоенный магазином.  Указывается, только если магазин передал данный идентификатор в ответе на запрос методом &#x60;POST cart&#x60;.  | [optional] 
+**Id** | Pointer to **string** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}     {% endnote %}  Идентификатор доставки, присвоенный магазином.  Указывается, только если магазин передал данный идентификатор в ответе на запрос методом &#x60;POST cart&#x60;.  | [optional] 
 **Type** | [**OrderDeliveryType**](OrderDeliveryType.md) |  | 
 **ServiceName** | **string** | Название службы доставки. | 
-**Price** | Pointer to **float32** | {% note warning \&quot;Стоимость доставки смотрите в параметре &#x60;deliveryTotal&#x60;.\&quot; %}     {% endnote %}  Стоимость доставки в валюте заказа.  | [optional] 
+**Price** | Pointer to **float32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Стоимость доставки смотрите в параметре &#x60;deliveryTotal&#x60;.  {% endnote %}  Стоимость доставки в валюте заказа.  | [optional] 
 **DeliveryPartnerType** | [**OrderDeliveryPartnerType**](OrderDeliveryPartnerType.md) |  | 
 **Courier** | Pointer to [**OrderCourierDTO**](OrderCourierDTO.md) |  | [optional] 
 **Dates** | [**OrderDeliveryDatesDTO**](OrderDeliveryDatesDTO.md) |  | 

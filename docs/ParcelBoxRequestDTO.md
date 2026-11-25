@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**FulfilmentId** | Pointer to **string** | {% note warning \&quot;Не используйте этот параметр.\&quot; %}     {% endnote %}  | [optional] 
+**FulfilmentId** | Pointer to **string** | {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  Не используйте этот параметр.  {% endnote %}  | [optional] 
 
 ## Methods
 

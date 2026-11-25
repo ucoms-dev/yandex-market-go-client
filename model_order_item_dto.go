@@ -33,7 +33,7 @@ type OrderItemDTO struct {
 	BuyerPrice float32 `json:"buyerPrice"`
 	// Стоимость товара в валюте покупателя до применения скидок по:  * акциям; * купонам; * промокодам.  Это зачеркнутая цена, которая отображается покупателю на карточке товара до применения скидок.
 	BuyerPriceBeforeDiscount float32 `json:"buyerPriceBeforeDiscount"`
-	// Стоимость товара в валюте магазина до применения скидок.
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}     {% endnote %}  Стоимость товара в валюте магазина до применения скидок.
 	// Deprecated
 	PriceBeforeDiscount *float32 `json:"priceBeforeDiscount,omitempty"`
 	// Количество единиц товара.
@@ -41,7 +41,7 @@ type OrderItemDTO struct {
 	Vat   *OrderVatType `json:"vat,omitempty"`
 	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	ShopSku *string `json:"shopSku,omitempty" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
-	// {% note warning \"Вместо него используйте `subsidies`.\" %}     {% endnote %}  Общее вознаграждение продавцу за DBS-доставку и все скидки на товар:  * по промокодам; * по купонам; * по баллам Плюса; * по акциям.
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Вместо него используйте `subsidies`.  {% endnote %}  Общее вознаграждение продавцу за DBS-доставку и все скидки на товар:  * по промокодам; * по купонам; * по баллам Плюса; * по акциям.
 	// Deprecated
 	Subsidy *float32 `json:"subsidy,omitempty"`
 	// **Только для моделей FBY и LaaS**  Идентификатор склада, на который сформирован заказ.
@@ -50,7 +50,7 @@ type OrderItemDTO struct {
 	Promos []OrderItemPromoDTO `json:"promos,omitempty"`
 	// Информация о маркировке единиц товара.  Возвращаются данные для маркировки, переданные в запросе:  * Для DBS — [PUT v2/campaigns/{campaignId}/orders/{orderId}/identifiers](../../reference/orders/provideOrderItemIdentifiers.md) или [PUT v2/campaigns/{campaignId}/orders/{orderId}/boxes](../../reference/orders/setOrderBoxLayout.md). * Для FBS и EXPRESS — [PUT v2/campaigns/{campaignId}/orders/{orderId}/boxes](../../reference/orders/setOrderBoxLayout.md).  Для FBY возвращаются коды маркировки, переданные во время поставки.  Если магазин еще не передавал коды для этого заказа, `instances` отсутствует.
 	Instances []OrderItemInstanceDTO `json:"instances,omitempty"`
-	// {% note warning \"Для получения информации о невыкупах и возвратах используйте [GET v2/campaigns/{campaignId}/returns](../../reference/returns/getReturns.md).\" %}     {% endnote %}  Информация о невыкупленных или возвращенных товарах в заказе.
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Для получения информации о невыкупах и возвратах используйте [GET v2/campaigns/{campaignId}/returns](../../reference/returns/getReturns.md).  {% endnote %}  Информация о невыкупленных или возвращенных товарах в заказе.
 	// Deprecated
 	Details []OrderItemDetailDTO `json:"details,omitempty"`
 	// Список субсидий по типам.

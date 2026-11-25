@@ -55,6 +55,11 @@ GetLogisticPoints Получение точек ПВЗ Маркета
 
 Регулярно запрашивайте эту информацию, чтобы в системе магазина хранить актуальные данные. Например, раз в день.
 
+**Пошаговые инструкции**
+
+* [Создать заказ LaaS](../../step-by-step/laas-order.md#create)
+* [Создать возврат LaaS](../../step-by-step/laas-return.md#create)
+
 {% include notitle [limit](../../_auto/method_limits/getLogisticPoints.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().

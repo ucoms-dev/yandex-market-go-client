@@ -36,7 +36,7 @@ type ReturnDTO struct {
 	PickupTillDate        *time.Time                `json:"pickupTillDate,omitempty"`
 	ShipmentRecipientType *RecipientType            `json:"shipmentRecipientType,omitempty"`
 	ShipmentStatus        *ReturnShipmentStatusType `json:"shipmentStatus,omitempty"`
-	// {% note warning \"Вместо него используйте `amount`.\" %}     {% endnote %}  Сумма возврата в копейках.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `amount`.  {% endnote %}  Сумма возврата в копейках.
 	// Deprecated
 	RefundAmount *int64            `json:"refundAmount,omitempty"`
 	Amount       *CurrencyValueDTO `json:"amount,omitempty"`

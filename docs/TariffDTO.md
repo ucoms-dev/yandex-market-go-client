@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | [**TariffType**](TariffType.md) |  | 
-**Percent** | Pointer to **float32** | Значение тарифа в процентах. | [optional] 
+**Percent** | Pointer to **float32** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;amount&#x60;.  {% endnote %}  Значение тарифа в процентах.  | [optional] 
 **Amount** | **float32** | Значение тарифа. | 
 **Currency** | [**CurrencyType**](CurrencyType.md) |  | 
 **Parameters** | [**[]TariffParameterDTO**](TariffParameterDTO.md) | Параметры расчета тарифа. | 

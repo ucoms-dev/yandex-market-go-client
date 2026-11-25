@@ -53,6 +53,10 @@ DeleteCampaignOffers Удаление товаров из ассортимент
 
 Товар не получится удалить, если он хранится на складах Маркета.
 
+**Пошаговые инструкции**
+
+* [Удаление товаров из каталога](../../step-by-step/assortment-add-goods.md#deletion)
+
 {% include notitle [limit](../../_auto/method_limits/deleteCampaignOffers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -721,6 +725,10 @@ UpdateCampaignOffers Изменение условий продажи товар
 {% include notitle [access](../../_auto/method_scopes/updateCampaignOffers.md) %}
 
 Изменяет параметры размещения товаров в конкретном магазине: доступность товара и применяемый НДС.
+
+**Пошаговые инструкции**
+
+* [Добавить новые товары в каталог](../../step-by-step/assortment-add-goods.md#add)
 
 {% include notitle [limit](../../_auto/method_limits/updateCampaignOffers.md) %}
 

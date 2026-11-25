@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**WarehouseModel** | Pointer to [**BusinessWarehouseModelType**](BusinessWarehouseModelType.md) |  | [optional] 
 **OnlyDefaultPrice** | Pointer to **bool** | Управление ценами на товары:  * &#x60;false&#x60; — можно установить цену, которая действует:   * во всех магазинах кабинета — [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/prices/updateBusinessPrices.md);   * в конкретном магазине — [POST v2/campaigns/{campaignId}/offer-prices/updates](../../reference/prices/updatePrices.md). * &#x60;true&#x60; — можно установить только цену, которая действует во всех магазинах кабинета, — [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/prices/updateBusinessPrices.md).  | [optional] 
 **Currency** | Pointer to [**CurrencyType**](CurrencyType.md) |  | [optional] 
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewBusinessSettingsDTOWithDefaults instantiates a new BusinessSettingsDTO object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetWarehouseModel
+
+`func (o *BusinessSettingsDTO) GetWarehouseModel() BusinessWarehouseModelType`
+
+GetWarehouseModel returns the WarehouseModel field if non-nil, zero value otherwise.
+
+### GetWarehouseModelOk
+
+`func (o *BusinessSettingsDTO) GetWarehouseModelOk() (*BusinessWarehouseModelType, bool)`
+
+GetWarehouseModelOk returns a tuple with the WarehouseModel field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWarehouseModel
+
+`func (o *BusinessSettingsDTO) SetWarehouseModel(v BusinessWarehouseModelType)`
+
+SetWarehouseModel sets WarehouseModel field to given value.
+
+### HasWarehouseModel
+
+`func (o *BusinessSettingsDTO) HasWarehouseModel() bool`
+
+HasWarehouseModel returns a boolean if a field has been set.
 
 ### GetOnlyDefaultPrice
 

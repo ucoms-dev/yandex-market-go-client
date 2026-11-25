@@ -15,17 +15,19 @@ import (
 	"fmt"
 )
 
-// LogisticPointFeatureType Свойство пункта выдачи:  * `RETURN_ALLOWED` — пункт выдачи принимает возвраты.  {% note warning \"Проверка ограничений\" %}  Признак не учитывает ограничения ПВЗ на прием различных товаров в возврате. Для проверки по конкретному набору товаров используйте метод [POST v1/campaigns/{campaignId}/return-delivery-options](../../reference/delivery-options/getReturnDeliveryOptions.md).  {% endnote %}
+// LogisticPointFeatureType Свойство пункта выдачи:  * `RETURN_ALLOWED` — пункт выдачи принимает возвраты. * `FITTING_ALLOWED` — в пункте выдачи доступна примерка.  {% note warning \"Проверка ограничений\" %}  Признак не учитывает ограничения ПВЗ на прием различных товаров в возврате. Для проверки по конкретному набору товаров используйте метод [POST v1/campaigns/{campaignId}/return-delivery-options](../../reference/delivery-options/getReturnDeliveryOptions.md).  {% endnote %}
 type LogisticPointFeatureType string
 
 // List of LogisticPointFeatureType
 const (
-	LOGISTICPOINTFEATURETYPE_RETURN_ALLOWED LogisticPointFeatureType = "RETURN_ALLOWED"
+	LOGISTICPOINTFEATURETYPE_RETURN_ALLOWED  LogisticPointFeatureType = "RETURN_ALLOWED"
+	LOGISTICPOINTFEATURETYPE_FITTING_ALLOWED LogisticPointFeatureType = "FITTING_ALLOWED"
 )
 
 // All allowed values of LogisticPointFeatureType enum
 var AllowedLogisticPointFeatureTypeEnumValues = []LogisticPointFeatureType{
 	"RETURN_ALLOWED",
+	"FITTING_ALLOWED",
 }
 
 func (v *LogisticPointFeatureType) UnmarshalJSON(src []byte) error {

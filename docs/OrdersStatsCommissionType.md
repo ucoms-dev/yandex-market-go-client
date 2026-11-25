@@ -19,6 +19,8 @@
 
 * `AGENCY` (value: `"AGENCY"`)
 
+* `AGENCY_COMMISSION_3_PL` (value: `"AGENCY_COMMISSION_3PL"`)
+
 * `PAYMENT_TRANSFER` (value: `"PAYMENT_TRANSFER"`)
 
 * `RETURNED_ORDERS_STORAGE` (value: `"RETURNED_ORDERS_STORAGE"`)
@@ -36,6 +38,8 @@
 * `FULFILLMENT_WITHDRAW` (value: `"FULFILLMENT_WITHDRAW"`)
 
 * `ITEM_BOOKING` (value: `"ITEM_BOOKING"`)
+
+* `SHOP_SERVICE_PLACEMENT` (value: `"SHOP_SERVICE_PLACEMENT"`)
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

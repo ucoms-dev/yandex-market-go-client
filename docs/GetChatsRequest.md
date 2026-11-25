@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderIds** | Pointer to **[]int64** | Фильтр по идентификаторам заказов на Маркете. | [optional] 
+**OrderIds** | Pointer to **[]int64** | {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  Вместо него используйте &#x60;contexts&#x60;.  {% endnote %}  Фильтр по идентификаторам заказов на Маркете.  | [optional] 
 **Contexts** | Pointer to [**[]ChatContextDTO**](ChatContextDTO.md) | Фильтр по контексту чата. | [optional] 
 **ContextTypes** | Pointer to [**[]ChatContextType**](ChatContextType.md) | Фильтр по типу контекста чата. | [optional] 
 **Types** | Pointer to [**[]ChatType**](ChatType.md) | Фильтр по типам чатов. | [optional] 

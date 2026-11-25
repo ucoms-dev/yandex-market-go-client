@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Price** | Pointer to **int64** | Зачеркнутая цена — та, по которой товар продавался до акции.  Указывается в рублях.  Возвращается, только если товар участвует в акции.  | [optional] 
 **PromoPrice** | Pointer to **int64** | Цена по акции — та, по которой вы хотите продавать товар.  Указывается в рублях.  Возвращается, только если товар участвует в акции.  | [optional] 
-**MaxPromoPrice** | Pointer to **int64** | Максимально возможная цена для участия в акции. Если значение не заполнено, ограничение отсутствует.  Указывается в рублях.  | [optional] 
+**MaxPromoPrice** | Pointer to **int64** | Максимально возможная цена для участия в акции. Если значение не заполнено, ограничение отсутствует.  Указывается в рублях.  Для акции «Бестселлеры Маркета» пороги по уровням возвращаются в параметре &#x60;bestPriceLevels&#x60;.  | [optional] 
+**BestPriceLevels** | Pointer to [**PromoOfferBestPriceLevelsDTO**](PromoOfferBestPriceLevelsDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetMaxPromoPrice sets MaxPromoPrice field to given value.
 `func (o *PromoOfferDiscountParamsDTO) HasMaxPromoPrice() bool`
 
 HasMaxPromoPrice returns a boolean if a field has been set.
+
+### GetBestPriceLevels
+
+`func (o *PromoOfferDiscountParamsDTO) GetBestPriceLevels() PromoOfferBestPriceLevelsDTO`
+
+GetBestPriceLevels returns the BestPriceLevels field if non-nil, zero value otherwise.
+
+### GetBestPriceLevelsOk
+
+`func (o *PromoOfferDiscountParamsDTO) GetBestPriceLevelsOk() (*PromoOfferBestPriceLevelsDTO, bool)`
+
+GetBestPriceLevelsOk returns a tuple with the BestPriceLevels field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBestPriceLevels
+
+`func (o *PromoOfferDiscountParamsDTO) SetBestPriceLevels(v PromoOfferBestPriceLevelsDTO)`
+
+SetBestPriceLevels sets BestPriceLevels field to given value.
+
+### HasBestPriceLevels
+
+`func (o *PromoOfferDiscountParamsDTO) HasBestPriceLevels() bool`
+
+HasBestPriceLevels returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

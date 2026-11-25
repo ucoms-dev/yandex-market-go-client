@@ -261,6 +261,10 @@ AddOffersToArchive Добавление товаров в архив
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Управление товарами в архиве](../../step-by-step/assortment-archive.md)
+
 {% include notitle [limit](../../_auto/method_limits/addOffersToArchive.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -678,6 +682,10 @@ ConfirmBusinessPrices Удаление товара из карантина по
 
 Чтобы увидеть список товаров, которые попали в карантин, используйте запрос [POST v2/businesses/{businessId}/price-quarantine](getBusinessQuarantineOffers.md).
 
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
+
 {% include notitle [limit](../../_auto/method_limits/confirmBusinessPrices.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -893,6 +901,10 @@ ConfirmCampaignPrices Удаление товара из карантина по
 Товар попадает в карантин, если его цена меняется слишком резко. [Как настроить карантин](https://yandex.ru/support/marketplace/assortment/operations/prices.html#quarantine)
 
 Чтобы увидеть список товаров, которые попали в карантин, используйте запрос [POST v2/campaigns/{campaignId}/price-quarantine](getCampaignQuarantineOffers.md).
+
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
 
 {% include notitle [limit](../../_auto/method_limits/confirmCampaignPrices.md) %}
 
@@ -1112,6 +1124,10 @@ CreateChat Создание нового чата с покупателем
 * по заказам;
 * по возвратам (доступны только для FBY-, FBS- и Экспресс-магазинов).
 
+**Пошаговые инструкции**
+
+* [Начать чат с покупателем](../../step-by-step/chats.md#create)
+
 {% include notitle [limit](../../_auto/method_limits/createChat.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1290,6 +1306,454 @@ func (a *FbyAPIService) CreateChatExecute(r FbyAPICreateChatRequest) (*CreateCha
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type FbyAPICreateContentSizeTablesRequest struct {
+	ctx                     context.Context
+	ApiService              *FbyAPIService
+	businessId              int64
+	createSizeTablesRequest *CreateSizeTablesRequest
+}
+
+func (r FbyAPICreateContentSizeTablesRequest) CreateSizeTablesRequest(createSizeTablesRequest CreateSizeTablesRequest) FbyAPICreateContentSizeTablesRequest {
+	r.createSizeTablesRequest = &createSizeTablesRequest
+	return r
+}
+
+func (r FbyAPICreateContentSizeTablesRequest) Execute() (*CreateSizeTablesResponse, *http.Response, error) {
+	return r.ApiService.CreateContentSizeTablesExecute(r)
+}
+
+/*
+CreateContentSizeTables Создание таблиц размеров
+
+{% include notitle [access](../../_auto/method_scopes/createContentSizeTables.md) %}
+
+Создает таблицы размеров бизнеса. За один запрос можно создать до 10 таблиц, в которых суммарно не больше
+5000 ячеек. Если таблиц или ячеек больше, запрос отклоняется с ошибкой `BAD_REQUEST` и ни одна таблица
+не создается.
+
+Таблица относится к размерной характеристике, а не к категории: она подбирается для всех категорий
+с той же размерной характеристикой.
+
+Размерную характеристику категории возвращает метод подбора таблиц размеров
+`POST v2/businesses/{businessId}/size-tables/suggest` в поле `result.sizeParameterId`, характеристику
+существующей таблицы — метод `POST v2/businesses/{businessId}/size-tables` в поле `sizeParameterId`.
+Если в запросе есть неизвестный идентификатор размерной характеристики, запрос отклоняется с ошибкой
+`UNKNOWN_SIZE_PARAMETER` и ни одна таблица не создается.
+
+Размерные сетки и обмеры, которые можно использовать в таблице, их значения и обязательные сетки
+возвращает метод `POST v2/businesses/{businessId}/size-tables/charts`.
+
+{% cut "Как заполнить таблицу" %}
+
+{% include notitle [size-tables-filling](../../_includes/common/size-tables-filling.md) %}
+
+{% endcut %}
+
+{% cut "Чем сохраненная таблица отличается от переданной" %}
+
+{% include notitle [size-tables-saved-differences](../../_includes/common/size-tables-saved-differences.md) %}
+
+Значения из ответа можно без изменений передать в метод обновления таблиц размеров
+`POST v2/businesses/{businessId}/size-tables/update`: поля `columnType` и `rowIndex` в нем не учитываются.
+
+{% endcut %}
+
+Чтобы привязать таблицу к товару, передайте ее идентификатор в `value` характеристики с `parameterId: 73979829`
+в запросе [POST v2/businesses/{businessId}/offer-cards/update](../../reference/content/updateOfferContent.md).
+Когда таблица изменяется, новое содержимое применяется к привязанным товарам автоматически.
+
+{% note warning "Повторный запрос создает таблицы еще раз" %}
+
+Метод не идемпотентен: каждый запрос создает новые таблицы, даже если такие же уже есть.
+
+Если запрос завершился ошибкой с кодом 5xx, часть таблиц могла сохраниться. Получите таблицы бизнеса методом
+`POST v2/businesses/{businessId}/size-tables` и только после этого повторите запрос для таблиц, которых там нет.
+
+{% endnote %}
+
+Количество таблиц у бизнеса ограничено — суммарно по всем размерным характеристикам. Удалить таблицу нельзя.
+Если лимит исчерпан, таблица не создается и для нее возвращается ошибка `LIMIT_TABLES`. При одновременных
+запросах лимит проверяется нестрого, и таблиц может создаться больше.
+
+**Пошаговые инструкции**
+
+* [Создать свою таблицу](../../step-by-step/size-tables.md#create)
+
+{% include notitle [limit](../../_auto/method_limits/createContentSizeTables.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPICreateContentSizeTablesRequest
+*/
+func (a *FbyAPIService) CreateContentSizeTables(ctx context.Context, businessId int64) FbyAPICreateContentSizeTablesRequest {
+	return FbyAPICreateContentSizeTablesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CreateSizeTablesResponse
+func (a *FbyAPIService) CreateContentSizeTablesExecute(r FbyAPICreateContentSizeTablesRequest) (*CreateSizeTablesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateSizeTablesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.CreateContentSizeTables")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables/create"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.createSizeTablesRequest == nil {
+		return localVarReturnValue, nil, reportError("createSizeTablesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createSizeTablesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type FbyAPICreateDocumentsRequest struct {
+	ctx                    context.Context
+	ApiService             *FbyAPIService
+	businessId             int64
+	createDocumentsRequest *CreateDocumentsRequest
+}
+
+func (r FbyAPICreateDocumentsRequest) CreateDocumentsRequest(createDocumentsRequest CreateDocumentsRequest) FbyAPICreateDocumentsRequest {
+	r.createDocumentsRequest = &createDocumentsRequest
+	return r
+}
+
+func (r FbyAPICreateDocumentsRequest) Execute() (*CreateDocumentsResponse, *http.Response, error) {
+	return r.ApiService.CreateDocumentsExecute(r)
+}
+
+/*
+CreateDocuments Создание документов
+
+{% include notitle [access](../../_auto/method_scopes/createDocuments.md) %}
+
+Создает для указанного бизнеса документы на товары. За один запрос можно создать не более 100 документов.
+
+Для привязки документа к товару передайте его номер в поле `certificates` метода
+[POST v2/businesses/{businessId}/offer-mappings/update](../../reference/business-offer-mappings/updateOfferMappings.md).
+
+Если документ с таким номером уже существует, результат для документа содержит ошибку
+`DOCUMENT_ALREADY_EXISTS`. Существующий документ при этом не возвращается. Ошибка одного документа
+не мешает обработке остальных.
+
+{% include notitle [limit](../../_auto/method_limits/createDocuments.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPICreateDocumentsRequest
+*/
+func (a *FbyAPIService) CreateDocuments(ctx context.Context, businessId int64) FbyAPICreateDocumentsRequest {
+	return FbyAPICreateDocumentsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CreateDocumentsResponse
+func (a *FbyAPIService) CreateDocumentsExecute(r FbyAPICreateDocumentsRequest) (*CreateDocumentsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateDocumentsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.CreateDocuments")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/businesses/{businessId}/offers/documents/create"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.createDocumentsRequest == nil {
+		return localVarReturnValue, nil, reportError("createDocumentsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createDocumentsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type FbyAPIDeleteCampaignOffersRequest struct {
 	ctx                         context.Context
 	ApiService                  *FbyAPIService
@@ -1320,6 +1784,10 @@ DeleteCampaignOffers Удаление товаров из ассортимент
 {% endnote %}
 
 Товар не получится удалить, если он хранится на складах Маркета.
+
+**Пошаговые инструкции**
+
+* [Удаление товаров из каталога](../../step-by-step/assortment-add-goods.md#deletion)
 
 {% include notitle [limit](../../_auto/method_limits/deleteCampaignOffers.md) %}
 
@@ -1510,6 +1978,199 @@ func (a *FbyAPIService) DeleteCampaignOffersExecute(r FbyAPIDeleteCampaignOffers
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type FbyAPIDeleteDocumentsRequest struct {
+	ctx                    context.Context
+	ApiService             *FbyAPIService
+	businessId             int64
+	deleteDocumentsRequest *DeleteDocumentsRequest
+}
+
+func (r FbyAPIDeleteDocumentsRequest) DeleteDocumentsRequest(deleteDocumentsRequest DeleteDocumentsRequest) FbyAPIDeleteDocumentsRequest {
+	r.deleteDocumentsRequest = &deleteDocumentsRequest
+	return r
+}
+
+func (r FbyAPIDeleteDocumentsRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.DeleteDocumentsExecute(r)
+}
+
+/*
+DeleteDocuments Удаление документов
+
+{% include notitle [access](../../_auto/method_scopes/deleteDocuments.md) %}
+
+Удаляет документы на товары по их идентификаторам. За один запрос можно удалить не более 100 документов.
+
+Повторный запрос на удаление возвращает успешный ответ.
+Отсутствие одного документа не мешает обработке остальных.
+
+{% include notitle [limit](../../_auto/method_limits/deleteDocuments.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPIDeleteDocumentsRequest
+*/
+func (a *FbyAPIService) DeleteDocuments(ctx context.Context, businessId int64) FbyAPIDeleteDocumentsRequest {
+	return FbyAPIDeleteDocumentsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return EmptyApiResponse
+func (a *FbyAPIService) DeleteDocumentsExecute(r FbyAPIDeleteDocumentsRequest) (*EmptyApiResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.DeleteDocuments")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/businesses/{businessId}/offers/documents/delete"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.deleteDocumentsRequest == nil {
+		return localVarReturnValue, nil, reportError("deleteDocumentsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.deleteDocumentsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type FbyAPIDeleteGoodsFeedbackCommentRequest struct {
 	ctx                               context.Context
 	ApiService                        *FbyAPIService
@@ -1539,6 +2200,10 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 {% include notitle [access](../../_auto/method_scopes/deleteGoodsFeedbackComment.md) %}
 
 Удаляет комментарий магазина.
+
+**Пошаговые инструкции**
+
+* [Удалить свой комментарий](../../step-by-step/goods-feedback.md#delete)
 
 {% include notitle [limit](../../_auto/method_limits/deleteGoodsFeedbackComment.md) %}
 
@@ -1963,6 +2628,10 @@ DeleteOffers Удаление товаров из каталога
 
 Удаляет товары из каталога.
 
+**Пошаговые инструкции**
+
+* [Удаление товаров из каталога](../../step-by-step/assortment-add-goods.md#deletion)
+
 {% include notitle [limit](../../_auto/method_limits/deleteOffers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2174,6 +2843,10 @@ DeleteOffersFromArchive Удаление товаров из архива
 {% include notitle [access](../../_auto/method_scopes/deleteOffersFromArchive.md) %}
 
 Восстанавливает товары из архива.
+
+**Пошаговые инструкции**
+
+* [Управление товарами в архиве](../../step-by-step/assortment-archive.md)
 
 {% include notitle [limit](../../_auto/method_limits/deleteOffersFromArchive.md) %}
 
@@ -2388,6 +3061,10 @@ DeletePromoOffers Удаление товаров из акции
 Убирает товары из акции.
 
 Изменения начинают действовать в течение 4–6 часов. Узнать, применились ли они, можно с помощью параметра `processing` в ответе метода [POST v2/businesses/{businessId}/promos](../../reference/promos/getPromos.md).
+
+**Пошаговые инструкции**
+
+* [Удалить товары из акции](../../step-by-step/promos.md#delete-goods)
 
 {% include notitle [limit](../../_auto/method_limits/deletePromoOffers.md) %}
 
@@ -2613,6 +3290,10 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 
 {% endif %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateBannersStatisticsReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2809,6 +3490,11 @@ GenerateBarcodesReport Получение файла со штрихкодами
 Файл не получится сгенерировать, если в нем будет более 1 500 штрихкодов.
 
 Узнать статус генерации и получить ссылку на готовый файл можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
+
+**Пошаговые инструкции**
+
+* [Получить файл со штрихкодами товаров в заявке](../../step-by-step/supplies.md)
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateBarcodesReport.md) %}
 
@@ -3018,6 +3704,10 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
 
 {% endif %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateBoostConsolidatedReport.md) %}
 
@@ -3233,6 +3923,10 @@ GenerateClosureDocumentsDetalizationReport Отчет по схождению с
 
 {% endlist %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateClosureDocumentsDetalizationReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -3438,8 +4132,9 @@ GenerateClosureDocumentsReport Закрывающие документы
 
 * **Договор на размещение**
 
-  - [акт об оказанных услугах](*acts-main-act)
-  - [счет-фактура](*acts-main-invoice)
+  - [универсальный передаточный документ (УПД-1)](*acts-main-utd) (в России формируется за октябрь 2026 года и последующие месяцы, вместо акта об оказанных услугах и счета-фактуры)
+  - [акт об оказанных услугах](*acts-main-act) (в России формируется за месяцы до октября 2026 года)
+  - [счет-фактура](*acts-main-invoice) (в России формируется за месяцы до октября 2026 года)
   - [сводный отчет по данным статистики](*acts-main-report)
   - [отчет об исполнении поручения и о зачете взаимных требований](*acts-main-agent) (отчет агента)
 
@@ -3450,15 +4145,19 @@ GenerateClosureDocumentsReport Закрывающие документы
 
 * **Договор на маркетинг**
 
-  - [акт об оказанных услугах](*acts-marketing-act)
-  - [счет-фактура](*acts-main-invoice)
+  - [универсальный передаточный документ (УПД-1)](*acts-main-utd) (в России формируется за август 2026 года и последующие месяцы, вместо акта об оказанных услугах и счета-фактуры)
+  - [акт об оказанных услугах](*acts-marketing-act) (в России формируется за месяцы до августа 2026 года)
+  - [счет-фактура](*acts-main-invoice) (в России формируется за месяцы до августа 2026 года)
   - [счет-фактура на аванс](*acts-marketing-invoice)
-  - [выписка по лицевому счету](*acts-marketing-account)
   - [детализация к акту](*acts-marketing-details)
 
 {% endcut %}
 
 Узнать статус генерации и получить ссылку на архив можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateClosureDocumentsReport.md) %}
 
@@ -3661,6 +4360,10 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 {% include notitle [reports](../../_auto/reports/masterstat/competitors_position.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateCompetitorsPositionReport.md) %}
 
@@ -3865,6 +4568,10 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 
 {% include notitle [tariff-period](../../_includes/common/simultaneously-generated-reports-amount.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateGoodsFeedbackReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -4067,6 +4774,10 @@ GenerateGoodsMovementReport Отчет по движению товаров
 {% include notitle [reports](../../_auto/reports/sku/movement/movement_config.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateGoodsMovementReport.md) %}
 
@@ -4286,6 +4997,10 @@ GenerateGoodsPricesReport Отчет «Цены»
 
 {% include notitle [tariff-period](../../_includes/common/simultaneously-generated-reports-amount.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateGoodsPricesReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -4496,6 +5211,10 @@ GenerateGoodsRealizationReport Отчет по реализации
 	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
 
 {% endlist %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateGoodsRealizationReport.md) %}
 
@@ -4711,6 +5430,10 @@ GenerateGoodsTurnoverReport Отчет по оборачиваемости
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateGoodsTurnoverReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -4914,6 +5637,10 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateJewelryFiscalReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -5116,6 +5843,10 @@ GenerateKeyIndicatorsReport Отчет по ключевым показател�
 {% include notitle [reports](../../_auto/reports/key_indicators/key_indicators.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateKeyIndicatorsReport.md) %}
 
@@ -5325,6 +6056,10 @@ GenerateMarketingDetalizationReport Отчет по счету маркетин�
 Узнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
 
 {% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateMarketingDetalizationReport.md) %}
 
@@ -5539,6 +6274,10 @@ GenerateOfferBarcodes Генерация штрихкодов
 
 Если у товара на упаковке уже есть штрихкод производителя, передайте его в параметре `barcodes` в методе [POST v2/businesses/{businessId}/offer-mappings/update](../../reference/business-offer-mappings/updateOfferMappings.md). Генерировать новый не нужно.
 
+**Пошаговые инструкции**
+
+* [Сгенерировать штрихкоды при добавлении товаров](../../step-by-step/assortment-add-goods.md#add)
+
 {% include notitle [limit](../../_auto/method_limits/generateOfferBarcodes.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -5751,6 +6490,10 @@ GenerateSalesGeographyReport Отчет по географии продаж
 {% include notitle [reports](../../_auto/reports/locality/locality_offers_report_v2.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateSalesGeographyReport.md) %}
 
@@ -5965,6 +6708,10 @@ GenerateShelfsStatisticsReport Отчет по полкам
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
 
 {% endif %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateShelfsStatisticsReport.md) %}
 
@@ -6183,6 +6930,10 @@ GenerateShowsBoostReport Отчет по бусту показов
 
 {% endif %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateShowsBoostReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -6388,6 +7139,10 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 {% include notitle [reports](../../_auto/reports/masterstat/sales_funnel_by_created_at.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateShowsSalesReport.md) %}
 
@@ -6597,6 +7352,17 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 
 Запускает генерацию отчета по остаткам на складах. [Что это за отчет](https://yandex.ru/support/marketplace/ru/storage/logistics#remains-history)
 
+{% note warning "Когда использовать этот метод" %}
+
+Метод актуален:
+
+* для моделей FBY и LaaS;
+* для моделей FBS, DBS и Экспресс, если в кабинете есть группы складов.
+
+Если в кабинете нет групп складов и вы работаете с моделями FBS, DBS или Экспресс, используйте метод [POST v3/businesses/{businessId}/reports/stocks/generate](../../reference/reports/generateStocksReport.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
+
 **Какая информация вернется:**
 
 * Для моделей FBY и LaaS, если указать `campaignId`, — об остатках на складах Маркета.
@@ -6622,6 +7388,10 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 	{% include notitle [reports](../../_auto/reports/offers/stocks_business_config.md) %}
 
 {% endlist %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateStocksOnWarehousesReport.md) %}
 
@@ -6850,6 +7620,10 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 Узнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
 
 {% include notitle [reports](../../_auto/reports/united/services/generator/united_marketplace_services.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateUnitedMarketplaceServicesReport.md) %}
 
@@ -7090,6 +7864,10 @@ GenerateUnitedNettingReport Отчет по платежам
 
 {% include notitle [reports](../../_auto/reports/united/netting/generator/united_netting.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateUnitedNettingReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -7314,6 +8092,10 @@ GenerateUnitedOrdersReport Отчет по заказам
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateUnitedOrdersReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -7532,6 +8314,10 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 {% include notitle [reports](../../_auto/reports/united/returns/generator/united_returns.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateUnitedReturnsReport.md) %}
 
@@ -7921,6 +8707,10 @@ GetBidsInfoForBusiness Информация об установленных ст
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Как получить установленные ставки](../../step-by-step/boost.md#get-bids)
+
 {% include notitle [limit](../../_auto/method_limits/getBidsInfoForBusiness.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -8135,6 +8925,10 @@ GetBidsRecommendations Рекомендованные ставки для зад
 Если товар только добавлен в каталог, но пока не продается, рекомендованной ставки для него не будет.
 
 В одном запросе может быть максимум 1500 товаров.
+
+**Пошаговые инструкции**
+
+* [Как получить рекомендованные ставки](../../step-by-step/boost.md#recommendations)
 
 {% include notitle [limit](../../_auto/method_limits/getBidsRecommendations.md) %}
 
@@ -8390,6 +9184,10 @@ GetBusinessOrders Информация о заказах в кабинете
 
 Получить более подробную информацию о покупателе и его номере телефона можно с помощью запроса [GET v2/campaigns/{campaignId}/orders/{orderId}/buyer](../../reference/order-delivery/getOrderBuyerInfo.md).
 
+**Пошаговые инструкции**
+
+* [Получать информацию о заказах](../../step-by-step/orders-receive.md)
+
 {% include notitle [limit](../../_auto/method_limits/getBusinessOrders.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -8626,6 +9424,10 @@ GetBusinessQuarantineOffers Список товаров, находящихся 
 В запросе можно использовать фильтры.
 
 Результаты возвращаются постранично.
+
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
 
 {% include notitle [limit](../../_auto/method_limits/getBusinessQuarantineOffers.md) %}
 
@@ -8949,17 +9751,6 @@ func (a *FbyAPIService) GetBusinessSettingsExecute(r FbyAPIGetBusinessSettingsRe
 		}
 		if localVarHTTPResponse.StatusCode == 403 {
 			var v ApiForbiddenErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiNotFoundErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -9469,6 +10260,10 @@ GetCampaignQuarantineOffers Список товаров, находящихся 
 
 Результаты возвращаются постранично.
 
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
+
 {% include notitle [limit](../../_auto/method_limits/getCampaignQuarantineOffers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -9868,14 +10663,14 @@ func (r FbyAPIGetCampaignsRequest) Limit(limit int32) FbyAPIGetCampaignsRequest 
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
 // Deprecated
 func (r FbyAPIGetCampaignsRequest) Page(page int32) FbyAPIGetCampaignsRequest {
 	r.page = &page
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
 // Deprecated
 func (r FbyAPIGetCampaignsRequest) PageSize(pageSize int32) FbyAPIGetCampaignsRequest {
 	r.pageSize = &pageSize
@@ -10505,6 +11300,11 @@ GetCategoryContentParameters Списки характеристик товар�
 - [POST v2/businesses/{businessId}/offer-mappings/update](../../reference/business-offer-mappings/updateOfferMappings.md)
 - [POST v2/businesses/{businessId}/offer-cards/update](../../reference/content/updateOfferContent.md)
 
+**Пошаговые инструкции**
+
+* [Проверить сопоставление характеристик категории](../../step-by-step/content-change.md#check-and-update-comparison)
+* [Передача значений характеристики](../../step-by-step/parameter-values.md)
+
 {% include notitle [limit](../../_auto/method_limits/getCategoryContentParameters.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -10712,6 +11512,10 @@ GetChat Получение чата по идентификатору
 [{#T}](../../push-notifications/index.md)
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Как проверить, есть ли новые чаты или сообщения](../../step-by-step/chats.md#check)
 
 {% include notitle [limit](../../_auto/method_limits/getChat.md) %}
 
@@ -10937,6 +11741,10 @@ GetChatHistory Получение истории сообщений в чате
 {% include notitle [access](../../_auto/method_scopes/getChatHistory.md) %}
 
 Возвращает историю сообщений в чате с покупателем.
+
+**Пошаговые инструкции**
+
+* [Чаты с покупателями](../../step-by-step/chats.md)
 
 {% include notitle [limit](../../_auto/method_limits/getChatHistory.md) %}
 
@@ -11172,6 +11980,10 @@ GetChatMessage Получение сообщения в чате
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Как проверить, есть ли новые чаты или сообщения](../../step-by-step/chats.md#check)
+
 {% include notitle [limit](../../_auto/method_limits/getChatMessage.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -11405,6 +12217,10 @@ GetChats Получение доступных чатов
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Чаты с покупателями](../../step-by-step/chats.md)
+
 {% include notitle [limit](../../_auto/method_limits/getChats.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -11477,6 +12293,469 @@ func (a *FbyAPIService) GetChatsExecute(r FbyAPIGetChatsRequest) (*GetChatsRespo
 	}
 	// body params
 	localVarPostBody = r.getChatsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type FbyAPIGetContentSizeChartsRequest struct {
+	ctx                  context.Context
+	ApiService           *FbyAPIService
+	businessId           int64
+	getSizeChartsRequest *GetSizeChartsRequest
+}
+
+func (r FbyAPIGetContentSizeChartsRequest) GetSizeChartsRequest(getSizeChartsRequest GetSizeChartsRequest) FbyAPIGetContentSizeChartsRequest {
+	r.getSizeChartsRequest = &getSizeChartsRequest
+	return r
+}
+
+func (r FbyAPIGetContentSizeChartsRequest) Execute() (*GetSizeChartsResponse, *http.Response, error) {
+	return r.ApiService.GetContentSizeChartsExecute(r)
+}
+
+/*
+GetContentSizeCharts Размерные сетки и обмеры для таблиц размеров
+
+{% include notitle [access](../../_auto/method_scopes/getContentSizeCharts.md) %}
+
+Возвращает размерные сетки и обмеры, из которых можно составить таблицу размеров для указанной размерной
+характеристики. Их идентификаторы передаются в `sizeChartId` ячеек в методах создания и обновления таблиц
+размеров `POST v2/businesses/{businessId}/size-tables/create` и `POST v2/businesses/{businessId}/size-tables/update`.
+
+В список входят:
+
+* стандартные размерные сетки Маркета — значения в них выбираются из справочника `sizeValues`;
+* размерные сетки, значения в которых задаются текстом;
+* обмеры — значения в них тоже задаются текстом.
+
+Брендовые размерные сетки в список не входят, и использовать их в своих таблицах нельзя: для них
+возвращается ошибка `UNKNOWN_SIZE_CHART`.
+
+Обязательные размерные сетки отмечены `required: true`. В таблице должна быть хотя бы одна из них,
+а каждую обязательную сетку в таблице нужно заполнить во всех строках.
+
+Для неизвестного идентификатора размерной характеристики возвращается ошибка `UNKNOWN_SIZE_PARAMETER`.
+
+**Пошаговые инструкции**
+
+* [Таблицы размеров](../../step-by-step/size-tables.md)
+
+{% include notitle [limit](../../_auto/method_limits/getContentSizeCharts.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPIGetContentSizeChartsRequest
+*/
+func (a *FbyAPIService) GetContentSizeCharts(ctx context.Context, businessId int64) FbyAPIGetContentSizeChartsRequest {
+	return FbyAPIGetContentSizeChartsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetSizeChartsResponse
+func (a *FbyAPIService) GetContentSizeChartsExecute(r FbyAPIGetContentSizeChartsRequest) (*GetSizeChartsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSizeChartsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.GetContentSizeCharts")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables/charts"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.getSizeChartsRequest == nil {
+		return localVarReturnValue, nil, reportError("getSizeChartsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getSizeChartsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type FbyAPIGetContentSizeTablesRequest struct {
+	ctx                  context.Context
+	ApiService           *FbyAPIService
+	businessId           int64
+	getSizeTablesRequest *GetSizeTablesRequest
+	pageToken            *string
+	limit                *int32
+}
+
+func (r FbyAPIGetContentSizeTablesRequest) GetSizeTablesRequest(getSizeTablesRequest GetSizeTablesRequest) FbyAPIGetContentSizeTablesRequest {
+	r.getSizeTablesRequest = &getSizeTablesRequest
+	return r
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r FbyAPIGetContentSizeTablesRequest) PageToken(pageToken string) FbyAPIGetContentSizeTablesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-param-description }}
+func (r FbyAPIGetContentSizeTablesRequest) Limit(limit int32) FbyAPIGetContentSizeTablesRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r FbyAPIGetContentSizeTablesRequest) Execute() (*GetSizeTablesResponse, *http.Response, error) {
+	return r.ApiService.GetContentSizeTablesExecute(r)
+}
+
+/*
+GetContentSizeTables Таблицы размеров по идентификаторам
+
+{% include notitle [access](../../_auto/method_scopes/getContentSizeTables.md) %}
+
+Возвращает таблицы размеров по их идентификаторам. Идентификаторы возвращает метод
+подбора таблиц размеров. Если `sizeTableIds` не передан, возвращает все таблицы размеров,
+созданные бизнесом.
+
+Сначала возвращаются созданные бизнесом, затем брендовые, затем стандартные таблицы;
+внутри каждой группы — по убыванию идентификатора.
+
+Результаты возвращаются постранично. Для навигации используйте параметры `pageToken` и `limit`.
+В каждом следующем запросе передавайте тот же набор `sizeTableIds`, что и в первом:
+`pageToken` привязан к нему, и с другим набором запрос будет отклонен. Порядок
+идентификаторов значения не имеет.
+
+Идентификаторы, по которым таблицу вернуть не удалось — такой таблицы нет или она
+принадлежит другому бизнесу, — возвращаются в `notFoundSizeTableIds` на первой странице.
+
+**Пошаговые инструкции**
+
+* [Таблицы размеров](../../step-by-step/size-tables.md)
+
+{% include notitle [limit](../../_auto/method_limits/getContentSizeTables.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPIGetContentSizeTablesRequest
+*/
+func (a *FbyAPIService) GetContentSizeTables(ctx context.Context, businessId int64) FbyAPIGetContentSizeTablesRequest {
+	return FbyAPIGetContentSizeTablesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetSizeTablesResponse
+func (a *FbyAPIService) GetContentSizeTablesExecute(r FbyAPIGetContentSizeTablesRequest) (*GetSizeTablesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSizeTablesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.GetContentSizeTables")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.getSizeTablesRequest == nil {
+		return localVarReturnValue, nil, reportError("getSizeTablesRequest is required and must be specified")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 25
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getSizeTablesRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
@@ -11817,6 +13096,220 @@ func (a *FbyAPIService) GetDefaultPricesExecute(r FbyAPIGetDefaultPricesRequest)
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type FbyAPIGetDocumentsRequest struct {
+	ctx                 context.Context
+	ApiService          *FbyAPIService
+	businessId          int64
+	getDocumentsRequest *GetDocumentsRequest
+	pageToken           *string
+	limit               *int32
+}
+
+func (r FbyAPIGetDocumentsRequest) GetDocumentsRequest(getDocumentsRequest GetDocumentsRequest) FbyAPIGetDocumentsRequest {
+	r.getDocumentsRequest = &getDocumentsRequest
+	return r
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r FbyAPIGetDocumentsRequest) PageToken(pageToken string) FbyAPIGetDocumentsRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-param-description }}
+func (r FbyAPIGetDocumentsRequest) Limit(limit int32) FbyAPIGetDocumentsRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r FbyAPIGetDocumentsRequest) Execute() (*GetDocumentsResponse, *http.Response, error) {
+	return r.ApiService.GetDocumentsExecute(r)
+}
+
+/*
+GetDocuments Получение документов
+
+{% include notitle [access](../../_auto/method_scopes/getDocuments.md) %}
+
+Возвращает страницу документов на товары с учетом переданных фильтров.
+
+{% include notitle [limit](../../_auto/method_limits/getDocuments.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPIGetDocumentsRequest
+*/
+func (a *FbyAPIService) GetDocuments(ctx context.Context, businessId int64) FbyAPIGetDocumentsRequest {
+	return FbyAPIGetDocumentsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetDocumentsResponse
+func (a *FbyAPIService) GetDocumentsExecute(r FbyAPIGetDocumentsRequest) (*GetDocumentsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetDocumentsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.GetDocuments")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/businesses/{businessId}/offers/documents"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.getDocumentsRequest == nil {
+		return localVarReturnValue, nil, reportError("getDocumentsRequest is required and must be specified")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getDocumentsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type FbyAPIGetFulfillmentWarehousesRequest struct {
 	ctx        context.Context
 	ApiService *FbyAPIService
@@ -12075,6 +13568,10 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 Комментарии расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `pageToken`, если вы получали его ранее.
 
+**Пошаговые инструкции**
+
+* [Отзывы о товарах](../../step-by-step/goods-feedback.md)
+
 {% include notitle [limit](../../_auto/method_limits/getGoodsFeedbackComments.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -12314,6 +13811,10 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 Результаты возвращаются постранично.
 
 Отзывы расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `pageToken`, если вы получали его ранее.
+
+**Пошаговые инструкции**
+
+* [Отзывы о товарах](../../step-by-step/goods-feedback.md)
 
 {% include notitle [limit](../../_auto/method_limits/getGoodsFeedbacks.md) %}
 
@@ -12783,6 +14284,10 @@ GetGoodsQuestionAnswers Получение ответов на вопрос
 
 Результаты возвращаются постранично, одна страница содержит не более 50 ответов.
 
+**Пошаговые инструкции**
+
+* [Вопросы и ответы о товарах](../../step-by-step/goods-questions.md)
+
 {% include notitle [limit](../../_auto/method_limits/getGoodsQuestionAnswers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -13017,6 +14522,10 @@ GetGoodsQuestions Получение вопросов о товарах прод
 {% endnote %}
 
 Результаты возвращаются постранично, одна страница содержит не более 50 вопросов.
+
+**Пошаговые инструкции**
+
+* [Вопросы и ответы о товарах](../../step-by-step/goods-questions.md)
 
 {% include notitle [limit](../../_auto/method_limits/getGoodsQuestions.md) %}
 
@@ -13664,6 +15173,11 @@ GetOfferCardsContentStatus Получение информации о запол
 
 Чтобы получить другие характеристики товаров, воспользуйтесь методом [POST v2/businesses/{businessId}/offer-mappings](../../reference/business-offer-mappings/getOfferMappings.md).
 
+**Пошаговые инструкции**
+
+* [Получить текущие характеристики и статус карточки](../../step-by-step/content-change.md#edit-card)
+* [Получить рекомендации по заполнению карточки](../../step-by-step/recommendations.md)
+
 {% include notitle [limit](../../_auto/method_limits/getOfferCardsContentStatus.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -13899,6 +15413,10 @@ GetOfferMappings Информация о товарах в каталоге
 * не передавать тело запроса, чтобы получить список всех товаров в каталоге.
 
 Чтобы получить категорийные характеристики товаров, воспользуйтесь методом [POST v2/businesses/{businessId}/offer-cards](../../reference/content/getOfferCardsContentStatus.md).
+
+**Пошаговые инструкции**
+
+* [Посмотреть товары в архиве](../../step-by-step/assortment-archive.md)
 
 {% include notitle [limit](../../_auto/method_limits/getOfferMappings.md) %}
 
@@ -14554,6 +16072,10 @@ GetOrderBusinessBuyerInfo Информация о покупателе — юр�
 
 Получить данные можно, только если заказ находится в статусе `PROCESSING`, `DELIVERY`, `PICKUP` или `DELIVERED`.
 
+**Пошаговые инструкции**
+
+* [Как получить информацию о покупателе](../../step-by-step/business-info.md#buyer-info)
+
 {% include notitle [limit](../../_auto/method_limits/getOrderBusinessBuyerInfo.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -14749,6 +16271,10 @@ GetOrderBusinessDocumentsInfo Информация о документах
 Возвращает информацию о документах по идентификатору заказа.
 
 Получить данные можно после того, как заказ перейдет в статус `DELIVERED`.
+
+**Пошаговые инструкции**
+
+* [Как получить информацию о документах](../../step-by-step/business-info.md#documents-info)
 
 {% include notitle [limit](../../_auto/method_limits/getOrderBusinessDocumentsInfo.md) %}
 
@@ -15041,14 +16567,14 @@ func (r FbyAPIGetOrdersRequest) BuyerType(buyerType OrderBuyerType) FbyAPIGetOrd
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
 // Deprecated
 func (r FbyAPIGetOrdersRequest) Page(page int32) FbyAPIGetOrdersRequest {
 	r.page = &page
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
 // Deprecated
 func (r FbyAPIGetOrdersRequest) PageSize(pageSize int32) FbyAPIGetOrdersRequest {
 	r.pageSize = &pageSize
@@ -16104,11 +17630,15 @@ GetPromoOffers Получение списка товаров, которые у
 
 {% note warning "Условия участия в акциях могут меняться" %}
 
-Например, `maxPromoPrice`.
+Например, `maxPromoPrice` и `bestPriceLevels`.
 
 Установленные цены меняться не будут — `price` и `promoPrice`.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Управление акциями](../../step-by-step/promos.md)
 
 {% include notitle [limit](../../_auto/method_limits/getPromoOffers.md) %}
 
@@ -16331,6 +17861,10 @@ GetPromos Получение списка акций
 * флеш-акция;
 * скидка по промокоду.
 
+**Пошаговые инструкции**
+
+* [Управление акциями](../../step-by-step/promos.md)
+
 {% include notitle [limit](../../_auto/method_limits/getPromos.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -16531,6 +18065,10 @@ GetQualityRatings Индекс качества магазинов
 
 Подробнее об индексе качества читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/quality/score/).
 
+**Пошаговые инструкции**
+
+* [Индекс качества](../../step-by-step/ratings.md)
+
 {% include notitle [limit](../../_auto/method_limits/getQualityRatings.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -16725,7 +18263,11 @@ GetRegionsCodes Список допустимых кодов стран
 
 Возвращает список стран с их кодами в формате :no-translate[ISO 3166-1 alpha-2].
 
-Страна производства `countryCode` понадобится при продаже товаров из-за рубежа для бизнеса. [Инструкция](../../step-by-step/business-info.md)
+Страна производства `countryCode` понадобится при продаже товаров из-за рубежа для бизнеса.
+
+**Пошаговые инструкции**
+
+* [Обработка заказов от юридических лиц](../../step-by-step/business-info.md)
 
 {% include notitle [limit](../../_auto/method_limits/getRegionsCodes.md) %}
 
@@ -16836,17 +18378,6 @@ func (a *FbyAPIService) GetRegionsCodesExecute(r FbyAPIGetRegionsCodesRequest) (
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiNotFoundErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 420 {
 			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -16907,7 +18438,11 @@ GetReportInfo Получение заданного отчета или доку
 
 Возвращает статус генерации заданного отчета или документа и, если он готов, ссылку для скачивания.
 
-Чтобы воспользоваться этим запросом, вначале нужно запустить генерацию отчета или документа. [Инструкция](../../step-by-step/reports.md)
+Чтобы воспользоваться этим запросом, вначале нужно запустить генерацию отчета или документа.
+
+**Пошаговые инструкции**
+
+* [Проверить готовность отчёта или документа](../../step-by-step/reports.md#status)
 
 {% include notitle [limit](../../_auto/method_limits/getReportInfo.md) %}
 
@@ -17115,6 +18650,10 @@ GetReturn Информация о невыкупе или возврате
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Невыкупы и возвраты](../../step-by-step/returns.md)
+
 {% include notitle [limit](../../_auto/method_limits/getReturn.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -17312,6 +18851,10 @@ GetReturnApplication Получение заявления на возврат
 {% include notitle [access](../../_auto/method_scopes/getReturnApplication.md) %}
 
 Загружает заявление покупателя на возврат товара.
+
+**Пошаговые инструкции**
+
+* [Как работать с невыкупами и возвратами](../../step-by-step/returns.md#new-return)
 
 {% include notitle [limit](../../_auto/method_limits/getReturnApplication.md) %}
 
@@ -17514,6 +19057,10 @@ GetReturnAvailableDecisions Получение возможных решений
 {% include notitle [access](../../_auto/method_scopes/getReturnAvailableDecisions.md) %}
 
 Возвращает список доступных решений по возврату.
+
+**Пошаговые инструкции**
+
+* [Как работать с невыкупами и возвратами](../../step-by-step/returns.md#new-return)
 
 {% include notitle [limit](../../_auto/method_limits/getReturnAvailableDecisions.md) %}
 
@@ -17719,6 +19266,10 @@ GetReturnPhoto Получение фотографий товаров в воз�
 Максимальный размер изображения — 50 МБ.
 
 Тип изображения можно определить по заголовку `Content-Type` в ответе.
+
+**Пошаговые инструкции**
+
+* [Как работать с невыкупами и возвратами](../../step-by-step/returns.md#new-return)
 
 {% include notitle [limit](../../_auto/method_limits/getReturnPhoto.md) %}
 
@@ -17969,14 +19520,14 @@ func (r FbyAPIGetReturnsRequest) ToDate(toDate string) FbyAPIGetReturnsRequest {
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
+// {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;fromDate&#x60;.  {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
 func (r FbyAPIGetReturnsRequest) FromDate2(fromDate2 string) FbyAPIGetReturnsRequest {
 	r.fromDate2 = &fromDate2
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
+// {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;toDate&#x60;.  {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
 func (r FbyAPIGetReturnsRequest) ToDate2(toDate2 string) FbyAPIGetReturnsRequest {
 	r.toDate2 = &toDate2
@@ -18003,6 +19554,10 @@ GetReturns Список невыкупов и возвратов
 [{#T}](../../push-notifications/index.md)
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Невыкупы и возвраты](../../step-by-step/returns.md)
 
 {% include notitle [limit](../../_auto/method_limits/getReturns.md) %}
 
@@ -18226,7 +19781,7 @@ func (r FbyAPIGetStocksRequest) PageToken(pageToken string) FbyAPIGetStocksReque
 	return r
 }
 
-// {{ limit-param-description }}
+// {{ limit-truncate-param-description }}
 func (r FbyAPIGetStocksRequest) Limit(limit int32) FbyAPIGetStocksRequest {
 	r.limit = &limit
 	return r
@@ -18247,6 +19802,17 @@ GetStocks Информация об остатках и оборачиваемо
 {% include notitle [access](../../_auto/method_scopes/getStocks.md) %}
 
 Возвращает данные об остатках товаров (для всех моделей) и об [оборачиваемости](*turnover) товаров (для модели FBY).
+
+{% note warning "Когда использовать этот метод" %}
+
+Метод актуален:
+
+* для моделей FBY и LaaS;
+* для моделей FBS, DBS и Экспресс, если в кабинете есть группы складов.
+
+Если в кабинете нет групп складов и вы работаете с моделями FBS, DBS или Экспресс, используйте метод [POST v3/businesses/{businessId}/offers/stocks](../../reference/stocks/getStocksOnPartnerWarehouses.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
 
 {% note info "По умолчанию данные по оборачивамости не возращаются" %}
 
@@ -18306,7 +19872,7 @@ func (a *FbyAPIService) GetStocksExecute(r FbyAPIGetStocksRequest) (*GetWarehous
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
-		var defaultValue int32 = 100
+		var defaultValue int32 = 50
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
@@ -18456,6 +20022,10 @@ GetSupplyRequestDocuments Получение документов по заяв�
 {% include notitle [access](../../_auto/method_scopes/getSupplyRequestDocuments.md) %}
 
 Возвращает документы по заявке.
+
+**Пошаговые инструкции**
+
+* [Заявки на поставку товаров на склад, вывоз или утилизацию](../../step-by-step/supplies.md)
 
 {% include notitle [limit](../../_auto/method_limits/getSupplyRequestDocuments.md) %}
 
@@ -18671,6 +20241,10 @@ GetSupplyRequestItems Получение товаров в заявке на п�
 {% include notitle [access](../../_auto/method_scopes/getSupplyRequestItems.md) %}
 
 Возвращает список товаров в заявке и информацию по ним.
+
+**Пошаговые инструкции**
+
+* [Заявки на поставку товаров на склад, вывоз или утилизацию](../../step-by-step/supplies.md)
 
 {% include notitle [limit](../../_auto/method_limits/getSupplyRequestItems.md) %}
 
@@ -18896,6 +20470,10 @@ GetSupplyRequests Получение информации о заявках на
 {% include notitle [access](../../_auto/method_scopes/getSupplyRequests.md) %}
 
 По указанным фильтрам возвращает заявки на поставку, вывоз и утилизацию, а также информацию по ним.
+
+**Пошаговые инструкции**
+
+* [Заявки на поставку товаров на склад, вывоз или утилизацию](../../step-by-step/supplies.md)
 
 {% include notitle [limit](../../_auto/method_limits/getSupplyRequests.md) %}
 
@@ -19126,6 +20704,10 @@ PutBidsForBusiness Включение буста продаж и установ�
 Это занимает до нескольких минут.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Работа с бустом продаж](../../step-by-step/boost.md)
 
 {% include notitle [limit](../../_auto/method_limits/putBidsForBusiness.md) %}
 
@@ -19555,14 +21137,14 @@ func (r FbyAPISearchRegionChildrenRequest) Limit(limit int32) FbyAPISearchRegion
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
 // Deprecated
 func (r FbyAPISearchRegionChildrenRequest) Page(page int32) FbyAPISearchRegionChildrenRequest {
 	r.page = &page
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
 // Deprecated
 func (r FbyAPISearchRegionChildrenRequest) PageSize(pageSize int32) FbyAPISearchRegionChildrenRequest {
 	r.pageSize = &pageSize
@@ -20171,6 +21753,10 @@ SendFileToChat Отправка файла в чат
 
 Отправляет файл в чат с покупателем.
 
+**Пошаговые инструкции**
+
+* [Чаты с покупателями](../../step-by-step/chats.md)
+
 {% include notitle [limit](../../_auto/method_limits/sendFileToChat.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -20400,6 +21986,10 @@ SendMessageToChat Отправка сообщения в чат
 
 Отправляет сообщение в чат с покупателем.
 
+**Пошаговые инструкции**
+
+* [Чаты с покупателями](../../step-by-step/chats.md)
+
 {% include notitle [limit](../../_auto/method_limits/sendMessageToChat.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -20615,6 +22205,10 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 
 Пропускает реакцию на отзыв — параметр `needReaction` принимает значение `false` в методе получения всех отзывов [POST v2/businesses/{businessId}/goods-feedback](../../reference/goods-feedback/getGoodsFeedbacks.md).
 
+**Пошаговые инструкции**
+
+* [Отзывы о товарах](../../step-by-step/goods-feedback.md)
+
 {% include notitle [limit](../../_auto/method_limits/skipGoodsFeedbacksReaction.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -20828,6 +22422,10 @@ SubmitReturnDecision Передача решения по возврату
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Как работать с невыкупами и возвратами](../../step-by-step/returns.md#new-return)
+
 {% include notitle [limit](../../_auto/method_limits/submitReturnDecision.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -21009,6 +22607,244 @@ func (a *FbyAPIService) SubmitReturnDecisionExecute(r FbyAPISubmitReturnDecision
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type FbyAPISuggestContentSizeTablesRequest struct {
+	ctx                      context.Context
+	ApiService               *FbyAPIService
+	businessId               int64
+	suggestSizeTablesRequest *SuggestSizeTablesRequest
+	pageToken                *string
+	limit                    *int32
+}
+
+func (r FbyAPISuggestContentSizeTablesRequest) SuggestSizeTablesRequest(suggestSizeTablesRequest SuggestSizeTablesRequest) FbyAPISuggestContentSizeTablesRequest {
+	r.suggestSizeTablesRequest = &suggestSizeTablesRequest
+	return r
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r FbyAPISuggestContentSizeTablesRequest) PageToken(pageToken string) FbyAPISuggestContentSizeTablesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-param-description }}
+func (r FbyAPISuggestContentSizeTablesRequest) Limit(limit int32) FbyAPISuggestContentSizeTablesRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r FbyAPISuggestContentSizeTablesRequest) Execute() (*SuggestSizeTablesResponse, *http.Response, error) {
+	return r.ApiService.SuggestContentSizeTablesExecute(r)
+}
+
+/*
+SuggestContentSizeTables Подбор таблиц размеров
+
+{% include notitle [access](../../_auto/method_scopes/suggestContentSizeTables.md) %}
+
+Возвращает таблицы размеров, подходящие для указанной категории, бренда и пола.
+
+Тип `STANDARD` — таблицы, уже созданные Маркетом и автоматически подобранные под выбранные
+вами категорию, бренд и пол. Тип `CUSTOM` — таблицы, которые вы создали сами: они подходят,
+если у вас свой бренд, уникальная размерная линейка, товары маломерят или большемерят.
+
+Сначала возвращаются созданные бизнесом, затем брендовые, затем стандартные таблицы;
+внутри каждой группы — по убыванию идентификатора.
+
+Результаты возвращаются постранично. Для навигации используйте параметры `pageToken` и `limit`.
+
+**Пошаговые инструкции**
+
+* [Подобрать готовую таблицу](../../step-by-step/size-tables.md#suggest)
+
+{% include notitle [limit](../../_auto/method_limits/suggestContentSizeTables.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPISuggestContentSizeTablesRequest
+*/
+func (a *FbyAPIService) SuggestContentSizeTables(ctx context.Context, businessId int64) FbyAPISuggestContentSizeTablesRequest {
+	return FbyAPISuggestContentSizeTablesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return SuggestSizeTablesResponse
+func (a *FbyAPIService) SuggestContentSizeTablesExecute(r FbyAPISuggestContentSizeTablesRequest) (*SuggestSizeTablesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SuggestSizeTablesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.SuggestContentSizeTables")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables/suggest"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.suggestSizeTablesRequest == nil {
+		return localVarReturnValue, nil, reportError("suggestSizeTablesRequest is required and must be specified")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 25
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.suggestSizeTablesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type FbyAPIUpdateBusinessPricesRequest struct {
 	ctx                         context.Context
 	ApiService                  *FbyAPIService
@@ -21039,6 +22875,10 @@ UpdateBusinessPrices Установка цен на товары для всех
 Это занимает до нескольких минут.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateBusinessPrices.md) %}
 
@@ -21252,6 +23092,10 @@ UpdateCampaignOffers Изменение условий продажи товар
 
 Изменяет параметры размещения товаров в конкретном магазине: доступность товара и применяемый НДС.
 
+**Пошаговые инструкции**
+
+* [Добавить новые товары в каталог](../../step-by-step/assortment-add-goods.md#add)
+
 {% include notitle [limit](../../_auto/method_limits/updateCampaignOffers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -21441,6 +23285,451 @@ func (a *FbyAPIService) UpdateCampaignOffersExecute(r FbyAPIUpdateCampaignOffers
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type FbyAPIUpdateContentSizeTablesRequest struct {
+	ctx                     context.Context
+	ApiService              *FbyAPIService
+	businessId              int64
+	updateSizeTablesRequest *UpdateSizeTablesRequest
+}
+
+func (r FbyAPIUpdateContentSizeTablesRequest) UpdateSizeTablesRequest(updateSizeTablesRequest UpdateSizeTablesRequest) FbyAPIUpdateContentSizeTablesRequest {
+	r.updateSizeTablesRequest = &updateSizeTablesRequest
+	return r
+}
+
+func (r FbyAPIUpdateContentSizeTablesRequest) Execute() (*UpdateSizeTablesResponse, *http.Response, error) {
+	return r.ApiService.UpdateContentSizeTablesExecute(r)
+}
+
+/*
+UpdateContentSizeTables Обновление таблиц размеров
+
+{% include notitle [access](../../_auto/method_scopes/updateContentSizeTables.md) %}
+
+Полностью заменяет названия и содержимое таблиц размеров, созданных бизнесом. За один запрос можно обновить
+до 10 таблиц, в которых суммарно не больше 5000 ячеек. Если таблиц или ячеек больше, запрос отклоняется
+с ошибкой `BAD_REQUEST` и ни одна таблица не обновляется.
+
+{% note warning "Передавайте полное содержимое таблицы" %}
+
+Все отсутствующие строки и колонки будут удалены.
+
+{% endnote %}
+
+Изменить можно только таблицы, созданные бизнесом, — у них в ответе метода
+`POST v2/businesses/{businessId}/size-tables` указано `editable: true`. Если таблицы нет, для нее возвращается
+ошибка `NOT_FOUND`, если это таблица Маркета (`sizeTableType: STANDARD`) — ошибка `FORBIDDEN`.
+
+Размерную характеристику таблицы изменить нельзя: колонки и значения проверяются по характеристике, указанной
+при создании таблицы. Размерные сетки и обмеры, которые можно использовать в таблице, их значения и обязательные
+сетки возвращает метод `POST v2/businesses/{businessId}/size-tables/charts`.
+
+Идентификаторы таблиц не должны повторяться в одном запросе. Если они повторяются, запрос отклоняется
+с ошибкой `BAD_REQUEST` и ни одна таблица не обновляется.
+
+{% cut "Как заполнить таблицу" %}
+
+{% include notitle [size-tables-filling](../../_includes/common/size-tables-filling.md) %}
+
+{% endcut %}
+
+{% cut "Чем сохраненная таблица отличается от переданной" %}
+
+{% include notitle [size-tables-saved-differences](../../_includes/common/size-tables-saved-differences.md) %}
+
+Значения из ответа можно без изменений передать в этот метод: поля `columnType` и `rowIndex` в нем не учитываются.
+
+{% endcut %}
+
+{% note warning "Сохраняется содержимое из последнего запроса" %}
+
+Версии таблицы не сравниваются. Если таблицу изменили в кабинете после того, как вы ее получили,
+эти изменения будут перезаписаны без предупреждения. Ошибка `CONCURRENT_MODIFICATION` возвращается, только если
+таблицу изменили во время обработки вашего запроса. В этом случае повторите запрос.
+
+{% endnote %}
+
+Новое содержимое таблицы применяется к привязанным к ней товарам автоматически через некоторое время.
+Передавать товары повторно не нужно.
+
+Если запрос завершился ошибкой с кодом 5xx, его можно повторить: таблицы заменятся тем же содержимым.
+
+**Пошаговые инструкции**
+
+* [Создать свою таблицу](../../step-by-step/size-tables.md#create)
+
+{% include notitle [limit](../../_auto/method_limits/updateContentSizeTables.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPIUpdateContentSizeTablesRequest
+*/
+func (a *FbyAPIService) UpdateContentSizeTables(ctx context.Context, businessId int64) FbyAPIUpdateContentSizeTablesRequest {
+	return FbyAPIUpdateContentSizeTablesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateSizeTablesResponse
+func (a *FbyAPIService) UpdateContentSizeTablesExecute(r FbyAPIUpdateContentSizeTablesRequest) (*UpdateSizeTablesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateSizeTablesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.UpdateContentSizeTables")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables/update"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.updateSizeTablesRequest == nil {
+		return localVarReturnValue, nil, reportError("updateSizeTablesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateSizeTablesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type FbyAPIUpdateDocumentsRequest struct {
+	ctx                    context.Context
+	ApiService             *FbyAPIService
+	businessId             int64
+	updateDocumentsRequest *UpdateDocumentsRequest
+}
+
+func (r FbyAPIUpdateDocumentsRequest) UpdateDocumentsRequest(updateDocumentsRequest UpdateDocumentsRequest) FbyAPIUpdateDocumentsRequest {
+	r.updateDocumentsRequest = &updateDocumentsRequest
+	return r
+}
+
+func (r FbyAPIUpdateDocumentsRequest) Execute() (*UpdateDocumentsResponse, *http.Response, error) {
+	return r.ApiService.UpdateDocumentsExecute(r)
+}
+
+/*
+UpdateDocuments Обновление документов
+
+{% include notitle [access](../../_auto/method_scopes/updateDocuments.md) %}
+
+Полностью обновляет номер, тип и даты документов на товары. За один запрос можно обновить не более 100 документов.
+
+Для каждого документа передайте его идентификатор и актуальные значения номера, типа и дат.
+Если дата не указана, ранее сохраненная дата будет удалена.
+Ошибка одного документа не мешает обработке остальных.
+
+{% include notitle [limit](../../_auto/method_limits/updateDocuments.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return FbyAPIUpdateDocumentsRequest
+*/
+func (a *FbyAPIService) UpdateDocuments(ctx context.Context, businessId int64) FbyAPIUpdateDocumentsRequest {
+	return FbyAPIUpdateDocumentsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateDocumentsResponse
+func (a *FbyAPIService) UpdateDocumentsExecute(r FbyAPIUpdateDocumentsRequest) (*UpdateDocumentsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateDocumentsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "FbyAPIService.UpdateDocuments")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v1/businesses/{businessId}/offers/documents/update"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.updateDocumentsRequest == nil {
+		return localVarReturnValue, nil, reportError("updateDocumentsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateDocumentsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type FbyAPIUpdateGoodsFeedbackCommentRequest struct {
 	ctx                               context.Context
 	ApiService                        *FbyAPIService
@@ -21484,6 +23773,10 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 * `comment.id` — идентификатор комментария, который нужно изменить.
 
 Если передать одновременно `comment.parentId` и `comment.id`, будет изменен существующий комментарий.
+
+**Пошаговые инструкции**
+
+* [Отзывы о товарах](../../step-by-step/goods-feedback.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateGoodsFeedbackComment.md) %}
 
@@ -21688,6 +23981,10 @@ UpdateGoodsQuestionTextEntity Создание, изменение и удале
 {% include notitle [access](../../_auto/method_scopes/updateGoodsQuestionTextEntity.md) %}
 
 Создание, изменение и удаление ответа или комментария.
+
+**Пошаговые инструкции**
+
+* [Вопросы и ответы о товарах](../../step-by-step/goods-questions.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateGoodsQuestionTextEntity.md) %}
 
@@ -21903,6 +24200,14 @@ UpdateOfferContent Редактирование категорийных хар�
 Это занимает до нескольких минут.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Объединить варианты товаров на карточке](../../step-by-step/assortment-add-goods.md#combine-variants)
+* [Товары относятся к новой для магазина категории](../../step-by-step/content-change.md#edit-card)
+* [Привязать таблицу размеров к карточке](../../step-by-step/size-tables.md#offer-card)
+* [Рекомендации Маркета по карточкам](../../step-by-step/recommendations.md)
+* [Передача значений характеристики](../../step-by-step/parameter-values.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateOfferContent.md) %}
 
@@ -22187,6 +24492,12 @@ SKU товара можно изменить в кабинете продавц�
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Добавление и редактирование товаров](../../step-by-step/assortment-add-goods.md)
+* [Рекомендации Маркета по карточкам](../../step-by-step/recommendations.md)
+* [Передача значений характеристики](../../step-by-step/parameter-values.md)
+
 {% include notitle [limit](../../_auto/method_limits/updateOfferMappings.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -22416,6 +24727,10 @@ UpdatePrices Установка цен на товары в конкретном
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Как изменить цены на товары](../../step-by-step/assortment-change-prices.md)
+
 {% include notitle [limit](../../_auto/method_limits/updatePrices.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -22629,6 +24944,10 @@ UpdatePromoOffers Добавление товаров в акцию или из�
 Добавляет товары в акцию или изменяет цены на товары, которые участвуют в акции.
 
 Изменения начинают действовать в течение 4–6 часов. Узнать, применились ли они, можно с помощью параметра `processing` в ответе метода [POST v2/businesses/{businessId}/promos](../../reference/promos/getPromos.md).
+
+**Пошаговые инструкции**
+
+* [Управление акциями](../../step-by-step/promos.md)
 
 {% include notitle [limit](../../_auto/method_limits/updatePromoOffers.md) %}
 

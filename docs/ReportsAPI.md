@@ -25,6 +25,7 @@ Method | HTTP request | Description
 [**GenerateShowsBoostReport**](ReportsAPI.md#GenerateShowsBoostReport) | **Post** /v2/reports/shows-boost/generate | Отчет по бусту показов
 [**GenerateShowsSalesReport**](ReportsAPI.md#GenerateShowsSalesReport) | **Post** /v2/reports/shows-sales/generate | Отчет «Аналитика продаж»
 [**GenerateStocksOnWarehousesReport**](ReportsAPI.md#GenerateStocksOnWarehousesReport) | **Post** /v2/reports/stocks-on-warehouses/generate | Отчет по остаткам на складах
+[**GenerateStocksReport**](ReportsAPI.md#GenerateStocksReport) | **Post** /v3/businesses/{businessId}/reports/stocks/generate | Отчет по остаткам на складах партнера
 [**GenerateUnitedMarketplaceServicesReport**](ReportsAPI.md#GenerateUnitedMarketplaceServicesReport) | **Post** /v2/reports/united-marketplace-services/generate | Отчет по стоимости услуг
 [**GenerateUnitedNettingReport**](ReportsAPI.md#GenerateUnitedNettingReport) | **Post** /v2/reports/united-netting/generate | Отчет по платежам
 [**GenerateUnitedOrdersReport**](ReportsAPI.md#GenerateUnitedOrdersReport) | **Post** /v2/reports/united-orders/generate | Отчет по заказам
@@ -1461,6 +1462,80 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **generateStocksOnWarehousesReportRequest** | [**GenerateStocksOnWarehousesReportRequest**](GenerateStocksOnWarehousesReportRequest.md) |  | 
  **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+
+### Return type
+
+[**GenerateReportResponse**](GenerateReportResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GenerateStocksReport
+
+> GenerateReportResponse GenerateStocksReport(ctx, businessId).Format(format).GenerateStocksReportRequest(generateStocksReportRequest).Execute()
+
+Отчет по остаткам на складах партнера
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	format := openapiclient.ReportFormatType("FILE") // ReportFormatType | Формат отчета или документа. (optional) (default to "FILE")
+	generateStocksReportRequest := *openapiclient.NewGenerateStocksReportRequest() // GenerateStocksReportRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.ReportsAPI.GenerateStocksReport(context.Background(), businessId).Format(format).GenerateStocksReportRequest(generateStocksReportRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `ReportsAPI.GenerateStocksReport``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GenerateStocksReport`: GenerateReportResponse
+	fmt.Fprintf(os.Stdout, "Response from `ReportsAPI.GenerateStocksReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGenerateStocksReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **format** | [**ReportFormatType**](ReportFormatType.md) | Формат отчета или документа. | [default to &quot;FILE&quot;]
+ **generateStocksReportRequest** | [**GenerateStocksReportRequest**](GenerateStocksReportRequest.md) |  | 
 
 ### Return type
 

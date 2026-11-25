@@ -38,7 +38,11 @@ GetRegionsCodes Список допустимых кодов стран
 
 Возвращает список стран с их кодами в формате :no-translate[ISO 3166-1 alpha-2].
 
-Страна производства `countryCode` понадобится при продаже товаров из-за рубежа для бизнеса. [Инструкция](../../step-by-step/business-info.md)
+Страна производства `countryCode` понадобится при продаже товаров из-за рубежа для бизнеса.
+
+**Пошаговые инструкции**
+
+* [Обработка заказов от юридических лиц](../../step-by-step/business-info.md)
 
 {% include notitle [limit](../../_auto/method_limits/getRegionsCodes.md) %}
 
@@ -149,17 +153,6 @@ func (a *RegionsAPIService) GetRegionsCodesExecute(r RegionsAPIGetRegionsCodesRe
 			newErr.model = v
 			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ApiNotFoundErrorResponse
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
 		if localVarHTTPResponse.StatusCode == 420 {
 			var v ApiLimitErrorResponse
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
@@ -218,14 +211,14 @@ func (r RegionsAPISearchRegionChildrenRequest) Limit(limit int32) RegionsAPISear
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.
 // Deprecated
 func (r RegionsAPISearchRegionChildrenRequest) Page(page int32) RegionsAPISearchRegionChildrenRequest {
 	r.page = &page
 	return r
 }
 
-// {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
+// {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.
 // Deprecated
 func (r RegionsAPISearchRegionChildrenRequest) PageSize(pageSize int32) RegionsAPISearchRegionChildrenRequest {
 	r.pageSize = &pageSize

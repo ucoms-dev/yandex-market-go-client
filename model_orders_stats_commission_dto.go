@@ -20,7 +20,7 @@ var _ MappedNullable = &OrdersStatsCommissionDTO{}
 // OrdersStatsCommissionDTO Информация о стоимости услуг.
 type OrdersStatsCommissionDTO struct {
 	Type *OrdersStatsCommissionType `json:"type,omitempty"`
-	// Сумма, которая была выставлена в момент создания заказа и которую нужно оплатить. Точность — два знака после запятой.
+	// Сумма начисления или корректировки.  Корректировки размещения услуг магазина (`SHOP_SERVICE_PLACEMENT`) возвращаются отдельными элементами и могут быть отрицательными.  Точность — два знака после запятой.
 	Actual *float32 `json:"actual,omitempty"`
 }
 

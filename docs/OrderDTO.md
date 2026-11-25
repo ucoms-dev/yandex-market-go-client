@@ -13,10 +13,10 @@ Name | Type | Description | Notes
 **Currency** | [**CurrencyType**](CurrencyType.md) |  | 
 **ItemsTotal** | **float32** | Платеж покупателя.  | 
 **DeliveryTotal** | **float32** | Стоимость доставки.  | 
-**BuyerItemsTotal** | Pointer to **float32** | Стоимость всех товаров в заказе в валюте покупателя после применения скидок и без учета стоимости доставки. | [optional] 
-**BuyerTotal** | Pointer to **float32** | Стоимость всех товаров в заказе в валюте покупателя после применения скидок и с учетом стоимости доставки. | [optional] 
+**BuyerItemsTotal** | Pointer to **float32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо него используйте &#x60;itemsTotal&#x60;.  {% endnote %}  Стоимость всех товаров в заказе в валюте покупателя после применения скидок и без учета стоимости доставки.  | [optional] 
+**BuyerTotal** | Pointer to **float32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}     {% endnote %}  Стоимость всех товаров в заказе в валюте покупателя после применения скидок и с учетом стоимости доставки.  | [optional] 
 **BuyerItemsTotalBeforeDiscount** | **float32** | Стоимость всех товаров в заказе в валюте покупателя без учета стоимости доставки и до применения скидок по:  * акциям; * купонам; * промокодам.  | 
-**BuyerTotalBeforeDiscount** | Pointer to **float32** | Стоимость всех товаров в заказе в валюте покупателя до применения скидок и с учетом стоимости доставки (&#x60;buyerItemsTotalBeforeDiscount&#x60; + стоимость доставки). | [optional] 
+**BuyerTotalBeforeDiscount** | Pointer to **float32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}     {% endnote %}  Стоимость всех товаров в заказе в валюте покупателя до применения скидок и с учетом стоимости доставки (&#x60;buyerItemsTotalBeforeDiscount&#x60; + стоимость доставки).  | [optional] 
 **PaymentType** | [**OrderPaymentType**](OrderPaymentType.md) |  | 
 **PaymentMethod** | [**OrderPaymentMethodType**](OrderPaymentMethodType.md) |  | 
 **Fake** | **bool** | Тип заказа:  * &#x60;false&#x60; — настоящий заказ покупателя.  * &#x60;true&#x60; — [тестовый заказ](../../concepts/sandbox.md) Маркета.  | 

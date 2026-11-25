@@ -19,6 +19,7 @@ var _ MappedNullable = &BusinessSettingsDTO{}
 
 // BusinessSettingsDTO Настройки кабинета.
 type BusinessSettingsDTO struct {
+	WarehouseModel *BusinessWarehouseModelType `json:"warehouseModel,omitempty"`
 	// Управление ценами на товары:  * `false` — можно установить цену, которая действует:   * во всех магазинах кабинета — [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/prices/updateBusinessPrices.md);   * в конкретном магазине — [POST v2/campaigns/{campaignId}/offer-prices/updates](../../reference/prices/updatePrices.md). * `true` — можно установить только цену, которая действует во всех магазинах кабинета, — [POST v2/businesses/{businessId}/offer-prices/updates](../../reference/prices/updateBusinessPrices.md).
 	OnlyDefaultPrice *bool         `json:"onlyDefaultPrice,omitempty"`
 	Currency         *CurrencyType `json:"currency,omitempty"`
@@ -39,6 +40,38 @@ func NewBusinessSettingsDTO() *BusinessSettingsDTO {
 func NewBusinessSettingsDTOWithDefaults() *BusinessSettingsDTO {
 	this := BusinessSettingsDTO{}
 	return &this
+}
+
+// GetWarehouseModel returns the WarehouseModel field value if set, zero value otherwise.
+func (o *BusinessSettingsDTO) GetWarehouseModel() BusinessWarehouseModelType {
+	if o == nil || IsNil(o.WarehouseModel) {
+		var ret BusinessWarehouseModelType
+		return ret
+	}
+	return *o.WarehouseModel
+}
+
+// GetWarehouseModelOk returns a tuple with the WarehouseModel field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BusinessSettingsDTO) GetWarehouseModelOk() (*BusinessWarehouseModelType, bool) {
+	if o == nil || IsNil(o.WarehouseModel) {
+		return nil, false
+	}
+	return o.WarehouseModel, true
+}
+
+// HasWarehouseModel returns a boolean if a field has been set.
+func (o *BusinessSettingsDTO) HasWarehouseModel() bool {
+	if o != nil && !IsNil(o.WarehouseModel) {
+		return true
+	}
+
+	return false
+}
+
+// SetWarehouseModel gets a reference to the given BusinessWarehouseModelType and assigns it to the WarehouseModel field.
+func (o *BusinessSettingsDTO) SetWarehouseModel(v BusinessWarehouseModelType) {
+	o.WarehouseModel = &v
 }
 
 // GetOnlyDefaultPrice returns the OnlyDefaultPrice field value if set, zero value otherwise.
@@ -115,6 +148,9 @@ func (o BusinessSettingsDTO) MarshalJSON() ([]byte, error) {
 
 func (o BusinessSettingsDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
+	if !IsNil(o.WarehouseModel) {
+		toSerialize["warehouseModel"] = o.WarehouseModel
+	}
 	if !IsNil(o.OnlyDefaultPrice) {
 		toSerialize["onlyDefaultPrice"] = o.OnlyDefaultPrice
 	}

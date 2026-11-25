@@ -6,7 +6,9 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**GetFulfillmentWarehouses**](WarehousesAPI.md#GetFulfillmentWarehouses) | **Get** /v2/warehouses | Идентификаторы фулфилмент-складов Маркета
 [**GetPagedWarehouses**](WarehousesAPI.md#GetPagedWarehouses) | **Post** /v2/businesses/{businessId}/warehouses | Список складов
+[**GetPartnerWarehouses**](WarehousesAPI.md#GetPartnerWarehouses) | **Post** /v3/businesses/{businessId}/warehouses | Список складов
 [**GetWarehouses**](WarehousesAPI.md#GetWarehouses) | **Get** /v2/businesses/{businessId}/warehouses | Список складов и групп складов
+[**UpdateWarehouseModelStatus**](WarehousesAPI.md#UpdateWarehouseModelStatus) | **Post** /v3/businesses/{businessId}/warehouse/models/status | Включение/выключение модели работы склада
 [**UpdateWarehouseStatus**](WarehousesAPI.md#UpdateWarehouseStatus) | **Post** /v2/campaigns/{campaignId}/warehouse/status | Изменение статуса склада
 
 
@@ -153,6 +155,82 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetPartnerWarehouses
+
+> GetPartnerWarehousesResponse GetPartnerWarehouses(ctx, businessId).PageToken(pageToken).Limit(limit).GetPartnerWarehousesRequest(getPartnerWarehousesRequest).Execute()
+
+Список складов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
+	limit := int32(56) // int32 | {{ limit-param-description }}  (optional) (default to 15)
+	getPartnerWarehousesRequest := *openapiclient.NewGetPartnerWarehousesRequest() // GetPartnerWarehousesRequest |  (optional)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WarehousesAPI.GetPartnerWarehouses(context.Background(), businessId).PageToken(pageToken).Limit(limit).GetPartnerWarehousesRequest(getPartnerWarehousesRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WarehousesAPI.GetPartnerWarehouses``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetPartnerWarehouses`: GetPartnerWarehousesResponse
+	fmt.Fprintf(os.Stdout, "Response from `WarehousesAPI.GetPartnerWarehouses`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetPartnerWarehousesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
+ **limit** | **int32** | {{ limit-param-description }}  | [default to 15]
+ **getPartnerWarehousesRequest** | [**GetPartnerWarehousesRequest**](GetPartnerWarehousesRequest.md) |  | 
+
+### Return type
+
+[**GetPartnerWarehousesResponse**](GetPartnerWarehousesResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetWarehouses
 
 > GetWarehousesResponse GetWarehouses(ctx, businessId).Execute()
@@ -216,6 +294,78 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateWarehouseModelStatus
+
+> UpdateWarehouseModelStatusResponse UpdateWarehouseModelStatus(ctx, businessId).UpdateWarehouseModelStatusRequest(updateWarehouseModelStatusRequest).Execute()
+
+Включение/выключение модели работы склада
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	updateWarehouseModelStatusRequest := *openapiclient.NewUpdateWarehouseModelStatusRequest(int64(123), openapiclient.WarehouseProgramType("FBS"), false) // UpdateWarehouseModelStatusRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.WarehousesAPI.UpdateWarehouseModelStatus(context.Background(), businessId).UpdateWarehouseModelStatusRequest(updateWarehouseModelStatusRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `WarehousesAPI.UpdateWarehouseModelStatus``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateWarehouseModelStatus`: UpdateWarehouseModelStatusResponse
+	fmt.Fprintf(os.Stdout, "Response from `WarehousesAPI.UpdateWarehouseModelStatus`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateWarehouseModelStatusRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateWarehouseModelStatusRequest** | [**UpdateWarehouseModelStatusRequest**](UpdateWarehouseModelStatusRequest.md) |  | 
+
+### Return type
+
+[**UpdateWarehouseModelStatusResponse**](UpdateWarehouseModelStatusResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

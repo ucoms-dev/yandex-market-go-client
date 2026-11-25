@@ -52,6 +52,10 @@ CreateChat Создание нового чата с покупателем
 * по заказам;
 * по возвратам (доступны только для FBY-, FBS- и Экспресс-магазинов).
 
+**Пошаговые инструкции**
+
+* [Начать чат с покупателем](../../step-by-step/chats.md#create)
+
 {% include notitle [limit](../../_auto/method_limits/createChat.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -261,6 +265,10 @@ GetChat Получение чата по идентификатору
 [{#T}](../../push-notifications/index.md)
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Как проверить, есть ли новые чаты или сообщения](../../step-by-step/chats.md#check)
 
 {% include notitle [limit](../../_auto/method_limits/getChat.md) %}
 
@@ -486,6 +494,10 @@ GetChatHistory Получение истории сообщений в чате
 {% include notitle [access](../../_auto/method_scopes/getChatHistory.md) %}
 
 Возвращает историю сообщений в чате с покупателем.
+
+**Пошаговые инструкции**
+
+* [Чаты с покупателями](../../step-by-step/chats.md)
 
 {% include notitle [limit](../../_auto/method_limits/getChatHistory.md) %}
 
@@ -721,6 +733,10 @@ GetChatMessage Получение сообщения в чате
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Как проверить, есть ли новые чаты или сообщения](../../step-by-step/chats.md#check)
+
 {% include notitle [limit](../../_auto/method_limits/getChatMessage.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -954,6 +970,10 @@ GetChats Получение доступных чатов
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Чаты с покупателями](../../step-by-step/chats.md)
+
 {% include notitle [limit](../../_auto/method_limits/getChats.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1172,6 +1192,10 @@ SendFileToChat Отправка файла в чат
 {% include notitle [access](../../_auto/method_scopes/sendFileToChat.md) %}
 
 Отправляет файл в чат с покупателем.
+
+**Пошаговые инструкции**
+
+* [Чаты с покупателями](../../step-by-step/chats.md)
 
 {% include notitle [limit](../../_auto/method_limits/sendFileToChat.md) %}
 
@@ -1401,6 +1425,10 @@ SendMessageToChat Отправка сообщения в чат
 {% include notitle [access](../../_auto/method_scopes/sendMessageToChat.md) %}
 
 Отправляет сообщение в чат с покупателем.
+
+**Пошаговые инструкции**
+
+* [Чаты с покупателями](../../step-by-step/chats.md)
 
 {% include notitle [limit](../../_auto/method_limits/sendMessageToChat.md) %}
 

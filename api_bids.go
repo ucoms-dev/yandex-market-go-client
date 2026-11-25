@@ -66,6 +66,10 @@ GetBidsInfoForBusiness Информация об установленных ст
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Как получить установленные ставки](../../step-by-step/boost.md#get-bids)
+
 {% include notitle [limit](../../_auto/method_limits/getBidsInfoForBusiness.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -280,6 +284,10 @@ GetBidsRecommendations Рекомендованные ставки для зад
 Если товар только добавлен в каталог, но пока не продается, рекомендованной ставки для него не будет.
 
 В одном запросе может быть максимум 1500 товаров.
+
+**Пошаговые инструкции**
+
+* [Как получить рекомендованные ставки](../../step-by-step/boost.md#recommendations)
 
 {% include notitle [limit](../../_auto/method_limits/getBidsRecommendations.md) %}
 
@@ -514,6 +522,10 @@ PutBidsForBusiness Включение буста продаж и установ�
 Это занимает до нескольких минут.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Работа с бустом продаж](../../step-by-step/boost.md)
 
 {% include notitle [limit](../../_auto/method_limits/putBidsForBusiness.md) %}
 

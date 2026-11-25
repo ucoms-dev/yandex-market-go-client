@@ -5,9 +5,12 @@ All URIs are relative to *https://api.partner.market.yandex.ru*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CancelReturn**](LaasAPI.md#CancelReturn) | **Post** /v1/campaigns/{campaignId}/returns/cancel | Отмена возврата
+[**CreateContentSizeTables**](LaasAPI.md#CreateContentSizeTables) | **Post** /v2/businesses/{businessId}/size-tables/create | Создание таблиц размеров
+[**CreateDocuments**](LaasAPI.md#CreateDocuments) | **Post** /v1/businesses/{businessId}/offers/documents/create | Создание документов
 [**CreateOrder**](LaasAPI.md#CreateOrder) | **Post** /v1/campaigns/{campaignId}/orders/create | Создание заказа
 [**CreateReturn**](LaasAPI.md#CreateReturn) | **Post** /v1/campaigns/{campaignId}/returns/create | Создание возврата
 [**DeleteCampaignOffers**](LaasAPI.md#DeleteCampaignOffers) | **Post** /v2/campaigns/{campaignId}/offers/delete | Удаление товаров из ассортимента магазина
+[**DeleteDocuments**](LaasAPI.md#DeleteDocuments) | **Post** /v1/businesses/{businessId}/offers/documents/delete | Удаление документов
 [**DeleteOffers**](LaasAPI.md#DeleteOffers) | **Post** /v2/businesses/{businessId}/offer-mappings/delete | Удаление товаров из каталога
 [**GenerateBarcodesReport**](LaasAPI.md#GenerateBarcodesReport) | **Post** /v1/reports/documents/barcodes/generate | Получение файла со штрихкодами
 [**GenerateClosureDocumentsDetalizationReport**](LaasAPI.md#GenerateClosureDocumentsDetalizationReport) | **Post** /v2/reports/closure-documents/detalization/generate | Отчет по схождению с закрывающими документами
@@ -27,8 +30,11 @@ Method | HTTP request | Description
 [**GetCampaigns**](LaasAPI.md#GetCampaigns) | **Get** /v2/campaigns | Список магазинов пользователя
 [**GetCategoriesTree**](LaasAPI.md#GetCategoriesTree) | **Post** /v2/categories/tree | Дерево категорий
 [**GetCategoryContentParameters**](LaasAPI.md#GetCategoryContentParameters) | **Post** /v2/category/{categoryId}/parameters | Списки характеристик товаров по категориям
+[**GetContentSizeCharts**](LaasAPI.md#GetContentSizeCharts) | **Post** /v2/businesses/{businessId}/size-tables/charts | Размерные сетки и обмеры для таблиц размеров
+[**GetContentSizeTables**](LaasAPI.md#GetContentSizeTables) | **Post** /v2/businesses/{businessId}/size-tables | Таблицы размеров по идентификаторам
 [**GetDefaultPrices**](LaasAPI.md#GetDefaultPrices) | **Post** /v2/businesses/{businessId}/offer-prices | Просмотр цен на указанные товары во всех магазинах
 [**GetDeliveryOptions**](LaasAPI.md#GetDeliveryOptions) | **Post** /v1/campaigns/{campaignId}/delivery-options | Получение доступных вариантов доставки заказов
+[**GetDocuments**](LaasAPI.md#GetDocuments) | **Post** /v1/businesses/{businessId}/offers/documents | Получение документов
 [**GetFulfillmentWarehouses**](LaasAPI.md#GetFulfillmentWarehouses) | **Get** /v2/warehouses | Идентификаторы фулфилмент-складов Маркета
 [**GetLogisticPoints**](LaasAPI.md#GetLogisticPoints) | **Post** /v1/businesses/{businessId}/logistics-points | Получение точек ПВЗ Маркета
 [**GetOfferCardsContentStatus**](LaasAPI.md#GetOfferCardsContentStatus) | **Post** /v2/businesses/{businessId}/offer-cards | Получение информации о заполненности карточек магазина
@@ -51,8 +57,11 @@ Method | HTTP request | Description
 [**SearchRegionChildren**](LaasAPI.md#SearchRegionChildren) | **Get** /v2/regions/{regionId}/children | Информация о дочерних регионах
 [**SearchRegionsById**](LaasAPI.md#SearchRegionsById) | **Get** /v2/regions/{regionId} | Информация о регионе
 [**SearchRegionsByName**](LaasAPI.md#SearchRegionsByName) | **Get** /v2/regions | Поиск регионов по их имени
+[**SuggestContentSizeTables**](LaasAPI.md#SuggestContentSizeTables) | **Post** /v2/businesses/{businessId}/size-tables/suggest | Подбор таблиц размеров
 [**UpdateBusinessPrices**](LaasAPI.md#UpdateBusinessPrices) | **Post** /v2/businesses/{businessId}/offer-prices/updates | Установка цен на товары для всех магазинов
 [**UpdateCampaignOffers**](LaasAPI.md#UpdateCampaignOffers) | **Post** /v2/campaigns/{campaignId}/offers/update | Изменение условий продажи товаров в магазине
+[**UpdateContentSizeTables**](LaasAPI.md#UpdateContentSizeTables) | **Post** /v2/businesses/{businessId}/size-tables/update | Обновление таблиц размеров
+[**UpdateDocuments**](LaasAPI.md#UpdateDocuments) | **Post** /v1/businesses/{businessId}/offers/documents/update | Обновление документов
 [**UpdateOfferContent**](LaasAPI.md#UpdateOfferContent) | **Post** /v2/businesses/{businessId}/offer-cards/update | Редактирование категорийных характеристик товара
 [**UpdateOfferMappings**](LaasAPI.md#UpdateOfferMappings) | **Post** /v2/businesses/{businessId}/offer-mappings/update | Добавление товаров в каталог и изменение информации о них
 [**UpdateOrder**](LaasAPI.md#UpdateOrder) | **Post** /v1/campaigns/{campaignId}/orders/update | Изменение заказа
@@ -119,6 +128,150 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**CancelReturnResponse**](CancelReturnResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateContentSizeTables
+
+> CreateSizeTablesResponse CreateContentSizeTables(ctx, businessId).CreateSizeTablesRequest(createSizeTablesRequest).Execute()
+
+Создание таблиц размеров
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	createSizeTablesRequest := *openapiclient.NewCreateSizeTablesRequest([]openapiclient.CreateSizeTableDTO{*openapiclient.NewCreateSizeTableDTO(int64(123), "SizeTableName_example", []openapiclient.SizeTableRowDTO{*openapiclient.NewSizeTableRowDTO([]openapiclient.SizeTableCellDTO{*openapiclient.NewSizeTableCellDTO()})})}) // CreateSizeTablesRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.CreateContentSizeTables(context.Background(), businessId).CreateSizeTablesRequest(createSizeTablesRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.CreateContentSizeTables``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateContentSizeTables`: CreateSizeTablesResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.CreateContentSizeTables`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateContentSizeTablesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createSizeTablesRequest** | [**CreateSizeTablesRequest**](CreateSizeTablesRequest.md) |  | 
+
+### Return type
+
+[**CreateSizeTablesResponse**](CreateSizeTablesResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## CreateDocuments
+
+> CreateDocumentsResponse CreateDocuments(ctx, businessId).CreateDocumentsRequest(createDocumentsRequest).Execute()
+
+Создание документов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	createDocumentsRequest := *openapiclient.NewCreateDocumentsRequest([]openapiclient.DocumentWriteDTO{*openapiclient.NewDocumentWriteDTO("Number_example", openapiclient.DocumentType("CONFORMITY_DECLARATION"))}) // CreateDocumentsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.CreateDocuments(context.Background(), businessId).CreateDocumentsRequest(createDocumentsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.CreateDocuments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `CreateDocuments`: CreateDocumentsResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.CreateDocuments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateDocumentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **createDocumentsRequest** | [**CreateDocumentsRequest**](CreateDocumentsRequest.md) |  | 
+
+### Return type
+
+[**CreateDocumentsResponse**](CreateDocumentsResponse.md)
 
 ### Authorization
 
@@ -336,6 +489,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**DeleteCampaignOffersResponse**](DeleteCampaignOffersResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteDocuments
+
+> EmptyApiResponse DeleteDocuments(ctx, businessId).DeleteDocumentsRequest(deleteDocumentsRequest).Execute()
+
+Удаление документов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	deleteDocumentsRequest := *openapiclient.NewDeleteDocumentsRequest([]int64{int64(123)}) // DeleteDocumentsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.DeleteDocuments(context.Background(), businessId).DeleteDocumentsRequest(deleteDocumentsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.DeleteDocuments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `DeleteDocuments`: EmptyApiResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.DeleteDocuments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteDocumentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **deleteDocumentsRequest** | [**DeleteDocumentsRequest**](DeleteDocumentsRequest.md) |  | 
+
+### Return type
+
+[**EmptyApiResponse**](EmptyApiResponse.md)
 
 ### Authorization
 
@@ -1493,8 +1718,8 @@ import (
 func main() {
 	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
 	limit := int32(56) // int32 | {{ limit-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}  (optional)
-	page := int32(56) // int32 | {% note warning \"Устаревший параметр\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром `pageSize`.  (optional) (default to 1)
-	pageSize := int32(56) // int32 | {% note warning \"Устаревший параметр\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром `page`.  (optional)
+	page := int32(56) // int32 | {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром `pageSize`.  (optional) (default to 1)
+	pageSize := int32(56) // int32 | {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром `page`.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -1521,8 +1746,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
  **limit** | **int32** | {{ limit-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}  | 
- **page** | **int32** | {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.  | [default to 1]
- **pageSize** | **int32** | {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.  | 
+ **page** | **int32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.  | [default to 1]
+ **pageSize** | **int32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.  | 
 
 ### Return type
 
@@ -1680,6 +1905,154 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## GetContentSizeCharts
+
+> GetSizeChartsResponse GetContentSizeCharts(ctx, businessId).GetSizeChartsRequest(getSizeChartsRequest).Execute()
+
+Размерные сетки и обмеры для таблиц размеров
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	getSizeChartsRequest := *openapiclient.NewGetSizeChartsRequest(int64(123)) // GetSizeChartsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.GetContentSizeCharts(context.Background(), businessId).GetSizeChartsRequest(getSizeChartsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.GetContentSizeCharts``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetContentSizeCharts`: GetSizeChartsResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.GetContentSizeCharts`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContentSizeChartsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **getSizeChartsRequest** | [**GetSizeChartsRequest**](GetSizeChartsRequest.md) |  | 
+
+### Return type
+
+[**GetSizeChartsResponse**](GetSizeChartsResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetContentSizeTables
+
+> GetSizeTablesResponse GetContentSizeTables(ctx, businessId).GetSizeTablesRequest(getSizeTablesRequest).PageToken(pageToken).Limit(limit).Execute()
+
+Таблицы размеров по идентификаторам
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	getSizeTablesRequest := *openapiclient.NewGetSizeTablesRequest() // GetSizeTablesRequest | 
+	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
+	limit := int32(56) // int32 | {{ limit-param-description }}  (optional) (default to 25)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.GetContentSizeTables(context.Background(), businessId).GetSizeTablesRequest(getSizeTablesRequest).PageToken(pageToken).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.GetContentSizeTables``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetContentSizeTables`: GetSizeTablesResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.GetContentSizeTables`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetContentSizeTablesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **getSizeTablesRequest** | [**GetSizeTablesRequest**](GetSizeTablesRequest.md) |  | 
+ **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
+ **limit** | **int32** | {{ limit-param-description }}  | [default to 25]
+
+### Return type
+
+[**GetSizeTablesResponse**](GetSizeTablesResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetDefaultPrices
 
 > GetDefaultPricesResponse GetDefaultPrices(ctx, businessId).PageToken(pageToken).Limit(limit).GetDefaultPricesRequest(getDefaultPricesRequest).Execute()
@@ -1813,6 +2186,82 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**GetDeliveryOptionsResponse**](GetDeliveryOptionsResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetDocuments
+
+> GetDocumentsResponse GetDocuments(ctx, businessId).GetDocumentsRequest(getDocumentsRequest).PageToken(pageToken).Limit(limit).Execute()
+
+Получение документов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	getDocumentsRequest := *openapiclient.NewGetDocumentsRequest() // GetDocumentsRequest | 
+	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
+	limit := int32(56) // int32 | {{ limit-param-description }}  (optional) (default to 50)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.GetDocuments(context.Background(), businessId).GetDocumentsRequest(getDocumentsRequest).PageToken(pageToken).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.GetDocuments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `GetDocuments`: GetDocumentsResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.GetDocuments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetDocumentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **getDocumentsRequest** | [**GetDocumentsRequest**](GetDocumentsRequest.md) |  | 
+ **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
+ **limit** | **int32** | {{ limit-param-description }}  | [default to 50]
+
+### Return type
+
+[**GetDocumentsResponse**](GetDocumentsResponse.md)
 
 ### Authorization
 
@@ -2450,8 +2899,8 @@ func main() {
 	onlyWaitingForCancellationApprove := true // bool | **Только для модели DBS**  Фильтр для получения заказов, по которым был запрос на отмену.  При значении `true` возвращаются только заказы, которые находятся в статусе `DELIVERY` или `PICKUP` и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT v2/campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).  (optional) (default to false)
 	onlyEstimatedDelivery := true // bool | Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * `true` — возвращаются только заказы с неподтвержденной датой доставки. * `false` — фильтрация не применяется.  (optional) (default to false)
 	buyerType := openapiclient.OrderBuyerType("PERSON") // OrderBuyerType | Фильтрация заказов по типу покупателя.  (optional)
-	page := int32(56) // int32 | {% note warning \"Устаревший параметр\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром `pageSize`.  (optional) (default to 1)
-	pageSize := int32(56) // int32 | {% note warning \"Устаревший параметр\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром `page`.  (optional)
+	page := int32(56) // int32 | {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром `pageSize`.  (optional) (default to 1)
+	pageSize := int32(56) // int32 | {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром `page`.  (optional)
 	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
 	limit := int32(56) // int32 | {{ limit-truncate-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}  (optional)
 
@@ -2498,8 +2947,8 @@ Name | Type | Description  | Notes
  **onlyWaitingForCancellationApprove** | **bool** | **Только для модели DBS**  Фильтр для получения заказов, по которым был запрос на отмену.  При значении &#x60;true&#x60; возвращаются только заказы, которые находятся в статусе &#x60;DELIVERY&#x60; или &#x60;PICKUP&#x60; и которые пользователи решили отменить.  Чтобы подтвердить или отклонить отмену, отправьте запрос [PUT v2/campaigns/{campaignId}/orders/{orderId}/cancellation/accept](../../reference/orders/acceptOrderCancellation).  | [default to false]
  **onlyEstimatedDelivery** | **bool** | Фильтрация заказов с долгой доставкой (31-60 дней) по подтвержденной дате доставки:  * &#x60;true&#x60; — возвращаются только заказы с неподтвержденной датой доставки. * &#x60;false&#x60; — фильтрация не применяется.  | [default to false]
  **buyerType** | [**OrderBuyerType**](OrderBuyerType.md) | Фильтрация заказов по типу покупателя.  | 
- **page** | **int32** | {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.  | [default to 1]
- **pageSize** | **int32** | {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.  | 
+ **page** | **int32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.  | [default to 1]
+ **pageSize** | **int32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.  | 
  **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
  **limit** | **int32** | {{ limit-truncate-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}  | 
 
@@ -2909,8 +3358,8 @@ func main() {
 	type_ := openapiclient.ReturnType("UNREDEEMED") // ReturnType | Тип заказа для фильтрации:  * `UNREDEEMED` — невыкуп.  * `RETURN` — возврат.  Если не указать, в ответе будут и невыкупы, и возвраты.  (optional)
 	fromDate := time.Now() // string | Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: `ГГГГ-ММ-ДД`.  (optional)
 	toDate := time.Now() // string | Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: `ГГГГ-ММ-ДД`.  (optional)
-	fromDate2 := time.Now() // string | {% note warning \"Вместо него используйте `fromDate`.\" %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  (optional)
-	toDate2 := time.Now() // string | {% note warning \"Вместо него используйте `toDate`.\" %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  (optional)
+	fromDate2 := time.Now() // string | {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `fromDate`.  {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  (optional)
+	toDate2 := time.Now() // string | {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `toDate`.  {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -2948,8 +3397,8 @@ Name | Type | Description  | Notes
  **type_** | [**ReturnType**](ReturnType.md) | Тип заказа для фильтрации:  * &#x60;UNREDEEMED&#x60; — невыкуп.  * &#x60;RETURN&#x60; — возврат.  Если не указать, в ответе будут и невыкупы, и возвраты.  | 
  **fromDate** | **string** | Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.  | 
  **toDate** | **string** | Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  Формат: &#x60;ГГГГ-ММ-ДД&#x60;.  | 
- **fromDate2** | **string** | {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  | 
- **toDate2** | **string** | {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  | 
+ **fromDate2** | **string** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;fromDate&#x60;.  {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.  | 
+ **toDate2** | **string** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;toDate&#x60;.  {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.  | 
 
 ### Return type
 
@@ -2992,7 +3441,7 @@ import (
 func main() {
 	campaignId := int64(789) // int64 | Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями. 
 	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
-	limit := int32(56) // int32 | {{ limit-param-description }}  (optional) (default to 100)
+	limit := int32(56) // int32 | {{ limit-truncate-param-description }}  (optional) (default to 50)
 	getWarehouseStocksRequest := *openapiclient.NewGetWarehouseStocksRequest() // GetWarehouseStocksRequest |  (optional)
 
 	configuration := openapiclient.NewConfiguration()
@@ -3024,7 +3473,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
  **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
- **limit** | **int32** | {{ limit-param-description }}  | [default to 100]
+ **limit** | **int32** | {{ limit-truncate-param-description }}  | [default to 50]
  **getWarehouseStocksRequest** | [**GetWarehouseStocksRequest**](GetWarehouseStocksRequest.md) |  | 
 
 ### Return type
@@ -3293,8 +3742,8 @@ func main() {
 	regionId := int64(789) // int64 | Идентификатор региона.  Идентификатор региона можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md). 
 	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
 	limit := int32(56) // int32 | {{ limit-truncate-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}  (optional)
-	page := int32(56) // int32 | {% note warning \"Устаревший параметр\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром `pageSize`.  (optional) (default to 1)
-	pageSize := int32(56) // int32 | {% note warning \"Устаревший параметр\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром `page`.  (optional)
+	page := int32(56) // int32 | {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром `pageSize`.  (optional) (default to 1)
+	pageSize := int32(56) // int32 | {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Вместо `page` и `pageSize` используйте пагинацию по `pageToken` и `limit`.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром `page`.  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -3326,8 +3775,8 @@ Name | Type | Description  | Notes
 
  **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
  **limit** | **int32** | {{ limit-truncate-param-description }}  {% note warning %}  У данного лимита нет значения по умолчанию.  {% endnote %}  | 
- **page** | **int32** | {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.  | [default to 1]
- **pageSize** | **int32** | {% note warning \&quot;Устаревший параметр\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.  | 
+ **page** | **int32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Номер страницы результатов.  Используется вместе с параметром &#x60;pageSize&#x60;.  | [default to 1]
+ **pageSize** | **int32** | {% note warning \&quot;Параметр устарел и будет отключен 05.10.2026.\&quot; %}  Вместо &#x60;page&#x60; и &#x60;pageSize&#x60; используйте пагинацию по &#x60;pageToken&#x60; и &#x60;limit&#x60;.  [Подробнее о типах пагинации и их использовании](../../concepts/pagination.md)  {% endnote %}  Размер страницы.  Используется вместе с параметром &#x60;page&#x60;.  | 
 
 ### Return type
 
@@ -3487,6 +3936,82 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## SuggestContentSizeTables
+
+> SuggestSizeTablesResponse SuggestContentSizeTables(ctx, businessId).SuggestSizeTablesRequest(suggestSizeTablesRequest).PageToken(pageToken).Limit(limit).Execute()
+
+Подбор таблиц размеров
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	suggestSizeTablesRequest := *openapiclient.NewSuggestSizeTablesRequest(int32(123)) // SuggestSizeTablesRequest | 
+	pageToken := "pageToken_example" // string | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра `nextPageToken`, полученное при последнем запросе.  (optional)
+	limit := int32(56) // int32 | {{ limit-param-description }}  (optional) (default to 25)
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.SuggestContentSizeTables(context.Background(), businessId).SuggestSizeTablesRequest(suggestSizeTablesRequest).PageToken(pageToken).Limit(limit).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.SuggestContentSizeTables``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `SuggestContentSizeTables`: SuggestSizeTablesResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.SuggestContentSizeTables`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSuggestContentSizeTablesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **suggestSizeTablesRequest** | [**SuggestSizeTablesRequest**](SuggestSizeTablesRequest.md) |  | 
+ **pageToken** | **string** | Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.  | 
+ **limit** | **int32** | {{ limit-param-description }}  | [default to 25]
+
+### Return type
+
+[**SuggestSizeTablesResponse**](SuggestSizeTablesResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateBusinessPrices
 
 > EmptyApiResponse UpdateBusinessPrices(ctx, businessId).UpdateBusinessPricesRequest(updateBusinessPricesRequest).Execute()
@@ -3616,6 +4141,150 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**EmptyApiResponse**](EmptyApiResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateContentSizeTables
+
+> UpdateSizeTablesResponse UpdateContentSizeTables(ctx, businessId).UpdateSizeTablesRequest(updateSizeTablesRequest).Execute()
+
+Обновление таблиц размеров
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	updateSizeTablesRequest := *openapiclient.NewUpdateSizeTablesRequest([]openapiclient.UpdateSizeTableDTO{*openapiclient.NewUpdateSizeTableDTO(int64(123), "SizeTableName_example", []openapiclient.SizeTableRowDTO{*openapiclient.NewSizeTableRowDTO([]openapiclient.SizeTableCellDTO{*openapiclient.NewSizeTableCellDTO()})})}) // UpdateSizeTablesRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.UpdateContentSizeTables(context.Background(), businessId).UpdateSizeTablesRequest(updateSizeTablesRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.UpdateContentSizeTables``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateContentSizeTables`: UpdateSizeTablesResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.UpdateContentSizeTables`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateContentSizeTablesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateSizeTablesRequest** | [**UpdateSizeTablesRequest**](UpdateSizeTablesRequest.md) |  | 
+
+### Return type
+
+[**UpdateSizeTablesResponse**](UpdateSizeTablesResponse.md)
+
+### Authorization
+
+[ApiKey](../README.md#ApiKey), [OAuth](../README.md#OAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateDocuments
+
+> UpdateDocumentsResponse UpdateDocuments(ctx, businessId).UpdateDocumentsRequest(updateDocumentsRequest).Execute()
+
+Обновление документов
+
+
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"fmt"
+	"os"
+	openapiclient "github.com/ucoms-dev/yandex-market-go-client"
+)
+
+func main() {
+	businessId := int64(789) // int64 | Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %} 
+	updateDocumentsRequest := *openapiclient.NewUpdateDocumentsRequest([]openapiclient.UpdateDocumentDTO{*openapiclient.NewUpdateDocumentDTO("Number_example", openapiclient.DocumentType("CONFORMITY_DECLARATION"), int64(123))}) // UpdateDocumentsRequest | 
+
+	configuration := openapiclient.NewConfiguration()
+	apiClient := openapiclient.NewAPIClient(configuration)
+	resp, r, err := apiClient.LaasAPI.UpdateDocuments(context.Background(), businessId).UpdateDocumentsRequest(updateDocumentsRequest).Execute()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error when calling `LaasAPI.UpdateDocuments``: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+	}
+	// response from `UpdateDocuments`: UpdateDocumentsResponse
+	fmt.Fprintf(os.Stdout, "Response from `LaasAPI.UpdateDocuments`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**businessId** | **int64** | Идентификатор кабинета.  {% if audience &#x3D;&#x3D; \&quot;partner\&quot; %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}  | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateDocumentsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **updateDocumentsRequest** | [**UpdateDocumentsRequest**](UpdateDocumentsRequest.md) |  | 
+
+### Return type
+
+[**UpdateDocumentsResponse**](UpdateDocumentsResponse.md)
 
 ### Authorization
 

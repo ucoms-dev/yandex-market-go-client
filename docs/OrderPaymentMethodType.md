@@ -27,6 +27,8 @@
 
 * `SBP` (value: `"SBP"`)
 
+* `SBP_ON_DELIVERY` (value: `"SBP_ON_DELIVERY"`)
+
 * `TINKOFF_INSTALLMENTS` (value: `"TINKOFF_INSTALLMENTS"`)
 
 * `B2_B_ACCOUNT_PREPAYMENT` (value: `"B2B_ACCOUNT_PREPAYMENT"`)
@@ -36,6 +38,10 @@
 * `MICROCREDIT` (value: `"MICROCREDIT"`)
 
 * `BNPL_TBYB` (value: `"BNPL_TBYB"`)
+
+* `BNPL_TBC` (value: `"BNPL_TBC"`)
+
+* `DIGITAL_RUBLE` (value: `"DIGITAL_RUBLE"`)
 
 * `UNKNOWN` (value: `"UNKNOWN"`)
 

@@ -15,19 +15,21 @@ import (
 	"fmt"
 )
 
-// CommodityCodeType Тип товарного кода:  * `CUSTOMS_COMMODITY_CODE` — код товара в единой Товарной номенклатуре внешнеэкономической деятельности (ТН ВЭД) — 10 или 14 цифр без пробелов. * `IKPU_CODE` — идентификационный код продукции и услуг (ИКПУ) в Узбекистане – 17 цифр без пробелов.  Не передавайте несколько кодов одного типа.
+// CommodityCodeType Тип товарного кода:  * `CUSTOMS_COMMODITY_CODE` — код товара в единой Товарной номенклатуре внешнеэкономической деятельности (ТН ВЭД) — 10 или 14 цифр без пробелов. * `IKPU_CODE` — идентификационный код продукции и услуг (ИКПУ) в Узбекистане – 17 цифр без пробелов. * `OKPD2_CODE` — код по Общероссийскому классификатору продукции по видам экономической деятельности (ОКПД2) — 2, 3, 4, 5, 6 или 9 цифр, разделенных точками: XX, XX.X, XX.XX, XX.XX.X, XX.XX.XX или XX.XX.XX.XXX.  Не передавайте несколько кодов одного типа.
 type CommodityCodeType string
 
 // List of CommodityCodeType
 const (
 	COMMODITYCODETYPE_CUSTOMS_COMMODITY_CODE CommodityCodeType = "CUSTOMS_COMMODITY_CODE"
 	COMMODITYCODETYPE_IKPU_CODE              CommodityCodeType = "IKPU_CODE"
+	COMMODITYCODETYPE_OKPD2_CODE             CommodityCodeType = "OKPD2_CODE"
 )
 
 // All allowed values of CommodityCodeType enum
 var AllowedCommodityCodeTypeEnumValues = []CommodityCodeType{
 	"CUSTOMS_COMMODITY_CODE",
 	"IKPU_CODE",
+	"OKPD2_CODE",
 }
 
 func (v *CommodityCodeType) UnmarshalJSON(src []byte) error {

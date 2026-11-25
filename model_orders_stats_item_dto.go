@@ -17,24 +17,25 @@ import (
 // checks if the OrdersStatsItemDTO type satisfies the MappedNullable interface at compile time
 var _ MappedNullable = &OrdersStatsItemDTO{}
 
-// OrdersStatsItemDTO Список товаров в заказе после возможных изменений.  В ходе обработки заказа Маркет может удалить из него единицы товаров — при проблемах на складе или по инициативе пользователя.  * Если из заказа удалены все единицы товара, его не будет в списке `items` — только в списке `initialItems`.  * Если в заказе осталась хотя бы одна единица товара, он будет и в списке `items` (с уменьшенным количеством единиц `count`), и в списке `initialItems` (с первоначальным количеством единиц `initialCount`).
+// OrdersStatsItemDTO Список товаров в заказе после возможных изменений.  Услуги установки, сборки и утилизации по модели DBS возвращаются отдельными позициями. Позицию услуги можно отличить от товара по наличию `shopServiceType`; ее `offerName` — `Установка`, `Сборка` или `Утилизация`. У одного товара может быть несколько позиций услуг.  Значения `marketSku` и `shopSku` позиции услуги совпадают со значениями товара, для которого она заказана. При подсчете количества товаров исключайте позиции с `shopServiceType`.  Отмена услуг отражается по тем же правилам, что и удаление товаров: при частичной отмене позиция есть в `items` с уменьшенным `count` и в `initialItems` с первоначальным `initialCount`, при полной — только в `initialItems`.  В ходе обработки заказа Маркет может удалить из него единицы товаров — при проблемах на складе или по инициативе пользователя.  * Если из заказа удалены все единицы товара, его не будет в списке `items` — только в списке `initialItems`.  * Если в заказе осталась хотя бы одна единица товара, он будет и в списке `items` (с уменьшенным количеством единиц `count`), и в списке `initialItems` (с первоначальным количеством единиц `initialCount`).
 type OrdersStatsItemDTO struct {
-	// Название товара.
-	OfferName *string `json:"offerName,omitempty"`
+	// Название товара или услуги магазина.
+	OfferName       *string                     `json:"offerName,omitempty"`
+	ShopServiceType *OrdersStatsShopServiceType `json:"shopServiceType,omitempty"`
 	// Идентификатор карточки товара на Маркете.
 	MarketSku *int64 `json:"marketSku,omitempty"`
 	// Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, `\"  SKU123  \"` и `\"SKU123\"` будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)
 	ShopSku *string `json:"shopSku,omitempty" validate:"regexp=^(?=.*\\\\S.*)[^\\\\x00-\\\\x08\\\\x0A-\\\\x1f\\\\x7f]{1,255}$"`
-	// Количество единиц товара с учетом удаленных единиц.  Если из заказа удалены все единицы товара, он попадет только в список `initialItems`.
+	// Количество единиц товара или услуги магазина с учетом удаленных или отмененных единиц.  Если из заказа удалены все единицы товара или полностью отменена услуга, позиция попадет только в список `initialItems`.
 	Count *int32 `json:"count,omitempty"`
-	// Цена или скидки на товар.
+	// Цена или скидки на товар или услугу магазина.
 	Prices    []OrdersStatsPriceDTO    `json:"prices,omitempty"`
 	Warehouse *OrdersStatsWarehouseDTO `json:"warehouse,omitempty"`
 	// Информация об удалении товара из заказа.
 	Details []OrdersStatsDetailsDTO `json:"details,omitempty"`
 	// Список кодов идентификации товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов :no-translate[Market Yandex Go]).
 	CisList []string `json:"cisList,omitempty"`
-	// Первоначальное количество единиц товара.
+	// Первоначальное количество единиц товара или услуги магазина.
 	InitialCount *int32 `json:"initialCount,omitempty"`
 	// Списанная ставка ближайшего конкурента.  Указывается в процентах от стоимости товара и умножается на 100. Например, ставка 5% обозначается как 500.
 	BidFee *int32 `json:"bidFee,omitempty"`
@@ -91,6 +92,38 @@ func (o *OrdersStatsItemDTO) HasOfferName() bool {
 // SetOfferName gets a reference to the given string and assigns it to the OfferName field.
 func (o *OrdersStatsItemDTO) SetOfferName(v string) {
 	o.OfferName = &v
+}
+
+// GetShopServiceType returns the ShopServiceType field value if set, zero value otherwise.
+func (o *OrdersStatsItemDTO) GetShopServiceType() OrdersStatsShopServiceType {
+	if o == nil || IsNil(o.ShopServiceType) {
+		var ret OrdersStatsShopServiceType
+		return ret
+	}
+	return *o.ShopServiceType
+}
+
+// GetShopServiceTypeOk returns a tuple with the ShopServiceType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *OrdersStatsItemDTO) GetShopServiceTypeOk() (*OrdersStatsShopServiceType, bool) {
+	if o == nil || IsNil(o.ShopServiceType) {
+		return nil, false
+	}
+	return o.ShopServiceType, true
+}
+
+// HasShopServiceType returns a boolean if a field has been set.
+func (o *OrdersStatsItemDTO) HasShopServiceType() bool {
+	if o != nil && !IsNil(o.ShopServiceType) {
+		return true
+	}
+
+	return false
+}
+
+// SetShopServiceType gets a reference to the given OrdersStatsShopServiceType and assigns it to the ShopServiceType field.
+func (o *OrdersStatsItemDTO) SetShopServiceType(v OrdersStatsShopServiceType) {
+	o.ShopServiceType = &v
 }
 
 // GetMarketSku returns the MarketSku field value if set, zero value otherwise.
@@ -460,6 +493,9 @@ func (o OrdersStatsItemDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize := map[string]interface{}{}
 	if !IsNil(o.OfferName) {
 		toSerialize["offerName"] = o.OfferName
+	}
+	if !IsNil(o.ShopServiceType) {
+		toSerialize["shopServiceType"] = o.ShopServiceType
 	}
 	if !IsNil(o.MarketSku) {
 		toSerialize["marketSku"] = o.MarketSku

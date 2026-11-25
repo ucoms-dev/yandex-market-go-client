@@ -4,15 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OfferName** | Pointer to **string** | Название товара. | [optional] 
+**OfferName** | Pointer to **string** | Название товара или услуги магазина. | [optional] 
+**ShopServiceType** | Pointer to [**OrdersStatsShopServiceType**](OrdersStatsShopServiceType.md) |  | [optional] 
 **MarketSku** | Pointer to **int64** | Идентификатор карточки товара на Маркете. | [optional] 
 **ShopSku** | Pointer to **string** | Ваш SKU — идентификатор товара в вашей системе.  Правила использования SKU:  * У каждого товара SKU должен быть свой.  * Уже заданный SKU нельзя освободить и использовать заново для другого товара. Каждый товар должен получать новый идентификатор, до того никогда не использовавшийся в вашем каталоге.  SKU товара можно изменить в кабинете продавца на Маркете. О том, как это сделать, читайте [в Справке Маркета для продавцов](https://yandex.ru/support2/marketplace/ru/assortment/operations/edit-sku).  {% note warning %}  Пробельные символы в начале и конце значения автоматически удаляются. Например, &#x60;\&quot;  SKU123  \&quot;&#x60; и &#x60;\&quot;SKU123\&quot;&#x60; будут обработаны как одинаковые значения.  {% endnote %}  [Что такое SKU и как его назначать](https://yandex.ru/support/marketplace/assortment/add/index.html#fields)  | [optional] 
-**Count** | Pointer to **int32** | Количество единиц товара с учетом удаленных единиц.  Если из заказа удалены все единицы товара, он попадет только в список &#x60;initialItems&#x60;.  | [optional] 
-**Prices** | Pointer to [**[]OrdersStatsPriceDTO**](OrdersStatsPriceDTO.md) | Цена или скидки на товар. | [optional] 
+**Count** | Pointer to **int32** | Количество единиц товара или услуги магазина с учетом удаленных или отмененных единиц.  Если из заказа удалены все единицы товара или полностью отменена услуга, позиция попадет только в список &#x60;initialItems&#x60;.  | [optional] 
+**Prices** | Pointer to [**[]OrdersStatsPriceDTO**](OrdersStatsPriceDTO.md) | Цена или скидки на товар или услугу магазина. | [optional] 
 **Warehouse** | Pointer to [**OrdersStatsWarehouseDTO**](OrdersStatsWarehouseDTO.md) |  | [optional] 
 **Details** | Pointer to [**[]OrdersStatsDetailsDTO**](OrdersStatsDetailsDTO.md) | Информация об удалении товара из заказа. | [optional] 
 **CisList** | Pointer to **[]string** | Список кодов идентификации товара в системе [«Честный ЗНАК»](https://честныйзнак.рф/) или [«ASL BELGISI»](https://aslbelgisi.uz) (для продавцов :no-translate[Market Yandex Go]). | [optional] 
-**InitialCount** | Pointer to **int32** | Первоначальное количество единиц товара. | [optional] 
+**InitialCount** | Pointer to **int32** | Первоначальное количество единиц товара или услуги магазина. | [optional] 
 **BidFee** | Pointer to **int32** | Списанная ставка ближайшего конкурента.  Указывается в процентах от стоимости товара и умножается на 100. Например, ставка 5% обозначается как 500.  | [optional] 
 **CofinanceThreshold** | Pointer to **float32** | Порог для скидок с Маркетом на момент оформления заказа. [Что это такое?](https://yandex.ru/support/marketplace/marketing/smart-pricing.html#sponsored-discounts)  Точность — два знака после запятой.  | [optional] 
 **CofinanceValue** | Pointer to **float32** | Скидка с Маркетом. [Что это такое?](https://yandex.ru/support/marketplace/marketing/smart-pricing.html#sponsored-discounts)  Точность — два знака после запятой.  | [optional] 
@@ -60,6 +61,31 @@ SetOfferName sets OfferName field to given value.
 `func (o *OrdersStatsItemDTO) HasOfferName() bool`
 
 HasOfferName returns a boolean if a field has been set.
+
+### GetShopServiceType
+
+`func (o *OrdersStatsItemDTO) GetShopServiceType() OrdersStatsShopServiceType`
+
+GetShopServiceType returns the ShopServiceType field if non-nil, zero value otherwise.
+
+### GetShopServiceTypeOk
+
+`func (o *OrdersStatsItemDTO) GetShopServiceTypeOk() (*OrdersStatsShopServiceType, bool)`
+
+GetShopServiceTypeOk returns a tuple with the ShopServiceType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShopServiceType
+
+`func (o *OrdersStatsItemDTO) SetShopServiceType(v OrdersStatsShopServiceType)`
+
+SetShopServiceType sets ShopServiceType field to given value.
+
+### HasShopServiceType
+
+`func (o *OrdersStatsItemDTO) HasShopServiceType() bool`
+
+HasShopServiceType returns a boolean if a field has been set.
 
 ### GetMarketSku
 

@@ -21,7 +21,7 @@ var _ MappedNullable = &OutletAddressDTO{}
 
 // OutletAddressDTO Адрес точки продаж.
 type OutletAddressDTO struct {
-	// Идентификатор региона.  Идентификатор можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md).  {% note alert \"Типы регионов при создании и редактировании точек продаж\" %}  Указывайте только регионы типов `TOWN` (город), `CITY` (крупный город) и `REPUBLIC_AREA` (район субъекта федерации). Тип региона указан в выходных параметрах `type` запросов [GET v2/regions](../../reference/regions/searchRegionsByName.md) и [GET v2/regions/{regionId}](../../reference/regions/searchRegionsById.md).  {% endnote %}
+	// Идентификатор региона.  Идентификатор можно получить c помощью запроса [GET v2/regions](../../reference/regions/searchRegionsByName.md).  {% note alert \"Типы регионов при создании и редактировании точек продаж\" %}  Указывайте только регионы типов `VILLAGE` (город), `CITY` (крупный город) и `REPUBLIC_AREA` (район субъекта федерации). Тип региона указан в выходных параметрах `type` запросов [GET v2/regions](../../reference/regions/searchRegionsByName.md) и [GET v2/regions/{regionId}](../../reference/regions/searchRegionsById.md).  {% endnote %}
 	RegionId int64 `json:"regionId"`
 	// Улица.
 	Street *string `json:"street,omitempty"`
@@ -37,7 +37,7 @@ type OutletAddressDTO struct {
 	Additional *string `json:"additional,omitempty"`
 	// Порядковый номер километра дороги, на котором располагается точка продаж, если отсутствует улица.
 	Km *int32 `json:"km,omitempty"`
-	// {% note warning \"В ответах города и населенные пункты возвращаются в параметре `regionId`.\" %}     {% endnote %}
+	// {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  В ответах города и населенные пункты возвращаются в параметре `regionId`.  {% endnote %}
 	// Deprecated
 	City *string `json:"city,omitempty"`
 }

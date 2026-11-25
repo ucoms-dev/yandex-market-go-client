@@ -27,7 +27,7 @@ type BaseOfferDTO struct {
 	Name *string `json:"name,omitempty"`
 	// Идентификатор категории на Маркете, к которой вы относите свой товар.  {% note warning \"Всегда указывайте, когда передаете `parameterValues`\" %}  Если при изменении характеристик передать `parameterValues` и не указать `marketCategoryId`, характеристики обновятся, но в ответе придет предупреждение (параметр `warnings`).  Если не передать их оба, будет использована информация из устаревших параметров `params` и `category`, а `marketCategoryId` будет определен автоматически.  {% endnote %}  При изменении категории убедитесь, что характеристики товара и их значения в параметре `parameterValues` вы передаете для новой категории.  Список категорий Маркета можно получить с помощью запроса  [POST v2/categories/tree](../../reference/categories/getCategoriesTree.md).
 	MarketCategoryId *int64 `json:"marketCategoryId,omitempty"`
-	// {% note warning \"Вместо него используйте `marketCategoryId`.\" %}     {% endnote %}  Категория товара в вашем магазине.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `marketCategoryId`.  {% endnote %}  Категория товара в вашем магазине.
 	// Deprecated
 	Category *string `json:"category,omitempty"`
 	// Ссылки на изображения товара. Изображение по первой ссылке считается основным, остальные дополнительными.  **Требования к ссылкам**  * Указывайте ссылку целиком, включая протокол http или https. * Русские буквы в URL можно. * Можно использовать прямые ссылки на изображения и на Яндекс Диск. Ссылки на Яндекс Диске нужно копировать с помощью функции **Поделиться**. Относительные ссылки и ссылки на другие облачные хранилища — не работают.  ✅ `https://example-shop.ru/images/sku12345.jpg`  ✅ `https://yadi.sk/i/NaBoRsimVOLov`  ❌ `/images/sku12345.jpg`  ❌ `https://www.dropbox.com/s/818f/tovar.jpg`  Ссылки на изображение должны быть постоянными. Нельзя использовать динамические ссылки, меняющиеся от выгрузки к выгрузке.  Если нужно заменить изображение, выложите новое изображение по новой ссылке, а ссылку на старое удалите. Если просто заменить изображение по старой ссылке, оно не обновится.  [Требования к изображениям](https://yandex.ru/support/marketplace/assortment/fields/images.html)
@@ -52,12 +52,12 @@ type BaseOfferDTO struct {
 	ShelfLife       *TimePeriodDTO `json:"shelfLife,omitempty"`
 	LifeTime        *TimePeriodDTO `json:"lifeTime,omitempty"`
 	GuaranteePeriod *TimePeriodDTO `json:"guaranteePeriod,omitempty"`
-	// {% note warning \"Вместо него используйте `commodityCodes` с типом `CUSTOMS_COMMODITY_CODE`.\" %}     {% endnote %}  Код товара в единой Товарной номенклатуре внешнеэкономической деятельности (ТН ВЭД) — 10 или 14 цифр без пробелов.  Обязательно укажите, если он есть.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `commodityCodes` с типом `CUSTOMS_COMMODITY_CODE`.  {% endnote %}  Код товара в единой Товарной номенклатуре внешнеэкономической деятельности (ТН ВЭД) — 10 или 14 цифр без пробелов.  Обязательно укажите, если он есть.
 	// Deprecated
 	CustomsCommodityCode *string `json:"customsCommodityCode,omitempty"`
 	// Товарные коды.
 	CommodityCodes []CommodityCodeDTO `json:"commodityCodes,omitempty"`
-	// Номера документов на товар: сертификата, декларации соответствия и т. п.  Передавать можно только номера документов, сканы которого загружены в кабинете продавца по [инструкции](https://yandex.ru/support/marketplace/assortment/restrictions/certificates.html).
+	// Номера документов на товар: сертификата, декларации соответствия и т. п.  Документы можно создать с помощью [POST v1/businesses/{businessId}/offers/documents/create](../../reference/documents/createDocuments.md).
 	Certificates []string `json:"certificates,omitempty"`
 	// Количество грузовых мест.  Параметр используется, если товар представляет собой несколько коробок, упаковок и так далее. Например, кондиционер занимает два места — внешний и внутренний блоки в двух коробках.  Для товаров, занимающих одно место, не передавайте этот параметр.
 	BoxCount  *int32             `json:"boxCount,omitempty"`
@@ -66,9 +66,11 @@ type BaseOfferDTO struct {
 	// Признак цифрового товара. Укажите `true`, если товар доставляется по электронной почте.  [Как работать с цифровыми товарами](../../step-by-step/digital.md)
 	Downloadable *bool `json:"downloadable,omitempty"`
 	// Параметр включает для товара пометку 18+. Устанавливайте ее только для товаров, которые относятся к удовлетворению сексуальных потребностей.
-	Adult *bool   `json:"adult,omitempty"`
-	Age   *AgeDTO `json:"age,omitempty"`
-	// {% note warning \"При передаче характеристик используйте `parameterValues`.\" %}     {% endnote %}  Характеристики, которые есть только у товаров конкретной категории — например, диаметр колес велосипеда или материал подошвы обуви.
+	Adult *bool `json:"adult,omitempty"`
+	// Продавец будет маркировать товар в системе [«Честный ЗНАК»](https://честныйзнак.рф/). Аналог параметра «Буду маркировать» в кабинете продавца, фиде и Excel-шаблоне.  * `true` — продавец будет маркировать товар. * `false` — продавец не заявляет маркировку. Если маркировка для товара обязательна, значение `false` ее не отменит.  В ответе параметр показывает только заявление продавца. Если продавец не заявлял маркировку, параметр в ответе может отсутствовать.  Если параметр не передан, текущее значение не меняется. Удалить его через `deleteParameters` нельзя — чтобы отозвать заявление, передайте `false`.  Если признак меняется в нескольких местах (в кабинете, фиде, Excel-шаблоне или через API), сохраняется значение, переданное последним.  Для маркируемого товара передайте в `barcodes` хотя бы один штрихкод производителя в формате GTIN.
+	MarkingDeclared *bool   `json:"markingDeclared,omitempty"`
+	Age             *AgeDTO `json:"age,omitempty"`
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  При передаче характеристик используйте `parameterValues`.  {% endnote %}  Характеристики, которые есть только у товаров конкретной категории — например, диаметр колес велосипеда или материал подошвы обуви.
 	// Deprecated
 	Params []OfferParamDTO `json:"params,omitempty"`
 }
@@ -899,6 +901,38 @@ func (o *BaseOfferDTO) SetAdult(v bool) {
 	o.Adult = &v
 }
 
+// GetMarkingDeclared returns the MarkingDeclared field value if set, zero value otherwise.
+func (o *BaseOfferDTO) GetMarkingDeclared() bool {
+	if o == nil || IsNil(o.MarkingDeclared) {
+		var ret bool
+		return ret
+	}
+	return *o.MarkingDeclared
+}
+
+// GetMarkingDeclaredOk returns a tuple with the MarkingDeclared field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BaseOfferDTO) GetMarkingDeclaredOk() (*bool, bool) {
+	if o == nil || IsNil(o.MarkingDeclared) {
+		return nil, false
+	}
+	return o.MarkingDeclared, true
+}
+
+// HasMarkingDeclared returns a boolean if a field has been set.
+func (o *BaseOfferDTO) HasMarkingDeclared() bool {
+	if o != nil && !IsNil(o.MarkingDeclared) {
+		return true
+	}
+
+	return false
+}
+
+// SetMarkingDeclared gets a reference to the given bool and assigns it to the MarkingDeclared field.
+func (o *BaseOfferDTO) SetMarkingDeclared(v bool) {
+	o.MarkingDeclared = &v
+}
+
 // GetAge returns the Age field value if set, zero value otherwise.
 func (o *BaseOfferDTO) GetAge() AgeDTO {
 	if o == nil || IsNil(o.Age) {
@@ -1049,6 +1083,9 @@ func (o BaseOfferDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Adult) {
 		toSerialize["adult"] = o.Adult
+	}
+	if !IsNil(o.MarkingDeclared) {
+		toSerialize["markingDeclared"] = o.MarkingDeclared
 	}
 	if !IsNil(o.Age) {
 		toSerialize["age"] = o.Age

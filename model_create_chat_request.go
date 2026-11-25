@@ -19,7 +19,7 @@ var _ MappedNullable = &CreateChatRequest{}
 
 // CreateChatRequest Заказ, для которого нужно создать чат.
 type CreateChatRequest struct {
-	// Идентификатор заказа на Маркете.
+	// {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  Вместо него используйте `context`.  {% endnote %}  Идентификатор заказа на Маркете.
 	// Deprecated
 	OrderId *int64          `json:"orderId,omitempty"`
 	Context *ChatContextDTO `json:"context,omitempty"`

@@ -52,6 +52,10 @@ DeleteGoodsFeedbackComment Удаление комментария к отзыв
 
 Удаляет комментарий магазина.
 
+**Пошаговые инструкции**
+
+* [Удалить свой комментарий](../../step-by-step/goods-feedback.md#delete)
+
 {% include notitle [limit](../../_auto/method_limits/deleteGoodsFeedbackComment.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -298,6 +302,10 @@ GetGoodsFeedbackComments Получение комментариев к отзы
 
 Комментарии расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `pageToken`, если вы получали его ранее.
 
+**Пошаговые инструкции**
+
+* [Отзывы о товарах](../../step-by-step/goods-feedback.md)
+
 {% include notitle [limit](../../_auto/method_limits/getGoodsFeedbackComments.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -537,6 +545,10 @@ GetGoodsFeedbacks Получение отзывов о товарах прода
 Результаты возвращаются постранично.
 
 Отзывы расположены в порядке публикации, поэтому вы можете передавать определенный идентификатор страницы в `pageToken`, если вы получали его ранее.
+
+**Пошаговые инструкции**
+
+* [Отзывы о товарах](../../step-by-step/goods-feedback.md)
 
 {% include notitle [limit](../../_auto/method_limits/getGoodsFeedbacks.md) %}
 
@@ -989,6 +1001,10 @@ SkipGoodsFeedbacksReaction Пропуск реакции на отзывы
 
 Пропускает реакцию на отзыв — параметр `needReaction` принимает значение `false` в методе получения всех отзывов [POST v2/businesses/{businessId}/goods-feedback](../../reference/goods-feedback/getGoodsFeedbacks.md).
 
+**Пошаговые инструкции**
+
+* [Отзывы о товарах](../../step-by-step/goods-feedback.md)
+
 {% include notitle [limit](../../_auto/method_limits/skipGoodsFeedbacksReaction.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1213,6 +1229,10 @@ UpdateGoodsFeedbackComment Добавление нового или измене
 * `comment.id` — идентификатор комментария, который нужно изменить.
 
 Если передать одновременно `comment.parentId` и `comment.id`, будет изменен существующий комментарий.
+
+**Пошаговые инструкции**
+
+* [Отзывы о товарах](../../step-by-step/goods-feedback.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateGoodsFeedbackComment.md) %}
 

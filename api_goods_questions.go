@@ -69,6 +69,10 @@ GetGoodsQuestionAnswers Получение ответов на вопрос
 
 Результаты возвращаются постранично, одна страница содержит не более 50 ответов.
 
+**Пошаговые инструкции**
+
+* [Вопросы и ответы о товарах](../../step-by-step/goods-questions.md)
+
 {% include notitle [limit](../../_auto/method_limits/getGoodsQuestionAnswers.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -304,6 +308,10 @@ GetGoodsQuestions Получение вопросов о товарах прод
 
 Результаты возвращаются постранично, одна страница содержит не более 50 вопросов.
 
+**Пошаговые инструкции**
+
+* [Вопросы и ответы о товарах](../../step-by-step/goods-questions.md)
+
 {% include notitle [limit](../../_auto/method_limits/getGoodsQuestions.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -511,6 +519,10 @@ UpdateGoodsQuestionTextEntity Создание, изменение и удале
 {% include notitle [access](../../_auto/method_scopes/updateGoodsQuestionTextEntity.md) %}
 
 Создание, изменение и удаление ответа или комментария.
+
+**Пошаговые инструкции**
+
+* [Вопросы и ответы о товарах](../../step-by-step/goods-questions.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateGoodsQuestionTextEntity.md) %}
 

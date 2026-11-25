@@ -34,15 +34,15 @@ type OrderDTO struct {
 	ItemsTotal float32 `json:"itemsTotal"`
 	// Стоимость доставки.
 	DeliveryTotal float32 `json:"deliveryTotal"`
-	// Стоимость всех товаров в заказе в валюте покупателя после применения скидок и без учета стоимости доставки.
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Вместо него используйте `itemsTotal`.  {% endnote %}  Стоимость всех товаров в заказе в валюте покупателя после применения скидок и без учета стоимости доставки.
 	// Deprecated
 	BuyerItemsTotal *float32 `json:"buyerItemsTotal,omitempty"`
-	// Стоимость всех товаров в заказе в валюте покупателя после применения скидок и с учетом стоимости доставки.
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}     {% endnote %}  Стоимость всех товаров в заказе в валюте покупателя после применения скидок и с учетом стоимости доставки.
 	// Deprecated
 	BuyerTotal *float32 `json:"buyerTotal,omitempty"`
 	// Стоимость всех товаров в заказе в валюте покупателя без учета стоимости доставки и до применения скидок по:  * акциям; * купонам; * промокодам.
 	BuyerItemsTotalBeforeDiscount float32 `json:"buyerItemsTotalBeforeDiscount"`
-	// Стоимость всех товаров в заказе в валюте покупателя до применения скидок и с учетом стоимости доставки (`buyerItemsTotalBeforeDiscount` + стоимость доставки).
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}     {% endnote %}  Стоимость всех товаров в заказе в валюте покупателя до применения скидок и с учетом стоимости доставки (`buyerItemsTotalBeforeDiscount` + стоимость доставки).
 	// Deprecated
 	BuyerTotalBeforeDiscount *float32               `json:"buyerTotalBeforeDiscount,omitempty"`
 	PaymentType              OrderPaymentType       `json:"paymentType"`

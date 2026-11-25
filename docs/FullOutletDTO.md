@@ -18,8 +18,8 @@ Name | Type | Description | Notes
 **Id** | **int64** | Идентификатор точки продаж, присвоенный Маркетом. | 
 **Status** | Pointer to [**OutletStatusType**](OutletStatusType.md) |  | [optional] 
 **Region** | Pointer to [**RegionDTO**](RegionDTO.md) |  | [optional] 
-**ShopOutletId** | Pointer to **string** | {% note warning \&quot;Вместо него используйте &#x60;shopOutletCode&#x60;.\&quot; %}     {% endnote %}  Идентификатор точки продаж, заданный магазином.  | [optional] 
-**WorkingTime** | Pointer to **string** | {% note warning \&quot;Вместо него используйте &#x60;workingSchedule&#x60;.\&quot; %}     {% endnote %}  Рабочее время.  | [optional] 
+**ShopOutletId** | Pointer to **string** | {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  Вместо него используйте &#x60;shopOutletCode&#x60;.  {% endnote %}  Идентификатор точки продаж, заданный магазином.  | [optional] 
+**WorkingTime** | Pointer to **string** | {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  Вместо него используйте &#x60;workingSchedule&#x60;.  {% endnote %}  Рабочее время.  | [optional] 
 **ModerationReason** | Pointer to **string** | Статус модерации. | [optional] 
 
 ## Methods

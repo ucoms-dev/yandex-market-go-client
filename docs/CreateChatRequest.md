@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**OrderId** | Pointer to **int64** | Идентификатор заказа на Маркете. | [optional] 
+**OrderId** | Pointer to **int64** | {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  Вместо него используйте &#x60;context&#x60;.  {% endnote %}  Идентификатор заказа на Маркете.  | [optional] 
 **Context** | Pointer to [**ChatContextDTO**](ChatContextDTO.md) |  | [optional] 
 
 ## Methods

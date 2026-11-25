@@ -38,7 +38,7 @@ type ParcelBoxLabelDTO struct {
 	FulfilmentId string `json:"fulfilmentId"`
 	// Номер коробки в заказе. Возвращается в формате: `номер места/общее количество мест`.
 	Place string `json:"place"`
-	// Общая масса всех товаров в заказе.  Возвращается в формате `weight кг`.
+	// {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}     {% endnote %}  Общая масса всех товаров в заказе.  Возвращается в формате `weight кг`.
 	// Deprecated
 	Weight string `json:"weight"`
 	// Идентификатор службы доставки. Информацию о службе доставки можно получить с помощью запроса [GET delivery/services](../../reference/delivery-services/getDeliveryServices.md).

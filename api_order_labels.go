@@ -57,7 +57,7 @@ GenerateOrderLabel Готовый ярлык‑наклейка для коро�
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
 	@param campaignId Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.
 	@param orderId Идентификатор заказа.
-	@param shipmentId { % note warning \"Параметр больше не используется\" % }  Передайте любое число, чтобы получился корректный URL.  { % endnote % }  Идентификатор грузового места.
+	@param shipmentId {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Передайте любое число, чтобы получился корректный URL.  {% endnote %}  Идентификатор грузового места.
 	@param boxId Идентификатор коробки.
 	@return OrderLabelsAPIGenerateOrderLabelRequest
 */
@@ -265,6 +265,11 @@ GenerateOrderLabels Готовые ярлыки‑наклейки на все �
 На вход нужно передать идентификатор заказа и один необязательный параметр, который управляет версткой PDF-файла.
 
 Чтобы на ярлыке отображался внешний идентификатор заказа, передайте его в методе [POST v2/campaigns/{campaignId}/orders/{orderId}/external-id](../../reference/orders/updateExternalOrderId.md).
+
+**Пошаговые инструкции**
+
+* [Напечатать ярлыки для FBS-заказа](../../step-by-step/fbs.md#fulfillment)
+* [Напечатать ярлыки для Экспресс-заказа](../../step-by-step/express.md#label)
 
 {% include notitle [limit](../../_auto/method_limits/generateOrderLabels.md) %}
 

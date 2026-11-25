@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to [**OrdersStatsCommissionType**](OrdersStatsCommissionType.md) |  | [optional] 
-**Actual** | Pointer to **float32** | Сумма, которая была выставлена в момент создания заказа и которую нужно оплатить. Точность — два знака после запятой.  | [optional] 
+**Actual** | Pointer to **float32** | Сумма начисления или корректировки.  Корректировки размещения услуг магазина (&#x60;SHOP_SERVICE_PLACEMENT&#x60;) возвращаются отдельными элементами и могут быть отрицательными.  Точность — два знака после запятой.  | [optional] 
 
 ## Methods
 

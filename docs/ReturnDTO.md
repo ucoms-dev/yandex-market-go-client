@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 **PickupTillDate** | Pointer to **time.Time** | Дата, до которой можно забрать товар.  Только для невыкупов и возвратов в логистическом статусе &#x60;READY_FOR_PICKUP&#x60;.  Формат даты: ISO 8601 со смещением относительно UTC.  | [optional] 
 **ShipmentRecipientType** | Pointer to [**RecipientType**](RecipientType.md) |  | [optional] 
 **ShipmentStatus** | Pointer to [**ReturnShipmentStatusType**](ReturnShipmentStatusType.md) |  | [optional] 
-**RefundAmount** | Pointer to **int64** | {% note warning \&quot;Вместо него используйте &#x60;amount&#x60;.\&quot; %}     {% endnote %}  Сумма возврата в копейках.  | [optional] 
+**RefundAmount** | Pointer to **int64** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;amount&#x60;.  {% endnote %}  Сумма возврата в копейках.  | [optional] 
 **Amount** | Pointer to [**CurrencyValueDTO**](CurrencyValueDTO.md) |  | [optional] 
 **Items** | [**[]ReturnItemDTO**](ReturnItemDTO.md) | Список товаров в невыкупе или возврате. | 
 **ReturnType** | [**ReturnType**](ReturnType.md) |  | 

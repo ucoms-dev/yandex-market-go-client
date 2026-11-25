@@ -23,8 +23,9 @@ type PromoOfferDiscountParamsDTO struct {
 	Price *int64 `json:"price,omitempty"`
 	// Цена по акции — та, по которой вы хотите продавать товар.  Указывается в рублях.  Возвращается, только если товар участвует в акции.
 	PromoPrice *int64 `json:"promoPrice,omitempty"`
-	// Максимально возможная цена для участия в акции. Если значение не заполнено, ограничение отсутствует.  Указывается в рублях.
-	MaxPromoPrice *int64 `json:"maxPromoPrice,omitempty"`
+	// Максимально возможная цена для участия в акции. Если значение не заполнено, ограничение отсутствует.  Указывается в рублях.  Для акции «Бестселлеры Маркета» пороги по уровням возвращаются в параметре `bestPriceLevels`.
+	MaxPromoPrice   *int64                        `json:"maxPromoPrice,omitempty"`
+	BestPriceLevels *PromoOfferBestPriceLevelsDTO `json:"bestPriceLevels,omitempty"`
 }
 
 // NewPromoOfferDiscountParamsDTO instantiates a new PromoOfferDiscountParamsDTO object
@@ -140,6 +141,38 @@ func (o *PromoOfferDiscountParamsDTO) SetMaxPromoPrice(v int64) {
 	o.MaxPromoPrice = &v
 }
 
+// GetBestPriceLevels returns the BestPriceLevels field value if set, zero value otherwise.
+func (o *PromoOfferDiscountParamsDTO) GetBestPriceLevels() PromoOfferBestPriceLevelsDTO {
+	if o == nil || IsNil(o.BestPriceLevels) {
+		var ret PromoOfferBestPriceLevelsDTO
+		return ret
+	}
+	return *o.BestPriceLevels
+}
+
+// GetBestPriceLevelsOk returns a tuple with the BestPriceLevels field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PromoOfferDiscountParamsDTO) GetBestPriceLevelsOk() (*PromoOfferBestPriceLevelsDTO, bool) {
+	if o == nil || IsNil(o.BestPriceLevels) {
+		return nil, false
+	}
+	return o.BestPriceLevels, true
+}
+
+// HasBestPriceLevels returns a boolean if a field has been set.
+func (o *PromoOfferDiscountParamsDTO) HasBestPriceLevels() bool {
+	if o != nil && !IsNil(o.BestPriceLevels) {
+		return true
+	}
+
+	return false
+}
+
+// SetBestPriceLevels gets a reference to the given PromoOfferBestPriceLevelsDTO and assigns it to the BestPriceLevels field.
+func (o *PromoOfferDiscountParamsDTO) SetBestPriceLevels(v PromoOfferBestPriceLevelsDTO) {
+	o.BestPriceLevels = &v
+}
+
 func (o PromoOfferDiscountParamsDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -158,6 +191,9 @@ func (o PromoOfferDiscountParamsDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.MaxPromoPrice) {
 		toSerialize["maxPromoPrice"] = o.MaxPromoPrice
+	}
+	if !IsNil(o.BestPriceLevels) {
+		toSerialize["bestPriceLevels"] = o.BestPriceLevels
 	}
 	return toSerialize, nil
 }

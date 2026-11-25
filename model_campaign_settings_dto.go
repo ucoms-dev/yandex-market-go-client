@@ -11,7 +11,9 @@ API version: LATEST
 package openapi
 
 import (
+	"bytes"
 	"encoding/json"
+	"fmt"
 )
 
 // checks if the CampaignSettingsDTO type satisfies the MappedNullable interface at compile time
@@ -23,24 +25,28 @@ type CampaignSettingsDTO struct {
 	CountryRegion *int64 `json:"countryRegion,omitempty"`
 	// Наименование магазина на Яндекс Маркете. Если наименование отсутствует, значение параметра выводится — `null`.
 	ShopName *string `json:"shopName,omitempty"`
-	// Признак размещения магазина на сайтах партнеров Яндекс Дистрибуции. Возможные значения: * `false` — магазин не размещен на сайтах партнеров Яндекс Дистрибуции. * `true` — магазин размещен на сайтах партнеров Яндекс Дистрибуции.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}     {% endnote %}  Признак размещения магазина на сайтах партнеров Яндекс Дистрибуции. Возможные значения: * `false` — магазин не размещен на сайтах партнеров Яндекс Дистрибуции. * `true` — магазин размещен на сайтах партнеров Яндекс Дистрибуции.
 	// Deprecated
 	ShowInContext *bool `json:"showInContext,omitempty"`
-	// Признак показа предложений магазина в блоке над результатами поиска (cпецразмещение). Возможные значения: * `false` — предложения не показываются в блоке cпецразмещения. * `true` — предложения показываются в блоке cпецразмещения.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}     {% endnote %}  Признак показа предложений магазина в блоке над результатами поиска (cпецразмещение). Возможные значения: * `false` — предложения не показываются в блоке cпецразмещения. * `true` — предложения показываются в блоке cпецразмещения.
 	// Deprecated
 	ShowInPremium *bool `json:"showInPremium,omitempty"`
-	// Признак использования внешней интернет-статистики. Возможные значения: * `false` — внешняя интернет-статистика не используется. * `true` — внешняя интернет-статистика используется.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}     {% endnote %}  Признак использования внешней интернет-статистики. Возможные значения: * `false` — внешняя интернет-статистика не используется. * `true` — внешняя интернет-статистика используется.
 	// Deprecated
 	UseOpenStat *bool                           `json:"useOpenStat,omitempty"`
 	LocalRegion *CampaignSettingsLocalRegionDTO `json:"localRegion,omitempty"`
+	Taxation    TaxationInfoDTO                 `json:"taxation"`
 }
+
+type _CampaignSettingsDTO CampaignSettingsDTO
 
 // NewCampaignSettingsDTO instantiates a new CampaignSettingsDTO object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCampaignSettingsDTO() *CampaignSettingsDTO {
+func NewCampaignSettingsDTO(taxation TaxationInfoDTO) *CampaignSettingsDTO {
 	this := CampaignSettingsDTO{}
+	this.Taxation = taxation
 	return &this
 }
 
@@ -253,6 +259,30 @@ func (o *CampaignSettingsDTO) SetLocalRegion(v CampaignSettingsLocalRegionDTO) {
 	o.LocalRegion = &v
 }
 
+// GetTaxation returns the Taxation field value
+func (o *CampaignSettingsDTO) GetTaxation() TaxationInfoDTO {
+	if o == nil {
+		var ret TaxationInfoDTO
+		return ret
+	}
+
+	return o.Taxation
+}
+
+// GetTaxationOk returns a tuple with the Taxation field value
+// and a boolean to check if the value has been set.
+func (o *CampaignSettingsDTO) GetTaxationOk() (*TaxationInfoDTO, bool) {
+	if o == nil {
+		return nil, false
+	}
+	return &o.Taxation, true
+}
+
+// SetTaxation sets field value
+func (o *CampaignSettingsDTO) SetTaxation(v TaxationInfoDTO) {
+	o.Taxation = v
+}
+
 func (o CampaignSettingsDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -281,7 +311,45 @@ func (o CampaignSettingsDTO) ToMap() (map[string]interface{}, error) {
 	if !IsNil(o.LocalRegion) {
 		toSerialize["localRegion"] = o.LocalRegion
 	}
+	toSerialize["taxation"] = o.Taxation
 	return toSerialize, nil
+}
+
+func (o *CampaignSettingsDTO) UnmarshalJSON(data []byte) (err error) {
+	// This validates that all required properties are included in the JSON object
+	// by unmarshalling the object into a generic map with string keys and checking
+	// that every required field exists as a key in the generic map.
+	requiredProperties := []string{
+		"taxation",
+	}
+
+	allProperties := make(map[string]interface{})
+
+	err = json.Unmarshal(data, &allProperties)
+
+	if err != nil {
+		return err
+	}
+
+	for _, requiredProperty := range requiredProperties {
+		if _, exists := allProperties[requiredProperty]; !exists {
+			return fmt.Errorf("no value given for required property %v", requiredProperty)
+		}
+	}
+
+	varCampaignSettingsDTO := _CampaignSettingsDTO{}
+
+	decoder := json.NewDecoder(bytes.NewReader(data))
+	decoder.DisallowUnknownFields()
+	err = decoder.Decode(&varCampaignSettingsDTO)
+
+	if err != nil {
+		return err
+	}
+
+	*o = CampaignSettingsDTO(varCampaignSettingsDTO)
+
+	return err
 }
 
 type NullableCampaignSettingsDTO struct {

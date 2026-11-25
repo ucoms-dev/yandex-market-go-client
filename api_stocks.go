@@ -37,7 +37,7 @@ func (r StocksAPIGetStocksRequest) PageToken(pageToken string) StocksAPIGetStock
 	return r
 }
 
-// {{ limit-param-description }}
+// {{ limit-truncate-param-description }}
 func (r StocksAPIGetStocksRequest) Limit(limit int32) StocksAPIGetStocksRequest {
 	r.limit = &limit
 	return r
@@ -58,6 +58,17 @@ GetStocks Информация об остатках и оборачиваемо
 {% include notitle [access](../../_auto/method_scopes/getStocks.md) %}
 
 Возвращает данные об остатках товаров (для всех моделей) и об [оборачиваемости](*turnover) товаров (для модели FBY).
+
+{% note warning "Когда использовать этот метод" %}
+
+Метод актуален:
+
+* для моделей FBY и LaaS;
+* для моделей FBS, DBS и Экспресс, если в кабинете есть группы складов.
+
+Если в кабинете нет групп складов и вы работаете с моделями FBS, DBS или Экспресс, используйте метод [POST v3/businesses/{businessId}/offers/stocks](../../reference/stocks/getStocksOnPartnerWarehouses.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
 
 {% note info "По умолчанию данные по оборачивамости не возращаются" %}
 
@@ -117,7 +128,7 @@ func (a *StocksAPIService) GetStocksExecute(r StocksAPIGetStocksRequest) (*GetWa
 	if r.limit != nil {
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
 	} else {
-		var defaultValue int32 = 100
+		var defaultValue int32 = 50
 		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
 		r.limit = &defaultValue
 	}
@@ -245,6 +256,241 @@ func (a *StocksAPIService) GetStocksExecute(r StocksAPIGetStocksRequest) (*GetWa
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type StocksAPIGetStocksOnPartnerWarehousesRequest struct {
+	ctx                                 context.Context
+	ApiService                          *StocksAPIService
+	businessId                          int64
+	getStocksOnPartnerWarehousesRequest *GetStocksOnPartnerWarehousesRequest
+	pageToken                           *string
+	limit                               *int32
+}
+
+func (r StocksAPIGetStocksOnPartnerWarehousesRequest) GetStocksOnPartnerWarehousesRequest(getStocksOnPartnerWarehousesRequest GetStocksOnPartnerWarehousesRequest) StocksAPIGetStocksOnPartnerWarehousesRequest {
+	r.getStocksOnPartnerWarehousesRequest = &getStocksOnPartnerWarehousesRequest
+	return r
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r StocksAPIGetStocksOnPartnerWarehousesRequest) PageToken(pageToken string) StocksAPIGetStocksOnPartnerWarehousesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-truncate-param-description }}
+func (r StocksAPIGetStocksOnPartnerWarehousesRequest) Limit(limit int32) StocksAPIGetStocksOnPartnerWarehousesRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r StocksAPIGetStocksOnPartnerWarehousesRequest) Execute() (*GetStocksOnPartnerWarehousesResponse, *http.Response, error) {
+	return r.ApiService.GetStocksOnPartnerWarehousesExecute(r)
+}
+
+/*
+GetStocksOnPartnerWarehouses Информация об остатках
+
+{% include notitle [access](../../_auto/method_scopes/getStocksOnPartnerWarehouses.md) %}
+
+Возвращает данные об остатках товаров на складе кабинета.
+
+{% note warning "Метод подходит, только если в кабинете нет групп складов" %}
+
+Если в кабинете есть группы складов, используйте метод [POST v2/campaigns/{campaignId}/offers/stocks](../../reference/stocks/getStocks.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
+
+**Пошаговые инструкции**
+
+* [Если в кабинете нет групп складов](../../step-by-step/stocks.md#no-warehouse-groups)
+
+{% include notitle [limit](../../_auto/method_limits/getStocksOnPartnerWarehouses.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return StocksAPIGetStocksOnPartnerWarehousesRequest
+*/
+func (a *StocksAPIService) GetStocksOnPartnerWarehouses(ctx context.Context, businessId int64) StocksAPIGetStocksOnPartnerWarehousesRequest {
+	return StocksAPIGetStocksOnPartnerWarehousesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetStocksOnPartnerWarehousesResponse
+func (a *StocksAPIService) GetStocksOnPartnerWarehousesExecute(r StocksAPIGetStocksOnPartnerWarehousesRequest) (*GetStocksOnPartnerWarehousesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetStocksOnPartnerWarehousesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StocksAPIService.GetStocksOnPartnerWarehouses")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/businesses/{businessId}/offers/stocks"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.getStocksOnPartnerWarehousesRequest == nil {
+		return localVarReturnValue, nil, reportError("getStocksOnPartnerWarehousesRequest is required and must be specified")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 50
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getStocksOnPartnerWarehousesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type StocksAPIUpdateStocksRequest struct {
 	ctx                 context.Context
 	ApiService          *StocksAPIService
@@ -268,6 +514,12 @@ UpdateStocks Передача информации об остатках
 
 Передает данные об остатках товаров на витрине.
 
+{% note warning "Когда использовать этот метод" %}
+
+Метод актуален только для кабинетов с группами складов. Если в кабинете нет групп складов, используйте метод [POST v3/businesses/{businessId}/offers/stocks/update](../../reference/stocks/updateStocksOnPartnerWarehouses.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
+
 Для группы складов передавайте остатки только для **одного любого склада**. Информация для остальных складов в этой группе обновится автоматически.
 
 Обязательно указывайте SKU **в точности** так, как он указан в каталоге. Например, _557722_ и _0557722_ — это два разных SKU.
@@ -277,6 +529,10 @@ UpdateStocks Передача информации об остатках
 Это занимает до нескольких минут.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Передача остатков через API](../../step-by-step/stocks.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateStocks.md) %}
 
@@ -340,6 +596,225 @@ func (a *StocksAPIService) UpdateStocksExecute(r StocksAPIUpdateStocksRequest) (
 	}
 	// body params
 	localVarPostBody = r.updateStocksRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type StocksAPIUpdateStocksOnPartnerWarehousesRequest struct {
+	ctx                             context.Context
+	ApiService                      *StocksAPIService
+	businessId                      int64
+	updateStocksOnWarehousesRequest *UpdateStocksOnWarehousesRequest
+}
+
+func (r StocksAPIUpdateStocksOnPartnerWarehousesRequest) UpdateStocksOnWarehousesRequest(updateStocksOnWarehousesRequest UpdateStocksOnWarehousesRequest) StocksAPIUpdateStocksOnPartnerWarehousesRequest {
+	r.updateStocksOnWarehousesRequest = &updateStocksOnWarehousesRequest
+	return r
+}
+
+func (r StocksAPIUpdateStocksOnPartnerWarehousesRequest) Execute() (*EmptyApiResponse, *http.Response, error) {
+	return r.ApiService.UpdateStocksOnPartnerWarehousesExecute(r)
+}
+
+/*
+UpdateStocksOnPartnerWarehouses Передача информации об остатках
+
+{% include notitle [access](../../_auto/method_scopes/updateStocksOnPartnerWarehouses.md) %}
+
+Передает данные об остатках товаров на витрине.
+
+Обязательно указывайте SKU **в точности** так, как он указан в каталоге. Например, _557722_ и _0557722_ — это два разных SKU.
+
+{% note info "Данные в каталоге обновляются не мгновенно" %}
+
+Это занимает до нескольких минут.
+
+{% endnote %}
+
+{% note warning "Метод подходит, только если в кабинете нет групп складов" %}
+
+Если в кабинете есть группы складов, используйте метод [PUT v2/campaigns/{campaignId}/offers/stocks](../../reference/stocks/updateStocks.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
+
+**Пошаговые инструкции**
+
+* [Передача остатков через API](../../step-by-step/stocks.md)
+
+{% include notitle [limit](../../_auto/method_limits/updateStocksOnPartnerWarehouses.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return StocksAPIUpdateStocksOnPartnerWarehousesRequest
+*/
+func (a *StocksAPIService) UpdateStocksOnPartnerWarehouses(ctx context.Context, businessId int64) StocksAPIUpdateStocksOnPartnerWarehousesRequest {
+	return StocksAPIUpdateStocksOnPartnerWarehousesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return EmptyApiResponse
+func (a *StocksAPIService) UpdateStocksOnPartnerWarehousesExecute(r StocksAPIUpdateStocksOnPartnerWarehousesRequest) (*EmptyApiResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *EmptyApiResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "StocksAPIService.UpdateStocksOnPartnerWarehouses")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/businesses/{businessId}/offers/stocks/update"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.updateStocksOnWarehousesRequest == nil {
+		return localVarReturnValue, nil, reportError("updateStocksOnWarehousesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateStocksOnWarehousesRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

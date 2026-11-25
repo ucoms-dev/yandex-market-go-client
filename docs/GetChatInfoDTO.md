@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ChatId** | **int64** | Идентификатор чата. | 
-**OrderId** | Pointer to **int64** | Идентификатор заказа. | [optional] 
+**OrderId** | Pointer to **int64** | {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  Вместо него используйте &#x60;context&#x60;.  {% endnote %}  Идентификатор заказа.  | [optional] 
 **Context** | [**ChatFullContextDTO**](ChatFullContextDTO.md) |  | 
 **Type** | [**ChatType**](ChatType.md) |  | 
 **Status** | [**ChatStatusType**](ChatStatusType.md) |  | 

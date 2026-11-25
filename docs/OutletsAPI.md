@@ -256,7 +256,7 @@ func main() {
 	limit := int32(56) // int32 | {{ limit-param-description }}  (optional) (default to 25)
 	regionId := int64(789) // int64 | Идентификатор региона. Если задать идентификатор родительского региона любого уровня, в выходных данных будут отображены точки продаж всех дочерних регионов. Идентификатор региона можно получить c помощью метода [GET v2/regions](../../reference/regions/searchRegionsByName.md).  (optional)
 	shopOutletCode := "shopOutletCode_example" // string | Идентификатор точки продаж, присвоенный магазином. (optional)
-	regionId2 := int64(789) // int64 | {% note warning \"Вместо него используйте `region_id`.\" %}     {% endnote %}  (optional)
+	regionId2 := int64(789) // int64 | {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  Вместо него используйте `region_id`.  {% endnote %}  (optional)
 
 	configuration := openapiclient.NewConfiguration()
 	apiClient := openapiclient.NewAPIClient(configuration)
@@ -290,7 +290,7 @@ Name | Type | Description  | Notes
  **limit** | **int32** | {{ limit-param-description }}  | [default to 25]
  **regionId** | **int64** | Идентификатор региона. Если задать идентификатор родительского региона любого уровня, в выходных данных будут отображены точки продаж всех дочерних регионов. Идентификатор региона можно получить c помощью метода [GET v2/regions](../../reference/regions/searchRegionsByName.md).  | 
  **shopOutletCode** | **string** | Идентификатор точки продаж, присвоенный магазином. | 
- **regionId2** | **int64** | {% note warning \&quot;Вместо него используйте &#x60;region_id&#x60;.\&quot; %}     {% endnote %}  | 
+ **regionId2** | **int64** | {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  Вместо него используйте &#x60;region_id&#x60;.  {% endnote %}  | 
 
 ### Return type
 

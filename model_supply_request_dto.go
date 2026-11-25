@@ -34,6 +34,7 @@ type SupplyRequestDTO struct {
 	ChildrenLinks   []SupplyRequestReferenceDTO `json:"childrenLinks,omitempty"`
 	TargetLocation  SupplyRequestLocationDTO    `json:"targetLocation"`
 	TransitLocation *SupplyRequestLocationDTO   `json:"transitLocation,omitempty"`
+	EtrnIdentifier  *EtrnIdentifierDTO          `json:"etrnIdentifier,omitempty"`
 }
 
 type _SupplyRequestDTO SupplyRequestDTO
@@ -327,6 +328,38 @@ func (o *SupplyRequestDTO) SetTransitLocation(v SupplyRequestLocationDTO) {
 	o.TransitLocation = &v
 }
 
+// GetEtrnIdentifier returns the EtrnIdentifier field value if set, zero value otherwise.
+func (o *SupplyRequestDTO) GetEtrnIdentifier() EtrnIdentifierDTO {
+	if o == nil || IsNil(o.EtrnIdentifier) {
+		var ret EtrnIdentifierDTO
+		return ret
+	}
+	return *o.EtrnIdentifier
+}
+
+// GetEtrnIdentifierOk returns a tuple with the EtrnIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *SupplyRequestDTO) GetEtrnIdentifierOk() (*EtrnIdentifierDTO, bool) {
+	if o == nil || IsNil(o.EtrnIdentifier) {
+		return nil, false
+	}
+	return o.EtrnIdentifier, true
+}
+
+// HasEtrnIdentifier returns a boolean if a field has been set.
+func (o *SupplyRequestDTO) HasEtrnIdentifier() bool {
+	if o != nil && !IsNil(o.EtrnIdentifier) {
+		return true
+	}
+
+	return false
+}
+
+// SetEtrnIdentifier gets a reference to the given EtrnIdentifierDTO and assigns it to the EtrnIdentifier field.
+func (o *SupplyRequestDTO) SetEtrnIdentifier(v EtrnIdentifierDTO) {
+	o.EtrnIdentifier = &v
+}
+
 func (o SupplyRequestDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -352,6 +385,9 @@ func (o SupplyRequestDTO) ToMap() (map[string]interface{}, error) {
 	toSerialize["targetLocation"] = o.TargetLocation
 	if !IsNil(o.TransitLocation) {
 		toSerialize["transitLocation"] = o.TransitLocation
+	}
+	if !IsNil(o.EtrnIdentifier) {
+		toSerialize["etrnIdentifier"] = o.EtrnIdentifier
 	}
 	return toSerialize, nil
 }

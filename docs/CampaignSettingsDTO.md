@@ -6,16 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CountryRegion** | Pointer to **int64** | Идентификатор региона, в котором находится магазин. | [optional] 
 **ShopName** | Pointer to **string** | Наименование магазина на Яндекс Маркете. Если наименование отсутствует, значение параметра выводится — &#x60;null&#x60;.  | [optional] 
-**ShowInContext** | Pointer to **bool** | Признак размещения магазина на сайтах партнеров Яндекс Дистрибуции. Возможные значения: * &#x60;false&#x60; — магазин не размещен на сайтах партнеров Яндекс Дистрибуции. * &#x60;true&#x60; — магазин размещен на сайтах партнеров Яндекс Дистрибуции.  | [optional] 
-**ShowInPremium** | Pointer to **bool** | Признак показа предложений магазина в блоке над результатами поиска (cпецразмещение). Возможные значения: * &#x60;false&#x60; — предложения не показываются в блоке cпецразмещения. * &#x60;true&#x60; — предложения показываются в блоке cпецразмещения.  | [optional] 
-**UseOpenStat** | Pointer to **bool** | Признак использования внешней интернет-статистики. Возможные значения: * &#x60;false&#x60; — внешняя интернет-статистика не используется. * &#x60;true&#x60; — внешняя интернет-статистика используется.  | [optional] 
+**ShowInContext** | Pointer to **bool** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}     {% endnote %}  Признак размещения магазина на сайтах партнеров Яндекс Дистрибуции. Возможные значения: * &#x60;false&#x60; — магазин не размещен на сайтах партнеров Яндекс Дистрибуции. * &#x60;true&#x60; — магазин размещен на сайтах партнеров Яндекс Дистрибуции.  | [optional] 
+**ShowInPremium** | Pointer to **bool** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}     {% endnote %}  Признак показа предложений магазина в блоке над результатами поиска (cпецразмещение). Возможные значения: * &#x60;false&#x60; — предложения не показываются в блоке cпецразмещения. * &#x60;true&#x60; — предложения показываются в блоке cпецразмещения.  | [optional] 
+**UseOpenStat** | Pointer to **bool** | {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}     {% endnote %}  Признак использования внешней интернет-статистики. Возможные значения: * &#x60;false&#x60; — внешняя интернет-статистика не используется. * &#x60;true&#x60; — внешняя интернет-статистика используется.  | [optional] 
 **LocalRegion** | Pointer to [**CampaignSettingsLocalRegionDTO**](CampaignSettingsLocalRegionDTO.md) |  | [optional] 
+**Taxation** | [**TaxationInfoDTO**](TaxationInfoDTO.md) |  | 
 
 ## Methods
 
 ### NewCampaignSettingsDTO
 
-`func NewCampaignSettingsDTO() *CampaignSettingsDTO`
+`func NewCampaignSettingsDTO(taxation TaxationInfoDTO, ) *CampaignSettingsDTO`
 
 NewCampaignSettingsDTO instantiates a new CampaignSettingsDTO object
 This constructor will assign default values to properties that have it defined,
@@ -179,6 +180,26 @@ SetLocalRegion sets LocalRegion field to given value.
 `func (o *CampaignSettingsDTO) HasLocalRegion() bool`
 
 HasLocalRegion returns a boolean if a field has been set.
+
+### GetTaxation
+
+`func (o *CampaignSettingsDTO) GetTaxation() TaxationInfoDTO`
+
+GetTaxation returns the Taxation field if non-nil, zero value otherwise.
+
+### GetTaxationOk
+
+`func (o *CampaignSettingsDTO) GetTaxationOk() (*TaxationInfoDTO, bool)`
+
+GetTaxationOk returns a tuple with the Taxation field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTaxation
+
+`func (o *CampaignSettingsDTO) SetTaxation(v TaxationInfoDTO)`
+
+SetTaxation sets Taxation field to given value.
+
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -25,6 +25,8 @@ type UpdateOrderDTO struct {
 	Id               int64                             `json:"id"`
 	DeliveryInterval *DeliveryIntervalsUpdateOptionDTO `json:"deliveryInterval,omitempty"`
 	Customer         *CustomerDTO                      `json:"customer,omitempty"`
+	// Продлить срок хранения заказа в пункте выдачи.
+	ExtendStoragePeriod *bool `json:"extendStoragePeriod,omitempty"`
 }
 
 type _UpdateOrderDTO UpdateOrderDTO
@@ -135,6 +137,38 @@ func (o *UpdateOrderDTO) SetCustomer(v CustomerDTO) {
 	o.Customer = &v
 }
 
+// GetExtendStoragePeriod returns the ExtendStoragePeriod field value if set, zero value otherwise.
+func (o *UpdateOrderDTO) GetExtendStoragePeriod() bool {
+	if o == nil || IsNil(o.ExtendStoragePeriod) {
+		var ret bool
+		return ret
+	}
+	return *o.ExtendStoragePeriod
+}
+
+// GetExtendStoragePeriodOk returns a tuple with the ExtendStoragePeriod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UpdateOrderDTO) GetExtendStoragePeriodOk() (*bool, bool) {
+	if o == nil || IsNil(o.ExtendStoragePeriod) {
+		return nil, false
+	}
+	return o.ExtendStoragePeriod, true
+}
+
+// HasExtendStoragePeriod returns a boolean if a field has been set.
+func (o *UpdateOrderDTO) HasExtendStoragePeriod() bool {
+	if o != nil && !IsNil(o.ExtendStoragePeriod) {
+		return true
+	}
+
+	return false
+}
+
+// SetExtendStoragePeriod gets a reference to the given bool and assigns it to the ExtendStoragePeriod field.
+func (o *UpdateOrderDTO) SetExtendStoragePeriod(v bool) {
+	o.ExtendStoragePeriod = &v
+}
+
 func (o UpdateOrderDTO) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -151,6 +185,9 @@ func (o UpdateOrderDTO) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Customer) {
 		toSerialize["customer"] = o.Customer
+	}
+	if !IsNil(o.ExtendStoragePeriod) {
+		toSerialize["extendStoragePeriod"] = o.ExtendStoragePeriod
 	}
 	return toSerialize, nil
 }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Regions** | Pointer to [**[]RegionDTO**](RegionDTO.md) | Регион доставки.  {% note warning %}  В массиве всегда возвращается один регион, используйте поле &#x60;region&#x60; вместо него.  {% endnote %}  | [optional] 
+**Regions** | Pointer to [**[]RegionDTO**](RegionDTO.md) | Регион доставки.  {% note warning \&quot;Параметр устарел и будет отключен 19.10.2026.\&quot; %}  В массиве всегда возвращается один регион, используйте поле &#x60;region&#x60; вместо него.  {% endnote %}  | [optional] 
 **Region** | [**RegionDTO**](RegionDTO.md) |  | 
 
 ## Methods

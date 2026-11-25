@@ -19,7 +19,7 @@ var _ MappedNullable = &ParcelBoxRequestDTO{}
 
 // ParcelBoxRequestDTO Параметр отображает одно грузовое место. Вложенные поля больше не используются, передавайте параметр пустым.
 type ParcelBoxRequestDTO struct {
-	// {% note warning \"Не используйте этот параметр.\" %}     {% endnote %}
+	// {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  Не используйте этот параметр.  {% endnote %}
 	// Deprecated
 	FulfilmentId *string `json:"fulfilmentId,omitempty" validate:"regexp=^[[a-zA-Z0-9]- ]*$"`
 }

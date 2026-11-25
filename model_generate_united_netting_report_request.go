@@ -24,10 +24,10 @@ var _ MappedNullable = &GenerateUnitedNettingReportRequest{}
 type GenerateUnitedNettingReportRequest struct {
 	// Идентификатор кабинета. {% if audience == \"partner\" %}Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html) {% endif %}
 	BusinessId int64 `json:"businessId"`
-	// Начало периода, включительно.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `dateFrom`.  {% endnote %}  Начало периода, включительно.
 	// Deprecated
 	DateTimeFrom *time.Time `json:"dateTimeFrom,omitempty"`
-	// Конец периода, включительно. Максимальный период — 3 месяца.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `dateTo`.  {% endnote %}  Конец периода, включительно. Максимальный период — 3 месяца.
 	// Deprecated
 	DateTimeTo *time.Time `json:"dateTimeTo,omitempty"`
 	// Начало периода, включительно.  Формат даты: `ГГГГ-ММ-ДД`.

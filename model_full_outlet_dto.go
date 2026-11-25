@@ -43,10 +43,10 @@ type FullOutletDTO struct {
 	Id     int64             `json:"id"`
 	Status *OutletStatusType `json:"status,omitempty"`
 	Region *RegionDTO        `json:"region,omitempty"`
-	// {% note warning \"Вместо него используйте `shopOutletCode`.\" %}     {% endnote %}  Идентификатор точки продаж, заданный магазином.
+	// {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  Вместо него используйте `shopOutletCode`.  {% endnote %}  Идентификатор точки продаж, заданный магазином.
 	// Deprecated
 	ShopOutletId *string `json:"shopOutletId,omitempty"`
-	// {% note warning \"Вместо него используйте `workingSchedule`.\" %}     {% endnote %}  Рабочее время.
+	// {% note warning \"Параметр устарел и будет отключен 19.10.2026.\" %}  Вместо него используйте `workingSchedule`.  {% endnote %}  Рабочее время.
 	// Deprecated
 	WorkingTime *string `json:"workingTime,omitempty"`
 	// Статус модерации.

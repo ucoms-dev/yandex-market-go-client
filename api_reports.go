@@ -68,6 +68,10 @@ GenerateBannersStatisticsReport Отчет по охватному продви�
 
 {% endif %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateBannersStatisticsReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -264,6 +268,11 @@ GenerateBarcodesReport Получение файла со штрихкодами
 Файл не получится сгенерировать, если в нем будет более 1 500 штрихкодов.
 
 Узнать статус генерации и получить ссылку на готовый файл можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
+
+**Пошаговые инструкции**
+
+* [Получить файл со штрихкодами товаров в заявке](../../step-by-step/supplies.md)
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateBarcodesReport.md) %}
 
@@ -473,6 +482,10 @@ GenerateBoostConsolidatedReport Отчет по бусту продаж
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
 
 {% endif %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateBoostConsolidatedReport.md) %}
 
@@ -688,6 +701,10 @@ GenerateClosureDocumentsDetalizationReport Отчет по схождению с
 
 {% endlist %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateClosureDocumentsDetalizationReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -893,8 +910,9 @@ GenerateClosureDocumentsReport Закрывающие документы
 
 * **Договор на размещение**
 
-  - [акт об оказанных услугах](*acts-main-act)
-  - [счет-фактура](*acts-main-invoice)
+  - [универсальный передаточный документ (УПД-1)](*acts-main-utd) (в России формируется за октябрь 2026 года и последующие месяцы, вместо акта об оказанных услугах и счета-фактуры)
+  - [акт об оказанных услугах](*acts-main-act) (в России формируется за месяцы до октября 2026 года)
+  - [счет-фактура](*acts-main-invoice) (в России формируется за месяцы до октября 2026 года)
   - [сводный отчет по данным статистики](*acts-main-report)
   - [отчет об исполнении поручения и о зачете взаимных требований](*acts-main-agent) (отчет агента)
 
@@ -905,15 +923,19 @@ GenerateClosureDocumentsReport Закрывающие документы
 
 * **Договор на маркетинг**
 
-  - [акт об оказанных услугах](*acts-marketing-act)
-  - [счет-фактура](*acts-main-invoice)
+  - [универсальный передаточный документ (УПД-1)](*acts-main-utd) (в России формируется за август 2026 года и последующие месяцы, вместо акта об оказанных услугах и счета-фактуры)
+  - [акт об оказанных услугах](*acts-marketing-act) (в России формируется за месяцы до августа 2026 года)
+  - [счет-фактура](*acts-main-invoice) (в России формируется за месяцы до августа 2026 года)
   - [счет-фактура на аванс](*acts-marketing-invoice)
-  - [выписка по лицевому счету](*acts-marketing-account)
   - [детализация к акту](*acts-marketing-details)
 
 {% endcut %}
 
 Узнать статус генерации и получить ссылку на архив можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateClosureDocumentsReport.md) %}
 
@@ -1116,6 +1138,10 @@ GenerateCompetitorsPositionReport Отчет «Конкурентная пози
 {% include notitle [reports](../../_auto/reports/masterstat/competitors_position.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateCompetitorsPositionReport.md) %}
 
@@ -1320,6 +1346,10 @@ GenerateGoodsFeedbackReport Отчет по отзывам о товарах
 
 {% include notitle [tariff-period](../../_includes/common/simultaneously-generated-reports-amount.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateGoodsFeedbackReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1522,6 +1552,10 @@ GenerateGoodsMovementReport Отчет по движению товаров
 {% include notitle [reports](../../_auto/reports/sku/movement/movement_config.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateGoodsMovementReport.md) %}
 
@@ -1741,6 +1775,10 @@ GenerateGoodsPricesReport Отчет «Цены»
 
 {% include notitle [tariff-period](../../_includes/common/simultaneously-generated-reports-amount.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateGoodsPricesReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1951,6 +1989,10 @@ GenerateGoodsRealizationReport Отчет по реализации
 	{% include notitle [reports](../../_auto/reports/united/statistics/generator/united_statistics_v2_dbs.md) %}
 
 {% endlist %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateGoodsRealizationReport.md) %}
 
@@ -2166,6 +2208,10 @@ GenerateGoodsTurnoverReport Отчет по оборачиваемости
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateGoodsTurnoverReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2369,6 +2415,10 @@ GenerateJewelryFiscalReport Отчет по заказам с ювелирным
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateJewelryFiscalReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2571,6 +2621,10 @@ GenerateKeyIndicatorsReport Отчет по ключевым показател�
 {% include notitle [reports](../../_auto/reports/key_indicators/key_indicators.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateKeyIndicatorsReport.md) %}
 
@@ -2780,6 +2834,10 @@ GenerateMarketingDetalizationReport Отчет по счету маркетин�
 Узнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
 
 {% include notitle [reports](../../_auto/reports/advertiser_billing_operations/advertiser_billing_operations.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateMarketingDetalizationReport.md) %}
 
@@ -3002,6 +3060,11 @@ GenerateMassOrderLabelsReport Готовые ярлыки‑наклейки н�
 
 Узнать статус генерации и получить ссылку на готовый файл можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
 
+**Пошаговые инструкции**
+
+* [Напечатать ярлыки для нескольких FBS-заказов](../../step-by-step/fbs.md#fulfillment)
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateMassOrderLabelsReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -3200,6 +3263,10 @@ GenerateSalesGeographyReport Отчет по географии продаж
 {% include notitle [reports](../../_auto/reports/locality/locality_offers_report_v2.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateSalesGeographyReport.md) %}
 
@@ -3415,6 +3482,10 @@ GenerateShelfsStatisticsReport Отчет по полкам
 
 {% endif %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateShelfsStatisticsReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -3611,6 +3682,11 @@ GenerateShipmentListDocumentReport Получение листа сборки
 Чтобы на в листе сборки отображался внешний идентификатор заказа, передайте его в методе [POST v2/campaigns/{campaignId}/orders/{orderId}/external-id](../../reference/orders/updateExternalOrderId.md).
 
 Узнать статус генерации и получить ссылку на готовый документ можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
+
+**Пошаговые инструкции**
+
+* [Сформировать лист сборки FBS](../../step-by-step/fbs.md#shipment-list)
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateShipmentListDocumentReport.md) %}
 
@@ -3819,6 +3895,10 @@ GenerateShowsBoostReport Отчет по бусту показов
 
 {% endif %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateShowsBoostReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -4024,6 +4104,10 @@ GenerateShowsSalesReport Отчет «Аналитика продаж»
 {% include notitle [reports](../../_auto/reports/masterstat/sales_funnel_by_created_at.md) %}
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-400-days.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateShowsSalesReport.md) %}
 
@@ -4233,6 +4317,17 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 
 Запускает генерацию отчета по остаткам на складах. [Что это за отчет](https://yandex.ru/support/marketplace/ru/storage/logistics#remains-history)
 
+{% note warning "Когда использовать этот метод" %}
+
+Метод актуален:
+
+* для моделей FBY и LaaS;
+* для моделей FBS, DBS и Экспресс, если в кабинете есть группы складов.
+
+Если в кабинете нет групп складов и вы работаете с моделями FBS, DBS или Экспресс, используйте метод [POST v3/businesses/{businessId}/reports/stocks/generate](../../reference/reports/generateStocksReport.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
+
 **Какая информация вернется:**
 
 * Для моделей FBY и LaaS, если указать `campaignId`, — об остатках на складах Маркета.
@@ -4258,6 +4353,10 @@ GenerateStocksOnWarehousesReport Отчет по остаткам на скла�
 	{% include notitle [reports](../../_auto/reports/offers/stocks_business_config.md) %}
 
 {% endlist %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateStocksOnWarehousesReport.md) %}
 
@@ -4438,6 +4537,239 @@ func (a *ReportsAPIService) GenerateStocksOnWarehousesReportExecute(r ReportsAPI
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ReportsAPIGenerateStocksReportRequest struct {
+	ctx                         context.Context
+	ApiService                  *ReportsAPIService
+	businessId                  int64
+	format                      *ReportFormatType
+	generateStocksReportRequest *GenerateStocksReportRequest
+}
+
+// Формат отчета или документа.
+func (r ReportsAPIGenerateStocksReportRequest) Format(format ReportFormatType) ReportsAPIGenerateStocksReportRequest {
+	r.format = &format
+	return r
+}
+
+func (r ReportsAPIGenerateStocksReportRequest) GenerateStocksReportRequest(generateStocksReportRequest GenerateStocksReportRequest) ReportsAPIGenerateStocksReportRequest {
+	r.generateStocksReportRequest = &generateStocksReportRequest
+	return r
+}
+
+func (r ReportsAPIGenerateStocksReportRequest) Execute() (*GenerateReportResponse, *http.Response, error) {
+	return r.ApiService.GenerateStocksReportExecute(r)
+}
+
+/*
+GenerateStocksReport Отчет по остаткам на складах партнера
+
+{% include notitle [access](../../_auto/method_scopes/generateStocksReport.md) %}
+
+Запускает генерацию отчета по остаткам на складах магазинов в кабинете. [Что это за отчет](https://yandex.ru/support/marketplace/ru/storage/logistics#remains-history)
+
+**Какая информация вернется:**
+
+* Об остатках на всех складах магазинов в кабинете (модели DBS, FBS и Экспресс).
+* По каждому товару — ваш SKU, название, модель работы, склад, доступное для заказа количество, резерв, цену и статус.
+
+Узнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
+
+{% list tabs %}
+
+- Все склады магазинов в кабинете
+
+	{% include notitle [reports](../../_auto/reports/offers/stocks_business_config.md) %}
+
+{% endlist %}
+
+{% note warning "Метод подходит, только если в кабинете нет групп складов" %}
+
+Если в кабинете есть группы складов, используйте метод [POST v2/reports/stocks-on-warehouses/generate](../../reference/reports/generateStocksOnWarehousesReport.md). [Что такое группы складов и зачем они нужны](https://yandex.ru/support/marketplace/assortment/operations/stocks.html#unified-stocks).
+
+{% endnote %}
+
+{% include notitle [limit](../../_auto/method_limits/generateStocksReport.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return ReportsAPIGenerateStocksReportRequest
+*/
+func (a *ReportsAPIService) GenerateStocksReport(ctx context.Context, businessId int64) ReportsAPIGenerateStocksReportRequest {
+	return ReportsAPIGenerateStocksReportRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GenerateReportResponse
+func (a *ReportsAPIService) GenerateStocksReportExecute(r ReportsAPIGenerateStocksReportRequest) (*GenerateReportResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GenerateReportResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsAPIService.GenerateStocksReport")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v3/businesses/{businessId}/reports/stocks/generate"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+
+	if r.format != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", r.format, "", "")
+	} else {
+		var defaultValue ReportFormatType = "FILE"
+		parameterAddToHeaderOrQuery(localVarQueryParams, "format", defaultValue, "", "")
+		r.format = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.generateStocksReportRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ReportsAPIGenerateUnitedMarketplaceServicesReportRequest struct {
 	ctx                                            context.Context
 	ApiService                                     *ReportsAPIService
@@ -4486,6 +4818,10 @@ GenerateUnitedMarketplaceServicesReport Отчет по стоимости ус�
 Узнать статус генерации и получить ссылку на готовый отчет можно с помощью запроса [GET v2/reports/info/{reportId}](../../reference/reports/getReportInfo.md).
 
 {% include notitle [reports](../../_auto/reports/united/services/generator/united_marketplace_services.md) %}
+
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
 
 {% include notitle [limit](../../_auto/method_limits/generateUnitedMarketplaceServicesReport.md) %}
 
@@ -4726,6 +5062,10 @@ GenerateUnitedNettingReport Отчет по платежам
 
 {% include notitle [reports](../../_auto/reports/united/netting/generator/united_netting.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateUnitedNettingReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -4950,6 +5290,10 @@ GenerateUnitedOrdersReport Отчет по заказам
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateUnitedOrdersReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -5169,6 +5513,10 @@ GenerateUnitedReturnsReport Отчет по невыкупам и возврат
 
 {% include notitle [tariff-period](../../_includes/common/report-data-period-unchanged.md) %}
 
+**Пошаговые инструкции**
+
+* [Заказать отчёт или документ](../../step-by-step/reports.md#generate)
+
 {% include notitle [limit](../../_auto/method_limits/generateUnitedReturnsReport.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -5361,7 +5709,11 @@ GetReportInfo Получение заданного отчета или доку
 
 Возвращает статус генерации заданного отчета или документа и, если он готов, ссылку для скачивания.
 
-Чтобы воспользоваться этим запросом, вначале нужно запустить генерацию отчета или документа. [Инструкция](../../step-by-step/reports.md)
+Чтобы воспользоваться этим запросом, вначале нужно запустить генерацию отчета или документа.
+
+**Пошаговые инструкции**
+
+* [Проверить готовность отчёта или документа](../../step-by-step/reports.md#status)
 
 {% include notitle [limit](../../_auto/method_limits/getReportInfo.md) %}
 

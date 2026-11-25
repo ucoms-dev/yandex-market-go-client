@@ -22,6 +22,257 @@ import (
 // ContentAPIService ContentAPI service
 type ContentAPIService service
 
+type ContentAPICreateContentSizeTablesRequest struct {
+	ctx                     context.Context
+	ApiService              *ContentAPIService
+	businessId              int64
+	createSizeTablesRequest *CreateSizeTablesRequest
+}
+
+func (r ContentAPICreateContentSizeTablesRequest) CreateSizeTablesRequest(createSizeTablesRequest CreateSizeTablesRequest) ContentAPICreateContentSizeTablesRequest {
+	r.createSizeTablesRequest = &createSizeTablesRequest
+	return r
+}
+
+func (r ContentAPICreateContentSizeTablesRequest) Execute() (*CreateSizeTablesResponse, *http.Response, error) {
+	return r.ApiService.CreateContentSizeTablesExecute(r)
+}
+
+/*
+CreateContentSizeTables Создание таблиц размеров
+
+{% include notitle [access](../../_auto/method_scopes/createContentSizeTables.md) %}
+
+Создает таблицы размеров бизнеса. За один запрос можно создать до 10 таблиц, в которых суммарно не больше
+5000 ячеек. Если таблиц или ячеек больше, запрос отклоняется с ошибкой `BAD_REQUEST` и ни одна таблица
+не создается.
+
+Таблица относится к размерной характеристике, а не к категории: она подбирается для всех категорий
+с той же размерной характеристикой.
+
+Размерную характеристику категории возвращает метод подбора таблиц размеров
+`POST v2/businesses/{businessId}/size-tables/suggest` в поле `result.sizeParameterId`, характеристику
+существующей таблицы — метод `POST v2/businesses/{businessId}/size-tables` в поле `sizeParameterId`.
+Если в запросе есть неизвестный идентификатор размерной характеристики, запрос отклоняется с ошибкой
+`UNKNOWN_SIZE_PARAMETER` и ни одна таблица не создается.
+
+Размерные сетки и обмеры, которые можно использовать в таблице, их значения и обязательные сетки
+возвращает метод `POST v2/businesses/{businessId}/size-tables/charts`.
+
+{% cut "Как заполнить таблицу" %}
+
+{% include notitle [size-tables-filling](../../_includes/common/size-tables-filling.md) %}
+
+{% endcut %}
+
+{% cut "Чем сохраненная таблица отличается от переданной" %}
+
+{% include notitle [size-tables-saved-differences](../../_includes/common/size-tables-saved-differences.md) %}
+
+Значения из ответа можно без изменений передать в метод обновления таблиц размеров
+`POST v2/businesses/{businessId}/size-tables/update`: поля `columnType` и `rowIndex` в нем не учитываются.
+
+{% endcut %}
+
+Чтобы привязать таблицу к товару, передайте ее идентификатор в `value` характеристики с `parameterId: 73979829`
+в запросе [POST v2/businesses/{businessId}/offer-cards/update](../../reference/content/updateOfferContent.md).
+Когда таблица изменяется, новое содержимое применяется к привязанным товарам автоматически.
+
+{% note warning "Повторный запрос создает таблицы еще раз" %}
+
+Метод не идемпотентен: каждый запрос создает новые таблицы, даже если такие же уже есть.
+
+Если запрос завершился ошибкой с кодом 5xx, часть таблиц могла сохраниться. Получите таблицы бизнеса методом
+`POST v2/businesses/{businessId}/size-tables` и только после этого повторите запрос для таблиц, которых там нет.
+
+{% endnote %}
+
+Количество таблиц у бизнеса ограничено — суммарно по всем размерным характеристикам. Удалить таблицу нельзя.
+Если лимит исчерпан, таблица не создается и для нее возвращается ошибка `LIMIT_TABLES`. При одновременных
+запросах лимит проверяется нестрого, и таблиц может создаться больше.
+
+**Пошаговые инструкции**
+
+* [Создать свою таблицу](../../step-by-step/size-tables.md#create)
+
+{% include notitle [limit](../../_auto/method_limits/createContentSizeTables.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return ContentAPICreateContentSizeTablesRequest
+*/
+func (a *ContentAPIService) CreateContentSizeTables(ctx context.Context, businessId int64) ContentAPICreateContentSizeTablesRequest {
+	return ContentAPICreateContentSizeTablesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return CreateSizeTablesResponse
+func (a *ContentAPIService) CreateContentSizeTablesExecute(r ContentAPICreateContentSizeTablesRequest) (*CreateSizeTablesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *CreateSizeTablesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContentAPIService.CreateContentSizeTables")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables/create"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.createSizeTablesRequest == nil {
+		return localVarReturnValue, nil, reportError("createSizeTablesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.createSizeTablesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ContentAPIGetCategoryContentParametersRequest struct {
 	ctx        context.Context
 	ApiService *ContentAPIService
@@ -49,6 +300,11 @@ GetCategoryContentParameters Списки характеристик товар�
 Поля в ответе определяют правила передачи характеристики в методах:
 - [POST v2/businesses/{businessId}/offer-mappings/update](../../reference/business-offer-mappings/updateOfferMappings.md)
 - [POST v2/businesses/{businessId}/offer-cards/update](../../reference/content/updateOfferContent.md)
+
+**Пошаговые инструкции**
+
+* [Проверить сопоставление характеристик категории](../../step-by-step/content-change.md#check-and-update-comparison)
+* [Передача значений характеристики](../../step-by-step/parameter-values.md)
 
 {% include notitle [limit](../../_auto/method_limits/getCategoryContentParameters.md) %}
 
@@ -226,6 +482,469 @@ func (a *ContentAPIService) GetCategoryContentParametersExecute(r ContentAPIGetC
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ContentAPIGetContentSizeChartsRequest struct {
+	ctx                  context.Context
+	ApiService           *ContentAPIService
+	businessId           int64
+	getSizeChartsRequest *GetSizeChartsRequest
+}
+
+func (r ContentAPIGetContentSizeChartsRequest) GetSizeChartsRequest(getSizeChartsRequest GetSizeChartsRequest) ContentAPIGetContentSizeChartsRequest {
+	r.getSizeChartsRequest = &getSizeChartsRequest
+	return r
+}
+
+func (r ContentAPIGetContentSizeChartsRequest) Execute() (*GetSizeChartsResponse, *http.Response, error) {
+	return r.ApiService.GetContentSizeChartsExecute(r)
+}
+
+/*
+GetContentSizeCharts Размерные сетки и обмеры для таблиц размеров
+
+{% include notitle [access](../../_auto/method_scopes/getContentSizeCharts.md) %}
+
+Возвращает размерные сетки и обмеры, из которых можно составить таблицу размеров для указанной размерной
+характеристики. Их идентификаторы передаются в `sizeChartId` ячеек в методах создания и обновления таблиц
+размеров `POST v2/businesses/{businessId}/size-tables/create` и `POST v2/businesses/{businessId}/size-tables/update`.
+
+В список входят:
+
+* стандартные размерные сетки Маркета — значения в них выбираются из справочника `sizeValues`;
+* размерные сетки, значения в которых задаются текстом;
+* обмеры — значения в них тоже задаются текстом.
+
+Брендовые размерные сетки в список не входят, и использовать их в своих таблицах нельзя: для них
+возвращается ошибка `UNKNOWN_SIZE_CHART`.
+
+Обязательные размерные сетки отмечены `required: true`. В таблице должна быть хотя бы одна из них,
+а каждую обязательную сетку в таблице нужно заполнить во всех строках.
+
+Для неизвестного идентификатора размерной характеристики возвращается ошибка `UNKNOWN_SIZE_PARAMETER`.
+
+**Пошаговые инструкции**
+
+* [Таблицы размеров](../../step-by-step/size-tables.md)
+
+{% include notitle [limit](../../_auto/method_limits/getContentSizeCharts.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return ContentAPIGetContentSizeChartsRequest
+*/
+func (a *ContentAPIService) GetContentSizeCharts(ctx context.Context, businessId int64) ContentAPIGetContentSizeChartsRequest {
+	return ContentAPIGetContentSizeChartsRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetSizeChartsResponse
+func (a *ContentAPIService) GetContentSizeChartsExecute(r ContentAPIGetContentSizeChartsRequest) (*GetSizeChartsResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSizeChartsResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContentAPIService.GetContentSizeCharts")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables/charts"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.getSizeChartsRequest == nil {
+		return localVarReturnValue, nil, reportError("getSizeChartsRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getSizeChartsRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ContentAPIGetContentSizeTablesRequest struct {
+	ctx                  context.Context
+	ApiService           *ContentAPIService
+	businessId           int64
+	getSizeTablesRequest *GetSizeTablesRequest
+	pageToken            *string
+	limit                *int32
+}
+
+func (r ContentAPIGetContentSizeTablesRequest) GetSizeTablesRequest(getSizeTablesRequest GetSizeTablesRequest) ContentAPIGetContentSizeTablesRequest {
+	r.getSizeTablesRequest = &getSizeTablesRequest
+	return r
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r ContentAPIGetContentSizeTablesRequest) PageToken(pageToken string) ContentAPIGetContentSizeTablesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-param-description }}
+func (r ContentAPIGetContentSizeTablesRequest) Limit(limit int32) ContentAPIGetContentSizeTablesRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ContentAPIGetContentSizeTablesRequest) Execute() (*GetSizeTablesResponse, *http.Response, error) {
+	return r.ApiService.GetContentSizeTablesExecute(r)
+}
+
+/*
+GetContentSizeTables Таблицы размеров по идентификаторам
+
+{% include notitle [access](../../_auto/method_scopes/getContentSizeTables.md) %}
+
+Возвращает таблицы размеров по их идентификаторам. Идентификаторы возвращает метод
+подбора таблиц размеров. Если `sizeTableIds` не передан, возвращает все таблицы размеров,
+созданные бизнесом.
+
+Сначала возвращаются созданные бизнесом, затем брендовые, затем стандартные таблицы;
+внутри каждой группы — по убыванию идентификатора.
+
+Результаты возвращаются постранично. Для навигации используйте параметры `pageToken` и `limit`.
+В каждом следующем запросе передавайте тот же набор `sizeTableIds`, что и в первом:
+`pageToken` привязан к нему, и с другим набором запрос будет отклонен. Порядок
+идентификаторов значения не имеет.
+
+Идентификаторы, по которым таблицу вернуть не удалось — такой таблицы нет или она
+принадлежит другому бизнесу, — возвращаются в `notFoundSizeTableIds` на первой странице.
+
+**Пошаговые инструкции**
+
+* [Таблицы размеров](../../step-by-step/size-tables.md)
+
+{% include notitle [limit](../../_auto/method_limits/getContentSizeTables.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return ContentAPIGetContentSizeTablesRequest
+*/
+func (a *ContentAPIService) GetContentSizeTables(ctx context.Context, businessId int64) ContentAPIGetContentSizeTablesRequest {
+	return ContentAPIGetContentSizeTablesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return GetSizeTablesResponse
+func (a *ContentAPIService) GetContentSizeTablesExecute(r ContentAPIGetContentSizeTablesRequest) (*GetSizeTablesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *GetSizeTablesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContentAPIService.GetContentSizeTables")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.getSizeTablesRequest == nil {
+		return localVarReturnValue, nil, reportError("getSizeTablesRequest is required and must be specified")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 25
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.getSizeTablesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ContentAPIGetOfferCardsContentStatusRequest struct {
 	ctx                               context.Context
 	ApiService                        *ContentAPIService
@@ -270,6 +989,11 @@ GetOfferCardsContentStatus Получение информации о запол
 * рекомендации по заполнению карточки.
 
 Чтобы получить другие характеристики товаров, воспользуйтесь методом [POST v2/businesses/{businessId}/offer-mappings](../../reference/business-offer-mappings/getOfferMappings.md).
+
+**Пошаговые инструкции**
+
+* [Получить текущие характеристики и статус карточки](../../step-by-step/content-change.md#edit-card)
+* [Получить рекомендации по заполнению карточки](../../step-by-step/recommendations.md)
 
 {% include notitle [limit](../../_auto/method_limits/getOfferCardsContentStatus.md) %}
 
@@ -456,6 +1180,495 @@ func (a *ContentAPIService) GetOfferCardsContentStatusExecute(r ContentAPIGetOff
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ContentAPISuggestContentSizeTablesRequest struct {
+	ctx                      context.Context
+	ApiService               *ContentAPIService
+	businessId               int64
+	suggestSizeTablesRequest *SuggestSizeTablesRequest
+	pageToken                *string
+	limit                    *int32
+}
+
+func (r ContentAPISuggestContentSizeTablesRequest) SuggestSizeTablesRequest(suggestSizeTablesRequest SuggestSizeTablesRequest) ContentAPISuggestContentSizeTablesRequest {
+	r.suggestSizeTablesRequest = &suggestSizeTablesRequest
+	return r
+}
+
+// Идентификатор страницы c результатами.  Если параметр не указан, возвращается первая страница.  Передавайте значение выходного параметра &#x60;nextPageToken&#x60;, полученное при последнем запросе.
+func (r ContentAPISuggestContentSizeTablesRequest) PageToken(pageToken string) ContentAPISuggestContentSizeTablesRequest {
+	r.pageToken = &pageToken
+	return r
+}
+
+// {{ limit-param-description }}
+func (r ContentAPISuggestContentSizeTablesRequest) Limit(limit int32) ContentAPISuggestContentSizeTablesRequest {
+	r.limit = &limit
+	return r
+}
+
+func (r ContentAPISuggestContentSizeTablesRequest) Execute() (*SuggestSizeTablesResponse, *http.Response, error) {
+	return r.ApiService.SuggestContentSizeTablesExecute(r)
+}
+
+/*
+SuggestContentSizeTables Подбор таблиц размеров
+
+{% include notitle [access](../../_auto/method_scopes/suggestContentSizeTables.md) %}
+
+Возвращает таблицы размеров, подходящие для указанной категории, бренда и пола.
+
+Тип `STANDARD` — таблицы, уже созданные Маркетом и автоматически подобранные под выбранные
+вами категорию, бренд и пол. Тип `CUSTOM` — таблицы, которые вы создали сами: они подходят,
+если у вас свой бренд, уникальная размерная линейка, товары маломерят или большемерят.
+
+Сначала возвращаются созданные бизнесом, затем брендовые, затем стандартные таблицы;
+внутри каждой группы — по убыванию идентификатора.
+
+Результаты возвращаются постранично. Для навигации используйте параметры `pageToken` и `limit`.
+
+**Пошаговые инструкции**
+
+* [Подобрать готовую таблицу](../../step-by-step/size-tables.md#suggest)
+
+{% include notitle [limit](../../_auto/method_limits/suggestContentSizeTables.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return ContentAPISuggestContentSizeTablesRequest
+*/
+func (a *ContentAPIService) SuggestContentSizeTables(ctx context.Context, businessId int64) ContentAPISuggestContentSizeTablesRequest {
+	return ContentAPISuggestContentSizeTablesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return SuggestSizeTablesResponse
+func (a *ContentAPIService) SuggestContentSizeTablesExecute(r ContentAPISuggestContentSizeTablesRequest) (*SuggestSizeTablesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *SuggestSizeTablesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContentAPIService.SuggestContentSizeTables")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables/suggest"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.suggestSizeTablesRequest == nil {
+		return localVarReturnValue, nil, reportError("suggestSizeTablesRequest is required and must be specified")
+	}
+
+	if r.pageToken != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "pageToken", r.pageToken, "", "")
+	}
+	if r.limit != nil {
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", r.limit, "", "")
+	} else {
+		var defaultValue int32 = 25
+		parameterAddToHeaderOrQuery(localVarQueryParams, "limit", defaultValue, "", "")
+		r.limit = &defaultValue
+	}
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.suggestSizeTablesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ContentAPIUpdateContentSizeTablesRequest struct {
+	ctx                     context.Context
+	ApiService              *ContentAPIService
+	businessId              int64
+	updateSizeTablesRequest *UpdateSizeTablesRequest
+}
+
+func (r ContentAPIUpdateContentSizeTablesRequest) UpdateSizeTablesRequest(updateSizeTablesRequest UpdateSizeTablesRequest) ContentAPIUpdateContentSizeTablesRequest {
+	r.updateSizeTablesRequest = &updateSizeTablesRequest
+	return r
+}
+
+func (r ContentAPIUpdateContentSizeTablesRequest) Execute() (*UpdateSizeTablesResponse, *http.Response, error) {
+	return r.ApiService.UpdateContentSizeTablesExecute(r)
+}
+
+/*
+UpdateContentSizeTables Обновление таблиц размеров
+
+{% include notitle [access](../../_auto/method_scopes/updateContentSizeTables.md) %}
+
+Полностью заменяет названия и содержимое таблиц размеров, созданных бизнесом. За один запрос можно обновить
+до 10 таблиц, в которых суммарно не больше 5000 ячеек. Если таблиц или ячеек больше, запрос отклоняется
+с ошибкой `BAD_REQUEST` и ни одна таблица не обновляется.
+
+{% note warning "Передавайте полное содержимое таблицы" %}
+
+Все отсутствующие строки и колонки будут удалены.
+
+{% endnote %}
+
+Изменить можно только таблицы, созданные бизнесом, — у них в ответе метода
+`POST v2/businesses/{businessId}/size-tables` указано `editable: true`. Если таблицы нет, для нее возвращается
+ошибка `NOT_FOUND`, если это таблица Маркета (`sizeTableType: STANDARD`) — ошибка `FORBIDDEN`.
+
+Размерную характеристику таблицы изменить нельзя: колонки и значения проверяются по характеристике, указанной
+при создании таблицы. Размерные сетки и обмеры, которые можно использовать в таблице, их значения и обязательные
+сетки возвращает метод `POST v2/businesses/{businessId}/size-tables/charts`.
+
+Идентификаторы таблиц не должны повторяться в одном запросе. Если они повторяются, запрос отклоняется
+с ошибкой `BAD_REQUEST` и ни одна таблица не обновляется.
+
+{% cut "Как заполнить таблицу" %}
+
+{% include notitle [size-tables-filling](../../_includes/common/size-tables-filling.md) %}
+
+{% endcut %}
+
+{% cut "Чем сохраненная таблица отличается от переданной" %}
+
+{% include notitle [size-tables-saved-differences](../../_includes/common/size-tables-saved-differences.md) %}
+
+Значения из ответа можно без изменений передать в этот метод: поля `columnType` и `rowIndex` в нем не учитываются.
+
+{% endcut %}
+
+{% note warning "Сохраняется содержимое из последнего запроса" %}
+
+Версии таблицы не сравниваются. Если таблицу изменили в кабинете после того, как вы ее получили,
+эти изменения будут перезаписаны без предупреждения. Ошибка `CONCURRENT_MODIFICATION` возвращается, только если
+таблицу изменили во время обработки вашего запроса. В этом случае повторите запрос.
+
+{% endnote %}
+
+Новое содержимое таблицы применяется к привязанным к ней товарам автоматически через некоторое время.
+Передавать товары повторно не нужно.
+
+Если запрос завершился ошибкой с кодом 5xx, его можно повторить: таблицы заменятся тем же содержимым.
+
+**Пошаговые инструкции**
+
+* [Создать свою таблицу](../../step-by-step/size-tables.md#create)
+
+{% include notitle [limit](../../_auto/method_limits/updateContentSizeTables.md) %}
+
+	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+	@param businessId Идентификатор кабинета.  {% if audience == \"partner\" %}  Чтобы его узнать, воспользуйтесь запросом [GET v2/campaigns](../../reference/campaigns/getCampaigns.md).  ℹ️ [Что такое кабинет и магазин на Маркете](https://yandex.ru/support/marketplace/account/introduction.html)  {% endif %}
+	@return ContentAPIUpdateContentSizeTablesRequest
+*/
+func (a *ContentAPIService) UpdateContentSizeTables(ctx context.Context, businessId int64) ContentAPIUpdateContentSizeTablesRequest {
+	return ContentAPIUpdateContentSizeTablesRequest{
+		ApiService: a,
+		ctx:        ctx,
+		businessId: businessId,
+	}
+}
+
+// Execute executes the request
+//
+//	@return UpdateSizeTablesResponse
+func (a *ContentAPIService) UpdateContentSizeTablesExecute(r ContentAPIUpdateContentSizeTablesRequest) (*UpdateSizeTablesResponse, *http.Response, error) {
+	var (
+		localVarHTTPMethod  = http.MethodPost
+		localVarPostBody    interface{}
+		formFiles           []formFile
+		localVarReturnValue *UpdateSizeTablesResponse
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ContentAPIService.UpdateContentSizeTables")
+	if err != nil {
+		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/v2/businesses/{businessId}/size-tables/update"
+	localVarPath = strings.Replace(localVarPath, "{"+"businessId"+"}", url.PathEscape(parameterValueToString(r.businessId, "businessId")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := url.Values{}
+	localVarFormParams := url.Values{}
+	if r.businessId < 1 {
+		return localVarReturnValue, nil, reportError("businessId must be greater than 1")
+	}
+	if r.updateSizeTablesRequest == nil {
+		return localVarReturnValue, nil, reportError("updateSizeTablesRequest is required and must be specified")
+	}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.updateSizeTablesRequest
+	if r.ctx != nil {
+		// API Key Authentication
+		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {
+			if apiKey, ok := auth["ApiKey"]; ok {
+				var key string
+				if apiKey.Prefix != "" {
+					key = apiKey.Prefix + " " + apiKey.Key
+				} else {
+					key = apiKey.Key
+				}
+				localVarHeaderParams["Api-Key"] = key
+			}
+		}
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, formFiles)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := io.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = io.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ApiClientDataErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v ApiUnauthorizedErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 403 {
+			var v ApiForbiddenErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v ApiNotFoundErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 420 {
+			var v ApiLimitErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 500 {
+			var v ApiServerErrorResponse
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.error = formatErrorMessage(localVarHTTPResponse.Status, &v)
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := &GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ContentAPIUpdateOfferContentRequest struct {
 	ctx                       context.Context
 	ApiService                *ContentAPIService
@@ -492,6 +1705,14 @@ UpdateOfferContent Редактирование категорийных хар�
 Это занимает до нескольких минут.
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Объединить варианты товаров на карточке](../../step-by-step/assortment-add-goods.md#combine-variants)
+* [Товары относятся к новой для магазина категории](../../step-by-step/content-change.md#edit-card)
+* [Привязать таблицу размеров к карточке](../../step-by-step/size-tables.md#offer-card)
+* [Рекомендации Маркета по карточкам](../../step-by-step/recommendations.md)
+* [Передача значений характеристики](../../step-by-step/parameter-values.md)
 
 {% include notitle [limit](../../_auto/method_limits/updateOfferContent.md) %}
 

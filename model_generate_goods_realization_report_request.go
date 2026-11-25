@@ -27,6 +27,12 @@ type GenerateGoodsRealizationReportRequest struct {
 	Year int32 `json:"year"`
 	// Номер месяца.
 	Month int32 `json:"month"`
+	// Список ИНН (доступно продавцам-резидентам РФ).
+	Inns []string `json:"inns,omitempty"`
+	// Список моделей размещения.
+	PlacementPrograms []PlacementType `json:"placementPrograms,omitempty"`
+	// Список номеров договоров на размещение.
+	PlacementContracts []string `json:"placementContracts,omitempty"`
 }
 
 type _GenerateGoodsRealizationReportRequest GenerateGoodsRealizationReportRequest
@@ -123,6 +129,105 @@ func (o *GenerateGoodsRealizationReportRequest) SetMonth(v int32) {
 	o.Month = v
 }
 
+// GetInns returns the Inns field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GenerateGoodsRealizationReportRequest) GetInns() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.Inns
+}
+
+// GetInnsOk returns a tuple with the Inns field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GenerateGoodsRealizationReportRequest) GetInnsOk() ([]string, bool) {
+	if o == nil || IsNil(o.Inns) {
+		return nil, false
+	}
+	return o.Inns, true
+}
+
+// HasInns returns a boolean if a field has been set.
+func (o *GenerateGoodsRealizationReportRequest) HasInns() bool {
+	if o != nil && !IsNil(o.Inns) {
+		return true
+	}
+
+	return false
+}
+
+// SetInns gets a reference to the given []string and assigns it to the Inns field.
+func (o *GenerateGoodsRealizationReportRequest) SetInns(v []string) {
+	o.Inns = v
+}
+
+// GetPlacementPrograms returns the PlacementPrograms field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GenerateGoodsRealizationReportRequest) GetPlacementPrograms() []PlacementType {
+	if o == nil {
+		var ret []PlacementType
+		return ret
+	}
+	return o.PlacementPrograms
+}
+
+// GetPlacementProgramsOk returns a tuple with the PlacementPrograms field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GenerateGoodsRealizationReportRequest) GetPlacementProgramsOk() ([]PlacementType, bool) {
+	if o == nil || IsNil(o.PlacementPrograms) {
+		return nil, false
+	}
+	return o.PlacementPrograms, true
+}
+
+// HasPlacementPrograms returns a boolean if a field has been set.
+func (o *GenerateGoodsRealizationReportRequest) HasPlacementPrograms() bool {
+	if o != nil && !IsNil(o.PlacementPrograms) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlacementPrograms gets a reference to the given []PlacementType and assigns it to the PlacementPrograms field.
+func (o *GenerateGoodsRealizationReportRequest) SetPlacementPrograms(v []PlacementType) {
+	o.PlacementPrograms = v
+}
+
+// GetPlacementContracts returns the PlacementContracts field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GenerateGoodsRealizationReportRequest) GetPlacementContracts() []string {
+	if o == nil {
+		var ret []string
+		return ret
+	}
+	return o.PlacementContracts
+}
+
+// GetPlacementContractsOk returns a tuple with the PlacementContracts field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GenerateGoodsRealizationReportRequest) GetPlacementContractsOk() ([]string, bool) {
+	if o == nil || IsNil(o.PlacementContracts) {
+		return nil, false
+	}
+	return o.PlacementContracts, true
+}
+
+// HasPlacementContracts returns a boolean if a field has been set.
+func (o *GenerateGoodsRealizationReportRequest) HasPlacementContracts() bool {
+	if o != nil && !IsNil(o.PlacementContracts) {
+		return true
+	}
+
+	return false
+}
+
+// SetPlacementContracts gets a reference to the given []string and assigns it to the PlacementContracts field.
+func (o *GenerateGoodsRealizationReportRequest) SetPlacementContracts(v []string) {
+	o.PlacementContracts = v
+}
+
 func (o GenerateGoodsRealizationReportRequest) MarshalJSON() ([]byte, error) {
 	toSerialize, err := o.ToMap()
 	if err != nil {
@@ -136,6 +241,15 @@ func (o GenerateGoodsRealizationReportRequest) ToMap() (map[string]interface{}, 
 	toSerialize["campaignId"] = o.CampaignId
 	toSerialize["year"] = o.Year
 	toSerialize["month"] = o.Month
+	if o.Inns != nil {
+		toSerialize["inns"] = o.Inns
+	}
+	if o.PlacementPrograms != nil {
+		toSerialize["placementPrograms"] = o.PlacementPrograms
+	}
+	if o.PlacementContracts != nil {
+		toSerialize["placementContracts"] = o.PlacementContracts
+	}
 	return toSerialize, nil
 }
 

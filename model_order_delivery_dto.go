@@ -21,13 +21,13 @@ var _ MappedNullable = &OrderDeliveryDTO{}
 
 // OrderDeliveryDTO Информация о доставке.
 type OrderDeliveryDTO struct {
-	// Идентификатор доставки, присвоенный магазином.  Указывается, только если магазин передал данный идентификатор в ответе на запрос методом `POST cart`.
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}     {% endnote %}  Идентификатор доставки, присвоенный магазином.  Указывается, только если магазин передал данный идентификатор в ответе на запрос методом `POST cart`.
 	// Deprecated
 	Id   *string           `json:"id,omitempty"`
 	Type OrderDeliveryType `json:"type"`
 	// Название службы доставки.
 	ServiceName string `json:"serviceName"`
-	// {% note warning \"Стоимость доставки смотрите в параметре `deliveryTotal`.\" %}     {% endnote %}  Стоимость доставки в валюте заказа.
+	// {% note warning \"Параметр устарел и будет отключен 05.10.2026.\" %}  Стоимость доставки смотрите в параметре `deliveryTotal`.  {% endnote %}  Стоимость доставки в валюте заказа.
 	// Deprecated
 	Price               *float32                 `json:"price,omitempty"`
 	DeliveryPartnerType OrderDeliveryPartnerType `json:"deliveryPartnerType"`

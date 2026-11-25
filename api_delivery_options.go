@@ -47,6 +47,10 @@ GetDeliveryOptions Получение доступных вариантов до
 
 Укажите `courierDelivery` для курьерской доставки или `pickupDelivery` для доставки в пункт выдачи. Не передавайте оба параметра одновременно.
 
+**Пошаговые инструкции**
+
+* [Создать заказ LaaS](../../step-by-step/laas-order.md#create)
+
 {% include notitle [limit](../../_auto/method_limits/getDeliveryOptions.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -236,6 +240,10 @@ GetReturnDeliveryOptions Получение подходящих для возв
 {% include notitle [access](../../_auto/method_scopes/getReturnDeliveryOptions.md) %}
 
 Возвращает список идентификаторов пунктов выдачи, которые могут принять возврат указанных товаров.
+
+**Пошаговые инструкции**
+
+* [Создать возврат LaaS](../../step-by-step/laas-return.md#create)
 
 {% include notitle [limit](../../_auto/method_limits/getReturnDeliveryOptions.md) %}
 

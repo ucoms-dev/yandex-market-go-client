@@ -904,6 +904,10 @@ PDF-файл с ярлыками на каждую упаковку в отгр�
 
 Количество упаковок в отгрузке передается в методе [PUT v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallets](../../reference/shipments/setShipmentPalletsCount.md).
 
+**Пошаговые инструкции**
+
+* [Работа с отгрузкой](../../step-by-step/fbs.md#shipment)
+
 {% include notitle [limit](../../_auto/method_limits/downloadShipmentPalletLabels.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -1181,6 +1185,10 @@ DownloadShipmentReceptionTransferAct Подтверждение ближайше
 Подробнее о работе с актами приема-передачи читайте [в Справке Маркета для продавцов](https://yandex.ru/support/marketplace/ru/orders/fbs/process#act).
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Работа с отгрузкой](../../step-by-step/fbs.md#shipment)
 
 {% include notitle [limit](../../_auto/method_limits/downloadShipmentReceptionTransferAct.md) %}
 
@@ -2233,6 +2241,10 @@ SetShipmentPalletsCount Передача количества упаковок �
 
 Получить PDF-файл с ярлыками для упаковок можно с помощью метода [GET v2/campaigns/{campaignId}/first-mile/shipments/{shipmentId}/pallet/labels](../../reference/shipments/downloadShipmentPalletLabels.md).
 
+**Пошаговые инструкции**
+
+* [Работа с отгрузкой](../../step-by-step/fbs.md#shipment)
+
 {% include notitle [limit](../../_auto/method_limits/setShipmentPalletsCount.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -2452,6 +2464,10 @@ TransferOrdersFromShipment Перенос заказов в следующую �
 Переносить заказы можно, если до формирования отгрузки осталось больше получаса.
 
 Перенос происходит не мгновенно, а занимает несколько минут.
+
+**Пошаговые инструкции**
+
+* [Если товара не хватает: перенос, отмена и сокращение заказа](../../step-by-step/fbs.md#cancel-by-seller)
 
 {% include notitle [limit](../../_auto/method_limits/transferOrdersFromShipment.md) %}
 

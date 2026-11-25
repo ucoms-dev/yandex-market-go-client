@@ -28,11 +28,11 @@ type ReturnDecisionDTO struct {
 	ReasonType    *ReturnDecisionReasonType    `json:"reasonType,omitempty"`
 	SubreasonType *ReturnDecisionSubreasonType `json:"subreasonType,omitempty"`
 	DecisionType  *ReturnDecisionType          `json:"decisionType,omitempty"`
-	// {% note warning \"Вместо него используйте `amount`.\" %}     {% endnote %}  Сумма возврата в копейках.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `amount`.  {% endnote %}  Сумма возврата в копейках.
 	// Deprecated
 	RefundAmount *int64            `json:"refundAmount,omitempty"`
 	Amount       *CurrencyValueDTO `json:"amount,omitempty"`
-	// {% note warning \"Вместо него используйте `partnerCompensationAmount`.\" %}     {% endnote %}  Компенсация за обратную доставку в копейках.
+	// {% note warning \"Параметр устарел и будет отключен 12.10.2026.\" %}  Вместо него используйте `partnerCompensationAmount`.  {% endnote %}  Компенсация за обратную доставку в копейках.
 	// Deprecated
 	PartnerCompensation       *int64            `json:"partnerCompensation,omitempty"`
 	PartnerCompensationAmount *CurrencyValueDTO `json:"partnerCompensationAmount,omitempty"`

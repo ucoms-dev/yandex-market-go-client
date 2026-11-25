@@ -14,6 +14,7 @@ Name | Type | Description | Notes
 **ChildrenLinks** | Pointer to [**[]SupplyRequestReferenceDTO**](SupplyRequestReferenceDTO.md) | Ссылки на дочерние заявки. | [optional] 
 **TargetLocation** | [**SupplyRequestLocationDTO**](SupplyRequestLocationDTO.md) |  | 
 **TransitLocation** | Pointer to [**SupplyRequestLocationDTO**](SupplyRequestLocationDTO.md) |  | [optional] 
+**EtrnIdentifier** | Pointer to [**EtrnIdentifierDTO**](EtrnIdentifierDTO.md) |  | [optional] 
 
 ## Methods
 
@@ -258,6 +259,31 @@ SetTransitLocation sets TransitLocation field to given value.
 `func (o *SupplyRequestDTO) HasTransitLocation() bool`
 
 HasTransitLocation returns a boolean if a field has been set.
+
+### GetEtrnIdentifier
+
+`func (o *SupplyRequestDTO) GetEtrnIdentifier() EtrnIdentifierDTO`
+
+GetEtrnIdentifier returns the EtrnIdentifier field if non-nil, zero value otherwise.
+
+### GetEtrnIdentifierOk
+
+`func (o *SupplyRequestDTO) GetEtrnIdentifierOk() (*EtrnIdentifierDTO, bool)`
+
+GetEtrnIdentifierOk returns a tuple with the EtrnIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEtrnIdentifier
+
+`func (o *SupplyRequestDTO) SetEtrnIdentifier(v EtrnIdentifierDTO)`
+
+SetEtrnIdentifier sets EtrnIdentifier field to given value.
+
+### HasEtrnIdentifier
+
+`func (o *SupplyRequestDTO) HasEtrnIdentifier() bool`
+
+HasEtrnIdentifier returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

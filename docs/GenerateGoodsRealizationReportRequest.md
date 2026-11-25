@@ -7,6 +7,9 @@ Name | Type | Description | Notes
 **CampaignId** | **int64** | Идентификатор кампании (магазина) — технический идентификатор, который представляет ваш магазин в системе Яндекс Маркета при работе через API. Он однозначно связывается с вашим магазином, но предназначен только для автоматизированного взаимодействия.  Его можно узнать с помощью запроса [GET v2/campaigns](../../reference/campaigns/getCampaigns.md) или найти в кабинете продавца на Маркете. Нажмите на иконку вашего аккаунта → **Настройки** и в меню слева выберите **API и модули**:  * блок **Идентификатор кампании**; * вкладка **Лог запросов** → выпадающий список в блоке **Показывать логи**.  ⚠️ Не путайте его с: - идентификатором магазина, который отображается в личном кабинете продавца; - рекламными кампаниями.  | 
 **Year** | **int32** | Год. | 
 **Month** | **int32** | Номер месяца. | 
+**Inns** | Pointer to **[]string** | Список ИНН (доступно продавцам-резидентам РФ). | [optional] 
+**PlacementPrograms** | Pointer to [**[]PlacementType**](PlacementType.md) | Список моделей размещения. | [optional] 
+**PlacementContracts** | Pointer to **[]string** | Список номеров договоров на размещение. | [optional] 
 
 ## Methods
 
@@ -87,6 +90,111 @@ and a boolean to check if the value has been set.
 SetMonth sets Month field to given value.
 
 
+### GetInns
+
+`func (o *GenerateGoodsRealizationReportRequest) GetInns() []string`
+
+GetInns returns the Inns field if non-nil, zero value otherwise.
+
+### GetInnsOk
+
+`func (o *GenerateGoodsRealizationReportRequest) GetInnsOk() (*[]string, bool)`
+
+GetInnsOk returns a tuple with the Inns field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInns
+
+`func (o *GenerateGoodsRealizationReportRequest) SetInns(v []string)`
+
+SetInns sets Inns field to given value.
+
+### HasInns
+
+`func (o *GenerateGoodsRealizationReportRequest) HasInns() bool`
+
+HasInns returns a boolean if a field has been set.
+
+### SetInnsNil
+
+`func (o *GenerateGoodsRealizationReportRequest) SetInnsNil(b bool)`
+
+ SetInnsNil sets the value for Inns to be an explicit nil
+
+### UnsetInns
+`func (o *GenerateGoodsRealizationReportRequest) UnsetInns()`
+
+UnsetInns ensures that no value is present for Inns, not even an explicit nil
+### GetPlacementPrograms
+
+`func (o *GenerateGoodsRealizationReportRequest) GetPlacementPrograms() []PlacementType`
+
+GetPlacementPrograms returns the PlacementPrograms field if non-nil, zero value otherwise.
+
+### GetPlacementProgramsOk
+
+`func (o *GenerateGoodsRealizationReportRequest) GetPlacementProgramsOk() (*[]PlacementType, bool)`
+
+GetPlacementProgramsOk returns a tuple with the PlacementPrograms field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlacementPrograms
+
+`func (o *GenerateGoodsRealizationReportRequest) SetPlacementPrograms(v []PlacementType)`
+
+SetPlacementPrograms sets PlacementPrograms field to given value.
+
+### HasPlacementPrograms
+
+`func (o *GenerateGoodsRealizationReportRequest) HasPlacementPrograms() bool`
+
+HasPlacementPrograms returns a boolean if a field has been set.
+
+### SetPlacementProgramsNil
+
+`func (o *GenerateGoodsRealizationReportRequest) SetPlacementProgramsNil(b bool)`
+
+ SetPlacementProgramsNil sets the value for PlacementPrograms to be an explicit nil
+
+### UnsetPlacementPrograms
+`func (o *GenerateGoodsRealizationReportRequest) UnsetPlacementPrograms()`
+
+UnsetPlacementPrograms ensures that no value is present for PlacementPrograms, not even an explicit nil
+### GetPlacementContracts
+
+`func (o *GenerateGoodsRealizationReportRequest) GetPlacementContracts() []string`
+
+GetPlacementContracts returns the PlacementContracts field if non-nil, zero value otherwise.
+
+### GetPlacementContractsOk
+
+`func (o *GenerateGoodsRealizationReportRequest) GetPlacementContractsOk() (*[]string, bool)`
+
+GetPlacementContractsOk returns a tuple with the PlacementContracts field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPlacementContracts
+
+`func (o *GenerateGoodsRealizationReportRequest) SetPlacementContracts(v []string)`
+
+SetPlacementContracts sets PlacementContracts field to given value.
+
+### HasPlacementContracts
+
+`func (o *GenerateGoodsRealizationReportRequest) HasPlacementContracts() bool`
+
+HasPlacementContracts returns a boolean if a field has been set.
+
+### SetPlacementContractsNil
+
+`func (o *GenerateGoodsRealizationReportRequest) SetPlacementContractsNil(b bool)`
+
+ SetPlacementContractsNil sets the value for PlacementContracts to be an explicit nil
+
+### UnsetPlacementContracts
+`func (o *GenerateGoodsRealizationReportRequest) UnsetPlacementContracts()`
+
+UnsetPlacementContracts ensures that no value is present for PlacementContracts, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -60,6 +60,10 @@ CancelReturn Отмена возврата
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Отменить возврат LaaS](../../step-by-step/laas-return.md#cancel)
+
 {% include notitle [limit](../../_auto/method_limits/cancelReturn.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -258,6 +262,10 @@ CreateReturn Создание возврата
 
 {% endnote %}
 
+**Пошаговые инструкции**
+
+* [Создать возврат LaaS](../../step-by-step/laas-return.md#create)
+
 {% include notitle [limit](../../_auto/method_limits/createReturn.md) %}
 
 	@param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -451,6 +459,10 @@ GetReturn Информация о невыкупе или возврате
 [{#T}](../../push-notifications/index.md)
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Невыкупы и возвраты](../../step-by-step/returns.md)
 
 {% include notitle [limit](../../_auto/method_limits/getReturn.md) %}
 
@@ -649,6 +661,10 @@ GetReturnApplication Получение заявления на возврат
 {% include notitle [access](../../_auto/method_scopes/getReturnApplication.md) %}
 
 Загружает заявление покупателя на возврат товара.
+
+**Пошаговые инструкции**
+
+* [Как работать с невыкупами и возвратами](../../step-by-step/returns.md#new-return)
 
 {% include notitle [limit](../../_auto/method_limits/getReturnApplication.md) %}
 
@@ -851,6 +867,10 @@ GetReturnAvailableDecisions Получение возможных решений
 {% include notitle [access](../../_auto/method_scopes/getReturnAvailableDecisions.md) %}
 
 Возвращает список доступных решений по возврату.
+
+**Пошаговые инструкции**
+
+* [Как работать с невыкупами и возвратами](../../step-by-step/returns.md#new-return)
 
 {% include notitle [limit](../../_auto/method_limits/getReturnAvailableDecisions.md) %}
 
@@ -1056,6 +1076,10 @@ GetReturnPhoto Получение фотографий товаров в воз�
 Максимальный размер изображения — 50 МБ.
 
 Тип изображения можно определить по заголовку `Content-Type` в ответе.
+
+**Пошаговые инструкции**
+
+* [Как работать с невыкупами и возвратами](../../step-by-step/returns.md#new-return)
 
 {% include notitle [limit](../../_auto/method_limits/getReturnPhoto.md) %}
 
@@ -1306,14 +1330,14 @@ func (r ReturnsAPIGetReturnsRequest) ToDate(toDate string) ReturnsAPIGetReturnsR
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;fromDate&#x60;.\&quot; %}     {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
+// {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;fromDate&#x60;.  {% endnote %}  Начальная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
 func (r ReturnsAPIGetReturnsRequest) FromDate2(fromDate2 string) ReturnsAPIGetReturnsRequest {
 	r.fromDate2 = &fromDate2
 	return r
 }
 
-// {% note warning \&quot;Вместо него используйте &#x60;toDate&#x60;.\&quot; %}     {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
+// {% note warning \&quot;Параметр устарел и будет отключен 12.10.2026.\&quot; %}  Вместо него используйте &#x60;toDate&#x60;.  {% endnote %}  Конечная дата для фильтрации невыкупов или возвратов по дате обновления.
 // Deprecated
 func (r ReturnsAPIGetReturnsRequest) ToDate2(toDate2 string) ReturnsAPIGetReturnsRequest {
 	r.toDate2 = &toDate2
@@ -1340,6 +1364,10 @@ GetReturns Список невыкупов и возвратов
 [{#T}](../../push-notifications/index.md)
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Невыкупы и возвраты](../../step-by-step/returns.md)
 
 {% include notitle [limit](../../_auto/method_limits/getReturns.md) %}
 
@@ -1792,6 +1820,10 @@ SubmitReturnDecision Передача решения по возврату
 Получите список доступных решений — [POST v1/businesses/{businessId}/returns/decisions](../../reference/returns/getReturnAvailableDecisions.md).
 
 {% endnote %}
+
+**Пошаговые инструкции**
+
+* [Как работать с невыкупами и возвратами](../../step-by-step/returns.md#new-return)
 
 {% include notitle [limit](../../_auto/method_limits/submitReturnDecision.md) %}
 
